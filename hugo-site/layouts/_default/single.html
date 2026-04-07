@@ -46,6 +46,11 @@
     </div>
   </header>
 
+  {{/* ── HERO IMAGE ── */}}
+  <div class="article-hero-image">
+    {{ partial "article-image.html" . }}
+  </div>
+
   {{/* ── FRAMEWORK ANALYSIS PANEL ── */}}
   {{ if or .Params.mitre_techniques .Params.owasp_categories }}
   <aside class="framework-panel">

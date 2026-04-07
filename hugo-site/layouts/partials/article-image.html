@@ -1,0 +1,148 @@
+{{/*
+  article-image.html
+  Renders the article thumbnail if one exists, otherwise generates
+  a branded SVG placeholder based on threat level and category.
+  Usage: {{ partial "article-image.html" . }}
+*/}}
+
+{{ $thumbnail := .Params.thumbnail }}
+{{ $title    := .Title }}
+{{ $category := "AI Security" }}
+{{ if .Params.categories }}{{ $category = index .Params.categories 0 }}{{ end }}
+
+{{/* Threat level → accent color */}}
+{{ $accentColor := "#ff3b3b" }}
+{{ $accentDim   := "rgba(255,59,59,0.18)" }}
+{{ if eq .Params.threat_level "HIGH" }}
+  {{ $accentColor = "#ff8c00" }}
+  {{ $accentDim   = "rgba(255,140,0,0.18)" }}
+{{ else if eq .Params.threat_level "MEDIUM" }}
+  {{ $accentColor = "#ffd700" }}
+  {{ $accentDim   = "rgba(255,215,0,0.15)" }}
+{{ else if eq .Params.threat_level "LOW" }}
+  {{ $accentColor = "#22c55e" }}
+  {{ $accentDim   = "rgba(34,197,94,0.15)" }}
+{{ end }}
+
+{{ if $thumbnail }}
+  <img src="{{ $thumbnail }}" alt="{{ $title }}" loading="lazy" class="article-thumb-img">
+{{ else }}
+  {{/* ── Generated SVG placeholder ── */}}
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420"
+       role="img" aria-label="{{ $category }} — {{ $title }}">
+    <defs>
+      <linearGradient id="grad-bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#0a0a0f"/>
+        <stop offset="100%" stop-color="#141420"/>
+      </linearGradient>
+      <linearGradient id="grad-glow" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="{{ $accentColor }}" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="{{ $accentColor }}" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+
+    {{/* Background */}}
+    <rect width="800" height="420" fill="url(#grad-bg)"/>
+
+    {{/* Glow blob */}}
+    <ellipse cx="160" cy="210" rx="300" ry="200" fill="url(#grad-glow)"/>
+
+    {{/* Hex grid pattern — subtle dots */}}
+    {{ range seq 0 11 }}
+      {{ $row := . }}
+      {{ range seq 0 7 }}
+        {{ $col := . }}
+        {{ $x := add (mul $col 70) (mul (mod $row 2) 35) }}
+        {{ $y := add (mul $row 60) 20 }}
+        <circle cx="{{ $x }}" cy="{{ $y }}" r="1.5"
+                fill="{{ $accentColor }}" fill-opacity="0.12"/>
+      {{ end }}
+    {{ end }}
+
+    {{/* Hexagon outline — top left */}}
+    <polygon points="60,30 95,10 130,30 130,70 95,90 60,70"
+             fill="none" stroke="{{ $accentColor }}" stroke-width="1"
+             stroke-opacity="0.25"/>
+    <polygon points="60,30 95,10 130,30 130,70 95,90 60,70"
+             fill="{{ $accentColor }}" fill-opacity="0.04"/>
+
+    {{/* Inner hex */}}
+    <polygon points="75,42 95,31 115,42 115,64 95,75 75,64"
+             fill="none" stroke="{{ $accentColor }}" stroke-width="1"
+             stroke-opacity="0.4"/>
+
+    {{/* Hex icon mark */}}
+    <text x="95" y="58" font-family="monospace" font-size="16"
+          fill="{{ $accentColor }}" text-anchor="middle" font-weight="bold">⬡</text>
+
+    {{/* Corner bracket — top right */}}
+    <polyline points="700,20 780,20 780,60"
+              fill="none" stroke="{{ $accentColor }}" stroke-width="1.5"
+              stroke-opacity="0.3"/>
+    <polyline points="700,400 780,400 780,360"
+              fill="none" stroke="{{ $accentColor }}" stroke-width="1.5"
+              stroke-opacity="0.3"/>
+
+    {{/* Scan line */}}
+    <line x1="0" y1="210" x2="800" y2="210"
+          stroke="{{ $accentColor }}" stroke-width="0.5" stroke-opacity="0.1"/>
+
+    {{/* Vertical accent bar */}}
+    <rect x="0" y="0" width="4" height="420" fill="{{ $accentColor }}" opacity="0.7"/>
+
+    {{/* Category label */}}
+    <rect x="20" y="160" width="{{ mul (len $category) 9 | add 24 }}" height="26"
+          rx="3" fill="{{ $accentDim }}"/>
+    <text x="32" y="178" font-family="monospace" font-size="11"
+          fill="{{ $accentColor }}" font-weight="600" letter-spacing="1.5">
+      {{ upper $category }}
+    </text>
+
+    {{/* Title — wrapping up to 2 lines */}}
+    {{ $words  := split $title " " }}
+    {{ $line1  := "" }}
+    {{ $line2  := "" }}
+    {{ $done   := false }}
+    {{ range $i, $w := $words }}
+      {{ if not $done }}
+        {{ $try := printf "%s %s" $line1 $w | strings.TrimLeft " " }}
+        {{ if gt (len $try) 44 }}
+          {{ $line2 = printf "%s %s" $line2 $w | strings.TrimLeft " " }}
+          {{ if gt (len $line2) 44 }}{{ $done = true }}{{ end }}
+        {{ else }}
+          {{ $line1 = $try }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    <text x="20" y="230" font-family="Georgia, serif" font-size="26"
+          fill="#e8e8e8" font-weight="700" letter-spacing="-0.3">
+      {{ $line1 }}
+    </text>
+    {{ if $line2 }}
+    <text x="20" y="264" font-family="Georgia, serif" font-size="26"
+          fill="#e8e8e8" font-weight="700" letter-spacing="-0.3">
+      {{ $line2 }}{{ if gt (len $title) 88 }}…{{ end }}
+    </text>
+    {{ end }}
+
+    {{/* Threat level badge */}}
+    {{ if .Params.threat_level }}
+    <rect x="20" y="310" width="90" height="22" rx="3"
+          fill="{{ $accentColor }}" fill-opacity="0.15"/>
+    <rect x="20" y="310" width="90" height="22" rx="3"
+          fill="none" stroke="{{ $accentColor }}" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="65" y="325" font-family="monospace" font-size="10"
+          fill="{{ $accentColor }}" text-anchor="middle" font-weight="700"
+          letter-spacing="1.5">
+      {{ .Params.threat_level }}
+    </text>
+    {{ end }}
+
+    {{/* SENTINEL AI watermark */}}
+    <text x="780" y="410" font-family="monospace" font-size="10"
+          fill="#ffffff" fill-opacity="0.12" text-anchor="end" letter-spacing="2">
+      SENTINEL AI
+    </text>
+  </svg>
+{{ end }}

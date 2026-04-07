@@ -286,10 +286,11 @@ def passes_prefilter(article: dict) -> bool:
 # 6. ARTICLE CONTENT FETCHING  (optional)
 # ─────────────────────────────────────────────
 
-def fetch_article_content(url: str, log: logging.Logger) -> str:
+def fetch_article_content(url: str, log: logging.Logger) -> tuple[str, str]:
     """
-    Attempt to fetch the full article text. Returns first ~4000 chars of
-    visible text, or empty string on failure. Never raises.
+    Attempt to fetch the full article text and og:image.
+    Returns (text[:4000], og_image_url) — both may be empty strings on failure.
+    Never raises.
     """
     try:
         headers = {
@@ -300,18 +301,31 @@ def fetch_article_content(url: str, log: logging.Logger) -> str:
             resp.raise_for_status()
             html = resp.text
 
-        # Crude but effective text extraction — no heavy deps
-        # Remove script/style blocks
-        html = re.sub(r"<(script|style)[^>]*>.*?</(script|style)>", " ", html, flags=re.DOTALL | re.IGNORECASE)
-        # Strip all tags
-        text = re.sub(r"<[^>]+>", " ", html)
-        # Collapse whitespace
+        # Extract og:image before stripping tags
+        og_image = ""
+        og_match = re.search(
+            r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
+            html, re.IGNORECASE
+        )
+        if not og_match:
+            # Try reversed attribute order
+            og_match = re.search(
+                r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
+                html, re.IGNORECASE
+            )
+        if og_match:
+            og_image = og_match.group(1).strip()
+            log.debug(f"  og:image found: {og_image[:80]}")
+
+        # Text extraction — remove script/style blocks then strip all tags
+        clean = re.sub(r"<(script|style)[^>]*>.*?</(script|style)>", " ", html, flags=re.DOTALL | re.IGNORECASE)
+        text = re.sub(r"<[^>]+>", " ", clean)
         text = re.sub(r"\s+", " ", text).strip()
-        return text[:4000]
+        return text[:4000], og_image
 
     except Exception as e:
         log.debug(f"  Content fetch failed for {url}: {e}")
-        return ""
+        return "", ""
 
 # ─────────────────────────────────────────────
 # 7. CLAUDE API — SCORING & ANALYSIS
@@ -459,7 +473,7 @@ summary: {json.dumps(analysis.get('summary', ''))}
 source: {json.dumps(article['source'])}
 source_url: {json.dumps(article['url'])}
 author: "SENTINEL AI Editorial"
-thumbnail: ""
+thumbnail: {json.dumps(article.get('thumbnail', ''))}
 
 # ── AI Security Classification ──
 relevance_score: {analysis.get('relevance_score', 0.0)}
@@ -607,13 +621,16 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         # Always mark as seen, regardless of outcome
         seen_urls.add(article["url"])
 
-        # Optionally fetch full article content
+        # Optionally fetch full article content + og:image
         full_content = ""
+        og_image = ""
         if FETCH_FULL_CONTENT and not args.dry_run:
             log.debug(f"  Fetching full content from {article['url']}")
-            full_content = fetch_article_content(article["url"], log)
+            full_content, og_image = fetch_article_content(article["url"], log)
             if full_content:
                 log.debug(f"  Content fetched: {len(full_content)} chars")
+            if og_image:
+                article["thumbnail"] = og_image
 
         if args.dry_run:
             log.info("  [DRY RUN] Would call Claude API here — skipping")

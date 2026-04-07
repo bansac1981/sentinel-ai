@@ -8,7 +8,7 @@ summary: "Researchers from CMU and Tsinghua University demonstrate physical adve
 source: "arXiv / CMU Security Lab"
 source_url: "https://arxiv.org/abs/2401.00000"
 author: "SENTINEL AI Editorial"
-thumbnail: ""
+thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80"
 
 relevance_score: 7.8
 threat_level: "HIGH"

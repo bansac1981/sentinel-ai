@@ -811,6 +811,86 @@ blockquote {
   padding: 1px 6px;
 }
 
+/* ═══════════════════════════════════════
+   ARTICLE IMAGES
+═══════════════════════════════════════ */
+
+/* Shared wrapper — used on featured card, grid card, list row */
+.post-card__image,
+.post-card__image--grid,
+.post-row__image {
+  display: block;
+  overflow: hidden;
+  background: var(--bg-tertiary);
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+/* Featured card image — left panel */
+.post-card--featured .post-card__image {
+  aspect-ratio: 16 / 9;
+}
+
+/* Grid card image — top of card */
+.post-card__image--grid {
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid var(--border);
+}
+
+/* List row image — small thumbnail on the left */
+.post-row__image {
+  width: 140px;
+  min-width: 140px;
+  aspect-ratio: 16 / 9;
+  border-right: 1px solid var(--border);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+/* The img or SVG inside any image wrapper */
+.post-card__image img,
+.post-card__image--grid img,
+.post-row__image img,
+.post-card__image svg,
+.post-card__image--grid svg,
+.post-row__image svg,
+.article-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms ease;
+}
+
+.post-card__image:hover img,
+.post-card__image:hover svg,
+.post-card__image--grid:hover img,
+.post-card__image--grid:hover svg,
+.post-row__image:hover img,
+.post-row__image:hover svg {
+  transform: scale(1.03);
+}
+
+/* Article hero image on single pages */
+.article-hero-image {
+  overflow: hidden;
+  aspect-ratio: 21 / 9;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border);
+}
+
+.article-hero-image img,
+.article-hero-image svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Fix post-row layout to accommodate the image */
+.post-row {
+  grid-template-columns: 140px auto 1fr;
+}
+
 /* ── Pagination ── */
 .pagination {
   display: flex;
@@ -1660,6 +1740,7 @@ blockquote {
   .posts-grid { grid-template-columns: 1fr; }
 
   .post-row { grid-template-columns: 1fr; }
+  .post-row__image { display: none; }
   .post-row__meta {
     flex-direction: row;
     border-right: none;
