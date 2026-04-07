@@ -36,7 +36,7 @@
 {{ end }}
 
 {{/* Feeds */}}
-<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} RSS" href="/index.xml">
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} RSS" href="{{ "index.xml" | relURL }}">
 
 {{/* Preconnect for fonts */}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,11 +44,11 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 {{/* Favicon */}}
-<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
-<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="icon" type="image/svg+xml" href="{{ "img/favicon.svg" | relURL }}">
+<link rel="icon" type="image/png" href="{{ "img/favicon.png" | relURL }}">
 
 {{/* Stylesheet */}}
-<link rel="stylesheet" href="/css/sentinel.css">
+<link rel="stylesheet" href="{{ "css/sentinel.css" | relURL }}">
 
 {{/* Schema.org structured data */}}
 {{ if .IsPage }}
