@@ -1,0 +1,25 @@
+<div class="ticker-bar" role="marquee" aria-label="Live threat feed">
+  <div class="ticker-bar__label">
+    <span class="pulse-dot pulse-dot--red"></span>
+    LIVE THREATS
+  </div>
+  <div class="ticker-bar__track">
+    <div class="ticker-bar__inner" id="tickerInner">
+      {{ range hugo.Data.ticker.items }}
+      <a href="{{ .url }}" class="ticker-item">
+        <span class="ticker-item__severity ticker-severity--{{ lower .severity }}">{{ .severity }}</span>
+        <span class="ticker-item__text">{{ .text }}</span>
+        <span class="ticker-item__sep">//</span>
+      </a>
+      {{ end }}
+      {{/* Duplicate for seamless loop */}}
+      {{ range hugo.Data.ticker.items }}
+      <a href="{{ .url }}" class="ticker-item" aria-hidden="true">
+        <span class="ticker-item__severity ticker-severity--{{ lower .severity }}">{{ .severity }}</span>
+        <span class="ticker-item__text">{{ .text }}</span>
+        <span class="ticker-item__sep">//</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>

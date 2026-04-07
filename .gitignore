@@ -1,0 +1,33 @@
+# ── Secrets ──
+.env
+
+# ── Python ──
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# ── Hugo build output ──
+hugo-site/public/
+hugo-site/resources/
+hugo-site/.hugo_build.lock
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ──
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# NOTE: seen_urls.json is intentionally NOT ignored.
+# It must be committed so deduplication persists between GitHub Actions runs.

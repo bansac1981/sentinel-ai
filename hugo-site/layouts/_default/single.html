@@ -1,0 +1,142 @@
+{{ define "main" }}
+
+<article class="article" itemscope itemtype="https://schema.org/Article">
+
+  {{/* ── ARTICLE HEADER ── */}}
+  <header class="article-header">
+    <div class="article-header__meta">
+      {{ partial "framework-badges.html" . }}
+      {{ if .Params.categories }}
+        {{ range .Params.categories }}
+        <a href="/categories/{{ . | urlize }}/" class="article-category">{{ . }}</a>
+        {{ end }}
+      {{ end }}
+      <time class="article-date" datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">
+        {{ .Date.Format "January 02, 2006" }}
+      </time>
+      {{ if .Params.relevance_score }}
+      <span class="article-score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
+        RELEVANCE ▲ {{ printf "%.1f" .Params.relevance_score }}
+      </span>
+      {{ end }}
+    </div>
+
+    <h1 class="article-title" itemprop="headline">{{ .Title }}</h1>
+
+    {{ if .Params.summary }}
+    <p class="article-summary" itemprop="description">{{ .Params.summary }}</p>
+    {{ end }}
+
+    <div class="article-byline">
+      {{ if .Params.source }}
+      <span class="article-source">
+        <span class="article-source__label">SOURCE</span>
+        {{ if .Params.source_url }}
+        <a href="{{ .Params.source_url }}" target="_blank" rel="noopener noreferrer" class="article-source__link">
+          {{ .Params.source }} ↗
+        </a>
+        {{ else }}
+        <span class="article-source__name">{{ .Params.source }}</span>
+        {{ end }}
+      </span>
+      {{ end }}
+      {{ if .Params.author }}
+      <span class="article-author" itemprop="author">{{ .Params.author }}</span>
+      {{ end }}
+    </div>
+  </header>
+
+  {{/* ── FRAMEWORK ANALYSIS PANEL ── */}}
+  {{ if or .Params.mitre_techniques .Params.owasp_categories }}
+  <aside class="framework-panel">
+    <div class="framework-panel__header">
+      <span class="framework-panel__icon">⬡</span>
+      THREAT FRAMEWORK MAPPING
+    </div>
+    <div class="framework-panel__body">
+      {{ if .Params.mitre_techniques }}
+      <div class="framework-panel__section">
+        <div class="badge badge--atlas">MITRE ATLAS</div>
+        <ul class="technique-list">
+          {{ range .Params.mitre_techniques }}
+          <li class="technique-list__item">
+            <span class="technique-id">{{ . }}</span>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+      {{ if .Params.owasp_categories }}
+      <div class="framework-panel__section">
+        <div class="badge badge--owasp">OWASP LLM TOP 10</div>
+        <ul class="technique-list">
+          {{ range .Params.owasp_categories }}
+          <li class="technique-list__item">
+            <span class="technique-id">{{ . }}</span>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+      {{ if .Params.threat_level }}
+      <div class="framework-panel__section">
+        <div class="threat-level-bar">
+          <span class="threat-level-bar__label">THREAT LEVEL</span>
+          <div class="threat-level-bar__track">
+            <div class="threat-level-bar__fill threat-level--{{ lower .Params.threat_level }}"
+              style="width: {{ if eq .Params.threat_level "CRITICAL" }}100%{{ else if eq .Params.threat_level "HIGH" }}75%{{ else if eq .Params.threat_level "MEDIUM" }}50%{{ else }}25%{{ end }}">
+            </div>
+          </div>
+          <span class="threat-level-bar__value threat-level--{{ lower .Params.threat_level }}">
+            {{ .Params.threat_level }}
+          </span>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </aside>
+  {{ end }}
+
+  {{/* ── ARTICLE BODY ── */}}
+  <div class="article-body" itemprop="articleBody">
+    {{ .Content }}
+  </div>
+
+  {{/* ── ARTICLE FOOTER ── */}}
+  <footer class="article-footer">
+    {{ if .Params.tags }}
+    <div class="article-tags">
+      <span class="article-tags__label">Tags:</span>
+      {{ range .Params.tags }}
+      <a href="/tags/{{ . | urlize }}/" class="tag-chip">{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <div class="article-share">
+      <span class="article-share__label">Share:</span>
+      <a href="https://twitter.com/intent/tweet?text={{ .Title | urlize }}&url={{ .Permalink | urlize }}"
+         target="_blank" rel="noopener" class="share-btn share-btn--twitter">Twitter</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlize }}"
+         target="_blank" rel="noopener" class="share-btn share-btn--linkedin">LinkedIn</a>
+    </div>
+
+    <div class="article-nav">
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="article-nav__link article-nav__link--prev">
+        <span class="article-nav__dir">← Previous</span>
+        <span class="article-nav__title">{{ .Title | truncate 60 }}</span>
+      </a>
+      {{ end }}
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="article-nav__link article-nav__link--next">
+        <span class="article-nav__dir">Next →</span>
+        <span class="article-nav__title">{{ .Title | truncate 60 }}</span>
+      </a>
+      {{ end }}
+    </div>
+  </footer>
+
+</article>
+
+{{ end }}

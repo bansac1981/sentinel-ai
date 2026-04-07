@@ -1,0 +1,46 @@
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+
+    {{/* Logo / wordmark */}}
+    <a href="/" class="site-logo" aria-label="{{ .Site.Title }} — Home">
+      <span class="site-logo__mark">⬡</span>
+      <span class="site-logo__text">
+        <span class="site-logo__name">SENTINEL</span><span class="site-logo__accent">AI</span>
+      </span>
+      <span class="site-logo__tagline">THREAT INTELLIGENCE</span>
+    </a>
+
+    {{/* Primary navigation */}}
+    <nav class="site-nav" role="navigation" aria-label="Primary navigation">
+      <button class="site-nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">
+        <span class="site-nav__toggle-bar"></span>
+        <span class="site-nav__toggle-bar"></span>
+        <span class="site-nav__toggle-bar"></span>
+      </button>
+      <ul class="site-nav__list" id="navMenu" role="list">
+        {{ range .Site.Menus.main }}
+        <li class="site-nav__item">
+          <a href="{{ .URL }}"
+             class="site-nav__link{{ if $.IsMenuCurrent "main" . }} site-nav__link--active{{ end }}"
+             {{ if .HasChildren }}aria-haspopup="true"{{ end }}>
+            {{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    {{/* Header actions */}}
+    <div class="site-header__actions">
+      <a href="/index.xml" class="header-action header-action--rss" title="RSS Feed" aria-label="RSS Feed">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+        </svg>
+      </a>
+      <a href="{{ .Site.Params.newsletterURL }}" class="btn btn--sm btn--accent" target="_blank" rel="noopener">
+        Subscribe
+      </a>
+    </div>
+
+  </div>
+</header>

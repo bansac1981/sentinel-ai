@@ -1,0 +1,23 @@
+# Normalise line endings to LF in the repo (important for Linux GitHub Actions runners)
+* text=auto eol=lf
+
+# Explicitly LF for scripts and config
+*.py      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.toml    text eol=lf
+*.json    text eol=lf
+*.html    text eol=lf
+*.css     text eol=lf
+*.md      text eol=lf
+*.txt     text eol=lf
+*.svg     text eol=lf
+
+# Binary — no line ending conversion
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.woff    binary
+*.woff2   binary

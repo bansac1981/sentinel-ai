@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "severity": "CRITICAL",
+      "text": "GPT-4 prompt injection bypass discovered — researchers can exfiltrate system prompt via Unicode trick",
+      "url": "/categories/prompt-injection/"
+    },
+    {
+      "severity": "HIGH",
+      "text": "LLM supply chain attack: malicious model weights found in HuggingFace repository",
+      "url": "/categories/supply-chain/"
+    },
+    {
+      "severity": "CRITICAL",
+      "text": "Claude jailbreak via indirect injection through retrieved documents — affects RAG pipelines",
+      "url": "/categories/jailbreaks/"
+    },
+    {
+      "severity": "HIGH",
+      "text": "NVIDIA AI SDK remote code execution CVE-2024-0087 — update to v0.14.1 immediately",
+      "url": "/categories/llm-security/"
+    },
+    {
+      "severity": "MEDIUM",
+      "text": "New adversarial patch attack bypasses YOLOv8 object detection in real-world conditions",
+      "url": "/categories/adversarial-ml/"
+    },
+    {
+      "severity": "HIGH",
+      "text": "Gemini Advanced system prompt leaked via multi-turn conversation manipulation",
+      "url": "/categories/prompt-injection/"
+    },
+    {
+      "severity": "CRITICAL",
+      "text": "Training data poisoning attack achieves 94% backdoor rate on open-source LLMs — MITRE AML.T0020",
+      "url": "/categories/data-poisoning/"
+    },
+    {
+      "severity": "INFO",
+      "text": "CISA releases AI security framework advisory — mandatory guidance for critical infrastructure operators",
+      "url": "/categories/regulatory/"
+    },
+    {
+      "severity": "HIGH",
+      "text": "Model inversion attack recovers 78% of private medical training data from federated learning",
+      "url": "/categories/adversarial-ml/"
+    },
+    {
+      "severity": "MEDIUM",
+      "text": "Copilot plugin ecosystem exposes OAuth token hijacking vector — affects 40+ enterprise integrations",
+      "url": "/categories/llm-security/"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "label": "Prompt Injection",
+      "count": 24,
+      "color": "#ff3b3b",
+      "distance": 0.75,
+      "url": "/categories/prompt-injection/",
+      "description": "Direct and indirect prompt injection attacks against LLM-powered applications"
+    },
+    {
+      "label": "Model Poisoning",
+      "count": 12,
+      "color": "#ff8c00",
+      "distance": 0.55,
+      "url": "/categories/data-poisoning/",
+      "description": "Training data and supply chain attacks corrupting model behaviour"
+    },
+    {
+      "label": "Adversarial ML",
+      "count": 18,
+      "color": "#ffd700",
+      "distance": 0.65,
+      "url": "/categories/adversarial-ml/",
+      "description": "Evasion and perturbation attacks against ML classifiers and vision models"
+    },
+    {
+      "label": "Data Exfiltration",
+      "count": 9,
+      "color": "#a855f7",
+      "distance": 0.82,
+      "url": "/categories/llm-security/",
+      "description": "Membership inference and model inversion attacks revealing training data"
+    },
+    {
+      "label": "Jailbreaks",
+      "count": 31,
+      "color": "#3b82f6",
+      "distance": 0.45,
+      "url": "/categories/jailbreaks/",
+      "description": "Techniques that bypass safety alignment in instruction-tuned models"
+    }
+  ]
+}

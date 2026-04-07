@@ -1,0 +1,140 @@
+name: "SENTINEL AI — Daily Pipeline"
+
+# ─────────────────────────────────────────────
+# Triggers
+# ─────────────────────────────────────────────
+on:
+  schedule:
+    # 9:30 AM IST = 04:00 UTC daily
+    - cron: "0 4 * * *"
+
+  # Manual trigger from GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Max articles to process (0 = use .env default of 20)"
+        required: false
+        default: "20"
+      dry_run:
+        description: "Dry run — fetch and filter but skip Claude API and file writes"
+        type: boolean
+        required: false
+        default: false
+      feed:
+        description: "Run a single feed only (leave blank for all feeds)"
+        required: false
+        default: ""
+        type: choice
+        options:
+          - ""
+          - thehackernews
+          - securityweek
+          - darkreading
+          - crowdstrike
+          - cisa
+          - hn_ai_security
+          - schneier
+          - projectzero
+          - krebsonsecurity
+
+# ─────────────────────────────────────────────
+# Permissions
+# ─────────────────────────────────────────────
+permissions:
+  contents: write   # needed to commit new posts back to the repo
+
+# ─────────────────────────────────────────────
+# Job
+# ─────────────────────────────────────────────
+jobs:
+  run-pipeline:
+    name: "Fetch → Score → Commit"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # 1. Checkout with full history so we can push back
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      # 2. Python setup with pip caching for faster runs
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      # 3. Install pipeline dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # 4. Run the pipeline
+      - name: Run SENTINEL AI pipeline
+        env:
+          ANTHROPIC_API_KEY:    ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL:         ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
+          RELEVANCE_THRESHOLD:  ${{ vars.RELEVANCE_THRESHOLD || '6.0' }}
+          MAX_ARTICLES_PER_RUN: ${{ vars.MAX_ARTICLES_PER_RUN || '20' }}
+          FETCH_FULL_CONTENT:   ${{ vars.FETCH_FULL_CONTENT || 'true' }}
+          FETCH_TIMEOUT:        "15"
+          HUGO_POSTS_DIR:       "hugo-site/content/posts"
+          SEEN_URLS_FILE:       "seen_urls.json"
+        run: |
+          # Build CLI args from workflow_dispatch inputs (ignored on schedule)
+          ARGS="--verbose"
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+
+          LIMIT="${{ github.event.inputs.limit }}"
+          if [ -n "$LIMIT" ] && [ "$LIMIT" != "0" ]; then
+            ARGS="$ARGS --limit $LIMIT"
+          fi
+
+          FEED="${{ github.event.inputs.feed }}"
+          if [ -n "$FEED" ]; then
+            ARGS="$ARGS --feed $FEED"
+          fi
+
+          echo "Running: python pipeline.py $ARGS"
+          python pipeline.py $ARGS
+
+      # 5. Commit results back to the repo
+      #    - New draft posts  → triggers the deploy workflow (site rebuild)
+      #    - Only seen_urls   → [skip ci] avoids an unnecessary site rebuild
+      - name: Commit new posts and seen_urls cache
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "SENTINEL AI Bot"
+          git config user.email "bot@sentinel-ai.news"
+
+          git add hugo-site/content/posts/ seen_urls.json
+
+          # Exit early if nothing changed
+          if git diff --staged --quiet; then
+            echo "No changes to commit — pipeline found nothing new today."
+            exit 0
+          fi
+
+          # Count genuinely new post files
+          NEW_POSTS=$(git diff --staged --name-only | grep "hugo-site/content/posts/.*\.md" | wc -l | tr -d ' ')
+
+          if [ "$NEW_POSTS" -gt "0" ]; then
+            COMMIT_MSG="feat: add ${NEW_POSTS} new draft post(s) [$(date -u +'%Y-%m-%d')]
+
+Pipeline run: ${{ github.run_id }}
+Model: ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
+Threshold: ${{ vars.RELEVANCE_THRESHOLD || '6.0' }}"
+            git commit -m "$COMMIT_MSG"
+            echo "✓ Committed $NEW_POSTS new post(s). Deploy workflow will trigger automatically."
+          else
+            # Only seen_urls.json changed — skip CI to avoid unnecessary rebuild
+            git commit -m "chore: update seen_urls cache $(date -u +'%Y-%m-%d') [skip ci]"
+            echo "✓ Updated seen_urls cache only. Skipping deploy."
+          fi
+
+          git push

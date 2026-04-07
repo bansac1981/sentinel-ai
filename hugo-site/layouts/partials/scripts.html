@@ -1,0 +1,118 @@
+<script>
+// ── Mobile nav toggle ──
+(function() {
+  var toggle = document.getElementById('navToggle');
+  var menu = document.getElementById('navMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', function() {
+      var expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      menu.classList.toggle('site-nav__list--open');
+    });
+  }
+})();
+
+// ── Ticker animation ──
+(function() {
+  var inner = document.getElementById('tickerInner');
+  if (!inner) return;
+  var pos = 0;
+  var speed = 0.4;
+  function animate() {
+    pos -= speed;
+    if (Math.abs(pos) >= inner.scrollWidth / 2) pos = 0;
+    inner.style.transform = 'translateX(' + pos + 'px)';
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// ── Threat Radar Canvas ──
+(function() {
+  var canvas = document.getElementById('radarCanvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  var cx = w / 2, cy = h / 2;
+  var r = Math.min(w, h) / 2 - 16;
+
+  function drawRadar(threats) {
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw rings
+    var rings = 4;
+    for (var i = 1; i <= rings; i++) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, (r / rings) * i, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 59, 59, ' + (0.08 * i) + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw axes
+    var axes = 6;
+    for (var a = 0; a < axes; a++) {
+      var angle = (a / axes) * Math.PI * 2 - Math.PI / 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
+      ctx.strokeStyle = 'rgba(255, 59, 59, 0.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Sweep line animation
+    var sweepAngle = (Date.now() / 3000) % (Math.PI * 2);
+    var grad = ctx.createConicalGradient ? null : null;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, sweepAngle - 0.8, sweepAngle);
+    ctx.fillStyle = 'rgba(255, 59, 59, 0.07)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(sweepAngle) * r, cy + Math.sin(sweepAngle) * r);
+    ctx.strokeStyle = 'rgba(255, 59, 59, 0.6)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Center dot
+    ctx.beginPath();
+    ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff3b3b';
+    ctx.fill();
+
+    // Threat blips
+    if (threats && threats.length) {
+      threats.forEach(function(t, idx) {
+        var angle = (idx / threats.length) * Math.PI * 2 + (Date.now() / 20000);
+        var dist = t.distance || (0.4 + Math.random() * 0.5);
+        var bx = cx + Math.cos(angle) * r * dist;
+        var by = cy + Math.sin(angle) * r * dist;
+        ctx.beginPath();
+        ctx.arc(bx, by, 4, 0, Math.PI * 2);
+        ctx.fillStyle = t.color || '#ff3b3b';
+        ctx.fill();
+        // Pulse ring
+        ctx.beginPath();
+        ctx.arc(bx, by, 7, 0, Math.PI * 2);
+        ctx.strokeStyle = (t.color || '#ff3b3b') + '55';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+    }
+
+    requestAnimationFrame(function() { drawRadar(threats); });
+  }
+
+  // Fetch threat data from data attribute or use defaults
+  var threats = [
+    { color: '#ff3b3b', distance: 0.75 },
+    { color: '#ff8c00', distance: 0.5 },
+    { color: '#ffd700', distance: 0.6 },
+    { color: '#ff3b3b', distance: 0.85 },
+    { color: '#ff8c00', distance: 0.4 }
+  ];
+  drawRadar(threats);
+})();
+</script>

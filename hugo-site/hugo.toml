@@ -1,0 +1,80 @@
+baseURL = "https://sentinel-ai.news/"
+languageCode = "en-us"
+title = "SENTINEL AI"
+paginate = 12
+enableRobotsTXT = true
+enableEmoji = false
+copyright = "© 2024 SENTINEL AI. All rights reserved."
+
+[params]
+  description = "AI Security Intelligence — Real-time threat analysis, MITRE ATLAS mapping, and OWASP LLM Top 10 coverage."
+  tagline = "AI THREAT INTELLIGENCE"
+  taglineSub = "Real-time coverage of adversarial AI, LLM vulnerabilities, and machine learning security threats."
+  accentColor = "#ff3b3b"
+  darkBg = "#0a0a0f"
+  author = "SENTINEL AI Editorial"
+  twitterHandle = "@sentinelai"
+  githubURL = "https://github.com/sentinel-ai"
+  newsletterURL = "https://beehiiv.com"
+  enableTicker = true
+  enableThreatRadar = true
+  enableFrameworkBadges = true
+  scoreThreshold = 6.0
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  framework = "frameworks"
+  threat_actor = "threat_actors"
+
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+  page = ["HTML"]
+
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    baseName = "index"
+    isPlainText = true
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+
+[menu]
+  [[menu.main]]
+    name = "Latest"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "MITRE ATLAS"
+    url = "/frameworks/mitre-atlas/"
+    weight = 2
+  [[menu.main]]
+    name = "OWASP LLM"
+    url = "/frameworks/owasp-llm/"
+    weight = 3
+  [[menu.main]]
+    name = "Threat Actors"
+    url = "/threat_actors/"
+    weight = 4
+  [[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 5
+  [[menu.main]]
+    name = "Newsletter"
+    url = "/newsletter/"
+    weight = 6

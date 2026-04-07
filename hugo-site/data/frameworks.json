@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "name": "MITRE ATLAS",
+      "badge": "ATLAS",
+      "type": "atlas",
+      "count": 58,
+      "url": "/frameworks/mitre-atlas/",
+      "description": "Adversarial Threat Landscape for Artificial-Intelligence Systems",
+      "techniques": [
+        "AML.T0006 - Active Learning Attack",
+        "AML.T0012 - Valid Accounts",
+        "AML.T0018 - Backdoor ML Model",
+        "AML.T0019 - Publish Poisoned Datasets",
+        "AML.T0020 - Poison Training Data",
+        "AML.T0031 - Erode ML Model Integrity",
+        "AML.T0040 - ML Model Inference API Access",
+        "AML.T0043 - Craft Adversarial Data"
+      ]
+    },
+    {
+      "name": "OWASP LLM Top 10",
+      "badge": "OWASP",
+      "type": "owasp",
+      "count": 41,
+      "url": "/frameworks/owasp-llm/",
+      "description": "OWASP Top 10 for Large Language Model Applications",
+      "techniques": [
+        "LLM01 - Prompt Injection",
+        "LLM02 - Insecure Output Handling",
+        "LLM03 - Training Data Poisoning",
+        "LLM04 - Model Denial of Service",
+        "LLM05 - Supply Chain Vulnerabilities",
+        "LLM06 - Sensitive Information Disclosure",
+        "LLM07 - Insecure Plugin Design",
+        "LLM08 - Excessive Agency",
+        "LLM09 - Overreliance",
+        "LLM10 - Model Theft"
+      ]
+    },
+    {
+      "name": "NIST AI RMF",
+      "badge": "NIST",
+      "type": "atlas",
+      "count": 17,
+      "url": "/frameworks/nist-ai-rmf/",
+      "description": "NIST AI Risk Management Framework"
+    },
+    {
+      "name": "EU AI Act",
+      "badge": "EU-AI",
+      "type": "owasp",
+      "count": 8,
+      "url": "/frameworks/eu-ai-act/",
+      "description": "European Union Artificial Intelligence Act compliance"
+    }
+  ]
+}

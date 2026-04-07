@@ -1,0 +1,114 @@
+{{ define "main" }}
+
+{{/* ── HERO SECTION ── */}}
+<section class="hero">
+  <div class="hero-label">
+    <span class="pulse-dot"></span>
+    LIVE THREAT FEED
+  </div>
+  <h1 class="hero-title">{{ .Site.Params.tagline }}</h1>
+  <p class="hero-sub">{{ .Site.Params.taglineSub }}</p>
+  <div class="hero-stats">
+    {{ range hugo.Data.stats.items }}
+    <div class="hero-stat">
+      <span class="hero-stat-value">{{ .value }}</span>
+      <span class="hero-stat-label">{{ .label }}</span>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+{{/* ── FEATURED / LATEST POSTS ── */}}
+<section class="posts-section">
+  <div class="section-header">
+    <h2 class="section-title">Latest Intelligence</h2>
+    <a href="/posts/" class="section-link">All reports →</a>
+  </div>
+
+  {{/* Featured post — first article */}}
+  {{ $pages := where .Site.RegularPages "Type" "posts" }}
+  {{ $pages = where $pages "Params.draft" "ne" true }}
+  {{ $featured := first 1 $pages }}
+  {{ $rest := after 1 $pages }}
+
+  {{ range $featured }}
+  <article class="post-card post-card--featured">
+    {{ if .Params.thumbnail }}
+    <div class="post-card__image">
+      <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
+    </div>
+    {{ end }}
+    <div class="post-card__body">
+      <div class="post-card__meta">
+        {{ partial "framework-badges.html" . }}
+        <span class="post-card__source">{{ .Params.source }}</span>
+        <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "Jan 02, 2006" }}
+        </time>
+        {{ if .Params.relevance_score }}
+        <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
+          ▲ {{ printf "%.1f" .Params.relevance_score }}
+        </span>
+        {{ end }}
+      </div>
+      <h2 class="post-card__title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      <p class="post-card__summary">{{ .Params.summary | default .Summary }}</p>
+      <a href="{{ .RelPermalink }}" class="post-card__read-more">Read Full Analysis →</a>
+    </div>
+  </article>
+  {{ end }}
+
+  {{/* Grid of remaining posts */}}
+  <div class="posts-grid">
+    {{ range first 11 $rest }}
+    <article class="post-card post-card--grid">
+      <div class="post-card__body">
+        <div class="post-card__meta">
+          {{ partial "framework-badges.html" . }}
+          <span class="post-card__source">{{ .Params.source }}</span>
+          <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "Jan 02" }}
+          </time>
+          {{ if .Params.relevance_score }}
+          <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
+            ▲ {{ printf "%.1f" .Params.relevance_score }}
+          </span>
+          {{ end }}
+        </div>
+        <h3 class="post-card__title">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+        <p class="post-card__summary post-card__summary--short">{{ .Params.summary | default .Summary | truncate 120 }}</p>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+
+  {{ if gt (len $pages) 12 }}
+  <div class="load-more-wrap">
+    <a href="/posts/" class="btn btn--outline">View All Intelligence Reports</a>
+  </div>
+  {{ end }}
+</section>
+
+{{/* ── FRAMEWORK COVERAGE ── */}}
+<section class="framework-section">
+  <div class="section-header">
+    <h2 class="section-title">Framework Coverage</h2>
+  </div>
+  <div class="framework-grid">
+    {{ range hugo.Data.frameworks.items }}
+    <a href="{{ .url }}" class="framework-card">
+      <div class="framework-card__badge badge--{{ .type }}">{{ .badge }}</div>
+      <div class="framework-card__info">
+        <span class="framework-card__name">{{ .name }}</span>
+        <span class="framework-card__count">{{ .count }} mapped techniques</span>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+
+{{ end }}

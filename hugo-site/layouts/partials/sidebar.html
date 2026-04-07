@@ -1,0 +1,107 @@
+{{/* ── THREAT RADAR ── */}}
+{{ if .Site.Params.enableThreatRadar }}
+<div class="sidebar-widget sidebar-widget--radar">
+  <div class="widget-header">
+    <span class="widget-header__icon">◎</span>
+    <span class="widget-header__title">THREAT RADAR</span>
+    <span class="pulse-dot pulse-dot--red"></span>
+  </div>
+  <div class="threat-radar" id="threatRadar" aria-label="Threat radar visualization">
+    <canvas id="radarCanvas" width="220" height="220"></canvas>
+    <div class="threat-radar__legend">
+      {{ range hugo.Data.threats.items }}
+      <a href="{{ .url }}" class="radar-legend-item" title="{{ .description }}">
+        <span class="radar-legend-item__dot" style="background:{{ .color }}"></span>
+        <span class="radar-legend-item__label">{{ .label }}</span>
+        <span class="radar-legend-item__count">{{ .count }}</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── TRENDING NOW ── */}}
+<div class="sidebar-widget">
+  <div class="widget-header">
+    <span class="widget-header__icon">▲</span>
+    <span class="widget-header__title">TRENDING NOW</span>
+  </div>
+  <ol class="trending-list">
+    {{ $posts := where .Site.RegularPages "Type" "posts" }}
+    {{ $posts = where $posts "Params.draft" "ne" true }}
+    {{ range $index, $post := first 5 $posts }}
+    <li class="trending-list__item">
+      <span class="trending-list__num">{{ add $index 1 | printf "%02d" }}</span>
+      <div class="trending-list__body">
+        {{ partial "framework-badges.html" $post }}
+        <a href="{{ $post.RelPermalink }}" class="trending-list__title">{{ $post.Title | truncate 70 }}</a>
+        <time class="trending-list__date">{{ $post.Date.Format "Jan 02" }}</time>
+      </div>
+    </li>
+    {{ end }}
+  </ol>
+</div>
+
+{{/* ── FRAMEWORK BREAKDOWN ── */}}
+{{ if .Site.Params.enableFrameworkBadges }}
+<div class="sidebar-widget">
+  <div class="widget-header">
+    <span class="widget-header__icon">⬡</span>
+    <span class="widget-header__title">FRAMEWORK INDEX</span>
+  </div>
+  <div class="framework-breakdown">
+    {{ range hugo.Data.frameworks.items }}
+    <a href="{{ .url }}" class="framework-row">
+      <span class="badge badge--{{ .type }} badge--sm">{{ .badge }}</span>
+      <span class="framework-row__name">{{ .name }}</span>
+      <span class="framework-row__count">{{ .count }}</span>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CATEGORIES ── */}}
+<div class="sidebar-widget">
+  <div class="widget-header">
+    <span class="widget-header__icon">≡</span>
+    <span class="widget-header__title">CATEGORIES</span>
+  </div>
+  <ul class="category-list">
+    {{ range .Site.Taxonomies.categories.ByCount }}
+    <li class="category-list__item">
+      <a href="{{ .Page.RelPermalink }}" class="category-list__link">
+        <span class="category-list__name">{{ .Page.Title }}</span>
+        <span class="category-list__count">{{ .Count }}</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+
+{{/* ── NEWSLETTER CTA ── */}}
+<div class="sidebar-widget sidebar-widget--cta">
+  <div class="newsletter-cta">
+    <div class="newsletter-cta__icon">✉</div>
+    <h3 class="newsletter-cta__title">AI Threat Briefing</h3>
+    <p class="newsletter-cta__desc">Weekly digest of the most critical AI security developments, delivered to your inbox.</p>
+    <a href="{{ .Site.Params.newsletterURL }}" class="btn btn--accent btn--full" target="_blank" rel="noopener">
+      Subscribe Free →
+    </a>
+    <p class="newsletter-cta__sub">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+{{/* ── TAGS CLOUD ── */}}
+<div class="sidebar-widget">
+  <div class="widget-header">
+    <span class="widget-header__icon">#</span>
+    <span class="widget-header__title">TAGS</span>
+  </div>
+  <div class="tags-cloud">
+    {{ range .Site.Taxonomies.tags.ByCount }}
+    <a href="{{ .Page.RelPermalink }}" class="tag-cloud-item">{{ .Page.Title }}</a>
+    {{ end }}
+  </div>
+</div>

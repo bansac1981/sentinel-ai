@@ -1,0 +1,10 @@
+{{/* Renders MITRE ATLAS and OWASP LLM badges for a given page */}}
+{{ if .Params.mitre_techniques }}
+<span class="badge badge--atlas badge--sm" title="MITRE ATLAS: {{ delimit .Params.mitre_techniques ", " }}">ATLAS</span>
+{{ end }}
+{{ if .Params.owasp_categories }}
+<span class="badge badge--owasp badge--sm" title="OWASP LLM: {{ delimit .Params.owasp_categories ", " }}">OWASP</span>
+{{ end }}
+{{ if .Params.threat_level }}
+<span class="badge badge--threat badge--threat--{{ lower .Params.threat_level }} badge--sm">{{ .Params.threat_level }}</span>
+{{ end }}
