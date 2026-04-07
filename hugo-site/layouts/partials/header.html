@@ -2,7 +2,7 @@
   <div class="site-header__inner">
 
     {{/* Logo / wordmark */}}
-    <a href="/" class="site-logo" aria-label="{{ .Site.Title }} — Home">
+    <a href="{{ "/" | relURL }}" class="site-logo" aria-label="{{ .Site.Title }} — Home">
       <span class="site-logo__mark">⬡</span>
       <span class="site-logo__text">
         <span class="site-logo__name">SENTINEL</span><span class="site-logo__accent">AI</span>
@@ -20,7 +20,7 @@
       <ul class="site-nav__list" id="navMenu" role="list">
         {{ range .Site.Menus.main }}
         <li class="site-nav__item">
-          <a href="{{ .URL }}"
+          <a href="{{ .URL | relURL }}"
              class="site-nav__link{{ if $.IsMenuCurrent "main" . }} site-nav__link--active{{ end }}"
              {{ if .HasChildren }}aria-haspopup="true"{{ end }}>
             {{ .Name }}

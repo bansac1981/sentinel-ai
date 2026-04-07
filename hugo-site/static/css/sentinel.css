@@ -826,22 +826,24 @@ blockquote {
   text-decoration: none;
 }
 
-/* Featured card image — left panel */
+/* Featured card image — left panel, moderate size */
 .post-card--featured .post-card__image {
-  aspect-ratio: 16 / 9;
+  height: 260px;
+  aspect-ratio: unset;
 }
 
-/* Grid card image — top of card */
+/* Grid card image — compact thumbnail at top of card */
 .post-card__image--grid {
-  aspect-ratio: 16 / 9;
+  height: 150px;
+  aspect-ratio: unset;
   border-bottom: 1px solid var(--border);
 }
 
-/* List row image — small thumbnail on the left */
+/* List row image — small fixed thumbnail on the left */
 .post-row__image {
-  width: 140px;
-  min-width: 140px;
-  aspect-ratio: 16 / 9;
+  width: 120px;
+  min-width: 120px;
+  height: 80px;
   border-right: 1px solid var(--border);
   border-radius: var(--radius-sm) 0 0 var(--radius-sm);
 }
