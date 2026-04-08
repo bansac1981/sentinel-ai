@@ -1,20 +1,20 @@
 {
   "items": [
     {
-      "value": "94",
-      "label": "CVEs tracked"
-    },
-    {
-      "value": "12",
-      "label": "ATLAS techniques"
-    },
-    {
-      "value": "340+",
-      "label": "articles indexed"
-    },
-    {
       "value": "9",
       "label": "feed sources"
+    },
+    {
+      "value": "6.0+",
+      "label": "relevance score"
+    },
+    {
+      "value": "daily",
+      "label": "update cadence"
+    },
+    {
+      "value": "2",
+      "label": "frameworks mapped"
     }
   ]
 }
