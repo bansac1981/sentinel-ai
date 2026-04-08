@@ -2,7 +2,7 @@
   <div class="site-footer__inner">
 
     <div class="footer-brand">
-      <a href="{{ "/" | relURL }}" class="footer-logo" aria-label="{{ .Site.Title }}">
+      <a href="{{ .Site.Home.RelPermalink }}" class="footer-logo" aria-label="{{ .Site.Title }}">
         <span class="footer-logo__mark">⬡</span>
         <span class="footer-logo__name">SENTINEL<span class="footer-logo__accent">AI</span></span>
       </a>
@@ -34,26 +34,26 @@
       <div class="footer-nav__col">
         <span class="footer-nav__heading">Coverage</span>
         <ul class="footer-nav__list">
-          <li><a href="{{ "/posts/" | relURL }}">All Reports</a></li>
-          <li><a href="{{ "/categories/llm-security/" | relURL }}">LLM Security</a></li>
-          <li><a href="{{ "/categories/adversarial-ml/" | relURL }}">Adversarial ML</a></li>
-          <li><a href="{{ "/categories/data-poisoning/" | relURL }}">Data Poisoning</a></li>
-          <li><a href="{{ "/categories/prompt-injection/" | relURL }}">Prompt Injection</a></li>
+          <li><a href="{{ "posts/" | relURL }}">All Reports</a></li>
+          <li><a href="{{ "categories/llm-security/" | relURL }}">LLM Security</a></li>
+          <li><a href="{{ "categories/adversarial-ml/" | relURL }}">Adversarial ML</a></li>
+          <li><a href="{{ "categories/data-poisoning/" | relURL }}">Data Poisoning</a></li>
+          <li><a href="{{ "categories/prompt-injection/" | relURL }}">Prompt Injection</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
         <span class="footer-nav__heading">Frameworks</span>
         <ul class="footer-nav__list">
-          <li><a href="{{ "/frameworks/mitre-atlas/" | relURL }}">MITRE ATLAS</a></li>
-          <li><a href="{{ "/frameworks/owasp-llm/" | relURL }}">OWASP LLM Top 10</a></li>
-          <li><a href="{{ "/threat_actors/" | relURL }}">Threat Actors</a></li>
-          <li><a href="{{ "/tags/" | relURL }}">All Tags</a></li>
+          <li><a href="{{ "frameworks/mitre-atlas/" | relURL }}">MITRE ATLAS</a></li>
+          <li><a href="{{ "frameworks/owasp-llm/" | relURL }}">OWASP LLM Top 10</a></li>
+          <li><a href="{{ "threat_actors/" | relURL }}">Threat Actors</a></li>
+          <li><a href="{{ "tags/" | relURL }}">All Tags</a></li>
         </ul>
       </div>
       <div class="footer-nav__col">
         <span class="footer-nav__heading">Resources</span>
         <ul class="footer-nav__list">
-          <li><a href="{{ "/newsletter/" | relURL }}">Newsletter</a></li>
+          <li><a href="{{ .Site.Params.newsletterURL }}" target="_blank" rel="noopener">Newsletter</a></li>
           <li><a href="{{ "index.xml" | relURL }}">RSS Feed</a></li>
           <li><a href="{{ .Site.Params.githubURL }}" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="/about/">About</a></li>
