@@ -33,13 +33,13 @@ Upload a logo: use the `⬡ SENTINELAI` wordmark or create one via Canva with th
 
 ## Step 3: Connect Subscribe Button to Your Beehiiv URL
 
-Once your Beehiiv publication is live, get your subscribe URL (e.g., `https://sentinelai.beehiiv.com/subscribe`).
+Once your Beehiiv publication is live, get your subscribe URL (e.g., `https://sentinel-ai.beehiiv.com/subscribe`).
 
 Update `hugo-site/hugo.toml`:
 
 ```toml
 [params]
-  newsletterURL = "https://sentinelai.beehiiv.com/subscribe"
+  newsletterURL = "https://sentinel-ai.beehiiv.com/subscribe"
 ```
 
 This automatically updates:
