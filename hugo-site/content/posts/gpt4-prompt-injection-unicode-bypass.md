@@ -1,6 +1,6 @@
 ---
 title: "GPT-4 Prompt Injection via Unicode Bidirectional Override — System Prompt Fully Exfiltrated"
-date: 2024-01-15T09:30:00+05:30
+date: 2026-04-07T09:30:00+05:30
 draft: false
 
 summary: "Researchers at Trail of Bits demonstrate a novel prompt injection technique using Unicode bidirectional control characters that bypasses OpenAI's content filters and allows full system prompt exfiltration from GPT-4 Turbo deployments."

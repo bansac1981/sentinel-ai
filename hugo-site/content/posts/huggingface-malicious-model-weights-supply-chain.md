@@ -1,6 +1,6 @@
 ---
 title: "Malicious Model Weights Discovered on HuggingFace Hub — Supply Chain Attack Targets ML Engineers"
-date: 2024-01-12T11:00:00+05:30
+date: 2026-04-06T11:00:00+05:30
 draft: false
 
 summary: "JFrog Security researchers uncovered over 100 malicious model repositories on HuggingFace that execute arbitrary code during model loading via pickle deserialization exploits. The models impersonate popular open-source LLMs to maximize reach."

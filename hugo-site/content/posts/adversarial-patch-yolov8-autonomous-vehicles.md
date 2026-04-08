@@ -1,6 +1,6 @@
 ---
 title: "Real-World Adversarial Patches Fool YOLOv8 in Autonomous Vehicle Object Detection — 94% Evasion Rate"
-date: 2024-01-10T08:00:00+05:30
+date: 2026-04-05T08:00:00+05:30
 draft: false
 
 summary: "Researchers from CMU and Tsinghua University demonstrate physical adversarial patches that achieve 94% evasion rate against YOLOv8-based pedestrian detection systems under real-world lighting, distance, and angle variations — raising critical concerns for AV safety."
