@@ -76,5 +76,5 @@ copyright = "© 2024 SENTINEL AI. All rights reserved."
     weight = 5
   [[menu.main]]
     name = "Newsletter"
-    url = "/newsletter/"
+    url = "https://beehiiv.com"
     weight = 6

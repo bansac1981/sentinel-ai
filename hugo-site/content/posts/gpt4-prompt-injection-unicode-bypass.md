@@ -25,6 +25,7 @@ owasp_categories:
 
 categories:
   - "Prompt Injection"
+  - "Jailbreaks"
   - "LLM Security"
 
 tags:

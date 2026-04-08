@@ -63,7 +63,7 @@ jobs:
         run: |
           hugo \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "https://bansac1981.github.io/sentinel-ai/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

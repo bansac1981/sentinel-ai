@@ -25,6 +25,7 @@ owasp_categories:
 categories:
   - "Supply Chain"
   - "Model Poisoning"
+  - "Data Poisoning"
   - "LLM Security"
 
 tags:
