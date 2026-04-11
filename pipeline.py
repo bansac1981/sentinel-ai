@@ -57,9 +57,9 @@ RSS_FEEDS = {
         "name": "CrowdStrike Blog",
         "url": "https://www.crowdstrike.com/en-us/blog/feed",
     },
-    "cisa": {
-        "name": "CISA Alerts",
-        "url": "https://www.us-cert.gov/current/index.rdf",
+    "sans_isc": {
+        "name": "SANS Internet Storm Center",
+        "url": "https://isc.sans.edu/rssfeed_full.xml",
     },
     "hn_ai_security": {
         "name": "HN AI Security",

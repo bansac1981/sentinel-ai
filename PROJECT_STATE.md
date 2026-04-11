@@ -95,7 +95,7 @@ schedule:
 | 2 | SecurityWeek | https://www.securityweek.com/feed/ |
 | 3 | Dark Reading | https://www.darkreading.com/rss.xml |
 | 4 | CrowdStrike Blog | https://www.crowdstrike.com/en-us/blog/feed |
-| 5 | CISA Alerts | https://www.us-cert.gov/current/index.rdf |
+| 5 | SANS Internet Storm Center | https://isc.sans.edu/rssfeed_full.xml |
 | 6 | HN AI Security | https://hnrss.org/newest?q=AI+security+OR+LLM+vulnerability+OR+prompt+injection&points=50 |
 | 7 | Schneier on Security | https://www.schneier.com/feed/ |
 | 8 | Google Project Zero | https://googleprojectzero.blogspot.com/feeds/posts/default |
