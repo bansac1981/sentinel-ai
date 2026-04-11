@@ -8,7 +8,7 @@ summary: "The US Treasury convened major bank executives to discuss cybersecurit
 source: "HN AI Security"
 source_url: "https://www.theguardian.com/technology/2026/apr/10/us-summoned-bank-bosses-to-discuss-cyber-risks-posed-by-anthropic-latest-ai-model"
 author: "Grid the Grey Editorial"
-thumbnail: "https://i.guim.co.uk/img/media/d604120aa55a5469d8bcd21deec7990e5ef3c52c/712_413_1896_1518/master/1896.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=804ae4c79b6fb6260d4d923999cd9e0c"
+thumbnail: ""
 
 # ── AI Security Classification ──
 relevance_score: 8.5

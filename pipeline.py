@@ -621,16 +621,16 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         # Always mark as seen, regardless of outcome
         seen_urls.add(article["url"])
 
-        # Optionally fetch full article content + og:image
+        # Optionally fetch full article content (og:image intentionally NOT used —
+        # third-party images are copyrighted; articles use generated SVG thumbnails instead)
         full_content = ""
-        og_image = ""
         if FETCH_FULL_CONTENT and not args.dry_run:
             log.debug(f"  Fetching full content from {article['url']}")
-            full_content, og_image = fetch_article_content(article["url"], log)
+            full_content, _og_image = fetch_article_content(article["url"], log)
             if full_content:
                 log.debug(f"  Content fetched: {len(full_content)} chars")
-            if og_image:
-                article["thumbnail"] = og_image
+        # thumbnail always left empty so Hugo uses the pattern-generated SVG
+        article["thumbnail"] = ""
 
         if args.dry_run:
             log.info("  [DRY RUN] Would call Claude API here — skipping")
