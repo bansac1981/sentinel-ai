@@ -5,18 +5,25 @@
   </div>
   <div class="ticker-bar__track">
     <div class="ticker-bar__inner" id="tickerInner">
-      {{ range site.Data.ticker.items }}
-      <a href="{{ .url | strings.TrimPrefix "/" | relURL }}" class="ticker-item">
-        <span class="ticker-item__severity ticker-severity--{{ lower .severity }}">{{ .severity }}</span>
-        <span class="ticker-item__text">{{ .text }}</span>
+      {{/* Pull latest 10 published posts, sorted by date descending */}}
+      {{ $posts := where .Site.RegularPages "Type" "posts" }}
+      {{ $posts = first 10 $posts }}
+      {{ range $posts }}
+      <a href="{{ .RelPermalink }}" class="ticker-item">
+        <span class="ticker-item__severity ticker-severity--{{ lower (.Params.threat_level | default "info") }}">
+          {{- .Params.threat_level | default "INFO" -}}
+        </span>
+        <span class="ticker-item__text">{{ .Title | truncate 90 }}</span>
         <span class="ticker-item__sep">//</span>
       </a>
       {{ end }}
-      {{/* Duplicate for seamless loop */}}
-      {{ range site.Data.ticker.items }}
-      <a href="{{ .url | strings.TrimPrefix "/" | relURL }}" class="ticker-item" aria-hidden="true">
-        <span class="ticker-item__severity ticker-severity--{{ lower .severity }}">{{ .severity }}</span>
-        <span class="ticker-item__text">{{ .text }}</span>
+      {{/* Duplicate for seamless CSS loop */}}
+      {{ range $posts }}
+      <a href="{{ .RelPermalink }}" class="ticker-item" aria-hidden="true">
+        <span class="ticker-item__severity ticker-severity--{{ lower (.Params.threat_level | default "info") }}">
+          {{- .Params.threat_level | default "INFO" -}}
+        </span>
+        <span class="ticker-item__text">{{ .Title | truncate 90 }}</span>
         <span class="ticker-item__sep">//</span>
       </a>
       {{ end }}
