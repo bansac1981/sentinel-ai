@@ -1,7 +1,8 @@
 baseURL = "https://bansac1981.github.io/sentinel-ai/"
 languageCode = "en-us"
 title = "SENTINEL AI"
-paginate = 12
+[pagination]
+  pagerSize = 12
 enableRobotsTXT = true
 enableEmoji = false
 copyright = "© 2024 SENTINEL AI. All rights reserved."
