@@ -1,7 +1,7 @@
 ---
 title: "New CrowdStrike Innovations Secure AI Agents and Govern Shadow AI Across Endpoints, SaaS, and Cloud"
 date: 2026-04-06T16:52:49+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "CrowdStrike has announced new platform innovations targeting the governance of Shadow AI and the security of AI agents across endpoints, SaaS, and cloud environments. The release highlights growing enterprise concerns around unmanaged AI tool proliferation and the attack surface introduced by autonomous AI agents. These developments reflect an industry-wide shift toward operationalising AI-specific security controls within existing SOC workflows."
