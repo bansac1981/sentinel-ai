@@ -3,6 +3,8 @@ title: "About SENTINEL AI"
 date: 2024-01-01
 draft: false
 description: "SENTINEL AI is an automated AI security intelligence platform tracking adversarial ML, LLM vulnerabilities, and machine learning security threats — mapped to MITRE ATLAS and OWASP LLM Top 10."
+_build:
+  list: never
 ---
 
 ## What is SENTINEL AI?
