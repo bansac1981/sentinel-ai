@@ -1,7 +1,7 @@
 ---
 title: "How Charlotte AI AgentWorks Fuels Security's Agentic Ecosystem"
 date: 2026-04-06T16:52:49+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "CrowdStrike's Charlotte AI AgentWorks introduces an agentic security ecosystem where autonomous AI agents collaborate to perform security operations tasks with reduced human intervention. The platform raises important considerations around excessive agency, trust boundaries between agents, and the attack surface introduced by interconnected AI systems in security-critical environments. As agentic SOC architectures proliferate, the security of the AI agents themselves becomes a primary concern."
