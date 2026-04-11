@@ -1,148 +1,362 @@
 {{/*
   article-image.html
-  Renders the article thumbnail if one exists, otherwise generates
-  a branded SVG placeholder based on threat level and category.
-  Usage: {{ partial "article-image.html" . }}
+  Generates a unique branded SVG per article.
+  6 visual patterns selected by: mod (len .Title) 6
+  Offset variation via: mod (len summary) N
 */}}
 
-{{ $thumbnail := .Params.thumbnail }}
+{{ $thumb    := .Params.thumbnail }}
 {{ $title    := .Title }}
-{{ $category := "AI Security" }}
-{{ if .Params.categories }}{{ $category = index .Params.categories 0 }}{{ end }}
+{{ $cat      := "AI Security" }}
+{{ if .Params.categories }}{{ $cat = index .Params.categories 0 }}{{ end }}
 
 {{/* Threat level → accent color */}}
-{{ $accentColor := "#ff3b3b" }}
-{{ $accentDim   := "rgba(255,59,59,0.18)" }}
+{{ $c  := "#ff3b3b" }}
+{{ $cd := "rgba(255,59,59,0.18)" }}
 {{ if eq .Params.threat_level "HIGH" }}
-  {{ $accentColor = "#ff8c00" }}
-  {{ $accentDim   = "rgba(255,140,0,0.18)" }}
+  {{ $c = "#ff8c00" }}{{ $cd = "rgba(255,140,0,0.18)" }}
 {{ else if eq .Params.threat_level "MEDIUM" }}
-  {{ $accentColor = "#ffd700" }}
-  {{ $accentDim   = "rgba(255,215,0,0.15)" }}
+  {{ $c = "#ffd700" }}{{ $cd = "rgba(255,215,0,0.15)" }}
 {{ else if eq .Params.threat_level "LOW" }}
-  {{ $accentColor = "#22c55e" }}
-  {{ $accentDim   = "rgba(34,197,94,0.15)" }}
+  {{ $c = "#22c55e" }}{{ $cd = "rgba(34,197,94,0.15)" }}
 {{ end }}
 
-{{ if $thumbnail }}
-  <img src="{{ $thumbnail }}" alt="{{ $title }}" loading="lazy" class="article-thumb-img">
+{{/* Pattern seed (0–5) and offset seed (0–79) */}}
+{{ $pat := mod (len $title) 6 }}
+{{ $off := mod (len (.Params.summary | default "x")) 80 }}
+
+{{/* Title wrap for SVG text */}}
+{{ $words := split $title " " }}
+{{ $line1 := "" }}{{ $line2 := "" }}{{ $done := false }}
+{{ range $words }}
+  {{ if not $done }}
+    {{ $try := printf "%s %s" $line1 . | strings.TrimLeft " " }}
+    {{ if gt (len $try) 42 }}
+      {{ $line2 = printf "%s %s" $line2 . | strings.TrimLeft " " }}
+      {{ if gt (len $line2) 42 }}{{ $done = true }}{{ end }}
+    {{ else }}
+      {{ $line1 = $try }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $thumb }}
+<img src="{{ $thumb }}" alt="{{ $title }}" loading="lazy" class="article-thumb-img">
 {{ else }}
-  {{/* ── Generated SVG placeholder ── */}}
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420"
-       role="img" aria-label="{{ $category }} — {{ $title }}">
-    <defs>
-      <linearGradient id="grad-bg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%"   stop-color="#0a0a0f"/>
-        <stop offset="100%" stop-color="#141420"/>
-      </linearGradient>
-      <linearGradient id="grad-glow" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%"   stop-color="{{ $accentColor }}" stop-opacity="0.12"/>
-        <stop offset="100%" stop-color="{{ $accentColor }}" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" role="img" aria-label="{{ $cat }} — {{ $title }}">
+  <defs>
+    <linearGradient id="gtg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#09090e"/>
+      <stop offset="100%" stop-color="#12121e"/>
+    </linearGradient>
+    <linearGradient id="gtg-glow" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0%"   stop-color="{{ $c }}" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="{{ $c }}" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
 
-    {{/* Background */}}
-    <rect width="800" height="420" fill="url(#grad-bg)"/>
+  <!-- Base -->
+  <rect width="800" height="420" fill="url(#gtg-bg)"/>
+  <ellipse cx="160" cy="210" rx="320" ry="200" fill="url(#gtg-glow)"/>
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="4" height="420" fill="{{ $c }}" opacity="0.85"/>
 
-    {{/* Glow blob */}}
-    <ellipse cx="160" cy="210" rx="300" ry="200" fill="url(#grad-glow)"/>
+  {{/* ═══════════════════════════════════
+       PATTERN 0 — WAVEFORM / SIGNAL
+       ═══════════════════════════════════ */}}
+  {{ if eq $pat 0 }}
+  {{ $wy := add 170 (mul $off 1) }}
+  {{ $wy2 := add 230 (mul $off 1) }}
+  {{ $wy3 := add 290 (mul $off 1) }}
+  <!-- Main wave -->
+  <path d="M0,{{ $wy }} C60,{{ sub $wy 55 }} 130,{{ add $wy 55 }} 200,{{ $wy }} C270,{{ sub $wy 55 }} 340,{{ add $wy 55 }} 410,{{ $wy }} C480,{{ sub $wy 55 }} 550,{{ add $wy 55 }} 620,{{ $wy }} C690,{{ sub $wy 55 }} 750,{{ add $wy 55 }} 800,{{ $wy }}"
+        stroke="{{ $c }}" stroke-width="2.5" fill="none" stroke-opacity="0.8"/>
+  <!-- Secondary wave -->
+  <path d="M0,{{ $wy2 }} C80,{{ sub $wy2 35 }} 160,{{ add $wy2 35 }} 240,{{ $wy2 }} C320,{{ sub $wy2 35 }} 400,{{ add $wy2 35 }} 480,{{ $wy2 }} C560,{{ sub $wy2 35 }} 640,{{ add $wy2 35 }} 800,{{ $wy2 }}"
+        stroke="{{ $c }}" stroke-width="1" fill="none" stroke-opacity="0.3"/>
+  <!-- Tertiary wave -->
+  <path d="M0,{{ $wy3 }} C100,{{ sub $wy3 20 }} 200,{{ add $wy3 20 }} 300,{{ $wy3 }} C400,{{ sub $wy3 20 }} 500,{{ add $wy3 20 }} 800,{{ $wy3 }}"
+        stroke="{{ $c }}" stroke-width="0.8" fill="none" stroke-opacity="0.15"/>
+  <!-- Pulse dots on main wave -->
+  <circle cx="{{ add 200 $off }}" cy="{{ $wy }}" r="5" fill="{{ $c }}" opacity="0.9"/>
+  <circle cx="{{ add 410 $off }}" cy="{{ $wy }}" r="4" fill="{{ $c }}" opacity="0.6"/>
+  <circle cx="{{ add 620 $off }}" cy="{{ $wy }}" r="5" fill="{{ $c }}" opacity="0.9"/>
+  <!-- Vertical tick marks -->
+  <line x1="{{ add 100 $off }}" y1="{{ sub $wy 15 }}" x2="{{ add 100 $off }}" y2="{{ add $wy 15 }}" stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="{{ add 300 $off }}" y1="{{ sub $wy 10 }}" x2="{{ add 300 $off }}" y2="{{ add $wy 10 }}" stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.3"/>
+  <line x1="{{ add 500 $off }}" y1="{{ sub $wy 15 }}" x2="{{ add 500 $off }}" y2="{{ add $wy 15 }}" stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="{{ add 700 $off }}" y1="{{ sub $wy 10 }}" x2="{{ add 700 $off }}" y2="{{ add $wy 10 }}" stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.3"/>
+  <!-- Scan area fill -->
+  <path d="M0,{{ $wy }} C60,{{ sub $wy 55 }} 130,{{ add $wy 55 }} 200,{{ $wy }} C270,{{ sub $wy 55 }} 340,{{ add $wy 55 }} 410,{{ $wy }} C480,{{ sub $wy 55 }} 550,{{ add $wy 55 }} 620,{{ $wy }} C690,{{ sub $wy 55 }} 750,{{ add $wy 55 }} 800,{{ $wy }} L800,420 L0,420 Z"
+        fill="{{ $c }}" fill-opacity="0.04"/>
+  {{ end }}
 
-    {{/* Hex grid pattern — subtle dots */}}
-    {{ range seq 0 11 }}
+  {{/* ═══════════════════════════════════
+       PATTERN 1 — CIRCUIT BOARD
+       ═══════════════════════════════════ */}}
+  {{ if eq $pat 1 }}
+  {{ $tx := add 120 $off }}
+  <!-- Horizontal traces -->
+  <polyline points="{{ $tx },80 {{ add $tx 180 }},80 {{ add $tx 180 }},140 {{ add $tx 340 }},140"
+            stroke="{{ $c }}" stroke-width="1.5" fill="none" stroke-opacity="0.5"/>
+  <polyline points="{{ add $tx 40 }},200 {{ add $tx 40 }},260 {{ add $tx 220 }},260 {{ add $tx 220 }},320 {{ add $tx 380 }},320"
+            stroke="{{ $c }}" stroke-width="1.5" fill="none" stroke-opacity="0.4"/>
+  <polyline points="{{ add $tx 80 }},340 {{ add $tx 240 }},340 {{ add $tx 240 }},160 {{ add $tx 400 }},160"
+            stroke="{{ $c }}" stroke-width="1" fill="none" stroke-opacity="0.25"/>
+  <polyline points="20,{{ add 120 $off }} 80,{{ add 120 $off }} 80,{{ add 200 $off }} 160,{{ add 200 $off }}"
+            stroke="{{ $c }}" stroke-width="1" fill="none" stroke-opacity="0.3"/>
+  <!-- Long horizontal baseline -->
+  <line x1="20" y1="380" x2="760" y2="380" stroke="{{ $c }}" stroke-width="0.6" stroke-opacity="0.12"/>
+  <!-- IC chip outline -->
+  <rect x="{{ add $tx 200 }}" y="100" width="90" height="60" rx="2"
+        fill="{{ $cd }}" stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="{{ add $tx 200 }}" y1="115" x2="{{ add $tx 290 }}" y2="115" stroke="{{ $c }}" stroke-width="0.5" stroke-opacity="0.3"/>
+  <line x1="{{ add $tx 200 }}" y1="130" x2="{{ add $tx 290 }}" y2="130" stroke="{{ $c }}" stroke-width="0.5" stroke-opacity="0.3"/>
+  <line x1="{{ add $tx 200 }}" y1="145" x2="{{ add $tx 290 }}" y2="145" stroke="{{ $c }}" stroke-width="0.5" stroke-opacity="0.3"/>
+  <!-- Pin stubs on chip -->
+  {{ range seq 0 3 }}
+  <line x1="{{ add $tx 200 }}" y1="{{ add 110 (mul . 16) }}" x2="{{ add $tx 190 }}" y2="{{ add 110 (mul . 16) }}"
+        stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="{{ add $tx 290 }}" y1="{{ add 110 (mul . 16) }}" x2="{{ add $tx 300 }}" y2="{{ add 110 (mul . 16) }}"
+        stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.5"/>
+  {{ end }}
+  <!-- Junction dots -->
+  <circle cx="{{ add $tx 180 }}" cy="80"  r="3.5" fill="{{ $c }}" opacity="0.8"/>
+  <circle cx="{{ add $tx 180 }}" cy="140" r="3.5" fill="{{ $c }}" opacity="0.8"/>
+  <circle cx="{{ add $tx 40 }}"  cy="200" r="3"   fill="{{ $c }}" opacity="0.6"/>
+  <circle cx="{{ add $tx 40 }}"  cy="260" r="3.5" fill="{{ $c }}" opacity="0.8"/>
+  <circle cx="{{ add $tx 220 }}" cy="260" r="3"   fill="{{ $c }}" opacity="0.6"/>
+  <circle cx="{{ add $tx 220 }}" cy="320" r="3.5" fill="{{ $c }}" opacity="0.8"/>
+  <circle cx="{{ add $tx 240 }}" cy="340" r="3"   fill="{{ $c }}" opacity="0.6"/>
+  <circle cx="{{ add $tx 240 }}" cy="160" r="3.5" fill="{{ $c }}" opacity="0.8"/>
+  <!-- Via circles -->
+  <circle cx="{{ add $tx 80 }}"  cy="100" r="5" fill="none" stroke="{{ $c }}" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="{{ add $tx 80 }}"  cy="100" r="2" fill="{{ $c }}" opacity="0.5"/>
+  <circle cx="{{ add $tx 360 }}" cy="280" r="5" fill="none" stroke="{{ $c }}" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle cx="{{ add $tx 360 }}" cy="280" r="2" fill="{{ $c }}" opacity="0.4"/>
+  {{ end }}
+
+  {{/* ═══════════════════════════════════
+       PATTERN 2 — MATRIX / DOT GRID
+       ═══════════════════════════════════ */}}
+  {{ if eq $pat 2 }}
+  {{ range seq 0 17 }}
+    {{ $col := . }}
+    {{ $cx := add (mul $col 44) 40 }}
+    {{ $phase := mod (add $col $off) 10 }}
+    {{ range seq 0 8 }}
       {{ $row := . }}
-      {{ range seq 0 7 }}
-        {{ $col := . }}
-        {{ $x := add (mul $col 70) (mul (mod $row 2) 35) }}
-        {{ $y := add (mul $row 60) 20 }}
-        <circle cx="{{ $x }}" cy="{{ $y }}" r="1.5"
-                fill="{{ $accentColor }}" fill-opacity="0.12"/>
+      {{ $cy := add (mul $row 46) 26 }}
+      {{ $bright := mod (add $row $phase) 5 }}
+      {{ if eq $bright 0 }}
+        <circle cx="{{ $cx }}" cy="{{ $cy }}" r="2.8" fill="{{ $c }}" fill-opacity="0.85"/>
+      {{ else if eq $bright 1 }}
+        <circle cx="{{ $cx }}" cy="{{ $cy }}" r="2" fill="{{ $c }}" fill-opacity="0.4"/>
+      {{ else if eq $bright 2 }}
+        <circle cx="{{ $cx }}" cy="{{ $cy }}" r="1.5" fill="{{ $c }}" fill-opacity="0.2"/>
+      {{ else }}
+        <circle cx="{{ $cx }}" cy="{{ $cy }}" r="1"   fill="{{ $c }}" fill-opacity="0.08"/>
       {{ end }}
     {{ end }}
+  {{ end }}
+  <!-- Highlight column -->
+  {{ $hcx := add (mul (mod $off 17) 44) 40 }}
+  {{ range seq 0 8 }}
+    <circle cx="{{ $hcx }}" cy="{{ add (mul . 46) 26 }}" r="3" fill="{{ $c }}" fill-opacity="0.9"/>
+    <line x1="{{ $hcx }}" y1="{{ add (mul . 46) 26 }}" x2="{{ $hcx }}" y2="{{ add (mul . 46) 72 }}"
+          stroke="{{ $c }}" stroke-width="0.6" stroke-opacity="0.3"/>
+  {{ end }}
+  {{ end }}
 
-    {{/* Hexagon outline — top left */}}
-    <polygon points="60,30 95,10 130,30 130,70 95,90 60,70"
-             fill="none" stroke="{{ $accentColor }}" stroke-width="1"
-             stroke-opacity="0.25"/>
-    <polygon points="60,30 95,10 130,30 130,70 95,90 60,70"
-             fill="{{ $accentColor }}" fill-opacity="0.04"/>
+  {{/* ═══════════════════════════════════
+       PATTERN 3 — RADAR
+       ═══════════════════════════════════ */}}
+  {{ if eq $pat 3 }}
+  {{ $rcx := add 380 (mod $off 60) }}
+  {{ $rcy := 210 }}
+  <!-- Concentric rings -->
+  {{ range seq 1 5 }}
+    <circle cx="{{ $rcx }}" cy="{{ $rcy }}" r="{{ mul . 64 }}"
+            fill="none" stroke="{{ $c }}" stroke-width="0.8"
+            stroke-opacity="{{ if gt . 3 }}0.08{{ else if gt . 1 }}0.18{{ else }}0.35{{ end }}"/>
+  {{ end }}
+  <!-- Cross-hair lines -->
+  <line x1="{{ $rcx }}" y1="10" x2="{{ $rcx }}" y2="410" stroke="{{ $c }}" stroke-width="0.6" stroke-opacity="0.2"/>
+  <line x1="30" y1="{{ $rcy }}" x2="770" y2="{{ $rcy }}" stroke="{{ $c }}" stroke-width="0.6" stroke-opacity="0.2"/>
+  <!-- Diagonal cross-hairs -->
+  <line x1="{{ sub $rcx 260 }}" y1="{{ sub $rcy 260 }}" x2="{{ add $rcx 260 }}" y2="{{ add $rcy 260 }}" stroke="{{ $c }}" stroke-width="0.4" stroke-opacity="0.12"/>
+  <line x1="{{ add $rcx 260 }}" y1="{{ sub $rcy 260 }}" x2="{{ sub $rcx 260 }}" y2="{{ add $rcy 260 }}" stroke="{{ $c }}" stroke-width="0.4" stroke-opacity="0.12"/>
+  <!-- Sweep wedge -->
+  <path d="M{{ $rcx }},{{ $rcy }} L{{ add $rcx 260 }},{{ sub $rcy 80 }} A280,280 0 0,0 {{ add $rcx 230 }},{{ add $rcy 150 }} Z"
+        fill="{{ $c }}" fill-opacity="0.06"/>
+  <line x1="{{ $rcx }}" y1="{{ $rcy }}" x2="{{ add $rcx 260 }}" y2="{{ sub $rcy 80 }}"
+        stroke="{{ $c }}" stroke-width="1.2" stroke-opacity="0.5"/>
+  <!-- Radar blips -->
+  {{ $blips := slice 80 140 210 110 60 180 }}
+  {{ $blipy := slice 170 260 190 300 240 140 }}
+  {{ range $i, $bx := $blips }}
+    {{ $by := index $blipy $i }}
+    {{ $bxr := add $rcx (sub $bx 130) }}
+    {{ $byr := add $rcy (sub $by 210) }}
+    <circle cx="{{ $bxr }}" cy="{{ $byr }}" r="{{ if eq (mod $i 3) 0 }}4{{ else }}2.5{{ end }}"
+            fill="{{ $c }}" opacity="{{ if eq (mod $i 3) 0 }}0.9{{ else }}0.5{{ end }}"/>
+    <circle cx="{{ $bxr }}" cy="{{ $byr }}" r="{{ if eq (mod $i 3) 0 }}9{{ else }}6{{ end }}"
+            fill="none" stroke="{{ $c }}" stroke-width="0.8"
+            stroke-opacity="{{ if eq (mod $i 3) 0 }}0.3{{ else }}0.15{{ end }}"/>
+  {{ end }}
+  <!-- Degree markers -->
+  {{ range seq 0 11 }}
+    {{ $angle := mul . 30 }}
+    <text x="{{ add $rcx (mul (div $angle 1) 0) }}" y="18" font-family="monospace" font-size="8"
+          fill="{{ $c }}" fill-opacity="0.3" text-anchor="middle">{{ mul . 30 }}°</text>
+  {{ end }}
+  {{ end }}
 
-    {{/* Inner hex */}}
-    <polygon points="75,42 95,31 115,42 115,64 95,75 75,64"
-             fill="none" stroke="{{ $accentColor }}" stroke-width="1"
-             stroke-opacity="0.4"/>
+  {{/* ═══════════════════════════════════
+       PATTERN 4 — TOPOLOGY / NODE GRAPH
+       ═══════════════════════════════════ */}}
+  {{ if eq $pat 4 }}
+  {{/* Node positions — fixed but offset by $off for variety */}}
+  {{ $ox := add 60 (mul $off 2) }}
+  {{ $nodes := slice
+    (slice (add $ox 120) 80)
+    (slice (add $ox 280) 130)
+    (slice (add $ox 460) 90)
+    (slice (add $ox 600) 160)
+    (slice (add $ox 200) 240)
+    (slice (add $ox 380) 280)
+    (slice (add $ox 540) 310)
+    (slice (add $ox 100) 340)
+    (slice (add $ox 660) 260)
+    (slice (add $ox 320) 380)
+  }}
+  {{/* Edge connections as index pairs */}}
+  {{ $edges := slice
+    (slice 0 1)(slice 1 2)(slice 2 3)
+    (slice 1 4)(slice 2 5)(slice 3 6)
+    (slice 4 5)(slice 5 6)(slice 6 8)
+    (slice 0 4)(slice 4 7)(slice 5 9)
+    (slice 7 9)(slice 3 8)(slice 1 5)
+  }}
+  {{/* Draw edges */}}
+  {{ range $edges }}
+    {{ $a := index . 0 }}
+    {{ $b := index . 1 }}
+    {{ $na := index $nodes $a }}
+    {{ $nb := index $nodes $b }}
+    <line x1="{{ index $na 0 }}" y1="{{ index $na 1 }}"
+          x2="{{ index $nb 0 }}" y2="{{ index $nb 1 }}"
+          stroke="{{ $c }}" stroke-width="0.8" stroke-opacity="0.25"/>
+  {{ end }}
+  {{/* Draw nodes */}}
+  {{ range $i, $n := $nodes }}
+    {{ $nx := index $n 0 }}
+    {{ $ny := index $n 1 }}
+    {{ $size := 4 }}{{ if eq (mod $i 4) 0 }}{{ $size = 7 }}{{ else if eq (mod $i 3) 0 }}{{ $size = 5 }}{{ end }}
+    <circle cx="{{ $nx }}" cy="{{ $ny }}" r="{{ add $size 6 }}"
+            fill="{{ $c }}" fill-opacity="0.06"/>
+    <circle cx="{{ $nx }}" cy="{{ $ny }}" r="{{ $size }}"
+            fill="{{ $c }}" fill-opacity="{{ if eq (mod $i 4) 0 }}0.9{{ else }}0.5{{ end }}"/>
+    <circle cx="{{ $nx }}" cy="{{ $ny }}" r="{{ add $size 2 }}"
+            fill="none" stroke="{{ $c }}" stroke-width="0.8"
+            stroke-opacity="{{ if eq (mod $i 4) 0 }}0.5{{ else }}0.2{{ end }}"/>
+  {{ end }}
+  {{ end }}
 
-    {{/* Hex icon mark */}}
-    <text x="95" y="58" font-family="monospace" font-size="16"
-          fill="{{ $accentColor }}" text-anchor="middle" font-weight="bold">⬡</text>
+  {{/* ═══════════════════════════════════
+       PATTERN 5 — SHARDS / FRAGMENTS
+       ═══════════════════════════════════ */}}
+  {{ if eq $pat 5 }}
+  {{ $sx := add 40 $off }}
+  <!-- Large background shards -->
+  <polygon points="{{ $sx }},0 {{ add $sx 320 }},0 {{ add $sx 160 }},420"
+           fill="{{ $c }}" fill-opacity="0.04"/>
+  <polygon points="{{ add $sx 200 }},0 {{ add $sx 580 }},0 {{ add $sx 460 }},420 {{ add $sx 120 }},420"
+           fill="{{ $c }}" fill-opacity="0.03"/>
+  <polygon points="{{ add $sx 500 }},0 800,0 800,420 {{ add $sx 640 }},420"
+           fill="{{ $c }}" fill-opacity="0.05"/>
+  <!-- Mid-layer shards -->
+  <polygon points="{{ $sx }},80 {{ add $sx 180 }},20 {{ add $sx 240 }},180 {{ add $sx 60 }},200"
+           fill="none" stroke="{{ $c }}" stroke-width="0.8" stroke-opacity="0.35"/>
+  <polygon points="{{ add $sx 220 }},60 {{ add $sx 400 }},40 {{ add $sx 440 }},240 {{ add $sx 200 }},280"
+           fill="none" stroke="{{ $c }}" stroke-width="0.8" stroke-opacity="0.25"/>
+  <polygon points="{{ add $sx 380 }},30 {{ add $sx 600 }},10 {{ add $sx 640 }},200 {{ add $sx 360 }},220"
+           fill="none" stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.3"/>
+  <polygon points="{{ add $sx 560 }},80 800,50 800,280 {{ add $sx 580 }},300"
+           fill="none" stroke="{{ $c }}" stroke-width="0.8" stroke-opacity="0.2"/>
+  <!-- Accent filled shard -->
+  <polygon points="{{ add $sx 160 }},150 {{ add $sx 280 }},100 {{ add $sx 320 }},240 {{ add $sx 140 }},260"
+           fill="{{ $c }}" fill-opacity="0.1" stroke="{{ $c }}" stroke-width="1" stroke-opacity="0.5"/>
+  <!-- Bright edge lines on key shards -->
+  <line x1="{{ $sx }}" y1="80" x2="{{ add $sx 240 }}" y2="180"
+        stroke="{{ $c }}" stroke-width="1.5" stroke-opacity="0.6"/>
+  <line x1="{{ add $sx 380 }}" y1="30" x2="{{ add $sx 640 }}" y2="200"
+        stroke="{{ $c }}" stroke-width="1.5" stroke-opacity="0.5"/>
+  <!-- Shard dots at vertices -->
+  <circle cx="{{ $sx }}" cy="80" r="4" fill="{{ $c }}" opacity="0.7"/>
+  <circle cx="{{ add $sx 240 }}" cy="180" r="3" fill="{{ $c }}" opacity="0.5"/>
+  <circle cx="{{ add $sx 380 }}" cy="30" r="4" fill="{{ $c }}" opacity="0.7"/>
+  <circle cx="{{ add $sx 640 }}" cy="200" r="3" fill="{{ $c }}" opacity="0.5"/>
+  <circle cx="{{ add $sx 160 }}" cy="150" r="5" fill="{{ $c }}" opacity="0.8"/>
+  {{ end }}
 
-    {{/* Corner bracket — top right */}}
-    <polyline points="700,20 780,20 780,60"
-              fill="none" stroke="{{ $accentColor }}" stroke-width="1.5"
-              stroke-opacity="0.3"/>
-    <polyline points="700,400 780,400 780,360"
-              fill="none" stroke="{{ $accentColor }}" stroke-width="1.5"
-              stroke-opacity="0.3"/>
+  {{/* ═══════════════════════════════════
+       SHARED TEXT OVERLAY (all patterns)
+       ═══════════════════════════════════ */}}
 
-    {{/* Scan line */}}
-    <line x1="0" y1="210" x2="800" y2="210"
-          stroke="{{ $accentColor }}" stroke-width="0.5" stroke-opacity="0.1"/>
+  <!-- Category badge -->
+  <rect x="20" y="155" width="{{ mul (len $cat) 9 | add 22 }}" height="24"
+        rx="3" fill="{{ $cd }}"/>
+  <rect x="20" y="155" width="{{ mul (len $cat) 9 | add 22 }}" height="24"
+        rx="3" fill="none" stroke="{{ $c }}" stroke-width="0.6" stroke-opacity="0.4"/>
+  <text x="31" y="172" font-family="monospace" font-size="11"
+        fill="{{ $c }}" font-weight="600" letter-spacing="1.5">{{ upper $cat }}</text>
 
-    {{/* Vertical accent bar */}}
-    <rect x="0" y="0" width="4" height="420" fill="{{ $accentColor }}" opacity="0.7"/>
+  <!-- Article title -->
+  <text x="20" y="218" font-family="Georgia, serif" font-size="24"
+        fill="#e8e8e8" font-weight="700" letter-spacing="-0.2">{{ $line1 }}</text>
+  {{ if $line2 }}
+  <text x="20" y="250" font-family="Georgia, serif" font-size="24"
+        fill="#e8e8e8" font-weight="700" letter-spacing="-0.2">{{ $line2 }}{{ if gt (len $title) 84 }}…{{ end }}</text>
+  {{ end }}
 
-    {{/* Category label */}}
-    <rect x="20" y="160" width="{{ mul (len $category) 9 | add 24 }}" height="26"
-          rx="3" fill="{{ $accentDim }}"/>
-    <text x="32" y="178" font-family="monospace" font-size="11"
-          fill="{{ $accentColor }}" font-weight="600" letter-spacing="1.5">
-      {{ upper $category }}
-    </text>
+  <!-- Threat level badge -->
+  {{ if .Params.threat_level }}
+  <rect x="20" y="300" width="88" height="22" rx="3"
+        fill="{{ $c }}" fill-opacity="0.15"/>
+  <rect x="20" y="300" width="88" height="22" rx="3"
+        fill="none" stroke="{{ $c }}" stroke-width="0.8" stroke-opacity="0.6"/>
+  <text x="64" y="315" font-family="monospace" font-size="10"
+        fill="{{ $c }}" text-anchor="middle" font-weight="700"
+        letter-spacing="1.5">{{ .Params.threat_level }}</text>
+  {{ end }}
 
-    {{/* Title — wrapping up to 2 lines */}}
-    {{ $words  := split $title " " }}
-    {{ $line1  := "" }}
-    {{ $line2  := "" }}
-    {{ $done   := false }}
-    {{ range $i, $w := $words }}
-      {{ if not $done }}
-        {{ $try := printf "%s %s" $line1 $w | strings.TrimLeft " " }}
-        {{ if gt (len $try) 44 }}
-          {{ $line2 = printf "%s %s" $line2 $w | strings.TrimLeft " " }}
-          {{ if gt (len $line2) 44 }}{{ $done = true }}{{ end }}
-        {{ else }}
-          {{ $line1 = $try }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
+  <!-- Source label -->
+  {{ if .Params.source }}
+  <text x="20" y="346" font-family="monospace" font-size="9"
+        fill="#ffffff" fill-opacity="0.3" letter-spacing="1">{{ upper .Params.source }}</text>
+  {{ end }}
 
-    <text x="20" y="230" font-family="Georgia, serif" font-size="26"
-          fill="#e8e8e8" font-weight="700" letter-spacing="-0.3">
-      {{ $line1 }}
-    </text>
-    {{ if $line2 }}
-    <text x="20" y="264" font-family="Georgia, serif" font-size="26"
-          fill="#e8e8e8" font-weight="700" letter-spacing="-0.3">
-      {{ $line2 }}{{ if gt (len $title) 88 }}…{{ end }}
-    </text>
-    {{ end }}
+  <!-- Score bar -->
+  {{ if .Params.relevance_score }}
+  {{ $sw := .Params.relevance_score | mul 56 | int }}
+  <rect x="20" y="358" width="56" height="3" rx="1" fill="#ffffff" fill-opacity="0.08"/>
+  <rect x="20" y="358" width="{{ $sw }}" height="3" rx="1" fill="{{ $c }}" opacity="0.7"/>
+  <text x="82" y="362" font-family="monospace" font-size="8"
+        fill="{{ $c }}" fill-opacity="0.6">{{ printf "%.1f" .Params.relevance_score }}</text>
+  {{ end }}
 
-    {{/* Threat level badge */}}
-    {{ if .Params.threat_level }}
-    <rect x="20" y="310" width="90" height="22" rx="3"
-          fill="{{ $accentColor }}" fill-opacity="0.15"/>
-    <rect x="20" y="310" width="90" height="22" rx="3"
-          fill="none" stroke="{{ $accentColor }}" stroke-width="1" stroke-opacity="0.5"/>
-    <text x="65" y="325" font-family="monospace" font-size="10"
-          fill="{{ $accentColor }}" text-anchor="middle" font-weight="700"
-          letter-spacing="1.5">
-      {{ .Params.threat_level }}
-    </text>
-    {{ end }}
+  <!-- Grid the Grey watermark -->
+  <text x="780" y="410" font-family="monospace" font-size="9"
+        fill="#ffffff" fill-opacity="0.1" text-anchor="end" letter-spacing="2">
+    GRID THE GREY
+  </text>
 
-    {{/* Grid the Grey watermark */}}
-    <text x="780" y="410" font-family="monospace" font-size="10"
-          fill="#ffffff" fill-opacity="0.12" text-anchor="end" letter-spacing="2">
-      GRID THE GREY
-    </text>
-  </svg>
+  <!-- Corner bracket — top right -->
+  <polyline points="710,16 784,16 784,56"
+            fill="none" stroke="{{ $c }}" stroke-width="1.2" stroke-opacity="0.25"/>
+  <polyline points="710,404 784,404 784,364"
+            fill="none" stroke="{{ $c }}" stroke-width="1.2" stroke-opacity="0.25"/>
+
+</svg>
 {{ end }}
