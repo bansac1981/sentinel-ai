@@ -65,7 +65,7 @@ jobs:
         run: |
           hugo \
             --minify \
-            --baseURL "https://bansac1981.github.io/sentinel-ai/"
+            --baseURL "https://gridthegrey.com/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

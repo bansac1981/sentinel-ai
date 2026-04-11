@@ -1,4 +1,4 @@
-baseURL = "https://bansac1981.github.io/sentinel-ai/"
+baseURL = "https://gridthegrey.com/"
 languageCode = "en-us"
 title = "SENTINEL AI"
 [pagination]
@@ -15,7 +15,7 @@ copyright = "© 2024 SENTINEL AI. All rights reserved."
   darkBg = "#0a0a0f"
   author = "SENTINEL AI Editorial"
   twitterHandle = "@sentinelai"
-  githubURL = "https://github.com/sentinel-ai"
+  githubURL = "https://github.com/bansac1981/sentinel-ai"
   newsletterURL = "https://sentinel-ai.beehiiv.com/subscribe"
   enableTicker = true
   enableThreatRadar = true
