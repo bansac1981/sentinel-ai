@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Claude Mythos Preview: The More Capable AI Becomes, the More Security It Needs"
 date: 2026-04-11T09:21:26+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "CrowdStrike, as a founding member of Anthropic's Mythos program, is highlighting the security challenges posed by increasingly capable frontier AI models, signaling a growing industry focus on securing agentic and large-scale AI systems. The article underscores the philosophical and practical position that AI capability gains must be matched by proportional security investment. While the piece is primarily a vendor partnership announcement and executive viewpoint, it reflects an important industry trend toward formalising AI-specific security frameworks and tooling."
