@@ -6,19 +6,19 @@
 
 /* ── CSS Custom Properties ── */
 :root {
-  /* Colors — pure charcoal grey, no blue tint */
-  --bg-primary:     #161616;
-  --bg-secondary:   #1c1c1c;
-  --bg-tertiary:    #222222;
-  --bg-card:        #1e1e1e;
-  --bg-card-hover:  #262626;
-  --border:         #2e2e2e;
-  --border-subtle:  #202020;
+  /* Colors — Theme A: medium charcoal (default) */
+  --bg-primary:     #1f1f1f;
+  --bg-secondary:   #252525;
+  --bg-tertiary:    #2a2a2a;
+  --bg-card:        #262626;
+  --bg-card-hover:  #2e2e2e;
+  --border:         #383838;
+  --border-subtle:  #2a2a2a;
 
   --text-primary:   #e8e8e8;
   --text-secondary: #909090;
   --text-muted:     #666666;
-  --text-inverse:   #161616;
+  --text-inverse:   #1f1f1f;
 
   --accent:         #ff3b3b;
   --accent-hover:   #ff5555;
@@ -61,6 +61,47 @@
 
   /* Transitions */
   --transition: 200ms ease;
+}
+
+/* ── Theme B: deeper graphite (#242424) ── */
+body.theme-b {
+  --bg-primary:    #242424;
+  --bg-secondary:  #2a2a2a;
+  --bg-tertiary:   #303030;
+  --bg-card:       #2c2c2c;
+  --bg-card-hover: #343434;
+  --border:        #3e3e3e;
+  --border-subtle: #303030;
+}
+
+/* ── Theme switcher button ── */
+#theme-switcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+#theme-switcher:hover { border-color: var(--accent); color: var(--text-primary); }
+#theme-switcher .ts-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 /* ── Reset & Base ── */
