@@ -1,35 +1,4 @@
-<button id="theme-switcher" aria-label="Switch colour theme" title="Toggle between Theme A and Theme B">
-  <span class="ts-dot"></span>
-  <span id="ts-label">THEME A</span>
-</button>
-
 <script>
-// ── Theme A / B toggle ──
-(function() {
-  var body  = document.body;
-  var label = document.getElementById('ts-label');
-  var btn   = document.getElementById('theme-switcher');
-  if (!btn) return;
-
-  var current = localStorage.getItem('gtg-theme') || 'a';
-  function apply(t) {
-    if (t === 'b') {
-      body.classList.add('theme-b');
-      label.textContent = 'THEME B';
-    } else {
-      body.classList.remove('theme-b');
-      label.textContent = 'THEME A';
-    }
-  }
-  apply(current);
-
-  btn.addEventListener('click', function() {
-    current = current === 'a' ? 'b' : 'a';
-    localStorage.setItem('gtg-theme', current);
-    apply(current);
-  });
-})();
-
 // ── Mobile nav toggle ──
 (function() {
   var toggle = document.getElementById('navToggle');
