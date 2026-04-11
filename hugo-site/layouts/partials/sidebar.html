@@ -9,7 +9,7 @@
   <div class="threat-radar" id="threatRadar" aria-label="Threat radar visualization">
     <canvas id="radarCanvas" width="220" height="220"></canvas>
     <div class="threat-radar__legend">
-      {{ range hugo.Data.threats.items }}
+      {{ range site.Data.threats.items }}
       <a href="{{ .url | strings.TrimPrefix "/" | relURL }}" class="radar-legend-item" title="{{ .description }}">
         <span class="radar-legend-item__dot" style="background:{{ .color }}"></span>
         <span class="radar-legend-item__label">{{ .label }}</span>
@@ -51,7 +51,7 @@
     <span class="widget-header__title">FRAMEWORK INDEX</span>
   </div>
   <div class="framework-breakdown">
-    {{ range hugo.Data.frameworks.items }}
+    {{ range site.Data.frameworks.items }}
     <a href="{{ .url | strings.TrimPrefix "/" | relURL }}" class="framework-row">
       <span class="badge badge--{{ .type }} badge--sm">{{ .badge }}</span>
       <span class="framework-row__name">{{ .name }}</span>

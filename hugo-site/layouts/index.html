@@ -9,7 +9,7 @@
   <h1 class="hero-title">{{ .Site.Params.tagline }}</h1>
   <p class="hero-sub">{{ .Site.Params.taglineSub }}</p>
   <div class="hero-stats">
-    {{ range hugo.Data.stats.items }}
+    {{ range site.Data.stats.items }}
     <div class="hero-stat">
       <span class="hero-stat-value">{{ .value }}</span>
       <span class="hero-stat-label">{{ .label }}</span>
@@ -100,7 +100,7 @@
     <h2 class="section-title">Framework Coverage</h2>
   </div>
   <div class="framework-grid">
-    {{ range hugo.Data.frameworks.items }}
+    {{ range site.Data.frameworks.items }}
     <a href="{{ .url }}" class="framework-card">
       <div class="framework-card__badge badge--{{ .type }}">{{ .badge }}</div>
       <div class="framework-card__info">
