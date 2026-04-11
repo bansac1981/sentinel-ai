@@ -1,15 +1,15 @@
-# SENTINEL AI — Automated AI Security Intelligence
+# GRID THE GREY — Automated AI Security Intelligence
 
 > Real-time AI threat intelligence mapped to MITRE ATLAS and OWASP LLM Top 10.
 
-**Live site:** https://bansac1981.github.io/sentinel-ai/  
+**Live site:** https://gridthegrey.com/  
 **Newsletter:** https://sentinel-ai.beehiiv.com/subscribe
 
 ---
 
 ## What It Does
 
-SENTINEL AI monitors 9 curated security RSS feeds, scores each article with Claude AI for relevance to AI/ML security (threshold 6.0/10), and publishes the best ones to a Hugo static site deployed on GitHub Pages. Every article is mapped to MITRE ATLAS techniques and OWASP LLM Top 10 categories.
+Grid the Grey monitors 9 curated security RSS feeds, scores each article with Claude AI for relevance to AI/ML security (threshold 6.0/10), and publishes the best ones to a Hugo static site deployed on GitHub Pages. Every article is mapped to MITRE ATLAS techniques and OWASP LLM Top 10 categories.
 
 The pipeline runs automatically every day at 9:30 AM IST via GitHub Actions.
 
@@ -30,7 +30,7 @@ hugo-site/content/posts/*.md  (draft: true)
 GitHub Actions deploy.yml
     │
     ▼
-https://bansac1981.github.io/sentinel-ai/
+https://gridthegrey.com/
     │
     ▼
 newsletter_digest.py  ──►  Beehiiv (weekly email)
@@ -161,7 +161,7 @@ Open the generated markdown files. Each has:
 # Preview locally (requires Hugo)
 cd hugo-site
 hugo server -D   # -D shows drafts
-# Open http://localhost:1313/sentinel-ai/
+# Open http://localhost:1313/
 ```
 
 ### Step 5: Push to deploy
@@ -210,7 +210,7 @@ Set these at **Settings → Secrets and variables → Actions → Variables**.
 
 ### Manual pipeline trigger
 
-Go to **Actions → SENTINEL AI Pipeline → Run workflow** to run manually. You can optionally set:
+Go to **Actions → Grid the Grey Pipeline → Run workflow** to run manually. You can optionally set:
 - `limit` — max articles to process
 - `dry_run` — test without writing posts or using API credits
 - `feed` — run on a single feed only
@@ -252,7 +252,7 @@ Opens `this_week.html` — a fully formatted dark-theme HTML email with:
 ### Publishing to Beehiiv
 
 1. Beehiiv → **New Post → New Email**
-2. Subject: `SENTINEL AI Threat Briefing — Week of [DATE]`
+2. Subject: `Grid the Grey AI Threat Briefing — Week of [DATE]`
 3. Add an **HTML block** → paste contents of `this_week.html`
 4. Preview, then **Send** or **Schedule**
 
@@ -267,7 +267,7 @@ All site config is in `hugo-site/hugo.toml`.
 ### Key parameters
 
 ```toml
-baseURL = "https://bansac1981.github.io/sentinel-ai/"
+baseURL = "https://gridthegrey.com/"
 
 [params]
   newsletterURL = "https://sentinel-ai.beehiiv.com/subscribe"

@@ -1,0 +1,54 @@
+# Full run (up to 20 articles, uses API credits)
+python pipeline.py
+
+# Limit articles processed
+python pipeline.py --limit 5
+
+# Dry run — no API calls, no files written
+python pipeline.py --dry-run
+
+# Test a single feed
+python pipeline.py --feed securityweek --limit 5
+
+# Available feed keys:
+# thehackernews, securityweek, darkreading, crowdstrike,
+# sans_isc, hn_ai_security, schneier, projectzero, krebsonsecurity
+==========================
+
+Git / deploy
+# Deploy any change
+git add .
+git commit -m "your message"
+git push
+
+# If git is locked (index.lock or HEAD.lock)
+del .git\index.lock
+del .git\HEAD.lock
+==============================
+Newsletter
+# Generate weekly digest (last 7 days)
+python newsletter_digest.py --days 7 --output this_week.html
+
+# Longer window if not many posts this week
+python newsletter_digest.py --days 14 --output this_week.html
+
+
+Local site preview
+cd hugo-site
+hugo server        # published posts only
+hugo server -D     # show drafts too
+# Visit: http://localhost:1313/sentinel-ai/
+
+============================================
+Publishing articles
+
+# After pipeline runs, open any draft post and change:
+#   draft: true  →  draft: false
+
+# Then push to deploy:
+git add hugo-site/content/posts/
+git commit -m "publish: [article title]"
+git push
+
+
+

@@ -1,13 +1,13 @@
 # Phase 5 — Beehiiv Newsletter Integration
 
-This guide connects SENTINEL AI to Beehiiv for email distribution and monetization.
+This guide connects Grid the Grey to Beehiiv for email distribution and monetization.
 
 ---
 
 ## Step 1: Create a Beehiiv Account
 
 1. Go to **https://www.beehiiv.com** and sign up for a free account
-2. When prompted for your publication name, enter: **SENTINEL AI**
+2. When prompted for your publication name, enter: **Grid the Grey**
 3. Choose your subdomain — e.g., `sentinelai.beehiiv.com`
 4. Select category: **Technology / Cybersecurity**
 5. Free tier supports up to **2,500 subscribers** with unlimited sends
@@ -20,7 +20,7 @@ In Beehiiv → **Settings → Publication**:
 
 | Field | Value |
 |---|---|
-| Name | SENTINEL AI |
+| Name | Grid the Grey |
 | Tagline | AI Threat Intelligence — Mapped to MITRE ATLAS & OWASP LLM Top 10 |
 | Primary colour | `#ff3b3b` |
 | Background | `#0a0a0f` |
@@ -66,7 +66,7 @@ This generates a fully formatted HTML email with:
 - Up to 7 secondary stories with summaries
 - MITRE ATLAS and OWASP tags on every article
 - Categories breakdown
-- CTA back to the SENTINEL AI site
+- CTA back to the Grid the Grey site
 
 **Options:**
 ```bash
@@ -78,7 +78,7 @@ python newsletter_digest.py --output digest.html  # save to file
 ### Publishing to Beehiiv
 
 1. In Beehiiv, click **New Post → New Email**
-2. Set subject: `SENTINEL AI Threat Briefing — Week of [DATE]`
+2. Set subject: `Grid the Grey Threat Briefing — Week of [DATE]`
 3. Set preview text: `[N] AI security stories this week, mapped to MITRE ATLAS and OWASP LLM Top 10`
 4. In the editor, click **+ Add Block → HTML**
 5. Open `this_week.html` and paste the full contents into the HTML block
@@ -93,7 +93,7 @@ python newsletter_digest.py --output digest.html  # save to file
 
 - Share each week's issue on LinkedIn and Twitter/X with the `#AISecuity` and `#LLMSecurity` hashtags
 - Post to relevant Reddit communities: r/netsec, r/MachineLearning, r/cybersecurity
-- Link to the subscribe page from the SENTINEL AI GitHub repo README
+- Link to the subscribe page from the Grid the Grey GitHub repo README
 
 ### Beehiiv Boosts (monetization)
 
@@ -113,7 +113,7 @@ Beehiiv's built-in referral system lets subscribers earn rewards for referring o
 Beehiiv supports importing from RSS to create draft newsletters automatically:
 
 1. Go to **Settings → Import**
-2. Enter your RSS feed URL: `https://bansac1981.github.io/sentinel-ai/index.xml`
+2. Enter your RSS feed URL: `https://gridthegrey.com/index.xml`
 3. Set frequency: **Weekly**
 4. Enable **"Create as draft"** (recommended — review before sending)
 
@@ -142,7 +142,7 @@ For the free tier, the manual copy-paste workflow (Step 4) takes under 5 minutes
 ## Checklist
 
 - [ ] Beehiiv account created at beehiiv.com
-- [ ] Publication name: SENTINEL AI
+- [ ] Publication name: Grid the Grey
 - [ ] Brand colours set (#ff3b3b accent, dark theme)
 - [ ] `newsletterURL` updated in `hugo-site/hugo.toml`
 - [ ] Committed and pushed — Subscribe buttons updated on live site

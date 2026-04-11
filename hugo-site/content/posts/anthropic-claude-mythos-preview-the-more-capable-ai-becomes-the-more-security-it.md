@@ -7,7 +7,7 @@ draft: false
 summary: "CrowdStrike, as a founding member of Anthropic's Mythos program, is highlighting the security challenges posed by increasingly capable frontier AI models, signaling a growing industry focus on securing agentic and large-scale AI systems. The article underscores the philosophical and practical position that AI capability gains must be matched by proportional security investment. While the piece is primarily a vendor partnership announcement and executive viewpoint, it reflects an important industry trend toward formalising AI-specific security frameworks and tooling."
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/"
-author: "SENTINEL AI Editorial"
+author: "Grid the Grey Editorial"
 thumbnail: ""
 
 # ── AI Security Classification ──
@@ -72,4 +72,4 @@ The immediate impact of this announcement is industry-level rather than incident
 
 ## References
 
-- [CrowdStrike Blog — Anthropic Claude Mythos Preview](https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/)
+- [CrowdStrike Blog — Anthropic Claude Mythos Preview](https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SENTINEL AI — Weekly Newsletter Digest Generator
+Grid the Grey — Weekly Newsletter Digest Generator
 ================================================
 Reads Hugo content/posts/ from the last N days, ranks by relevance score,
 and generates a formatted HTML digest ready to paste into Beehiiv.
@@ -23,7 +23,7 @@ from pathlib import Path
 # Config
 # ─────────────────────────────────────────────────────────────────────────────
 
-SITE_URL        = "https://bansac1981.github.io/sentinel-ai"
+SITE_URL        = "https://gridthegrey.com"
 POSTS_DIR       = Path(__file__).parent / "hugo-site" / "content" / "posts"
 MAX_STORIES     = 8       # maximum articles in the digest
 TOP_STORY_MIN   = 7.5     # minimum score to be the lead story
@@ -293,7 +293,7 @@ def build_html(posts: list[dict], days: int) -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SENTINEL AI — AI Threat Briefing #{issue_num}</title>
+<title>Grid the Grey — AI Threat Briefing #{issue_num}</title>
 </head>
 <body style="margin:0;padding:0;background:{BG_DARK};font-family:'DM Sans',Arial,sans-serif;">
 
@@ -351,7 +351,7 @@ def build_html(posts: list[dict], days: int) -> str:
   <tr><td style="padding:24px;background:{BG_CARD};border:1px solid {BORDER};
      border-radius:8px;text-align:center;margin-top:8px;">
     <p style="margin:0 0 8px 0;font-size:15px;font-weight:700;color:{TEXT_HEAD};">
-      Read the full analysis on SENTINEL AI
+      Read the full analysis on Grid the Grey
     </p>
     <p style="margin:0 0 16px 0;font-size:13px;color:{TEXT_MUTED};">
       Every article includes MITRE ATLAS technique mapping and OWASP LLM Top 10 categorisation.
@@ -359,7 +359,7 @@ def build_html(posts: list[dict], days: int) -> str:
     <a href="{SITE_URL}" style="display:inline-block;padding:12px 28px;
        background:{ACCENT};color:#fff;border-radius:4px;font-size:14px;
        font-weight:700;text-decoration:none;font-family:monospace;">
-      VISIT SENTINEL AI →
+      VISIT GRID THE GREY →
     </a>
   </td></tr>
 
@@ -367,7 +367,7 @@ def build_html(posts: list[dict], days: int) -> str:
   <tr><td style="padding:24px 0;text-align:center;
      border-top:1px solid {BORDER};margin-top:24px;">
     <p style="margin:0 0 4px 0;font-size:11px;color:{TEXT_MUTED};">
-      SENTINEL AI · AI Threat Intelligence ·
+      GRID THE GREY · AI Threat Intelligence ·
       <a href="{SITE_URL}" style="color:{TEXT_MUTED};">sentinelai.dev</a>
     </p>
     <p style="margin:0;font-size:11px;color:{TEXT_MUTED};">
@@ -388,7 +388,7 @@ def build_html(posts: list[dict], days: int) -> str:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate SENTINEL AI weekly newsletter digest"
+        description="Generate Grid the Grey weekly newsletter digest"
     )
     parser.add_argument("--days",   type=int, default=7,
                         help="Look back N days for posts (default: 7)")

@@ -7,7 +7,7 @@ draft: true
 summary: "CrowdStrike has announced new platform innovations targeting the governance of Shadow AI and the security of AI agents across endpoints, SaaS, and cloud environments. The release highlights growing enterprise concerns around unmanaged AI tool proliferation and the attack surface introduced by autonomous AI agents. These developments reflect an industry-wide shift toward operationalising AI-specific security controls within existing SOC workflows."
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/new-crowdstrike-innovations-secure-ai-agents-govern-shadow-ai/"
-author: "SENTINEL AI Editorial"
+author: "Grid the Grey Editorial"
 thumbnail: ""
 
 # ── AI Security Classification ──

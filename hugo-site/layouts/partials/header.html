@@ -3,11 +3,29 @@
 
     {{/* Logo / wordmark */}}
     <a href="{{ .Site.Home.RelPermalink }}" class="site-logo" aria-label="{{ .Site.Title }} — Home">
-      <span class="site-logo__mark">⬡</span>
-      <span class="site-logo__text">
-        <span class="site-logo__name">SENTINEL</span><span class="site-logo__accent">AI</span>
+      <span class="site-logo__mark">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="2" y1="2"  x2="18" y2="2"  stroke="#ff3b3b" stroke-width="0.8" stroke-opacity="0.5"/>
+          <line x1="2" y1="10" x2="18" y2="10" stroke="#ff3b3b" stroke-width="0.8" stroke-opacity="0.5"/>
+          <line x1="2" y1="18" x2="18" y2="18" stroke="#ff3b3b" stroke-width="0.8" stroke-opacity="0.5"/>
+          <line x1="2"  y1="2" x2="2"  y2="18" stroke="#ff3b3b" stroke-width="0.8" stroke-opacity="0.5"/>
+          <line x1="10" y1="2" x2="10" y2="18" stroke="#ff3b3b" stroke-width="0.8" stroke-opacity="0.5"/>
+          <line x1="18" y1="2" x2="18" y2="18" stroke="#ff3b3b" stroke-width="0.8" stroke-opacity="0.5"/>
+          <circle cx="2"  cy="2"  r="1.4" fill="#ff3b3b"/>
+          <circle cx="10" cy="2"  r="1.4" fill="#ff3b3b"/>
+          <circle cx="18" cy="2"  r="1.4" fill="#ff3b3b"/>
+          <circle cx="2"  cy="10" r="1.4" fill="#ff3b3b"/>
+          <circle cx="10" cy="10" r="2"   fill="#ff3b3b"/>
+          <circle cx="18" cy="10" r="1.4" fill="#ff3b3b"/>
+          <circle cx="2"  cy="18" r="1.4" fill="#ff3b3b"/>
+          <circle cx="10" cy="18" r="1.4" fill="#ff3b3b"/>
+          <circle cx="18" cy="18" r="1.4" fill="#ff3b3b"/>
+        </svg>
       </span>
-      <span class="site-logo__tagline">THREAT INTELLIGENCE</span>
+      <span class="site-logo__text">
+        <span class="site-logo__name">GRID THE </span><span class="site-logo__accent">GREY</span>
+      </span>
+      <span class="site-logo__tagline">AI THREAT INTELLIGENCE</span>
     </a>
 
     {{/* Primary navigation */}}

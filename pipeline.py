@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SENTINEL AI — RSS-to-Hugo Pipeline
+Grid the Grey — RSS-to-Hugo Pipeline
 ====================================
 Fetches AI security news from RSS feeds, scores articles with Claude API,
 maps them to MITRE ATLAS / OWASP LLM Top 10, and generates Hugo draft posts.
@@ -294,7 +294,7 @@ def fetch_article_content(url: str, log: logging.Logger) -> tuple[str, str]:
     """
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (compatible; SentinelAI-Bot/1.0; +https://sentinel-ai.news/bot)"
+            "User-Agent": "Mozilla/5.0 (compatible; GridTheGrey-Bot/1.0; +https://gridthegrey.com/bot)"
         }
         with httpx.Client(timeout=FETCH_TIMEOUT, follow_redirects=True) as client:
             resp = client.get(url, headers=headers)
@@ -332,7 +332,7 @@ def fetch_article_content(url: str, log: logging.Logger) -> tuple[str, str]:
 # ─────────────────────────────────────────────
 
 ANALYSIS_PROMPT_TEMPLATE = """\
-You are a senior AI security analyst working for SENTINEL AI, an intelligence platform covering adversarial AI, LLM vulnerabilities, and machine learning security threats.
+You are a senior AI security analyst working for Grid the Grey, an intelligence platform covering adversarial AI, LLM vulnerabilities, and machine learning security threats.
 
 Analyse the following article and return a JSON object with your assessment.
 
@@ -472,7 +472,7 @@ draft: true
 summary: {json.dumps(analysis.get('summary', ''))}
 source: {json.dumps(article['source'])}
 source_url: {json.dumps(article['url'])}
-author: "SENTINEL AI Editorial"
+author: "Grid the Grey Editorial"
 thumbnail: {json.dumps(article.get('thumbnail', ''))}
 
 # ── AI Security Classification ──
@@ -704,7 +704,7 @@ def _print_stats(stats: dict, log: logging.Logger) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="SENTINEL AI — RSS-to-Hugo Pipeline",
+        description="Grid the Grey — RSS-to-Hugo Pipeline",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -736,7 +736,7 @@ if __name__ == "__main__":
     log = setup_logging(args.verbose)
 
     log.info("╔══════════════════════════════════════╗")
-    log.info("║     SENTINEL AI  —  RSS Pipeline     ║")
+    log.info("║     GRID THE GREY  —  RSS Pipeline     ║")
     log.info(f"║     v{PIPELINE_VERSION}  |  {CLAUDE_MODEL:<22}║")
     log.info("╚══════════════════════════════════════╝")
     log.info(f"Mode: {'DRY RUN' if args.dry_run else 'LIVE'}  |  Threshold: {RELEVANCE_THRESHOLD}  |  Max articles: {args.limit or MAX_ARTICLES}")

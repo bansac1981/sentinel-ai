@@ -1,19 +1,19 @@
 ---
-title: "About SENTINEL AI"
+title: "About Grid the Grey"
 date: 2024-01-01
 draft: false
-description: "SENTINEL AI is an automated AI security intelligence platform tracking adversarial ML, LLM vulnerabilities, and machine learning security threats — mapped to MITRE ATLAS and OWASP LLM Top 10."
+description: "Grid the Grey is an automated AI security intelligence platform tracking adversarial ML, LLM vulnerabilities, and machine learning security threats — mapped to MITRE ATLAS and OWASP LLM Top 10."
 _build:
   list: never
 ---
 
-## What is SENTINEL AI?
+## What is Grid the Grey?
 
-SENTINEL AI is an automated threat intelligence platform focused exclusively on the intersection of artificial intelligence and cybersecurity. We aggregate, filter, and analyse security research from across the web — then map every article to industry frameworks so you can act on it.
+Grid the Grey is an automated threat intelligence platform focused exclusively on the intersection of artificial intelligence and cybersecurity. We aggregate, filter, and analyse security research from across the web — then map every article to industry frameworks so you can act on it.
 
 ## What We Cover
 
-AI security is moving faster than any single researcher can track. SENTINEL AI monitors 9 curated RSS feeds covering:
+AI security is moving faster than any single researcher can track. Grid the Grey monitors 9 curated RSS feeds covering:
 
 - **Prompt injection and jailbreaks** — direct and indirect attacks against LLM-powered applications
 - **Adversarial machine learning** — evasion, perturbation, and physical-world attacks on ML classifiers
@@ -49,7 +49,7 @@ We aggregate from verified, high-quality sources:
 - SecurityWeek
 - Dark Reading
 - CrowdStrike Blog
-- CISA Alerts
+- SANS Internet Storm Center
 - Hacker News (AI security filtered)
 - Schneier on Security
 - Google Project Zero
@@ -61,4 +61,4 @@ The weekly **AI Threat Briefing** distils the week's most critical developments 
 
 ## Disclaimer
 
-Content is aggregated from public sources for research and educational purposes. Framework mappings are AI-assisted and may require expert validation. SENTINEL AI is an independent publication and is not affiliated with MITRE, OWASP, or any of the source publications.
+Content is aggregated from public sources for research and educational purposes. Framework mappings are AI-assisted and may require expert validation. Grid the Grey is an independent publication and is not affiliated with MITRE, OWASP, or any of the source publications.

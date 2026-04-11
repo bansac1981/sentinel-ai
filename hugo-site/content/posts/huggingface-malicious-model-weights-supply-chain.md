@@ -7,7 +7,7 @@ summary: "JFrog Security researchers uncovered over 100 malicious model reposito
 
 source: "JFrog Security"
 source_url: "https://jfrog.com/blog/data-scientists-targeted/"
-author: "SENTINEL AI Editorial"
+author: "Grid the Grey Editorial"
 thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
 
 relevance_score: 8.7

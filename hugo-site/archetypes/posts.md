@@ -7,7 +7,7 @@ draft: true
 summary: ""
 source: ""
 source_url: ""
-author: "SENTINEL AI Editorial"
+author: "Grid the Grey Editorial"
 thumbnail: ""
 
 # ── AI Security Classification ──
@@ -47,7 +47,7 @@ original_url: ""
 pipeline_version: ""
 ---
 
-<!-- SENTINEL AI — Article Body -->
+<!-- Grid the Grey — Article Body -->
 
 ## Overview
 

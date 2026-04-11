@@ -1,10 +1,10 @@
-# SENTINEL AI — Project State Reference
+# GRID THE GREY — Project State Reference
 
 **Last updated:** 2026-04-11  
-**Project:** SENTINEL AI (considering GARD.AI)  
+**Project:** Grid the Grey  
 **Owner:** Achin Bansal — bansalachin@gmail.com  
 **Repo:** https://github.com/bansac1981/sentinel-ai  
-**Live site:** https://bansac1981.github.io/sentinel-ai/
+**Live site:** https://gridthegrey.com/
 
 ---
 
@@ -12,7 +12,7 @@
 
 | Item | Value |
 |------|-------|
-| **Hugo base URL** | `https://bansac1981.github.io/sentinel-ai/` |
+| **Hugo base URL** | `https://gridthegrey.com/` |
 | **Local path** | `C:\Users\admin\projects\Security News Website\AI Security News Website` |
 | **Newsletter** | https://sentinel-ai.beehiiv.com/subscribe |
 | **Python version** | 3.12 |
@@ -42,14 +42,14 @@ Live site + Beehiiv weekly newsletter
 
 **hugo.toml:**
 ```toml
-baseURL = "https://bansac1981.github.io/sentinel-ai/"
+baseURL = "https://gridthegrey.com/"
 newsletterURL = "https://sentinel-ai.beehiiv.com/subscribe"
 ```
 
 **deploy.yml:**
 ```bash
 # CRITICAL: Hardcode baseURL (configure-pages returns wrong base)
-hugo --baseURL "https://bansac1981.github.io/sentinel-ai/" -d public
+hugo --baseURL "https://gridthegrey.com/" -d public
 ```
 
 **pipeline.yml:**
@@ -112,7 +112,7 @@ schedule:
 
 ### 2. deploy.yml baseURL
 - **Problem:** `configure-pages@v5` returns wrong base URL (missing `/sentinel-ai/`)
-- **Solution:** Hardcode in deploy.yml: `hugo --baseURL "https://bansac1981.github.io/sentinel-ai/" -d public`
+- **Solution:** Hardcode in deploy.yml: `hugo --baseURL "https://gridthegrey.com/" -d public`
 - **Do NOT:** Rely on configure-pages output
 
 ### 3. Hugo theme = ""

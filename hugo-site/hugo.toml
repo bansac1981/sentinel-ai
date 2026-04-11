@@ -1,11 +1,11 @@
 baseURL = "https://gridthegrey.com/"
 languageCode = "en-us"
-title = "SENTINEL AI"
+title = "GRID THE GREY"
 [pagination]
   pagerSize = 12
 enableRobotsTXT = true
 enableEmoji = false
-copyright = "© 2024 SENTINEL AI. All rights reserved."
+copyright = "© 2026 Grid the Grey. All rights reserved."
 
 [params]
   description = "AI Security Intelligence — Real-time threat analysis, MITRE ATLAS mapping, and OWASP LLM Top 10 coverage."
@@ -13,8 +13,8 @@ copyright = "© 2024 SENTINEL AI. All rights reserved."
   taglineSub = "Real-time coverage of adversarial AI, LLM vulnerabilities, and machine learning security threats."
   accentColor = "#ff3b3b"
   darkBg = "#0a0a0f"
-  author = "SENTINEL AI Editorial"
-  twitterHandle = "@sentinelai"
+  author = "Grid the Grey Editorial"
+  twitterHandle = "@gridthegrey"
   githubURL = "https://github.com/bansac1981/sentinel-ai"
   newsletterURL = "https://sentinel-ai.beehiiv.com/subscribe"
   enableTicker = true

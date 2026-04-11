@@ -1,4 +1,4 @@
-name: "SENTINEL AI — Daily Pipeline"
+name: "Grid the Grey — Daily Pipeline"
 
 # ─────────────────────────────────────────────
 # Triggers
@@ -72,7 +72,7 @@ jobs:
         run: pip install -r requirements.txt
 
       # 4. Run the pipeline
-      - name: Run SENTINEL AI pipeline
+      - name: Run Grid the Grey pipeline
         env:
           ANTHROPIC_API_KEY:    ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL:         ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
@@ -109,8 +109,8 @@ jobs:
       - name: Commit new posts and seen_urls cache
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
-          git config user.name  "SENTINEL AI Bot"
-          git config user.email "bot@sentinel-ai.news"
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
 
           git add hugo-site/content/posts/ seen_urls.json
 

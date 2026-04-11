@@ -7,7 +7,7 @@ summary: "Researchers at Trail of Bits demonstrate a novel prompt injection tech
 
 source: "Trail of Bits Security Research"
 source_url: "https://blog.trailofbits.com"
-author: "SENTINEL AI Editorial"
+author: "Grid the Grey Editorial"
 thumbnail: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80"
 
 relevance_score: 9.2
