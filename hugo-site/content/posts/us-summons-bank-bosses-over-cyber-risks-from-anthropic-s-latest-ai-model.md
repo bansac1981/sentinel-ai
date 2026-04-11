@@ -1,7 +1,7 @@
 ---
 title: "US summons bank bosses over cyber risks from Anthropic's latest AI model"
 date: 2026-04-10T13:47:17+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "The US Treasury convened major bank executives to discuss cybersecurity risks posed by Anthropic's unreleased Claude Mythos model, which the company claims has surpassed nearly all human experts at finding and exploiting software vulnerabilities. A code leak prompted Anthropic to publicly acknowledge the model's unprecedented offensive cyber capability, raising systemic financial sector risk concerns. The meeting signals growing regulatory awareness of AI-enabled cyber threats to critical financial infrastructure."
