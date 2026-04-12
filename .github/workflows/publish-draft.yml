@@ -132,10 +132,7 @@ jobs:
           fi
 
           TITLE=$(grep "^title:" "$FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
-          git commit -m "publish: ${TITLE}
-
-Published via GitHub Actions workflow_dispatch
-Run: ${{ github.run_id }}"
+          git commit -m "publish: ${TITLE}"
 
           git push
           echo ""
