@@ -512,12 +512,11 @@ def write_hugo_post(slug: str, content: str, log: logging.Logger) -> Path | None
     HUGO_POSTS_DIR.mkdir(parents=True, exist_ok=True)
     filepath = HUGO_POSTS_DIR / f"{slug}.md"
 
-    # Avoid clobbering an existing file — append suffix
-    counter = 1
-    original_stem = filepath.stem
-    while filepath.exists():
-        filepath = HUGO_POSTS_DIR / f"{original_stem}-{counter}.md"
-        counter += 1
+    # If a file with this slug already exists, skip — never create -1 variants
+    # which cause Hugo routing issues and duplicate content on the site
+    if filepath.exists():
+        log.warning(f"  ⚠ Skipping — file already exists: {filepath.name}")
+        return None
 
     try:
         filepath.write_text(content, encoding="utf-8")
@@ -573,12 +572,29 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
 
     # ── Step 2: Deduplicate ──
     log.info("\nSTEP 2 — Deduplication")
+
+    # Build a set of slugs already on disk so we never re-fetch the same article
+    # even if seen_urls.json was reset or the URL came in with a different variant
+    existing_slugs: set = set()
+    if HUGO_POSTS_DIR.exists():
+        for f in HUGO_POSTS_DIR.glob("*.md"):
+            if f.stem != "_index":
+                existing_slugs.add(f.stem)
+    log.info(f"Existing posts on disk: {len(existing_slugs)}")
+
     new_articles = []
     for a in all_articles:
         if a["url"] in seen_urls:
             stats["already_seen"] += 1
         else:
-            new_articles.append(a)
+            # Also check if the slug this title would produce already exists on disk
+            candidate_slug = build_slug(a["title"], a["published"])
+            if candidate_slug in existing_slugs:
+                log.info(f"  Skipping (slug exists on disk): {candidate_slug}")
+                seen_urls.add(a["url"])  # add to seen so we don't check again
+                stats["already_seen"] += 1
+            else:
+                new_articles.append(a)
     log.info(f"New articles (not yet seen): {len(new_articles)}  |  Already seen: {stats['already_seen']}")
 
     # ── Step 3: Keyword pre-filter ──
