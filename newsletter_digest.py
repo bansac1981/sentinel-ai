@@ -29,13 +29,14 @@ MAX_STORIES     = 8       # maximum articles in the digest
 TOP_STORY_MIN   = 7.5     # minimum score to be the lead story
 
 # Beehiiv-safe colours (inline CSS only — no external stylesheets)
-ACCENT          = "#ff3b3b"
-BG_DARK         = "#0a0a0f"
-BG_CARD         = "#111118"
-TEXT_MUTED      = "#8b8b9e"
-TEXT_BODY       = "#c8c8d8"
-TEXT_HEAD       = "#f0f0ff"
-BORDER          = "#1e1e2e"
+# Matches Grid the Grey dark editorial theme
+ACCENT          = "#ff3b3b"    # Red accent
+BG_DARK         = "#0a0a0f"    # Deep black background
+BG_CARD         = "#141419"    # Card background (slightly lighter than primary)
+TEXT_MUTED      = "#7a7a8c"    # Neutral grey (no purple tint)
+TEXT_BODY       = "#c8c8d8"    # Body text
+TEXT_HEAD       = "#f0f0ff"    # Heading text
+BORDER          = "#252535"    # Border / divider color
 
 THREAT_COLORS = {
     "CRITICAL": "#ff3b3b",
@@ -304,11 +305,11 @@ def build_html(posts: list[dict], days: int) -> str:
   <!-- HEADER -->
   <tr><td style="padding:0 0 24px 0;text-align:center;
      border-bottom:1px solid {BORDER};margin-bottom:24px;">
-    <p style="margin:0 0 4px 0;font-family:monospace;font-size:11px;
-       color:{TEXT_MUTED};letter-spacing:0.2em;">AI THREAT INTELLIGENCE</p>
+    <p style="margin:0 0 8px 0;font-family:monospace;font-size:11px;
+       color:{TEXT_MUTED};letter-spacing:0.15em;">AI SECURITY NEWS · FRAMEWORK ANALYSIS · STRUCTURAL INSIGHT</p>
     <h1 style="margin:0;font-family:monospace;font-size:28px;font-weight:900;
        color:{TEXT_HEAD};letter-spacing:0.05em;">
-      SENTINEL<span style="color:{ACCENT};">AI</span>
+      GRID THE <span style="color:{ACCENT};">GREY</span>
     </h1>
     <p style="margin:8px 0 0 0;font-size:13px;color:{TEXT_MUTED};">
       Issue #{issue_num} &nbsp;·&nbsp; {date_range} &nbsp;·&nbsp;
@@ -367,8 +368,8 @@ def build_html(posts: list[dict], days: int) -> str:
   <tr><td style="padding:24px 0;text-align:center;
      border-top:1px solid {BORDER};margin-top:24px;">
     <p style="margin:0 0 4px 0;font-size:11px;color:{TEXT_MUTED};">
-      GRID THE GREY · AI Threat Intelligence ·
-      <a href="{SITE_URL}" style="color:{TEXT_MUTED};">sentinelai.dev</a>
+      GRID THE GREY · AI Security News ·
+      <a href="{SITE_URL}" style="color:{TEXT_MUTED};">gridthegrey.com</a>
     </p>
     <p style="margin:0;font-size:11px;color:{TEXT_MUTED};">
       Content aggregated from public sources for research and educational purposes.
