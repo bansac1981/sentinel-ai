@@ -1,6 +1,6 @@
 # GRID THE GREY — Project State Reference
 
-**Last updated:** 2026-04-11  
+**Last updated:** 2026-04-12  
 **Project:** Grid the Grey  
 **Owner:** Achin Bansal — bansalachin@gmail.com  
 **Repo:** https://github.com/bansac1981/sentinel-ai  
@@ -20,7 +20,7 @@
 | **Relevance threshold** | 6.0 |
 | **Max articles/run** | 20 |
 | **Pipeline cron** | `0 4 * * *` UTC (9:30 AM IST) |
-| **Status** | Phase 6 — README in progress |
+| **Status** | Phase 6 Complete — Mobile workflows + design finalized |
 
 ---
 
@@ -68,14 +68,16 @@ schedule:
 
 | Path | Purpose | Status | Notes |
 |------|---------|--------|-------|
-| `pipeline.py` | RSS fetch → Claude score → Hugo markdown | ✅ Stable | 9 feeds, threshold 6.0 |
+| `pipeline.py` | RSS fetch → Claude score → Hugo markdown | ✅ Stable | 9 feeds, threshold 6.0, dedup by slug+URL |
 | `newsletter_digest.py` | Weekly HTML digest for Beehiiv | ✅ Stable | Generates `.html` for manual paste |
 | `.github/workflows/deploy.yml` | Hugo build + GitHub Pages deploy | ✅ Stable | Hardcoded baseURL (do NOT use configure-pages) |
-| `.github/workflows/pipeline.yml` | Daily cron + manual dispatch | ✅ Stable | Runs at 9:30 AM IST |
+| `.github/workflows/pipeline.yml` | Daily cron + manual dispatch | ✅ Stable | Runs at 9:30 AM IST, mobile-friendly |
+| `.github/workflows/publish-draft.yml` | Manual publish draft posts | ✅ Stable | Mobile-friendly workflow dispatch |
 | `hugo.toml` | Site config, menus, taxonomies | ✅ Stable | No `theme = ""` line |
 | `hugo-site/layouts/index.html` | Homepage (featured + grid) | 🔄 Iterating | Design tweaks ongoing |
 | `hugo-site/layouts/_default/single.html` | Article page template | ✅ Stable | Minimal future changes |
-| `hugo-site/static/css/sentinel.css` | All styles (dark theme) | 🔄 Iterating | Design refinements |
+| `hugo-site/static/css/sentinel.css` | All styles (dark theme #0a0a0f) | ✅ Stable | 6 article SVG patterns, h1-sized tagline |
+| `hugo-site/layouts/partials/article-image.html` | 6 distinct SVG article visuals | ✅ Stable | Terminal, Heatmap, Blueprint, Interference, Breach, Topology |
 | `hugo-site/layouts/partials/` | Header, footer, sidebar, ticker, etc. | 🔄 Iterating | Minor alignment/spacing changes |
 | `content/posts/` | Articles (draft:true by default) | ✅ Dynamic | Pipeline auto-generates |
 | `content/categories/` | Category _index.md files | ✅ Stable | 6 categories configured |
@@ -139,6 +141,11 @@ schedule:
 - **Problem:** Line ending conflicts between Windows and CI
 - **Solution:** `.gitattributes` in repo root forces LF: `* text=auto eol=lf`
 
+### 9. Duplicate articles (-1 files)
+- **Problem:** Same article fetched via different URL variant, pipeline created `-1` duplicate file
+- **Solution:** Pipeline now deduplicates by both URL *and* slug on disk before Claude API call. Never creates `-1` variants; skips silently if slug exists
+- **Fixed:** 2026-04-12 — article-image post bug resolved
+
 ---
 
 ## Phase Status
@@ -150,7 +157,7 @@ schedule:
 | 3 | GitHub Actions (deploy + pipeline workflows) | ✅ Complete |
 | 4 | About page, category _index.md, stats.json | ✅ Complete |
 | 5 | newsletter_digest.py, Beehiiv setup | ✅ Complete |
-| 6 | README documentation | 🔄 IN PROGRESS |
+| 6 | Mobile workflows + final design polish | ✅ Complete |
 
 ---
 
@@ -185,6 +192,28 @@ git commit -m "your message"
 git push origin main
 # Auto-triggers deploy.yml
 ```
+
+### Mobile App Workflows (GitHub Mobile)
+
+**Run the Daily Pipeline:**
+1. Actions tab → `.github/workflows/pipeline.yml`
+2. Tap **"Run workflow"** (top-right)
+3. Leave defaults or pick a single feed
+4. Tap **Run** — fetches new articles in ~5 minutes
+
+**List all draft posts:**
+1. Actions tab → "Grid the Grey — Publish Draft"
+2. Tap **"Run workflow"** → leave slug blank → tap **Run**
+3. Log shows all available drafts with slug, title, score, threat level
+
+**Publish a specific draft:**
+1. Run "Publish Draft" workflow (see above) to get the slug
+2. Run again → paste slug into input → tap **Run**
+3. Site redeploys automatically — live in ~2 minutes
+
+**Preview before publishing:**
+1. Tick the **"preview"** checkbox before running the workflow
+2. Shows what would change without committing
 
 ---
 
