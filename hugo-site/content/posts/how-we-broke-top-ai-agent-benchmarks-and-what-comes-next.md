@@ -1,7 +1,7 @@
 ---
 title: "How We Broke Top AI Agent Benchmarks: And What Comes Next"
 date: 2026-04-11T19:15:56+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "Researchers at UC Berkeley demonstrated that every major AI agent benchmark \u2014 including SWE-bench, WebArena, OSWorld, and others \u2014 can be fully exploited to achieve near-perfect scores without solving a single task, using trivial environmental manipulation rather than genuine capability. The attacks include pytest hook injection, config file leakage, DOM manipulation, and reward component bypassing, with zero LLM calls required in most cases. This represents a systemic integrity failure in the evaluation infrastructure underpinning AI deployment decisions across industry and research."
