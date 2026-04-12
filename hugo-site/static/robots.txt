@@ -1,0 +1,23 @@
+# Grid the Grey — AI Security News
+# https://gridthegrey.com
+
+# Allow all bots
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /draft/
+Crawl-delay: 1
+
+# Specific search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://gridthegrey.com/sitemap.xml
+Sitemap: https://gridthegrey.com/index.xml
