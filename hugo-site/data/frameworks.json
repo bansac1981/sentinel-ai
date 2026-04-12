@@ -37,22 +37,6 @@
         "LLM09 - Overreliance",
         "LLM10 - Model Theft"
       ]
-    },
-    {
-      "name": "NIST AI RMF",
-      "badge": "NIST",
-      "type": "atlas",
-      "count": 17,
-      "url": "/frameworks/nist-ai-rmf/",
-      "description": "NIST AI Risk Management Framework"
-    },
-    {
-      "name": "EU AI Act",
-      "badge": "EU-AI",
-      "type": "owasp",
-      "count": 8,
-      "url": "/frameworks/eu-ai-act/",
-      "description": "European Union Artificial Intelligence Act compliance"
     }
   ]
 }
