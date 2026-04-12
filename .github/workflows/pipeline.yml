@@ -124,12 +124,7 @@ jobs:
           NEW_POSTS=$(git diff --staged --name-only | grep "hugo-site/content/posts/.*\.md" | wc -l | tr -d ' ')
 
           if [ "$NEW_POSTS" -gt "0" ]; then
-            COMMIT_MSG="feat: add ${NEW_POSTS} new draft post(s) [$(date -u +'%Y-%m-%d')]
-
-Pipeline run: ${{ github.run_id }}
-Model: ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
-Threshold: ${{ vars.RELEVANCE_THRESHOLD || '6.0' }}"
-            git commit -m "$COMMIT_MSG"
+            git commit -m "feat: add ${NEW_POSTS} new draft post(s) [$(date -u +'%Y-%m-%d')]"
             echo "✓ Committed $NEW_POSTS new post(s). Deploy workflow will trigger automatically."
           else
             # Only seen_urls.json changed — skip CI to avoid unnecessary rebuild
