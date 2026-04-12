@@ -1,5 +1,7 @@
 # Phase 5 — Beehiiv Newsletter Integration
 
+**Status: ✅ LIVE** — Publication active at https://gridthegrey.beehiiv.com/subscribe
+
 This guide connects Grid the Grey to Beehiiv for email distribution and monetization.
 
 ---
@@ -33,13 +35,13 @@ Upload a logo: use the `⬡ SENTINELAI` wordmark or create one via Canva with th
 
 ## Step 3: Connect Subscribe Button to Your Beehiiv URL
 
-Once your Beehiiv publication is live, get your subscribe URL (e.g., `https://sentinel-ai.beehiiv.com/subscribe`).
+Once your Beehiiv publication is live, get your subscribe URL (e.g., `https://gridthegrey.beehiiv.com/subscribe`).
 
 Update `hugo-site/hugo.toml`:
 
 ```toml
 [params]
-  newsletterURL = "https://sentinel-ai.beehiiv.com/subscribe"
+  newsletterURL = "https://gridthegrey.beehiiv.com/subscribe"
 ```
 
 This automatically updates:

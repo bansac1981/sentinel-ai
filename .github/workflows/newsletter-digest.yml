@@ -1,0 +1,90 @@
+name: "Grid the Grey — Weekly Newsletter Digest"
+
+on:
+  # Every Monday at 8:00 AM IST (02:30 UTC)
+  schedule:
+    - cron: "30 2 * * 1"
+
+  # Manual trigger — run anytime from GitHub Actions UI or mobile app
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Number of days to look back for articles (default 7)"
+        required: false
+        default: "7"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-digest:
+    name: "Generate Newsletter Digest"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate digest
+        run: |
+          DAYS="${{ github.event.inputs.days }}"
+          DAYS="${DAYS:-7}"
+          mkdir -p digest
+          python newsletter_digest.py --days "$DAYS" --output digest/latest.html
+          echo "DAYS=$DAYS" >> $GITHUB_ENV
+
+      - name: Check digest content
+        run: |
+          if [ ! -f digest/latest.html ]; then
+            echo "ERROR: digest/latest.html was not created"
+            exit 1
+          fi
+          LINES=$(wc -l < digest/latest.html)
+          echo "Digest generated: $LINES lines"
+          echo "Preview (first 5 lines of body):"
+          grep -m 5 "<h" digest/latest.html || true
+
+      - name: Commit digest to repo
+        run: |
+          git config user.name "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+
+          WEEK=$(date -u +'%Y-W%V')
+          DATE=$(date -u +'%Y-%m-%d')
+
+          cp digest/latest.html "digest/digest-${DATE}.html"
+          git add digest/
+
+          if git diff --staged --quiet; then
+            echo "No changes to digest — no new articles this week."
+            exit 0
+          fi
+
+          git commit -m "digest: weekly newsletter digest ${WEEK} (${ENV_DAYS:-7} days) [skip ci]"
+          git push
+          echo ""
+          echo "=================================================="
+          echo "DIGEST READY"
+          echo "File: digest/digest-${DATE}.html"
+          echo ""
+          echo "Next steps:"
+          echo "1. Open the file in your browser or text editor"
+          echo "2. Copy the full HTML content"
+          echo "3. Go to gridthegrey.beehiiv.com -> New Post -> New Email"
+          echo "4. Add an HTML block and paste the content"
+          echo "5. Set subject, preview text, then send or schedule"
+          echo "=================================================="
+        env:
+          ENV_DAYS: ${{ github.event.inputs.days }}

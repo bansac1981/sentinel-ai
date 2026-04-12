@@ -14,7 +14,7 @@
 |------|-------|
 | **Hugo base URL** | `https://gridthegrey.com/` |
 | **Local path** | `C:\Users\admin\projects\Security News Website\AI Security News Website` |
-| **Newsletter** | https://sentinel-ai.beehiiv.com/subscribe |
+| **Newsletter** | https://gridthegrey.beehiiv.com/subscribe |
 | **Python version** | 3.12 |
 | **Claude model** | claude-sonnet-4-6 |
 | **Relevance threshold** | 6.0 |
@@ -73,6 +73,7 @@ schedule:
 | `.github/workflows/deploy.yml` | Hugo build + GitHub Pages deploy | ✅ Stable | Hardcoded baseURL (do NOT use configure-pages) |
 | `.github/workflows/pipeline.yml` | Daily cron + manual dispatch | ✅ Stable | Runs at 9:30 AM IST, mobile-friendly |
 | `.github/workflows/publish-draft.yml` | Manual publish draft posts | ✅ Stable | Mobile-friendly workflow dispatch |
+| `.github/workflows/newsletter-digest.yml` | Weekly HTML digest generator | ✅ Stable | Runs Monday 8 AM IST, commits to digest/ |
 | `hugo.toml` | Site config, menus, taxonomies | ✅ Stable | No `theme = ""` line |
 | `hugo-site/layouts/index.html` | Homepage (featured + grid) | 🔄 Iterating | Design tweaks ongoing |
 | `hugo-site/layouts/_default/single.html` | Article page template | ✅ Stable | Minimal future changes |
@@ -192,6 +193,13 @@ git commit -m "your message"
 git push origin main
 # Auto-triggers deploy.yml
 ```
+
+### Publish digest to Beehiiv (free plan — 2 min manual step)
+1. Open `digest/latest.html` from repo (auto-committed every Monday)
+2. Copy full HTML content
+3. Beehiiv → New Post → New Email → add HTML block → paste
+4. Subject: `Grid the Grey — Week of [DATE]`
+5. Send or schedule (recommended: Tuesday 9:30 AM IST)
 
 ### Mobile App Workflows (GitHub Mobile)
 
