@@ -1,16 +1,10 @@
 name: "Grid the Grey — Publish Draft"
 
-# ─────────────────────────────────────────────
-# Trigger: manual only, from GitHub Actions UI
-# (works from the GitHub mobile app)
-# ─────────────────────────────────────────────
 on:
   workflow_dispatch:
     inputs:
       slug:
-        description: |
-          Post slug to publish — the filename WITHOUT .md
-          (leave blank to list all current drafts)
+        description: "Post slug to publish (filename without .md). Leave blank to list all drafts."
         required: false
         default: ""
       preview:
@@ -34,13 +28,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── List drafts (always runs first so you can see what's available) ──
       - name: List all current draft posts
         run: |
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "  CURRENT DRAFT POSTS"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
+          echo "=================================================="
+          echo "CURRENT DRAFT POSTS"
+          echo "=================================================="
           FOUND=0
           for f in hugo-site/content/posts/*.md; do
             [ -f "$f" ] || continue
@@ -51,91 +43,78 @@ jobs:
               SCORE=$(grep "^relevance_score:" "$f" | head -1 | sed 's/^relevance_score: *//')
               THREAT=$(grep "^threat_level:" "$f" | head -1 | sed 's/^threat_level: *//;s/"//g')
               echo ""
-              echo "  SLUG:   $SLUG"
-              echo "  TITLE:  $TITLE"
-              echo "  DATE:   $DATE  |  SCORE: $SCORE  |  THREAT: $THREAT"
-              echo "  ──────────────────────────────────────────────"
+              echo "SLUG:   $SLUG"
+              echo "TITLE:  $TITLE"
+              echo "DATE:   $DATE  |  SCORE: $SCORE  |  THREAT: $THREAT"
+              echo "--------------------------------------------------"
               FOUND=$((FOUND + 1))
             fi
           done
-
           if [ "$FOUND" -eq 0 ]; then
-            echo ""
-            echo "  No draft posts found — all posts are published."
+            echo "No draft posts found. All posts are already published."
           else
             echo ""
-            echo "  Total drafts: $FOUND"
+            echo "Total drafts: $FOUND"
           fi
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "=================================================="
 
-      # ── Publish the specified slug (only if slug was provided) ──
       - name: Publish post
         if: ${{ github.event.inputs.slug != '' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
           FILE="hugo-site/content/posts/${SLUG}.md"
 
-          echo ""
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "  PUBLISHING: $SLUG"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "=================================================="
+          echo "PUBLISHING: $SLUG"
+          echo "=================================================="
 
-          # Check the file exists
           if [ ! -f "$FILE" ]; then
-            echo "  ERROR: File not found: $FILE"
-            echo "  Check the slug — use the exact filename without .md"
+            echo "ERROR: File not found: $FILE"
+            echo "Check the slug - use the exact filename without .md"
             exit 1
           fi
 
-          # Check it is actually a draft
           if ! grep -q "^draft: true" "$FILE"; then
-            echo "  WARNING: Post is already published (draft: false)."
-            echo "  Nothing to do."
+            echo "WARNING: Post is already published (draft: false). Nothing to do."
             exit 0
           fi
 
           TITLE=$(grep "^title:" "$FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
-          echo "  Title:  $TITLE"
-          echo ""
+          echo "Title: $TITLE"
 
-          if [ "${{ github.event.inputs.preview }}" = "true" ]; then
-            echo "  PREVIEW MODE — no changes will be committed."
-            echo "  Would change: draft: true → draft: false"
+          PREVIEW="${{ github.event.inputs.preview }}"
+          if [ "$PREVIEW" = "true" ]; then
+            echo "PREVIEW MODE - no changes will be committed."
+            echo "Would change: draft: true to draft: false"
             exit 0
           fi
 
-          # Flip draft: true → draft: false
           sed -i 's/^draft: true$/draft: false/' "$FILE"
 
-          # Verify the change took effect
           if grep -q "^draft: false" "$FILE"; then
-            echo "  ✓ draft: false set successfully"
+            echo "draft: false set successfully"
           else
-            echo "  ERROR: sed replacement did not work — check the file manually"
+            echo "ERROR: replacement did not work - check the file manually"
             exit 1
           fi
 
-      # ── Commit and push (triggers deploy workflow automatically) ──
       - name: Commit and push
         if: ${{ github.event.inputs.slug != '' && github.event.inputs.preview != 'true' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
           FILE="hugo-site/content/posts/${SLUG}.md"
+          TITLE=$(grep "^title:" "$FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
 
-          git config user.name  "Grid the Grey Bot"
+          git config user.name "Grid the Grey Bot"
           git config user.email "bot@gridthegrey.com"
           git add "$FILE"
 
           if git diff --staged --quiet; then
-            echo "No staged changes — post was already published."
+            echo "No staged changes - post was already published."
             exit 0
           fi
 
-          TITLE=$(grep "^title:" "$FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
           git commit -m "publish: ${TITLE}"
-
           git push
-          echo ""
-          echo "  ✓ Published and pushed."
-          echo "  Deploy workflow will trigger automatically."
-          echo "  Site will be live in ~2 minutes."
+
+          echo "Published and pushed. Site will redeploy in ~2 minutes."
