@@ -89,7 +89,8 @@ jobs:
             exit 0
           fi
 
-          sed -i 's/^draft: true$/draft: false/' "$FILE"
+          # Handle both Unix (LF) and Windows (CRLF) line endings
+          sed -i 's/^draft: true[[:space:]]*$/draft: false/' "$FILE"
 
           if grep -q "^draft: false" "$FILE"; then
             echo "draft: false set successfully"
