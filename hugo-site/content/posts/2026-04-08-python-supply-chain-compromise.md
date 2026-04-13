@@ -1,6 +1,6 @@
 ---
 title: "Python Supply-Chain Compromise"
-date: 2026-04-08T10:25:53+00:00
+date: "2026-04-13T15:41:27+00:00"
 draft: false
 
 # ── Content metadata ──
