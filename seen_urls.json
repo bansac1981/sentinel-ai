@@ -26,6 +26,7 @@
     "https://krebsonsecurity.com/2026/02/kimwolf-botnet-swamps-anonymity-network-i2p/",
     "https://krebsonsecurity.com/2026/02/patch-tuesday-february-2026-edition/",
     "https://krebsonsecurity.com/2026/02/starkiller-phishing-service-proxies-real-login-pages-mfa/",
+    "https://krebsonsecurity.com/2026/02/who-is-the-kimwolf-botmaster-dort/",
     "https://krebsonsecurity.com/2026/03/canisterworm-springs-wiper-attack-targeting-iran/",
     "https://krebsonsecurity.com/2026/03/feds-disrupt-iot-botnets-behind-huge-ddos-attacks/",
     "https://krebsonsecurity.com/2026/03/how-ai-assistants-are-moving-the-security-goalposts/",
@@ -46,6 +47,7 @@
     "https://projectzero.google/2026/01/sound-barrier-2.html",
     "https://projectzero.google/2026/02/gphfh-deep-dive.html",
     "https://projectzero.google/2026/02/windows-administrator-protection.html",
+    "https://projectzero.google/2026/03/mutational-grammar-fuzzing.html",
     "https://projectzero.google/2026/26/windows-administrator-protection.html",
     "https://purplesyringa.moe/blog/no-one-owes-you-supply-chain-security/",
     "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/",
@@ -103,6 +105,7 @@
     "https://thehackernews.com/2026/04/new-sparkcat-variant-in-ios-android.html",
     "https://thehackernews.com/2026/04/over-1000-exposed-comfyui-instances.html",
     "https://thehackernews.com/2026/04/qilin-and-warlock-ransomware-use.html",
+    "https://thehackernews.com/2026/04/researchers-uncover-mining-operation.html",
     "https://thehackernews.com/2026/04/russian-state-linked-apt28-exploits.html",
     "https://thehackernews.com/2026/04/shrinking-iam-attack-surface-through.html",
     "https://thehackernews.com/2026/04/the-hidden-cost-of-recurring-credential.html",
@@ -152,6 +155,7 @@
     "https://www.darkreading.com/cyber-risk/cyberattacks-latin-american-governments",
     "https://www.darkreading.com/cyber-risk/emojis-power-covert-threat-actor-communications",
     "https://www.darkreading.com/cyber-risk/experts-near-miss-database-improve-information-sharing",
+    "https://www.darkreading.com/cyber-risk/googles-vertex-ai-over-privilege-problem",
     "https://www.darkreading.com/cyber-risk/intermediaries-driving-global-spyware-market-expansion",
     "https://www.darkreading.com/cyber-risk/lies-damned-lies-cybersecurity-metrics",
     "https://www.darkreading.com/cyber-risk/manufacturing-and-healthcare-share-struggles-with-passwords",
@@ -253,5 +257,5 @@
     "https://www.wheresyoured.at/the-subprime-ai-crisis-is-here/",
     "https://www.wired.com/story/openai-backs-bill-exempt-ai-firms-model-harm-lawsuits/"
   ],
-  "updated_at": "2026-04-13T05:11:55.489820+00:00"
+  "updated_at": "2026-04-13T06:09:44.188094+00:00"
 }
