@@ -12,6 +12,11 @@ on:
         type: boolean
         required: false
         default: false
+  push:
+    branches:
+      - main
+    paths:
+      - 'hugo-site/content/posts/drafts/**'
 
 permissions:
   contents: write
@@ -170,3 +175,94 @@ jobs:
           echo ""
           echo "Published successfully. Site will redeploy in ~2 minutes."
           echo "Live at: https://gridthegrey.com/posts/${SLUG}/"
+
+  auto-publish-push:
+    name: "Auto-Publish Changed Drafts"
+    # Only run on push events (not manual dispatch)
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Find and publish marked drafts
+        run: |
+          git config user.name "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+
+          echo "Checking for drafts marked draft: false..."
+          PUBLISHED_COUNT=0
+          FAILED_COUNT=0
+
+          for f in hugo-site/content/posts/drafts/*.md; do
+            [ -f "$f" ] || continue
+            BASENAME=$(basename "$f")
+            [ "$BASENAME" = "_index.md" ] && continue
+
+            # Check if this draft is marked draft: false
+            if grep -q "^draft: false" "$f"; then
+              SLUG=$(echo "$BASENAME" | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//;s/\.md$//')
+              TITLE=$(grep "^title:" "$f" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
+              DATE_PREFIX=$(echo "$BASENAME" | grep -oP '^\d{4}-\d{2}-\d{2}')
+              PUBLISH_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S+00:00")
+
+              DEST_FILE="hugo-site/content/posts/${DATE_PREFIX}-${SLUG}.md"
+
+              echo "Auto-publishing: $SLUG"
+
+              # Move draft to published folder
+              git mv "$f" "$DEST_FILE"
+
+              # Verify draft file was removed (git mv should handle this, but double-check)
+              if [ -f "$f" ]; then
+                echo "ERROR: Draft file still exists at $f after git mv"
+                FAILED_COUNT=$((FAILED_COUNT + 1))
+                continue
+              fi
+
+              # Update date to publish time
+              sed -i "s|^date:.*$|date: \"${PUBLISH_DATE}\"|" "$DEST_FILE"
+
+              # Verify changes
+              if grep -q "^draft: false" "$DEST_FILE"; then
+                git add "$DEST_FILE"
+                git commit -m "auto-publish: ${TITLE}" || true
+                PUBLISHED_COUNT=$((PUBLISHED_COUNT + 1))
+                echo "✓ Published: $SLUG"
+              else
+                echo "ERROR: Draft flag not found in published file"
+                FAILED_COUNT=$((FAILED_COUNT + 1))
+              fi
+            fi
+          done
+
+          echo ""
+          echo "=================================================="
+          echo "Auto-publish results:"
+          echo "  Published: $PUBLISHED_COUNT"
+          echo "  Failed: $FAILED_COUNT"
+          echo "=================================================="
+
+          if [ "$FAILED_COUNT" -gt 0 ]; then
+            exit 1
+          fi
+
+      - name: Push published articles
+        if: success()
+        run: |
+          # Only push if there are staged changes
+          if ! git diff --staged --quiet; then
+            git push
+            echo "Pushed auto-published articles. Site will redeploy in ~2 minutes."
+          else
+            echo "No articles to push."
+          fi
