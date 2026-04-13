@@ -1,7 +1,7 @@
 ---
 title: "Claude Source Code Leak Highlights Big Supply Chain Missteps"
 date: 2026-04-03T13:00:00+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "A reported source code leak affecting Claude, Anthropic's large language model, underscores systemic weaknesses in AI software supply chains and the absence of robust oversight mechanisms at critical development and distribution layers. The incident highlights how proprietary model code, training pipelines, and system prompts can become high-value targets for adversarial actors seeking to enable model theft, backdoor insertion, or competitive intelligence gathering. This event serves as a broader warning about treating AI development infrastructure with the same rigor applied to other critical systems."
