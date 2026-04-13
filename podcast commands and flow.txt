@@ -1,0 +1,29 @@
+Monday 8:00 AM IST
+    → newsletter-digest.yml runs (existing)
+    → podcast-script.yml also runs:
+          reads last 7 days published posts
+          Claude API writes 600-word CISO briefing script
+          commits → podcast/drafts/draft-2026-04-14.md
+
+You (anytime Monday/Tuesday)
+    → open GitHub mobile → find the draft
+    → read, edit if needed
+    → rename: draft-2026-04-14.md → approved-2026-04-14.md
+    → commit from GitHub mobile
+
+You (when ready to publish)
+    → open GitHub Actions → run podcast-tts.yml manually
+    → enter date: 2026-04-14
+    → workflow runs podcast_tts.py:
+          reads approved-2026-04-14.md
+          calls OpenAI TTS API → MP3
+          uploads to Cloudflare R2 (audio.gridthegrey.com/episodes/...)
+          creates hugo-site/content/podcast/2026-04-14.md
+          commits → GitHub Actions builds Hugo → site deploys
+
+Spotify + Apple Podcasts (automatic, within hours)
+    → detect new item in /podcast/index.xml
+    → episode goes live on both platforms
+
+Website (immediate after deploy)
+    → /podcast/ page shows new episode with HTML5 player

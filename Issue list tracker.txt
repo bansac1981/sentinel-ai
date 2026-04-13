@@ -1,0 +1,45 @@
+Workflow issues
+
+1. As soon as an article is published and moved to the /posts folder, it should be removed from the drafts folder. This will help ensuring we are not reviewing articles viewed or published earlier.
+
+2. it looks like commit from github webgui are not working. when i open a draft article in the github gui and edit and set draft: false, the commits happen but the articles don't show up on the website.
+
+3. A clear process that i need to follow to sync up documents between online-github based commits versus commits done using powershell
+
+
+=================================================================
+Webgui changes
+
+Home Page
+1. the home page should show total number of articles
+2. the home page article listing should be organized and sorted by date - the latest being on the top - and also a date based sub-heading or demarcation.
+3. All the articles should be arranged similar to the "Latest" page style i.e. all the article listing should be the same height and width blocks.
+4. Make "GRID THE GREY" logo 2 pts bigger
+5. The "Threat Actors" heading should open a hover over list of various threat actors
+6. The "Categories" heading should open a hover over list of all categories
+7. Create a search magnifying glass icon based search button before the RSS Feed icon on the top heading bar. When clicked, it should show a search field to help search articles or information from within the website.
+8. I don't like the images we are generating to show in our articles. Refer to "thehackernews" for insipiration. the images should be more real life than vector images. Need to make the site look a little more lively with the images.
+
+Latest Page
+1. The "Latest" page can be removed all together. It does not add much value.
+
+Mitre-Atlas page
+1. The "Mitre-atlas" page is just showing the listing of the articles. this should be changed into a matrix/table where each article is a row, and against each row we should show the applying mitre-atlas attack framework numbers. 
+2. Also create a bar chart or something similar which shows which attack vectors are more trending in our articles, basically a comparison.
+3. the default article listing should go away
+
+OWASP LLM page
+1. The "Owasp LLM" page is just showing the listing of the articles. this should be changed into a matrix/table where each article is a row, and against each row we should show the applying owasp-llm attack framework numbers. 
+2. Also create a bar chart or something similar which shows which attack vectors are more trending in our articles, basically a comparison.
+3. the default article listing should go away
+
+Article pages
+1. The "THREAT LEVEL" indicator should also become a hover-over which shows the value of the threat level like "medium", "high" etc.
+
+EXTRA
+1. We should have a page which shows the logic of our "Relevance" and "THREAT LEVEL" scoring mechanism. This should be linked to the threat level and relevance score icons in the articles.
+
+2. We should also have a page which shows brief definitions of mitre and owasp framework standards used. 
+
+
+

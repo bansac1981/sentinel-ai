@@ -47,8 +47,19 @@ Publishing articles
 
 # Then push to deploy:
 git add hugo-site/content/posts/
-git commit -m "publish: [article title]"
+git commit -m "publish: browser-extensions-are-the-new-ai-consumption-channel-that-no-one-is-talking"
 git push
 
+
+=========================================================
+
+Your day-to-day workflow from here:
+
+Run python pipeline.py --limit 10 periodically to fetch new articles
+Open drafts in hugo-site/content/posts/, review, change draft: false on the ones worth publishing
+git add → git commit → git push from AI Security News Website\
+Site updates in ~2 minutes
+
+=========================================================
 
 
