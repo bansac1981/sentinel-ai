@@ -1,7 +1,7 @@
 ---
 title: "Over 1,000 Exposed ComfyUI Instances Targeted in Cryptomining Botnet Campaign"
 date: 2026-04-07T12:46:00+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "Threat actors are actively exploiting internet-exposed ComfyUI instances \u2014 a popular AI image generation platform \u2014 by abusing its custom node execution feature to achieve unauthenticated remote code execution. Over 1,000 publicly accessible instances have been identified as targets, with compromised hosts enrolled in Monero and Conflux cryptomining operations and a Hysteria V2 proxy botnet. The attack highlights critical supply chain and insecure plugin design risks inherent in AI/ML tooling ecosystems."
