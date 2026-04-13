@@ -31,6 +31,7 @@ fetched_at: "2026-04-13T05:09:52+00:00"
 feed_source: "darkreading"
 original_url: "https://www.darkreading.com/application-security/owasp-genai-security-project-update-matrix"
 pipeline_version: "1.0.0"
+slug: "owasp-genai-security-project-gets-update-new-tools-matrix"
 ---
 
 ## Overview

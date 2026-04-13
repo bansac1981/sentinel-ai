@@ -31,6 +31,7 @@ fetched_at: "2026-04-13T05:06:51+00:00"
 feed_source: "schneier"
 original_url: "https://www.schneier.com/blog/archives/2026/04/python-supply-chain-compromise.html"
 pipeline_version: "1.0.0"
+slug: "python-supply-chain-compromise"
 ---
 
 ## Overview

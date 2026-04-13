@@ -31,6 +31,7 @@ fetched_at: "2026-04-13T05:07:25+00:00"
 feed_source: "thehackernews"
 original_url: "https://thehackernews.com/2026/04/anthropics-claude-mythos-finds.html"
 pipeline_version: "1.0.0"
+slug: "anthropic-s-claude-mythos-finds-thousands-of-zero-day-flaws-across-major-systems"
 ---
 
 ## Overview

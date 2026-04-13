@@ -31,6 +31,7 @@ fetched_at: "2026-04-13T06:09:32+00:00"
 feed_source: "darkreading"
 original_url: "https://www.darkreading.com/cyber-risk/googles-vertex-ai-over-privilege-problem"
 pipeline_version: "1.0.0"
+slug: "google-s-vertex-ai-is-over-privileged-that-s-a-problem"
 ---
 
 ## Overview

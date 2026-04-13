@@ -31,6 +31,7 @@ fetched_at: "2026-04-13T05:08:28+00:00"
 feed_source: "thehackernews"
 original_url: "https://thehackernews.com/2026/04/over-1000-exposed-comfyui-instances.html"
 pipeline_version: "1.0.0"
+slug: "over-1000-exposed-comfyui-instances-targeted-in-cryptomining-botnet-campaign"
 ---
 
 ## Overview

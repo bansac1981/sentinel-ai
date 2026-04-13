@@ -31,6 +31,7 @@ fetched_at: "2026-04-13T05:10:51+00:00"
 feed_source: "thehackernews"
 original_url: "https://thehackernews.com/2026/04/how-litellm-turned-developer-machines.html"
 pipeline_version: "1.0.0"
+slug: "how-litellm-turned-developer-machines-into-credential-vaults-for-attackers"
 ---
 
 ## Overview
