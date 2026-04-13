@@ -1,5 +1,9 @@
 name: "Grid the Grey — Publish Draft"
 
+# ─────────────────────────────────────────────
+# Manual-only trigger — enter a slug to publish a specific draft,
+# or leave blank to list all current drafts.
+# ─────────────────────────────────────────────
 on:
   workflow_dispatch:
     inputs:
@@ -12,11 +16,6 @@ on:
         type: boolean
         required: false
         default: false
-  push:
-    branches:
-      - main
-    paths:
-      - 'hugo-site/content/posts/drafts/**'
 
 permissions:
   contents: write
@@ -74,7 +73,6 @@ jobs:
         run: |
           SLUG="${{ github.event.inputs.slug }}"
 
-          # Find draft file matching *-{slug}.md in the drafts folder
           DRAFT_FILE=$(find hugo-site/content/posts/drafts -name "*-${SLUG}.md" ! -name "_index.md" | head -1)
 
           if [ -z "$DRAFT_FILE" ]; then
@@ -86,7 +84,6 @@ jobs:
           echo "Found draft: $DRAFT_FILE"
           echo "DRAFT_FILE=$DRAFT_FILE" >> $GITHUB_ENV
 
-          # Extract date prefix from filename for the published filename
           BASENAME=$(basename "$DRAFT_FILE")
           DATE_PREFIX=$(echo "$BASENAME" | grep -oP '^\d{4}-\d{2}-\d{2}')
           echo "DATE_PREFIX=$DATE_PREFIX" >> $GITHUB_ENV
@@ -103,14 +100,8 @@ jobs:
           SLUG="${{ github.event.inputs.slug }}"
           PREVIEW="${{ github.event.inputs.preview }}"
 
-          # Set publish date to RIGHT NOW (not the original source date)
           PUBLISH_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S+00:00")
-          PUBLISH_DATE_PREFIX=$(date -u +"%Y-%m-%d")
-
-          # Destination: published file uses the original draft date prefix
-          # so articles sort correctly by when they were fetched
           DEST_FILE="hugo-site/content/posts/${DATE_PREFIX}-${SLUG}.md"
-
           TITLE=$(grep "^title:" "$DRAFT_FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
 
           echo "=================================================="
@@ -130,27 +121,15 @@ jobs:
             exit 0
           fi
 
-          # Move draft to published folder
           git mv "$DRAFT_FILE" "$DEST_FILE"
-
-          # Flip draft: true → draft: false (handles LF and CRLF)
           sed -i 's/^draft: true[[:space:]]*$/draft: false/' "$DEST_FILE"
-
-          # Update date: to today's publish date (not source date)
           sed -i "s|^date:.*$|date: \"${PUBLISH_DATE}\"|" "$DEST_FILE"
 
-          # Verify changes
           if grep -q "^draft: false" "$DEST_FILE"; then
             echo "draft: false — OK"
           else
             echo "ERROR: draft flag was not updated"
             exit 1
-          fi
-
-          if grep -q "^date: \"${PUBLISH_DATE}\"" "$DEST_FILE"; then
-            echo "date: $PUBLISH_DATE — OK"
-          else
-            echo "WARNING: date field may not have updated cleanly — check the file"
           fi
 
       - name: Commit and push
@@ -175,94 +154,3 @@ jobs:
           echo ""
           echo "Published successfully. Site will redeploy in ~2 minutes."
           echo "Live at: https://gridthegrey.com/posts/${SLUG}/"
-
-  auto-publish-push:
-    name: "Auto-Publish Changed Drafts"
-    # Only run on push events (not manual dispatch)
-    if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Find and publish marked drafts
-        run: |
-          git config user.name "Grid the Grey Bot"
-          git config user.email "bot@gridthegrey.com"
-
-          echo "Checking for drafts marked draft: false..."
-          PUBLISHED_COUNT=0
-          FAILED_COUNT=0
-
-          for f in hugo-site/content/posts/drafts/*.md; do
-            [ -f "$f" ] || continue
-            BASENAME=$(basename "$f")
-            [ "$BASENAME" = "_index.md" ] && continue
-
-            # Check if this draft is marked draft: false
-            if grep -q "^draft: false" "$f"; then
-              SLUG=$(echo "$BASENAME" | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//;s/\.md$//')
-              TITLE=$(grep "^title:" "$f" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
-              DATE_PREFIX=$(echo "$BASENAME" | grep -oP '^\d{4}-\d{2}-\d{2}')
-              PUBLISH_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S+00:00")
-
-              DEST_FILE="hugo-site/content/posts/${DATE_PREFIX}-${SLUG}.md"
-
-              echo "Auto-publishing: $SLUG"
-
-              # Move draft to published folder
-              git mv "$f" "$DEST_FILE"
-
-              # Verify draft file was removed (git mv should handle this, but double-check)
-              if [ -f "$f" ]; then
-                echo "ERROR: Draft file still exists at $f after git mv"
-                FAILED_COUNT=$((FAILED_COUNT + 1))
-                continue
-              fi
-
-              # Update date to publish time
-              sed -i "s|^date:.*$|date: \"${PUBLISH_DATE}\"|" "$DEST_FILE"
-
-              # Verify changes
-              if grep -q "^draft: false" "$DEST_FILE"; then
-                git add "$DEST_FILE"
-                git commit -m "auto-publish: ${TITLE}" || true
-                PUBLISHED_COUNT=$((PUBLISHED_COUNT + 1))
-                echo "✓ Published: $SLUG"
-              else
-                echo "ERROR: Draft flag not found in published file"
-                FAILED_COUNT=$((FAILED_COUNT + 1))
-              fi
-            fi
-          done
-
-          echo ""
-          echo "=================================================="
-          echo "Auto-publish results:"
-          echo "  Published: $PUBLISHED_COUNT"
-          echo "  Failed: $FAILED_COUNT"
-          echo "=================================================="
-
-          if [ "$FAILED_COUNT" -gt 0 ]; then
-            exit 1
-          fi
-
-      - name: Push published articles
-        if: success()
-        run: |
-          # Only push if there are staged changes
-          if ! git diff --staged --quiet; then
-            git push
-            echo "Pushed auto-published articles. Site will redeploy in ~2 minutes."
-          else
-            echo "No articles to push."
-          fi

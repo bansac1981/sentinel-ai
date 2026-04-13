@@ -8,7 +8,7 @@ on:
     branches:
       - main
     paths:
-      # Only rebuild when content or theme actually changed
+      # Rebuild when content or theme changes
       - "hugo-site/**"
       - ".github/workflows/deploy.yml"
 
@@ -16,14 +16,14 @@ on:
   workflow_dispatch:
 
 # ─────────────────────────────────────────────
-# Permissions required for GitHub Pages deployment
+# Permissions
 # ─────────────────────────────────────────────
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Only one deploy can run at a time; don't cancel in-progress deploys
+# Only one deploy at a time; don't cancel in-progress deploys
 concurrency:
   group: "github-pages"
   cancel-in-progress: false
@@ -33,9 +33,60 @@ concurrency:
 # ─────────────────────────────────────────────
 jobs:
 
-  # ── Job 1: Build Hugo site ──────────────────
+  # ── Job 1: Auto-Publish any drafts marked draft:false ──────────────
+  auto-publish:
+    name: "Auto-Publish Drafted Posts"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # This job needs to commit + push
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Publish drafts marked draft:false
+        run: |
+          git config user.name "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+
+          PUBLISHED_COUNT=0
+
+          for f in hugo-site/content/posts/drafts/*.md; do
+            [ -f "$f" ] || continue
+            BASENAME=$(basename "$f")
+            [ "$BASENAME" = "_index.md" ] && continue
+
+            if grep -q "^draft: false" "$f"; then
+              SLUG=$(echo "$BASENAME" | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//;s/\.md$//')
+              DATE_PREFIX=$(echo "$BASENAME" | grep -oP '^\d{4}-\d{2}-\d{2}')
+              PUBLISH_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S+00:00")
+              DEST_FILE="hugo-site/content/posts/${DATE_PREFIX}-${SLUG}.md"
+              TITLE=$(grep "^title:" "$f" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
+
+              echo "Publishing: $TITLE"
+              git mv "$f" "$DEST_FILE"
+              sed -i "s|^date:.*$|date: \"${PUBLISH_DATE}\"|" "$DEST_FILE"
+              git add "$DEST_FILE"
+
+              PUBLISHED_COUNT=$((PUBLISHED_COUNT + 1))
+            fi
+          done
+
+          if [ "$PUBLISHED_COUNT" -gt 0 ]; then
+            git commit -m "auto-publish: $PUBLISHED_COUNT article(s)"
+            git push
+            echo "Pushed $PUBLISHED_COUNT published article(s)."
+          else
+            echo "No drafts to publish."
+          fi
+
+  # ── Job 2: Build Hugo site ──────────────────
   build:
     name: "Build Hugo site"
+    needs: auto-publish    # Always runs after auto-publish (even if nothing was published)
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -43,7 +94,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # full history needed for .GitInfo and lastmod
+          ref: main        # Get latest main — includes any auto-published articles
+          fetch-depth: 0
 
       - name: Setup Hugo (extended)
         run: |
@@ -72,7 +124,7 @@ jobs:
         with:
           path: hugo-site/public
 
-  # ── Job 2: Deploy to GitHub Pages ───────────
+  # ── Job 3: Deploy to GitHub Pages ───────────
   deploy:
     name: "Deploy to GitHub Pages"
     runs-on: ubuntu-latest
