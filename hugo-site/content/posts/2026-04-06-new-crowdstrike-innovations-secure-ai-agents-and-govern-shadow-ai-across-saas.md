@@ -31,6 +31,7 @@ fetched_at: "2026-04-06T16:53:30+00:00"
 feed_source: "crowdstrike"
 original_url: "https://www.crowdstrike.com/en-us/blog/new-crowdstrike-innovations-secure-ai-agents-govern-shadow-ai/"
 pipeline_version: "1.0.0"
+slug: "new-crowdstrike-innovations-secure-ai-agents-and-govern-shadow-ai-across-saas"
 ---
 
 ## Overview

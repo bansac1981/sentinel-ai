@@ -1,0 +1,120 @@
+name: "Grid the Grey — Draft Cleanup"
+
+# Deletes draft articles that have been sitting in posts/drafts/ for more
+# than 15 days without being published. Runs daily at 6:00 AM IST (00:30 UTC).
+
+on:
+  schedule:
+    - cron: "30 0 * * *"
+
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run — list expired drafts without deleting"
+        type: boolean
+        required: false
+        default: false
+      days:
+        description: "Delete drafts older than N days (default: 15)"
+        required: false
+        default: "15"
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    name: "Clean Up Expired Drafts"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Find and delete expired drafts
+        run: |
+          DAYS="${{ github.event.inputs.days || '15' }}"
+          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
+          CUTOFF=$(date -d "${DAYS} days ago" +%Y-%m-%d)
+          TODAY=$(date +%Y-%m-%d)
+
+          echo "=================================================="
+          echo "DRAFT CLEANUP — Grid the Grey"
+          echo "=================================================="
+          echo "Today:    $TODAY"
+          echo "Cutoff:   $CUTOFF (drafts older than ${DAYS} days)"
+          echo "Dry run:  $DRY_RUN"
+          echo "=================================================="
+
+          DELETED=0
+          KEPT=0
+          TOTAL=0
+
+          for f in hugo-site/content/posts/drafts/*.md; do
+            [ -f "$f" ] || continue
+            BASENAME=$(basename "$f")
+            [ "$BASENAME" = "_index.md" ] && continue
+
+            TOTAL=$((TOTAL + 1))
+
+            # Extract date from YYYY-MM-DD- filename prefix
+            FILE_DATE=$(echo "$BASENAME" | grep -oP '^\d{4}-\d{2}-\d{2}')
+            if [ -z "$FILE_DATE" ]; then
+              echo "SKIP (no date prefix): $BASENAME"
+              KEPT=$((KEPT + 1))
+              continue
+            fi
+
+            TITLE=$(grep "^title:" "$f" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
+            SCORE=$(grep "^relevance_score:" "$f" | head -1 | sed 's/^relevance_score: *//')
+
+            if [[ "$FILE_DATE" < "$CUTOFF" ]] || [[ "$FILE_DATE" == "$CUTOFF" ]]; then
+              echo ""
+              echo "EXPIRED: $BASENAME"
+              echo "  Title:  $TITLE"
+              echo "  Score:  $SCORE"
+              echo "  Age:    drafted on $FILE_DATE"
+              if [ "$DRY_RUN" = "true" ]; then
+                echo "  Action: would delete (dry run)"
+              else
+                git rm "$f"
+                echo "  Action: deleted"
+              fi
+              DELETED=$((DELETED + 1))
+            else
+              KEPT=$((KEPT + 1))
+            fi
+          done
+
+          echo ""
+          echo "=================================================="
+          echo "SUMMARY"
+          echo "=================================================="
+          echo "Total drafts scanned: $TOTAL"
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "Would delete:         $DELETED"
+          else
+            echo "Deleted:              $DELETED"
+          fi
+          echo "Kept (still fresh):   $KEPT"
+          echo "=================================================="
+
+          # Export for next step
+          echo "DELETED_COUNT=$DELETED" >> $GITHUB_ENV
+          echo "DRY_RUN=$DRY_RUN" >> $GITHUB_ENV
+
+      - name: Commit deletions
+        if: ${{ env.DELETED_COUNT != '0' && env.DRY_RUN == 'false' }}
+        run: |
+          git config user.name "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          if git diff --staged --quiet; then
+            echo "Nothing staged — no deletions to commit."
+          else
+            git commit -m "cleanup: remove ${{ env.DELETED_COUNT }} draft(s) older than ${{ github.event.inputs.days || '15' }} days"
+            git push
+            echo "Cleanup committed and pushed."
+          fi

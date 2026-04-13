@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: "Post slug to publish (filename without .md). Leave blank to list all drafts."
+        description: "Post slug to publish (e.g. openai-security-advisory). Leave blank to list all drafts."
         required: false
         default: ""
       preview:
@@ -28,94 +28,145 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: List all current draft posts
         run: |
           echo "=================================================="
-          echo "CURRENT DRAFT POSTS"
+          echo "CURRENT DRAFT POSTS  (posts/drafts/)"
           echo "=================================================="
           FOUND=0
-          for f in hugo-site/content/posts/*.md; do
+          for f in hugo-site/content/posts/drafts/*.md; do
             [ -f "$f" ] || continue
-            if grep -q "^draft: true" "$f"; then
-              SLUG=$(basename "$f" .md)
-              TITLE=$(grep "^title:" "$f" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
-              DATE=$(grep "^date:" "$f" | head -1 | sed 's/^date: *//' | cut -c1-10)
-              SCORE=$(grep "^relevance_score:" "$f" | head -1 | sed 's/^relevance_score: *//')
-              THREAT=$(grep "^threat_level:" "$f" | head -1 | sed 's/^threat_level: *//;s/"//g')
-              echo ""
-              echo "SLUG:   $SLUG"
-              echo "TITLE:  $TITLE"
-              echo "DATE:   $DATE  |  SCORE: $SCORE  |  THREAT: $THREAT"
-              echo "--------------------------------------------------"
-              FOUND=$((FOUND + 1))
-            fi
+            BASENAME=$(basename "$f")
+            [ "$BASENAME" = "_index.md" ] && continue
+            SLUG=$(echo "$BASENAME" | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//;s/\.md$//')
+            TITLE=$(grep "^title:" "$f" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
+            DATE=$(echo "$BASENAME" | grep -oP '^\d{4}-\d{2}-\d{2}')
+            SCORE=$(grep "^relevance_score:" "$f" | head -1 | sed 's/^relevance_score: *//')
+            THREAT=$(grep "^threat_level:" "$f" | head -1 | sed 's/^threat_level: *//;s/"//g')
+            echo ""
+            echo "SLUG:   $SLUG"
+            echo "FILE:   $BASENAME"
+            echo "TITLE:  $TITLE"
+            echo "DRAFTED:$DATE  |  SCORE: $SCORE  |  THREAT: $THREAT"
+            echo "--------------------------------------------------"
+            FOUND=$((FOUND + 1))
           done
           if [ "$FOUND" -eq 0 ]; then
-            echo "No draft posts found. All posts are already published."
+            echo "No draft posts found."
           else
             echo ""
             echo "Total drafts: $FOUND"
           fi
           echo "=================================================="
 
+      - name: Find draft file by slug
+        if: ${{ github.event.inputs.slug != '' }}
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+
+          # Find draft file matching *-{slug}.md in the drafts folder
+          DRAFT_FILE=$(find hugo-site/content/posts/drafts -name "*-${SLUG}.md" ! -name "_index.md" | head -1)
+
+          if [ -z "$DRAFT_FILE" ]; then
+            echo "ERROR: No draft found with slug: $SLUG"
+            echo "Check the slug — use the exact value from the SLUG: line above."
+            exit 1
+          fi
+
+          echo "Found draft: $DRAFT_FILE"
+          echo "DRAFT_FILE=$DRAFT_FILE" >> $GITHUB_ENV
+
+          # Extract date prefix from filename for the published filename
+          BASENAME=$(basename "$DRAFT_FILE")
+          DATE_PREFIX=$(echo "$BASENAME" | grep -oP '^\d{4}-\d{2}-\d{2}')
+          echo "DATE_PREFIX=$DATE_PREFIX" >> $GITHUB_ENV
+
+      - name: Run duplicate content check
+        if: ${{ github.event.inputs.slug != '' && github.event.inputs.preview != 'true' }}
+        run: |
+          echo "Running duplicate content check..."
+          python check_duplicate.py "$DRAFT_FILE"
+
       - name: Publish post
         if: ${{ github.event.inputs.slug != '' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
-          FILE="hugo-site/content/posts/${SLUG}.md"
+          PREVIEW="${{ github.event.inputs.preview }}"
+
+          # Set publish date to RIGHT NOW (not the original source date)
+          PUBLISH_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S+00:00")
+          PUBLISH_DATE_PREFIX=$(date -u +"%Y-%m-%d")
+
+          # Destination: published file uses the original draft date prefix
+          # so articles sort correctly by when they were fetched
+          DEST_FILE="hugo-site/content/posts/${DATE_PREFIX}-${SLUG}.md"
+
+          TITLE=$(grep "^title:" "$DRAFT_FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
 
           echo "=================================================="
           echo "PUBLISHING: $SLUG"
           echo "=================================================="
+          echo "Source:  $DRAFT_FILE"
+          echo "Dest:    $DEST_FILE"
+          echo "Title:   $TITLE"
+          echo "Date:    $PUBLISH_DATE"
 
-          if [ ! -f "$FILE" ]; then
-            echo "ERROR: File not found: $FILE"
-            echo "Check the slug - use the exact filename without .md"
-            exit 1
-          fi
-
-          if ! grep -q "^draft: true" "$FILE"; then
-            echo "WARNING: Post is already published (draft: false). Nothing to do."
-            exit 0
-          fi
-
-          TITLE=$(grep "^title:" "$FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
-          echo "Title: $TITLE"
-
-          PREVIEW="${{ github.event.inputs.preview }}"
           if [ "$PREVIEW" = "true" ]; then
-            echo "PREVIEW MODE - no changes will be committed."
-            echo "Would change: draft: true to draft: false"
+            echo ""
+            echo "PREVIEW MODE — no changes committed."
+            echo "Would move:  $DRAFT_FILE → $DEST_FILE"
+            echo "Would set:   draft: false"
+            echo "Would set:   date: $PUBLISH_DATE"
             exit 0
           fi
 
-          # Handle both Unix (LF) and Windows (CRLF) line endings
-          sed -i 's/^draft: true[[:space:]]*$/draft: false/' "$FILE"
+          # Move draft to published folder
+          git mv "$DRAFT_FILE" "$DEST_FILE"
 
-          if grep -q "^draft: false" "$FILE"; then
-            echo "draft: false set successfully"
+          # Flip draft: true → draft: false (handles LF and CRLF)
+          sed -i 's/^draft: true[[:space:]]*$/draft: false/' "$DEST_FILE"
+
+          # Update date: to today's publish date (not source date)
+          sed -i "s|^date:.*$|date: \"${PUBLISH_DATE}\"|" "$DEST_FILE"
+
+          # Verify changes
+          if grep -q "^draft: false" "$DEST_FILE"; then
+            echo "draft: false — OK"
           else
-            echo "ERROR: replacement did not work - check the file manually"
+            echo "ERROR: draft flag was not updated"
             exit 1
+          fi
+
+          if grep -q "^date: \"${PUBLISH_DATE}\"" "$DEST_FILE"; then
+            echo "date: $PUBLISH_DATE — OK"
+          else
+            echo "WARNING: date field may not have updated cleanly — check the file"
           fi
 
       - name: Commit and push
         if: ${{ github.event.inputs.slug != '' && github.event.inputs.preview != 'true' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
-          FILE="hugo-site/content/posts/${SLUG}.md"
-          TITLE=$(grep "^title:" "$FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
+          DEST_FILE="hugo-site/content/posts/${DATE_PREFIX}-${SLUG}.md"
+          TITLE=$(grep "^title:" "$DEST_FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
 
           git config user.name "Grid the Grey Bot"
           git config user.email "bot@gridthegrey.com"
-          git add "$FILE"
+          git add "$DEST_FILE"
 
           if git diff --staged --quiet; then
-            echo "No staged changes - post was already published."
+            echo "No staged changes — post may already be published."
             exit 0
           fi
 
           git commit -m "publish: ${TITLE}"
           git push
 
-          echo "Published and pushed. Site will redeploy in ~2 minutes."
+          echo ""
+          echo "Published successfully. Site will redeploy in ~2 minutes."
+          echo "Live at: https://gridthegrey.com/posts/${SLUG}/"

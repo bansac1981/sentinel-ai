@@ -31,6 +31,7 @@ fetched_at: "2026-04-11T09:23:01+00:00"
 feed_source: "hn_ai_security"
 original_url: "https://www.theguardian.com/technology/2026/apr/10/us-summoned-bank-bosses-to-discuss-cyber-risks-posed-by-anthropic-latest-ai-model"
 pipeline_version: "1.0.0"
+slug: "us-summons-bank-bosses-over-cyber-risks-from-anthropic-s-latest-ai-model"
 ---
 
 ## Overview
@@ -76,4 +77,4 @@ The financial sector faces compounded risk: as a primary target for cybercrime a
 
 ## References
 
-- [US summons bank bosses over cyber risks from Anthropic's latest AI model — The Guardian](https://www.theguardian.com/technology/2026/apr/10/us-summoned-bank-bosses-to-discuss-cyber-risks-posed-by-anthropic-latest-ai-model)
+- [US summons bank bosses over cyber risks from Anthropic's latest AI model — The Guardian](https://www.theguardian.com/technology/2026/apr/10/us-summoned-bank-bosses-to-discuss-cyber-risks-posed-by-anthropic-latest-ai-model)

@@ -31,6 +31,7 @@ fetched_at: "2026-04-11T18:59:52+00:00"
 feed_source: "hn_ai_security"
 original_url: "https://botctl.dev/"
 pipeline_version: "1.0.0"
+slug: "process-manager-for-autonomous-ai-agents"
 ---
 
 ## Overview

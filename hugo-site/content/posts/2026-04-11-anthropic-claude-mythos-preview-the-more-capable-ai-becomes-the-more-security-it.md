@@ -31,6 +31,7 @@ fetched_at: "2026-04-11T09:22:08+00:00"
 feed_source: "crowdstrike"
 original_url: "https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/"
 pipeline_version: "1.0.0"
+slug: "anthropic-claude-mythos-preview-the-more-capable-ai-becomes-the-more-security-it"
 ---
 
 ## Overview
@@ -72,4 +73,4 @@ The immediate impact of this announcement is industry-level rather than incident
 
 ## References
 
-- [CrowdStrike Blog — Anthropic Claude Mythos Preview](https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/)
+- [CrowdStrike Blog — Anthropic Claude Mythos Preview](https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/)

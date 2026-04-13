@@ -157,6 +157,7 @@ ANTHROPIC_API_KEY   = os.getenv("ANTHROPIC_API_KEY", "")
 CLAUDE_MODEL        = os.getenv("CLAUDE_MODEL", "claude-sonnet-4-6")
 RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "6.0"))
 HUGO_POSTS_DIR      = Path(os.getenv("HUGO_POSTS_DIR", "hugo-site/content/posts"))
+HUGO_DRAFTS_DIR     = HUGO_POSTS_DIR / "drafts"
 SEEN_URLS_FILE      = Path(os.getenv("SEEN_URLS_FILE", "seen_urls.json"))
 MAX_ARTICLES        = int(os.getenv("MAX_ARTICLES_PER_RUN", "20"))
 FETCH_FULL_CONTENT  = os.getenv("FETCH_FULL_CONTENT", "true").lower() == "true"
@@ -454,24 +455,30 @@ def to_yaml_list(items: list | None) -> str:
     return "[" + ", ".join(f'"{s}"' for s in safe) + "]"
 
 
-def generate_hugo_markdown(article: dict, analysis: dict) -> str:
+def generate_hugo_markdown(article: dict, analysis: dict, slug: str) -> str:
     """
     Build the full Hugo markdown file content from article metadata
     and Claude's analysis. Matches the post archetype exactly.
     """
     now = datetime.now(timezone.utc)
-    pub_date = article["published"].strftime("%Y-%m-%dT%H:%M:%S+00:00")
+    # date: is set to NOW (pipeline fetch time) — updated to actual publish time
+    # when the article is published via publish-draft.yml
+    fetch_date = now.strftime("%Y-%m-%dT%H:%M:%S+00:00")
+    # Preserve the original source publication date for reference
+    source_date = article["published"].strftime("%Y-%m-%dT%H:%M:%S+00:00")
 
     # Front matter
     front_matter = f"""---
 title: {json.dumps(article['title'])}
-date: {pub_date}
+date: {fetch_date}
 draft: true
+slug: {json.dumps(slug)}
 
 # ── Content metadata ──
 summary: {json.dumps(analysis.get('summary', ''))}
 source: {json.dumps(article['source'])}
 source_url: {json.dumps(article['url'])}
+source_date: {source_date}
 author: "Grid the Grey Editorial"
 thumbnail: {json.dumps(article.get('thumbnail', ''))}
 
@@ -508,19 +515,20 @@ pipeline_version: "{PIPELINE_VERSION}"
 
 
 def write_hugo_post(slug: str, content: str, log: logging.Logger) -> Path | None:
-    """Write the markdown file to the Hugo posts directory. Returns path or None."""
-    HUGO_POSTS_DIR.mkdir(parents=True, exist_ok=True)
-    filepath = HUGO_POSTS_DIR / f"{slug}.md"
+    """Write the markdown file to the Hugo drafts directory. Returns path or None."""
+    HUGO_DRAFTS_DIR.mkdir(parents=True, exist_ok=True)
+    date_prefix = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    filename = f"{date_prefix}-{slug}.md"
+    filepath = HUGO_DRAFTS_DIR / filename
 
-    # If a file with this slug already exists, skip — never create -1 variants
-    # which cause Hugo routing issues and duplicate content on the site
+    # If a file with this slug already exists in drafts, skip
     if filepath.exists():
-        log.warning(f"  ⚠ Skipping — file already exists: {filepath.name}")
+        log.warning(f"  ⚠ Skipping — draft already exists: {filename}")
         return None
 
     try:
         filepath.write_text(content, encoding="utf-8")
-        log.info(f"  ✓ Written: {filepath.name}")
+        log.info(f"  ✓ Written: posts/drafts/{filename}")
         return filepath
     except OSError as e:
         log.error(f"  ✗ Failed to write {filepath}: {e}")
@@ -573,14 +581,20 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
     # ── Step 2: Deduplicate ──
     log.info("\nSTEP 2 — Deduplication")
 
-    # Build a set of slugs already on disk so we never re-fetch the same article
-    # even if seen_urls.json was reset or the URL came in with a different variant
+    # Build a set of slugs already on disk (published + drafts) to avoid re-fetching.
+    # Filenames may have YYYY-MM-DD- prefix — strip it to get the bare slug.
     existing_slugs: set = set()
-    if HUGO_POSTS_DIR.exists():
-        for f in HUGO_POSTS_DIR.glob("*.md"):
-            if f.stem != "_index":
-                existing_slugs.add(f.stem)
-    log.info(f"Existing posts on disk: {len(existing_slugs)}")
+    date_prefix_re = re.compile(r"^\d{4}-\d{2}-\d{2}-")
+    for search_dir in [HUGO_POSTS_DIR, HUGO_DRAFTS_DIR]:
+        if search_dir.exists():
+            for f in search_dir.glob("*.md"):
+                stem = f.stem
+                if stem == "_index":
+                    continue
+                bare = date_prefix_re.sub("", stem)
+                existing_slugs.add(bare)
+                existing_slugs.add(stem)  # also keep full name just in case
+    log.info(f"Existing posts on disk (published + drafts): {len(existing_slugs)}")
 
     new_articles = []
     for a in all_articles:
@@ -679,7 +693,7 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
 
         # Generate and write Hugo post
         slug = build_slug(article["title"], article["published"])
-        markdown = generate_hugo_markdown(article, analysis)
+        markdown = generate_hugo_markdown(article, analysis, slug)
         written = write_hugo_post(slug, markdown, log)
         if written:
             stats["posts_written"] += 1

@@ -31,6 +31,7 @@ fetched_at: "2026-04-12T07:52:15+00:00"
 feed_source: "hn_ai_security"
 original_url: "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/"
 pipeline_version: "1.0.0"
+slug: "how-we-broke-top-ai-agent-benchmarks-and-what-comes-next"
 ---
 
 ## Overview

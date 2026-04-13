@@ -31,6 +31,7 @@ fetched_at: "2026-04-06T16:53:57+00:00"
 feed_source: "crowdstrike"
 original_url: "https://www.crowdstrike.com/en-us/blog/how-charlotte-ai-agentworks-fuels-securitys-agentic-ecosystem/"
 pipeline_version: "1.0.0"
+slug: "how-charlotte-ai-agentworks-fuels-security-s-agentic-ecosystem"
 ---
 
 ## Overview
