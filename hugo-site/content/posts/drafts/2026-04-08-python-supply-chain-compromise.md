@@ -1,7 +1,7 @@
 ---
 title: "Python Supply-Chain Compromise"
 date: 2026-04-08T10:25:53+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "A malicious supply chain attack was discovered in litellm version 1.82.8, a widely-used Python library that serves as a unified interface for interacting with large language model APIs. The compromised package contained a hidden .pth file executing arbitrary code on every Python interpreter startup, meaning any developer or AI system relying on litellm could be silently compromised without triggering an explicit import. Given litellm's central role in LLM-powered application stacks, this attack vector poses significant risk to AI pipeline integrity, credential theft, and downstream model infrastructure."
