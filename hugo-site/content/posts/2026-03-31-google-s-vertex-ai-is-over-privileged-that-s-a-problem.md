@@ -1,6 +1,6 @@
 ---
 title: "Google's Vertex AI Is Over-Privileged. That's a Problem"
-date: 2026-03-31T20:26:33+00:00
+date: "2026-04-13T14:39:34+00:00"
 draft: false
 
 # ── Content metadata ──
