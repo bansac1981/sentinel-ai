@@ -1,7 +1,7 @@
 ---
 title: "Google's Vertex AI Is Over-Privileged. That's a Problem"
 date: 2026-03-31T20:26:33+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "Palo Alto Networks researchers have identified over-privilege vulnerabilities in Google's Vertex AI platform, demonstrating how malicious actors could exploit AI agents to exfiltrate sensitive data and pivot into restricted cloud infrastructure. The findings highlight systemic risks in agentic AI deployments where excessive permissions granted to AI workloads expand the attack surface beyond traditional cloud security boundaries. This research underscores the growing urgency around securing AI agent permissions and enforcing least-privilege principles in enterprise ML platforms."
