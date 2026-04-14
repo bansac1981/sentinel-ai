@@ -8,7 +8,7 @@ summary: "Palo Alto Networks researchers have identified over-privilege vulnerab
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/cyber-risk/googles-vertex-ai-over-privilege-problem"
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/5866051/pexels-photo-5866051.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 8.5

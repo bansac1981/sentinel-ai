@@ -10,7 +10,7 @@ source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/your-mttd-looks-great-your-post-alert.html"
 source_date: 2026-04-13T11:41:00+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/4389463/pexels-photo-4389463.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 7.2

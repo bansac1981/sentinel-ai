@@ -8,7 +8,7 @@ summary: "A malicious supply chain attack was discovered in litellm version 1.82
 source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/python-supply-chain-compromise.html"
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/5866051/pexels-photo-5866051.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 8.2

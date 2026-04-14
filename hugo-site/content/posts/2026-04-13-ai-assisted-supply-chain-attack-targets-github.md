@@ -8,7 +8,7 @@ summary: "A threat actor identified as part of the PRT-scan campaign has leverag
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/application-security/ai-assisted-supply-chain-attack-targets-github"
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/9349519/pexels-photo-9349519.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 7.5

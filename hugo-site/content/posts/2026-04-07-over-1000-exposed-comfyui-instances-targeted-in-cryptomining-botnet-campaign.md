@@ -8,7 +8,7 @@ summary: "Threat actors are actively exploiting internet-exposed ComfyUI instanc
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/over-1000-exposed-comfyui-instances.html"
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/17489151/pexels-photo-17489151.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 7.2
