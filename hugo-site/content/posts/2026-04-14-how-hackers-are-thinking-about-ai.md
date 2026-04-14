@@ -1,6 +1,6 @@
 ---
 title: "How Hackers Are Thinking About AI"
-date: 2026-04-14T15:24:28+00:00
+date: "2026-04-14T16:52:07+00:00"
 draft: false
 slug: "how-hackers-are-thinking-about-ai"
 
