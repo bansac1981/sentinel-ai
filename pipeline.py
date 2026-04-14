@@ -163,6 +163,68 @@ MAX_ARTICLES        = int(os.getenv("MAX_ARTICLES_PER_RUN", "20"))
 FETCH_FULL_CONTENT  = os.getenv("FETCH_FULL_CONTENT", "true").lower() == "true"
 FETCH_TIMEOUT       = int(os.getenv("FETCH_TIMEOUT", "10"))
 
+# Pexels API — free stock photos, Pexels License (free for commercial use, no attribution required)
+# Get a free key at: https://www.pexels.com/api/
+PEXELS_API_KEY      = os.getenv("PEXELS_API_KEY", "")
+
+# ─────────────────────────────────────────────
+# PEXELS KEYWORD → SEARCH QUERY MAP
+# Ordered most-specific → most-general; first match wins.
+# All queries chosen to return professional, relevant landscape photos.
+# ─────────────────────────────────────────────
+PEXELS_KEYWORD_MAP = [
+    # Generative AI / LLM
+    (["prompt injection", "jailbreak", "system prompt"],
+     "artificial intelligence robot security"),
+    (["llm", "large language model", "gpt", "chatgpt", "gemini", "openai", "anthropic"],
+     "artificial intelligence technology neural network"),
+    (["rag", "retrieval augmented", "embedding", "vector db"],
+     "database search artificial intelligence"),
+    (["deepfake", "synthetic media", "voice clone"],
+     "deepfake face identity technology"),
+    (["neural network", "deep learning", "machine learning"],
+     "neural network deep learning data"),
+    # Ransomware / Malware
+    (["ransomware", "ransom demand"],
+     "ransomware encrypted lock cybercrime dark"),
+    (["malware", "trojan", "virus", "worm", "spyware", "infostealer"],
+     "malware computer virus dark hacker"),
+    (["backdoor", "rootkit"],
+     "backdoor shadow hacking server"),
+    (["cryptojacking", "cryptomining"],
+     "cryptocurrency mining server"),
+    # Social / Credential
+    (["phishing", "spear phish", "social engineering"],
+     "phishing email hook scam"),
+    (["credential", "password spray", "brute force", "mfa bypass"],
+     "password authentication security lock"),
+    # Data exfiltration
+    (["data breach", "data leak", "exfiltrat", "stolen data"],
+     "data breach privacy security padlock server"),
+    (["surveillance", "spyware", "stalkerware"],
+     "surveillance camera privacy security"),
+    # Infrastructure
+    (["supply chain", "pypi", "npm", "package", "dependency"],
+     "supply chain software packages"),
+    (["critical infrastructure", "ics", "scada", "ot ", "industrial"],
+     "industrial infrastructure power grid"),
+    (["cloud", "aws", "azure", "gcp", "kubernetes", "container"],
+     "cloud computing server data center"),
+    (["api ", "web application", "owasp"],
+     "web application programming code security"),
+    (["iot", "firmware", "embedded", "router"],
+     "iot device circuit board electronics"),
+    (["ddos", "denial of service", "botnet"],
+     "network server traffic cybersecurity"),
+    # Threat actors
+    (["nation state", "apt ", "state-sponsored", "espionage",
+      "china", "russia", "iran", "north korea"],
+     "cyber espionage government hacking globe"),
+    # Generic vulnerability
+    (["zero day", "zero-day", "cve-", "exploit", "vulnerability", "patch"],
+     "cybersecurity vulnerability lock crack code"),
+]
+
 # Pipeline version — bump when changing the Claude prompt
 PIPELINE_VERSION = "1.0.0"
 
@@ -323,6 +385,63 @@ def fetch_og_image(url: str, log: logging.Logger) -> str:
     except Exception as e:
         log.debug(f"  OG image fetch failed for {url}: {e}")
     return ""
+
+
+def _pexels_query(title: str, categories: list) -> str:
+    """Build the best Pexels search query for this article."""
+    text = title.lower()
+    for keywords, query in PEXELS_KEYWORD_MAP:
+        if any(kw in text for kw in keywords):
+            return query
+    # Fall back to first category
+    if categories:
+        cat = categories[0].replace("-", " ")
+        return f"{cat} cybersecurity technology"
+    return "cybersecurity technology dark computer"
+
+
+def fetch_pexels_image(title: str, categories: list, log: logging.Logger) -> str:
+    """
+    Search Pexels for a relevant landscape photo.
+
+    Pexels License: https://www.pexels.com/license/
+    - Free for commercial and personal use.
+    - No copyright, no attribution required.
+    - Photos are NOT AI-generated; they are real photographs by human creators.
+
+    Returns the photo URL (large ~940px) or empty string on failure.
+    Never raises.
+    """
+    if not PEXELS_API_KEY:
+        return ""
+
+    query = _pexels_query(title, categories)
+    log.debug(f"  Pexels query: '{query}'")
+
+    try:
+        resp = httpx.get(
+            "https://api.pexels.com/v1/search",
+            params={"query": query, "per_page": 15, "orientation": "landscape"},
+            headers={"Authorization": PEXELS_API_KEY},
+            timeout=8.0,
+        )
+        resp.raise_for_status()
+        photos = resp.json().get("photos", [])
+
+        if not photos:
+            log.debug(f"  Pexels: no results for '{query}'")
+            return ""
+
+        # Deterministic pick: same article always gets the same photo,
+        # but different articles with similar topics get variety.
+        idx = abs(hash(title)) % len(photos)
+        url = photos[idx]["src"]["large"]  # ~940×650 landscape
+        log.debug(f"  Pexels photo: {url[:80]}")
+        return url
+
+    except Exception as e:
+        log.debug(f"  Pexels fetch failed: {e}")
+        return ""
 
 
 def fetch_article_content(url: str, log: logging.Logger) -> tuple[str, str]:
@@ -689,14 +808,6 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         # Always mark as seen, regardless of outcome
         seen_urls.add(article["url"])
 
-        # Fetch OG image for thumbnail
-        if not args.dry_run:
-            log.debug(f"  Fetching OG image from {article['url']}")
-            og_image = fetch_og_image(article["url"], log)
-            article["thumbnail"] = og_image
-        else:
-            article["thumbnail"] = ""
-
         # Optionally fetch full article content
         full_content = ""
         if FETCH_FULL_CONTENT and not args.dry_run:
@@ -715,6 +826,20 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         if analysis is None:
             stats["errors"] += 1
             continue
+
+        # Fetch thumbnail: Pexels first (free, copyright-safe), OG image as fallback
+        # Done here so categories from Claude analysis improve keyword matching
+        categories = analysis.get("categories", [])
+        log.debug(f"  Fetching thumbnail (categories: {categories})")
+        thumbnail = fetch_pexels_image(article["title"], categories, log)
+        if thumbnail:
+            log.debug(f"  Pexels image: {thumbnail[:80]}")
+        else:
+            log.debug(f"  Pexels returned nothing, falling back to OG image")
+            thumbnail = fetch_og_image(article["url"], log)
+            if thumbnail:
+                log.debug(f"  OG image: {thumbnail[:80]}")
+        article["thumbnail"] = thumbnail
 
         stats["claude_scored"] += 1
         score = analysis.get("relevance_score", 0.0)
