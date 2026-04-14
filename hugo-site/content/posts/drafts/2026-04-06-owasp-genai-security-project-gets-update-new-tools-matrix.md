@@ -1,7 +1,7 @@
 ---
 title: "OWASP GenAI Security Project Gets Update, New Tools Matrix"
 date: 2026-04-06T13:49:27+00:00
-draft: true
+draft: false
 
 # ── Content metadata ──
 summary: "OWASP has updated its GenAI Security Project to formally recognise 21 generative AI risks, releasing a new tools matrix to help organisations structure their defences. The update notably distinguishes between securing traditional GenAI systems and the emerging attack surface presented by agentic AI architectures. This guidance represents a significant standards-level acknowledgement that agentic AI requires its own dedicated security posture."
