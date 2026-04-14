@@ -8,7 +8,7 @@ summary: "OWASP has updated its GenAI Security Project to formally recognise 21 
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/application-security/owasp-genai-security-project-update-matrix"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/5380655/pexels-photo-5380655.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/5380603/pexels-photo-5380603.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 7.2

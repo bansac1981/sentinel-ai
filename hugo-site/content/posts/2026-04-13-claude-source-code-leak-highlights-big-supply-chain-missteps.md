@@ -8,7 +8,7 @@ summary: "A reported source code leak affecting Claude, Anthropic's large langua
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/application-security/source-code-leaks-highlight-lack-supply-chain-oversight"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/7519246/pexels-photo-7519246.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/12196579/pexels-photo-12196579.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 8.2

@@ -10,7 +10,7 @@ source: "SecurityWeek"
 source_url: "https://www.securityweek.com/openai-impacted-by-north-korea-linked-axios-supply-chain-hack/"
 source_date: 2026-04-13T12:34:06+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/10900608/pexels-photo-10900608.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/9599933/pexels-photo-9599933.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 7.5

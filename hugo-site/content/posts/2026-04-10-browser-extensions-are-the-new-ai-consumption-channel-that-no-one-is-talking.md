@@ -8,7 +8,7 @@ summary: "A LayerX report reveals that AI browser extensions represent a largely
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/browser-extensions-are-new-ai.html"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/5380666/pexels-photo-5380666.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/5380596/pexels-photo-5380596.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 7.5

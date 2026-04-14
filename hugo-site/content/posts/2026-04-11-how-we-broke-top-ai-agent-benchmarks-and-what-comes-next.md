@@ -8,7 +8,7 @@ summary: "Researchers at UC Berkeley demonstrated that every major AI agent benc
 source: "HN AI Security"
 source_url: "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/9783346/pexels-photo-9783346.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/30530420/pexels-photo-30530420.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 9.2

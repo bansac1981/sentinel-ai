@@ -8,7 +8,7 @@ summary: "botctl is an open-source process manager that enables persistent, auto
 source: "HN AI Security"
 source_url: "https://botctl.dev/"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/5473956/pexels-photo-5473956.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 7.2

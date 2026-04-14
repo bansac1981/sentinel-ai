@@ -8,7 +8,7 @@ summary: "CrowdStrike's Charlotte AI AgentWorks introduces an agentic security e
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/how-charlotte-ai-agentworks-fuels-securitys-agentic-ecosystem/"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/9783346/pexels-photo-9783346.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 6.5

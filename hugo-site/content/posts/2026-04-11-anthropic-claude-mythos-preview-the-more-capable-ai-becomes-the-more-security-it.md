@@ -8,7 +8,7 @@ summary: "CrowdStrike, as a founding member of Anthropic's Mythos program, is hi
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/5380666/pexels-photo-5380666.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.pexels.com/photos/5380618/pexels-photo-5380618.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 6.2
