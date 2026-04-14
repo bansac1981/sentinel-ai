@@ -1,39 +1,37 @@
 {{/*
-  article-image.html
-  6 visually DISTINCT patterns — each with its own colour palette and visual language
-  Pattern selected by: mod (len .Title) 6
-  All derived coords pre-computed as variables (no inline arithmetic in SVG attrs)
+  article-image.html  —  ANIMATED SVG thumbnails
+  Three animated patterns cycled by title-length mod 3:
+    0 = GRID SCAN      — red scan-line sweeps a grid
+    1 = NEURAL MESH    — pulsing node graph with data-flow edges
+    2 = HEX CASCADE    — columns of falling hex characters (data-rain)
 */}}
 
 {{ $thumb := .Params.thumbnail }}
 {{ $title := .Title }}
 {{ $cat   := "AI Security" }}
-{{ if .Params.categories }}{{ $cat = index .Params.categories 0 }}{{ end }}
+{{ if .Params.categories }}{{ $cat = index .Params.categories 0 | title }}{{ end }}
+{{ $src   := "" }}
+{{ if .Params.source }}{{ $src = .Params.source }}{{ end }}
 
-{{/* Threat-level badge colour */}}
+{{/* Threat-level accent colour */}}
 {{ $tc  := "#ff3b3b" }}
-{{ $tcd := "rgba(255,59,59,0.25)" }}
-{{ if eq .Params.threat_level "HIGH" }}
-  {{ $tc = "#ff8c00" }}{{ $tcd = "rgba(255,140,0,0.25)" }}
-{{ else if eq .Params.threat_level "MEDIUM" }}
-  {{ $tc = "#ffd700" }}{{ $tcd = "rgba(255,215,0,0.2)" }}
-{{ else if eq .Params.threat_level "LOW" }}
-  {{ $tc = "#22c55e" }}{{ $tcd = "rgba(34,197,94,0.2)" }}
-{{ end }}
+{{ $tcd := "rgba(255,59,59,0.15)" }}
+{{ if eq .Params.threat_level "HIGH"   }}{{ $tc = "#ff8c00" }}{{ $tcd = "rgba(255,140,0,0.15)"   }}{{ end }}
+{{ if eq .Params.threat_level "MEDIUM" }}{{ $tc = "#ffd700" }}{{ $tcd = "rgba(255,215,0,0.12)"   }}{{ end }}
+{{ if eq .Params.threat_level "LOW"    }}{{ $tc = "#22c55e" }}{{ $tcd = "rgba(34,197,94,0.12)"    }}{{ end }}
 
-{{/* Pattern seed 0–5, offset 0–79 */}}
-{{ $pat := mod (len $title) 6 }}
-{{ $off := mod (len (.Params.summary | default "x")) 80 }}
+{{/* Pattern: 0 / 1 / 2 */}}
+{{ $pat := mod (len $title) 3 }}
 
-{{/* Title word-wrap into two lines */}}
+{{/* Title word-wrap into two display lines */}}
 {{ $words := split $title " " }}
 {{ $l1 := "" }}{{ $l2 := "" }}{{ $ldone := false }}
 {{ range $words }}
   {{ if not $ldone }}
     {{ $try := printf "%s %s" $l1 . | strings.TrimLeft " " }}
-    {{ if gt (len $try) 42 }}
+    {{ if gt (len $try) 46 }}
       {{ $l2 = printf "%s %s" $l2 . | strings.TrimLeft " " }}
-      {{ if gt (len $l2) 42 }}{{ $ldone = true }}{{ end }}
+      {{ if gt (len $l2) 46 }}{{ $l2 = printf "%s…" ($l2 | truncate 44) }}{{ $ldone = true }}{{ end }}
     {{ else }}
       {{ $l1 = $try }}
     {{ end }}
@@ -43,413 +41,233 @@
 {{ if $thumb }}
 <img src="{{ $thumb }}" alt="{{ $title }}" loading="lazy" class="article-thumb-img">
 {{ else }}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" role="img" aria-label="{{ $cat }} — {{ $title }}">
 
-  {{/* ══════════════════════════════════════════════════
-       PATTERN 0 — TERMINAL  (green phosphor on near-black)
-       ══════════════════════════════════════════════════ */}}
-  {{ if eq $pat 0 }}
-  {{ $lx  := add 30 $off }}
-  {{ $lx2 := add $lx 80  }}
-  {{ $lx3 := add $lx 160 }}
-  {{ $lx4 := add $lx 240 }}
-  {{ $lx5 := add $lx 320 }}
-  {{ $lx6 := add $lx 400 }}
-  {{ $lx7 := add $lx 480 }}
-  {{ $ly1 := add 40 $off }}
-  {{ $ly2 := add $ly1 22  }}
-  {{ $ly3 := add $ly1 44  }}
-  {{ $ly4 := add $ly1 66  }}
-  {{ $ly5 := add $ly1 88  }}
-  {{ $ly6 := add $ly1 110 }}
-  {{ $ly7 := add $ly1 132 }}
-  {{ $ly8 := add $ly1 154 }}
-  <rect width="800" height="420" fill="#0b110c"/>
-  <rect x="0" y="0" width="800" height="420" fill="url(#scan0)"/>
-  <defs>
-    <linearGradient id="scan0" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#00ff41" stop-opacity="0.03"/>
-      <stop offset="50%"  stop-color="#00ff41" stop-opacity="0.01"/>
-      <stop offset="100%" stop-color="#00ff41" stop-opacity="0.04"/>
-    </linearGradient>
-  </defs>
-  {{/* scan lines */}}
-  {{ range seq 0 41 }}
-  {{ $sy := mul . 10 }}
-  <line x1="0" y1="{{ $sy }}" x2="800" y2="{{ $sy }}" stroke="#00ff41" stroke-width="0.4" stroke-opacity="0.04"/>
+{{/* ═══════════════════════════════════════════════════════════
+     PATTERN 0  —  GRID SCAN
+     Dark grid with an animated red scan-line sweeping top→bottom
+     ═══════════════════════════════════════════════════════════ */}}
+{{ if eq $pat 0 }}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="{{ $cat }} — {{ $title }}">
+  <style>
+    .sg-line  { animation: sg-sweep 3.6s ease-in-out infinite; }
+    .sg-line2 { animation: sg-sweep 3.6s ease-in-out infinite; animation-delay:-1.8s; opacity:.35; }
+    @keyframes sg-sweep { 0%,100%{transform:translateY(0)} 50%{transform:translateY(390px)} }
+    .sg-cur   { animation: sg-blink 1.1s step-end infinite; }
+    @keyframes sg-blink  { 50%{opacity:0} }
+    .sg-node  { animation: sg-node-p 2.5s ease-in-out infinite; }
+    @keyframes sg-node-p { 0%,100%{opacity:.4} 50%{opacity:1} }
+    .sg-node2 { animation: sg-node-p 2.5s ease-in-out infinite; animation-delay:-1.25s; }
+  </style>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="#0a0a0f"/>
+
+  <!-- Threat-colour left accent bar -->
+  <rect x="0" y="0" width="4" height="420" fill="{{ $tc }}" opacity=".9"/>
+
+  <!-- Grid verticals -->
+  {{ range $i := seq 1 7 }}
+  <line x1="{{ mul $i 100 }}" y1="0" x2="{{ mul $i 100 }}" y2="420" stroke="{{ $tc }}" stroke-width=".35" opacity=".18"/>
   {{ end }}
-  {{/* prompt line */}}
-  <text x="{{ $lx }}" y="{{ $ly1 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.9">$ ./scan --target ai-model --mode deep</text>
-  <text x="{{ $lx }}" y="{{ $ly2 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.55">[*] Initialising threat classifier v2.4.1</text>
-  <text x="{{ $lx }}" y="{{ $ly3 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.55">[*] Loading MITRE ATLAS ruleset ... OK</text>
-  <text x="{{ $lx }}" y="{{ $ly4 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.8">[!] Anomaly detected — confidence 0.{{ add 71 (mod $off 27) }}</text>
-  <text x="{{ $lx }}" y="{{ $ly5 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.4">[*] Cross-referencing OWASP LLM Top 10 ...</text>
-  <text x="{{ $lx }}" y="{{ $ly6 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.4">[*] Mapping attack vectors ...</text>
-  <text x="{{ $lx }}" y="{{ $ly7 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.7">[+] {{ $cat | upper }} — category match CONFIRMED</text>
-  <text x="{{ $lx }}" y="{{ $ly8 }}" font-family="monospace" font-size="11" fill="#00ff41" fill-opacity="0.9">█<animate attributeName="fill-opacity" values="0.9;0.1;0.9" dur="1.2s" repeatCount="indefinite"/></text>
-  {{/* bottom bar */}}
-  <rect x="0" y="393" width="800" height="27" fill="#00ff41" fill-opacity="0.07"/>
-  <text x="12" y="409" font-family="monospace" font-size="10" fill="#00ff41" fill-opacity="0.5">GRID THE GREY // THREAT INTEL // SESSION {{ add 1000 $off }}</text>
-  <text x="760" y="409" font-family="monospace" font-size="10" fill="#00ff41" fill-opacity="0.5" text-anchor="end">TTY</text>
+  <!-- Grid horizontals -->
+  {{ range $i := seq 1 5 }}
+  <line x1="0" y1="{{ mul $i 70 }}" x2="800" y2="{{ mul $i 70 }}" stroke="{{ $tc }}" stroke-width=".35" opacity=".18"/>
   {{ end }}
 
-  {{/* ══════════════════════════════════════════════════
-       PATTERN 1 — HEATMAP  (amber/orange intensity grid)
-       ══════════════════════════════════════════════════ */}}
-  {{ if eq $pat 1 }}
-  <rect width="800" height="420" fill="#120a00"/>
-  <defs>
-    <radialGradient id="hg1" cx="0.4" cy="0.5" r="0.6">
-      <stop offset="0%"   stop-color="#ff8c00" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#ff8c00" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="800" height="420" fill="url(#hg1)"/>
-  {{/* heat cells */}}
-  {{ $cols := 20 }}
-  {{ $rows := 10 }}
-  {{ range seq 0 19 }}
-  {{ $ci := . }}
-  {{ $cx := mul $ci 40 }}
-  {{ range seq 0 9 }}
-  {{ $ri := . }}
-  {{ $cy := mul $ri 42 }}
-  {{ $heat := mod (add (mul $ci 3) (add (mul $ri 7) $off)) 10 }}
-  {{ if eq $heat 0 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff8c00" fill-opacity="0.55" rx="1"/>
-  {{ else if eq $heat 1 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff6600" fill-opacity="0.35" rx="1"/>
-  {{ else if eq $heat 2 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff8c00" fill-opacity="0.2" rx="1"/>
-  {{ else if eq $heat 3 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ffaa00" fill-opacity="0.12" rx="1"/>
-  {{ else if eq $heat 4 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff4500" fill-opacity="0.45" rx="1"/>
-  {{ else if eq $heat 5 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff8c00" fill-opacity="0.08" rx="1"/>
-  {{ else if eq $heat 6 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ffcc00" fill-opacity="0.28" rx="1"/>
-  {{ else if eq $heat 7 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff4500" fill-opacity="0.6"  rx="1"/>
-  {{ else if eq $heat 8 }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff8c00" fill-opacity="0.15" rx="1"/>
-  {{ else }}<rect x="{{ $cx }}" y="{{ $cy }}" width="38" height="40" fill="#ff6600" fill-opacity="0.04" rx="1"/>
-  {{ end }}
-  {{ end }}
-  {{ end }}
-  {{/* grid lines */}}
-  {{ range seq 0 20 }}
-  {{ $gx := mul . 40 }}
-  <line x1="{{ $gx }}" y1="0" x2="{{ $gx }}" y2="420" stroke="#ff8c00" stroke-width="0.5" stroke-opacity="0.12"/>
-  {{ end }}
-  {{ range seq 0 10 }}
-  {{ $gy := mul . 42 }}
-  <line x1="0" y1="{{ $gy }}" x2="800" y2="{{ $gy }}" stroke="#ff8c00" stroke-width="0.5" stroke-opacity="0.12"/>
-  {{ end }}
-  {{/* colour scale bar */}}
-  <defs>
-    <linearGradient id="scale1" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#ff4500"/>
-      <stop offset="50%"  stop-color="#ff8c00"/>
-      <stop offset="100%" stop-color="#ffcc00"/>
-    </linearGradient>
-  </defs>
-  <rect x="600" y="380" width="180" height="10" rx="2" fill="url(#scale1)" fill-opacity="0.7"/>
-  <text x="600" y="376" font-family="monospace" font-size="9" fill="#ff8c00" fill-opacity="0.6">LOW</text>
-  <text x="769" y="376" font-family="monospace" font-size="9" fill="#ff8c00" fill-opacity="0.6" text-anchor="end">HIGH</text>
-  {{ end }}
+  <!-- Animated scan lines -->
+  <g class="sg-line">
+    <rect x="0" y="-16" width="800" height="18" fill="{{ $tc }}" opacity=".07"/>
+    <line x1="0" y1="2" x2="800" y2="2" stroke="{{ $tc }}" stroke-width="2" opacity=".9"/>
+  </g>
+  <g class="sg-line2">
+    <line x1="0" y1="2" x2="800" y2="2" stroke="{{ $tc }}" stroke-width="1.2" opacity=".55"/>
+  </g>
 
-  {{/* ══════════════════════════════════════════════════
-       PATTERN 2 — BLUEPRINT  (cobalt on dark navy, technical grid)
-       ══════════════════════════════════════════════════ */}}
-  {{ if eq $pat 2 }}
-  {{ $bx := add 40 $off }}
-  {{ $bx2 := add $bx 200 }}
-  {{ $bx3 := add $bx 400 }}
-  {{ $bx4 := add $bx 580 }}
-  <rect width="800" height="420" fill="#020d1c"/>
-  <defs>
-    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#0a1628" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#020818" stop-opacity="1"/>
-    </linearGradient>
-  </defs>
-  <rect width="800" height="420" fill="url(#bg2)"/>
-  {{/* major grid */}}
-  {{ range seq 0 8 }}
-  {{ $gx := mul . 100 }}
-  <line x1="{{ $gx }}" y1="0" x2="{{ $gx }}" y2="420" stroke="#2563eb" stroke-width="0.6" stroke-opacity="0.35"/>
-  {{ end }}
-  {{ range seq 0 5 }}
-  {{ $gy := mul . 84 }}
-  <line x1="0" y1="{{ $gy }}" x2="800" y2="{{ $gy }}" stroke="#2563eb" stroke-width="0.6" stroke-opacity="0.35"/>
-  {{ end }}
-  {{/* minor grid */}}
-  {{ range seq 0 39 }}
-  {{ $gx := mul . 20 }}
-  <line x1="{{ $gx }}" y1="0" x2="{{ $gx }}" y2="420" stroke="#2563eb" stroke-width="0.3" stroke-opacity="0.12"/>
-  {{ end }}
-  {{ range seq 0 20 }}
-  {{ $gy := mul . 21 }}
-  <line x1="0" y1="{{ $gy }}" x2="800" y2="{{ $gy }}" stroke="#2563eb" stroke-width="0.3" stroke-opacity="0.12"/>
-  {{ end }}
-  {{/* component boxes */}}
-  <rect x="{{ $bx }}" y="60" width="120" height="80" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.7"/>
-  <text x="{{ add $bx 60 }}" y="104" font-family="monospace" font-size="10" fill="#60a5fa" fill-opacity="0.8" text-anchor="middle">LLM CORE</text>
-  <line x1="{{ add $bx 120 }}" y1="100" x2="{{ $bx2 }}" y2="100" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.5"/>
-  <rect x="{{ $bx2 }}" y="60" width="120" height="80" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.7"/>
-  <text x="{{ add $bx2 60 }}" y="104" font-family="monospace" font-size="10" fill="#60a5fa" fill-opacity="0.8" text-anchor="middle">GUARDRAILS</text>
-  <line x1="{{ add $bx2 120 }}" y1="100" x2="{{ $bx3 }}" y2="100" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.5"/>
-  <rect x="{{ $bx3 }}" y="60" width="120" height="80" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.7"/>
-  <text x="{{ add $bx3 60 }}" y="104" font-family="monospace" font-size="10" fill="#60a5fa" fill-opacity="0.8" text-anchor="middle">OUTPUT</text>
-  {{/* dimension arrows */}}
-  {{ $arry  := 200 }}
-  {{ $arry1 := sub $arry 4 }}
-  {{ $arry2 := add $arry 4 }}
-  {{ $bx3e  := add $bx3 120 }}
-  {{ $arrx1 := add $bx  8 }}
-  {{ $arrx2 := add $bx3 112 }}
-  <line x1="{{ $bx }}" y1="{{ $arry }}" x2="{{ $bx3e }}" y2="{{ $arry }}" stroke="#1d4ed8" stroke-width="0.8" stroke-opacity="0.5"/>
-  <polygon points="{{ $bx }},{{ $arry1 }} {{ $bx }},{{ $arry2 }} {{ $arrx1 }},{{ $arry }}" fill="#1d4ed8" fill-opacity="0.5"/>
-  <polygon points="{{ $bx3e }},{{ $arry1 }} {{ $bx3e }},{{ $arry2 }} {{ $arrx2 }},{{ $arry }}" fill="#1d4ed8" fill-opacity="0.5"/>
-  {{/* cross-hair at center */}}
-  {{ $chx := add $bx 240 }}
-  {{ $chy := 310 }}
-  <circle cx="{{ $chx }}" cy="{{ $chy }}" r="30" fill="none" stroke="#3b82f6" stroke-width="0.8" stroke-opacity="0.4"/>
-  <circle cx="{{ $chx }}" cy="{{ $chy }}" r="12" fill="none" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.6"/>
-  <circle cx="{{ $chx }}" cy="{{ $chy }}" r="3"  fill="#3b82f6" fill-opacity="0.8"/>
-  {{ $chxl := sub $chx 38 }}{{ $chxr := add $chx 38 }}{{ $chyu := sub $chy 38 }}{{ $chyd := add $chy 38 }}
-  <line x1="{{ $chxl }}" y1="{{ $chy }}" x2="{{ $chxr }}" y2="{{ $chy }}" stroke="#3b82f6" stroke-width="0.7" stroke-opacity="0.5"/>
-  <line x1="{{ $chx }}" y1="{{ $chyu }}" x2="{{ $chx }}" y2="{{ $chyd }}" stroke="#3b82f6" stroke-width="0.7" stroke-opacity="0.5"/>
-  {{/* title block */}}
-  <rect x="{{ $bx4 }}" y="280" width="160" height="100" fill="#0a1628" stroke="#3b82f6" stroke-width="0.8" stroke-opacity="0.5"/>
-  <line x1="{{ $bx4 }}" y1="296" x2="{{ add $bx4 160 }}" y2="296" stroke="#3b82f6" stroke-width="0.8" stroke-opacity="0.5"/>
-  <text x="{{ add $bx4 80 }}" y="291" font-family="monospace" font-size="9" fill="#60a5fa" fill-opacity="0.6" text-anchor="middle">CLASSIFICATION</text>
-  <text x="{{ add $bx4 80 }}" y="316" font-family="monospace" font-size="10" fill="#93c5fd" fill-opacity="0.9" text-anchor="middle">{{ upper $cat }}</text>
-  <text x="{{ add $bx4 80 }}" y="334" font-family="monospace" font-size="8"  fill="#60a5fa" fill-opacity="0.5" text-anchor="middle">GRID THE GREY</text>
-  {{ end }}
+  <!-- Corner bracket markers -->
+  <polyline points="20,20 20,8 32,8"   fill="none" stroke="{{ $tc }}" stroke-width="1.6" opacity=".75"/>
+  <polyline points="780,20 780,8 768,8" fill="none" stroke="{{ $tc }}" stroke-width="1.6" opacity=".75"/>
+  <polyline points="20,400 20,412 32,412"   fill="none" stroke="{{ $tc }}" stroke-width="1.6" opacity=".75"/>
+  <polyline points="780,400 780,412 768,412" fill="none" stroke="{{ $tc }}" stroke-width="1.6" opacity=".75"/>
 
-  {{/* ══════════════════════════════════════════════════
-       PATTERN 3 — INTERFERENCE  (magenta/purple wave rings)
-       ══════════════════════════════════════════════════ */}}
-  {{ if eq $pat 3 }}
-  {{ $cx1 := add 200 $off }}
-  {{ $cy1 := 210 }}
-  {{ $cx2 := add $cx1 250 }}
-  {{ $cy2 := 170 }}
-  {{ $cx3 := add $cx1 120 }}
-  {{ $cy3 := 280 }}
-  <rect width="800" height="420" fill="#0d0016"/>
-  <defs>
-    <radialGradient id="rg3a" cx="0.35" cy="0.5" r="0.55">
-      <stop offset="0%"   stop-color="#c026d3" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#c026d3" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rg3b" cx="0.65" cy="0.4" r="0.45">
-      <stop offset="0%"   stop-color="#7c3aed" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="800" height="420" fill="url(#rg3a)"/>
-  <rect width="800" height="420" fill="url(#rg3b)"/>
-  {{/* source 1 rings */}}
-  {{ range seq 1 7 }}
-  {{ $r := mul . 55 }}
-  <circle cx="{{ $cx1 }}" cy="{{ $cy1 }}" r="{{ $r }}"
-          fill="none" stroke="#c026d3" stroke-width="1"
-          stroke-opacity="{{ if gt . 5 }}0.06{{ else if gt . 3 }}0.18{{ else if gt . 1 }}0.35{{ else }}0.55{{ end }}"/>
-  {{ end }}
-  {{/* source 2 rings */}}
-  {{ range seq 1 6 }}
-  {{ $r := mul . 48 }}
-  <circle cx="{{ $cx2 }}" cy="{{ $cy2 }}" r="{{ $r }}"
-          fill="none" stroke="#7c3aed" stroke-width="1"
-          stroke-opacity="{{ if gt . 4 }}0.06{{ else if gt . 2 }}0.2{{ else }}0.4{{ end }}"/>
-  {{ end }}
-  {{/* source 3 (faint) */}}
-  {{ range seq 1 4 }}
-  {{ $r := mul . 38 }}
-  <circle cx="{{ $cx3 }}" cy="{{ $cy3 }}" r="{{ $r }}"
-          fill="none" stroke="#e879f9" stroke-width="0.7" stroke-opacity="0.12"/>
-  {{ end }}
-  {{/* centre dots */}}
-  <circle cx="{{ $cx1 }}" cy="{{ $cy1 }}" r="6" fill="#c026d3" fill-opacity="0.9"/>
-  <circle cx="{{ $cx1 }}" cy="{{ $cy1 }}" r="14" fill="none" stroke="#c026d3" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="{{ $cx2 }}" cy="{{ $cy2 }}" r="5" fill="#7c3aed" fill-opacity="0.9"/>
-  <circle cx="{{ $cx2 }}" cy="{{ $cy2 }}" r="12" fill="none" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.35"/>
-  <circle cx="{{ $cx3 }}" cy="{{ $cy3 }}" r="3" fill="#e879f9" fill-opacity="0.7"/>
-  {{/* connecting arc suggestion */}}
-  {{ $midx := add $cx1 125 }}
-  {{ $midy := 190 }}
-  <line x1="{{ $cx1 }}" y1="{{ $cy1 }}" x2="{{ $cx2 }}" y2="{{ $cy2 }}"
-        stroke="#c026d3" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 6"/>
-  {{ end }}
+  <!-- Blinking cursor -->
+  <rect x="28" y="52" width="8" height="13" fill="{{ $tc }}" class="sg-cur" opacity=".85"/>
 
-  {{/* ══════════════════════════════════════════════════
-       PATTERN 4 — BREACH  (white lightning fractures on black)
-       ══════════════════════════════════════════════════ */}}
-  {{ if eq $pat 4 }}
-  {{ $fx  := add 120 $off }}
-  {{ $fx2 := add $fx 80  }}
-  {{ $fx3 := add $fx 160 }}
-  {{ $fx4 := add $fx 240 }}
-  {{ $fx5 := add $fx 380 }}
-  {{ $fx6 := add $fx 500 }}
-  {{ $fy1 := add 30 (mod $off 40) }}
-  {{ $fy2 := add $fy1 80  }}
-  {{ $fy3 := add $fy1 140 }}
-  {{ $fy4 := add $fy1 220 }}
-  {{ $fy5 := add $fy1 310 }}
-  <rect width="800" height="420" fill="#111111"/>
-  <defs>
-    <radialGradient id="bg4" cx="0.5" cy="0.5" r="0.7">
-      <stop offset="0%"   stop-color="#1a1a1a" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#030303" stop-opacity="1"/>
-    </radialGradient>
-  </defs>
-  <rect width="800" height="420" fill="url(#bg4)"/>
-  {{/* pre-compute fracture vertices */}}
-  {{ $fv1x := $fx2 }}          {{ $fv1y := $fy1 }}
-  {{ $fv2x := sub $fx2 40 }}   {{ $fv2y := $fy2 }}
-  {{ $fv3x := add $fx2 60 }}   {{ $fv3y := $fy3 }}
-  {{ $fv4x := add $fx2 20 }}   {{ $fv4y := $fy4 }}
-  {{ $fv5x := add $fx2 80 }}
-  {{ $f5x50 := sub $fx5 50 }}
-  {{ $f6x30 := sub $fx6 30 }}
-  {{/* main fracture — bright */}}
-  <polyline points="{{ $fx }},0 {{ $fv1x }},{{ $fv1y }} {{ $fv2x }},{{ $fv2y }} {{ $fv3x }},{{ $fv3y }} {{ $fv4x }},{{ $fv4y }} {{ $fv5x }},420"
-            fill="none" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95" stroke-linejoin="round"/>
-  {{/* glow layer */}}
-  <polyline points="{{ $fx }},0 {{ $fv1x }},{{ $fv1y }} {{ $fv2x }},{{ $fv2y }} {{ $fv3x }},{{ $fv3y }} {{ $fv4x }},{{ $fv4y }} {{ $fv5x }},420"
-            fill="none" stroke="#ffffff" stroke-width="8" stroke-opacity="0.08" stroke-linejoin="round"/>
-  {{/* branch fractures */}}
-  {{ $bfx1  := $fv2x }}
-  {{ $bf1bx := sub $bfx1 70 }}{{ $bf1by := add $fv2y 60 }}
-  {{ $bf1cx := sub $bfx1 40 }}{{ $bf1cy := add $fv2y 130 }}
-  <polyline points="{{ $bfx1 }},{{ $fv2y }} {{ $bf1bx }},{{ $bf1by }} {{ $bf1cx }},{{ $bf1cy }}"
-            fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.6" stroke-linejoin="round"/>
-  {{ $bfx2  := $fv3x }}
-  {{ $bf2bx := add $bfx2 90 }}{{ $bf2by := add $fv3y 50 }}
-  {{ $bf2cx := add $bfx2 60 }}{{ $bf2cy := add $fv3y 120 }}
-  <polyline points="{{ $bfx2 }},{{ $fv3y }} {{ $bf2bx }},{{ $bf2by }} {{ $bf2cx }},{{ $bf2cy }}"
-            fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round"/>
-  {{/* second fracture — dimmer, offset */}}
-  <polyline points="{{ $fx5 }},0 {{ $f5x50 }},{{ $fy1 }} {{ $fx6 }},{{ $fy3 }} {{ $f6x30 }},420"
-            fill="none" stroke="#e2e2e2" stroke-width="1.5" stroke-opacity="0.35" stroke-linejoin="round"/>
-  {{/* impact dots at vertices */}}
-  <circle cx="{{ $fv1x }}" cy="{{ $fv1y }}" r="4" fill="#ffffff" fill-opacity="0.95"/>
-  <circle cx="{{ $fv2x }}" cy="{{ $fv2y }}" r="3" fill="#ffffff" fill-opacity="0.8"/>
-  <circle cx="{{ $fv3x }}" cy="{{ $fv3y }}" r="4" fill="#ffffff" fill-opacity="0.95"/>
-  <circle cx="{{ $fv4x }}" cy="{{ $fv4y }}" r="3" fill="#ffffff" fill-opacity="0.7"/>
-  {{/* shatter micro-lines */}}
-  {{ $msx := $fv3x }}
-  {{ $msy := $fv3y }}
-  {{ $msx1 := add $msx 30 }}{{ $msy1 := sub $msy 40 }}
-  {{ $msx2 := add $msx 55 }}{{ $msy2 := add $msy 20 }}
-  {{ $msx3 := sub $msx 50 }}{{ $msy3 := sub $msy 30 }}
-  <line x1="{{ $msx }}" y1="{{ $msy }}" x2="{{ $msx1 }}" y2="{{ $msy1 }}" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.4"/>
-  <line x1="{{ $msx }}" y1="{{ $msy }}" x2="{{ $msx2 }}" y2="{{ $msy2 }}" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.35"/>
-  <line x1="{{ $msx }}" y1="{{ $msy }}" x2="{{ $msx3 }}" y2="{{ $msy3 }}" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.3"/>
-  {{ end }}
+  <!-- Scattered node dots (static accent) -->
+  <circle cx="200" cy="140" r="3" fill="{{ $tc }}" class="sg-node"  opacity=".6"/>
+  <circle cx="350" cy="210" r="2" fill="{{ $tc }}" class="sg-node2" opacity=".5"/>
+  <circle cx="540" cy="105" r="3" fill="{{ $tc }}" class="sg-node"  opacity=".55"/>
+  <circle cx="650" cy="280" r="2" fill="{{ $tc }}" class="sg-node2" opacity=".45"/>
+  <circle cx="720" cy="175" r="3" fill="{{ $tc }}" class="sg-node"  opacity=".5"/>
+  <circle cx="430" cy="320" r="2" fill="{{ $tc }}" class="sg-node2" opacity=".4"/>
 
-  {{/* ══════════════════════════════════════════════════
-       PATTERN 5 — TOPOLOGY  (teal network on dark teal bg)
-       ══════════════════════════════════════════════════ */}}
-  {{ if eq $pat 5 }}
-  {{ $ox := add 30 $off }}
-  {{ $n0x := add $ox 100 }}{{ $n0y := 70  }}
-  {{ $n1x := add $ox 260 }}{{ $n1y := 120 }}
-  {{ $n2x := add $ox 420 }}{{ $n2y := 65  }}
-  {{ $n3x := add $ox 570 }}{{ $n3y := 150 }}
-  {{ $n4x := add $ox 680 }}{{ $n4y := 80  }}
-  {{ $n5x := add $ox 160 }}{{ $n5y := 240 }}
-  {{ $n6x := add $ox 340 }}{{ $n6y := 270 }}
-  {{ $n7x := add $ox 500 }}{{ $n7y := 300 }}
-  {{ $n8x := add $ox 80  }}{{ $n8y := 360 }}
-  {{ $n9x := add $ox 280 }}{{ $n9y := 370 }}
-  {{ $n10x := add $ox 630 }}{{ $n10y := 330 }}
-  <rect width="800" height="420" fill="#001412"/>
-  <defs>
-    <radialGradient id="bg5" cx="0.45" cy="0.5" r="0.65">
-      <stop offset="0%"   stop-color="#0d3331" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#001a18" stop-opacity="1"/>
-    </radialGradient>
-  </defs>
-  <rect width="800" height="420" fill="url(#bg5)"/>
-  {{/* edges */}}
-  <line x1="{{ $n0x }}" y1="{{ $n0y }}" x2="{{ $n1x }}" y2="{{ $n1y }}" stroke="#2dd4bf" stroke-width="1"   stroke-opacity="0.35"/>
-  <line x1="{{ $n1x }}" y1="{{ $n1y }}" x2="{{ $n2x }}" y2="{{ $n2y }}" stroke="#2dd4bf" stroke-width="1"   stroke-opacity="0.35"/>
-  <line x1="{{ $n2x }}" y1="{{ $n2y }}" x2="{{ $n3x }}" y2="{{ $n3y }}" stroke="#2dd4bf" stroke-width="0.8" stroke-opacity="0.3"/>
-  <line x1="{{ $n3x }}" y1="{{ $n3y }}" x2="{{ $n4x }}" y2="{{ $n4y }}" stroke="#2dd4bf" stroke-width="0.8" stroke-opacity="0.3"/>
-  <line x1="{{ $n1x }}" y1="{{ $n1y }}" x2="{{ $n5x }}" y2="{{ $n5y }}" stroke="#2dd4bf" stroke-width="1.2" stroke-opacity="0.45"/>
-  <line x1="{{ $n2x }}" y1="{{ $n2y }}" x2="{{ $n6x }}" y2="{{ $n6y }}" stroke="#2dd4bf" stroke-width="1"   stroke-opacity="0.35"/>
-  <line x1="{{ $n3x }}" y1="{{ $n3y }}" x2="{{ $n7x }}" y2="{{ $n7y }}" stroke="#2dd4bf" stroke-width="1"   stroke-opacity="0.35"/>
-  <line x1="{{ $n5x }}" y1="{{ $n5y }}" x2="{{ $n6x }}" y2="{{ $n6y }}" stroke="#2dd4bf" stroke-width="1.2" stroke-opacity="0.5"/>
-  <line x1="{{ $n6x }}" y1="{{ $n6y }}" x2="{{ $n7x }}" y2="{{ $n7y }}" stroke="#2dd4bf" stroke-width="1"   stroke-opacity="0.4"/>
-  <line x1="{{ $n5x }}" y1="{{ $n5y }}" x2="{{ $n8x }}" y2="{{ $n8y }}" stroke="#2dd4bf" stroke-width="0.8" stroke-opacity="0.3"/>
-  <line x1="{{ $n5x }}" y1="{{ $n5y }}" x2="{{ $n9x }}" y2="{{ $n9y }}" stroke="#2dd4bf" stroke-width="0.8" stroke-opacity="0.3"/>
-  <line x1="{{ $n6x }}" y1="{{ $n6y }}" x2="{{ $n9x }}" y2="{{ $n9y }}" stroke="#2dd4bf" stroke-width="0.8" stroke-opacity="0.3"/>
-  <line x1="{{ $n7x }}" y1="{{ $n7y }}" x2="{{ $n10x }}" y2="{{ $n10y }}" stroke="#2dd4bf" stroke-width="1" stroke-opacity="0.35"/>
-  <line x1="{{ $n4x }}" y1="{{ $n4y }}" x2="{{ $n10x }}" y2="{{ $n10y }}" stroke="#2dd4bf" stroke-width="0.8" stroke-opacity="0.25"/>
-  {{/* halo + node */}}
-  <circle cx="{{ $n0x }}" cy="{{ $n0y }}" r="18" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n0x }}" cy="{{ $n0y }}" r="8"  fill="#2dd4bf" fill-opacity="0.9"/>
-  <circle cx="{{ $n1x }}" cy="{{ $n1y }}" r="14" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n1x }}" cy="{{ $n1y }}" r="6"  fill="#2dd4bf" fill-opacity="0.7"/>
-  <circle cx="{{ $n2x }}" cy="{{ $n2y }}" r="18" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n2x }}" cy="{{ $n2y }}" r="8"  fill="#2dd4bf" fill-opacity="0.9"/>
-  <circle cx="{{ $n3x }}" cy="{{ $n3y }}" r="14" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n3x }}" cy="{{ $n3y }}" r="6"  fill="#2dd4bf" fill-opacity="0.7"/>
-  <circle cx="{{ $n4x }}" cy="{{ $n4y }}" r="12" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n4x }}" cy="{{ $n4y }}" r="5"  fill="#2dd4bf" fill-opacity="0.55"/>
-  <circle cx="{{ $n5x }}" cy="{{ $n5y }}" r="20" fill="#2dd4bf" fill-opacity="0.07"/>
-  <circle cx="{{ $n5x }}" cy="{{ $n5y }}" r="9"  fill="#2dd4bf" fill-opacity="0.95"/>
-  <circle cx="{{ $n6x }}" cy="{{ $n6y }}" r="18" fill="#2dd4bf" fill-opacity="0.07"/>
-  <circle cx="{{ $n6x }}" cy="{{ $n6y }}" r="8"  fill="#2dd4bf" fill-opacity="0.9"/>
-  <circle cx="{{ $n7x }}" cy="{{ $n7y }}" r="14" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n7x }}" cy="{{ $n7y }}" r="6"  fill="#2dd4bf" fill-opacity="0.7"/>
-  <circle cx="{{ $n8x }}" cy="{{ $n8y }}" r="12" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n8x }}" cy="{{ $n8y }}" r="5"  fill="#2dd4bf" fill-opacity="0.5"/>
-  <circle cx="{{ $n9x }}" cy="{{ $n9y }}" r="14" fill="#2dd4bf" fill-opacity="0.05"/>
-  <circle cx="{{ $n9x }}" cy="{{ $n9y }}" r="6"  fill="#2dd4bf" fill-opacity="0.65"/>
-  <circle cx="{{ $n10x }}" cy="{{ $n10y }}" r="16" fill="#2dd4bf" fill-opacity="0.06"/>
-  <circle cx="{{ $n10x }}" cy="{{ $n10y }}" r="7"  fill="#2dd4bf" fill-opacity="0.8"/>
-  {{ end }}
+  <!-- Category label -->
+  <text x="28" y="36" font-family="monospace" font-size="10" fill="{{ $tc }}" letter-spacing="2.5" opacity=".9" text-transform="uppercase">{{ upper $cat }}</text>
 
-  {{/* ══════════════════════════════════════════════════
-       SHARED TEXT OVERLAY (all patterns)
-       ══════════════════════════════════════════════════ */}}
-  {{/* semi-transparent bottom panel for legibility */}}
-  <rect x="0" y="145" width="800" height="200" fill="#000000" fill-opacity="0.45"/>
-  <rect x="0" y="145" width="800" height="1"   fill="#ffffff" fill-opacity="0.04"/>
+  <!-- Source (top-right) -->
+  {{ if $src }}<text x="772" y="28" font-family="monospace" font-size="9" fill="#555" text-anchor="end">{{ $src }}</text>{{ end }}
 
-  {{/* category badge */}}
-  {{ $cbadgew := mul (len $cat) 9 | add 22 }}
-  <rect x="20" y="156" width="{{ $cbadgew }}" height="22" rx="3" fill="{{ $tcd }}"/>
-  <rect x="20" y="156" width="{{ $cbadgew }}" height="22" rx="3" fill="none" stroke="{{ $tc }}" stroke-width="0.7" stroke-opacity="0.6"/>
-  <text x="31" y="172" font-family="monospace" font-size="10" fill="{{ $tc }}" font-weight="700" letter-spacing="1.5">{{ upper $cat }}</text>
-
-  {{/* title lines */}}
-  <text x="20" y="210" font-family="Georgia, serif" font-size="22" fill="#f0f0f0" font-weight="700" letter-spacing="-0.2">{{ $l1 }}</text>
-  {{ if $l2 }}
-  <text x="20" y="238" font-family="Georgia, serif" font-size="22" fill="#f0f0f0" font-weight="700" letter-spacing="-0.2">{{ $l2 }}{{ if gt (len $title) 84 }}…{{ end }}</text>
-  {{ end }}
-
-  {{/* threat level badge */}}
+  <!-- Threat level badge -->
   {{ if .Params.threat_level }}
-  <rect x="20" y="300" width="88" height="20" rx="3" fill="{{ $tc }}" fill-opacity="0.18"/>
-  <rect x="20" y="300" width="88" height="20" rx="3" fill="none" stroke="{{ $tc }}" stroke-width="0.8" stroke-opacity="0.7"/>
-  <text x="64" y="314" font-family="monospace" font-size="10" fill="{{ $tc }}" text-anchor="middle" font-weight="700" letter-spacing="1.5">{{ .Params.threat_level }}</text>
+  <rect x="715" y="44" width="65" height="19" rx="2" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width=".8"/>
+  <text x="748" y="57" font-family="monospace" font-size="9" fill="{{ $tc }}" text-anchor="middle" font-weight="bold">{{ upper .Params.threat_level }}</text>
   {{ end }}
 
-  {{/* source */}}
-  {{ if .Params.source }}
-  <text x="20" y="342" font-family="monospace" font-size="9" fill="#ffffff" fill-opacity="0.3" letter-spacing="1">{{ upper .Params.source }}</text>
-  {{ end }}
-
-  {{/* relevance score bar */}}
-  {{ if .Params.relevance_score }}
-  {{ $sw := .Params.relevance_score | mul 56 | int }}
-  <rect x="20" y="356" width="56" height="3" rx="1" fill="#ffffff" fill-opacity="0.08"/>
-  <rect x="20" y="356" width="{{ $sw }}" height="3" rx="1" fill="{{ $tc }}" opacity="0.8"/>
-  <text x="82" y="360" font-family="monospace" font-size="8" fill="{{ $tc }}" fill-opacity="0.7">{{ printf "%.1f" .Params.relevance_score }}</text>
-  {{ end }}
-
-  {{/* watermark */}}
-  <text x="780" y="412" font-family="monospace" font-size="9" fill="#ffffff" fill-opacity="0.08" text-anchor="end" letter-spacing="2">GRID THE GREY</text>
-  <polyline points="710,16 784,16 784,52"   fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.1"/>
-  <polyline points="710,404 784,404 784,368" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.1"/>
-
+  <!-- Title overlay at bottom -->
+  <rect x="0" y="354" width="800" height="66" fill="rgba(8,8,14,.88)"/>
+  <line x1="28" y1="356" x2="772" y2="356" stroke="{{ $tc }}" stroke-width=".5" opacity=".5"/>
+  <text x="28" y="381" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l1 }}</text>
+  <text x="28" y="407" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l2 }}</text>
 </svg>
-{{ end }}
+{{ end }}{{/* end pat 0 */}}
+
+
+{{/* ═══════════════════════════════════════════════════════════
+     PATTERN 1  —  NEURAL MESH
+     Network of nodes with pulsing radii and animated data-flow
+     edges (stroke-dashoffset travelling along connections)
+     ═══════════════════════════════════════════════════════════ */}}
+{{ if eq $pat 1 }}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="{{ $cat }} — {{ $title }}">
+  <style>
+    .nm-n1 { animation: nm-p1 2.6s ease-in-out infinite; }
+    .nm-n2 { animation: nm-p1 2.6s ease-in-out infinite; animation-delay:-.87s; }
+    .nm-n3 { animation: nm-p1 2.6s ease-in-out infinite; animation-delay:-1.73s; }
+    @keyframes nm-p1 { 0%,100%{r:5;opacity:.55} 50%{r:8.5;opacity:1} }
+    .nm-flow1 { stroke-dasharray:55 220; animation: nm-f 3.2s linear infinite; }
+    .nm-flow2 { stroke-dasharray:55 220; animation: nm-f 3.2s linear infinite; animation-delay:-1.6s; }
+    .nm-flow3 { stroke-dasharray:40 260; animation: nm-f 4s   linear infinite; animation-delay:-2s; }
+    @keyframes nm-f { to{ stroke-dashoffset: -275; } }
+    .nm-halo { animation: nm-halo 3s ease-out infinite; transform-origin: center; }
+    @keyframes nm-halo { 0%{opacity:.6;r:12} 100%{opacity:0;r:28} }
+  </style>
+
+  <rect width="800" height="420" fill="#0a0a0f"/>
+  <rect x="0" y="0" width="4" height="420" fill="{{ $tc }}" opacity=".9"/>
+
+  <!-- Subtle dot grid background -->
+  {{ range $r := seq 0 5 }}
+  {{ range $c := seq 0 9 }}
+  <circle cx="{{ add (mul $c 80) 40 }}" cy="{{ add (mul $r 70) 35 }}" r="1.2" fill="{{ $tc }}" opacity=".1"/>
+  {{ end }}{{ end }}
+
+  <!-- Static edges -->
+  <line x1="120" y1="200" x2="270" y2="110" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="120" y1="200" x2="270" y2="295" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="270" y1="110" x2="440" y2="150" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="270" y1="295" x2="440" y2="260" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="440" y1="150" x2="600" y2="195" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="440" y1="260" x2="600" y2="195" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="600" y1="195" x2="700" y2="120" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="600" y1="195" x2="700" y2="300" stroke="{{ $tc }}" stroke-width=".9" opacity=".22"/>
+  <line x1="270" y1="110" x2="440" y2="260" stroke="{{ $tc }}" stroke-width=".5" opacity=".12"/>
+  <line x1="440" y1="150" x2="440" y2="260" stroke="{{ $tc }}" stroke-width=".5" opacity=".12"/>
+
+  <!-- Animated flow edges (data pulses) -->
+  <line x1="120" y1="200" x2="600" y2="195" stroke="{{ $tc }}" stroke-width="1.4" opacity=".7" class="nm-flow1" stroke-dashoffset="0"/>
+  <line x1="270" y1="110" x2="700" y2="120" stroke="{{ $tc }}" stroke-width="1.2" opacity=".55" class="nm-flow2" stroke-dashoffset="-110"/>
+  <line x1="270" y1="295" x2="700" y2="300" stroke="{{ $tc }}" stroke-width="1"   opacity=".45" class="nm-flow3" stroke-dashoffset="-55"/>
+
+  <!-- Node halo rings (expanding) -->
+  <circle cx="120" cy="200" r="14" fill="none" stroke="{{ $tc }}" stroke-width="1" class="nm-halo" opacity=".5"/>
+  <circle cx="600" cy="195" r="14" fill="none" stroke="{{ $tc }}" stroke-width="1" class="nm-halo" opacity=".4" style="animation-delay:-.6s"/>
+
+  <!-- Nodes -->
+  <circle cx="120" cy="200" r="5" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="1.6" class="nm-n1"/>
+  <circle cx="270" cy="110" r="5" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="1.4" class="nm-n2"/>
+  <circle cx="270" cy="295" r="5" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="1.4" class="nm-n3"/>
+  <circle cx="440" cy="150" r="6" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="1.6" class="nm-n1"/>
+  <circle cx="440" cy="260" r="6" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="1.6" class="nm-n2"/>
+  <circle cx="600" cy="195" r="8" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="2"   class="nm-n3"/>
+  <circle cx="700" cy="120" r="5" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="1.2" class="nm-n1"/>
+  <circle cx="700" cy="300" r="5" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width="1.2" class="nm-n2"/>
+
+  <!-- Labels -->
+  <text x="28" y="36" font-family="monospace" font-size="10" fill="{{ $tc }}" letter-spacing="2.5" opacity=".9">{{ upper $cat }}</text>
+  {{ if $src }}<text x="772" y="28" font-family="monospace" font-size="9" fill="#555" text-anchor="end">{{ $src }}</text>{{ end }}
+  {{ if .Params.threat_level }}
+  <rect x="715" y="44" width="65" height="19" rx="2" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width=".8"/>
+  <text x="748" y="57" font-family="monospace" font-size="9" fill="{{ $tc }}" text-anchor="middle" font-weight="bold">{{ upper .Params.threat_level }}</text>
+  {{ end }}
+
+  <!-- Title overlay -->
+  <rect x="0" y="354" width="800" height="66" fill="rgba(8,8,14,.88)"/>
+  <line x1="28" y1="356" x2="772" y2="356" stroke="{{ $tc }}" stroke-width=".5" opacity=".5"/>
+  <text x="28" y="381" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l1 }}</text>
+  <text x="28" y="407" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l2 }}</text>
+</svg>
+{{ end }}{{/* end pat 1 */}}
+
+
+{{/* ═══════════════════════════════════════════════════════════
+     PATTERN 2  —  HEX CASCADE
+     Columns of hex codes that light up in a downward wave,
+     simulating a data-rain / Matrix-style waterfall
+     ═══════════════════════════════════════════════════════════ */}}
+{{ if eq $pat 2 }}
+{{/* Pre-pick a set of hex strings for visual variety */}}
+{{ $hex := slice "4F" "3A" "FF" "0D" "7B" "C2" "A1" "55" "E8" "12" "9F" "D4" "2E" "88" "61" "B3" }}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="{{ $cat }} — {{ $title }}">
+  <defs>
+    <style>
+      /* Wave: each cell fades bright→dim; rows stagger via delay */
+      .hx { font-family: monospace; font-size: 11px; fill: {{ $tc }}; }
+      .hx-b { font-family: monospace; font-size: 11px; fill: {{ $tc }}; font-weight: 700; }
+      /* 8-row cascade per column: base delay + row offset */
+      @keyframes hx-wave { 0%,100%{opacity:.08} 50%{opacity:.85} }
+      {{ range $col := seq 0 6 }}
+        {{ $colDelay := mul $col 0.22 }}
+        {{ range $row := seq 0 7 }}
+          {{ $delay := printf "%.2f" (add (mul $row 0.28) $colDelay) }}
+          .hx-c{{ $col }}-r{{ $row }} { animation: hx-wave 2.4s ease-in-out infinite; animation-delay: -{{ $delay }}s; }
+        {{ end }}
+      {{ end }}
+      .hx-bright { animation: hx-bright 1.8s ease-in-out infinite; }
+      @keyframes hx-bright { 0%,100%{opacity:.12} 30%,70%{opacity:1} }
+    </style>
+    <!-- Vertical fade mask: chars fade at top and bottom edges -->
+    <linearGradient id="hx-fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+      <stop offset="18%"  stop-color="white" stop-opacity="1"/>
+      <stop offset="72%"  stop-color="white" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="hx-mask"><rect width="800" height="420" fill="url(#hx-fade)"/></mask>
+  </defs>
+
+  <rect width="800" height="420" fill="#0a0a0f"/>
+  <rect x="0" y="0" width="4" height="420" fill="{{ $tc }}" opacity=".9"/>
+
+  <!-- Hex columns (7 cols × 8 rows) masked with gradient fade -->
+  <g mask="url(#hx-mask)">
+  {{ range $col := seq 0 6 }}
+    {{ $cx := add (mul $col 100) 60 }}
+    {{ range $row := seq 0 7 }}
+      {{ $ry := add (mul $row 46) 28 }}
+      {{ $hi := mod (add (mul $col 3) $row) 16 }}
+      {{ $hv := index $hex $hi }}
+      {{ if and (eq $col 2) (eq $row 3) }}
+      <text x="{{ $cx }}" y="{{ $ry }}" class="hx-b hx-bright">0x{{ $hv }}</text>
+      {{ else }}
+      <text x="{{ $cx }}" y="{{ $ry }}" class="hx hx-c{{ $col }}-r{{ $row }}">0x{{ $hv }}</text>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  </g>
+
+  <!-- Category label (sits above mask so it's always fully visible) -->
+  <text x="28" y="36" font-family="monospace" font-size="10" fill="{{ $tc }}" letter-spacing="2.5" opacity=".95">{{ upper $cat }}</text>
+  {{ if $src }}<text x="772" y="28" font-family="monospace" font-size="9" fill="#555" text-anchor="end">{{ $src }}</text>{{ end }}
+  {{ if .Params.threat_level }}
+  <rect x="715" y="44" width="65" height="19" rx="2" fill="{{ $tcd }}" stroke="{{ $tc }}" stroke-width=".8"/>
+  <text x="748" y="57" font-family="monospace" font-size="9" fill="{{ $tc }}" text-anchor="middle" font-weight="bold">{{ upper .Params.threat_level }}</text>
+  {{ end }}
+
+  <!-- Title overlay -->
+  <rect x="0" y="354" width="800" height="66" fill="rgba(8,8,14,.88)"/>
+  <line x1="28" y1="356" x2="772" y2="356" stroke="{{ $tc }}" stroke-width=".5" opacity=".5"/>
+  <text x="28" y="381" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l1 }}</text>
+  <text x="28" y="407" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l2 }}</text>
+</svg>
+{{ end }}{{/* end pat 2 */}}
+
+{{ end }}{{/* end if thumb */}}

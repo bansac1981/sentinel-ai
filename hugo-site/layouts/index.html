@@ -27,11 +27,6 @@
 
 {{/* ── PAGINATED ARTICLE LISTING ── */}}
 <section class="posts-section">
-  <div class="section-header">
-    <h2 class="section-title">Latest Intelligence</h2>
-    <span class="section-count">{{ $totalCount }} articles</span>
-  </div>
-
   {{ $paginator := .Paginate $allPosts 15 }}
 
   {{/* Group current page's articles by day */}}

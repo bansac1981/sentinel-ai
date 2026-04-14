@@ -21,25 +21,25 @@
   <p class="page-header__desc">{{ .Description | default (cond $isMitre "Articles mapped to MITRE ATLAS adversarial ML attack techniques." "Articles mapped to OWASP LLM Top 10 vulnerability categories.") }}</p>
 </div>
 
-{{/* Pass data to JS via JSON in a script tag */}}
-{{ $articles := .Pages }}
-<script id="framework-data" type="application/json">
-{
-  "frameworkType": {{ cond $isMitre "mitre" "owasp" | jsonify }},
-  "frameworkColor": {{ $frameworkColor | jsonify }},
-  "definitionsUrl": {{ "/frameworks/" | relURL | jsonify }},
-  "articles": [
-    {{ range $i, $p := $articles }}{{ if $i }},{{ end }}
-    {
-      "title": {{ $p.Title | jsonify }},
-      "url": {{ $p.RelPermalink | jsonify }},
-      "date": {{ $p.Date.Format "Jan 02, 2006" | jsonify }},
-      "techniques": {{ if $isMitre }}{{ $p.Params.mitre_techniques | jsonify }}{{ else }}{{ $p.Params.owasp_categories | jsonify }}{{ end }}
-    }
-    {{ end }}
-  ]
-}
-</script>
+{{/* Query all posts that have this framework's techniques/categories set */}}
+{{ $allPosts := where .Site.RegularPages "Section" "posts" }}
+{{ $articles := cond $isMitre (where $allPosts ".Params.mitre_techniques" "!=" nil) (where $allPosts ".Params.owasp_categories" "!=" nil) }}
+
+{{/* Build article data slice and jsonify the whole thing — avoids any manual JSON escaping bugs */}}
+{{ $articleData := slice }}
+{{ range $articles }}
+  {{ $techs := cond $isMitre .Params.mitre_techniques .Params.owasp_categories }}
+  {{ $item := dict "title" .Title "url" .RelPermalink "date" (.Date.Format "Jan 02, 2006") "techniques" $techs }}
+  {{ $articleData = $articleData | append $item }}
+{{ end }}
+
+{{ $payload := dict
+    "frameworkType" (cond $isMitre "mitre" "owasp")
+    "frameworkColor" $frameworkColor
+    "definitionsUrl" ("frameworks/" | relURL)
+    "articles" $articleData
+}}
+<script id="framework-data" type="application/json">{{ $payload | jsonify }}</script>
 
 {{/* ── BAR CHART SECTION ── */}}
 <section class="framework-chart-section">
