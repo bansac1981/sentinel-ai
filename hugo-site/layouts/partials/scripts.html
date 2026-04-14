@@ -217,4 +217,27 @@
     if (searchOpen && !searchBar.contains(e.target) && e.target !== toggleBtn) closeSearch();
   });
 })();
+
+// ── Auto-refresh (30 min, only when tab is visible) ──
+(function() {
+  var INTERVAL_MS = 30 * 60 * 1000;  // 30 minutes
+  var scheduledAt = Date.now();
+
+  function doRefresh() {
+    // Only reload if the tab is visible — no point refreshing in the background
+    if (!document.hidden) {
+      location.reload();
+    } else {
+      // Tab is hidden; wait until it becomes visible again then reload
+      document.addEventListener('visibilitychange', function onVisible() {
+        if (!document.hidden) {
+          document.removeEventListener('visibilitychange', onVisible);
+          location.reload();
+        }
+      });
+    }
+  }
+
+  setTimeout(doRefresh, INTERVAL_MS);
+})();
 </script>
