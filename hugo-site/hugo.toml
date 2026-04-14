@@ -2,7 +2,7 @@ baseURL = "https://gridthegrey.com/"
 languageCode = "en-us"
 title = "GRID THE GREY"
 [pagination]
-  pagerSize = 12
+  pagerSize = 15
 enableRobotsTXT = true
 enableEmoji = false
 copyright = "© 2026 Grid the Grey. All rights reserved."
@@ -55,10 +55,6 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
   disableJS = false
 
 [menu]
-  [[menu.main]]
-    name = "Latest"
-    url = "/posts/"
-    weight = 1
   [[menu.main]]
     name = "MITRE ATLAS"
     url = "/frameworks/mitre-atlas/"

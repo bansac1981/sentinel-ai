@@ -1,6 +1,9 @@
 {{ define "main" }}
 
 {{/* ── HERO SECTION ── */}}
+{{ $allPosts := where .Site.RegularPages "Section" "posts" }}
+{{ $totalCount := len $allPosts }}
+
 <section class="hero">
   <div class="hero-label">
     <span class="pulse-dot"></span>
@@ -15,83 +18,67 @@
       <span class="hero-stat-label">{{ .label }}</span>
     </div>
     {{ end }}
+    <div class="hero-stat">
+      <span class="hero-stat-value">{{ $totalCount }}</span>
+      <span class="hero-stat-label">articles published</span>
+    </div>
   </div>
 </section>
 
-{{/* ── FEATURED / LATEST POSTS ── */}}
+{{/* ── PAGINATED ARTICLE LISTING ── */}}
 <section class="posts-section">
   <div class="section-header">
     <h2 class="section-title">Latest Intelligence</h2>
-    <a href="{{ "posts/" | relURL }}" class="section-link">All reports →</a>
+    <span class="section-count">{{ $totalCount }} articles</span>
   </div>
 
-  {{/* Featured post — first article */}}
-  {{ $pages := where .Site.RegularPages "Type" "posts" }}
-  {{ $pages = where $pages "Params.draft" "ne" true }}
-  {{ $featured := first 1 $pages }}
-  {{ $rest := after 1 $pages }}
+  {{ $paginator := .Paginate $allPosts 15 }}
 
-  {{ range $featured }}
-  <article class="post-card post-card--featured">
-    <a href="{{ .RelPermalink }}" class="post-card__image">
-      {{ partial "article-image.html" . }}
-    </a>
-    <div class="post-card__body">
-      <div class="post-card__meta">
-        {{ partial "framework-badges.html" . }}
-        <span class="post-card__source">{{ .Params.source }}</span>
-        <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
-          {{ .Date.Format "Jan 02, 2006" }}
-        </time>
-        {{ if .Params.relevance_score }}
-        <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
-          ▲ {{ printf "%.1f" .Params.relevance_score }}
-        </span>
-        {{ end }}
-      </div>
-      <h2 class="post-card__title">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      </h2>
-      <p class="post-card__summary">{{ .Params.summary | default .Summary }}</p>
-      <a href="{{ .RelPermalink }}" class="post-card__read-more">Read Full Analysis →</a>
-    </div>
-  </article>
-  {{ end }}
+  {{/* Group current page's articles by month */}}
+  {{ $grouped := $paginator.Pages.GroupByDate "January 2006" }}
 
-  {{/* Grid of remaining posts */}}
-  <div class="posts-grid">
-    {{ range first 11 $rest }}
-    <article class="post-card post-card--grid">
-      <a href="{{ .RelPermalink }}" class="post-card__image post-card__image--grid">
-        {{ partial "article-image.html" . }}
-      </a>
-      <div class="post-card__body">
-        <div class="post-card__meta">
-          {{ partial "framework-badges.html" . }}
-          <span class="post-card__source">{{ .Params.source }}</span>
-          <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "Jan 02" }}
-          </time>
-          {{ if .Params.relevance_score }}
-          <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
-            ▲ {{ printf "%.1f" .Params.relevance_score }}
-          </span>
-          {{ end }}
+  {{ range $grouped }}
+  <div class="date-group">
+    <h3 class="date-group__heading">{{ .Key }}</h3>
+    <div class="posts-uniform-grid">
+      {{ range .Pages }}
+      <article class="post-card post-card--uniform">
+        <a href="{{ .RelPermalink }}" class="post-card__image post-card__image--uniform">
+          {{ partial "article-image.html" . }}
+        </a>
+        <div class="post-card__body">
+          <h3 class="post-card__title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <div class="post-card__meta-line">
+            {{ partial "framework-badges.html" . }}
+            <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+            {{ if .Params.source }}<span class="post-card__source">{{ .Params.source }}</span>{{ end }}
+            {{ if .Params.relevance_score }}
+            <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">▲ {{ printf "%.1f" .Params.relevance_score }}</span>
+            {{ end }}
+          </div>
+          <p class="post-card__summary">{{ .Params.summary | default .Summary | truncate 130 }}</p>
         </div>
-        <h3 class="post-card__title">
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </h3>
-        <p class="post-card__summary post-card__summary--short">{{ .Params.summary | default .Summary | truncate 120 }}</p>
-      </div>
-    </article>
-    {{ end }}
-  </div>
-
-  {{ if gt (len $pages) 12 }}
-  <div class="load-more-wrap">
-    <a href="/posts/" class="btn btn--outline">View All Intelligence Reports</a>
+      </article>
+      {{ end }}
+    </div>
   </div>
   {{ end }}
+
+  {{/* Pagination */}}
+  {{ if gt $paginator.TotalPages 1 }}
+  <nav class="pagination-nav" aria-label="Page navigation">
+    {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="pagination-btn pagination-btn--prev">← Previous</a>
+    {{ end }}
+    <span class="pagination-info">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+    {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="pagination-btn pagination-btn--next">Next Page →</a>
+    {{ end }}
+  </nav>
+  {{ end }}
+
 </section>
 
 {{/* ── FRAMEWORK COVERAGE ── */}}

@@ -1,10 +1,19 @@
-{{/* Renders MITRE ATLAS and OWASP LLM badges for a given page */}}
+{{/* Renders MITRE ATLAS, OWASP LLM, and threat level badges for a given page */}}
 {{ if .Params.mitre_techniques }}
-<span class="badge badge--atlas badge--sm" title="MITRE ATLAS: {{ delimit .Params.mitre_techniques ", " }}">ATLAS</span>
+<a href="{{ "frameworks/" | relURL }}mitre-atlas/" class="badge badge--atlas badge--sm" title="MITRE ATLAS: {{ delimit .Params.mitre_techniques ", " }}">ATLAS</a>
 {{ end }}
 {{ if .Params.owasp_categories }}
-<span class="badge badge--owasp badge--sm" title="OWASP LLM: {{ delimit .Params.owasp_categories ", " }}">OWASP</span>
+<a href="{{ "frameworks/" | relURL }}owasp-llm/" class="badge badge--owasp badge--sm" title="OWASP LLM: {{ delimit .Params.owasp_categories ", " }}">OWASP</a>
 {{ end }}
 {{ if .Params.threat_level }}
-<span class="badge badge--threat badge--threat--{{ lower .Params.threat_level }} badge--sm">{{ .Params.threat_level }}</span>
+<a href="{{ "scoring/" | relURL }}" class="badge badge--threat badge--threat--{{ lower .Params.threat_level }} badge--sm badge--threat--hoverable"
+   data-threat="{{ .Params.threat_level }}">
+  {{ .Params.threat_level }}
+  <span class="threat-tooltip">
+    {{ if eq .Params.threat_level "CRITICAL" }}Active exploitation · Immediate action required{{ end }}
+    {{ if eq .Params.threat_level "HIGH" }}Significant risk · Prioritise patching{{ end }}
+    {{ if eq .Params.threat_level "MEDIUM" }}Moderate risk · Monitor closely{{ end }}
+    {{ if eq .Params.threat_level "LOW" }}Limited impact · Standard review{{ end }}
+  </span>
+</a>
 {{ end }}

@@ -15,9 +15,9 @@
         {{ .Date.Format "January 02, 2006" }}
       </time>
       {{ if .Params.relevance_score }}
-      <span class="article-score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
+      <a href="{{ "scoring/" | relURL }}" class="article-score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
         RELEVANCE ▲ {{ printf "%.1f" .Params.relevance_score }}
-      </span>
+      </a>
       {{ end }}
     </div>
 

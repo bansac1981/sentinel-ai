@@ -287,6 +287,44 @@ def passes_prefilter(article: dict) -> bool:
 # 6. ARTICLE CONTENT FETCHING  (optional)
 # ─────────────────────────────────────────────
 
+def fetch_og_image(url: str, log: logging.Logger) -> str:
+    """
+    Fetch the Open Graph image URL from a webpage.
+    Returns the og:image URL string, or empty string on any error.
+    Never raises.
+    """
+    if not url:
+        return ""
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (compatible; GridTheGrey-Bot/1.0; +https://gridthegrey.com/bot)"
+        }
+        with httpx.Client(timeout=5.0, follow_redirects=True) as client:
+            resp = client.get(url, headers=headers)
+            resp.raise_for_status()
+            html = resp.text
+
+        # Try og:image
+        og_match = re.search(
+            r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
+            html, re.IGNORECASE
+        )
+        if not og_match:
+            # Try reversed attribute order
+            og_match = re.search(
+                r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
+                html, re.IGNORECASE
+            )
+        if og_match:
+            img_url = og_match.group(1).strip()
+            if img_url.startswith("http"):
+                log.debug(f"  og:image found: {img_url[:80]}")
+                return img_url
+    except Exception as e:
+        log.debug(f"  OG image fetch failed for {url}: {e}")
+    return ""
+
+
 def fetch_article_content(url: str, log: logging.Logger) -> tuple[str, str]:
     """
     Attempt to fetch the full article text and og:image.
@@ -651,16 +689,21 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         # Always mark as seen, regardless of outcome
         seen_urls.add(article["url"])
 
-        # Optionally fetch full article content (og:image intentionally NOT used —
-        # third-party images are copyrighted; articles use generated SVG thumbnails instead)
+        # Fetch OG image for thumbnail
+        if not args.dry_run:
+            log.debug(f"  Fetching OG image from {article['url']}")
+            og_image = fetch_og_image(article["url"], log)
+            article["thumbnail"] = og_image
+        else:
+            article["thumbnail"] = ""
+
+        # Optionally fetch full article content
         full_content = ""
         if FETCH_FULL_CONTENT and not args.dry_run:
             log.debug(f"  Fetching full content from {article['url']}")
             full_content, _og_image = fetch_article_content(article["url"], log)
             if full_content:
                 log.debug(f"  Content fetched: {len(full_content)} chars")
-        # thumbnail always left empty so Hugo uses the pattern-generated SVG
-        article["thumbnail"] = ""
 
         if args.dry_run:
             log.info("  [DRY RUN] Would call Claude API here — skipping")

@@ -116,3 +116,89 @@
   drawRadar(threats);
 })();
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js" defer></script>
+<script>
+// ── Search ──
+(function() {
+  var toggleBtn = document.getElementById('searchToggle');
+  var searchBar = document.getElementById('searchBar');
+  var searchInput = document.getElementById('searchInput');
+  var searchResults = document.getElementById('searchResults');
+  if (!toggleBtn || !searchBar || !searchInput) return;
+
+  var fuse = null;
+  var fuseLoaded = false;
+
+  function loadIndex() {
+    if (fuseLoaded) return;
+    fuseLoaded = true;
+    fetch('/index.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        fuse = new Fuse(data, {
+          keys: [
+            { name: 'title', weight: 0.35 },
+            { name: 'summary', weight: 0.2 },
+            { name: 'categories', weight: 0.15 },
+            { name: 'tags', weight: 0.15 },
+            { name: 'mitre_techniques', weight: 0.1 },
+            { name: 'owasp_categories', weight: 0.1 },
+            { name: 'source', weight: 0.05 }
+          ],
+          threshold: 0.35,
+          includeScore: true,
+          minMatchCharLength: 2
+        });
+      });
+  }
+
+  function openSearch() {
+    searchBar.classList.add('search-bar--open');
+    searchBar.setAttribute('aria-hidden', 'false');
+    searchInput.focus();
+    loadIndex();
+  }
+
+  function closeSearch() {
+    searchBar.classList.remove('search-bar--open');
+    searchBar.setAttribute('aria-hidden', 'true');
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+  }
+
+  toggleBtn.addEventListener('click', function() {
+    searchBar.classList.contains('search-bar--open') ? closeSearch() : openSearch();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSearch();
+    if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  searchInput.addEventListener('input', function() {
+    var q = searchInput.value.trim();
+    if (!q || !fuse) { searchResults.innerHTML = ''; return; }
+    var results = fuse.search(q, { limit: 8 });
+    if (!results.length) {
+      searchResults.innerHTML = '<div class="search-result search-result--empty">No results for "' + q + '"</div>';
+      return;
+    }
+    searchResults.innerHTML = results.map(function(r) {
+      var p = r.item;
+      return '<a href="' + p.url + '" class="search-result" role="option">' +
+        '<span class="search-result__title">' + p.title + '</span>' +
+        '<span class="search-result__meta">' + (p.source || '') + (p.date ? ' · ' + p.date : '') + '</span>' +
+        '</a>';
+    }).join('');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!searchBar.contains(e.target) && e.target !== toggleBtn) closeSearch();
+  });
+})();
+</script>

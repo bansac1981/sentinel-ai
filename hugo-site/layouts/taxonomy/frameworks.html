@@ -1,0 +1,167 @@
+{{ define "main" }}
+
+{{ $term := .Data.Term }}
+{{ $isMitre := eq $term "mitre-atlas" }}
+{{ $isOwasp := eq $term "owasp-llm" }}
+{{ $isFramework := or $isMitre $isOwasp }}
+
+{{ if $isFramework }}
+
+{{/* ── FRAMEWORK MATRIX PAGE ── */}}
+{{ $frameworkName := cond $isMitre "MITRE ATLAS" "OWASP LLM Top 10" }}
+{{ $frameworkColor := cond $isMitre "#3b82f6" "#a855f7" }}
+{{ $fieldKey := cond $isMitre "mitre_techniques" "owasp_categories" }}
+{{ $badgeClass := cond $isMitre "badge--atlas" "badge--owasp" }}
+
+<div class="page-header">
+  <div class="page-header__label">
+    <span class="badge {{ $badgeClass }}">{{ cond $isMitre "ATLAS" "OWASP" }}</span>
+  </div>
+  <h1 class="page-header__title">{{ .Title }}</h1>
+  <p class="page-header__desc">{{ .Description | default (cond $isMitre "Articles mapped to MITRE ATLAS adversarial ML attack techniques." "Articles mapped to OWASP LLM Top 10 vulnerability categories.") }}</p>
+</div>
+
+{{/* Pass data to JS via JSON in a script tag */}}
+{{ $articles := .Pages }}
+<script id="framework-data" type="application/json">
+{
+  "frameworkType": {{ cond $isMitre "mitre" "owasp" | jsonify }},
+  "frameworkColor": {{ $frameworkColor | jsonify }},
+  "definitionsUrl": {{ "/frameworks/" | relURL | jsonify }},
+  "articles": [
+    {{ range $i, $p := $articles }}{{ if $i }},{{ end }}
+    {
+      "title": {{ $p.Title | jsonify }},
+      "url": {{ $p.RelPermalink | jsonify }},
+      "date": {{ $p.Date.Format "Jan 02, 2006" | jsonify }},
+      "techniques": {{ if $isMitre }}{{ $p.Params.mitre_techniques | jsonify }}{{ else }}{{ $p.Params.owasp_categories | jsonify }}{{ end }}
+    }
+    {{ end }}
+  ]
+}
+</script>
+
+{{/* ── BAR CHART SECTION ── */}}
+<section class="framework-chart-section">
+  <h2 class="section-title">Trending Attack Vectors</h2>
+  <p class="section-sub">Most frequently mapped techniques across all published articles</p>
+  <div class="framework-bar-chart" id="frameworkBarChart">
+    <div class="framework-bar-chart__loading">Loading chart…</div>
+  </div>
+</section>
+
+{{/* ── MATRIX TABLE SECTION ── */}}
+<section class="framework-matrix-section">
+  <h2 class="section-title">Article Coverage Matrix</h2>
+  <p class="section-sub">Each row shows an article and its mapped {{ cond $isMitre "MITRE ATLAS techniques" "OWASP LLM categories" }}</p>
+  <div class="framework-matrix" id="frameworkMatrix">
+    <div class="framework-matrix__loading">Loading matrix…</div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var dataEl = document.getElementById('framework-data');
+  if (!dataEl) return;
+  var data = JSON.parse(dataEl.textContent);
+  var articles = data.articles;
+  var color = data.frameworkColor;
+  var defsUrl = data.definitionsUrl;
+
+  // ── Build technique frequency map ──
+  var freq = {};
+  articles.forEach(function(a) {
+    (a.techniques || []).forEach(function(t) {
+      // Extract ID: "AML.T0051 - LLM Prompt Injection" → "AML.T0051"
+      // or "LLM08 - Excessive Agency" → "LLM08"
+      var id = t.split(' - ')[0].trim();
+      var label = t.split(' - ').slice(1).join(' - ').trim() || id;
+      if (!freq[id]) freq[id] = { id: id, label: label, count: 0 };
+      freq[id].count++;
+    });
+  });
+
+  // Sort by count desc, take top 10
+  var sorted = Object.values(freq).sort(function(a, b) { return b.count - a.count; }).slice(0, 10);
+  var maxCount = sorted.length ? sorted[0].count : 1;
+
+  // ── Render Bar Chart ──
+  var chartEl = document.getElementById('frameworkBarChart');
+  if (chartEl && sorted.length) {
+    var html = '<div class="bar-chart">';
+    sorted.forEach(function(t) {
+      var pct = Math.round((t.count / maxCount) * 100);
+      html += '<div class="bar-chart__row">' +
+        '<a href="' + defsUrl + '" class="bar-chart__label technique-tag" title="' + t.label + '">' + t.id + '</a>' +
+        '<div class="bar-chart__track">' +
+          '<div class="bar-chart__fill" style="width:' + pct + '%;background:' + color + '"></div>' +
+        '</div>' +
+        '<span class="bar-chart__count">' + t.count + '</span>' +
+      '</div>';
+    });
+    html += '</div>';
+    chartEl.innerHTML = html;
+  } else if (chartEl) {
+    chartEl.innerHTML = '<p class="framework-empty">No techniques mapped yet.</p>';
+  }
+
+  // ── Render Matrix ──
+  var matrixEl = document.getElementById('frameworkMatrix');
+  if (!matrixEl) return;
+
+  if (!articles.length) {
+    matrixEl.innerHTML = '<p class="framework-empty">No articles found.</p>';
+    return;
+  }
+
+  var html = '<table class="matrix-table"><thead><tr>' +
+    '<th class="matrix-table__article-col">Article</th>' +
+    '<th class="matrix-table__date-col">Date</th>' +
+    '<th class="matrix-table__tags-col">Mapped Techniques</th>' +
+  '</tr></thead><tbody>';
+
+  // Sort articles by date desc (they come sorted from Hugo already)
+  articles.forEach(function(a) {
+    var tags = (a.techniques || []).map(function(t) {
+      var id = t.split(' - ')[0].trim();
+      var label = t;
+      return '<a href="' + defsUrl + '" class="technique-tag" title="' + label + '">' + id + '</a>';
+    }).join('');
+
+    html += '<tr class="matrix-table__row">' +
+      '<td class="matrix-table__title"><a href="' + a.url + '">' + a.title + '</a></td>' +
+      '<td class="matrix-table__date">' + a.date + '</td>' +
+      '<td class="matrix-table__tags">' + (tags || '<span class="matrix-table__none">—</span>') + '</td>' +
+    '</tr>';
+  });
+
+  html += '</tbody></table>';
+  matrixEl.innerHTML = html;
+})();
+</script>
+
+{{ else }}
+
+{{/* ── FALLBACK: normal list for other framework taxonomy terms ── */}}
+<div class="page-header">
+  <h1 class="page-header__title">{{ .Title }}</h1>
+</div>
+<div class="posts-uniform-grid">
+  {{ range .Pages }}
+  <article class="post-card post-card--uniform">
+    <a href="{{ .RelPermalink }}" class="post-card__image post-card__image--uniform">
+      {{ partial "article-image.html" . }}
+    </a>
+    <div class="post-card__body">
+      <h3 class="post-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <div class="post-card__meta-line">
+        {{ partial "framework-badges.html" . }}
+        <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+      </div>
+    </div>
+  </article>
+  {{ end }}
+</div>
+
+{{ end }}
+{{ end }}
