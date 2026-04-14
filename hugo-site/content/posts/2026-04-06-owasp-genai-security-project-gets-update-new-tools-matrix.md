@@ -1,6 +1,6 @@
 ---
 title: "OWASP GenAI Security Project Gets Update, New Tools Matrix"
-date: 2026-04-06T13:49:27+00:00
+date: "2026-04-14T08:18:19+00:00"
 draft: false
 
 # ── Content metadata ──
