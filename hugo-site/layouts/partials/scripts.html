@@ -129,6 +129,7 @@
 
   var fuse = null;
   var fuseLoaded = false;
+  var searchOpen = false;
 
   function loadIndex() {
     if (fuseLoaded) return;
@@ -136,24 +137,32 @@
     fetch('/index.json')
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        fuse = new Fuse(data, {
+        fuse = new window.Fuse(data, {
           keys: [
-            { name: 'title', weight: 0.35 },
-            { name: 'summary', weight: 0.2 },
-            { name: 'categories', weight: 0.15 },
-            { name: 'tags', weight: 0.15 },
-            { name: 'mitre_techniques', weight: 0.1 },
-            { name: 'owasp_categories', weight: 0.1 },
-            { name: 'source', weight: 0.05 }
+            { name: 'title',            weight: 0.35 },
+            { name: 'summary',          weight: 0.2  },
+            { name: 'categories',       weight: 0.15 },
+            { name: 'tags',             weight: 0.15 },
+            { name: 'mitre_techniques', weight: 0.1  },
+            { name: 'owasp_categories', weight: 0.1  },
+            { name: 'source',           weight: 0.05 }
           ],
           threshold: 0.35,
           includeScore: true,
           minMatchCharLength: 2
         });
-      });
+      })
+      .catch(function() { fuseLoaded = false; });
   }
 
   function openSearch() {
+    if (searchOpen) return;
+    searchOpen = true;
+    /* 1. Make element visible in layout */
+    searchBar.style.display = 'block';
+    /* 2. Force reflow so the browser registers the initial opacity:0/translateY */
+    void searchBar.offsetHeight;
+    /* 3. Trigger CSS transition to final state */
     searchBar.classList.add('search-bar--open');
     searchBar.setAttribute('aria-hidden', 'false');
     searchInput.focus();
@@ -161,14 +170,21 @@
   }
 
   function closeSearch() {
+    if (!searchOpen) return;
+    searchOpen = false;
     searchBar.classList.remove('search-bar--open');
     searchBar.setAttribute('aria-hidden', 'true');
     searchInput.value = '';
-    searchResults.innerHTML = '';
+    if (searchResults) searchResults.innerHTML = '';
+    /* Hide after transition completes */
+    setTimeout(function() {
+      if (!searchOpen) searchBar.style.display = 'none';
+    }, 250);
   }
 
-  toggleBtn.addEventListener('click', function() {
-    searchBar.classList.contains('search-bar--open') ? closeSearch() : openSearch();
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    searchOpen ? closeSearch() : openSearch();
   });
 
   document.addEventListener('keydown', function(e) {
@@ -196,9 +212,9 @@
     }).join('');
   });
 
-  // Close when clicking outside
+  /* Close when clicking anywhere outside the bar or toggle button */
   document.addEventListener('click', function(e) {
-    if (!searchBar.contains(e.target) && e.target !== toggleBtn) closeSearch();
+    if (searchOpen && !searchBar.contains(e.target) && e.target !== toggleBtn) closeSearch();
   });
 })();
 </script>

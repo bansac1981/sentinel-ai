@@ -9,7 +9,7 @@
     <span class="pulse-dot"></span>
     LIVE THREAT FEED
   </div>
-  <h1 class="hero-title">{{ .Site.Params.tagline }}</h1>
+  <h1 class="hero-title">{{ .Site.Params.tagline }}<br><span class="hero-title__line2">{{ .Site.Params.tagline2 }}</span></h1>
   <p class="hero-sub">{{ .Site.Params.taglineSub }}</p>
   <div class="hero-stats">
     {{ range site.Data.stats.items }}

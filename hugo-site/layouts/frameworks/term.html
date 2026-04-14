@@ -39,7 +39,9 @@
     "definitionsUrl" ("frameworks/" | relURL)
     "articles" $articleData
 }}
-<script id="framework-data" type="application/json">{{ $payload | jsonify }}</script>
+{{/* Use a plain JS variable — Hugo's HTML minifier is safe with JS but can
+     corrupt <script type="application/json"> content. */}}
+<script>var __fwData = {{ $payload | jsonify | safeJS }};</script>
 
 {{/* ── BAR CHART SECTION ── */}}
 <section class="framework-chart-section">
@@ -61,9 +63,8 @@
 
 <script>
 (function() {
-  var dataEl = document.getElementById('framework-data');
-  if (!dataEl) return;
-  var data = JSON.parse(dataEl.textContent);
+  if (typeof __fwData === 'undefined') return;
+  var data = __fwData;
   var articles = data.articles;
   var color = data.frameworkColor;
   var defsUrl = data.definitionsUrl;
