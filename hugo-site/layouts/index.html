@@ -34,31 +34,38 @@
 
   {{ $paginator := .Paginate $allPosts 15 }}
 
-  {{/* Group current page's articles by month */}}
-  {{ $grouped := $paginator.Pages.GroupByDate "January 2006" }}
+  {{/* Group current page's articles by day */}}
+  {{ $grouped := $paginator.Pages.GroupByDate "January 02, 2006" }}
 
   {{ range $grouped }}
   <div class="date-group">
     <h3 class="date-group__heading">{{ .Key }}</h3>
-    <div class="posts-uniform-grid">
+    <div class="posts-list">
       {{ range .Pages }}
-      <article class="post-card post-card--uniform">
-        <a href="{{ .RelPermalink }}" class="post-card__image post-card__image--uniform">
+      <article class="post-card post-card--h">
+        <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
           {{ partial "article-image.html" . }}
         </a>
-        <div class="post-card__body">
-          <h3 class="post-card__title">
+        <div class="post-card__body--h">
+          <h3 class="post-card__title--h">
             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           </h3>
           <div class="post-card__meta-line">
             {{ partial "framework-badges.html" . }}
-            <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
-            {{ if .Params.source }}<span class="post-card__source">{{ .Params.source }}</span>{{ end }}
             {{ if .Params.relevance_score }}
             <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">▲ {{ printf "%.1f" .Params.relevance_score }}</span>
             {{ end }}
+            {{ if .Params.source }}<span class="post-card__source">{{ .Params.source }}</span>{{ end }}
+            <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
           </div>
-          <p class="post-card__summary">{{ .Params.summary | default .Summary | truncate 130 }}</p>
+          <p class="post-card__summary--h">{{ .Params.summary | default (.Summary | truncate 200) }}</p>
+          {{ if .Params.mitre_techniques }}
+          <div class="post-card__techniques">
+            {{ range .Params.mitre_techniques }}
+            <span class="card-technique-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
         </div>
       </article>
       {{ end }}
