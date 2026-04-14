@@ -197,6 +197,7 @@ def set_thumbnail(text: str, url: str) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Backfill Pexels thumbnails for Hugo posts")
     parser.add_argument("--write", action="store_true", help="Actually update files (default: dry-run)")
+    parser.add_argument("--force", action="store_true", help="Replace existing thumbnails too (not just empty ones)")
     parser.add_argument("--limit", type=int, default=0, help="Only process N posts (0 = all)")
     parser.add_argument("--debug", action="store_true", help="Verbose debug logging")
     args = parser.parse_args()
@@ -248,7 +249,7 @@ def main() -> None:
             errors += 1
             continue
 
-        if not needs_thumbnail(text):
+        if not needs_thumbnail(text) and not args.force:
             log.debug(f"  SKIP (has thumbnail): {path.name}")
             skipped += 1
             continue
