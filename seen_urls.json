@@ -48,6 +48,7 @@
     "https://lalitm.com/post/building-syntaqlite-ai/",
     "https://leehanchung.github.io/blogs/2026/04/05/the-ai-great-leap-forward/",
     "https://meiert.com/blog/ai-ethics-and-safety/",
+    "https://mrdns.com/",
     "https://nerdy.dev/why-ai-sucks-at-front-end",
     "https://news.ycombinator.com/item?id=47700460",
     "https://nvd.nist.gov/vuln/detail/CVE-2026-33579",
@@ -129,6 +130,7 @@
     "https://thehackernews.com/2026/04/new-php-composer-flaws-enable-arbitrary.html",
     "https://thehackernews.com/2026/04/new-sparkcat-variant-in-ios-android.html",
     "https://thehackernews.com/2026/04/north-koreas-apt37-uses-facebook-social.html",
+    "https://thehackernews.com/2026/04/openai-launches-gpt-54-cyber-with.html",
     "https://thehackernews.com/2026/04/openai-revokes-macos-app-certificate.html",
     "https://thehackernews.com/2026/04/over-1000-exposed-comfyui-instances.html",
     "https://thehackernews.com/2026/04/qilin-and-warlock-ransomware-use.html",
@@ -167,6 +169,7 @@
     "https://www.crowdstrike.com/en-us/blog/how-charlotte-ai-agentworks-fuels-securitys-agentic-ecosystem/",
     "https://www.crowdstrike.com/en-us/blog/how-crowdstrike-accelerates-exposure-evaluation-against-threats/",
     "https://www.crowdstrike.com/en-us/blog/new-crowdstrike-innovations-secure-ai-agents-govern-shadow-ai/",
+    "https://www.crowdstrike.com/en-us/blog/patch-tuesday-analysis-april-2026/",
     "https://www.crowdstrike.com/en-us/blog/stardust-chollima-likely-compromises-axios-npm-package/",
     "https://www.darkreading.com/application-security/adobe-patches-actively-exploited-zero-day",
     "https://www.darkreading.com/application-security/ai-assisted-supply-chain-attack-targets-github",
@@ -295,6 +298,7 @@
     "https://www.securityweek.com/google-adds-rust-dns-parser-to-pixel-phones-for-better-security/",
     "https://www.securityweek.com/google-rolls-out-cookie-theft-protections-in-chrome/",
     "https://www.securityweek.com/guardarian-users-targeted-with-malicious-strapi-npm-packages/",
+    "https://www.securityweek.com/ics-patch-tuesday-8-industrial-giants-publish-new-security-advisories/",
     "https://www.securityweek.com/in-other-news-cyberattack-stings-stryker-windows-zero-day-china-supercomputer-hack/",
     "https://www.securityweek.com/industry-reactions-to-iran-hacking-ics-in-critical-infrastructure-feedback-friday/",
     "https://www.securityweek.com/international-operation-targets-multimillion-dollar-crypto-theft-schemes/",
@@ -321,5 +325,5 @@
     "https://www.wheresyoured.at/the-subprime-ai-crisis-is-here/",
     "https://www.wired.com/story/openai-backs-bill-exempt-ai-firms-model-harm-lawsuits/"
   ],
-  "updated_at": "2026-04-15T05:55:02.295339+00:00"
+  "updated_at": "2026-04-15T08:26:38.262349+00:00"
 }
