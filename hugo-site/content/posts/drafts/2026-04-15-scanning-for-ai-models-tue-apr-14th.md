@@ -1,7 +1,7 @@
 ---
 title: "Scanning for AI Models, (Tue, Apr 14th)"
 date: 2026-04-15T04:35:09+00:00
-draft: true
+draft: false
 slug: "scanning-for-ai-models-tue-apr-14th"
 
 # ── Content metadata ──
