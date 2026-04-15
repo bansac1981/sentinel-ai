@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Launches GPT-5.4-Cyber with Expanded Access for Security Teams"
-date: 2026-04-15T08:26:37+00:00
+date: "2026-04-15T09:03:45+00:00"
 draft: false
 slug: "openai-launches-gpt-5-4-cyber-with-expanded-access-for-security-teams"
 
