@@ -653,7 +653,7 @@ def to_yaml_list(items: list | None) -> str:
     return "[" + ", ".join(f'"{s}"' for s in safe) + "]"
 
 
-def generate_hugo_markdown(article: dict, analysis: dict, slug: str) -> str:
+def generate_hugo_markdown(article: dict, analysis: dict, slug: str, thumbnail_query: str = "") -> str:
     """
     Build the full Hugo markdown file content from article metadata
     and Claude's analysis. Matches the post archetype exactly.
@@ -679,6 +679,8 @@ source_url: {json.dumps(article['url'])}
 source_date: {source_date}
 author: "Grid the Grey Editorial"
 thumbnail: {json.dumps(article.get('thumbnail', ''))}
+thumbnail_pexels_id: ""
+thumbnail_search: {json.dumps("https://www.pexels.com/search/" + thumbnail_query.replace(" ", "+") + "/" if thumbnail_query else "")}
 
 # ── AI Security Classification ──
 relevance_score: {analysis.get('relevance_score', 0.0)}
@@ -876,6 +878,7 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         # Done here so categories from Claude analysis improve keyword matching.
         # recent_thumbnails ensures the same photo isn't reused across the last 20 posts.
         categories = analysis.get("categories", [])
+        pexels_query = _pexels_query(article["title"], categories)  # capture for front-matter
         log.debug(f"  Fetching thumbnail (categories: {categories})")
         thumbnail = fetch_pexels_image(article["title"], categories, log, used_urls=recent_thumbnails)
         if thumbnail:
@@ -883,6 +886,7 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
             recent_thumbnails.add(thumbnail)   # prevent reuse within this run
         else:
             log.debug(f"  Pexels returned nothing, falling back to OG image")
+            pexels_query = ""   # no Pexels result — clear query so search URL isn't misleading
             thumbnail = fetch_og_image(article["url"], log)
             if thumbnail:
                 log.debug(f"  OG image: {thumbnail[:80]}")
@@ -908,7 +912,7 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
 
         # Generate and write Hugo post
         slug = build_slug(article["title"], article["published"])
-        markdown = generate_hugo_markdown(article, analysis, slug)
+        markdown = generate_hugo_markdown(article, analysis, slug, thumbnail_query=pexels_query)
         written = write_hugo_post(slug, markdown, log)
         if written:
             stats["posts_written"] += 1
