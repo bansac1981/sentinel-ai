@@ -679,6 +679,13 @@ source_url: {json.dumps(article['url'])}
 source_date: {source_date}
 author: "Grid the Grey Editorial"
 thumbnail: {json.dumps(article.get('thumbnail', ''))}
+
+# ── Thumbnail override (optional) ──
+# To replace the auto-picked image:
+#   1. Click thumbnail_search URL below → find a photo on Pexels
+#   2. Copy the NUMBER from its URL: pexels.com/photo/some-title-NUMBER/
+#   3. Paste the number into thumbnail_pexels_id below (replace the empty quotes)
+#   4. Run: python pick_thumbnail.py --resolve --write
 thumbnail_pexels_id: ""
 thumbnail_search: {json.dumps("https://www.pexels.com/search/" + thumbnail_query.replace(" ", "+") + "/" if thumbnail_query else "")}
 

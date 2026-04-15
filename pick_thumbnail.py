@@ -133,14 +133,27 @@ _FM_SEARCH        = re.compile(r'^thumbnail_search:.*$', re.MULTILINE)
 _FM_ID_FIELD      = re.compile(r'^thumbnail_pexels_id:.*$', re.MULTILINE)
 
 
-def get_pending_id(text: str) -> str | None:
-    """Return the thumbnail_pexels_id value if it's a non-empty digit string."""
+def get_pending_id(text: str) -> tuple[str | None, str]:
+    """
+    Return (photo_id, source_field) for any pending Pexels ID, or (None, "").
+
+    Checks thumbnail_pexels_id first (correct field), then falls back to
+    thumbnail_search — in case the user accidentally pasted the numeric ID
+    there instead of into thumbnail_pexels_id.
+    """
+    # Correct field
     m = _FM_THUMBNAIL_ID.search(text)
     if m:
         val = m.group(1).strip()
         if val.isdigit():
-            return val
-    return None
+            return val, "thumbnail_pexels_id"
+
+    # Fallback: ID accidentally placed in thumbnail_search
+    search_val = get_search_url(text)
+    if search_val.isdigit():
+        return search_val, "thumbnail_search"
+
+    return None, ""
 
 
 def get_title(text: str) -> str:
@@ -178,22 +191,24 @@ def cmd_list() -> None:
             text = path.read_text(encoding="utf-8")
         except Exception:
             continue
-        pid = get_pending_id(text)
+        pid, field = get_pending_id(text)
         if pid:
             title = get_title(text)
             search = get_search_url(text)
-            pending.append((path, pid, title, search))
+            pending.append((path, pid, field, title, search))
 
     if not pending:
         log.info("No posts have a thumbnail_pexels_id set. Nothing to resolve.")
         return
 
     log.info(f"Posts with pending thumbnail picks ({len(pending)}):\n")
-    for path, pid, title, search in pending:
+    for path, pid, field, title, search in pending:
         print(f"  File   : {path.name}")
         print(f"  Title  : {title[:70]}")
-        print(f"  ID set : {pid}")
-        if search:
+        print(f"  ID set : {pid}  (found in: {field})")
+        if field != "thumbnail_pexels_id":
+            print(f"  ⚠ ID was in '{field}' — will be auto-corrected on resolve")
+        if search and not search.isdigit():
             print(f"  Search : {search}")
         print()
 
@@ -215,7 +230,7 @@ def cmd_resolve(write: bool) -> None:
             errors += 1
             continue
 
-        pid = get_pending_id(text)
+        pid, field = get_pending_id(text)
         if not pid:
             continue
 
@@ -223,6 +238,8 @@ def cmd_resolve(write: bool) -> None:
         log.info(f"\n  {path.name}")
         log.info(f"  Title : {title[:70]}")
         log.info(f"  ID    : {pid}")
+        if field != "thumbnail_pexels_id":
+            log.info(f"  ⚠ ID found in '{field}' (not thumbnail_pexels_id) — auto-correcting")
 
         photo = fetch_photo_by_id(pid)
         if not photo:
