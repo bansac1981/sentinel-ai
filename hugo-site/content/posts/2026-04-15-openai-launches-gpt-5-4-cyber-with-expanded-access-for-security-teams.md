@@ -11,8 +11,8 @@ source_url: "https://thehackernews.com/2026/04/openai-launches-gpt-54-cyber-with
 source_date: 2026-04-15T04:30:00+00:00
 author: "Grid the Grey Editorial"
 thumbnail: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrjpxBjlnOwelWhtbcyO3kBGpQwkfPkbL7RytRsDo26AL5rMz4inD_rjZLSfjy5R6skvnpiOA5M1LoDaAW1bCz4Isy4RMffGJVzgm4kYy5N-V1ijfLhVHefPcneHVGZyXZRjbLZZBHQRe3_QKhKfb5hss3a5hFveU8v2WkKHq-2wUmY_ocysIGGMP8GxdV/s1600/gpt.jpg"
-thumbnail_pexels_id: ""
-thumbnail_search: "30869075"
+thumbnail_pexels_id: "30869075"
+thumbnail_search: ""
 
 # ── AI Security Classification ──
 relevance_score: 7.2
