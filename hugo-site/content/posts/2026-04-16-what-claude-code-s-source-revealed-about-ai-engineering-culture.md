@@ -1,6 +1,6 @@
 ---
 title: "What Claude Code's Source Revealed About AI Engineering Culture"
-date: 2026-04-16T04:10:58+00:00
+date: "2026-04-16T04:18:34+00:00"
 draft: false
 slug: "what-claude-code-s-source-revealed-about-ai-engineering-culture"
 
