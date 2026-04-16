@@ -1,6 +1,6 @@
 ---
 title: "\u2018By Design\u2019 Flaw in MCP Could Enable Widespread AI Supply Chain Attacks"
-date: 2026-04-16T04:09:26+00:00
+date: "2026-04-16T04:24:54+00:00"
 draft: false
 slug: "by-design-flaw-in-mcp-could-enable-widespread-ai-supply-chain-attacks"
 
