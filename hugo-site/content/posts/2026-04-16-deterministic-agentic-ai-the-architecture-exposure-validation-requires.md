@@ -1,6 +1,6 @@
 ---
 title: "Deterministic + Agentic AI: The Architecture Exposure Validation Requires"
-date: 2026-04-16T04:10:26+00:00
+date: "2026-04-16T04:44:10+00:00"
 draft: false
 slug: "deterministic-agentic-ai-the-architecture-exposure-validation-requires"
 
