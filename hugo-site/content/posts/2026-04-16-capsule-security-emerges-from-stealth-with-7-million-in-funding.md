@@ -1,6 +1,6 @@
 ---
 title: "Capsule Security Emerges From Stealth With $7 Million in Funding"
-date: 2026-04-16T04:09:00+00:00
+date: "2026-04-16T04:23:06+00:00"
 draft: false
 slug: "capsule-security-emerges-from-stealth-with-7-million-in-funding"
 
