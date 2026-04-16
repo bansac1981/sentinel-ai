@@ -1,6 +1,6 @@
 ---
 title: "Microsoft, Salesforce Patch AI Agent Data Leak Flaws"
-date: 2026-04-16T04:09:58+00:00
+date: "2026-04-16T04:19:34+00:00"
 draft: false
 slug: "microsoft-salesforce-patch-ai-agent-data-leak-flaws"
 
