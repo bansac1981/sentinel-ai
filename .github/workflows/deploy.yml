@@ -143,7 +143,7 @@ jobs:
       # ─────────────────────────────────────────────────────────────
       # NEW: Google Indexing API (Workload Identity Federation)
       # ─────────────────────────────────────────────────────────────
-      
+      # 1. Authenticate to Google Cloud 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v2'
@@ -152,8 +152,18 @@ jobs:
           workload_identity_provider: 'projects/742662365824/locations/global/workloadIdentityPools/gtg-pool/providers/github-provider'
           service_account: 'google-seo-indexer@fiery-tribute-493613-r1.iam.gserviceaccount.com'
 
+      # 2. Trigger Indexing via direct API call (No third-party actions needed)
       - name: 'Google Indexing API 🚀'
-        uses: 'm3m3nto/giaa@main'
-        with:
-          sitemap_url: "https://gridthegrey.com/sitemap.xml"
+        run: |
+          # Get the temporary access token from the 'auth' step
+          ACCESS_TOKEN="${{ steps.auth.outputs.access_token }}"
+          
+          # Send the newest URL from your sitemap to Google
+          # Note: We are notifying Google of the sitemap itself so it recrawls everything
+          curl -H "Content-Type: application/json" \
+               -H "Authorization: Bearer $ACCESS_TOKEN" \
+               -X POST -d '{
+                 "url": "https://gridthegrey.com/sitemap.xml",
+                 "type": "URL_UPDATED"
+               }' "https://indexing.googleapis.com/v3/urlNotifications:publish"
     # ───────────────────────────────────────────────────────────── 
