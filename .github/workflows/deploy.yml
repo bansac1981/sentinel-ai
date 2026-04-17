@@ -139,3 +139,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        
+      # ─────────────────────────────────────────────────────────────
+      # NEW: Google Indexing API (Workload Identity Federation)
+      # ─────────────────────────────────────────────────────────────
+      
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          # Using your verified Project 742662365824 and gtg-pool
+          workload_identity_provider: 'projects/742662365824/locations/global/workloadIdentityPools/gtg-pool/providers/github-provider'
+          service_account: 'google-seo-indexer@fiery-tribute-493613-r1.iam.gserviceaccount.com'
+
+      - name: 'Google Indexing API 🚀'
+        uses: 'm3m3nto/giaa@v1.1'
+        with:
+          sitemap_url: "https://gridthegrey.com/sitemap.xml"
+    # ───────────────────────────────────────────────────────────── 
