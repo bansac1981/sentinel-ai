@@ -1,7 +1,7 @@
 ---
 title: "Frontier AI for Defenders: CrowdStrike and OpenAI TAC"
 date: 2026-04-17T02:43:32+00:00
-draft: true
+draft: false
 slug: "frontier-ai-for-defenders-crowdstrike-and-openai-tac"
 
 # ── Content metadata ──
