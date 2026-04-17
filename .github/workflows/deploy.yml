@@ -151,6 +151,8 @@ jobs:
           # Using your verified Project 742662365824 and gtg-pool
           workload_identity_provider: 'projects/742662365824/locations/global/workloadIdentityPools/gtg-pool/providers/github-provider'
           service_account: 'google-seo-indexer@fiery-tribute-493613-r1.iam.gserviceaccount.com'
+          token_format: 'access_token'
+          access_token_scopes: 'https://www.googleapis.com/auth/indexing'
 
       # 2. Trigger Indexing via direct API call (No third-party actions needed)
       - name: 'Google Indexing API 🚀'
