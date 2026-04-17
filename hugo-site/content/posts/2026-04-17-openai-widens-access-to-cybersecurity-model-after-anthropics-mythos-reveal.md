@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Widens Access to Cybersecurity Model After Anthropic\u2019s Mythos Reveal"
-date: 2026-04-17T02:44:06+00:00
+date: "2026-04-17T03:39:14+00:00"
 draft: false
 slug: "openai-widens-access-to-cybersecurity-model-after-anthropics-mythos-reveal"
 
