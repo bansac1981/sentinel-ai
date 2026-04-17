@@ -153,7 +153,7 @@ jobs:
           service_account: 'google-seo-indexer@fiery-tribute-493613-r1.iam.gserviceaccount.com'
 
       - name: 'Google Indexing API 🚀'
-        uses: 'm3m3nto/giaa@v1.1'
+        uses: 'm3m3nto/giaa@main'
         with:
           sitemap_url: "https://gridthegrey.com/sitemap.xml"
     # ───────────────────────────────────────────────────────────── 
