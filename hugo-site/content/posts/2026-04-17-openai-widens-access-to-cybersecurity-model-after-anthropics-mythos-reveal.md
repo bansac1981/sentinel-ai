@@ -10,7 +10,7 @@ source: "SecurityWeek"
 source_url: "https://www.securityweek.com/openai-widens-access-to-cybersecurity-model-after-anthropics-mythos-reveal/"
 source_date: 2026-04-16T14:27:06+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/36513381/pexels-photo-36513381.jpeg"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
