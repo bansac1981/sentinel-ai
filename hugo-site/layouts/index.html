@@ -25,6 +25,11 @@
   </div>
 </section>
 
+{{/* ── MOBILE-ONLY PODCAST PLAYER (hidden on desktop via CSS) ── */}}
+<div class="mobile-podcast-wrap">
+  {{ partial "podcast-player.html" . }}
+</div>
+
 {{/* ── PAGINATED ARTICLE LISTING ── */}}
 <section class="posts-section">
   {{ $paginator := .Paginate $allPosts 15 }}
