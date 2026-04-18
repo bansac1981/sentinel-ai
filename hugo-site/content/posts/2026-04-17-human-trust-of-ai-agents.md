@@ -10,7 +10,7 @@ source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/human-trust-of-ai-agents.html"
 source_date: 2026-04-16T09:41:24+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/7688749/pexels-photo-7688749.jpeg"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
