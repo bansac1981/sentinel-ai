@@ -480,17 +480,22 @@ def update_hugo_params(episode_url: str, episode_title: str) -> None:
 
     text = HUGO_TOML_PATH.read_text(encoding="utf-8")
 
-    def replace_or_append(content: str, key: str, value: str) -> str:
-        pattern = rf'^{re.escape(key)}\s*=.*$'
-        replacement = f'{key} = "{value}"'
-        if re.search(pattern, content, re.MULTILINE):
-            return re.sub(pattern, replacement, content, flags=re.MULTILINE)
-        # Append before closing [taxonomies] block
-        return content.replace("\n[taxonomies]", f'\n{replacement}\n\n[taxonomies]')
+    def replace_param(content: str, key: str, value: str, is_bool: bool = False) -> str:
+        """Replace an existing indented param inside [params] block."""
+        # Match the key with optional leading whitespace (params are indented in [params])
+        pattern = rf'^(\s*){re.escape(key)}\s*=.*$'
+        if is_bool:
+            repl = rf'\g<1>{key} = {value}'
+        else:
+            repl = rf'\g<1>{key} = "{value}"'
+        new_content, n = re.subn(pattern, repl, content, flags=re.MULTILINE)
+        if n == 0:
+            log.warning(f"  hugo.toml: param '{key}' not found — skipping update")
+        return new_content
 
-    text = replace_or_append(text, "latestEpisodeUrl",   episode_url)
-    text = replace_or_append(text, "latestEpisodeTitle", episode_title)
-    text = replace_or_append(text, "enablePodcastPlayer", "true")
+    text = replace_param(text, "latestEpisodeUrl",    episode_url)
+    text = replace_param(text, "latestEpisodeTitle",  episode_title)
+    text = replace_param(text, "enablePodcastPlayer", "true", is_bool=True)
 
     HUGO_TOML_PATH.write_text(text, encoding="utf-8")
     log.info("  hugo.toml updated with latest episode")
