@@ -24,7 +24,7 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
   scoreThreshold = 6.0
   enablePodcastPlayer = true
   latestEpisodeUrl = "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W16-onyx.mp3"
-  latestEpisodeTitle = "Week 16, 2026 — AI Security Briefing"
+  latestEpisodeTitle = "Week 16, 2026 - AI Security Briefing"
   podcastFeedUrl = "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/feed.xml"
 
 [taxonomies]
@@ -66,4 +66,17 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
     weight = 2
   [[menu.main]]
     name = "OWASP LLM"
-    url = "/framework
+    url = "/frameworks/owasp-llm/"
+    weight = 3
+  [[menu.main]]
+    name = "Threat Actors"
+    url = "/threat_actors/"
+    weight = 4
+  [[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 5
+  [[menu.main]]
+    name = "Newsletter"
+    url = "https://beehiiv.com"
+    weight = 6
