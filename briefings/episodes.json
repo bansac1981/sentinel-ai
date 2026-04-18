@@ -1,0 +1,13 @@
+{
+  "show": {
+    "title": "Grid the Grey — Weekly AI Security Briefing",
+    "description": "Weekly audio briefings covering the most critical AI security developments, threat actor activity, and framework updates. Every story scored, classified, and mapped to MITRE ATLAS and OWASP LLM Top 10.",
+    "link": "https://gridthegrey.com",
+    "image_url": "",
+    "author": "Grid the Grey",
+    "email": "",
+    "language": "en",
+    "category": "Technology"
+  },
+  "episodes": []
+}

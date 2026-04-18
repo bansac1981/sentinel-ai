@@ -380,6 +380,122 @@ def upload_to_r2(audio_bytes: bytes, filename: str) -> str:
     return public_url
 
 
+# ── Episode metadata ──────────────────────────────────────────────────────────
+EPISODES_JSON   = BRIEFINGS_DIR / "episodes.json"
+HUGO_TOML_PATH  = Path(__file__).parent / "hugo-site" / "hugo.toml"
+
+SHOW_DEFAULTS = {
+    "title":       PODCAST_NAME,
+    "description": (
+        "Weekly AI security intelligence briefings for CISO-level audiences. "
+        "Every episode covers the week's most significant threats — framework-mapped "
+        "to MITRE ATLAS and OWASP LLM Top 10 — and closes with concrete actions "
+        "for security leaders."
+    ),
+    "link":        "",   # populated from hugo.toml baseURL at save time
+    "image_url":   "",   # set to R2_PUBLIC_URL/podcast-artwork.jpg when artwork is uploaded
+    "author":      "Grid the Grey",
+    "email":       "bansalachin@gmail.com",
+    "language":    "en",
+    "category":    "Technology",
+}
+
+
+def load_episodes() -> dict:
+    """Load episodes.json or return a fresh structure."""
+    if EPISODES_JSON.exists():
+        return json.loads(EPISODES_JSON.read_text(encoding="utf-8"))
+    return {"show": SHOW_DEFAULTS.copy(), "episodes": []}
+
+
+def save_episodes(data: dict) -> None:
+    BRIEFINGS_DIR.mkdir(exist_ok=True)
+    EPISODES_JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def next_episode_num(data: dict) -> int:
+    if not data["episodes"]:
+        return 1
+    return max(e["episode_num"] for e in data["episodes"]) + 1
+
+
+def save_episode_metadata(
+    audio_bytes: bytes,
+    script: str,
+    label: str,
+    voice: str,
+    public_url: str,
+) -> None:
+    """Append this episode to briefings/episodes.json."""
+    data = load_episodes()
+
+    # Populate show link from hugo.toml if not set
+    if not data["show"].get("link") and HUGO_TOML_PATH.exists():
+        toml_text = HUGO_TOML_PATH.read_text(encoding="utf-8")
+        m = re.search(r'^baseURL\s*=\s*"([^"]+)"', toml_text, re.MULTILINE)
+        if m:
+            data["show"]["link"] = m.group(1).rstrip("/") + "/"
+
+    # Populate show image URL from R2 if not set
+    if not data["show"].get("image_url") and R2_PUBLIC_URL:
+        data["show"]["image_url"] = f"{R2_PUBLIC_URL}/podcast-artwork.jpg"
+
+    word_count  = len(script.split())
+    duration_s  = int(word_count / 120 * 60)   # ~120 words/min speaking pace
+    size_bytes  = len(audio_bytes)
+
+    # Parse year+week from label e.g. "2026-W17"
+    m = re.match(r'(\d{4})-W(\d+)', label)
+    if m:
+        year, week = int(m.group(1)), int(m.group(2))
+        episode_title = f"Week {week}, {year} — AI Security Briefing"
+    else:
+        episode_title = f"{label} — AI Security Briefing"
+
+    # Extract first sentence of script as short description
+    first_sentence = script.split(".")[0].strip() + "."
+
+    episode = {
+        "episode_num":   next_episode_num(data),
+        "week":          label,
+        "title":         episode_title,
+        "description":   first_sentence,
+        "r2_url":        public_url,
+        "pub_date":      datetime.now(timezone.utc).isoformat(),
+        "duration_secs": duration_s,
+        "size_bytes":    size_bytes,
+        "voice":         voice,
+    }
+
+    data["episodes"].insert(0, episode)   # newest first
+    save_episodes(data)
+    log.info(f"  Episode #{episode['episode_num']} saved to {EPISODES_JSON.name}")
+
+
+def update_hugo_params(episode_url: str, episode_title: str) -> None:
+    """Update hugo.toml with the latest episode URL and title."""
+    if not HUGO_TOML_PATH.exists():
+        log.warning("  hugo.toml not found — skipping param update")
+        return
+
+    text = HUGO_TOML_PATH.read_text(encoding="utf-8")
+
+    def replace_or_append(content: str, key: str, value: str) -> str:
+        pattern = rf'^{re.escape(key)}\s*=.*$'
+        replacement = f'{key} = "{value}"'
+        if re.search(pattern, content, re.MULTILINE):
+            return re.sub(pattern, replacement, content, flags=re.MULTILINE)
+        # Append before closing [taxonomies] block
+        return content.replace("\n[taxonomies]", f'\n{replacement}\n\n[taxonomies]')
+
+    text = replace_or_append(text, "latestEpisodeUrl",   episode_url)
+    text = replace_or_append(text, "latestEpisodeTitle", episode_title)
+    text = replace_or_append(text, "enablePodcastPlayer", "true")
+
+    HUGO_TOML_PATH.write_text(text, encoding="utf-8")
+    log.info("  hugo.toml updated with latest episode")
+
+
 # ── Commands ──────────────────────────────────────────────────────────────────
 def cmd_generate(days: int) -> None:
     if not ANTHROPIC_API_KEY:
@@ -462,6 +578,13 @@ def cmd_produce(draft_file: str | None, voice: str) -> None:
     # Upload to R2
     public_url = upload_to_r2(audio_bytes, filename)
 
+    # Save metadata + update Hugo params
+    save_episode_metadata(audio_bytes, script, label, voice, public_url)
+    m2 = re.match(r'(\d{4})-W(\d+)', label)
+    ep_title = f"Week {int(m2.group(2))}, {m2.group(1)} — AI Security Briefing" if m2 else label
+    update_hugo_params(public_url, ep_title)
+
+    feed_url = f"{R2_PUBLIC_URL}/feed.xml"
     print()
     print("=" * 60)
     print(f"  ✓ Episode produced successfully")
@@ -472,9 +595,12 @@ def cmd_produce(draft_file: str | None, voice: str) -> None:
     print(f"  R2 URL   : {public_url}")
     print()
     print("  Next steps:")
-    print("  1. Listen to the audio and verify quality")
-    print("  2. Run: python podcast_feed.py  (to update RSS feed)")
-    print("  3. Embed the Spotify player on the site once the feed is live")
+    print("  1. Listen to the audio at the R2 URL above")
+    print(f"  2. Run: python podcast_feed.py --update")
+    print(f"     → regenerates {feed_url}")
+    print(f"  3. git add hugo-site/hugo.toml briefings/")
+    print(f"     git commit -m 'feat: episode {ep_title}'")
+    print(f"     git push origin main")
     print("=" * 60)
 
 

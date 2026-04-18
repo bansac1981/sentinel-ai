@@ -1,0 +1,24 @@
+{{/* ── WEEKLY BRIEFING PODCAST PLAYER ── */}}
+{{ if and .Site.Params.enablePodcastPlayer .Site.Params.latestEpisodeUrl }}
+<div class="sidebar-widget sidebar-widget--podcast">
+  <div class="widget-header">
+    <span class="widget-header__icon">▶</span>
+    <span class="widget-header__title">WEEKLY BRIEFING</span>
+    <span class="pulse-dot pulse-dot--red"></span>
+  </div>
+  <div class="podcast-player">
+    {{ with .Site.Params.latestEpisodeTitle }}
+    <p class="podcast-player__title">{{ . }}</p>
+    {{ end }}
+    <audio class="podcast-player__audio" controls preload="none">
+      <source src="{{ .Site.Params.latestEpisodeUrl }}" type="audio/mpeg">
+      Your browser does not support audio playback.
+    </audio>
+    {{ if .Site.Params.podcastFeedUrl }}
+    <a href="{{ .Site.Params.podcastFeedUrl }}" class="podcast-player__feed" target="_blank" rel="noopener">
+      Subscribe via RSS ↗
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
