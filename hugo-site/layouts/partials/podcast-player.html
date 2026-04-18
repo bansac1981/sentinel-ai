@@ -6,14 +6,30 @@
     <span class="widget-header__title">WEEKLY BRIEFING</span>
     <span class="pulse-dot pulse-dot--red"></span>
   </div>
-  <div class="podcast-player">
+  <div class="podcast-player" id="podcastPlayer">
     {{ with .Site.Params.latestEpisodeTitle }}
     <p class="podcast-player__title">{{ . }}</p>
     {{ end }}
-    <audio class="podcast-player__audio" controls preload="none">
+
+    <audio id="podcastAudio" preload="none">
       <source src="{{ .Site.Params.latestEpisodeUrl }}" type="audio/mpeg">
-      Your browser does not support audio playback.
     </audio>
+
+    <div class="podcast-controls">
+      <button class="podcast-btn" id="podcastPlayBtn" aria-label="Play">
+        <svg id="podcastIconPlay" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        <svg id="podcastIconPause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </button>
+
+      <div class="podcast-progress-wrap" id="podcastProgressWrap">
+        <div class="podcast-progress-bar">
+          <div class="podcast-progress-fill" id="podcastFill"></div>
+        </div>
+      </div>
+
+      <span class="podcast-time" id="podcastTime">0:00</span>
+    </div>
+
     {{ if .Site.Params.podcastFeedUrl }}
     <a href="{{ .Site.Params.podcastFeedUrl }}" class="podcast-player__feed" target="_blank" rel="noopener">
       Subscribe via RSS ↗
@@ -21,4 +37,104 @@
     {{ end }}
   </div>
 </div>
+
+<style>
+.podcast-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+.podcast-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ff3b3b;
+  background: transparent;
+  color: #ff3b3b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+.podcast-btn:hover {
+  background: #ff3b3b;
+  color: #0a0a0f;
+}
+.podcast-progress-wrap {
+  flex: 1;
+  cursor: pointer;
+  padding: 8px 0;
+}
+.podcast-progress-bar {
+  height: 3px;
+  background: rgba(255,59,59,0.2);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.podcast-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #ff3b3b;
+  border-radius: 2px;
+  transition: width 0.25s linear;
+}
+.podcast-time {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: #ff3b3b;
+  flex-shrink: 0;
+  min-width: 28px;
+  text-align: right;
+}
+</style>
+
+<script>
+(function() {
+  var audio   = document.getElementById('podcastAudio');
+  var btn     = document.getElementById('podcastPlayBtn');
+  var iconPl  = document.getElementById('podcastIconPlay');
+  var iconPa  = document.getElementById('podcastIconPause');
+  var fill    = document.getElementById('podcastFill');
+  var timeEl  = document.getElementById('podcastTime');
+  var wrap    = document.getElementById('podcastProgressWrap');
+
+  function fmt(s) {
+    s = Math.floor(s) || 0;
+    var m = Math.floor(s / 60), sec = s % 60;
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  btn.addEventListener('click', function() {
+    if (audio.paused) { audio.play(); } else { audio.pause(); }
+  });
+
+  audio.addEventListener('play', function() {
+    iconPl.style.display = 'none';
+    iconPa.style.display = '';
+  });
+  audio.addEventListener('pause', function() {
+    iconPl.style.display = '';
+    iconPa.style.display = 'none';
+  });
+
+  audio.addEventListener('timeupdate', function() {
+    if (audio.duration) {
+      fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      timeEl.textContent = fmt(audio.currentTime);
+    }
+  });
+
+  wrap.addEventListener('click', function(e) {
+    if (!audio.duration) return;
+    var rect = wrap.getBoundingClientRect();
+    var pct  = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+  });
+})();
+</script>
 {{ end }}
