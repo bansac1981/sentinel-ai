@@ -10,7 +10,7 @@ source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/frontier-ai-for-defenders-crowdstrike-and-openai-tac/"
 source_date: 2026-04-17T02:42:55+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/6670889/pexels-photo-6670889.jpeg"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
