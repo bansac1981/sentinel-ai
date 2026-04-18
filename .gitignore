@@ -29,5 +29,10 @@ desktop.ini
 *.swp
 *.swo
 
+# ── Briefings ──
+# Draft scripts (.md) ARE committed — they're the approved source text.
+# MP3 files are NOT committed — they live in Cloudflare R2.
+briefings/*.mp3
+
 # NOTE: seen_urls.json is intentionally NOT ignored.
 # It must be committed so deduplication persists between GitHub Actions runs.
