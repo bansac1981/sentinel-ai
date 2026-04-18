@@ -10,7 +10,7 @@ source: "SecurityWeek"
 source_url: "https://www.securityweek.com/claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via-comments/"
 source_date: 2026-04-16T08:33:54+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/31343288/pexels-photo-31343288.jpeg"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
