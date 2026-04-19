@@ -10,7 +10,7 @@ source: "SecurityWeek"
 source_url: "https://www.securityweek.com/capsule-security-emerges-from-stealth-with-7-million-in-funding/"
 source_date: 2026-04-15T13:56:50+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/4761309/pexels-photo-4761309.jpeg"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
