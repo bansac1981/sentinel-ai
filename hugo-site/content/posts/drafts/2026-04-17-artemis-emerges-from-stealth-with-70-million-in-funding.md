@@ -1,7 +1,7 @@
----
+p---
 title: "Artemis Emerges From Stealth With $70 Million in Funding"
 date: 2026-04-17T02:44:30+00:00
-draft: true
+draft: false
 slug: "artemis-emerges-from-stealth-with-70-million-in-funding"
 
 # ── Content metadata ──
