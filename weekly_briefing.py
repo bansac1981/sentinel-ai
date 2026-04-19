@@ -63,10 +63,10 @@ load_dotenv()
 # ── Config ────────────────────────────────────────────────────────────────────
 POSTS_DIR       = Path(__file__).parent / "hugo-site" / "content" / "posts"
 BRIEFINGS_DIR   = Path(__file__).parent / "briefings"
-PODCAST_NAME    = "Grid the Grey Weekly Security Briefing"
+PODCAST_NAME    = "CISO AI Security Briefing"
 DEFAULT_DAYS    = 7
 DEFAULT_VOICE   = "onyx"
-TARGET_WORDS    = 600          # ~5 minutes at natural speaking pace
+TARGET_WORDS    = 450          # ~3.5 minutes at speaking pace; keeps chars well under TTS 4096 limit
 MAX_TTS_CHARS   = 4000         # OpenAI TTS limit is 4096; leave headroom
 MAX_ARTICLES    = 10           # Cap articles fed to Claude
 
@@ -213,19 +213,23 @@ This week's articles (ordered by relevance):
 
 Write a professional spoken-word script for this week's episode. Requirements:
 
+MANDATORY OPENING LINE — the script MUST begin with exactly:
+"This week's Grid-the-Grey CISO AI Security Brief —"
+Then continue directly with the week's overarching threat theme (no further preamble).
+
 STRUCTURE (in order):
-1. Opening hook (2–3 sentences): A crisp, compelling summary of the week's overarching threat theme. No "welcome to" intro — start directly with the intelligence.
+1. Opening (mandatory line above + 1–2 sentences): The week's overarching threat theme, stated crisply.
 2. Top stories (bulk of the episode): Cover the 3–5 most significant stories. For each, explain: what happened, why it matters strategically to a CISO, and any MITRE ATLAS or OWASP LLM framing where relevant. Weave them together — don't treat each as an isolated item.
-3. Threat landscape synthesis (3–4 sentences): Step back and identify the pattern — what does this week tell us about the direction of AI-enabled threats?
+3. Threat landscape synthesis (2–3 sentences): Step back and identify the pattern — what does this week tell us about the direction of AI-enabled threats?
 4. CISO action points (2–3 sentences): Concrete, specific actions a CISO should take or consider this week. Not generic advice — grounded in this week's stories.
 
 STYLE RULES:
-- Approximately {TARGET_WORDS} words total (~5 minutes at natural speaking pace)
+- STRICT LIMIT: {TARGET_WORDS} words maximum. Stay under this — the audio service cuts off beyond ~3,500 characters.
 - Written to be SPOKEN ALOUD — short sentences, natural rhythm, no jargon dumps
 - Tone: authoritative senior analyst briefing a board. Confident, precise, no filler phrases
 - No bullet points, no headers, no markdown formatting
 - No stage directions, no [PAUSE], no speaker notes
-- Do not mention the podcast name or sign off — start and end with the intelligence itself
+- Do not sign off or say goodbye — end with the last action point
 - Do not write "In conclusion" or "To summarise"
 
 Output ONLY the spoken script. Nothing else."""
@@ -235,7 +239,7 @@ Output ONLY the spoken script. Nothing else."""
 
     response = client.messages.create(
         model=CLAUDE_MODEL,
-        max_tokens=1200,
+        max_tokens=800,
         messages=[{"role": "user", "content": prompt}],
     )
 
