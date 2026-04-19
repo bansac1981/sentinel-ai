@@ -10,7 +10,7 @@ source: "Dark Reading"
 source_url: "https://www.darkreading.com/cloud-security/microsoft-salesforce-patch-ai-agent-data-leak-flaws"
 source_date: 2026-04-15T12:00:00+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/6275959/pexels-photo-6275959.jpeg"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
