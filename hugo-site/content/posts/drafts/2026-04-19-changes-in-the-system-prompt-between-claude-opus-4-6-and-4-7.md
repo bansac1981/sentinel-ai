@@ -1,7 +1,7 @@
 ---
 title: "Changes in the system prompt between Claude Opus 4.6 and 4.7"
 date: 2026-04-19T19:33:45+00:00
-draft: true
+draft: false
 slug: "changes-in-the-system-prompt-between-claude-opus-4-6-and-4-7"
 
 # ── Content metadata ──
