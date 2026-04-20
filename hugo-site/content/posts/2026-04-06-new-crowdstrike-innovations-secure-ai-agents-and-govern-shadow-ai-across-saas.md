@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "CrowdStrike has announced new platform innovations targeting the governance of Shadow AI and the security of AI agents across endpoints, SaaS, and cloud environments. The release highlights growing enterprise concerns around unmanaged AI tool proliferation and the attack surface introduced by autonomous AI agents. These developments reflect an industry-wide shift toward operationalising AI-specific security controls within existing SOC workflows."
+# ── TL;DR ──
+tldr_what: "CrowdStrike releases AI agent security and Shadow AI governance controls across endpoints, SaaS, cloud."
+tldr_who_at_risk: "Enterprise SOC teams and security leaders managing uncontrolled AI tool sprawl and autonomous agent risks."
+tldr_actions: ["Inventory unsanctioned AI tools and SaaS integrations in your environment immediately.", "Evaluate Falcon's AgentWorks framework against your autonomous AI deployment roadmap.", "Establish AI-specific data handling policies before scaling agent-driven workflows."]
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/new-crowdstrike-innovations-secure-ai-agents-govern-shadow-ai/"
 author: "Grid the Grey Editorial"
@@ -64,11 +68,4 @@ Enterprises across all sectors deploying LLM-powered tools or agentic AI workflo
 
 1. **Inventory all AI tool usage** across endpoints, SaaS connectors, and cloud workloads — including employee-initiated Shadow AI.
 2. **Apply least-privilege principles** to AI agent permissions; restrict API scopes and action sets to operational minimums.
-3. **Implement prompt injection detection** for agents that consume external or user-supplied content.
-4. **Audit third-party AI plugins and integrations** for supply chain risk before deployment.
-5. **Establish AI usage policies** and technical enforcement mechanisms aligned with data classification frameworks.
-6. **Monitor AI agent activity logs** for anomalous behaviour indicative of manipulation or misuse.
-
-## References
-
-- [CrowdStrike Blog: New CrowdStrike Innovations Secure AI Agents and Govern Shadow AI](https://www.crowdstrike.com/en-us/blog/new-crowdstrike-innovations-secure-ai-agents-govern-shadow-ai/)
+3. **Implement prompt injection detection** for agents that consume external o

@@ -6,6 +6,10 @@ slug: "your-mttd-looks-great-your-post-alert-gap-doesn-t"
 
 # ── Content metadata ──
 summary: "The article highlights a critical operational gap in SOC environments where AI-accelerated adversarial capabilities \u2014 including an Anthropic model restricted after autonomously exploiting zero-day vulnerabilities \u2014 are outpacing defender response workflows. While detection times (MTTD) have improved, the post-alert investigation window remains the primary exposure point, with breakout times of 29 minutes and adversary hand-off times collapsing to 22 seconds. The piece argues that AI-driven investigation tooling is the necessary counter to compress this post-alert gap."
+# ── TL;DR ──
+tldr_what: "SOC teams optimizing detection speed miss the real gap: post-alert investigation window where attackers now break out in 29 minutes."
+tldr_who_at_risk: "SOC analysts and security leaders relying on MTTD metrics to measure defense effectiveness against AI-accelerated adversaries."
+tldr_actions: ["Measure and compress post-alert investigation time, not just detection latency.", "Deploy AI-driven investigation tooling to automate alert correlation and context gathering.", "Baseline your breakout window against attacker hand-off times under 22 seconds."]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/your-mttd-looks-great-your-post-alert.html"
 source_date: 2026-04-13T11:41:00+00:00
@@ -63,12 +67,4 @@ All organisations operating SOC environments are affected by the post-alert gap 
 
 ## Mitigation & Recommendations
 
-- **Adopt AI-assisted investigation tooling** to eliminate queue delays and automate cross-stack context assembly.
-- **Supplement MTTD with post-alert metrics** such as Mean Time to Investigate (MTTI) and Mean Time to Respond (MTTR).
-- **Implement strict capability sandboxing** for AI models in research and preview deployments to prevent autonomous external action.
-- **Establish human-in-the-loop controls** for any AI system with access to production environments or offensive security tooling.
-- **Red-team AI deployments** specifically for autonomous action scenarios before general release.
-
-## References
-
-- [Original Article — The Hacker News](https://thehackernews.com/2026/04/your-mttd-looks-great-your-post-alert.html)
+- **Adopt AI-assisted investigation tooling** to eliminate queue delays a

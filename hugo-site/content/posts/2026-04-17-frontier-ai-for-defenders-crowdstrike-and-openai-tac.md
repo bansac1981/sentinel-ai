@@ -6,6 +6,10 @@ slug: "frontier-ai-for-defenders-crowdstrike-and-openai-tac"
 
 # ── Content metadata ──
 summary: "CrowdStrike has announced a partnership with OpenAI's Threat Actor Collaboration (TAC) programme, positioning frontier AI models as defensive tools within the cybersecurity operations space. The collaboration signals a broader industry push to deploy advanced LLMs in security contexts, raising important considerations around agentic AI risk, model trust boundaries, and the dual-use nature of frontier AI capabilities. While framed as a defensive initiative, the integration of powerful AI into SOC workflows introduces new attack surfaces including prompt injection against agentic pipelines and potential for sensitive data leakage through LLM interfaces."
+# ── TL;DR ──
+tldr_what: "CrowdStrike integrates OpenAI frontier models into SOC workflows, introducing agentic AI attack surfaces."
+tldr_who_at_risk: "Security operations teams deploying CrowdStrike's Charlotte AI with elevated endpoint access and telemetry visibility."
+tldr_actions: ["Audit prompt injection risks in agentic pipelines handling untrusted threat data.", "Implement strict output filtering and context isolation for LLM-processed sensitive incident data.", "Define clear tool-use boundaries and disable unnecessary remediation actions in AI agents."]
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/frontier-ai-for-defenders-crowdstrike-and-openai-tac/"
 source_date: 2026-04-17T02:42:55+00:00
@@ -66,12 +70,4 @@ The primary audience affected is enterprise security operations teams adopting C
 ## Mitigation & Recommendations
 
 - Enforce strict input sanitisation on all data ingested by LLM-connected pipelines to mitigate indirect prompt injection.
-- Implement human-in-the-loop review for any agentic actions with real-world consequences (isolation, blocking, remediation).
-- Audit LLM output logs and context windows for sensitive data exposure.
-- Apply least-privilege access controls to model inference API credentials.
-- Red-team agentic AI deployments specifically for prompt injection and evasion scenarios before production rollout.
-- Monitor for adversarial adaptation—threat actors who become aware of AI-assisted triage may deliberately craft evasive artefacts.
-
-## References
-
-- [CrowdStrike Blog: Frontier AI for Defenders — CrowdStrike and OpenAI TAC](https://www.crowdstrike.com/en-us/blog/frontier-ai-for-defenders-crowdstrike-and-openai-tac/)
+- Implement human-in-the-loop review for any agentic actions with r

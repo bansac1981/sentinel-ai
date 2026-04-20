@@ -6,6 +6,10 @@ slug: "openai-revokes-macos-app-certificate-after-malicious-axios-supply-chain-i
 
 # ── Content metadata ──
 summary: "A North Korean threat group (UNC1069) compromised the popular npm Axios library via a supply chain attack, injecting a backdoor (WAVESHAPER.V2) into two poisoned versions that were inadvertently downloaded by OpenAI's macOS app-signing GitHub Actions workflow. Although OpenAI found no evidence of certificate exfiltration or user data compromise, the incident exposed the signing credentials for ChatGPT Desktop, Codex, Codex CLI, and Atlas, prompting certificate revocation and mandatory app updates by May 8, 2026. The attack highlights the acute risk of software supply chain compromises against AI product delivery pipelines."
+# ── TL;DR ──
+tldr_what: "North Korean actors compromised Axios npm library, exposing OpenAI's macOS app-signing certificates."
+tldr_who_at_risk: "ChatGPT Desktop, Codex, and Atlas users relying on OpenAI's macOS applications for daily workflows."
+tldr_actions: ["Update all OpenAI macOS apps to versions signed with new certificates by May 8, 2026.", "Audit GitHub Actions workflows for npm dependency pinning and verification controls.", "Monitor for WAVESHAPER.V2 backdoor indicators on macOS, Windows, and Linux systems."]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/openai-revokes-macos-app-certificate.html"
 source_date: 2026-04-13T06:50:00+00:00

@@ -6,6 +6,10 @@ slug: "human-trust-of-ai-agents"
 
 # ── Content metadata ──
 summary: "Research published via Schneier on Security reveals that humans systematically over-trust LLMs in strategic game environments, defaulting to Nash-equilibrium rational play based on assumptions of LLM rationality and cooperation. This behavioural bias has direct security implications for mixed human-LLM systems, where adversaries could exploit predictable human over-trust to manipulate decision outcomes. The findings underscore systemic risks in deploying LLMs as agents in high-stakes economic or security-relevant decision loops."
+# ── TL;DR ──
+tldr_what: "Humans systematically over-trust LLM agents in strategic games, defaulting to Nash-equilibrium play."
+tldr_who_at_risk: "Organizations deploying LLMs in mixed human-AI decision loops, especially high-stakes economic or security contexts where analytical staff are most vulnerable."
+tldr_actions: ["Audit human-LLM interaction protocols for over-trust bias in adversarial settings.", "Add explicit adversarial red-teaming against LLM agents before deployment.", "Train decision-makers to treat LLM partners as potentially uncooperative competitors."]
 source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/human-trust-of-ai-agents.html"
 source_date: 2026-04-16T09:41:24+00:00
@@ -63,11 +67,4 @@ The affected population includes any organisation deploying LLMs in mixed human-
 
 - **Audit human-LLM interaction design** in high-stakes systems to identify where trust asymmetries could be exploited.
 - **Train operators** to treat LLM agents as probabilistic, manipulable systems rather than rational cooperative actors.
-- **Implement human-in-the-loop checkpoints** that explicitly require adversarial thinking before acting on LLM-informed decisions.
-- **Red-team mixed human-LLM workflows** to surface exploitable behavioural patterns before production deployment.
-- Incorporate behavioural security into mechanism design for any system featuring LLM agents alongside human decision-makers.
-
-## References
-
-- [Schneier on Security — Human Trust of AI Agents](https://www.schneier.com/blog/archives/2026/04/human-trust-of-ai-agents.html)
-- [Related ScienceDirect paper on LLM behaviour in beauty contest games](https://www.sciencedirect.com/science/article/abs/pii/S0167268125004470)
+- **Implement 

@@ -6,11 +6,15 @@ slug: "capsule-security-emerges-from-stealth-with-7-million-in-funding"
 
 # ── Content metadata ──
 summary: "Capsule Security, an Israeli startup, has emerged from stealth with $7 million in seed funding focused on runtime security for AI agents, continuously monitoring their behaviour to detect and prevent unsafe or malicious actions. This positions the company within the rapidly growing agentic AI security space, where autonomous agents executing actions on behalf of users represent a significant and underexplored attack surface. The funding signals growing investor recognition of the risks posed by unmonitored AI agent behaviour, including prompt injection, excessive agency, and unintended tool use."
+# ── TL;DR ──
+tldr_what: "Capsule Security launches with $7M to monitor AI agent runtime behaviour and block unsafe actions."
+tldr_who_at_risk: "Enterprises deploying autonomous AI agents with tool access, API integrations, and code execution capabilities."
+tldr_actions: ["Implement runtime monitoring for all deployed AI agents with broad tool permissions.", "Audit agent guardrails against prompt injection, excessive agency, and insecure output handling.", "Evaluate runtime security solutions designed for agentic AI systems in your stack."]
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/capsule-security-emerges-from-stealth-with-7-million-in-funding/"
 source_date: 2026-04-15T13:56:50+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/4761309/pexels-photo-4761309.jpeg"
+thumbnail: ""
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
@@ -72,11 +76,4 @@ Organisations deploying autonomous AI agents in production environments — part
 ## Mitigation & Recommendations
 
 - **Implement runtime behavioural monitoring** for all production AI agents, logging tool calls, external requests, and data access patterns.
-- **Apply least-privilege principles** to agent tool access; restrict permissions to only what is operationally necessary.
-- **Validate and sanitise all external inputs** fed to agents to reduce prompt injection exposure.
-- **Define and enforce agent safety policies** programmatically, with automated circuit-breakers for policy violations.
-- **Audit agent action logs** regularly for anomalous behaviour patterns indicative of hijacking or misuse.
-
-## References
-
-- [Capsule Security Emerges From Stealth With $7 Million in Funding — SecurityWeek](https://www.securityweek.com/capsule-security-emerges-from-stealth-with-7-million-in-funding/)
+- **Apply leas

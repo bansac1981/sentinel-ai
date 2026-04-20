@@ -6,6 +6,10 @@ slug: "openai-impacted-by-north-korea-linked-axios-supply-chain-hack"
 
 # ── Content metadata ──
 summary: "OpenAI has been impacted by a supply chain attack attributed to North Korea-linked threat actors, involving a compromised macOS code signing certificate associated with the Axios JavaScript library. The incident highlights the vulnerability of major AI platforms to upstream software supply chain compromises, which could expose users to malicious code distributed through trusted tooling. As a leading AI infrastructure provider, any compromise of OpenAI's build or distribution pipeline carries significant downstream risk for enterprises relying on its models and APIs."
+# ── TL;DR ──
+tldr_what: "North Korea-linked actors compromised Axios macOS certificate, exposing OpenAI and downstream users."
+tldr_who_at_risk: "Enterprises and developers relying on OpenAI APIs and services that depend on compromised Axios library."
+tldr_actions: ["Audit Axios dependencies in your build and development pipelines immediately.", "Revoke or re-validate any macOS code signing certificates from affected timeframe.", "Monitor for suspicious code execution or network activity from Axios-dependent applications."]
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/openai-impacted-by-north-korea-linked-axios-supply-chain-hack/"
 source_date: 2026-04-13T12:34:06+00:00
@@ -66,10 +70,4 @@ The immediate impact falls on OpenAI's internal systems, with potential exposure
 
 - **Audit Axios dependencies**: Organisations using Axios should verify package integrity via npm audit and cross-check published checksums against known-good versions.
 - **Revoke and reissue certificates**: Any certificates potentially in scope should be revoked immediately; OpenAI's response reportedly includes certificate remediation steps.
-- **Enforce code signing policies**: Implement strict allowlisting of trusted certificates in macOS enterprise environments using MDM tooling.
-- **Monitor CI/CD pipelines**: Inspect build logs for unexpected signing operations or anomalous package fetch behaviour.
-- **Threat intelligence subscription**: Track North Korean TTPs via CISA advisories and vendor threat intelligence feeds focused on DPRK-affiliated clusters.
-
-## References
-
-- [OpenAI Impacted by North Korea-Linked Axios Supply Chain Hack – SecurityWeek](https://www.securityweek.com/openai-impacted-by-north-korea-linked-axios-supply-chain-hack/)
+- **Enforce code signing policies**: Implement strict allowlisting of trusted c

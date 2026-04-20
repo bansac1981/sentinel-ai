@@ -6,6 +6,10 @@ slug: "claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injecti
 
 # ── Content metadata ──
 summary: "A researcher has disclosed a novel prompt injection attack technique dubbed 'Comment and Control,' demonstrating that popular AI coding agents \u2014 including Claude Code, Gemini CLI, and GitHub Copilot Agents \u2014 can be manipulated through malicious instructions embedded in source code comments. The attack exploits the tendency of agentic coding tools to process and act upon contextual content within files they are tasked to read or modify. This represents a meaningful escalation in the risk surface of AI-assisted software development workflows."
+# ── TL;DR ──
+tldr_what: "AI coding agents hijacked via malicious comments embedded in source code files."
+tldr_who_at_risk: "Developers using Claude Code, Gemini CLI, or GitHub Copilot Agents on untrusted or third-party repositories."
+tldr_actions: ["Audit code comments in external repos before running agentic tools on them.", "Request sandbox isolation or confirmation prompts from AI tool vendors.", "Monitor agent activity logs for unexpected file access or exfiltration attempts."]
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via-comments/"
 source_date: 2026-04-16T08:33:54+00:00
@@ -76,10 +80,4 @@ The risk is compounded when agents operate with minimal human-in-the-loop oversi
 
 1. **Restrict agent permissions**: Apply least-privilege principles — limit file system scope, disable outbound network calls where unnecessary.
 2. **Enable human confirmation steps**: Configure agents to require explicit approval before executing sensitive operations.
-3. **Sanitise untrusted inputs**: Treat third-party or externally sourced code files as untrusted when processed by AI agents.
-4. **Monitor agent outputs**: Log and audit all actions taken by coding agents, particularly file writes and shell commands.
-5. **Vendor mitigations**: Follow advisories from Anthropic, Google, and GitHub as patches or guardrails are released in response to this disclosure.
-
-## References
-
-- [Claude Code, Gemini CLI, GitHub Copilot Agents Vulnerable to Prompt Injection via Comments — SecurityWeek](https://www.securityweek.com/claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via-comments/)
+3. **Sanitise untrusted inputs**: Treat third-party or externally sourc

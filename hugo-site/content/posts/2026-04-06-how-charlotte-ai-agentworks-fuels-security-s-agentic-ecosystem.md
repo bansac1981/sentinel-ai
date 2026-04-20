@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "CrowdStrike's Charlotte AI AgentWorks introduces an agentic security ecosystem where autonomous AI agents collaborate to perform security operations tasks with reduced human intervention. The platform raises important considerations around excessive agency, trust boundaries between agents, and the attack surface introduced by interconnected AI systems in security-critical environments. As agentic SOC architectures proliferate, the security of the AI agents themselves becomes a primary concern."
+# ── TL;DR ──
+tldr_what: "CrowdStrike's Charlotte AI AgentWorks enables autonomous SOC agents, expanding attack surface through agent-to-agent trust risks."
+tldr_who_at_risk: "Security teams deploying multi-agent AI orchestration in SOCs where compromised agents can propagate malicious instructions across the pipeline."
+tldr_actions: ["Enforce strict agent-to-agent validation and context verification in agentic SOC pipelines.", "Implement human-in-the-loop approvals for all agent remediation actions (isolation, firewall changes).", "Audit prompt injection and agent manipulation vectors before production deployment."]
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/how-charlotte-ai-agentworks-fuels-securitys-agentic-ecosystem/"
 author: "Grid the Grey Editorial"
@@ -62,11 +66,4 @@ Organisations adopting agentic SOC architectures face a dual risk: the operation
 ## Mitigation & Recommendations
 
 1. **Enforce human-in-the-loop checkpoints** for high-impact remediation actions such as endpoint isolation or credential revocation.
-2. **Audit agent-to-agent communication** for trust boundary enforcement and validate that context passed between agents cannot be manipulated by attacker-controlled inputs.
-3. **Apply input sanitisation** to any external data (logs, alerts, file content) processed as context by LLM-backed agents.
-4. **Monitor agent API calls** for anomalous inference patterns that could indicate adversarial probing.
-5. **Conduct adversarial red-teaming** of the agentic pipeline, specifically testing indirect prompt injection scenarios.
-
-## References
-
-- [CrowdStrike Blog: How Charlotte AI AgentWorks Fuels Security's Agentic Ecosystem](https://www.crowdstrike.com/en-us/blog/how-charlotte-ai-agentworks-fuels-securitys-agentic-ecosystem/)
+2. **Audit agent-to-agent communication** for trust boundary enforcement and validate that context pa

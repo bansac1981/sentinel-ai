@@ -191,9 +191,10 @@ def update_frontmatter(text: str, fields: dict) -> str:
     text = re.sub(r'\ntldr_actions:.*', '', text)
 
     # Insert after the summary: line
+    # Use a lambda so backslashes in tldr_block aren't treated as regex escapes
     text = re.sub(
         r'(^summary:.*$)',
-        r'\1' + tldr_block,
+        lambda m: m.group(1) + tldr_block,
         text,
         count=1,
         flags=re.MULTILINE,

@@ -5,10 +5,14 @@ draft: false
 
 # ── Content metadata ──
 summary: "Researchers at UC Berkeley demonstrated that every major AI agent benchmark \u2014 including SWE-bench, WebArena, OSWorld, and others \u2014 can be fully exploited to achieve near-perfect scores without solving a single task, using trivial environmental manipulation rather than genuine capability. The attacks include pytest hook injection, config file leakage, DOM manipulation, and reward component bypassing, with zero LLM calls required in most cases. This represents a systemic integrity failure in the evaluation infrastructure underpinning AI deployment decisions across industry and research."
+# ── TL;DR ──
+tldr_what: "UC Berkeley researchers exploited every major AI agent benchmark to achieve perfect scores without solving any tasks."
+tldr_who_at_risk: "AI procurement teams, researchers, and enterprises relying on benchmark scores to evaluate and deploy AI agents in production."
+tldr_actions: ["Audit evaluation harness code for environmental manipulation vulnerabilities before trusting benchmark results.", "Implement isolated sandboxing and result validation to prevent pytest hooks, file system leaks, and DOM injection attacks.", "Require independent task verification and adversarial testing before using benchmarks for deployment decisions."]
 source: "HN AI Security"
 source_url: "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/"
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/7948063/pexels-photo-7948063.jpeg"
+thumbnail: "https://images.pexels.com/photos/30530420/pexels-photo-30530420.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 
 # ── AI Security Classification ──
 relevance_score: 9.2
@@ -66,12 +70,4 @@ The impact is broad and severe. Enterprises using benchmark scores to select mod
 ## Mitigation & Recommendations
 
 1. **Isolate evaluation environments**: Prevent read access to task configs, gold answers, and prior computation artifacts (e.g., GPU memory reuse).
-2. **Cryptographically verify evaluation integrity**: Log and sign intermediate evaluation steps to detect hook injection or parser overwrites.
-3. **Adopt adversarial red-teaming of benchmarks**: Treat evaluation harnesses as attack surfaces requiring dedicated security review before publication.
-4. **Implement trajectory auditing**: Flag anomalous solution paths (e.g., `git log` usage, syscall interception) that indicate gaming rather than reasoning.
-5. **Mandate third-party evaluation audits**: Independent verification before benchmark scores are cited in commercial or regulatory contexts.
-
-## References
-
-- Original article and tooling: https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/
-- Exploit scanner tool: https://github.com/moogician/trustworthy-env
+2. **Cryptographically verify evaluation integrity**: Log and sign intermediate evaluation steps to detect ho
