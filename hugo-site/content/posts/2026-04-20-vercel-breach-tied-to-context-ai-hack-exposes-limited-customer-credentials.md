@@ -1,6 +1,6 @@
 ---
 title: "Vercel Breach Tied to Context AI Hack Exposes Limited Customer Credentials"
-date: 2026-04-20T05:20:32+00:00
+date: "2026-04-20T05:21:47+00:00"
 draft: false
 slug: "vercel-breach-tied-to-context-ai-hack-exposes-limited-customer-credentials"
 
