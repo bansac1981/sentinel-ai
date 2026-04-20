@@ -96,15 +96,3 @@
   </div>
 </div>
 
-{{/* ── TAGS CLOUD ── */}}
-<div class="sidebar-widget">
-  <div class="widget-header">
-    <span class="widget-header__icon">#</span>
-    <span class="widget-header__title">TAGS</span>
-  </div>
-  <div class="tags-cloud">
-    {{ range .Site.Taxonomies.tags.ByCount }}
-    <a href="{{ .Page.RelPermalink }}" class="tag-cloud-item">{{ .Page.Title }}</a>
-    {{ end }}
-  </div>
-</div>
