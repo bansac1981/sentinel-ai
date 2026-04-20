@@ -1,8 +1,9 @@
 {{/* ── TL;DR BOX ──────────────────────────────────────────────────────────────
-   Three bullets only: What happened · Who's at risk · Act now
-   MITRE/OWASP mapping is shown in the framework panel below (not repeated here).
+   Three bullets: What happened · Who's at risk · Act now
+   Uses tldr_what (concise 1-liner) for "What happened", falls back to summary.
+   MITRE/OWASP shown in the framework panel below — not repeated here.
 ── */}}
-{{ if .Params.summary }}
+{{ if or .Params.tldr_what .Params.summary }}
 <div class="tldr-box">
   <div class="tldr-box__header">
     <span class="tldr-box__label">TL;DR</span>
@@ -14,7 +15,7 @@
   <ul class="tldr-list">
 
     <li>
-      <strong>What happened:</strong> {{ .Params.summary }}
+      <strong>What happened:</strong> {{ with .Params.tldr_what }}{{ . }}{{ else }}{{ .Params.summary }}{{ end }}
     </li>
 
     {{ with .Params.tldr_who_at_risk }}
