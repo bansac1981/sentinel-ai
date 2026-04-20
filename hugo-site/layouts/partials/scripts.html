@@ -240,4 +240,53 @@
 
   setTimeout(doRefresh, INTERVAL_MS);
 })();
+
+// ── Podcast player (container-relative — safe for multiple instances) ──
+(function() {
+  function fmt(s) {
+    s = Math.floor(s) || 0;
+    var m = Math.floor(s / 60), sec = s % 60;
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  document.querySelectorAll('.sidebar-widget--podcast').forEach(function(widget) {
+    var audio   = widget.querySelector('.podcast-audio');
+    var btn     = widget.querySelector('.podcast-btn');
+    var iconPl  = widget.querySelector('.icon-play');
+    var iconPa  = widget.querySelector('.icon-pause');
+    var fill    = widget.querySelector('.podcast-progress-fill');
+    var timeEl  = widget.querySelector('.podcast-time');
+    var wrap    = widget.querySelector('.podcast-progress-wrap');
+
+    if (!audio || !btn) return;
+
+    btn.addEventListener('click', function() {
+      // Pause all other instances first
+      document.querySelectorAll('.podcast-audio').forEach(function(a) {
+        if (a !== audio) a.pause();
+      });
+      if (audio.paused) { audio.play(); } else { audio.pause(); }
+    });
+
+    audio.addEventListener('play', function() {
+      iconPl.style.display = 'none';
+      iconPa.style.display = '';
+    });
+    audio.addEventListener('pause', function() {
+      iconPl.style.display = '';
+      iconPa.style.display = 'none';
+    });
+    audio.addEventListener('timeupdate', function() {
+      if (audio.duration) {
+        fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+        timeEl.textContent = fmt(audio.currentTime);
+      }
+    });
+    wrap.addEventListener('click', function(e) {
+      if (!audio.duration) return;
+      var rect = wrap.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    });
+  });
+})();
 </script>

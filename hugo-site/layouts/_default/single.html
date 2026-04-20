@@ -23,10 +23,6 @@
 
     <h1 class="article-title" itemprop="headline">{{ .Title }}</h1>
 
-    {{ if .Params.summary }}
-    <p class="article-summary" itemprop="description">{{ .Params.summary }}</p>
-    {{ end }}
-
     <div class="article-byline">
       {{ if .Params.source }}
       <span class="article-source">
@@ -46,10 +42,8 @@
     </div>
   </header>
 
-  {{/* ── HERO IMAGE ── */}}
-  <div class="article-hero-image">
-    {{ partial "article-image.html" . }}
-  </div>
+  {{/* ── TL;DR BOX ── */}}
+  {{ partial "tldr.html" . }}
 
   {{/* ── FRAMEWORK ANALYSIS PANEL ── */}}
   {{ if or .Params.mitre_techniques .Params.owasp_categories }}
@@ -101,6 +95,11 @@
     </div>
   </aside>
   {{ end }}
+
+  {{/* ── HERO IMAGE ── */}}
+  <div class="article-hero-image">
+    {{ partial "article-image.html" . }}
+  </div>
 
   {{/* ── ARTICLE BODY ── */}}
   <div class="article-body" itemprop="articleBody">

@@ -557,6 +557,9 @@ Return a single valid JSON object (no markdown fences, no extra text) with exact
   "categories": ["<from the valid list>", ...],
   "tags": ["<lowercase-hyphenated>", ...],
   "threat_actors": ["<nation-state|cybercriminal|researcher|insider|hacktivist>", ...],
+  "tldr_what": "<1 punchy sentence — the core event/finding, no filler, max 20 words>",
+  "tldr_who_at_risk": "<1 concise sentence: who is most directly exposed and why>",
+  "tldr_actions": ["<short imperative action 1>", "<short imperative action 2>", "<short imperative action 3>"],
   "article_body": "<full markdown article body — see format below>"
 }}
 
@@ -690,6 +693,11 @@ mitre_techniques: {to_yaml_list(analysis.get('mitre_techniques', []))}
 
 # ── OWASP LLM Top 10 ──
 owasp_categories: {to_yaml_list(analysis.get('owasp_categories', []))}
+
+# ── TL;DR ──
+tldr_what: {json.dumps(analysis.get('tldr_what', ''))}
+tldr_who_at_risk: {json.dumps(analysis.get('tldr_who_at_risk', ''))}
+tldr_actions: {to_yaml_list(analysis.get('tldr_actions', []))}
 
 # ── Taxonomies ──
 categories: {to_yaml_list(analysis.get('categories', []))}

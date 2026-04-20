@@ -4,11 +4,7 @@ name: "Grid the Grey — Daily Pipeline"
 # Triggers
 # ─────────────────────────────────────────────
 on:
-  schedule:
-    # 9:30 AM IST = 04:00 UTC daily
-    - cron: "0 4 * * *"
-
-  # Manual trigger from GitHub Actions UI
+  # Manual trigger only — run from GitHub Actions UI or GitHub mobile app
   workflow_dispatch:
     inputs:
       limit:

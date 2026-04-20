@@ -3,11 +3,23 @@
     "title": "Grid the Grey — Weekly AI Security Briefing",
     "description": "Weekly audio briefings covering the most critical AI security developments, threat actor activity, and framework updates. Every story scored, classified, and mapped to MITRE ATLAS and OWASP LLM Top 10.",
     "link": "https://gridthegrey.com",
-    "image_url": "",
+    "image_url": "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/podcast-artwork.jpg",
     "author": "Grid the Grey",
     "email": "",
     "language": "en",
     "category": "Technology"
   },
-  "episodes": []
+  "episodes": [
+    {
+      "episode_num": 1,
+      "week": "2026-W16",
+      "title": "Week 16, 2026 — AI Security Briefing",
+      "description": "This week, the attack surface for agentic AI collapsed faster than most security teams can track.",
+      "r2_url": "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W16-onyx.mp3",
+      "pub_date": "2026-04-18T17:01:36.326652+00:00",
+      "duration_secs": 325,
+      "size_bytes": 4990080,
+      "voice": "onyx"
+    }
+  ]
 }

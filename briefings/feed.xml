@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:atom="http://www.w3.org/2005/Atom">
+
+  <channel>
+    <title>Grid the Grey — Weekly AI Security Briefing</title>
+    <link>https://gridthegrey.com</link>
+    <description>Weekly audio briefings covering the most critical AI security developments, threat actor activity, and framework updates. Every story scored, classified, and mapped to MITRE ATLAS and OWASP LLM Top 10.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 18 Apr 2026 17:07:12 +0000</lastBuildDate>
+    <atom:link href="https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <itunes:author>Grid the Grey</itunes:author>
+    <itunes:summary>Weekly audio briefings covering the most critical AI security developments, threat actor activity, and framework updates. Every story scored, classified, and mapped to MITRE ATLAS and OWASP LLM Top 10.</itunes:summary>
+    <itunes:category text="Technology"/>
+    <itunes:image href="https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/podcast-artwork.jpg"/>
+    
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+
+    <item>
+      <title>Week 16, 2026 — AI Security Briefing</title>
+      <description>This week, the attack surface for agentic AI collapsed faster than most security teams can track.</description>
+      <pubDate>Sat, 18 Apr 2026 17:01:36 +0000</pubDate>
+      <enclosure url="https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W16-onyx.mp3" length="4990080" type="audio/mpeg"/>
+      <guid isPermaLink="false">https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W16-onyx.mp3</guid>
+      <itunes:title>Week 16, 2026 — AI Security Briefing</itunes:title>
+      <itunes:duration>05:25</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+
+  </channel>
+</rss>
