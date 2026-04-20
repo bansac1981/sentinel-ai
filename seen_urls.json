@@ -49,6 +49,7 @@
     "https://isc.sans.edu/diary/rss/32902",
     "https://isc.sans.edu/diary/rss/32904",
     "https://isc.sans.edu/diary/rss/32906",
+    "https://isc.sans.edu/diary/rss/32912",
     "https://isitagentready.com",
     "https://krebsonsecurity.com/2026/02/kimwolf-botnet-swamps-anonymity-network-i2p/",
     "https://krebsonsecurity.com/2026/02/patch-tuesday-february-2026-edition/",
@@ -186,6 +187,7 @@
     "https://thehackernews.com/2026/04/uac-0247-targets-ukrainian-clinics-and.html",
     "https://thehackernews.com/2026/04/uat-10362-targets-taiwanese-ngos-with.html",
     "https://thehackernews.com/2026/04/unc1069-social-engineering-of-axios.html",
+    "https://thehackernews.com/2026/04/vercel-breach-tied-to-context-ai-hack.html",
     "https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html",
     "https://thehackernews.com/2026/04/webinar-how-to-close-identity-gaps-in.html",
     "https://thehackernews.com/2026/04/weekly-recap-axios-hack-chrome-0-day.html",
@@ -430,5 +432,5 @@
     "https://www.wheresyoured.at/the-subprime-ai-crisis-is-here/",
     "https://www.wired.com/story/openai-backs-bill-exempt-ai-firms-model-harm-lawsuits/"
   ],
-  "updated_at": "2026-04-19T19:33:46.776190+00:00"
+  "updated_at": "2026-04-20T05:20:33.077768+00:00"
 }
