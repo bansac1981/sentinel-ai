@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Revokes macOS App Certificate After Malicious Axios Supply Chain Incident"
 date: 2026-04-14T05:59:28+00:00
-draft: true
+draft: false
 slug: "openai-revokes-macos-app-certificate-after-malicious-axios-supply-chain-incident"
 
 # ── Content metadata ──
