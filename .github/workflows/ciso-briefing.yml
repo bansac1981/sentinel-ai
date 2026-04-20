@@ -1,0 +1,163 @@
+name: "Grid the Grey — CISO Audio Briefing"
+
+# ─────────────────────────────────────────────
+# Manual trigger only — run from GitHub Actions UI or GitHub mobile app
+#
+# TWO-STEP WORKFLOW (run them in order):
+#
+#   Step 1 — "generate"
+#     Claude reads recent published articles and writes the script.
+#     Commits briefings/week-YYYY-WXX.md to the repo.
+#     → REVIEW the committed file in GitHub before proceeding.
+#
+#   Step 2 — "produce"
+#     Converts the approved script to MP3 via OpenAI TTS.
+#     Uploads audio to Cloudflare R2.
+#     Regenerates feed.xml on R2 (Spotify picks it up automatically).
+#     Updates hugo.toml with the new episode URL → triggers site rebuild.
+#
+# ─────────────────────────────────────────────
+on:
+  workflow_dispatch:
+    inputs:
+      step:
+        description: "Which step to run"
+        required: true
+        default: "generate"
+        type: choice
+        options:
+          - generate
+          - produce
+      voice:
+        description: "TTS voice (produce step only)"
+        required: false
+        default: "onyx"
+        type: choice
+        options:
+          - onyx
+          - echo
+          - nova
+          - alloy
+          - fable
+          - shimmer
+      days:
+        description: "How many days of articles to include (generate step only)"
+        required: false
+        default: "7"
+      dry_run:
+        description: "Dry run — generate script only, skip TTS and R2 upload"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  ciso-briefing:
+    name: "CISO Briefing — ${{ github.event.inputs.step }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── STEP 1: GENERATE SCRIPT ────────────────────────────────────────────
+      - name: Generate CISO briefing script
+        if: ${{ github.event.inputs.step == 'generate' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL:      ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
+        run: |
+          DAYS="${{ github.event.inputs.days }}"
+          echo "Generating briefing script for last ${DAYS} days of articles..."
+          python weekly_briefing.py --generate --days "${DAYS}"
+
+      - name: Commit generated script
+        if: ${{ github.event.inputs.step == 'generate' }}
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          git add briefings/
+          if git diff --staged --quiet; then
+            echo "No new script generated."
+            exit 0
+          fi
+          LABEL=$(ls briefings/draft-*.md 2>/dev/null | sort -r | head -1 | xargs basename 2>/dev/null || echo "unknown")
+          git commit -m "feat: CISO briefing script draft — ${LABEL}"
+          git push
+          echo ""
+          echo "══════════════════════════════════════════════"
+          echo "  ✓ Script committed: briefings/${LABEL}"
+          echo ""
+          echo "  NEXT STEP:"
+          echo "  1. Open the file in GitHub and review the script"
+          echo "  2. Edit directly in GitHub if needed"
+          echo "  3. Re-run this workflow with step = produce"
+          echo "══════════════════════════════════════════════"
+
+      # ── STEP 2: PRODUCE AUDIO ──────────────────────────────────────────────
+      - name: Produce audio and upload to R2
+        if: ${{ github.event.inputs.step == 'produce' && github.event.inputs.dry_run != 'true' }}
+        env:
+          OPENAI_API_KEY:      ${{ secrets.OPENAI_API_KEY }}
+          R2_ACCOUNT_ID:       ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID:    ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET_NAME:      ${{ secrets.R2_BUCKET_NAME }}
+          R2_PUBLIC_URL:       ${{ secrets.R2_PUBLIC_URL }}
+        run: |
+          VOICE="${{ github.event.inputs.voice }}"
+          echo "Producing audio with voice: ${VOICE}"
+          python weekly_briefing.py --produce --voice "${VOICE}"
+
+      - name: Update podcast RSS feed on R2
+        if: ${{ github.event.inputs.step == 'produce' && github.event.inputs.dry_run != 'true' }}
+        env:
+          R2_ACCOUNT_ID:       ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID:    ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET_NAME:      ${{ secrets.R2_BUCKET_NAME }}
+          R2_PUBLIC_URL:       ${{ secrets.R2_PUBLIC_URL }}
+        run: |
+          echo "Regenerating podcast RSS feed..."
+          python podcast_feed.py --update
+
+      - name: Commit updated hugo.toml and episodes.json
+        if: ${{ github.event.inputs.step == 'produce' && github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          git add hugo-site/hugo.toml briefings/episodes.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "feat: publish CISO audio briefing — $(date -u +'%Y-W%V')"
+          git push
+          echo ""
+          echo "══════════════════════════════════════════════"
+          echo "  ✓ Episode published"
+          echo "  ✓ hugo.toml updated — site rebuild triggered"
+          echo "  ✓ RSS feed updated on R2"
+          echo "  Spotify will pick up the new episode within ~1 hour"
+          echo "══════════════════════════════════════════════"
+
+      - name: Dry run summary
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: |
+          echo "Dry run mode — no audio produced, no files uploaded."
+          echo "Re-run with dry_run = false to produce the episode."
