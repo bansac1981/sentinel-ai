@@ -294,9 +294,11 @@ def load_draft(path: Path) -> str:
 
 
 def latest_draft() -> Path | None:
-    """Return the most recently modified draft file, or None."""
+    """Return the latest draft file by filename (YYYY-WXX sorts correctly).
+    Filename-based sort is reliable in GitHub Actions where all checked-out
+    files share the same mtime."""
     BRIEFINGS_DIR.mkdir(exist_ok=True)
-    drafts = sorted(BRIEFINGS_DIR.glob("draft-*.md"), key=lambda p: p.stat().st_mtime, reverse=True)
+    drafts = sorted(BRIEFINGS_DIR.glob("draft-*.md"), key=lambda p: p.name, reverse=True)
     return drafts[0] if drafts else None
 
 
