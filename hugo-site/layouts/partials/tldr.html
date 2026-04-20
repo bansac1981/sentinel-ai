@@ -1,8 +1,8 @@
-{{/* ── TL;DR BOX ─────────────────────────────────────────────────────────────
-   Structured insight card matching the approved design:
-   bold-label bullet list inside a bordered box.
+{{/* ── TL;DR BOX ──────────────────────────────────────────────────────────────
+   Three bullets only: What happened · Who's at risk · Act now
+   MITRE/OWASP mapping is shown in the framework panel below (not repeated here).
 ── */}}
-{{ if or .Params.summary .Params.mitre_techniques .Params.owasp_categories }}
+{{ if .Params.summary }}
 <div class="tldr-box">
   <div class="tldr-box__header">
     <span class="tldr-box__label">TL;DR</span>
@@ -11,34 +11,21 @@
     {{ end }}
   </div>
 
-  {{ with .Params.summary }}
-  <p class="tldr-box__summary">{{ . }}</p>
-  {{ end }}
-
   <ul class="tldr-list">
 
-    {{ with .Params.tldr_who_at_risk }}
-    <li><span class="tldr-list__key">Who's at risk</span> {{ . }}</li>
-    {{ end }}
-
-    {{ if .Params.mitre_techniques }}
     <li>
-      <span class="tldr-list__key">MITRE ATLAS</span>
-      {{ range $i, $t := .Params.mitre_techniques }}{{ if $i }} &middot; {{ end }}<code class="tldr-code">{{ $t }}</code>{{ end }}
+      <strong>What happened:</strong> {{ .Params.summary }}
     </li>
-    {{ end }}
 
-    {{ if .Params.owasp_categories }}
+    {{ with .Params.tldr_who_at_risk }}
     <li>
-      <span class="tldr-list__key">OWASP LLM</span>
-      {{ range $i, $t := .Params.owasp_categories }}{{ if $i }} &middot; {{ end }}<code class="tldr-code">{{ $t }}</code>{{ end }}
+      <strong>Who's at risk:</strong> {{ . }}
     </li>
     {{ end }}
 
     {{ if .Params.tldr_actions }}
     <li>
-      <span class="tldr-list__key">Act now</span>
-      {{ range $i, $a := .Params.tldr_actions }}{{ if $i }} &middot; {{ end }}{{ $a }}{{ end }}
+      <strong>Act now:</strong> {{ range $i, $a := .Params.tldr_actions }}{{ if $i }} &middot; {{ end }}{{ $a }}{{ end }}
     </li>
     {{ end }}
 

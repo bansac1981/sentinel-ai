@@ -1039,33 +1039,18 @@ blockquote {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .tldr-list li {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
-.tldr-list__key {
-  font-weight: 700;
+.tldr-list li strong {
   color: var(--text-primary);
-}
-
-.tldr-list__key::after {
-  content: ":";
-}
-
-.tldr-code {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 1px 5px;
-  color: var(--text-secondary);
-  white-space: nowrap;
+  font-weight: 700;
 }
 
 /* Keep .article-summary for any legacy content that might still use it */
