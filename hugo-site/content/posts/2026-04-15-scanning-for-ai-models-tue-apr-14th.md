@@ -6,6 +6,10 @@ slug: "scanning-for-ai-models-tue-apr-14th"
 
 # ── Content metadata ──
 summary: "A single threat actor (IP 81.168.83.103) has been systematically scanning internet-facing systems since at least January 2026, specifically targeting credential files, API tokens, and configuration data associated with popular AI platforms including OpenAI, Anthropic Claude, HuggingFace, and the Openclaw/Clawdbot tools. The campaign focuses on harvesting AI API credentials and secrets stored in predictable file paths, representing a targeted reconnaissance effort against AI model deployments. If successful, these probes could enable API key theft, model access abuse, and broader compromise of AI-integrated systems."
+# ── TL;DR ──
+tldr_what: "Single IP systematically scans for exposed AI platform credentials across internet-facing systems."
+tldr_who_at_risk: "Organizations running OpenAI, Anthropic, HuggingFace, or Openclaw tools with misconfigured web servers or exposed credential files."
+tldr_actions: ["Audit web server roots for exposed .openclaw, .claude, .cache, openai directories.", "Rotate all AI API keys and tokens if your systems match targeted file paths.", "Implement access controls blocking external HTTP requests to credential storage locations."]
 source: "SANS Internet Storm Center"
 source_url: "https://isc.sans.edu/diary/rss/32896"
 source_date: 2026-04-15T00:19:53+00:00

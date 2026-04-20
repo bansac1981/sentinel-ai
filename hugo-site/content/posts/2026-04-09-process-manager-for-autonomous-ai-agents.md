@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "botctl is an open-source process manager that enables persistent, autonomous AI agents (currently Claude-backed) to run continuously as background daemons with tool access, file system write permissions, and internet connectivity. While marketed as a productivity tool, the architecture introduces substantial attack surface through unattended agentic execution, a skills marketplace with third-party prompt injection, and a locally-exposed web dashboard. The combination of persistent autonomy, extensible skill modules from arbitrary GitHub repositories, and session memory creates compounding risk vectors relevant to agentic AI security."
+# ── TL;DR ──
+tldr_what: "botctl process manager for autonomous AI agents aggregates unattended execution, supply chain, and prompt injection risks."
+tldr_who_at_risk: "Developers deploying Claude-backed autonomous agents with GitHub-sourced skill modules and persistent daemon permissions."
+tldr_actions: ["Audit third-party skill modules before installation; verify GitHub repository ownership and commit history.", "Restrict agent filesystem and shell permissions to minimal required scope via OS-level controls.", "Implement per-action human approval workflows or rate-limiting on sensitive tool calls (file write, HTTP, bash)."]
 source: "HN AI Security"
 source_url: "https://botctl.dev/"
 author: "Grid the Grey Editorial"

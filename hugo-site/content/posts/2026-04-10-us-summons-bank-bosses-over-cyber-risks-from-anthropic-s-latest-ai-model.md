@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "The US Treasury convened major bank executives to discuss cybersecurity risks posed by Anthropic's unreleased Claude Mythos model, which the company claims has surpassed nearly all human experts at finding and exploiting software vulnerabilities. A code leak prompted Anthropic to publicly acknowledge the model's unprecedented offensive cyber capability, raising systemic financial sector risk concerns. The meeting signals growing regulatory awareness of AI-enabled cyber threats to critical financial infrastructure."
+# ── TL;DR ──
+tldr_what: "US Treasury summons bank chiefs over Anthropic's Claude Mythos AI vulnerability-finding model."
+tldr_who_at_risk: "Financial sector executives and critical infrastructure operators facing autonomous, large-scale cyber exploitation risks."
+tldr_actions: ["Review AI vendor security disclosures and offensive capability claims immediately.", "Conduct vulnerability audits across systems before advanced AI exploitation tools proliferate.", "Establish inter-agency protocols for AI-enabled cyber threat escalation and response."]
 source: "HN AI Security"
 source_url: "https://www.theguardian.com/technology/2026/apr/10/us-summoned-bank-bosses-to-discuss-cyber-risks-posed-by-anthropic-latest-ai-model"
 author: "Grid the Grey Editorial"

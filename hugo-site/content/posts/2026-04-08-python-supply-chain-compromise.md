@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "A malicious supply chain attack was discovered in litellm version 1.82.8, a widely-used Python library that serves as a unified interface for interacting with large language model APIs. The compromised package contained a hidden .pth file executing arbitrary code on every Python interpreter startup, meaning any developer or AI system relying on litellm could be silently compromised without triggering an explicit import. Given litellm's central role in LLM-powered application stacks, this attack vector poses significant risk to AI pipeline integrity, credential theft, and downstream model infrastructure."
+# ── TL;DR ──
+tldr_what: "Malicious .pth file in litellm 1.82.8 executes code on Python startup without import."
+tldr_who_at_risk: "Developers and AI systems using litellm for LLM API integration across CI/CD, workstations, and production servers."
+tldr_actions: ["Immediately uninstall or downgrade litellm below version 1.82.8", "Audit environment variables and credentials for unauthorized access or exfiltration", "Scan CI/CD logs and production servers for suspicious network activity post-installation"]
 source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/python-supply-chain-compromise.html"
 author: "Grid the Grey Editorial"

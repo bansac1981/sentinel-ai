@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "Threat actors are actively exploiting internet-exposed ComfyUI instances \u2014 a popular AI image generation platform \u2014 by abusing its custom node execution feature to achieve unauthenticated remote code execution. Over 1,000 publicly accessible instances have been identified as targets, with compromised hosts enrolled in Monero and Conflux cryptomining operations and a Hysteria V2 proxy botnet. The attack highlights critical supply chain and insecure plugin design risks inherent in AI/ML tooling ecosystems."
+# ── TL;DR ──
+tldr_what: "Attackers exploit 1,000+ exposed ComfyUI instances via malicious custom nodes for cryptomining."
+tldr_who_at_risk: "Organizations running internet-exposed ComfyUI deployments without authentication or network segmentation controls."
+tldr_actions: ["Restrict ComfyUI network access; require authentication and firewall egress controls", "Audit installed custom nodes; remove or pin versions of Shell-Executor and similar packages", "Deploy ComfyUI behind reverse proxy with API key validation and rate limiting"]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/over-1000-exposed-comfyui-instances.html"
 author: "Grid the Grey Editorial"

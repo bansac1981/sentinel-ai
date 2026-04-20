@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "A LayerX report reveals that AI browser extensions represent a largely unmonitored attack surface in enterprise environments, with 1-in-6 enterprise users already running at least one AI extension. These extensions are statistically riskier than standard extensions \u2014 60% more likely to carry a CVE, 3x more likely to access cookies, and capable of exfiltrating sensitive data without triggering DLP or SaaS monitoring controls. The finding highlights a critical governance gap in AI consumption channels that bypasses traditional enterprise security tooling."
+# ── TL;DR ──
+tldr_what: "AI browser extensions bypass enterprise security controls, exposing 1-in-6 users to data theft."
+tldr_who_at_risk: "Enterprise security teams and employees using AI extensions, unmonitored by DLP or SaaS logging systems."
+tldr_actions: ["Audit installed AI extensions across enterprise and baseline current exposure.", "Block high-risk AI extensions via browser policy until security review complete.", "Implement extension permission monitoring outside existing DLP tooling scope."]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/browser-extensions-are-new-ai.html"
 author: "Grid the Grey Editorial"

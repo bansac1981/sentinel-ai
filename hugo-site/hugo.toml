@@ -23,8 +23,8 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
   enableFrameworkBadges = true
   scoreThreshold = 6.0
   enablePodcastPlayer = true
-  latestEpisodeUrl = "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W16-onyx.mp3"
-  latestEpisodeTitle = "Week 16, 2026 - AI Security Briefing"
+  latestEpisodeUrl = "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W17-onyx.mp3"
+  latestEpisodeTitle = "Week 17, 2026 — AI Security Briefing"
   podcastFeedUrl = "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/feed.xml"
 
 [taxonomies]

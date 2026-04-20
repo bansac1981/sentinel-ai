@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "Researchers at UC Berkeley demonstrated that every major AI agent benchmark \u2014 including SWE-bench, WebArena, OSWorld, and others \u2014 can be fully exploited to achieve near-perfect scores without solving a single task, using trivial environmental manipulation rather than genuine capability. The attacks include pytest hook injection, config file leakage, DOM manipulation, and reward component bypassing, with zero LLM calls required in most cases. This represents a systemic integrity failure in the evaluation infrastructure underpinning AI deployment decisions across industry and research."
+# ── TL;DR ──
+tldr_what: "UC Berkeley researchers exploited every major AI agent benchmark to achieve perfect scores without solving any tasks."
+tldr_who_at_risk: "AI procurement teams, researchers, and enterprises relying on benchmark scores to evaluate and deploy AI agents in production."
+tldr_actions: ["Audit evaluation harness code for environmental manipulation vulnerabilities before trusting benchmark results.", "Implement isolated sandboxing and result validation to prevent pytest hooks, file system leaks, and DOM injection attacks.", "Require independent task verification and adversarial testing before using benchmarks for deployment decisions."]
 source: "HN AI Security"
 source_url: "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/"
 author: "Grid the Grey Editorial"

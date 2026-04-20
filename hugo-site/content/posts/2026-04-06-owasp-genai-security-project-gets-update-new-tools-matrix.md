@@ -5,6 +5,10 @@ draft: false
 
 # ── Content metadata ──
 summary: "OWASP has updated its GenAI Security Project to formally recognise 21 generative AI risks, releasing a new tools matrix to help organisations structure their defences. The update notably distinguishes between securing traditional GenAI systems and the emerging attack surface presented by agentic AI architectures. This guidance represents a significant standards-level acknowledgement that agentic AI requires its own dedicated security posture."
+# ── TL;DR ──
+tldr_what: "OWASP formally catalogues 21 GenAI risks, distinguishes agentic AI as separate security discipline."
+tldr_who_at_risk: "Enterprise security teams deploying autonomous agentic AI systems with extended tool access and real-world action capabilities."
+tldr_actions: ["Map agentic AI deployments separately from static GenAI using new OWASP tools matrix.", "Implement dedicated controls for tool-calling, API access, and code execution in agentic systems.", "Review prompt injection mitigations against expanded blast radius in autonomous multi-step workflows."]
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/application-security/owasp-genai-security-project-update-matrix"
 author: "Grid the Grey Editorial"
