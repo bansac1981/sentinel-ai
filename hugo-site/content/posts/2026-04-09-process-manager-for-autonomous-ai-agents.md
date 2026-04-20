@@ -5,10 +5,6 @@ draft: false
 
 # ── Content metadata ──
 summary: "botctl is an open-source process manager that enables persistent, autonomous AI agents (currently Claude-backed) to run continuously as background daemons with tool access, file system write permissions, and internet connectivity. While marketed as a productivity tool, the architecture introduces substantial attack surface through unattended agentic execution, a skills marketplace with third-party prompt injection, and a locally-exposed web dashboard. The combination of persistent autonomy, extensible skill modules from arbitrary GitHub repositories, and session memory creates compounding risk vectors relevant to agentic AI security."
-# ── TL;DR ──
-tldr_what: "botctl process manager for autonomous AI agents aggregates unattended execution, supply chain, and prompt injection risks."
-tldr_who_at_risk: "Developers deploying Claude-backed autonomous agents with GitHub-sourced skill modules and persistent daemon permissions."
-tldr_actions: ["Audit third-party skill modules before installation; verify GitHub repository ownership and commit history.", "Restrict agent filesystem and shell permissions to minimal required scope via OS-level controls.", "Implement per-action human approval workflows or rate-limiting on sensitive tool calls (file write, HTTP, bash)."]
 source: "HN AI Security"
 source_url: "https://botctl.dev/"
 author: "Grid the Grey Editorial"
@@ -68,4 +64,12 @@ Organisations deploying botctl in CI/CD pipelines, developer workstations, or se
 
 ## Mitigation & Recommendations
 
-- **Verify skill provenance** — audit all third-party skill m
+- **Verify skill provenance** — audit all third-party skill modules before installation; prefer pinned commits over branch references.
+- **Restrict tool permissions** — run agent processes under least-privilege OS accounts with scoped filesystem access.
+- **Authenticate the web dashboard** — place the web UI behind a reverse proxy with authentication before any network exposure.
+- **Audit session storage** — ensure sensitive data is not persisted in the session database unnecessarily.
+- **Human-in-the-loop gates** — for high-consequence actions (PR comments, external API writes), require explicit approval steps in the bot prompt.
+
+## References
+
+- [botctl.dev](https://botctl.dev/)

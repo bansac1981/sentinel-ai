@@ -6,10 +6,6 @@ slug: "how-hackers-are-thinking-about-ai"
 
 # ── Content metadata ──
 summary: "A new academic paper analysed over 160 cybercrime forum conversations to understand how threat actors are discussing and adopting AI tools for criminal purposes. The research documents both misuse of legitimate AI platforms and attempts to build bespoke criminal AI models, revealing early-stage diffusion of AI capabilities within cybercriminal communities. The findings carry practical implications for law enforcement and security practitioners monitoring the evolving AI-enabled threat landscape."
-# ── TL;DR ──
-tldr_what: "Academic study documents how cybercriminals are actively adopting and experimenting with AI tools."
-tldr_who_at_risk: "Law enforcement, security teams, and enterprise defenders tracking evolving AI-enabled threat capabilities."
-tldr_actions: ["Monitor cybercrime forums for jailbreak techniques and prompt injection discussions.", "Implement guardrails on enterprise LLM access to prevent criminal misuse.", "Map capability gaps in criminal AI adoption to guide defensive prioritization."]
 source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/how-hackers-are-thinking-about-ai.html"
 source_date: 2026-04-14T10:49:50+00:00
@@ -69,4 +65,10 @@ The immediate risk is concentrated around **AI-assisted social engineering, phis
 ## Mitigation & Recommendations
 
 - **Threat intelligence teams** should expand keyword monitoring in dark web forums to capture AI tooling discussions, including references to specific model names and jailbreak techniques.
-- **Platform providers** should continue investing in abuse detection for API access pa
+- **Platform providers** should continue investing in abuse detection for API access patterns consistent with bulk phishing or social engineering content generation.
+- **Policymakers** should engage with findings from diffusion-of-innovation research to anticipate the maturation curve of criminal AI adoption before capabilities fully diffuse.
+- **Defenders** should assume AI-generated phishing content is increasingly indistinguishable from human-authored material and update user awareness training accordingly.
+
+## References
+
+- [Schneier on Security — How Hackers Are Thinking About AI](https://www.schneier.com/blog/archives/2026/04/how-hackers-are-thinking-about-ai.html)

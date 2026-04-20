@@ -5,10 +5,6 @@ draft: false
 
 # ── Content metadata ──
 summary: "Palo Alto Networks researchers have identified over-privilege vulnerabilities in Google's Vertex AI platform, demonstrating how malicious actors could exploit AI agents to exfiltrate sensitive data and pivot into restricted cloud infrastructure. The findings highlight systemic risks in agentic AI deployments where excessive permissions granted to AI workloads expand the attack surface beyond traditional cloud security boundaries. This research underscores the growing urgency around securing AI agent permissions and enforcing least-privilege principles in enterprise ML platforms."
-# ── TL;DR ──
-tldr_what: "Google Vertex AI agents operate with excessive permissions, enabling data theft and infrastructure pivots."
-tldr_who_at_risk: "Enterprise organizations deploying agentic AI systems on Google Cloud without strict permission enforcement."
-tldr_actions: ["Audit all Vertex AI service account IAM roles for over-privilege immediately.", "Implement least-privilege principles on AI agent permissions and credentials.", "Establish guardrails against prompt injection attacks targeting AI agents with cloud access."]
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/cyber-risk/googles-vertex-ai-over-privilege-problem"
 author: "Grid the Grey Editorial"
@@ -76,4 +72,10 @@ Organisations using Google Vertex AI for production agentic workloads — partic
 
 1. **Enforce least-privilege IAM**: Audit all service accounts associated with Vertex AI agents and revoke permissions not explicitly required for documented workflows.
 2. **Implement VPC Service Controls**: Restrict which GCP resources Vertex AI workloads can reach at the network perimeter level.
-3. **Monitor agent ac
+3. **Monitor agent activity**: Enable Cloud Audit Logs for all services accessible to AI agents and alert on anomalous API calls.
+4. **Constrain tool and plugin access**: Carefully scope which external tools, APIs, and data sources agents are permitted to invoke.
+5. **Conduct adversarial testing**: Include prompt injection scenarios in red team exercises targeting agentic deployments.
+
+## References
+
+- [Google's Vertex AI Is Over-Privileged. That's a Problem — Dark Reading](https://www.darkreading.com/cyber-risk/googles-vertex-ai-over-privilege-problem)

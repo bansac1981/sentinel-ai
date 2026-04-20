@@ -6,10 +6,6 @@ slug: "deterministic-agentic-ai-the-architecture-exposure-validation-requires"
 
 # ── Content metadata ──
 summary: "The article examines the architectural tension between fully agentic AI systems and deterministic validation frameworks in security testing contexts, arguing that unconstrained AI autonomy introduces repeatability and auditability risks. It highlights how probabilistic AI behaviour \u2014 while valuable for exploration \u2014 undermines the measurable, consistent outcomes required for enterprise security validation programs. The piece reflects a broader industry debate about governing AI agency in high-stakes operational environments."
-# ── TL;DR ──
-tldr_what: "Fully agentic AI in security testing sacrifices repeatability and auditability for autonomy."
-tldr_who_at_risk: "Enterprise security teams relying on AI-driven validation platforms to demonstrate consistent compliance and control effectiveness."
-tldr_actions: ["Implement deterministic execution backbone for AI-driven security testing workflows.", "Audit AI reasoning logs to distinguish security improvements from test variance.", "Isolate agentic AI capabilities (payload generation, sequencing) within bounded, measurable constraints."]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/deterministic-agentic-ai-architecture.html"
 source_date: 2026-04-15T11:30:00+00:00
@@ -71,4 +67,11 @@ The primary affected parties are enterprise security teams and CISOs adopting AI
 
 - **Hybrid architectures**: Combine deterministic execution frameworks with AI-enhanced reasoning modules, ensuring core test logic remains reproducible while AI augments contextual adaptation.
 - **Test run versioning**: Log AI decision paths and technique selections per run to enable post-hoc comparison and variance analysis.
-- **Human-in-the-loop at execution boundaries**: Require analyst approval before AI agents cross defined scope boundaries or escalate pr
+- **Human-in-the-loop at execution boundaries**: Require analyst approval before AI agents cross defined scope boundaries or escalate privilege chains.
+- **Benchmark baselines**: Maintain a static, reproducible test baseline against which AI-augmented runs are compared to isolate methodology variance from genuine security change.
+- **Governance policies for agentic tools**: Establish organisational policies governing the autonomy level permitted for AI in security-critical workflows, aligned with OWASP LLM08 mitigations.
+
+## References
+
+- Original article: [The Hacker News – Deterministic + Agentic AI: The Architecture Exposure Validation Requires](https://thehackernews.com/2026/04/deterministic-agentic-ai-architecture.html)
+- Pentera AI Security and Exposure Report 2026

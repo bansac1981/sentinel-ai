@@ -6,10 +6,6 @@ slug: "microsoft-salesforce-patch-ai-agent-data-leak-flaws"
 
 # ── Content metadata ──
 summary: "Prompt injection vulnerabilities in Salesforce Agentforce and Microsoft Copilot were patched after researchers demonstrated that external attackers could exploit them to exfiltrate sensitive user data. The flaws highlight systemic risks in enterprise AI agent deployments, where insufficient input sanitisation allows malicious content to hijack agent behaviour. Both vendors have issued patches, but the incidents underscore the growing attack surface introduced by agentic AI systems operating with elevated privileges."
-# ── TL;DR ──
-tldr_what: "Prompt injection flaws in Microsoft Copilot and Salesforce Agentforce enabled data exfiltration via malicious inputs."
-tldr_who_at_risk: "Enterprise organisations deploying AI agents to process emails, documents, and external data without robust input sanitisation."
-tldr_actions: ["Apply patches for Copilot and Agentforce immediately", "Implement input validation and sanitisation on all agent data sources", "Audit AI agent permission scopes and data access policies"]
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/cloud-security/microsoft-salesforce-patch-ai-agent-data-leak-flaws"
 source_date: 2026-04-15T12:00:00+00:00
@@ -73,4 +69,11 @@ Enterprise users of Microsoft Copilot and Salesforce Agentforce are the primary 
 ## Mitigation & Recommendations
 
 - **Apply patches immediately**: Both Microsoft and Salesforce have issued fixes — ensure all instances are updated.
-- **Enforce least-privilege agent permissions**: Restrict AI agent access to only the data and actions necessary for their defined ro
+- **Enforce least-privilege agent permissions**: Restrict AI agent access to only the data and actions necessary for their defined role.
+- **Implement input/output guardrails**: Deploy content filtering on both inputs to and outputs from AI agents.
+- **Monitor agent activity logs**: Establish anomaly detection for unexpected data access or exfiltration patterns by AI agents.
+- **Security-test AI integrations**: Include prompt injection scenarios in penetration testing and red team exercises for all agentic AI deployments.
+
+## References
+
+- [Microsoft, Salesforce Patch AI Agent Data Leak Flaws — Dark Reading](https://www.darkreading.com/cloud-security/microsoft-salesforce-patch-ai-agent-data-leak-flaws)

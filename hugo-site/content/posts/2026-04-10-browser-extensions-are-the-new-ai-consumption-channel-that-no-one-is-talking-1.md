@@ -5,10 +5,6 @@ draft: true
 
 # ── Content metadata ──
 summary: "A LayerX report reveals that AI browser extensions represent a largely unmonitored attack surface in enterprise environments, with 1-in-6 enterprise users already running at least one such extension. AI extensions carry significantly elevated risk profiles compared to average extensions \u2014 including 60% higher CVE likelihood, 3x greater cookie access, and 2.5x more scripting permissions \u2014 while bypassing traditional DLP and SaaS monitoring controls. This creates an ungoverned AI consumption channel capable of exfiltrating sensitive data, session tokens, and user inputs without detection."
-# ── TL;DR ──
-tldr_what: "AI browser extensions bypass DLP controls, creating ungoverned exfiltration channels in enterprise."
-tldr_who_at_risk: "Enterprise security teams and users running AI extensions, where 1-in-6 employees already have at least one installed."
-tldr_actions: ["Inventory all AI extensions across enterprise browser deployments immediately.", "Implement browser-layer monitoring to detect cookie access and script execution.", "Establish AI extension allowlist policy; block unapproved extensions at deployment."]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/browser-extensions-are-new-ai.html"
 author: "Grid the Grey Editorial"
@@ -80,4 +76,11 @@ Enterprise security and compliance teams are the primary affected parties. The r
 1. **Inventory all installed extensions** across managed browsers using endpoint visibility tooling or browser management platforms.
 2. **Enforce extension allowlisting** via Group Policy, Chrome Enterprise, or equivalent MDM controls.
 3. **Audit permissions** of any AI-category extension before approving use; reject extensions with cookie access or remote scripting unless justified.
-4. **Monitor for permission escalation** — flag extensions that have expanded their
+4. **Monitor for permission escalation** — flag extensions that have expanded their declared permissions since initial install.
+5. **Integrate browser extension telemetry** into SIEM/SOAR pipelines to detect anomalous data egress patterns.
+6. **Educate employees** that AI browser extensions are not equivalent to approved AI platforms in terms of data governance.
+
+## References
+
+- [The Hacker News — Browser Extensions Are the New AI Consumption Channel That No One Is Talking About](https://thehackernews.com/2026/04/browser-extensions-are-new-ai.html)
+- LayerX Browser Extension Risk Report (referenced in article)

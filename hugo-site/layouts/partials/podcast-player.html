@@ -1,39 +1,19 @@
-{{/* ── WEEKLY BRIEFING PODCAST PLAYER ──────────────────────────────────────────
-   Accepts an optional .variant context to add a CSS modifier class.
-   Safe to include multiple times on the same page — uses container-relative
-   DOM traversal instead of global IDs, so no JS conflicts.
-── */}}
+{{/* ── WEEKLY BRIEFING PODCAST PLAYER ── */}}
 {{ if and .Site.Params.enablePodcastPlayer .Site.Params.latestEpisodeUrl }}
-<div class="sidebar-widget sidebar-widget--podcast{{ with .Params.variant }} podcast-player--{{ . }}{{ end }}">
+<div class="sidebar-widget sidebar-widget--podcast">
   <div class="widget-header">
     <span class="widget-header__icon">▶</span>
-    <span class="widget-header__title">CISO AI SECURITY BRIEFING</span>
+    <span class="widget-header__title">WEEKLY BRIEFING</span>
     <span class="pulse-dot pulse-dot--red"></span>
   </div>
   <div class="podcast-player">
     {{ with .Site.Params.latestEpisodeTitle }}
     <p class="podcast-player__title">{{ . }}</p>
     {{ end }}
-
-    <audio class="podcast-audio" preload="none">
+    <audio class="podcast-player__audio" controls preload="none">
       <source src="{{ .Site.Params.latestEpisodeUrl }}" type="audio/mpeg">
+      Your browser does not support audio playback.
     </audio>
-
-    <div class="podcast-controls">
-      <button class="podcast-btn" aria-label="Play">
-        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-      </button>
-
-      <div class="podcast-progress-wrap">
-        <div class="podcast-progress-bar">
-          <div class="podcast-progress-fill"></div>
-        </div>
-      </div>
-
-      <span class="podcast-time">0:00</span>
-    </div>
-
     {{ if .Site.Params.podcastFeedUrl }}
     <a href="{{ .Site.Params.podcastFeedUrl }}" class="podcast-player__feed" target="_blank" rel="noopener">
       Subscribe via RSS ↗

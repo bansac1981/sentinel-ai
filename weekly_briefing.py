@@ -572,10 +572,15 @@ def cmd_produce(draft_file: str | None, voice: str) -> None:
     log.info(f"  Estimate : OpenAI TTS cost ~${word_count * 0.000015:.4f}")
     print()
 
-    confirm = input("  Proceed? [y/N] ").strip().lower()
-    if confirm != "y":
-        log.info("  Aborted.")
-        return
+    # In CI / GitHub Actions there is no TTY — auto-confirm.
+    import sys
+    if sys.stdin.isatty():
+        confirm = input("  Proceed? [y/N] ").strip().lower()
+        if confirm != "y":
+            log.info("  Aborted.")
+            return
+    else:
+        log.info("  Non-interactive mode — proceeding automatically.")
 
     # Derive week label from draft filename
     m = re.search(r'draft-(\d{4}-W\d{2})', path.name)

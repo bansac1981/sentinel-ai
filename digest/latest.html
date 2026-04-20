@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Grid the Grey — AI Threat Briefing #121</title>
+<title>Grid the Grey — AI Threat Briefing #120</title>
 </head>
 <body style="margin:0;padding:0;background:#0a0a0f;font-family:'DM Sans',Arial,sans-serif;">
 
@@ -19,7 +19,7 @@
       GRID THE <span style="color:#ff3b3b;">GREY</span>
     </h1>
     <p style="margin:8px 0 0 0;font-size:13px;color:#7a7a8c;">
-      Issue #121 &nbsp;·&nbsp; April 20, 2026 &nbsp;·&nbsp;
+      Issue #120 &nbsp;·&nbsp; April 13, 2026 &nbsp;·&nbsp;
       8 stories this week
     </p>
   </td></tr>
@@ -40,28 +40,28 @@
   <tr><td style="background:#141419;border:1px solid #252535;border-radius:8px;padding:24px;">
     <p style="margin:0 0 10px 0;font-family:monospace;font-size:10px;
        color:#ff3b3b;letter-spacing:0.15em;font-weight:700;">◉ LEAD STORY</p>
-    <a href="https://gridthegrey.com/posts/2026-04-07-flowise-ai-agent-builder-under-active-cvss-10-0-rce-exploitation-12000-instances/" style="display:block;margin-bottom:16px;"><img src="https://images.pexels.com/photos/30530426/pexels-photo-30530426.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Flowise AI Agent Builder Under Active CVSS 10.0 RCE Exploitation; 12,000+ Instances Exposed" style="width:100%;max-height:220px;object-fit:cover;border-radius:6px;border:1px solid #252535;" /></a>
+    
     <p style="margin:0 0 8px 0;">
       <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ff3b3b22;color:#ff3b3b;border:1px solid #ff3b3b44;">CRITICAL</span>
     </p>
     <h2 style="margin:8px 0 12px 0;font-family:Georgia,serif;font-size:22px;
        font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-04-07-flowise-ai-agent-builder-under-active-cvss-10-0-rce-exploitation-12000-instances/" style="color:#f0f0ff;text-decoration:none;">Flowise AI Agent Builder Under Active CVSS 10.0 RCE Exploitation; 12,000+ Instances Exposed</a>
+      <a href="https://gridthegrey.com/posts/how-we-broke-top-ai-agent-benchmarks-and-what-comes-next/" style="color:#f0f0ff;text-decoration:none;">How We Broke Top AI Agent Benchmarks: And What Comes Next</a>
     </h2>
     <p style="margin:0 0 14px 0;font-size:15px;line-height:1.6;color:#c8c8d8;">
-      A maximum-severity (CVSS 10.0) remote code execution vulnerability in Flowise, a widely-used open-source AI agent builder, is under active exploitation with over 12,000 internet-exposed instances at risk. The flaw, CVE-2025-59528, exists in the CustomMCP node and allows unauthenticated JavaScript execution with full Node.js runtime privileges via unsanitised MCP server configuration input. This marks the third Flowise vulnerability exploited in the wild, underscoring systemic security gaps in AI orchestration and agent-building platforms.
+      Researchers at UC Berkeley demonstrated that every major AI agent benchmark \u2014 including SWE-bench, WebArena, OSWorld, and others \u2014 can be fully exploited to achieve near-perfect scores without solving a single task, using trivial environmental manipulation rather than genuine capability. The attacks include pytest hook injection, config file leakage, DOM manipulation, and reward component bypassing, with zero LLM calls required in most cases. This represents a systemic integrity failure in the evaluation infrastructure underpinning AI deployment decisions across industry and research.
     </p>
     <p style="margin:0 0 12px 0;">
-      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0047</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0040</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM07</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM08</span>
+      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0043</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0031</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM09</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM02</span>
     </p>
     <p style="margin:0;font-size:12px;color:#7a7a8c;">
-      Source: <a href="https://thehackernews.com/2026/04/flowise-ai-agent-builder-under-active.html" style="color:#7a7a8c;"
-        target="_blank">The Hacker News</a>
-      &nbsp;·&nbsp; Score: 9.4/10
-      &nbsp;·&nbsp; Apr 13, 2026
+      Source: <a href="https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/" style="color:#7a7a8c;"
+        target="_blank">HN AI Security</a>
+      &nbsp;·&nbsp; Score: 9.2/10
+      &nbsp;·&nbsp; Apr 11, 2026
     </p>
     <p style="margin:14px 0 0 0;">
-      <a href="https://gridthegrey.com/posts/2026-04-07-flowise-ai-agent-builder-under-active-cvss-10-0-rce-exploitation-12000-instances/" style="display:inline-block;padding:10px 20px;
+      <a href="https://gridthegrey.com/posts/how-we-broke-top-ai-agent-benchmarks-and-what-comes-next/" style="display:inline-block;padding:10px 20px;
          background:#ff3b3b;color:#fff;border-radius:4px;font-size:13px;
          font-weight:700;text-decoration:none;font-family:monospace;
          letter-spacing:0.05em;">READ FULL ANALYSIS →</a>
@@ -84,19 +84,19 @@
     <p style="margin:0 0 6px 0;">
       <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ff3b3b22;color:#ff3b3b;border:1px solid #ff3b3b44;">CRITICAL</span>
       &nbsp;
-      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0010</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM05</span>
+      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0047</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM02</span>
     </p>
     <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
        font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-04-16-by-design-flaw-in-mcp-could-enable-widespread-ai-supply-chain-attacks/" style="color:#f0f0ff;text-decoration:none;">\u2018By Design\u2019 Flaw in MCP Could Enable Widespread AI Supply Chain Attacks</a>
+      <a href="https://gridthegrey.com/posts/us-summons-bank-bosses-over-cyber-risks-from-anthropic-s-latest-ai-model/" style="color:#f0f0ff;text-decoration:none;">US summons bank bosses over cyber risks from Anthropic's latest AI model</a>
     </h3>
     <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
-      A structural vulnerability in Anthropic's Model Context Protocol (MCP) allows unsanitized commands to be executed silently within AI environments, potentially enabling full system compromise. Research…
+      The US Treasury convened major bank executives to discuss cybersecurity risks posed by Anthropic's unreleased Claude Mythos model, which the company claims has surpassed nearly all human experts at fi…
     </p>
     <p style="margin:0;font-size:11px;color:#7a7a8c;">
-      SecurityWeek &nbsp;·&nbsp; Apr 16
+      HN AI Security &nbsp;·&nbsp; Apr 10
       &nbsp;·&nbsp;
-      <a href="https://gridthegrey.com/posts/2026-04-16-by-design-flaw-in-mcp-could-enable-widespread-ai-supply-chain-attacks/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
+      <a href="https://gridthegrey.com/posts/us-summons-bank-bosses-over-cyber-risks-from-anthropic-s-latest-ai-model/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
     </p>
   </td></tr>
 </table>
@@ -106,19 +106,19 @@
     <p style="margin:0 0 6px 0;">
       <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ff8c0022;color:#ff8c00;border:1px solid #ff8c0044;">HIGH</span>
       &nbsp;
-      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0010</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM05</span>
+      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0047</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM08</span>
     </p>
     <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
        font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-04-16-does-gas-town-steal-usage-from-users-llm-credits-to-improve-itself/" style="color:#f0f0ff;text-decoration:none;">Does Gas Town 'steal' usage from users' LLM credits to improve itself?</a>
+      <a href="https://gridthegrey.com/posts/can-anthropic-keep-its-exploit-writing-ai-out-of-the-wrong-hands/" style="color:#f0f0ff;text-decoration:none;">Can Anthropic Keep Its Exploit-Writing AI Out of the Wrong Hands?</a>
     </h3>
     <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
-      Gas Town, a developer tool with 14.2k GitHub stars, allegedly ships configuration files that autonomously consume users' LLM API credits and GitHub account permissions to perform work on the maintaine…
+      Anthropic has released a preview of 'Mythos,' an AI model reportedly capable of autonomously discovering and exploiting critical zero-day vulnerabilities, raising significant dual-use concerns. While …
     </p>
     <p style="margin:0;font-size:11px;color:#7a7a8c;">
-      HN AI Security &nbsp;·&nbsp; Apr 16
+      Dark Reading &nbsp;·&nbsp; Apr 10
       &nbsp;·&nbsp;
-      <a href="https://gridthegrey.com/posts/2026-04-16-does-gas-town-steal-usage-from-users-llm-credits-to-improve-itself/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
+      <a href="https://gridthegrey.com/posts/can-anthropic-keep-its-exploit-writing-ai-out-of-the-wrong-hands/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
     </p>
   </td></tr>
 </table>
@@ -128,63 +128,19 @@
     <p style="margin:0 0 6px 0;">
       <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ff8c0022;color:#ff8c00;border:1px solid #ff8c0044;">HIGH</span>
       &nbsp;
-      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0051</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM08</span>
+      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0057</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM05</span>
     </p>
     <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
        font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-03-31-google-s-vertex-ai-is-over-privileged-that-s-a-problem/" style="color:#f0f0ff;text-decoration:none;">Google's Vertex AI Is Over-Privileged. That's a Problem</a>
+      <a href="https://gridthegrey.com/posts/browser-extensions-are-the-new-ai-consumption-channel-that-no-one-is-talking/" style="color:#f0f0ff;text-decoration:none;">Browser Extensions Are the New AI Consumption Channel That No One Is Talking About</a>
     </h3>
     <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
-      Palo Alto Networks researchers have identified over-privilege vulnerabilities in Google's Vertex AI platform, demonstrating how malicious actors could exploit AI agents to exfiltrate sensitive data an…
+      A LayerX report reveals that AI browser extensions represent a largely unmonitored attack surface in enterprise environments, with 1-in-6 enterprise users already running at least one AI extension. Th…
     </p>
     <p style="margin:0;font-size:11px;color:#7a7a8c;">
-      Dark Reading &nbsp;·&nbsp; Apr 13
+      The Hacker News &nbsp;·&nbsp; Apr 10
       &nbsp;·&nbsp;
-      <a href="https://gridthegrey.com/posts/2026-03-31-google-s-vertex-ai-is-over-privileged-that-s-a-problem/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
-    </p>
-  </td></tr>
-</table>
-<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
-  <tr><td style="background:#141419;border:1px solid #252535;
-     border-radius:6px;padding:16px 20px;">
-    <p style="margin:0 0 6px 0;">
-      <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ff3b3b22;color:#ff3b3b;border:1px solid #ff3b3b44;">CRITICAL</span>
-      &nbsp;
-      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0051</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM01</span>
-    </p>
-    <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
-       font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-04-18-cursor-ai-vulnerability-exposed-developer-devices/" style="color:#f0f0ff;text-decoration:none;">Cursor AI Vulnerability Exposed Developer Devices</a>
-    </h3>
-    <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
-      A chained vulnerability in Cursor AI\u2014a widely-used AI-powered code editor\u2014allowed attackers to combine indirect prompt injection with a sandbox escape and the application's built-in remote t…
-    </p>
-    <p style="margin:0;font-size:11px;color:#7a7a8c;">
-      SecurityWeek &nbsp;·&nbsp; Apr 18
-      &nbsp;·&nbsp;
-      <a href="https://gridthegrey.com/posts/2026-04-18-cursor-ai-vulnerability-exposed-developer-devices/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
-    </p>
-  </td></tr>
-</table>
-<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
-  <tr><td style="background:#141419;border:1px solid #252535;
-     border-radius:6px;padding:16px 20px;">
-    <p style="margin:0 0 6px 0;">
-      <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ff8c0022;color:#ff8c00;border:1px solid #ff8c0044;">HIGH</span>
-      &nbsp;
-      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0010</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM05</span>
-    </p>
-    <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
-       font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-04-08-python-supply-chain-compromise/" style="color:#f0f0ff;text-decoration:none;">Python Supply-Chain Compromise</a>
-    </h3>
-    <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
-      A malicious supply chain attack was discovered in litellm version 1.82.8, a widely-used Python library that serves as a unified interface for interacting with large language model APIs. The compromise…
-    </p>
-    <p style="margin:0;font-size:11px;color:#7a7a8c;">
-      Schneier on Security &nbsp;·&nbsp; Apr 13
-      &nbsp;·&nbsp;
-      <a href="https://gridthegrey.com/posts/2026-04-08-python-supply-chain-compromise/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
+      <a href="https://gridthegrey.com/posts/browser-extensions-are-the-new-ai-consumption-channel-that-no-one-is-talking/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
     </p>
   </td></tr>
 </table>
@@ -198,15 +154,15 @@
     </p>
     <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
        font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-04-17-claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via/" style="color:#f0f0ff;text-decoration:none;">Claude Code, Gemini CLI, GitHub Copilot Agents Vulnerable to Prompt Injection via Comments</a>
+      <a href="https://gridthegrey.com/posts/process-manager-for-autonomous-ai-agents/" style="color:#f0f0ff;text-decoration:none;">Process Manager for Autonomous AI Agents</a>
     </h3>
     <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
-      A researcher has disclosed a novel prompt injection attack technique dubbed 'Comment and Control,' demonstrating that popular AI coding agents \u2014 including Claude Code, Gemini CLI, and GitHub Copi…
+      botctl is an open-source process manager that enables persistent, autonomous AI agents (currently Claude-backed) to run continuously as background daemons with tool access, file system write permissio…
     </p>
     <p style="margin:0;font-size:11px;color:#7a7a8c;">
-      SecurityWeek &nbsp;·&nbsp; Apr 17
+      HN AI Security &nbsp;·&nbsp; Apr 09
       &nbsp;·&nbsp;
-      <a href="https://gridthegrey.com/posts/2026-04-17-claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
+      <a href="https://gridthegrey.com/posts/process-manager-for-autonomous-ai-agents/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
     </p>
   </td></tr>
 </table>
@@ -214,21 +170,65 @@
   <tr><td style="background:#141419;border:1px solid #252535;
      border-radius:6px;padding:16px 20px;">
     <p style="margin:0 0 6px 0;">
-      <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ff8c0022;color:#ff8c00;border:1px solid #ff8c0044;">HIGH</span>
+      <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ffd70022;color:#ffd700;border:1px solid #ffd70044;">MEDIUM</span>
       &nbsp;
-      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0051</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM01</span>
+      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0047</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM08</span>
     </p>
     <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
        font-weight:700;line-height:1.3;color:#f0f0ff;">
-      <a href="https://gridthegrey.com/posts/2026-04-16-microsoft-salesforce-patch-ai-agent-data-leak-flaws/" style="color:#f0f0ff;text-decoration:none;">Microsoft, Salesforce Patch AI Agent Data Leak Flaws</a>
+      <a href="https://gridthegrey.com/posts/new-crowdstrike-innovations-secure-ai-agents-and-govern-shadow-ai-across-saas/" style="color:#f0f0ff;text-decoration:none;">New CrowdStrike Innovations Secure AI Agents and Govern Shadow AI Across Endpoints, SaaS, and Cloud</a>
     </h3>
     <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
-      Prompt injection vulnerabilities in Salesforce Agentforce and Microsoft Copilot were patched after researchers demonstrated that external attackers could exploit them to exfiltrate sensitive user data…
+      CrowdStrike has announced new platform innovations targeting the governance of Shadow AI and the security of AI agents across endpoints, SaaS, and cloud environments. The release highlights growing en…
     </p>
     <p style="margin:0;font-size:11px;color:#7a7a8c;">
-      Dark Reading &nbsp;·&nbsp; Apr 16
+      CrowdStrike Blog &nbsp;·&nbsp; Apr 06
       &nbsp;·&nbsp;
-      <a href="https://gridthegrey.com/posts/2026-04-16-microsoft-salesforce-patch-ai-agent-data-leak-flaws/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
+      <a href="https://gridthegrey.com/posts/new-crowdstrike-innovations-secure-ai-agents-and-govern-shadow-ai-across-saas/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
+    </p>
+  </td></tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+  <tr><td style="background:#141419;border:1px solid #252535;
+     border-radius:6px;padding:16px 20px;">
+    <p style="margin:0 0 6px 0;">
+      <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#ffd70022;color:#ffd700;border:1px solid #ffd70044;">MEDIUM</span>
+      &nbsp;
+      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0047</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM08</span>
+    </p>
+    <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
+       font-weight:700;line-height:1.3;color:#f0f0ff;">
+      <a href="https://gridthegrey.com/posts/how-charlotte-ai-agentworks-fuels-security-s-agentic-ecosystem/" style="color:#f0f0ff;text-decoration:none;">How Charlotte AI AgentWorks Fuels Security's Agentic Ecosystem</a>
+    </h3>
+    <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
+      CrowdStrike's Charlotte AI AgentWorks introduces an agentic security ecosystem where autonomous AI agents collaborate to perform security operations tasks with reduced human intervention. The platform…
+    </p>
+    <p style="margin:0;font-size:11px;color:#7a7a8c;">
+      CrowdStrike Blog &nbsp;·&nbsp; Apr 06
+      &nbsp;·&nbsp;
+      <a href="https://gridthegrey.com/posts/how-charlotte-ai-agentworks-fuels-security-s-agentic-ecosystem/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
+    </p>
+  </td></tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+  <tr><td style="background:#141419;border:1px solid #252535;
+     border-radius:6px;padding:16px 20px;">
+    <p style="margin:0 0 6px 0;">
+      <span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:0.1em;background:#22c55e22;color:#22c55e;border:1px solid #22c55e44;">LOW</span>
+      &nbsp;
+      <span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#ff3b3b22;color:#ff8888;border:1px solid #ff3b3b44;">AML.T0047</span><span style="display:inline-block;margin:2px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;font-family:monospace;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f644;">LLM08</span>
+    </p>
+    <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
+       font-weight:700;line-height:1.3;color:#f0f0ff;">
+      <a href="https://gridthegrey.com/posts/anthropic-claude-mythos-preview-the-more-capable-ai-becomes-the-more-security-it/" style="color:#f0f0ff;text-decoration:none;">Anthropic Claude Mythos Preview: The More Capable AI Becomes, the More Security It Needs</a>
+    </h3>
+    <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:#c8c8d8;">
+      CrowdStrike, as a founding member of Anthropic's Mythos program, is highlighting the security challenges posed by increasingly capable frontier AI models, signaling a growing industry focus on securin…
+    </p>
+    <p style="margin:0;font-size:11px;color:#7a7a8c;">
+      CrowdStrike Blog &nbsp;·&nbsp; Apr 11
+      &nbsp;·&nbsp;
+      <a href="https://gridthegrey.com/posts/anthropic-claude-mythos-preview-the-more-capable-ai-becomes-the-more-security-it/" style="color:#ff3b3b;text-decoration:none;">Read more →</a>
     </p>
   </td></tr>
 </table>
@@ -238,7 +238,7 @@
   <tr><td style="padding:20px 0;border-top:1px solid #252535;">
     <p style="margin:0 0 10px 0;font-family:monospace;font-size:10px;
        color:#7a7a8c;letter-spacing:0.15em;">COVERAGE THIS ISSUE</p>
-    <a href="https://gridthegrey.com/categories/llm-security/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">LLM Security <span style="color:#ff3b3b;">(8)</span></a><a href="https://gridthegrey.com/categories/agentic-ai/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Agentic AI <span style="color:#ff3b3b;">(7)</span></a><a href="https://gridthegrey.com/categories/industry-news/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Industry News <span style="color:#ff3b3b;">(6)</span></a><a href="https://gridthegrey.com/categories/supply-chain/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Supply Chain <span style="color:#ff3b3b;">(4)</span></a><a href="https://gridthegrey.com/categories/prompt-injection/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Prompt Injection <span style="color:#ff3b3b;">(4)</span></a><a href="https://gridthegrey.com/categories/research/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Research <span style="color:#ff3b3b;">(3)</span></a>
+    <a href="https://gridthegrey.com/categories/agentic-ai/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Agentic AI <span style="color:#ff3b3b;">(8)</span></a><a href="https://gridthegrey.com/categories/llm-security/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">LLM Security <span style="color:#ff3b3b;">(8)</span></a><a href="https://gridthegrey.com/categories/industry-news/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Industry News <span style="color:#ff3b3b;">(6)</span></a><a href="https://gridthegrey.com/categories/regulatory/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Regulatory <span style="color:#ff3b3b;">(4)</span></a><a href="https://gridthegrey.com/categories/research/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Research <span style="color:#ff3b3b;">(3)</span></a><a href="https://gridthegrey.com/categories/supply-chain/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Supply Chain <span style="color:#ff3b3b;">(2)</span></a><a href="https://gridthegrey.com/categories/adversarial-ml/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Adversarial ML <span style="color:#ff3b3b;">(1)</span></a><a href="https://gridthegrey.com/categories/prompt-injection/" style="display:inline-block;margin:3px;padding:4px 10px;background:#141419;border:1px solid #252535;border-radius:4px;font-size:12px;color:#c8c8d8;text-decoration:none;">Prompt Injection <span style="color:#ff3b3b;">(1)</span></a>
   </td></tr>
 
   <!-- CTA -->

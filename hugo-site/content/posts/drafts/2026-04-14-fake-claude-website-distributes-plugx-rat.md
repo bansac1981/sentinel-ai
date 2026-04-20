@@ -6,10 +6,6 @@ slug: "fake-claude-website-distributes-plugx-rat"
 
 # ── Content metadata ──
 summary: "Threat actors have created a fraudulent website impersonating Anthropic's Claude AI platform to distribute the PlugX remote access trojan, leveraging DLL sideloading and self-cleanup techniques to evade detection. The campaign exploits growing public trust in legitimate AI brands to lure victims into executing malware under the guise of an official Claude installation. This represents a notable trend of adversaries weaponising AI product branding as a social engineering vector."
-# ── TL;DR ──
-tldr_what: "Fake Claude website distributes PlugX RAT via DLL sideloading and self-cleanup evasion."
-tldr_who_at_risk: "Users downloading Claude from unofficial sources or typosquatted domains seeking legitimate AI tools."
-tldr_actions: ["Download Claude only from anthropic.com; verify domain spelling carefully.", "Block suspicious Claude installer domains at network/DNS level.", "Scan systems for PlugX artifacts; monitor for unsigned DLL loads."]
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/fake-claude-website-distributes-plugx-rat/"
 source_date: 2026-04-13T09:52:50+00:00

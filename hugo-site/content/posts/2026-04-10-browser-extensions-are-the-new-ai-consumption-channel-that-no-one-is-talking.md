@@ -5,10 +5,6 @@ draft: false
 
 # ── Content metadata ──
 summary: "A LayerX report reveals that AI browser extensions represent a largely unmonitored attack surface in enterprise environments, with 1-in-6 enterprise users already running at least one AI extension. These extensions are statistically riskier than standard extensions \u2014 60% more likely to carry a CVE, 3x more likely to access cookies, and capable of exfiltrating sensitive data without triggering DLP or SaaS monitoring controls. The finding highlights a critical governance gap in AI consumption channels that bypasses traditional enterprise security tooling."
-# ── TL;DR ──
-tldr_what: "AI browser extensions bypass enterprise security controls, exposing 1-in-6 users to data theft."
-tldr_who_at_risk: "Enterprise security teams and employees using AI extensions, unmonitored by DLP or SaaS logging systems."
-tldr_actions: ["Audit installed AI extensions across enterprise and baseline current exposure.", "Block high-risk AI extensions via browser policy until security review complete.", "Implement extension permission monitoring outside existing DLP tooling scope."]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/browser-extensions-are-new-ai.html"
 author: "Grid the Grey Editorial"
@@ -73,4 +69,11 @@ The affected population is effectively the entire enterprise workforce. Organisa
 1. **Inventory all installed browser extensions** across managed devices using browser management APIs (Chrome Enterprise, Edge Management Service).
 2. **Enforce allowlist policies** — block installation of extensions not explicitly approved by security teams.
 3. **Audit permissions** for all AI-categorised extensions; flag any requesting cookie access, remote scripting, or DOM manipulation.
-4. **Monitor for silent permission updates** as an indi
+4. **Monitor for silent permission updates** as an indicator of supply chain compromise.
+5. **Classify AI extensions as a distinct risk category** in your browser security policy, with stricter review thresholds than general extensions.
+6. **Integrate browser extension telemetry** into SIEM/SOAR pipelines to close the DLP blind spot.
+
+## References
+
+- [The Hacker News – Browser Extensions Are the New AI Consumption Channel That No One Is Talking About](https://thehackernews.com/2026/04/browser-extensions-are-new-ai.html)
+- LayerX Browser Security Report (2026)

@@ -5,10 +5,6 @@ draft: true
 
 # ── Content metadata ──
 summary: "The TeamPCP threat actor compromised LiteLLM packages on PyPI (versions 1.82.7 and 1.82.8), injecting infostealer malware that harvested SSH keys, cloud credentials, and other secrets from developer machines. The attack exploited the AI development supply chain, with cascading exposure through 1,705 dependent packages including major AI libraries like dspy and crawl4ai. This represents a significant escalation in AI-toolchain-targeted supply chain attacks, directly threatening the infrastructure used to build and deploy LLM-powered applications."
-# ── TL;DR ──
-tldr_what: "TeamPCP poisoned LiteLLM on PyPI, harvesting SSH keys and cloud credentials from developer machines."
-tldr_who_at_risk: "AI engineers and developers using LiteLLM or its 1,705 dependent packages for LLM integration."
-tldr_actions: ["Immediately downgrade LiteLLM below version 1.82.7; audit pip install logs.", "Rotate all SSH keys, AWS credentials, and cloud tokens from affected machines.", "Scan developer workstations for exfiltration artifacts; monitor for unauthorized API access."]
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/how-litellm-turned-developer-machines.html"
 author: "Grid the Grey Editorial"

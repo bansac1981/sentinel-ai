@@ -5,10 +5,6 @@ draft: false
 
 # ── Content metadata ──
 summary: "A malicious supply chain attack was discovered in litellm version 1.82.8, a widely-used Python library that serves as a unified interface for interacting with large language model APIs. The compromised package contained a hidden .pth file executing arbitrary code on every Python interpreter startup, meaning any developer or AI system relying on litellm could be silently compromised without triggering an explicit import. Given litellm's central role in LLM-powered application stacks, this attack vector poses significant risk to AI pipeline integrity, credential theft, and downstream model infrastructure."
-# ── TL;DR ──
-tldr_what: "Malicious .pth file in litellm 1.82.8 executes code on Python startup without import."
-tldr_who_at_risk: "Developers and AI systems using litellm for LLM API integration across CI/CD, workstations, and production servers."
-tldr_actions: ["Immediately uninstall or downgrade litellm below version 1.82.8", "Audit environment variables and credentials for unauthorized access or exfiltration", "Scan CI/CD logs and production servers for suspicious network activity post-installation"]
 source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/python-supply-chain-compromise.html"
 author: "Grid the Grey Editorial"
@@ -73,4 +69,10 @@ Any organisation or developer who installed litellm==1.82.8 is potentially compr
 1. **Audit installations**: Check all environments for litellm==1.82.8 and remove immediately. Upgrade to a verified clean version.
 2. **Rotate API keys**: Any LLM provider credentials present in affected environments should be considered compromised and rotated without delay.
 3. **Implement SBOM tracking**: Maintain a Software Bill of Materials for all Python dependencies to accelerate detection of future compromises.
-4. **Adopt SLSA and Sigstore**: Enforce provenance verification on PyPI packages using 
+4. **Adopt SLSA and Sigstore**: Enforce provenance verification on PyPI packages using Sigstore signatures and SLSA attestations where available.
+5. **Pin dependencies with hash verification**: Use `pip install --require-hashes` or tools like `pip-audit` and `pipenv` with lock files to detect integrity violations.
+6. **Scan for .pth files**: Audit site-packages directories for unexpected `.pth` files as a post-incident detection measure.
+
+## References
+
+- [Schneier on Security – Python Supply-Chain Compromise](https://www.schneier.com/blog/archives/2026/04/python-supply-chain-compromise.html)
