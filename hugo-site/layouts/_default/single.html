@@ -23,9 +23,7 @@
 
     <h1 class="article-title" itemprop="headline">{{ .Title }}</h1>
 
-    {{ if .Params.summary }}
-    <p class="article-summary" itemprop="description">{{ .Params.summary }}</p>
-    {{ end }}
+    {{ partial "tldr.html" . }}
 
     <div class="article-byline">
       {{ if .Params.source }}
