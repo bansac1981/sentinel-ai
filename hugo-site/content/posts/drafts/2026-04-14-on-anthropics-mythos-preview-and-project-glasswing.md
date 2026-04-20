@@ -1,7 +1,7 @@
 ---
 title: "On Anthropic\u2019s Mythos Preview and Project Glasswing"
 date: 2026-04-14T05:56:53+00:00
-draft: true
+draft: false
 slug: "on-anthropics-mythos-preview-and-project-glasswing"
 
 # ── Content metadata ──
