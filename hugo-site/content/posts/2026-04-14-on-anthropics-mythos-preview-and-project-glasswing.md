@@ -14,7 +14,7 @@ source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/on-anthropics-mythos-preview-and-project-glasswing.html"
 source_date: 2026-04-13T16:52:57+00:00
 author: "Grid the Grey Editorial"
-thumbnail: ""
+thumbnail: "https://images.pexels.com/photos/19679317/pexels-photo-19679317.jpeg"
 
 # ── AI Security Classification ──
 relevance_score: 8.5
