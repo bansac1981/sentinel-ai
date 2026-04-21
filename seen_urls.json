@@ -51,6 +51,7 @@
     "https://isc.sans.edu/diary/rss/32902",
     "https://isc.sans.edu/diary/rss/32904",
     "https://isc.sans.edu/diary/rss/32906",
+    "https://isc.sans.edu/diary/rss/32910",
     "https://isc.sans.edu/diary/rss/32912",
     "https://isc.sans.edu/diary/rss/32914",
     "https://isc.sans.edu/diary/rss/32916",
@@ -136,6 +137,7 @@
     "https://thehackernews.com/2026/04/china-linked-storm-1175-exploits-zero.html",
     "https://thehackernews.com/2026/04/china-linked-ta416-targets-european.html",
     "https://thehackernews.com/2026/04/cisa-adds-6-known-exploited-flaws-in.html",
+    "https://thehackernews.com/2026/04/cisa-adds-8-exploited-flaws-to-kev-sets.html",
     "https://thehackernews.com/2026/04/cisco-patches-98-cvss-imc-and-ssm-flaws.html",
     "https://thehackernews.com/2026/04/cisco-patches-four-critical-identity.html",
     "https://thehackernews.com/2026/04/citizen-lab-law-enforcement-used-webloc.html",
@@ -462,5 +464,5 @@
     "https://www.wheresyoured.at/the-subprime-ai-crisis-is-here/",
     "https://www.wired.com/story/openai-backs-bill-exempt-ai-firms-model-harm-lawsuits/"
   ],
-  "updated_at": "2026-04-21T04:15:35.333008+00:00"
+  "updated_at": "2026-04-21T09:34:09.385357+00:00"
 }
