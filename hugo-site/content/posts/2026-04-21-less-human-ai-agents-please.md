@@ -1,6 +1,6 @@
 ---
 title: "Less human AI agents, please"
-date: 2026-04-21T18:02:07+00:00
+date: "2026-04-21T18:24:45+00:00"
 draft: false
 slug: "less-human-ai-agents-please"
 
