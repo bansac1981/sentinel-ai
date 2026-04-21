@@ -1,6 +1,6 @@
 ---
 title: "AI gateway projects like GoModel - the next high value target"
-date: 2026-04-21T17:59:55+00:00
+date: "2026-04-21T18:19:00+00:00"
 draft: false
 slug: "show-hn-gomodel-an-open-source-ai-gateway-in-go"
 
