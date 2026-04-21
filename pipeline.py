@@ -77,6 +77,82 @@ RSS_FEEDS = {
         "name": "Krebs on Security",
         "url": "https://krebsonsecurity.com/feed/",
     },
+
+    # ── AI Vendors ────────────────────────────────────────────────────────────
+    "hn_openai": {
+        "name": "OpenAI (via HN)",
+        "url": "https://hnrss.org/newest?q=OpenAI+security&points=30",
+    },
+    "hn_anthropic": {
+        "name": "Anthropic (via HN)",
+        "url": "https://hnrss.org/newest?q=Anthropic+Claude+security&points=30",
+    },
+    "google_ai_blog": {
+        "name": "Google DeepMind Blog",
+        "url": "https://blog.google/technology/ai/rss/",
+    },
+    "microsoft_ai": {
+        "name": "Microsoft AI Blog",
+        "url": "https://blogs.microsoft.com/ai/feed/",
+    },
+
+    # ── Security Vendor Threat Research ───────────────────────────────────────
+    "unit42": {
+        "name": "Palo Alto Unit 42",
+        "url": "https://unit42.paloaltonetworks.com/feed/",
+    },
+    "talos": {
+        "name": "Cisco Talos",
+        "url": "https://blog.talosintelligence.com/rss",
+    },
+    "microsoft_security": {
+        "name": "Microsoft Security Blog",
+        "url": "https://www.microsoft.com/en-us/security/blog/feed/",
+    },
+    "sentinelone": {
+        "name": "SentinelOne Blog",
+        "url": "https://www.sentinelone.com/blog/feed/",
+    },
+    "mandiant": {
+        "name": "Mandiant Blog",
+        "url": "https://www.mandiant.com/resources/blog/rss.xml",
+    },
+    "qualys": {
+        "name": "Qualys Blog",
+        "url": "https://blog.qualys.com/feed",
+    },
+    "checkpoint": {
+        "name": "Check Point Research",
+        "url": "https://research.checkpoint.com/feed/",
+    },
+
+    # ── Government & Agencies ─────────────────────────────────────────────────
+    "ncsc_uk": {
+        "name": "NCSC UK",
+        "url": "https://www.ncsc.gov.uk/api/1/services/v1/report-rss-feed.xml",
+    },
+
+    # ── Security News & Analysis ──────────────────────────────────────────────
+    "bleepingcomputer": {
+        "name": "BleepingComputer",
+        "url": "https://www.bleepingcomputer.com/feed/",
+    },
+    "simonwillison": {
+        "name": "Simon Willison",
+        "url": "https://simonwillison.net/atom/everything/",
+    },
+    "huggingface": {
+        "name": "Hugging Face Blog",
+        "url": "https://huggingface.co/blog/feed.xml",
+    },
+    "wired_security": {
+        "name": "Wired Security",
+        "url": "https://www.wired.com/feed/category/security/latest/rss",
+    },
+    "arstechnica": {
+        "name": "Ars Technica Security",
+        "url": "https://arstechnica.com/security/feed/",
+    },
 }
 
 # Pre-filter keywords — article must contain at least one to proceed to Claude
