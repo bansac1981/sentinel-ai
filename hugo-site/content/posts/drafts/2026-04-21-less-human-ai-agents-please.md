@@ -1,7 +1,7 @@
 ---
 title: "Less human AI agents, please"
 date: 2026-04-21T18:02:07+00:00
-draft: true
+draft: false
 slug: "less-human-ai-agents-please"
 
 # ── Content metadata ──
