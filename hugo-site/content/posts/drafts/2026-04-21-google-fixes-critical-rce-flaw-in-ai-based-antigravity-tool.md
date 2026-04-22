@@ -1,7 +1,7 @@
 ---
 title: "Google Fixes Critical RCE Flaw in AI-Based Antigravity Tool"
 date: 2026-04-21T17:59:23+00:00
-draft: true
+draft: false
 slug: "google-fixes-critical-rce-flaw-in-ai-based-antigravity-tool"
 
 # ── Content metadata ──
