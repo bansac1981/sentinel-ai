@@ -1,6 +1,6 @@
 ---
 title: "Claude Mythos identified 271 vulnerabilities in Firefox codebase"
-date: 2026-04-22T08:13:28+00:00
+date: "2026-04-22T09:52:31+00:00"
 draft: false
 slug: "quoting-bobby-holley"
 
