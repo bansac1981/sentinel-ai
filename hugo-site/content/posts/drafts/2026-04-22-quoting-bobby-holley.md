@@ -1,7 +1,7 @@
 ---
-title: "Quoting Bobby Holley"
+title: "Claude Mythos identified 271 vulnerabilities in Firefox codebase"
 date: 2026-04-22T08:13:28+00:00
-draft: true
+draft: false
 slug: "quoting-bobby-holley"
 
 # ── Content metadata ──
@@ -10,7 +10,7 @@ source: "Simon Willison"
 source_url: "https://simonwillison.net/2026/Apr/22/bobby-holley/#atom-everything"
 source_date: 2026-04-22T05:40:56+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/5380582/pexels-photo-5380582.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://plus.unsplash.com/premium_vector-1718660537080-f6937a9a3d9d?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
