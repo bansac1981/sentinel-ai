@@ -1,6 +1,6 @@
 ---
 title: "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in production"
-date: 2026-04-22T08:15:59+00:00
+date: "2026-04-22T10:00:29+00:00"
 draft: false
 slug: "crabtrap-an-llm-as-a-judge-http-proxy-to-secure-agents-in-production"
 
