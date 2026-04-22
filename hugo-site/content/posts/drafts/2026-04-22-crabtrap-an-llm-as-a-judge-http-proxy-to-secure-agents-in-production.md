@@ -1,7 +1,7 @@
 ---
 title: "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in production"
 date: 2026-04-22T08:15:59+00:00
-draft: true
+draft: false
 slug: "crabtrap-an-llm-as-a-judge-http-proxy-to-secure-agents-in-production"
 
 # ── Content metadata ──
@@ -10,7 +10,7 @@ source: "HN AI Security"
 source_url: "https://www.brex.com/crabtrap"
 source_date: 2026-04-21T15:29:16+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/17483871/pexels-photo-17483871.png?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://plus.unsplash.com/premium_vector-1725420017452-eb130b8ea017?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
