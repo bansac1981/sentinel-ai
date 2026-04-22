@@ -1,7 +1,7 @@
 ---
 title: "Claude system prompts as a git timeline"
 date: 2026-04-21T18:04:10+00:00
-draft: true
+draft: false
 slug: "claude-system-prompts-as-a-git-timeline"
 
 # ── Content metadata ──
