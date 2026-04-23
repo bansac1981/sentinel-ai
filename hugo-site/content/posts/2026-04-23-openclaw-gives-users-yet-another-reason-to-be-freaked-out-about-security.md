@@ -1,6 +1,6 @@
 ---
 title: "Critical OpenClaw flaw lets low-privilege attackers silently seize full admin control"
-date: 2026-04-23T04:07:12+00:00
+date: "2026-04-23T11:48:38+00:00"
 draft: false
 slug: "openclaw-gives-users-yet-another-reason-to-be-freaked-out-about-security"
 
