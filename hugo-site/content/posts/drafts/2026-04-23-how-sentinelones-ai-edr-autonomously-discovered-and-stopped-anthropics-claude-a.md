@@ -1,5 +1,5 @@
 ---
-title: "How SentinelOne\u2019s AI EDR Autonomously Discovered and Stopped Anthropic\u2019s Claude from Executing a Zero Day Supply Chain Attack, Globally"
+title: "SentinelOne's AI-powered EDR autonomously claims blocking a Claude Zero Day Supply Chain Attack"
 date: 2026-04-23T04:08:17+00:00
 draft: true
 slug: "how-sentinelones-ai-edr-autonomously-discovered-and-stopped-anthropics-claude-a"
@@ -10,7 +10,7 @@ source: "SentinelOne Blog"
 source_url: "https://www.sentinelone.com/blog/how-sentinelones-ai-edr-autonomously-discovered-and-stopped-anthropics-claude-from-executing-a-zero-day-supply-chain-attack-globally/"
 source_date: 2026-03-31T19:12:26+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/14314636/pexels-photo-14314636.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.unsplash.com/photo-1740398304698-f9cd23a2d899?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
