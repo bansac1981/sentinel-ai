@@ -1,6 +1,6 @@
 ---
 title: "Moltbook breach: When Cross-App Permissions Stack into Risk"
-date: 2026-04-23T04:03:02+00:00
+date: "2026-04-23T11:39:35+00:00"
 draft: false
 slug: "toxic-combinations-when-cross-app-permissions-stack-into-risk"
 
