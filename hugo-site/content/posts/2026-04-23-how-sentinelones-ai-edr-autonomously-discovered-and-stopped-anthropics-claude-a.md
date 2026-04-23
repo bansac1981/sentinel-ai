@@ -1,6 +1,6 @@
 ---
 title: "SentinelOne's AI-powered EDR autonomously claims blocking a Claude Zero Day Supply Chain Attack"
-date: 2026-04-23T04:08:17+00:00
+date: "2026-04-23T11:58:53+00:00"
 draft: false
 slug: "how-sentinelones-ai-edr-autonomously-discovered-and-stopped-anthropics-claude-a"
 
