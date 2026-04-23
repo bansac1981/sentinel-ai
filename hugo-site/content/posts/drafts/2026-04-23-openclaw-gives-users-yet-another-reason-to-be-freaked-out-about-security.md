@@ -1,7 +1,7 @@
 ---
-title: "OpenClaw gives users yet another reason to be freaked out about security"
+title: "Critical OpenClaw flaw lets low-privilege attackers silently seize full admin control"
 date: 2026-04-23T04:07:12+00:00
-draft: true
+draft: false
 slug: "openclaw-gives-users-yet-another-reason-to-be-freaked-out-about-security"
 
 # ── Content metadata ──
@@ -10,7 +10,7 @@ source: "Ars Technica Security"
 source_url: "https://arstechnica.com/security/2026/04/heres-why-its-prudent-for-openclaw-users-to-assume-compromise/"
 source_date: 2026-04-03T20:30:15+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/9786320/pexels-photo-9786320.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://plus.unsplash.com/premium_vector-1727145411977-3eea86191b8d?q=80&w=1267&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
