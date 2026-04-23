@@ -1,7 +1,7 @@
 ---
 title: "Moltbook breach: When Cross-App Permissions Stack into Risk"
 date: 2026-04-23T04:03:02+00:00
-draft: true
+draft: false
 slug: "toxic-combinations-when-cross-app-permissions-stack-into-risk"
 
 # ── Content metadata ──
@@ -10,7 +10,7 @@ source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/toxic-combinations-when-cross-app.html"
 source_date: 2026-04-22T10:41:36+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/9783346/pexels-photo-9783346.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.unsplash.com/photo-1650234083211-f1feaf324d4c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
