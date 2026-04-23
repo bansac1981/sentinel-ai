@@ -1,7 +1,7 @@
 ---
 title: "AI-powered defense for an AI-accelerated threat landscape"
 date: 2026-04-23T04:01:29+00:00
-draft: true
+draft: false
 slug: "ai-powered-defense-for-an-ai-accelerated-threat-landscape"
 
 # ── Content metadata ──
@@ -10,7 +10,7 @@ source: "Microsoft Security Blog"
 source_url: "https://www.microsoft.com/en-us/security/blog/2026/04/22/ai-powered-defense-for-an-ai-accelerated-threat-landscape/"
 source_date: 2026-04-22T17:00:00+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/6963098/pexels-photo-6963098.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.unsplash.com/photo-1642783327432-d269921e0f20?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
