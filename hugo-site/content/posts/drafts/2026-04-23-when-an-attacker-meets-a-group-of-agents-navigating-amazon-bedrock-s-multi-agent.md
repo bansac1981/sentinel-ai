@@ -1,7 +1,7 @@
 ---
-title: "When an Attacker Meets a Group of Agents: Navigating Amazon Bedrock's Multi-Agent Applications"
+title: "Prompt injection attacks can traverse Amazon Bedrock multi-agent hierarchies"
 date: 2026-04-23T04:06:38+00:00
-draft: true
+draft: false
 slug: "when-an-attacker-meets-a-group-of-agents-navigating-amazon-bedrock-s-multi-agent"
 
 # ── Content metadata ──
