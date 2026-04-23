@@ -1,6 +1,6 @@
 ---
 title: "AI-powered defense for an AI-accelerated threat landscape"
-date: 2026-04-23T04:01:29+00:00
+date: "2026-04-23T12:12:12+00:00"
 draft: false
 slug: "ai-powered-defense-for-an-ai-accelerated-threat-landscape"
 
