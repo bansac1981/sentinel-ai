@@ -1,6 +1,6 @@
 ---
 title: "Claude's Mythos rival: Chinese Cybersecurity Firm\u2019s claims finding 1000 vulnerabilities"
-date: 2026-04-24T02:41:25+00:00
+date: "2026-04-24T03:14:26+00:00"
 draft: false
 slug: "chinese-cybersecurity-firms-ai-hacking-claims-draw-comparisons-to-claude-mythos"
 
