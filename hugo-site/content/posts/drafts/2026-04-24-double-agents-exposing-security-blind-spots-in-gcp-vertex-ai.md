@@ -1,7 +1,7 @@
 ---
-title: "Double Agents: Exposing Security Blind Spots in GCP Vertex AI"
+title: "Vertex AI agents can be weaponized to steal GCP service credentials"
 date: 2026-04-24T02:43:51+00:00
-draft: true
+draft: false
 slug: "double-agents-exposing-security-blind-spots-in-gcp-vertex-ai"
 
 # ── Content metadata ──
