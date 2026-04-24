@@ -1,7 +1,7 @@
 ---
 title: "Bad Memories Still Haunt AI Agents"
 date: 2026-04-24T02:40:02+00:00
-draft: true
+draft: false
 slug: "bad-memories-still-haunt-ai-agents"
 
 # ── Content metadata ──
