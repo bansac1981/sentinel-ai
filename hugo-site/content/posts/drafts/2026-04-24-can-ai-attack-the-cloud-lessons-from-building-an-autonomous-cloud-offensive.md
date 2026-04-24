@@ -1,7 +1,7 @@
 ---
-title: "Can AI Attack the Cloud? Lessons From Building an Autonomous Cloud Offensive Multi-Agent System"
+title: "Paloalto's Zealot successfully attacks misconfigured cloud environments"
 date: 2026-04-24T02:42:34+00:00
-draft: true
+draft: false
 slug: "can-ai-attack-the-cloud-lessons-from-building-an-autonomous-cloud-offensive"
 
 # ── Content metadata ──
