@@ -1,7 +1,7 @@
 ---
 title: "Bitwarden CLI Compromised in Ongoing Checkmarx Supply Chain Campaign"
 date: 2026-04-24T02:40:42+00:00
-draft: true
+draft: false
 slug: "bitwarden-cli-compromised-in-ongoing-checkmarx-supply-chain-campaign"
 
 # ── Content metadata ──
