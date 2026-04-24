@@ -1,5 +1,5 @@
 ---
-title: "Claude's Mythos rival: Chinese Cybersecurity Firm\u2019s claims finding 1000 vulnerabilities"
+title: "Claude's Mythos rival: Chinese Cybersecurity Firm claims finding 1000 vulnerabilities"
 date: "2026-04-24T03:14:26+00:00"
 draft: false
 slug: "chinese-cybersecurity-firms-ai-hacking-claims-draw-comparisons-to-claude-mythos"
@@ -10,7 +10,7 @@ source: "SecurityWeek"
 source_url: "https://www.securityweek.com/chinese-cybersecurity-firms-ai-hacking-claims-draw-comparisons-to-claude-mythos/"
 source_date: 2026-04-23T12:36:45+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/30530406/pexels-photo-30530406.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://plus.unsplash.com/premium_vector-1727392228159-2453db30083e?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
 
 # ── AI Security Classification ──
