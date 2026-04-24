@@ -1,6 +1,6 @@
 ---
 title: "ChatGPT's code runtime silently exfiltrates user data via malicious prompt"
-date: 2026-04-24T02:44:19+00:00
+date: "2026-04-24T03:30:25+00:00"
 draft: false
 slug: "chatgpt-data-leakage-via-a-hidden-outbound-channel-in-the-code-execution-runtime"
 
