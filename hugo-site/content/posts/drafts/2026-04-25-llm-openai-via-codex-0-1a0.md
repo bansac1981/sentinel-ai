@@ -1,7 +1,7 @@
 ---
 title: "Python package 'llm-openai-via-codex 0.1a0' hijacks Codex CLI"
 date: 2026-04-25T04:25:12+00:00
-draft: true
+draft: false
 slug: "llm-openai-via-codex-0-1a0"
 
 # ── Content metadata ──
