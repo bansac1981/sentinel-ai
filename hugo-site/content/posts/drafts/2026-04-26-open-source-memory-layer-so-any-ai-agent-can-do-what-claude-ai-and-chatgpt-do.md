@@ -1,7 +1,7 @@
 ---
 title: "Open source memory layer so any AI agent can do what Claude.ai and ChatGPT do"
 date: 2026-04-26T10:19:20+00:00
-draft: true
+draft: false
 slug: "open-source-memory-layer-so-any-ai-agent-can-do-what-claude-ai-and-chatgpt-do"
 
 # ── Content metadata ──
