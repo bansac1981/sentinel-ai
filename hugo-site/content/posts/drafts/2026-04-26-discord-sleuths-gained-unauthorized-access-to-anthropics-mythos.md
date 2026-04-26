@@ -1,7 +1,7 @@
 ---
 title: "Discord Sleuths Gained Unauthorized Access to Anthropic\u2019s Mythos"
 date: 2026-04-26T10:18:08+00:00
-draft: true
+draft: false
 slug: "discord-sleuths-gained-unauthorized-access-to-anthropics-mythos"
 
 # ── Content metadata ──
