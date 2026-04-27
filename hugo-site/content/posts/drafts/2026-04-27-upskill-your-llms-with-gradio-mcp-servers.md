@@ -1,7 +1,7 @@
 ---
-title: "Upskill your LLMs With Gradio MCP Servers"
+title: "Hugging Face 'Spaces' now acts as an MCP-App-Store. Anybody thinking on the security consequence?"
 date: 2026-04-27T09:24:31+00:00
-draft: true
+draft: false
 slug: "upskill-your-llms-with-gradio-mcp-servers"
 
 # ── Content metadata ──
