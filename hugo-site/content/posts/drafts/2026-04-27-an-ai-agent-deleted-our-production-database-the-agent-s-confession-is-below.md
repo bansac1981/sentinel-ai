@@ -1,5 +1,5 @@
 ---
-title: "An AI agent deleted our production database. The agent's confession is below"
+title: "An AI agent confesses after deleting a production database. The Oops! moment."
 date: 2026-04-27T09:22:05+00:00
 draft: true
 slug: "an-ai-agent-deleted-our-production-database-the-agent-s-confession-is-below"
