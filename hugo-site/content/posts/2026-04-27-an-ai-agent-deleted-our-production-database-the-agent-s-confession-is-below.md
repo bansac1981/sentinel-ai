@@ -1,6 +1,6 @@
 ---
 title: "An AI agent confesses after deleting a production database. The Oops! moment."
-date: 2026-04-27T09:22:05+00:00
+date: "2026-04-27T09:39:26+00:00"
 draft: false
 slug: "an-ai-agent-deleted-our-production-database-the-agent-s-confession-is-below"
 
