@@ -1,7 +1,7 @@
 ---
 title: "Welcoming Llama Guard 4 on Hugging Face Hub"
 date: 2026-04-27T09:25:53+00:00
-draft: true
+draft: false
 slug: "welcoming-llama-guard-4-on-hugging-face-hub"
 
 # ── Content metadata ──
