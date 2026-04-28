@@ -1,6 +1,6 @@
 ---
 title: "TeamPCP resumes supply chain attacks, poisoning xinference PyPI and triggering a Bitwarden CLI cascade via compromised Docker image."
-date: 2026-04-28T04:44:59+00:00
+date: "2026-04-28T05:48:19+00:00"
 draft: false
 slug: "teampcp-supply-chain-campaign-update-008-26-day-pause-ends-with-three-concurrent"
 
