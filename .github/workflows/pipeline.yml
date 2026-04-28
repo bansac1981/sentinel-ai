@@ -71,6 +71,7 @@ jobs:
       - name: Run Grid the Grey pipeline
         env:
           ANTHROPIC_API_KEY:    ${{ secrets.ANTHROPIC_API_KEY }}
+          UNSPLASH_ACCESS_KEY:  ${{ secrets.UNSPLASH_ACCESS_KEY }}
           PEXELS_API_KEY:       ${{ secrets.PEXELS_API_KEY }}
           CLAUDE_MODEL:         ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
           RELEVANCE_THRESHOLD:  ${{ vars.RELEVANCE_THRESHOLD || '6.0' }}

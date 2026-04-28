@@ -239,16 +239,23 @@ MAX_ARTICLES        = int(os.getenv("MAX_ARTICLES_PER_RUN", "20"))
 FETCH_FULL_CONTENT  = os.getenv("FETCH_FULL_CONTENT", "true").lower() == "true"
 FETCH_TIMEOUT       = int(os.getenv("FETCH_TIMEOUT", "10"))
 
-# Pexels API — free stock photos, Pexels License (free for commercial use, no attribution required)
+# Article age filter — reject anything published more than this many days ago
+MAX_ARTICLE_AGE_DAYS = int(os.getenv("MAX_ARTICLE_AGE_DAYS", "7"))
+
+# Unsplash API — primary image source (free, high quality, no attribution required)
+# Get a free key at: https://unsplash.com/developers
+UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY", "")
+
+# Pexels API — fallback image source (free, no attribution required)
 # Get a free key at: https://www.pexels.com/api/
 PEXELS_API_KEY      = os.getenv("PEXELS_API_KEY", "")
 
 # ─────────────────────────────────────────────
-# PEXELS KEYWORD → SEARCH QUERY MAP
+# IMAGE KEYWORD → SEARCH QUERY MAP (shared by Unsplash + Pexels)
 # Ordered most-specific → most-general; first match wins.
 # All queries chosen to return professional, relevant landscape photos.
 # ─────────────────────────────────────────────
-PEXELS_KEYWORD_MAP = [
+IMAGE_KEYWORD_MAP = [
     # Generative AI / LLM
     (["prompt injection", "jailbreak", "system prompt"],
      "artificial intelligence robot security"),
@@ -463,10 +470,10 @@ def fetch_og_image(url: str, log: logging.Logger) -> str:
     return ""
 
 
-def _pexels_query(title: str, categories: list) -> str:
-    """Build the best Pexels search query for this article."""
+def _image_query(title: str, categories: list) -> str:
+    """Build the best image search query for this article (shared by Unsplash + Pexels)."""
     text = title.lower()
-    for keywords, query in PEXELS_KEYWORD_MAP:
+    for keywords, query in IMAGE_KEYWORD_MAP:
         if any(kw in text for kw in keywords):
             return query
     # Fall back to first category
@@ -500,6 +507,60 @@ def get_recent_thumbnails(n: int = 20) -> set:
     return used
 
 
+def fetch_unsplash_image(
+    title: str,
+    categories: list,
+    log: logging.Logger,
+    used_urls: set | None = None,
+) -> str:
+    """
+    Search Unsplash for a relevant landscape photo. Primary image source.
+
+    Unsplash License: https://unsplash.com/license
+    - Free for commercial and personal use.
+    - No attribution required (appreciated but not mandatory).
+
+    Returns the photo URL (regular ~1080px) or empty string on failure.
+    Never raises.
+    """
+    if not UNSPLASH_ACCESS_KEY:
+        return ""
+
+    if used_urls is None:
+        used_urls = set()
+
+    query = _image_query(title, categories)
+    log.debug(f"  Unsplash query: '{query}'")
+
+    try:
+        resp = httpx.get(
+            "https://api.unsplash.com/search/photos",
+            params={"query": query, "per_page": 15, "orientation": "landscape"},
+            headers={"Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}"},
+            timeout=8.0,
+        )
+        resp.raise_for_status()
+        results = resp.json().get("results", [])
+
+        if not results:
+            log.debug(f"  Unsplash: no results for '{query}'")
+            return ""
+
+        start = abs(hash(title)) % len(results)
+        for i in range(len(results)):
+            candidate = results[(start + i) % len(results)]["urls"]["regular"]
+            if candidate not in used_urls:
+                log.debug(f"  Unsplash photo (slot {(start+i)%len(results)}): {candidate[:80]}")
+                return candidate
+
+        log.debug("  Unsplash: all candidates already used, reusing deterministic pick")
+        return results[start]["urls"]["regular"]
+
+    except Exception as e:
+        log.debug(f"  Unsplash fetch failed: {e}")
+        return ""
+
+
 def fetch_pexels_image(
     title: str,
     categories: list,
@@ -507,15 +568,11 @@ def fetch_pexels_image(
     used_urls: set | None = None,
 ) -> str:
     """
-    Search Pexels for a relevant landscape photo.
+    Search Pexels for a relevant landscape photo. Fallback image source.
 
     Pexels License: https://www.pexels.com/license/
     - Free for commercial and personal use.
     - No copyright, no attribution required.
-    - Photos are NOT AI-generated; they are real photographs by human creators.
-
-    used_urls: set of thumbnail URLs already used in recent posts — any photo
-               whose URL appears in this set is skipped to avoid repeats.
 
     Returns the photo URL (large ~940px) or empty string on failure.
     Never raises.
@@ -526,7 +583,7 @@ def fetch_pexels_image(
     if used_urls is None:
         used_urls = set()
 
-    query = _pexels_query(title, categories)
+    query = _image_query(title, categories)
     log.debug(f"  Pexels query: '{query}'")
 
     try:
@@ -626,6 +683,7 @@ Return a single valid JSON object (no markdown fences, no extra text) with exact
 {{
   "relevance_score": <float 0.0–10.0>,
   "is_ai_security_relevant": <true/false>,
+  "generated_title": "<A punchy, security-focused headline for this article. Max 12 words. Lead with the threat or finding, not the vendor. Do NOT use clickbait. Examples: 'MCP Design Flaw Lets Attackers Hijack AI Agent Pipelines', 'Cursor IDE Vulnerability Gave Attackers Shell Access on Developer Machines', 'North Korea Targets OpenAI via Axios Supply Chain Compromise'. Never start with 'How', 'Why', 'What', or a number.>",
   "summary": "<2-3 sentence editorial summary focused on the security implications>",
   "threat_level": "<CRITICAL|HIGH|MEDIUM|LOW|NONE>",
   "mitre_techniques": ["<AML.TXXXX - Technique Name>", ...],
@@ -744,9 +802,12 @@ def generate_hugo_markdown(article: dict, analysis: dict, slug: str) -> str:
     # Preserve the original source publication date for reference
     source_date = article["published"].strftime("%Y-%m-%dT%H:%M:%S+00:00")
 
+    # Use Claude-generated title if available, fall back to original
+    display_title = analysis.get("generated_title", "").strip() or article["title"]
+
     # Front matter
     front_matter = f"""---
-title: {json.dumps(article['title'])}
+title: {json.dumps(display_title)}
 date: {fetch_date}
 draft: true
 slug: {json.dumps(slug)}
@@ -755,10 +816,11 @@ slug: {json.dumps(slug)}
 summary: {json.dumps(analysis.get('summary', ''))}
 source: {json.dumps(article['source'])}
 source_url: {json.dumps(article['url'])}
+source_title: {json.dumps(article['title'])}
 source_date: {source_date}
 author: "Grid the Grey Editorial"
 thumbnail: {json.dumps(article.get('thumbnail', ''))}
-# To override: find a photo on pexels.com, right-click → Open image in new tab, paste URL above
+# To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── AI Security Classification ──
 relevance_score: {analysis.get('relevance_score', 0.0)}
@@ -861,6 +923,19 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
     # Sort by date descending (newest first)
     all_articles.sort(key=lambda a: a["published"], reverse=True)
 
+    # ── Age filter: drop articles older than MAX_ARTICLE_AGE_DAYS ──
+    cutoff = datetime.now(timezone.utc).replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
+    from datetime import timedelta
+    cutoff -= timedelta(days=MAX_ARTICLE_AGE_DAYS)
+    before_age_filter = len(all_articles)
+    all_articles = [a for a in all_articles if a["published"] >= cutoff]
+    too_old = before_age_filter - len(all_articles)
+    if too_old:
+        log.info(f"Age filter (>{MAX_ARTICLE_AGE_DAYS} days): dropped {too_old} articles  |  Remaining: {len(all_articles)}")
+    stats["articles_found"] = len(all_articles)
+
     # ── Step 2: Deduplicate ──
     log.info("\nSTEP 2 — Deduplication")
 
@@ -957,20 +1032,27 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
             stats["errors"] += 1
             continue
 
-        # Fetch thumbnail: Pexels first (free, copyright-safe), OG image as fallback
+        # Fetch thumbnail: Unsplash (primary) → Pexels (fallback) → OG image (last resort)
         # Done here so categories from Claude analysis improve keyword matching.
         # recent_thumbnails ensures the same photo isn't reused across the last 20 posts.
         categories = analysis.get("categories", [])
+        title_for_image = analysis.get("generated_title", "") or article["title"]
         log.debug(f"  Fetching thumbnail (categories: {categories})")
-        thumbnail = fetch_pexels_image(article["title"], categories, log, used_urls=recent_thumbnails)
+        thumbnail = fetch_unsplash_image(title_for_image, categories, log, used_urls=recent_thumbnails)
         if thumbnail:
-            log.debug(f"  Pexels image: {thumbnail[:80]}")
-            recent_thumbnails.add(thumbnail)   # prevent reuse within this run
+            log.debug(f"  Unsplash image: {thumbnail[:80]}")
+            recent_thumbnails.add(thumbnail)
         else:
-            log.debug(f"  Pexels returned nothing, falling back to OG image")
-            thumbnail = fetch_og_image(article["url"], log)
+            log.debug(f"  Unsplash returned nothing, trying Pexels")
+            thumbnail = fetch_pexels_image(title_for_image, categories, log, used_urls=recent_thumbnails)
             if thumbnail:
-                log.debug(f"  OG image: {thumbnail[:80]}")
+                log.debug(f"  Pexels image: {thumbnail[:80]}")
+                recent_thumbnails.add(thumbnail)
+            else:
+                log.debug(f"  Pexels returned nothing, falling back to OG image")
+                thumbnail = fetch_og_image(article["url"], log)
+                if thumbnail:
+                    log.debug(f"  OG image: {thumbnail[:80]}")
         article["thumbnail"] = thumbnail
 
         stats["claude_scored"] += 1
@@ -991,8 +1073,9 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         if owasp:
             log.info(f"  OWASP: {', '.join(owasp[:2])}{'...' if len(owasp) > 2 else ''}")
 
-        # Generate and write Hugo post
-        slug = build_slug(article["title"], article["published"])
+        # Generate and write Hugo post — slug based on generated title if available
+        slug_title = analysis.get("generated_title", "").strip() or article["title"]
+        slug = build_slug(slug_title, article["published"])
         markdown = generate_hugo_markdown(article, analysis, slug)
         written = write_hugo_post(slug, markdown, log)
         if written:
