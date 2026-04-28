@@ -1,7 +1,7 @@
 ---
-title: "Parsing Agentic Offensive Security's Existential Threat"
+title: "Frontier agentic LLMs risk industrialising cyberattacks, but may also empower defenders."
 date: 2026-04-28T04:46:02+00:00
-draft: true
+draft: false
 slug: "parsing-agentic-offensive-security-s-existential-threat"
 
 # ── Content metadata ──
