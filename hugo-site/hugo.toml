@@ -17,7 +17,7 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
   author = "Grid the Grey Editorial"
   twitterHandle = "@gridthegrey"
   githubURL = "https://github.com/bansac1981/sentinel-ai"
-  newsletterURL = "MAILERLITE_FORM_URL_PLACEHOLDER"
+  newsletterURL = "https://preview.mailerlite.io/forms/2303110/186108792273896900/share"
   enableTicker = true
   enableThreatRadar = true
   enableFrameworkBadges = true
@@ -78,5 +78,5 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
     weight = 5
   [[menu.main]]
     name = "Newsletter"
-    url = "MAILERLITE_FORM_URL_PLACEHOLDER"
+    url = "https://preview.mailerlite.io/forms/2303110/186108792273896900/share"
     weight = 6
