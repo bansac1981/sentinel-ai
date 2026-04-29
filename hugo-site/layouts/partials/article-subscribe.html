@@ -1,4 +1,8 @@
 {{/* ── ARTICLE-BOTTOM NEWSLETTER SUBSCRIBE ── */}}
+
+{{/* Hidden iframe absorbs the form POST response — no new tab, no page reload */}}
+<iframe name="gtg-ml-sink" style="display:none;" aria-hidden="true"></iframe>
+
 <div class="article-subscribe" id="gtg-newsletter-article">
   <div class="article-subscribe__inner">
     <div class="article-subscribe__left">
@@ -10,29 +14,31 @@
       </p>
     </div>
     <div class="article-subscribe__right">
-      <form
-        class="article-subscribe__form"
-        action="https://assets.mailerlite.com/jsonp/2303110/forms/186108792273896900/subscribe"
-        method="post"
-        target="_blank"
-        onsubmit="gtgArticleSubscribe(this)">
-        <input
-          type="email"
-          name="fields[email]"
-          class="article-subscribe__input"
-          placeholder="your@email.com"
-          required
-          autocomplete="email"
-          aria-label="Email address">
-        <input type="hidden" name="ml-submit" value="1">
-        <input type="hidden" name="anticsrf" value="true">
-        <button type="submit" class="article-subscribe__btn">
-          SUBSCRIBE FREE →
-        </button>
-      </form>
-      <p class="article-subscribe__fine">No spam. Unsubscribe anytime.</p>
+      <div class="article-subscribe__form-wrap">
+        <form
+          class="article-subscribe__form"
+          action="https://assets.mailerlite.com/jsonp/2303110/forms/186108792273896900/subscribe"
+          method="post"
+          target="gtg-ml-sink"
+          onsubmit="gtgArticleSubscribe(this)">
+          <input
+            type="email"
+            name="fields[email]"
+            class="article-subscribe__input"
+            placeholder="your@email.com"
+            required
+            autocomplete="email"
+            aria-label="Email address">
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+          <button type="submit" class="article-subscribe__btn">
+            SUBSCRIBE FREE →
+          </button>
+        </form>
+        <p class="article-subscribe__fine">No spam. Unsubscribe anytime.</p>
+      </div>
       <p class="article-subscribe__success" style="display:none;">
-        ✓ You're in — check your inbox.
+        ✓ You're in — first briefing lands Tuesday or Friday.
       </p>
     </div>
   </div>
@@ -40,21 +46,16 @@
 
 <script>
 function gtgArticleSubscribe(form) {
-  var email = form.querySelector('input[type="email"]').value;
-  if (!email) return true;
-  // Submit via fetch to avoid opening a new tab
-  fetch(form.action, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'fields[email]=' + encodeURIComponent(email) + '&ml-submit=1&anticsrf=true'
-  }).then(function() {
-    form.style.display = 'none';
-    document.querySelector('.article-subscribe__success').style.display = 'block';
-  }).catch(function() {
-    // Fallback: let the form submit normally (opens Mailerlite thank-you page)
-    return true;
-  });
-  // Prevent default while fetch runs; fallback handles failure
-  return false;
+  // Form posts to hidden iframe (target="gtg-ml-sink") — no new tab
+  // Show success message after a brief delay to let the POST fire
+  setTimeout(function() {
+    var wrap = form.closest('.article-subscribe__form-wrap');
+    var success = form.closest('.article-subscribe__right')
+                      .querySelector('.article-subscribe__success');
+    if (wrap) wrap.style.display = 'none';
+    if (success) success.style.display = 'block';
+  }, 800);
+  // Return true so the form submits normally to the hidden iframe
+  return true;
 }
 </script>
