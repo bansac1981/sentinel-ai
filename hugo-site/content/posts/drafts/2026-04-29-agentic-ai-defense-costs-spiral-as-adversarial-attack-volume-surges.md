@@ -1,7 +1,7 @@
 ---
 title: "Agentic AI Defense Costs Spiral as Adversarial Attack Volume Surges"
 date: 2026-04-29T02:47:12+00:00
-draft: true
+draft: false
 slug: "agentic-ai-defense-costs-spiral-as-adversarial-attack-volume-surges"
 
 # ── Content metadata ──
