@@ -1,6 +1,6 @@
 ---
 title: "FIDO Alliance Launches Standards Push to Secure AI Agent Transactions"
-date: 2026-04-29T02:46:33+00:00
+date: "2026-04-29T07:16:53+00:00"
 draft: false
 slug: "fido-alliance-launches-standards-push-to-secure-ai-agent-transactions"
 
