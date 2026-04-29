@@ -1,0 +1,102 @@
+name: "Grid the Grey — Newsletter Dispatch"
+
+# ─────────────────────────────────────────────
+# Triggers
+# ─────────────────────────────────────────────
+on:
+  # Twice a week: Tuesday and Friday at 9:30 AM IST (04:00 UTC)
+  schedule:
+    - cron: "0 4 * * 2"   # Tuesday
+    - cron: "0 4 * * 5"   # Friday
+
+  # Manual trigger from GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Look back N days for posts (default: 4)"
+        required: false
+        default: "4"
+      dry_run:
+        description: "Dry run — build digest but skip API send"
+        type: boolean
+        required: false
+        default: false
+      subject:
+        description: "Custom subject line (leave blank for auto-generated)"
+        required: false
+        default: ""
+
+# ─────────────────────────────────────────────
+# Permissions — read-only, no repo writes needed
+# ─────────────────────────────────────────────
+permissions:
+  contents: read
+
+# ─────────────────────────────────────────────
+# Job
+# ─────────────────────────────────────────────
+jobs:
+  send-newsletter:
+    name: "Build → Send"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # 1. Checkout (needs post content)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # 2. Python setup
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # 4. Save digest HTML as artifact (always, even on dry run)
+      - name: Generate digest HTML
+        env:
+          MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
+          MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
+        run: |
+          DAYS="${{ github.event.inputs.days || '4' }}"
+          python newsletter_digest.py --days "$DAYS" --output digest.html
+          echo "Digest saved to digest.html"
+          wc -c digest.html
+
+      # 5. Upload digest as artifact for inspection
+      - name: Upload digest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: newsletter-digest-${{ github.run_number }}
+          path: digest.html
+          retention-days: 14
+
+      # 6. Send via Mailerlite API
+      - name: Send newsletter
+        env:
+          MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
+          MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
+        run: |
+          ARGS="--send"
+
+          DAYS="${{ github.event.inputs.days || '4' }}"
+          ARGS="$ARGS --days $DAYS"
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+
+          SUBJECT="${{ github.event.inputs.subject }}"
+          if [ -n "$SUBJECT" ]; then
+            ARGS="$ARGS --subject \"$SUBJECT\""
+          fi
+
+          echo "Running: python newsletter_digest.py $ARGS"
+          python newsletter_digest.py $ARGS

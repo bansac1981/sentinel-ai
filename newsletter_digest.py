@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 """
-Grid the Grey — Weekly Newsletter Digest Generator
-================================================
+Grid the Grey — Newsletter Digest Generator (Mailerlite edition)
+================================================================
 Reads Hugo content/posts/ from the last N days, ranks by relevance score,
-and generates a formatted HTML digest ready to paste into Beehiiv.
+and either saves HTML locally or sends directly via Mailerlite API.
 
 Usage:
-    python newsletter_digest.py                  # last 7 days
-    python newsletter_digest.py --days 14        # last 14 days
-    python newsletter_digest.py --output digest.html  # save to file
+    python newsletter_digest.py                        # last 4 days, print HTML
+    python newsletter_digest.py --days 7               # last 7 days
+    python newsletter_digest.py --output digest.html   # save to file
+    python newsletter_digest.py --send                 # send via Mailerlite API
+    python newsletter_digest.py --send --dry-run       # build + validate, skip send
 
-Output: HTML email body (paste into Beehiiv's HTML block editor)
+Environment variables (required for --send):
+    MAILERLITE_API_KEY   — your Mailerlite API key
+    MAILERLITE_LIST_ID   — numeric ID of your subscriber group/list
 """
 
 import argparse
+import json
+import os
 import re
 import sys
 from datetime import datetime, timedelta, timezone
@@ -28,15 +34,16 @@ POSTS_DIR       = Path(__file__).parent / "hugo-site" / "content" / "posts"
 MAX_STORIES     = 8       # maximum articles in the digest
 TOP_STORY_MIN   = 7.5     # minimum score to be the lead story
 
-# Beehiiv-safe colours (inline CSS only — no external stylesheets)
-# Matches Grid the Grey dark editorial theme
-ACCENT          = "#ff3b3b"    # Red accent
-BG_DARK         = "#0a0a0f"    # Deep black background
-BG_CARD         = "#141419"    # Card background (slightly lighter than primary)
-TEXT_MUTED      = "#7a7a8c"    # Neutral grey (no purple tint)
-TEXT_BODY       = "#c8c8d8"    # Body text
-TEXT_HEAD       = "#f0f0ff"    # Heading text
-BORDER          = "#252535"    # Border / divider color
+MAILERLITE_API  = "https://connect.mailerlite.com/api"
+
+# Email-safe colours (inline CSS only — no external stylesheets)
+ACCENT          = "#ff3b3b"
+BG_DARK         = "#0a0a0f"
+BG_CARD         = "#141419"
+TEXT_MUTED      = "#7a7a8c"
+TEXT_BODY       = "#c8c8d8"
+TEXT_HEAD       = "#f0f0ff"
+BORDER          = "#252535"
 
 THREAT_COLORS = {
     "CRITICAL": "#ff3b3b",
@@ -70,14 +77,12 @@ def parse_frontmatter(text: str) -> dict:
         return {}
 
     raw = m.group(1)
-    result = {}
 
     def _get(key):
         p = re.search(rf"^{key}:\s*(.+)$", raw, re.MULTILINE)
         return p.group(1).strip().strip('"').strip("'") if p else ""
 
     def _get_list(key):
-        # handles both inline ["a","b"] and YAML list blocks
         inline = re.search(rf"^{key}:\s*\[(.+?)\]", raw, re.MULTILINE)
         if inline:
             return [x.strip().strip('"').strip("'")
@@ -88,28 +93,20 @@ def parse_frontmatter(text: str) -> dict:
                     for l in block[0].splitlines()]
         return []
 
-    result["title"]           = _get("title")
-    result["date"]            = _get("date")
-    result["summary"]         = _get("summary")
-    result["source"]          = _get("source")
-    result["source_url"]      = _get("source_url")
-    result["threat_level"]    = _get("threat_level")
-    result["relevance_score"] = float(_get("relevance_score") or 0)
-    result["thumbnail"]       = _get("thumbnail")
-    result["draft"]           = _get("draft").lower() == "true"
+    result = {}
+    result["title"]            = _get("title")
+    result["date"]             = _get("date")
+    result["summary"]          = _get("summary")
+    result["source"]           = _get("source")
+    result["source_url"]       = _get("source_url")
+    result["threat_level"]     = _get("threat_level")
+    result["relevance_score"]  = float(_get("relevance_score") or 0)
+    result["thumbnail"]        = _get("thumbnail")
+    result["draft"]            = _get("draft").lower() == "true"
     result["mitre_techniques"] = _get_list("mitre_techniques")
     result["owasp_categories"] = _get_list("owasp_categories")
     result["categories"]       = _get_list("categories")
-
-    # Parse slug from filename
     return result
-
-
-def slugify(title: str) -> str:
-    s = title.lower()
-    s = re.sub(r"[^\w\s-]", "", s)
-    s = re.sub(r"[\s_]+", "-", s).strip("-")
-    return s
 
 
 def load_posts(days: int) -> list[dict]:
@@ -124,10 +121,8 @@ def load_posts(days: int) -> list[dict]:
         if not fm or fm.get("draft"):
             continue
 
-        # Parse date
         date_str = fm.get("date", "")
         try:
-            # Handle various date formats
             for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S+05:30",
                         "%Y-%m-%d", "%Y-%m-%dT%H:%M:%SZ"):
                 try:
@@ -145,12 +140,11 @@ def load_posts(days: int) -> list[dict]:
         if pub_date < cutoff:
             continue
 
-        fm["pub_date"]   = pub_date
-        fm["slug"]       = md_file.stem
-        fm["url"]        = f"{SITE_URL}/posts/{md_file.stem}/"
+        fm["pub_date"] = pub_date
+        fm["slug"]     = md_file.stem
+        fm["url"]      = f"{SITE_URL}/posts/{md_file.stem}/"
         posts.append(fm)
 
-    # Sort by relevance score descending
     posts.sort(key=lambda p: p["relevance_score"], reverse=True)
     return posts[:MAX_STORIES]
 
@@ -275,7 +269,6 @@ def build_html(posts: list[dict], days: int) -> str:
     lead_html      = lead_story_html(lead) if lead else ""
     secondary_html = "".join(secondary_story_html(p) for p in secondary)
 
-    # Category breakdown
     cat_counts: dict[str, int] = {}
     for p in posts:
         for c in p.get("categories", []):
@@ -313,14 +306,14 @@ def build_html(posts: list[dict], days: int) -> str:
     </h1>
     <p style="margin:8px 0 0 0;font-size:13px;color:{TEXT_MUTED};">
       Issue #{issue_num} &nbsp;·&nbsp; {date_range} &nbsp;·&nbsp;
-      {len(posts)} stor{'y' if len(posts)==1 else 'ies'} this week
+      {len(posts)} stor{'y' if len(posts)==1 else 'ies'} this period
     </p>
   </td></tr>
 
   <!-- INTRO -->
   <tr><td style="padding:20px 0;">
     <p style="margin:0;font-size:14px;line-height:1.6;color:{TEXT_BODY};">
-      Your weekly digest of the most critical AI security developments —
+      Your briefing on the most critical AI security developments —
       adversarial ML, LLM vulnerabilities, and supply chain threats,
       mapped to <strong style="color:{TEXT_HEAD};">MITRE ATLAS</strong> and
       <strong style="color:{TEXT_HEAD};">OWASP LLM Top 10</strong>.
@@ -333,7 +326,7 @@ def build_html(posts: list[dict], days: int) -> str:
   <!-- DIVIDER -->
   <tr><td style="padding:4px 0 20px 0;">
     <p style="margin:0;font-family:monospace;font-size:10px;
-       color:{TEXT_MUTED};letter-spacing:0.15em;">── MORE THIS WEEK ──────────────────────────────</p>
+       color:{TEXT_MUTED};letter-spacing:0.15em;">── MORE THIS PERIOD ────────────────────────────</p>
   </td></tr>
 
   <!-- SECONDARY STORIES -->
@@ -368,11 +361,14 @@ def build_html(posts: list[dict], days: int) -> str:
   <tr><td style="padding:24px 0;text-align:center;
      border-top:1px solid {BORDER};margin-top:24px;">
     <p style="margin:0 0 4px 0;font-size:11px;color:{TEXT_MUTED};">
-      GRID THE GREY · AI Security News ·
+      GRID THE GREY · AI Security Intelligence ·
       <a href="{SITE_URL}" style="color:{TEXT_MUTED};">gridthegrey.com</a>
     </p>
-    <p style="margin:0;font-size:11px;color:{TEXT_MUTED};">
+    <p style="margin:0 0 4px 0;font-size:11px;color:{TEXT_MUTED};">
       Content aggregated from public sources for research and educational purposes.
+    </p>
+    <p style="margin:0;font-size:11px;color:{TEXT_MUTED};">
+      {{{{ unsubscribe }}}}
     </p>
   </td></tr>
 
@@ -384,17 +380,138 @@ def build_html(posts: list[dict], days: int) -> str:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Mailerlite API sender
+# ─────────────────────────────────────────────────────────────────────────────
+
+def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
+    """Create and immediately send a campaign via Mailerlite API v3."""
+    try:
+        import httpx
+    except ImportError:
+        print("[newsletter] ERROR: httpx not installed. Run: pip install httpx",
+              file=sys.stderr)
+        return False
+
+    api_key = os.environ.get("MAILERLITE_API_KEY", "").strip()
+    list_id = os.environ.get("MAILERLITE_LIST_ID", "").strip()
+
+    if not api_key:
+        print("[newsletter] ERROR: MAILERLITE_API_KEY environment variable not set.",
+              file=sys.stderr)
+        return False
+    if not list_id:
+        print("[newsletter] ERROR: MAILERLITE_LIST_ID environment variable not set.",
+              file=sys.stderr)
+        return False
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type":  "application/json",
+        "Accept":        "application/json",
+    }
+
+    campaign_name = f"Grid the Grey — {datetime.now().strftime('%Y-%m-%d')}"
+
+    payload = {
+        "name":   campaign_name,
+        "type":   "regular",
+        "emails": [
+            {
+                "subject":   subject,
+                "from_name": "Grid the Grey",
+                "from":      "analyst@gridthegrey.com",
+                "content":   html,
+            }
+        ],
+        "groups": [list_id],
+    }
+
+    if dry_run:
+        print(f"[newsletter] DRY RUN — would create campaign: {campaign_name!r}", file=sys.stderr)
+        print(f"[newsletter] DRY RUN — subject: {subject!r}", file=sys.stderr)
+        print(f"[newsletter] DRY RUN — list ID: {list_id}", file=sys.stderr)
+        print(f"[newsletter] DRY RUN — HTML length: {len(html):,} chars", file=sys.stderr)
+        return True
+
+    # Step 1: create campaign
+    print("[newsletter] Creating campaign…", file=sys.stderr)
+    try:
+        resp = httpx.post(
+            f"{MAILERLITE_API}/campaigns",
+            headers=headers,
+            json=payload,
+            timeout=30.0,
+        )
+        resp.raise_for_status()
+    except httpx.HTTPStatusError as e:
+        print(f"[newsletter] ERROR creating campaign: {e.response.status_code}",
+              file=sys.stderr)
+        print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
+        return False
+    except Exception as e:
+        print(f"[newsletter] ERROR creating campaign: {e}", file=sys.stderr)
+        return False
+
+    campaign_id = resp.json().get("data", {}).get("id")
+    if not campaign_id:
+        print(f"[newsletter] ERROR: no campaign ID in response: {resp.text[:300]}",
+              file=sys.stderr)
+        return False
+
+    print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
+
+    # Step 2: send immediately
+    print("[newsletter] Sending campaign…", file=sys.stderr)
+    try:
+        send_resp = httpx.post(
+            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/send",
+            headers=headers,
+            timeout=30.0,
+        )
+        send_resp.raise_for_status()
+    except httpx.HTTPStatusError as e:
+        print(f"[newsletter] ERROR sending campaign: {e.response.status_code}",
+              file=sys.stderr)
+        print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
+        return False
+    except Exception as e:
+        print(f"[newsletter] ERROR sending campaign: {e}", file=sys.stderr)
+        return False
+
+    print(f"[newsletter] ✓ Campaign sent successfully! ID: {campaign_id}", file=sys.stderr)
+    return True
+
+
+def build_subject(posts: list[dict]) -> str:
+    """Build an email subject line from the top story."""
+    date_str = datetime.now().strftime("%b %d")
+    if posts:
+        top_title = posts[0]["title"]
+        # Truncate to fit subject line
+        if len(top_title) > 60:
+            top_title = top_title[:57] + "…"
+        return f"[Grid the Grey] {top_title} + {len(posts)-1} more — {date_str}"
+    return f"[Grid the Grey] AI Security Briefing — {date_str}"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # CLI
 # ─────────────────────────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate Grid the Grey weekly newsletter digest"
+        description="Generate (and optionally send) Grid the Grey newsletter digest"
     )
-    parser.add_argument("--days",   type=int, default=7,
-                        help="Look back N days for posts (default: 7)")
-    parser.add_argument("--output", type=str, default=None,
+    parser.add_argument("--days",    type=int,  default=4,
+                        help="Look back N days for posts (default: 4)")
+    parser.add_argument("--output",  type=str,  default=None,
                         help="Save HTML to this file (default: print to stdout)")
+    parser.add_argument("--send",    action="store_true",
+                        help="Send via Mailerlite API (requires MAILERLITE_API_KEY + MAILERLITE_LIST_ID)")
+    parser.add_argument("--subject", type=str,  default=None,
+                        help="Custom email subject (auto-generated if omitted)")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Build and validate but skip actual API send")
     args = parser.parse_args()
 
     print(f"[newsletter] Scanning posts from last {args.days} days…", file=sys.stderr)
@@ -403,16 +520,27 @@ def main():
     if not posts:
         print(f"[newsletter] No published posts found in the last {args.days} days.",
               file=sys.stderr)
-        print("[newsletter] Try: python newsletter_digest.py --days 30", file=sys.stderr)
+        print("[newsletter] Try: python newsletter_digest.py --days 14", file=sys.stderr)
         sys.exit(1)
 
     print(f"[newsletter] Found {len(posts)} posts. Building digest…", file=sys.stderr)
     html = build_html(posts, args.days)
 
+    subject = args.subject or build_subject(posts)
+    print(f"[newsletter] Subject: {subject}", file=sys.stderr)
+
+    # Save to file if requested
     if args.output:
         Path(args.output).write_text(html, encoding="utf-8")
         print(f"[newsletter] Saved to {args.output}", file=sys.stderr)
-    else:
+
+    # Send via Mailerlite if requested
+    if args.send:
+        success = send_via_mailerlite(html, subject, dry_run=args.dry_run)
+        if not success:
+            sys.exit(1)
+    elif not args.output:
+        # Default: print HTML to stdout
         print(html)
 
     print(f"[newsletter] Done. Lead story: {posts[0]['title'][:60]}…", file=sys.stderr)
