@@ -106,6 +106,9 @@
     {{ .Content }}
   </div>
 
+  {{/* ── SUBSCRIBE CTA ── */}}
+  {{ partial "article-subscribe.html" . }}
+
   {{/* ── ARTICLE FOOTER ── */}}
   <footer class="article-footer">
     {{ if .Params.tags }}

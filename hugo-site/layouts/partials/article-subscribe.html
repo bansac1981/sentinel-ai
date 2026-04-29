@@ -1,0 +1,60 @@
+{{/* ── ARTICLE-BOTTOM NEWSLETTER SUBSCRIBE ── */}}
+<div class="article-subscribe" id="gtg-newsletter-article">
+  <div class="article-subscribe__inner">
+    <div class="article-subscribe__left">
+      <p class="article-subscribe__label">◉ AI THREAT BRIEFING</p>
+      <h3 class="article-subscribe__title">Stay ahead of the threat.</h3>
+      <p class="article-subscribe__desc">
+        Twice-weekly digest of critical AI security developments — every story
+        mapped to MITRE ATLAS and OWASP LLM Top 10. Free.
+      </p>
+    </div>
+    <div class="article-subscribe__right">
+      <form
+        class="article-subscribe__form"
+        action="https://assets.mailerlite.com/jsonp/2303110/forms/186108792273896900/subscribe"
+        method="post"
+        target="_blank"
+        onsubmit="gtgArticleSubscribe(this)">
+        <input
+          type="email"
+          name="fields[email]"
+          class="article-subscribe__input"
+          placeholder="your@email.com"
+          required
+          autocomplete="email"
+          aria-label="Email address">
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+        <button type="submit" class="article-subscribe__btn">
+          SUBSCRIBE FREE →
+        </button>
+      </form>
+      <p class="article-subscribe__fine">No spam. Unsubscribe anytime.</p>
+      <p class="article-subscribe__success" style="display:none;">
+        ✓ You're in — check your inbox.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+function gtgArticleSubscribe(form) {
+  var email = form.querySelector('input[type="email"]').value;
+  if (!email) return true;
+  // Submit via fetch to avoid opening a new tab
+  fetch(form.action, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'fields[email]=' + encodeURIComponent(email) + '&ml-submit=1&anticsrf=true'
+  }).then(function() {
+    form.style.display = 'none';
+    document.querySelector('.article-subscribe__success').style.display = 'block';
+  }).catch(function() {
+    // Fallback: let the form submit normally (opens Mailerlite thank-you page)
+    return true;
+  });
+  // Prevent default while fetch runs; fallback handles failure
+  return false;
+}
+</script>
