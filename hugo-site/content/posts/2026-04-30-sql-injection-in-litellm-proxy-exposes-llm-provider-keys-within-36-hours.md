@@ -11,7 +11,7 @@ source_url: "https://thehackernews.com/2026/04/litellm-cve-2026-42208-sql-inject
 source_title: "LiteLLM CVE-2026-42208 SQL Injection Exploited within 36 Hours of Disclosure"
 source_date: 2026-04-29T05:34:00+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.unsplash.com/photo-1717501218511-768944e2c325?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5Mzc1ODZ8MHwxfHNlYXJjaHw2fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwdGVjaG5vbG9neSUyMG5ldXJhbCUyMG5ldHdvcmt8ZW58MHwwfHx8MTc3NzQzMDYyMHww&ixlib=rb-4.1.0&q=80&w=1080"
+thumbnail: "https://plus.unsplash.com/premium_vector-1727419643880-92ad34c052a9?q=80&w=1116&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── AI Security Classification ──
