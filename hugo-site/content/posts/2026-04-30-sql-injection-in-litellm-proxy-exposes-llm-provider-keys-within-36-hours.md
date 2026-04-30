@@ -1,6 +1,6 @@
 ---
 title: "SQL Injection in LiteLLM Proxy Exposes LLM Provider Keys Within 36 Hours"
-date: 2026-04-30T05:07:18+00:00
+date: "2026-04-30T05:32:40+00:00"
 draft: false
 slug: "sql-injection-in-litellm-proxy-exposes-llm-provider-keys-within-36-hours"
 
