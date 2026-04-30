@@ -1,7 +1,7 @@
 ---
 title: "AI-Powered Honeypots Expose Blind Spots in Automated Malicious AI Agents"
 date: 2026-04-30T05:06:45+00:00
-draft: true
+draft: false
 slug: "ai-powered-honeypots-expose-blind-spots-in-automated-malicious-ai-agents"
 
 # ── Content metadata ──
