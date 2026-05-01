@@ -1,7 +1,7 @@
 ---
 title: "Gemini CLI Flaw Allowed Arbitrary Code Execution in CI/CD Pipelines"
 date: "2026-05-01T06:52:43+00:00"
-draft: false
+draft: true
 slug: "gemini-cli-flaw-allowed-arbitrary-code-execution-in-ci-cd-pipelines"
 
 # ── Content metadata ──
