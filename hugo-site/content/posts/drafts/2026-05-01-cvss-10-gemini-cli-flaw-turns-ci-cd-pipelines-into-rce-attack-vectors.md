@@ -1,7 +1,7 @@
 ---
 title: "CVSS 10 Gemini CLI Flaw Turns CI/CD Pipelines Into RCE Attack Vectors"
 date: 2026-05-01T04:33:03+00:00
-draft: true
+draft: false
 slug: "cvss-10-gemini-cli-flaw-turns-ci-cd-pipelines-into-rce-attack-vectors"
 
 # ── Content metadata ──
