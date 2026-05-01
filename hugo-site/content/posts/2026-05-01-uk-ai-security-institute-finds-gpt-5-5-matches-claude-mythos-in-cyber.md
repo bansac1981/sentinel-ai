@@ -1,6 +1,6 @@
 ---
 title: "UK AI Security Institute Finds GPT-5.5 Matches Claude Mythos in Cyber Capabilities"
-date: 2026-05-01T04:29:50+00:00
+date: "2026-05-01T04:37:05+00:00"
 draft: false
 slug: "uk-ai-security-institute-finds-gpt-5-5-matches-claude-mythos-in-cyber"
 
