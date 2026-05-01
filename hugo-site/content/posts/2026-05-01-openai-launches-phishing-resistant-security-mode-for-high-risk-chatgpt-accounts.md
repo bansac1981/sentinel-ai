@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Launches Phishing-Resistant Security Mode for High-Risk ChatGPT Accounts"
-date: 2026-05-01T04:31:39+00:00
+date: "2026-05-01T04:42:27+00:00"
 draft: false
 slug: "openai-launches-phishing-resistant-security-mode-for-high-risk-chatgpt-accounts"
 
