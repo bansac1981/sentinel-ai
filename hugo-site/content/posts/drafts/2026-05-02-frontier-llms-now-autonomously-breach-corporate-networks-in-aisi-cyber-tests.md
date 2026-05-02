@@ -1,7 +1,7 @@
 ---
 title: "Frontier LLMs Now Autonomously Breach Corporate Networks in AISI Cyber Tests"
 date: 2026-05-02T04:07:49+00:00
-draft: true
+draft: false
 slug: "frontier-llms-now-autonomously-breach-corporate-networks-in-aisi-cyber-tests"
 
 # ── Content metadata ──
