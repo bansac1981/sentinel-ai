@@ -1,6 +1,6 @@
 ---
 title: "Premature AI Agent Deployments Expose Production Systems to Destructive Actions"
-date: 2026-05-02T04:08:44+00:00
+date: "2026-05-02T04:45:09+00:00"
 draft: false
 slug: "premature-ai-agent-deployments-expose-production-systems-to-destructive-actions"
 
