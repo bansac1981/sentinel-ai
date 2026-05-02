@@ -11,7 +11,7 @@ source_url: "https://arstechnica.com/ai/2026/05/amid-mythos-hyped-cybersecurity-
 source_title: "GPT-5.5 matches heavily hyped Mythos Preview in new cybersecurity tests"
 source_date: 2026-05-01T15:32:27+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.unsplash.com/photo-1717501219291-29f30b728f86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5Mzc1ODZ8MHwxfHNlYXJjaHwxMXx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMHRlY2hub2xvZ3klMjBuZXVyYWwlMjBuZXR3b3JrfGVufDB8MHx8fDE3Nzc2MDk3ODl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+thumbnail: "https://plus.unsplash.com/premium_photo-1726079247110-5e593660c7b2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── AI Security Classification ──
