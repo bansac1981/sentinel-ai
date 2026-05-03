@@ -11,7 +11,7 @@ source_url: "https://github.com/leox255/loopsy"
 source_title: "Show HN: Loopsy, a way for terminals and AI agents on different machines to talk"
 source_date: 2026-05-01T10:25:41+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/30530426/pexels-photo-30530426.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://plus.unsplash.com/premium_photo-1677194598974-9b925fec1f46?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── AI Security Classification ──
