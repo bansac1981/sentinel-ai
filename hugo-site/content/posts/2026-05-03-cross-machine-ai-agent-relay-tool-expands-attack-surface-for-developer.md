@@ -1,6 +1,6 @@
 ---
 title: "Cross-Machine AI Agent Relay Tool Expands Attack Surface for Developer Environments"
-date: 2026-05-03T03:00:24+00:00
+date: "2026-05-03T03:31:51+00:00"
 draft: false
 slug: "cross-machine-ai-agent-relay-tool-expands-attack-surface-for-developer"
 
