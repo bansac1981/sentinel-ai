@@ -1,7 +1,7 @@
 ---
 title: "Pentagon Deploys Classified AI Across Seven Tech Giants for Warfighter Systems"
 date: 2026-05-04T03:20:18+00:00
-draft: true
+draft: false
 slug: "pentagon-deploys-classified-ai-across-seven-tech-giants-for-warfighter-systems"
 
 # ── Content metadata ──
