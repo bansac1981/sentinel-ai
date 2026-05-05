@@ -11,6 +11,17 @@
   },
   "episodes": [
     {
+      "episode_num": 2,
+      "week": "2026-W19",
+      "title": "Week 19, 2026 — AI Security Briefing",
+      "description": "This week's Grid-the-Grey CISO AI Security Brief — your AI infrastructure is now the primary attack surface, and this week proved that at scale.",
+      "r2_url": "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W19-onyx.mp3",
+      "pub_date": "2026-05-05T05:49:17.014642+00:00",
+      "duration_secs": 207,
+      "size_bytes": 3551520,
+      "voice": "onyx"
+    },
+    {
       "episode_num": 1,
       "week": "2026-W16",
       "title": "Week 16, 2026 — AI Security Briefing",
