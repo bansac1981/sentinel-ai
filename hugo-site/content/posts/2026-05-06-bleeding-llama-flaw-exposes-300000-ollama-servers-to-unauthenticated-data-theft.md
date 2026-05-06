@@ -1,6 +1,6 @@
 ---
 title: "Bleeding Llama Flaw Exposes 300,000 Ollama Servers to Unauthenticated Data Theft"
-date: 2026-05-06T02:55:20+00:00
+date: "2026-05-06T04:16:56+00:00"
 draft: false
 slug: "bleeding-llama-flaw-exposes-300000-ollama-servers-to-unauthenticated-data-theft"
 
