@@ -1,6 +1,6 @@
 ---
 title: "CrowdStrike Researcher Details AI Jailbreaking and Data Poisoning Techniques"
-date: 2026-05-06T02:54:45+00:00
+date: "2026-05-06T04:15:58+00:00"
 draft: false
 slug: "crowdstrike-researcher-details-ai-jailbreaking-and-data-poisoning-techniques"
 
