@@ -1,6 +1,6 @@
 ---
 title: "Mass Scan Reveals Widespread Authentication Failures Across Exposed AI Infrastructure"
-date: 2026-05-06T02:56:35+00:00
+date: "2026-05-06T04:15:21+00:00"
 draft: false
 slug: "mass-scan-reveals-widespread-authentication-failures-across-exposed-ai"
 
