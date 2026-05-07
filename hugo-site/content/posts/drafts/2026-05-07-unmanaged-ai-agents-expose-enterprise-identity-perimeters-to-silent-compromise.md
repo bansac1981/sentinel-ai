@@ -1,7 +1,7 @@
 ---
 title: "Unmanaged AI Agents Expose Enterprise Identity Perimeters to Silent Compromise"
 date: 2026-05-07T03:02:51+00:00
-draft: true
+draft: false
 slug: "unmanaged-ai-agents-expose-enterprise-identity-perimeters-to-silent-compromise"
 
 # ── Content metadata ──
