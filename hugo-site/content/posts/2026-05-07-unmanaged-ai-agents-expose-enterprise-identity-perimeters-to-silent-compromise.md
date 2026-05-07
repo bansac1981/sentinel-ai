@@ -11,7 +11,7 @@ source_url: "https://thehackernews.com/2026/05/your-ai-agents-are-already-inside
 source_title: "Your AI Agents Are Already Inside the Perimeter. Do You Know What They're Doing?"
 source_date: 2026-05-06T10:57:00+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://plus.unsplash.com/premium_photo-1725985758251-b49c6b581d17?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── AI Security Classification ──
