@@ -1,7 +1,7 @@
 ---
-title: "MCP Hijack Attack Steals Claude Code OAuth Tokens via Silent Man-in-the-Middle"
+title: "Mitiga Labs: MCP Hijack Attack Steals Claude Code OAuth Tokens via Silent Man-in-the-Middle"
 date: 2026-05-08T02:55:27+00:00
-draft: true
+draft: false
 slug: "mcp-hijack-attack-steals-claude-code-oauth-tokens-via-silent-man-in-the-middle"
 
 # ── Content metadata ──
