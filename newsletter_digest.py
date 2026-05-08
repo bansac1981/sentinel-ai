@@ -425,6 +425,7 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
                 "content":   html,
             }
         ],
+        "groups": [group_id],
     }
 
     if dry_run:
@@ -461,8 +462,10 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
             print(f"[newsletter] ERROR creating campaign: {e}", file=sys.stderr)
             return False
 
-    resp_data = resp.json().get("data", {})
-    campaign_id = resp_data.get("id")
+    # Extract campaign ID as a raw string to avoid float64 precision loss on large ints
+    import re as _re
+    id_match = _re.search(r'"id"\s*:\s*"?(\d+)"?', resp.text)
+    campaign_id = id_match.group(1) if id_match else str(resp.json().get("data", {}).get("id", ""))
     if not campaign_id:
         print(f"[newsletter] ERROR: no campaign ID in response: {resp.text[:300]}",
               file=sys.stderr)
@@ -470,45 +473,12 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
 
     print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
 
-    # Step 2: assign subscriber group via PUT
-    time.sleep(2)
-    print(f"[newsletter] Assigning group {group_id}…", file=sys.stderr)
-    try:
-        update_resp = httpx.put(
-            f"{MAILERLITE_API}/campaigns/{campaign_id}",
-            headers=headers,
-            json={
-                "name":   campaign_name,
-                "type":   "regular",
-                "emails": [
-                    {
-                        "subject":   subject,
-                        "from_name": "Grid the Grey",
-                        "from":      "analyst@gridthegrey.com",
-                        "content":   html,
-                    }
-                ],
-                "groups": [group_id],
-            },
-            timeout=30.0,
-        )
-        print(f"[newsletter] Update response status: {update_resp.status_code}", file=sys.stderr)
-        update_resp.raise_for_status()
-        update_data = update_resp.json().get("data", {})
-        print(f"[newsletter] After update — groups: {update_data.get('groups')} | is_eligible: {update_data.get('is_eligible_for_sending')}", file=sys.stderr)
-    except httpx.HTTPStatusError as e:
-        print(f"[newsletter] ERROR updating campaign: {e.response.status_code} {e.response.text[:300]}", file=sys.stderr)
-        return False
-    except Exception as e:
-        print(f"[newsletter] ERROR updating campaign: {e}", file=sys.stderr)
-        return False
-
-    # Step 3: schedule for immediate send
+    # Step 2: schedule for immediate send — endpoint is /schedule (no /actions/ prefix)
     time.sleep(3)
     print(f"[newsletter] Scheduling for immediate send…", file=sys.stderr)
     try:
         send_resp = httpx.post(
-            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/schedule",
+            f"{MAILERLITE_API}/campaigns/{campaign_id}/schedule",
             headers=headers,
             json={"delivery": "instant"},
             timeout=30.0,
