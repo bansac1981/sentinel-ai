@@ -468,42 +468,33 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
 
     print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
 
-    # Step 2: wait for campaign to reach 'ready' status, then send
-    print("[newsletter] Waiting for campaign to reach 'ready' status…", file=sys.stderr)
-    for attempt in range(10):
-        time.sleep(3)
-        try:
-            status_resp = httpx.get(
-                f"{MAILERLITE_API}/campaigns/{campaign_id}",
-                headers=headers,
-                timeout=15.0,
-            )
-            status_resp.raise_for_status()
-            status = status_resp.json().get("data", {}).get("status")
-            print(f"[newsletter] Campaign status: {status} (attempt {attempt + 1})", file=sys.stderr)
-            if status == "ready":
-                break
-        except Exception as e:
-            print(f"[newsletter] WARNING: status check failed: {e}", file=sys.stderr)
-    else:
-        print("[newsletter] ERROR: campaign did not reach 'ready' status after 30s", file=sys.stderr)
-        return False
-
+    # Step 2: send immediately — API campaigns stay 'draft' but are sendable.
+    # Retry a few times with backoff to allow the campaign to propagate.
     print("[newsletter] Sending campaign…", file=sys.stderr)
-    try:
-        send_resp = httpx.post(
-            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/send",
-            headers=headers,
-            timeout=30.0,
-        )
-        send_resp.raise_for_status()
-    except httpx.HTTPStatusError as e:
-        print(f"[newsletter] ERROR sending campaign: {e.response.status_code}",
-              file=sys.stderr)
-        print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
-        return False
-    except Exception as e:
-        print(f"[newsletter] ERROR sending campaign: {e}", file=sys.stderr)
+    for attempt in range(5):
+        wait = 5 * (attempt + 1)
+        print(f"[newsletter] Waiting {wait}s before send attempt {attempt + 1}…", file=sys.stderr)
+        time.sleep(wait)
+        try:
+            send_resp = httpx.post(
+                f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/send",
+                headers=headers,
+                timeout=30.0,
+            )
+            send_resp.raise_for_status()
+            break
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code in (404, 502, 503) and attempt < 4:
+                print(f"[newsletter] WARNING: {e.response.status_code} on attempt {attempt + 1}, retrying…", file=sys.stderr)
+                continue
+            print(f"[newsletter] ERROR sending campaign: {e.response.status_code}", file=sys.stderr)
+            print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
+            return False
+        except Exception as e:
+            print(f"[newsletter] ERROR sending campaign: {e}", file=sys.stderr)
+            return False
+    else:
+        print("[newsletter] ERROR: all send attempts failed", file=sys.stderr)
         return False
 
     print(f"[newsletter] ✓ Campaign sent successfully! ID: {campaign_id}", file=sys.stderr)
