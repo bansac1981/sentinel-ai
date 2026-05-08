@@ -57,12 +57,10 @@ jobs:
 
       # 3. Install dependencies
       - name: Install dependencies
-        working-directory: "AI Security News Website"
         run: pip install -r requirements.txt
 
       # 4. Save digest HTML as artifact (always, even on dry run)
       - name: Generate digest HTML
-        working-directory: "AI Security News Website"
         env:
           MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
           MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
@@ -77,12 +75,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: newsletter-digest-${{ github.run_number }}
-          path: "AI Security News Website/digest.html"
+          path: digest.html
           retention-days: 14
 
       # 6. Send via Mailerlite API
       - name: Send newsletter
-        working-directory: "AI Security News Website"
         env:
           MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
           MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
