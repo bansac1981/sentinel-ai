@@ -1,7 +1,7 @@
 ---
-title: "AI-Assisted Fuzzing Uncovers 423 Firefox Security Bugs in One Month"
+title: "Claude Mythos AI-Assisted Fuzzing Uncovers 423 Firefox Security Bugs in One Month"
 date: 2026-05-08T02:44:16+00:00
-draft: true
+draft: false
 slug: "ai-assisted-fuzzing-uncovers-423-firefox-security-bugs-in-one-month"
 
 # ── Content metadata ──
