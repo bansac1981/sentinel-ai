@@ -1,7 +1,7 @@
 ---
 title: "Pixel-Level Perturbations Enable Invisible Prompt Injection in Vision-Language Models"
 date: 2026-05-08T02:56:04+00:00
-draft: true
+draft: false
 slug: "pixel-level-perturbations-enable-invisible-prompt-injection-in-vision-language"
 
 # ── Content metadata ──
