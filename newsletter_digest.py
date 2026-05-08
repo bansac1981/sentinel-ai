@@ -424,7 +424,7 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
                 "content":   html,
             }
         ],
-        "groups": [list_id],
+        "groups": [int(list_id)],
     }
 
     if dry_run:
