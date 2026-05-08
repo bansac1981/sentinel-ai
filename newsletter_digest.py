@@ -487,15 +487,13 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
     except Exception as e:
         print(f"[newsletter] WARNING: could not re-fetch campaign: {e}", file=sys.stderr)
 
-    # Step 2: schedule for immediate send (Mailerlite v3 uses /actions/schedule)
+    # Step 2: send immediately via /actions/send (Mailerlite v3)
     time.sleep(5)
-    scheduled_for = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[newsletter] Scheduling campaign for immediate send ({scheduled_for} UTC)…", file=sys.stderr)
+    print(f"[newsletter] Sending campaign immediately…", file=sys.stderr)
     try:
         send_resp = httpx.post(
-            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/schedule",
+            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/send",
             headers=headers,
-            json={"delivery": "instant", "scheduled_for": scheduled_for},
             timeout=30.0,
         )
         print(f"[newsletter] Schedule response status: {send_resp.status_code}", file=sys.stderr)
