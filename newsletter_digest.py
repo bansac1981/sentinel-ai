@@ -413,6 +413,7 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
 
     campaign_name = f"Grid the Grey — {datetime.now().strftime('%Y-%m-%d')}"
 
+    group_id = int(list_id)
     payload = {
         "name":   campaign_name,
         "type":   "regular",
@@ -424,7 +425,6 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
                 "content":   html,
             }
         ],
-        "groups": [int(list_id)],
     }
 
     if dry_run:
@@ -469,31 +469,48 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
         return False
 
     print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
-    print(f"[newsletter] Full response keys: {list(resp_data.keys())}", file=sys.stderr)
-    print(f"[newsletter] Campaign status: {resp_data.get('status')} | groups: {resp_data.get('groups')} | emails: {[e.get('status') for e in resp_data.get('emails', [])]}", file=sys.stderr)
-    print(f"[newsletter] is_eligible_for_sending: {resp_data.get('is_eligible_for_sending')}", file=sys.stderr)
-    print(f"[newsletter] missing_data: {resp_data.get('missing_data')}", file=sys.stderr)
-    print(f"[newsletter] next_step: {resp_data.get('next_step')}", file=sys.stderr)
-    print(f"[newsletter] warnings: {resp_data.get('warnings')}", file=sys.stderr)
-    print(f"[newsletter] can: {resp_data.get('can')}", file=sys.stderr)
-    print(f"[newsletter] email[0] status/from: {[(e.get('status'), e.get('from'), e.get('missing_data')) for e in resp_data.get('emails', [])]}", file=sys.stderr)
 
-    # Re-fetch campaign to confirm live state before sending
-    time.sleep(3)
+    # Step 2: assign subscriber group via PUT
+    time.sleep(2)
+    print(f"[newsletter] Assigning group {group_id}…", file=sys.stderr)
     try:
-        get_resp = httpx.get(f"{MAILERLITE_API}/campaigns/{campaign_id}", headers=headers, timeout=15.0)
-        get_data = get_resp.json().get("data", {})
-        print(f"[newsletter] Live campaign status: {get_data.get('status')} | can: {get_data.get('can')} | is_eligible: {get_data.get('is_eligible_for_sending')}", file=sys.stderr)
+        update_resp = httpx.put(
+            f"{MAILERLITE_API}/campaigns/{campaign_id}",
+            headers=headers,
+            json={
+                "name":   campaign_name,
+                "type":   "regular",
+                "emails": [
+                    {
+                        "subject":   subject,
+                        "from_name": "Grid the Grey",
+                        "from":      "analyst@gridthegrey.com",
+                        "content":   html,
+                    }
+                ],
+                "groups": [group_id],
+            },
+            timeout=30.0,
+        )
+        print(f"[newsletter] Update response status: {update_resp.status_code}", file=sys.stderr)
+        update_resp.raise_for_status()
+        update_data = update_resp.json().get("data", {})
+        print(f"[newsletter] After update — groups: {update_data.get('groups')} | is_eligible: {update_data.get('is_eligible_for_sending')}", file=sys.stderr)
+    except httpx.HTTPStatusError as e:
+        print(f"[newsletter] ERROR updating campaign: {e.response.status_code} {e.response.text[:300]}", file=sys.stderr)
+        return False
     except Exception as e:
-        print(f"[newsletter] WARNING: could not re-fetch campaign: {e}", file=sys.stderr)
+        print(f"[newsletter] ERROR updating campaign: {e}", file=sys.stderr)
+        return False
 
-    # Step 2: send immediately via /actions/send (Mailerlite v3)
-    time.sleep(5)
-    print(f"[newsletter] Sending campaign immediately…", file=sys.stderr)
+    # Step 3: schedule for immediate send
+    time.sleep(3)
+    print(f"[newsletter] Scheduling for immediate send…", file=sys.stderr)
     try:
         send_resp = httpx.post(
-            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/send",
+            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/schedule",
             headers=headers,
+            json={"delivery": "instant"},
             timeout=30.0,
         )
         print(f"[newsletter] Schedule response status: {send_resp.status_code}", file=sys.stderr)
