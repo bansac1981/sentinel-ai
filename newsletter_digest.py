@@ -475,7 +475,17 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
     print(f"[newsletter] missing_data: {resp_data.get('missing_data')}", file=sys.stderr)
     print(f"[newsletter] next_step: {resp_data.get('next_step')}", file=sys.stderr)
     print(f"[newsletter] warnings: {resp_data.get('warnings')}", file=sys.stderr)
+    print(f"[newsletter] can: {resp_data.get('can')}", file=sys.stderr)
     print(f"[newsletter] email[0] status/from: {[(e.get('status'), e.get('from'), e.get('missing_data')) for e in resp_data.get('emails', [])]}", file=sys.stderr)
+
+    # Re-fetch campaign to confirm live state before sending
+    time.sleep(3)
+    try:
+        get_resp = httpx.get(f"{MAILERLITE_API}/campaigns/{campaign_id}", headers=headers, timeout=15.0)
+        get_data = get_resp.json().get("data", {})
+        print(f"[newsletter] Live campaign status: {get_data.get('status')} | can: {get_data.get('can')} | is_eligible: {get_data.get('is_eligible_for_sending')}", file=sys.stderr)
+    except Exception as e:
+        print(f"[newsletter] WARNING: could not re-fetch campaign: {e}", file=sys.stderr)
 
     # Step 2: schedule for immediate send (Mailerlite v3 uses /actions/schedule)
     time.sleep(5)
