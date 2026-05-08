@@ -433,24 +433,32 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
         print(f"[newsletter] DRY RUN — HTML length: {len(html):,} chars", file=sys.stderr)
         return True
 
-    # Step 1: create campaign
+    # Step 1: create campaign (retry up to 3 times on 5xx)
+    import time
+
     print("[newsletter] Creating campaign…", file=sys.stderr)
-    try:
-        resp = httpx.post(
-            f"{MAILERLITE_API}/campaigns",
-            headers=headers,
-            json=payload,
-            timeout=30.0,
-        )
-        resp.raise_for_status()
-    except httpx.HTTPStatusError as e:
-        print(f"[newsletter] ERROR creating campaign: {e.response.status_code}",
-              file=sys.stderr)
-        print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
-        return False
-    except Exception as e:
-        print(f"[newsletter] ERROR creating campaign: {e}", file=sys.stderr)
-        return False
+    resp = None
+    for attempt in range(3):
+        try:
+            resp = httpx.post(
+                f"{MAILERLITE_API}/campaigns",
+                headers=headers,
+                json=payload,
+                timeout=30.0,
+            )
+            resp.raise_for_status()
+            break
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code >= 500 and attempt < 2:
+                print(f"[newsletter] WARNING: {e.response.status_code} on attempt {attempt + 1}, retrying in 10s…", file=sys.stderr)
+                time.sleep(10)
+                continue
+            print(f"[newsletter] ERROR creating campaign: {e.response.status_code}", file=sys.stderr)
+            print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
+            return False
+        except Exception as e:
+            print(f"[newsletter] ERROR creating campaign: {e}", file=sys.stderr)
+            return False
 
     campaign_id = resp.json().get("data", {}).get("id")
     if not campaign_id:
@@ -461,8 +469,6 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
     print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
 
     # Step 2: wait for campaign to reach 'ready' status, then send
-    import time
-
     print("[newsletter] Waiting for campaign to reach 'ready' status…", file=sys.stderr)
     for attempt in range(10):
         time.sleep(3)
