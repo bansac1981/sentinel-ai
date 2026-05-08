@@ -460,7 +460,29 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
 
     print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
 
-    # Step 2: send immediately
+    # Step 2: wait for campaign to reach 'ready' status, then send
+    import time
+
+    print("[newsletter] Waiting for campaign to reach 'ready' status…", file=sys.stderr)
+    for attempt in range(10):
+        time.sleep(3)
+        try:
+            status_resp = httpx.get(
+                f"{MAILERLITE_API}/campaigns/{campaign_id}",
+                headers=headers,
+                timeout=15.0,
+            )
+            status_resp.raise_for_status()
+            status = status_resp.json().get("data", {}).get("status")
+            print(f"[newsletter] Campaign status: {status} (attempt {attempt + 1})", file=sys.stderr)
+            if status == "ready":
+                break
+        except Exception as e:
+            print(f"[newsletter] WARNING: status check failed: {e}", file=sys.stderr)
+    else:
+        print("[newsletter] ERROR: campaign did not reach 'ready' status after 30s", file=sys.stderr)
+        return False
+
     print("[newsletter] Sending campaign…", file=sys.stderr)
     try:
         send_resp = httpx.post(
