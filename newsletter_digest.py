@@ -477,33 +477,26 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
     print(f"[newsletter] warnings: {resp_data.get('warnings')}", file=sys.stderr)
     print(f"[newsletter] email[0] status/from: {[(e.get('status'), e.get('from'), e.get('missing_data')) for e in resp_data.get('emails', [])]}", file=sys.stderr)
 
-    # Step 2: send immediately — API campaigns stay 'draft' but are sendable.
-    # Retry a few times with backoff to allow the campaign to propagate.
-    print("[newsletter] Sending campaign…", file=sys.stderr)
-    for attempt in range(5):
-        wait = 5 * (attempt + 1)
-        print(f"[newsletter] Waiting {wait}s before send attempt {attempt + 1}…", file=sys.stderr)
-        time.sleep(wait)
-        try:
-            send_resp = httpx.post(
-                f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/send",
-                headers=headers,
-                timeout=30.0,
-            )
-            send_resp.raise_for_status()
-            break
-        except httpx.HTTPStatusError as e:
-            if e.response.status_code in (404, 502, 503) and attempt < 4:
-                print(f"[newsletter] WARNING: {e.response.status_code} on attempt {attempt + 1}, retrying…", file=sys.stderr)
-                continue
-            print(f"[newsletter] ERROR sending campaign: {e.response.status_code}", file=sys.stderr)
-            print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
-            return False
-        except Exception as e:
-            print(f"[newsletter] ERROR sending campaign: {e}", file=sys.stderr)
-            return False
-    else:
-        print("[newsletter] ERROR: all send attempts failed", file=sys.stderr)
+    # Step 2: schedule for immediate send (Mailerlite v3 uses /actions/schedule)
+    time.sleep(5)
+    scheduled_for = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[newsletter] Scheduling campaign for immediate send ({scheduled_for} UTC)…", file=sys.stderr)
+    try:
+        send_resp = httpx.post(
+            f"{MAILERLITE_API}/campaigns/{campaign_id}/actions/schedule",
+            headers=headers,
+            json={"delivery": "instant", "scheduled_for": scheduled_for},
+            timeout=30.0,
+        )
+        print(f"[newsletter] Schedule response status: {send_resp.status_code}", file=sys.stderr)
+        print(f"[newsletter] Schedule response: {send_resp.text[:500]}", file=sys.stderr)
+        send_resp.raise_for_status()
+    except httpx.HTTPStatusError as e:
+        print(f"[newsletter] ERROR scheduling campaign: {e.response.status_code}", file=sys.stderr)
+        print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
+        return False
+    except Exception as e:
+        print(f"[newsletter] ERROR scheduling campaign: {e}", file=sys.stderr)
         return False
 
     print(f"[newsletter] ✓ Campaign sent successfully! ID: {campaign_id}", file=sys.stderr)
