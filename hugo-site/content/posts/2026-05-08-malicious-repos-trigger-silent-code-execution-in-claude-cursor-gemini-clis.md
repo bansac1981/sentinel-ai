@@ -1,6 +1,6 @@
 ---
 title: "Malicious Repos Trigger Silent Code Execution in Claude, Cursor, Gemini CLIs"
-date: 2026-05-08T02:56:33+00:00
+date: "2026-05-08T03:10:50+00:00"
 draft: false
 slug: "malicious-repos-trigger-silent-code-execution-in-claude-cursor-gemini-clis"
 
