@@ -1,7 +1,7 @@
 ---
-title: "Prompt Injection Achieves RCE in Semantic Kernel Agent Framework"
+title: "Prompt Injection Achieves Remote Code Execution in Semantic Kernel Agent Framework"
 date: 2026-05-08T02:43:29+00:00
-draft: true
+draft: false
 slug: "prompt-injection-achieves-rce-in-semantic-kernel-agent-framework"
 
 # ── Content metadata ──
