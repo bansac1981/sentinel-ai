@@ -471,7 +471,11 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
     print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
     print(f"[newsletter] Full response keys: {list(resp_data.keys())}", file=sys.stderr)
     print(f"[newsletter] Campaign status: {resp_data.get('status')} | groups: {resp_data.get('groups')} | emails: {[e.get('status') for e in resp_data.get('emails', [])]}", file=sys.stderr)
-    print(f"[newsletter] Raw response (first 800 chars): {resp.text[:800]}", file=sys.stderr)
+    print(f"[newsletter] is_eligible_for_sending: {resp_data.get('is_eligible_for_sending')}", file=sys.stderr)
+    print(f"[newsletter] missing_data: {resp_data.get('missing_data')}", file=sys.stderr)
+    print(f"[newsletter] next_step: {resp_data.get('next_step')}", file=sys.stderr)
+    print(f"[newsletter] warnings: {resp_data.get('warnings')}", file=sys.stderr)
+    print(f"[newsletter] email[0] status/from: {[(e.get('status'), e.get('from'), e.get('missing_data')) for e in resp_data.get('emails', [])]}", file=sys.stderr)
 
     # Step 2: send immediately — API campaigns stay 'draft' but are sendable.
     # Retry a few times with backoff to allow the campaign to propagate.
