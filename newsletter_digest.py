@@ -403,6 +403,7 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
         print("[newsletter] ERROR: MAILERLITE_LIST_ID environment variable not set.",
               file=sys.stderr)
         return False
+    print(f"[newsletter] Using group ID: {list_id!r}", file=sys.stderr)
 
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -423,7 +424,7 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
                 "content":   html,
             }
         ],
-        "groups": [int(list_id)],
+        "groups": [list_id],
     }
 
     if dry_run:
@@ -468,7 +469,9 @@ def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
         return False
 
     print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
+    print(f"[newsletter] Full response keys: {list(resp_data.keys())}", file=sys.stderr)
     print(f"[newsletter] Campaign status: {resp_data.get('status')} | groups: {resp_data.get('groups')} | emails: {[e.get('status') for e in resp_data.get('emails', [])]}", file=sys.stderr)
+    print(f"[newsletter] Raw response (first 800 chars): {resp.text[:800]}", file=sys.stderr)
 
     # Step 2: send immediately — API campaigns stay 'draft' but are sendable.
     # Retry a few times with backoff to allow the campaign to propagate.
