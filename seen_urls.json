@@ -520,6 +520,7 @@
     "https://huggingface.co/blog/kv-cache",
     "https://huggingface.co/blog/kv-cache-quantization",
     "https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/cybersecqwen-4b",
+    "https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck",
     "https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/oncoagent-official-paper",
     "https://huggingface.co/blog/layerskip",
     "https://huggingface.co/blog/lcm_lora",
@@ -1022,6 +1023,7 @@
     "https://simonwillison.net/2026/Apr/30/zig-anti-ai/",
     "https://simonwillison.net/2026/Apr/30/zig-anti-ai/#atom-everything",
     "https://simonwillison.net/2026/May/1/inat-sightings/#atom-everything",
+    "https://simonwillison.net/2026/May/10/andrew-quinn/#atom-everything",
     "https://simonwillison.net/2026/May/2/sightings/#atom-everything",
     "https://simonwillison.net/2026/May/3/anthropic/#atom-everything",
     "https://simonwillison.net/2026/May/4/andy-masley/#atom-everything",
@@ -1248,6 +1250,7 @@
     "https://thehackernews.com/2026/05/mirai-based-xlabsv1-botnet-exploits-adb.html",
     "https://thehackernews.com/2026/05/muddywater-uses-microsoft-teams-to.html",
     "https://thehackernews.com/2026/05/new-linux-pamdoora-backdoor-uses-pam.html",
+    "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html",
     "https://thehackernews.com/2026/05/one-click-total-shutdown-patient-zero.html",
     "https://thehackernews.com/2026/05/one-missed-threat-per-week-what-25m.html",
     "https://thehackernews.com/2026/05/palo-alto-pan-os-flaw-under-active.html",
@@ -1391,6 +1394,7 @@
     "https://www.bleepingcomputer.com/news/security/github-fixes-rce-flaw-that-gave-access-to-millions-of-private-repos/",
     "https://www.bleepingcomputer.com/news/security/glassworm-malware-attacks-return-via-73-openvsx-sleeper-extensions/",
     "https://www.bleepingcomputer.com/news/security/google-now-offers-up-to-15-million-for-some-android-exploits/",
+    "https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-claudeai-chats-to-push-mac-malware/",
     "https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-for-godaddy-managewp-login-phishing/",
     "https://www.bleepingcomputer.com/news/security/hackers-are-exploiting-a-critical-litellm-pre-auth-sqli-flaw/",
     "https://www.bleepingcomputer.com/news/security/hackers-arrested-for-hijacking-and-selling-610-000-roblox-accounts/",
@@ -1436,6 +1440,7 @@
     "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-actively-exploited-firewall-zero-day/",
     "https://www.bleepingcomputer.com/news/security/pan-os-firewall-rce-zero-day-exploited-in-attacks-since-april-9/",
     "https://www.bleepingcomputer.com/news/security/police-dismantles-9-crypto-investment-scam-centers-arrests-276-suspects/",
+    "https://www.bleepingcomputer.com/news/security/police-shut-down-reboot-of-crimenetwork-marketplace-arrest-admin/",
     "https://www.bleepingcomputer.com/news/security/popular-wordpress-redirect-plugin-hid-dormant-backdoor-for-years/",
     "https://www.bleepingcomputer.com/news/security/pypi-package-with-11m-monthly-downloads-hacked-to-push-infostealer/",
     "https://www.bleepingcomputer.com/news/security/regular-password-resets-arent-as-safe-as-you-think/",
@@ -2035,5 +2040,5 @@
     "https://www.wired.com/story/you-can-disable-gemini-in-chrome-if-its-freaking-you-out/",
     "https://www.wiz.io/blog/github-rce-vulnerability-cve-2026-3854"
   ],
-  "updated_at": "2026-05-10T04:54:19.628777+00:00"
+  "updated_at": "2026-05-10T20:06:25.561173+00:00"
 }
