@@ -1,6 +1,6 @@
 ---
 title: "Fake OpenAI Repository on Hugging Face Delivers Rust-Based Infostealer"
-date: 2026-05-10T04:54:18+00:00
+date: "2026-05-10T05:10:54+00:00"
 draft: false
 slug: "fake-openai-repository-on-hugging-face-delivers-rust-based-infostealer"
 
