@@ -1,7 +1,7 @@
 ---
 title: "State Machine Guardrails Proposed to Rein In Uncontrolled AI Agent Tool Access"
 date: 2026-05-13T05:07:50+00:00
-draft: true
+draft: false
 slug: "state-machine-guardrails-proposed-to-rein-in-uncontrolled-ai-agent-tool-access"
 
 # ── Content metadata ──
