@@ -1,7 +1,7 @@
 ---
 title: "Supply Chain Worm Compromises Mistral AI, Guardrails AI and TanStack Packages"
 date: 2026-05-13T05:08:34+00:00
-draft: true
+draft: false
 slug: "supply-chain-worm-compromises-mistral-ai-guardrails-ai-and-tanstack-packages"
 
 # ── Content metadata ──
