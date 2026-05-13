@@ -1,7 +1,7 @@
 ---
 title: ""Mini Shai-Hulud" Supply Chain Worm Compromises Mistral AI, Guardrails AI and TanStack Packages"
 date: "2026-05-13T08:08:33+00:00"
-draft: false
+draft: true
 slug: "supply-chain-worm-compromises-mistral-ai-guardrails-ai-and-tanstack-packages"
 
 # ── Content metadata ──
