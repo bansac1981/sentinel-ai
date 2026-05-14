@@ -11,7 +11,7 @@ source_url: "https://thehackernews.com/2026/05/microsofts-mdash-ai-system-finds-
 source_title: "Microsoft's MDASH AI System Finds 16 Windows Flaws Fixed in Patch Tuesday"
 source_date: 2026-05-13T13:46:02+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.pexels.com/photos/5473956/pexels-photo-5473956.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+thumbnail: "https://images.unsplash.com/photo-1655720449272-e615efe8d795?q=80&w=1113&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── AI Security Classification ──
