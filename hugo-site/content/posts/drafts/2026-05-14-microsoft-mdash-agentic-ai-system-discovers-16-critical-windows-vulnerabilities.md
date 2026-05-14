@@ -1,7 +1,7 @@
 ---
 title: "Microsoft MDASH Agentic AI System Discovers 16 Critical Windows Vulnerabilities"
 date: 2026-05-14T04:40:03+00:00
-draft: true
+draft: false
 slug: "microsoft-mdash-agentic-ai-system-discovers-16-critical-windows-vulnerabilities"
 
 # ── Content metadata ──
