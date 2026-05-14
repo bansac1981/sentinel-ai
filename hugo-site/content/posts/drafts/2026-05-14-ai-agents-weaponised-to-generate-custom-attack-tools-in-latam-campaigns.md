@@ -1,7 +1,7 @@
 ---
 title: "AI Agents Weaponised to Generate Custom Attack Tools in LatAm Campaigns"
 date: 2026-05-14T04:40:30+00:00
-draft: true
+draft: false
 slug: "ai-agents-weaponised-to-generate-custom-attack-tools-in-latam-campaigns"
 
 # ── Content metadata ──
