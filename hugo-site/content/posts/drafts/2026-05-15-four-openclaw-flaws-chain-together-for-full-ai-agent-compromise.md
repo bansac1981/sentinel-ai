@@ -1,7 +1,7 @@
 ---
 title: "Four OpenClaw Flaws Chain Together for Full AI Agent Compromise"
 date: 2026-05-15T16:42:27+00:00
-draft: true
+draft: false 
 slug: "four-openclaw-flaws-chain-together-for-full-ai-agent-compromise"
 
 # ── Content metadata ──
