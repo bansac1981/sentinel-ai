@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Outlines Defense-in-Depth Framework for Autonomous AI Agents"
-date: 2026-05-15T16:47:53+00:00
+date: "2026-05-15T21:22:59+00:00"
 draft: false 
 slug: "microsoft-outlines-defense-in-depth-framework-for-autonomous-ai-agents"
 
