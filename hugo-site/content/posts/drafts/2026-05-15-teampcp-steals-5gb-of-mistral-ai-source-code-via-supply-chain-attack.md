@@ -1,7 +1,7 @@
 ---
 title: "TeamPCP Steals 5GB of Mistral AI Source Code via Supply Chain Attack"
 date: 2026-05-15T16:45:54+00:00
-draft: true
+draft: false 
 slug: "teampcp-steals-5gb-of-mistral-ai-source-code-via-supply-chain-attack"
 
 # ── Content metadata ──
