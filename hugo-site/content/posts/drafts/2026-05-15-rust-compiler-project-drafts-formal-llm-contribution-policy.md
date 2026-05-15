@@ -1,7 +1,7 @@
 ---
 title: "Rust Compiler Project Drafts Formal LLM Contribution Policy"
 date: 2026-05-15T16:45:19+00:00
-draft: true
+draft: false 
 slug: "rust-compiler-project-drafts-formal-llm-contribution-policy"
 
 # ── Content metadata ──
