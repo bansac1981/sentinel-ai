@@ -1,7 +1,7 @@
 ---
 title: "LLM Activation Steering Goes Local: Security Implications of Direct Model Manipulation"
 date: 2026-05-16T19:09:31+00:00
-draft: true
+draft: false 
 slug: "llm-activation-steering-goes-local-security-implications-of-direct-model"
 
 # ── Content metadata ──
