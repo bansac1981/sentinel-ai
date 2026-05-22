@@ -1,6 +1,6 @@
 ---
 title: "AI Agent Identity Sprawl Creates New Attack Surface in Enterprise IAM"
-date: 2026-05-22T02:12:16+00:00
+date: "2026-05-22T02:22:18+00:00"
 draft: false 
 slug: "ai-agent-identity-sprawl-creates-new-attack-surface-in-enterprise-iam"
 
