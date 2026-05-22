@@ -1,7 +1,7 @@
 ---
 title: "Google's Gemini Spark Agent Raises Prompt Injection Risks at Enterprise Scale"
 date: 2026-05-22T02:14:52+00:00
-draft: true
+draft: false 
 slug: "google-s-gemini-spark-agent-raises-prompt-injection-risks-at-enterprise-scale"
 
 # ── Content metadata ──
