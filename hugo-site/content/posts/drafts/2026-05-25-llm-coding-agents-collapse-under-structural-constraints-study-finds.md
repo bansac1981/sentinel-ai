@@ -1,7 +1,7 @@
 ---
 title: "LLM Coding Agents Collapse Under Structural Constraints, Study Finds"
 date: 2026-05-25T09:59:58+00:00
-draft: true
+draft: false 
 slug: "llm-coding-agents-collapse-under-structural-constraints-study-finds"
 
 # ── Content metadata ──
