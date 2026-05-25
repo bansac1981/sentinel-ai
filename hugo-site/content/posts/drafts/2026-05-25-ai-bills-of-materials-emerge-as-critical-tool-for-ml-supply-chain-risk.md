@@ -1,7 +1,7 @@
 ---
 title: "AI Bills of Materials Emerge as Critical Tool for ML Supply Chain Risk"
 date: 2026-05-25T10:04:01+00:00
-draft: true
+draft: false 
 slug: "ai-bills-of-materials-emerge-as-critical-tool-for-ml-supply-chain-risk"
 
 # ── Content metadata ──
