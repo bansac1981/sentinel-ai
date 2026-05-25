@@ -1,6 +1,6 @@
 ---
 title: "Anthropic's Claude Mythos Autonomously Uncovers 10,000 Critical Software Flaws"
-date: 2026-05-25T10:00:37+00:00
+date: "2026-05-25T15:43:34+00:00"
 draft: false
 slug: "anthropic-s-claude-mythos-autonomously-uncovers-10000-critical-software-flaws"
 
