@@ -1,7 +1,7 @@
 ---
 title: "SentinelOne Prompt Security Targets Agentic AI Trust Verification Gap"
 date: 2026-05-25T10:03:14+00:00
-draft: 6
+draft: false
 slug: "sentinelone-prompt-security-targets-agentic-ai-trust-verification-gap"
 
 # ── Content metadata ──
