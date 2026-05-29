@@ -1,6 +1,6 @@
 ---
 title: "Multi-Agent LLM System Discovers 29 Zero-Day Vulnerabilities in Open-Source Projects"
-date: 2026-05-28T23:57:58+00:00
+date: "2026-05-29T10:10:04+00:00"
 draft: false 
 slug: "multi-agent-llm-system-discovers-29-zero-day-vulnerabilities-in-open-source"
 
