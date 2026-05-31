@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Documents Sandbox Escape Risks and Credential Exfiltration Vectors in Claude Products"
 date: 2026-05-31T01:07:26+00:00
-draft: true
+draft: false 
 slug: "anthropic-documents-sandbox-escape-risks-and-credential-exfiltration-vectors-in"
 
 # ── Content metadata ──
