@@ -1,7 +1,7 @@
 ---
 title: "High-Autonomy AI Agents With Broad Permissions Pose Enterprise Security Crisis"
 date: 2026-06-03T23:07:57+00:00
-draft: true
+draft: false 
 slug: "high-autonomy-ai-agents-with-broad-permissions-pose-enterprise-security-crisis"
 
 # ── Content metadata ──
