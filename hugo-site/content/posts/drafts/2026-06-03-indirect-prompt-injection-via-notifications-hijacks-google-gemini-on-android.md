@@ -1,7 +1,7 @@
 ---
 title: "Indirect Prompt Injection via Notifications Hijacks Google Gemini on Android"
 date: 2026-06-03T23:02:32+00:00
-draft: true
+draft: false 
 slug: "indirect-prompt-injection-via-notifications-hijacks-google-gemini-on-android"
 
 # ── Content metadata ──
