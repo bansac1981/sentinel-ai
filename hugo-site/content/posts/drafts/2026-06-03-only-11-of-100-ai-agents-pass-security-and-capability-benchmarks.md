@@ -1,7 +1,7 @@
 ---
 title: "Only 11 of 100 AI Agents Pass Security and Capability Benchmarks"
 date: 2026-06-03T23:03:32+00:00
-draft: true
+draft: false 
 slug: "only-11-of-100-ai-agents-pass-security-and-capability-benchmarks"
 
 # ── Content metadata ──
