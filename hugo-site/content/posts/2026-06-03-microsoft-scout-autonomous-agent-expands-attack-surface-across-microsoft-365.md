@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Scout Autonomous Agent Expands Attack Surface Across Microsoft 365"
-date: 2026-06-03T23:08:29+00:00
+date: "2026-06-04T05:41:41+00:00"
 draft: false 
 slug: "microsoft-scout-autonomous-agent-expands-attack-surface-across-microsoft-365"
 
