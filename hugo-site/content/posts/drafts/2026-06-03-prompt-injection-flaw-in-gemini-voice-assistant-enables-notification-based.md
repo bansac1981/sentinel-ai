@@ -1,7 +1,7 @@
 ---
 title: "Prompt Injection Flaw in Gemini Voice Assistant Enables Notification-Based Attacks"
 date: 2026-06-03T23:04:11+00:00
-draft: true
+draft: false 
 slug: "prompt-injection-flaw-in-gemini-voice-assistant-enables-notification-based"
 
 # ── Content metadata ──
