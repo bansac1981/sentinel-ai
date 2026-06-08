@@ -1,6 +1,6 @@
 ---
 title: "AI Security M&A Surge: Agentic Identity, LLM Evaluation, and Browser Control Targeted"
-date: 2026-06-08T13:47:45+00:00
+date: "2026-06-08T14:06:27+00:00"
 draft: false 
 slug: "ai-security-m-a-surge-agentic-identity-llm-evaluation-and-browser-control"
 
