@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Lockdown Mode Targets Prompt Injection Data Exfiltration Vector"
-date: 2026-06-08T13:51:58+00:00
+date: "2026-06-08T14:04:03+00:00"
 draft: false 
 slug: "openai-lockdown-mode-targets-prompt-injection-data-exfiltration-vector"
 

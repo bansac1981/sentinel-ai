@@ -1,6 +1,6 @@
 ---
 title: "Prototype AI Worm Carries Embedded LLM for Decentralised Self-Propagation"
-date: 2026-06-08T13:53:30+00:00
+date: "2026-06-08T14:04:03+00:00"
 draft: false 
 slug: "prototype-ai-worm-carries-embedded-llm-for-decentralised-self-propagation"
 
