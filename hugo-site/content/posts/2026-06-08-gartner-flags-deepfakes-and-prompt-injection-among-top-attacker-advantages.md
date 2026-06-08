@@ -1,6 +1,6 @@
 ---
 title: "Gartner Flags Deepfakes and Prompt Injection Among Top Attacker Advantages"
-date: 2026-06-08T13:54:30+00:00
+date: "2026-06-08T14:05:30+00:00"
 draft: false 
 slug: "gartner-flags-deepfakes-and-prompt-injection-among-top-attacker-advantages"
 
