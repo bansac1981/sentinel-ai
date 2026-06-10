@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Publishes Investigator Playbook for AI Telemetry and Incident Reconstruction"
 date: 2026-06-10T03:57:15+00:00
-draft: true
+draft: false 
 slug: "microsoft-publishes-investigator-playbook-for-ai-telemetry-and-incident"
 
 # ── Content metadata ──
