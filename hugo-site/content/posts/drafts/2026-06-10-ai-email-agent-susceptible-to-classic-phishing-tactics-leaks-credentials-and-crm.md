@@ -1,7 +1,7 @@
 ---
 title: "AI Email Agent Susceptible to Classic Phishing Tactics, Leaks Credentials and CRM Data"
 date: 2026-06-10T03:56:37+00:00
-draft: true
+draft: false 
 slug: "ai-email-agent-susceptible-to-classic-phishing-tactics-leaks-credentials-and-crm"
 
 # ── Content metadata ──
