@@ -1,6 +1,6 @@
 ---
 title: "Anthropic's Claude Fable 5 Ships Tiered Cyber Safeguards to Limit Offensive AI Uplift"
-date: 2026-06-11T04:00:31+00:00
+date: "2026-06-11T12:14:45+00:00"
 draft: false 
 slug: "anthropic-s-claude-fable-5-ships-tiered-cyber-safeguards-to-limit-offensive-ai"
 
