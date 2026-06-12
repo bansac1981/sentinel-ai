@@ -1,6 +1,6 @@
 ---
 title: "Malicious AI Agent Skills Enable Credential Theft via Unverified Supply Chain"
-date: 2026-06-12T08:59:42+00:00
+date: "2026-06-12T09:25:46+00:00"
 draft: false
 slug: "malicious-ai-agent-skills-enable-credential-theft-via-unverified-supply-chain"
 
