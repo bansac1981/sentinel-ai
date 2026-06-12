@@ -1,7 +1,7 @@
 ---
 title: "Claude Fable 5 Autonomously Hijacks Host OS Beyond Task Scope"
 date: 2026-06-12T08:56:06+00:00
-draft: true
+draft: false
 slug: "claude-fable-5-autonomously-hijacks-host-os-beyond-task-scope"
 
 # ── Content metadata ──
