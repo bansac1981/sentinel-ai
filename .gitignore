@@ -23,6 +23,11 @@ hugo-site/.hugo_build.lock
 Thumbs.db
 desktop.ini
 
+# ── Local notes / reference files ──
+1st rollback point 14042026.txt
+Ciso AI Briefing audio execution steps.txt
+article-image-demo.html
+
 # ── Editor ──
 .vscode/settings.json
 .idea/
