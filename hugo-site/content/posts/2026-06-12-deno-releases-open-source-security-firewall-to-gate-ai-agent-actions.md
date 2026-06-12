@@ -1,6 +1,6 @@
 ---
 title: "Deno Releases Open-Source Security Firewall to Gate AI Agent Actions"
-date: 2026-06-12T09:00:32+00:00
+date: "2026-06-12T09:19:10+00:00"
 draft: false
 slug: "deno-releases-open-source-security-firewall-to-gate-ai-agent-actions"
 
