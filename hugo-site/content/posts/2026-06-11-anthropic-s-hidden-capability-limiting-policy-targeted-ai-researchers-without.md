@@ -1,6 +1,6 @@
 ---
 title: "Anthropic's Hidden Capability-Limiting Policy Targeted AI Researchers Without Disclosure"
-date: 2026-06-11T03:56:46+00:00
+date: "2026-06-12T06:45:14+00:00"
 draft: false
 slug: "anthropic-s-hidden-capability-limiting-policy-targeted-ai-researchers-without"
 
