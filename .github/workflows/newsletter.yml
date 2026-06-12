@@ -61,9 +61,6 @@ jobs:
 
       # 4. Save digest HTML as artifact (always, even on dry run)
       - name: Generate digest HTML
-        env:
-          MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
-          MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
         run: |
           DAYS="${{ github.event.inputs.days || '4' }}"
           python newsletter_digest.py --days "$DAYS" --output digest.html
@@ -78,9 +75,10 @@ jobs:
           path: digest.html
           retention-days: 14
 
-      # 6. Send via Mailerlite API
+      # 6. Send via Resend API (subscribers pulled from Mailerlite)
       - name: Send newsletter
         env:
+          RESEND_API_KEY:    ${{ secrets.RESEND_API_KEY }}
           MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
           MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
         run: |

@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """
-Grid the Grey — Newsletter Digest Generator (Mailerlite edition)
-================================================================
+Grid the Grey — Newsletter Digest Generator
+============================================
 Reads Hugo content/posts/ from the last N days, ranks by relevance score,
-and either saves HTML locally or sends directly via Mailerlite API.
+and either saves HTML locally or sends via Resend API (subscribers from Mailerlite).
 
 Usage:
     python newsletter_digest.py                        # last 4 days, print HTML
     python newsletter_digest.py --days 7               # last 7 days
     python newsletter_digest.py --output digest.html   # save to file
-    python newsletter_digest.py --send                 # send via Mailerlite API
+    python newsletter_digest.py --send                 # send via Resend API
     python newsletter_digest.py --send --dry-run       # build + validate, skip send
 
 Environment variables (required for --send):
-    MAILERLITE_API_KEY   — your Mailerlite API key
-    MAILERLITE_LIST_ID   — numeric ID of your subscriber group/list
+    RESEND_API_KEY       — your Resend API key
+    MAILERLITE_API_KEY   — Mailerlite API key (for pulling subscriber list)
+    MAILERLITE_LIST_ID   — Mailerlite group ID containing subscribers
 """
 
 import argparse
@@ -35,6 +36,7 @@ MAX_STORIES     = 8       # maximum articles in the digest
 TOP_STORY_MIN   = 7.5     # minimum score to be the lead story
 
 MAILERLITE_API  = "https://connect.mailerlite.com/api"
+RESEND_BATCH_URL = "https://api.resend.com/emails/batch"
 
 # Email-safe colours (inline CSS only — no external stylesheets)
 ACCENT          = "#ff3b3b"
@@ -368,7 +370,7 @@ def build_html(posts: list[dict], days: int) -> str:
       Content aggregated from public sources for research and educational purposes.
     </p>
     <p style="margin:0;font-size:11px;color:{TEXT_MUTED};">
-      {{{{ unsubscribe }}}}
+      Reply "unsubscribe" to be removed from this list.
     </p>
   </td></tr>
 
@@ -380,121 +382,144 @@ def build_html(posts: list[dict], days: int) -> str:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Mailerlite API sender
+# Subscriber fetch (Mailerlite) + Send (Resend)
 # ─────────────────────────────────────────────────────────────────────────────
 
-def send_via_mailerlite(html: str, subject: str, dry_run: bool = False) -> bool:
-    """Create and immediately send a campaign via Mailerlite API v3."""
-    try:
-        import httpx
-    except ImportError:
-        print("[newsletter] ERROR: httpx not installed. Run: pip install httpx",
-              file=sys.stderr)
-        return False
+def fetch_subscribers_from_mailerlite() -> list[str]:
+    """Fetch all active subscriber emails from Mailerlite group (free tier API)."""
+    import httpx
 
     api_key = os.environ.get("MAILERLITE_API_KEY", "").strip()
     list_id = os.environ.get("MAILERLITE_LIST_ID", "").strip()
 
     if not api_key:
-        print("[newsletter] ERROR: MAILERLITE_API_KEY environment variable not set.",
-              file=sys.stderr)
-        return False
+        print("[newsletter] ERROR: MAILERLITE_API_KEY not set.", file=sys.stderr)
+        return []
     if not list_id:
-        print("[newsletter] ERROR: MAILERLITE_LIST_ID environment variable not set.",
-              file=sys.stderr)
-        return False
-    print(f"[newsletter] Using group ID: {list_id!r}", file=sys.stderr)
+        print("[newsletter] ERROR: MAILERLITE_LIST_ID not set.", file=sys.stderr)
+        return []
 
     headers = {
         "Authorization": f"Bearer {api_key}",
-        "Content-Type":  "application/json",
-        "Accept":        "application/json",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
     }
 
-    campaign_name = f"Grid the Grey — {datetime.now().strftime('%Y-%m-%d')}"
+    emails: list[str] = []
+    cursor = None
 
-    group_id = int(list_id)
-    payload = {
-        "name":   campaign_name,
-        "type":   "regular",
-        "emails": [
-            {
-                "subject":   subject,
-                "from_name": "Grid the Grey",
-                "from":      "analyst@gridthegrey.com",
-                "content":   html,
-            }
-        ],
-        "groups": [group_id],
-    }
+    with httpx.Client(timeout=30.0) as client:
+        while True:
+            params = {"filter[status]": "active", "limit": 1000}
+            if cursor:
+                params["cursor"] = cursor
+
+            resp = client.get(
+                f"{MAILERLITE_API}/groups/{list_id}/subscribers",
+                headers=headers,
+                params=params,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+            for sub in data.get("data", []):
+                email = sub.get("email", "").strip()
+                if email:
+                    emails.append(email)
+
+            cursor = data.get("meta", {}).get("next_cursor")
+            if not cursor:
+                break
+
+    print(f"[newsletter] Fetched {len(emails)} active subscribers from Mailerlite.",
+          file=sys.stderr)
+    return emails
+
+
+def send_via_resend(html: str, subject: str, subscribers: list[str],
+                    dry_run: bool = False) -> bool:
+    """Send newsletter to subscribers via Resend batch API."""
+    import httpx
+    import time
+
+    resend_key = os.environ.get("RESEND_API_KEY", "").strip()
+    if not resend_key:
+        print("[newsletter] ERROR: RESEND_API_KEY not set.", file=sys.stderr)
+        return False
+
+    from_addr = os.environ.get("RESEND_FROM", "Grid the Grey <analyst@gridthegrey.com>")
+
+    if not subscribers:
+        print("[newsletter] ERROR: No subscribers to send to.", file=sys.stderr)
+        return False
 
     if dry_run:
-        print(f"[newsletter] DRY RUN — would create campaign: {campaign_name!r}", file=sys.stderr)
+        print(f"[newsletter] DRY RUN — would send to {len(subscribers)} subscribers",
+              file=sys.stderr)
         print(f"[newsletter] DRY RUN — subject: {subject!r}", file=sys.stderr)
-        print(f"[newsletter] DRY RUN — list ID: {list_id}", file=sys.stderr)
+        print(f"[newsletter] DRY RUN — from: {from_addr}", file=sys.stderr)
         print(f"[newsletter] DRY RUN — HTML length: {len(html):,} chars", file=sys.stderr)
         return True
 
-    # Step 1: create campaign (retry up to 3 times on 5xx)
-    import time
+    headers = {
+        "Authorization": f"Bearer {resend_key}",
+        "Content-Type": "application/json",
+    }
 
-    print("[newsletter] Creating campaign…", file=sys.stderr)
-    resp = None
-    for attempt in range(3):
-        try:
-            resp = httpx.post(
-                f"{MAILERLITE_API}/campaigns",
-                headers=headers,
-                json=payload,
-                timeout=30.0,
-            )
-            resp.raise_for_status()
-            break
-        except httpx.HTTPStatusError as e:
-            if e.response.status_code >= 500 and attempt < 2:
-                print(f"[newsletter] WARNING: {e.response.status_code} on attempt {attempt + 1}, retrying in 10s…", file=sys.stderr)
-                time.sleep(10)
-                continue
-            print(f"[newsletter] ERROR creating campaign: {e.response.status_code}", file=sys.stderr)
-            print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
-            return False
-        except Exception as e:
-            print(f"[newsletter] ERROR creating campaign: {e}", file=sys.stderr)
-            return False
+    # Resend batch endpoint accepts up to 100 emails per call
+    BATCH_SIZE = 100
+    total_sent = 0
 
-    # Extract campaign ID as a raw string to avoid float64 precision loss on large ints
-    import re as _re
-    id_match = _re.search(r'"id"\s*:\s*"?(\d+)"?', resp.text)
-    campaign_id = id_match.group(1) if id_match else str(resp.json().get("data", {}).get("id", ""))
-    if not campaign_id:
-        print(f"[newsletter] ERROR: no campaign ID in response: {resp.text[:300]}",
-              file=sys.stderr)
-        return False
+    for i in range(0, len(subscribers), BATCH_SIZE):
+        batch = subscribers[i:i + BATCH_SIZE]
+        payload = [
+            {
+                "from": from_addr,
+                "to": [email],
+                "subject": subject,
+                "html": html,
+                "headers": {
+                    "List-Unsubscribe": f"<mailto:{from_addr.split('<')[-1].rstrip('>')}?subject=unsubscribe>",
+                },
+            }
+            for email in batch
+        ]
 
-    print(f"[newsletter] Campaign created: ID {campaign_id}", file=sys.stderr)
+        for attempt in range(3):
+            try:
+                resp = httpx.post(
+                    RESEND_BATCH_URL,
+                    headers=headers,
+                    json=payload,
+                    timeout=30.0,
+                )
+                resp.raise_for_status()
+                total_sent += len(batch)
+                break
+            except httpx.HTTPStatusError as e:
+                if e.response.status_code == 429 and attempt < 2:
+                    print(f"[newsletter] Rate limited, waiting 2s…", file=sys.stderr)
+                    time.sleep(2)
+                    continue
+                if e.response.status_code >= 500 and attempt < 2:
+                    print(f"[newsletter] Server error {e.response.status_code}, retrying…",
+                          file=sys.stderr)
+                    time.sleep(5)
+                    continue
+                print(f"[newsletter] ERROR sending batch {i//BATCH_SIZE + 1}: "
+                      f"{e.response.status_code}", file=sys.stderr)
+                print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
+                return False
+            except Exception as e:
+                print(f"[newsletter] ERROR sending batch: {e}", file=sys.stderr)
+                return False
 
-    # Step 2: schedule for immediate send — endpoint is /schedule (no /actions/ prefix)
-    time.sleep(3)
-    print(f"[newsletter] Scheduling for immediate send…", file=sys.stderr)
-    try:
-        send_resp = httpx.post(
-            f"{MAILERLITE_API}/campaigns/{campaign_id}/schedule",
-            headers=headers,
-            json={"delivery": "instant"},
-            timeout=30.0,
-        )
-        print(f"[newsletter] Schedule response status: {send_resp.status_code}", file=sys.stderr)
-        print(f"[newsletter] Schedule response: {send_resp.text[:500]}", file=sys.stderr)
-        send_resp.raise_for_status()
-    except httpx.HTTPStatusError as e:
-        print(f"[newsletter] ERROR scheduling campaign: {e.response.status_code}", file=sys.stderr)
-        print(f"[newsletter] Response: {e.response.text[:500]}", file=sys.stderr)
-        return False
-    except Exception as e:
-        print(f"[newsletter] ERROR scheduling campaign: {e}", file=sys.stderr)
-        return False
+        # Respect rate limit (5 req/s) — small pause between batches
+        if i + BATCH_SIZE < len(subscribers):
+            time.sleep(0.5)
 
-    print(f"[newsletter] ✓ Campaign sent successfully! ID: {campaign_id}", file=sys.stderr)
+    print(f"[newsletter] ✓ Sent to {total_sent}/{len(subscribers)} subscribers via Resend.",
+          file=sys.stderr)
     return True
 
 
@@ -523,7 +548,7 @@ def main():
     parser.add_argument("--output",  type=str,  default=None,
                         help="Save HTML to this file (default: print to stdout)")
     parser.add_argument("--send",    action="store_true",
-                        help="Send via Mailerlite API (requires MAILERLITE_API_KEY + MAILERLITE_LIST_ID)")
+                        help="Send via Resend API (requires RESEND_API_KEY + MAILERLITE_API_KEY + MAILERLITE_LIST_ID)")
     parser.add_argument("--subject", type=str,  default=None,
                         help="Custom email subject (auto-generated if omitted)")
     parser.add_argument("--dry-run", action="store_true",
@@ -550,9 +575,13 @@ def main():
         Path(args.output).write_text(html, encoding="utf-8")
         print(f"[newsletter] Saved to {args.output}", file=sys.stderr)
 
-    # Send via Mailerlite if requested
+    # Send via Resend (subscribers pulled from Mailerlite)
     if args.send:
-        success = send_via_mailerlite(html, subject, dry_run=args.dry_run)
+        subscribers = fetch_subscribers_from_mailerlite()
+        if not subscribers and not args.dry_run:
+            print("[newsletter] ERROR: No active subscribers found.", file=sys.stderr)
+            sys.exit(1)
+        success = send_via_resend(html, subject, subscribers, dry_run=args.dry_run)
         if not success:
             sys.exit(1)
     elif not args.output:
