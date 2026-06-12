@@ -1,6 +1,6 @@
 ---
 title: "Pliny the Liberator Claims Claude Fable 5 Jailbreak via Multi-Agent Prompting"
-date: 2026-06-12T08:54:57+00:00
+date: "2026-06-12T09:29:37+00:00"
 draft: false
 slug: "pliny-the-liberator-claims-claude-fable-5-jailbreak-via-multi-agent-prompting"
 
