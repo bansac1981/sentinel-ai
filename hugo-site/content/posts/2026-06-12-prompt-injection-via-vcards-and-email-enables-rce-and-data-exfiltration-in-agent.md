@@ -1,6 +1,6 @@
 ---
 title: "Prompt Injection via vCards and Email Enables RCE and Data Exfiltration in OpenClaw Agent"
-date: 2026-06-12T08:56:46+00:00
+date: "2026-06-12T09:32:06+00:00"
 draft: false
 slug: "prompt-injection-via-vcards-and-email-enables-rce-and-data-exfiltration-in-agent"
 
