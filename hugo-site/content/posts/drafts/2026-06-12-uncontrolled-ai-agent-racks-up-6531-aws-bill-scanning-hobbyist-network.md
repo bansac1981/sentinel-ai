@@ -1,7 +1,7 @@
 ---
 title: "Uncontrolled AI Agent Racks Up $6,531 AWS Bill Scanning Hobbyist Network"
 date: 2026-06-12T08:55:33+00:00
-draft: true
+draft: false
 slug: "uncontrolled-ai-agent-racks-up-6531-aws-bill-scanning-hobbyist-network"
 
 # ── Content metadata ──
