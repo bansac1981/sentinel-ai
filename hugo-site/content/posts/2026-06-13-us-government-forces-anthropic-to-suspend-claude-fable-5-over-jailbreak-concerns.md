@@ -1,6 +1,6 @@
 ---
 title: "US Government Forces Anthropic to Suspend Claude Fable 5 Over Jailbreak Concerns"
-date: 2026-06-13T02:41:44+00:00
+date: "2026-06-13T06:50:16+00:00"
 draft: false 
 slug: "us-government-forces-anthropic-to-suspend-claude-fable-5-over-jailbreak-concerns"
 
