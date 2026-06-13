@@ -1,7 +1,7 @@
 ---
 title: "Claude Fable 5 Launch Sparks Warnings Over AI-Orchestrated Cyberattacks"
 date: 2026-06-13T02:43:42+00:00
-draft: true
+draft: false 
 slug: "claude-fable-5-launch-sparks-warnings-over-ai-orchestrated-cyberattacks"
 
 # ── Content metadata ──
