@@ -1,6 +1,6 @@
 ---
 title: "Agentjacking Attack Achieves 85% Success Rate Against AI Coding Agents via Sentry MCP"
-date: 2026-06-13T02:44:15+00:00
+date: "2026-06-13T06:48:18+00:00"
 draft: false 
 slug: "agentjacking-attack-achieves-85-success-rate-against-ai-coding-agents-via-sentry"
 
