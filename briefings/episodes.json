@@ -11,6 +11,17 @@
   },
   "episodes": [
     {
+      "episode_num": 3,
+      "week": "2026-W24",
+      "title": "Week 24, 2026 — AI Security Briefing",
+      "description": "This week's Grid-the-Grey CISO AI Security Brief — the AI development stack is now an active attack surface, and threat actors are moving faster than your patch cycles.",
+      "r2_url": "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W24-onyx.mp3",
+      "pub_date": "2026-06-14T18:07:15.482612+00:00",
+      "duration_secs": 223,
+      "size_bytes": 3849600,
+      "voice": "onyx"
+    },
+    {
       "episode_num": 2,
       "week": "2026-W19",
       "title": "Week 19, 2026 — AI Security Briefing",
