@@ -1,10 +1,14 @@
 {{ define "main" }}
+{{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
 
 <article class="article" itemscope itemtype="https://schema.org/Article">
 
   {{/* ── ARTICLE HEADER ── */}}
-  <header class="article-header">
+  <header class="article-header {{ if $isFirstLook }}article-header--first-look{{ end }}">
     <div class="article-header__meta">
+      {{ if $isFirstLook }}
+      <span class="badge badge--first-look">FIRST LOOK</span>
+      {{ end }}
       {{ partial "framework-badges.html" . }}
       {{ if .Params.categories }}
         {{ range .Params.categories }}
@@ -45,12 +49,27 @@
   {{/* ── TL;DR BOX ── */}}
   {{ partial "tldr.html" . }}
 
+  {{/* ── ATTACK VECTORS PANEL (First Look only) ── */}}
+  {{ if and $isFirstLook .Params.attack_vectors_introduced }}
+  <aside class="attack-vectors-panel">
+    <div class="attack-vectors-panel__header">
+      <span>&#x26A1;</span>
+      NEW ATTACK VECTORS INTRODUCED
+    </div>
+    <ul class="attack-vectors-list">
+      {{ range .Params.attack_vectors_introduced }}
+      <li class="attack-vectors-list__item">{{ . }}</li>
+      {{ end }}
+    </ul>
+  </aside>
+  {{ end }}
+
   {{/* ── FRAMEWORK ANALYSIS PANEL ── */}}
   {{ if or .Params.mitre_techniques .Params.owasp_categories }}
   <aside class="framework-panel">
     <div class="framework-panel__header">
-      <span class="framework-panel__icon">⬡</span>
-      THREAT FRAMEWORK MAPPING
+      <span class="framework-panel__icon">{{ if $isFirstLook }}&#x25C8;{{ else }}⬡{{ end }}</span>
+      {{ if $isFirstLook }}ATTACK SURFACE FRAMEWORK MAPPING{{ else }}THREAT FRAMEWORK MAPPING{{ end }}
     </div>
     <div class="framework-panel__body">
       {{ if .Params.mitre_techniques }}

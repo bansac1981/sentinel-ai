@@ -35,6 +35,11 @@
   --threat-medium:   #ffd700;
   --threat-low:      #22c55e;
 
+  --first-look-color:   #06b6d4;
+  --first-look-bg:      rgba(6, 182, 212, 0.10);
+  --first-look-border:  rgba(6, 182, 212, 0.25);
+  --first-look-glow:    rgba(6, 182, 212, 0.06);
+
   /* Typography */
   --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
   --font-serif:   'Source Serif 4', Georgia, serif;
@@ -2786,4 +2791,242 @@ blockquote {
   .post-card__image--h { width: 100%; height: 180px; }
   .post-card__body--h { padding: var(--space-md); }
   .post-card__title--h { font-size: 0.95rem; }
+}
+
+/* ============================================================
+   FIRST LOOK: SECURITY — Content Type Styles
+   ============================================================ */
+
+/* ── Badge ── */
+.badge--first-look {
+  color: var(--first-look-color);
+  background: var(--first-look-bg);
+  border: 1px solid var(--first-look-border);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Card Treatment ── */
+.post-card--first-look {
+  border-left: 3px solid var(--first-look-color);
+}
+
+.post-card--first-look:hover {
+  border-color: var(--first-look-color);
+  box-shadow: 0 2px 16px var(--first-look-glow);
+}
+
+/* ── Article Header ── */
+.article-header--first-look {
+  border-bottom: 2px solid var(--first-look-color);
+}
+
+/* ── TL;DR Box Variant ── */
+.tldr-box--first-look {
+  border-left-color: var(--first-look-color);
+}
+
+.tldr-box--first-look .tldr-box__label {
+  color: var(--first-look-color);
+}
+
+/* ── Attack Vectors Panel ── */
+.attack-vectors-panel {
+  margin: var(--space-lg) 0;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--first-look-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.attack-vectors-panel__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--first-look-border);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--first-look-color);
+}
+
+.attack-vectors-list {
+  padding: var(--space-md);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.attack-vectors-list__item {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding-left: var(--space-lg);
+  position: relative;
+  line-height: 1.5;
+}
+
+.attack-vectors-list__item::before {
+  content: "\26A1";
+  position: absolute;
+  left: 0;
+  color: var(--first-look-color);
+}
+
+/* ── Adoption Velocity Badges ── */
+.velocity-badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.velocity-badge--rapid    { background: rgba(255,59,59,0.15);  color: #ff3b3b; }
+.velocity-badge--moderate { background: rgba(255,140,0,0.15);  color: #ff8c00; }
+.velocity-badge--gradual  { background: rgba(255,215,0,0.15);  color: #ffd700; }
+.velocity-badge--niche    { background: rgba(34,197,94,0.12);  color: #22c55e; }
+
+/* ── Ticker: First Look Label ── */
+.ticker-severity--first-look {
+  color: var(--first-look-color);
+  font-weight: 600;
+}
+
+/* ── Homepage: First Look Strip ── */
+.first-look-strip {
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--first-look-glow);
+  border: 1px solid var(--first-look-border);
+  border-radius: var(--radius-md);
+}
+
+.first-look-strip__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--first-look-color);
+}
+
+.first-look-strip__sub {
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-left: var(--space-sm);
+}
+
+.first-look-strip__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.fl-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: var(--transition);
+  text-decoration: none;
+  display: block;
+}
+
+.fl-card:hover {
+  border-color: var(--first-look-color);
+  transform: translateY(-1px);
+}
+
+.fl-card__badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--first-look-color);
+  margin-bottom: var(--space-xs);
+}
+
+.fl-card__title {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.fl-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* ── Sidebar: First Look Widget ── */
+.sidebar-widget--first-look .widget-header__icon {
+  color: var(--first-look-color);
+}
+
+.fl-sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+.fl-sidebar-list__item {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.fl-sidebar-list__item:last-child {
+  border-bottom: none;
+}
+
+.fl-sidebar-list__link {
+  text-decoration: none;
+  display: block;
+}
+
+.fl-sidebar-list__title {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  display: block;
+  line-height: 1.4;
+}
+
+.fl-sidebar-list__link:hover .fl-sidebar-list__title {
+  color: var(--first-look-color);
+}
+
+.fl-sidebar-list__meta {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+  display: block;
+}
+
+/* ── Responsive: First Look Strip ── */
+@media (max-width: 768px) {
+  .first-look-strip__cards {
+    grid-template-columns: 1fr;
+  }
 }

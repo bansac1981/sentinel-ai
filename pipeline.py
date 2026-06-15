@@ -153,6 +153,36 @@ RSS_FEEDS = {
         "name": "Ars Technica Security",
         "url": "https://arstechnica.com/security/feed/",
     },
+
+    # ── AI Capability Sources (First Look: Security) ─────────────────────────
+    "aws_ml": {
+        "name": "AWS Machine Learning Blog",
+        "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+    },
+    "github_blog": {
+        "name": "GitHub Blog",
+        "url": "https://github.blog/feed",
+    },
+    "hn_meta_ai": {
+        "name": "Meta AI (via HN)",
+        "url": "https://hnrss.org/newest?q=Meta+AI+OR+Llama+release&points=30",
+    },
+    "hn_mistral": {
+        "name": "Mistral AI (via HN)",
+        "url": "https://hnrss.org/newest?q=Mistral+AI+OR+Mistral+release&points=30",
+    },
+    "hn_cohere": {
+        "name": "Cohere AI (via HN)",
+        "url": "https://hnrss.org/newest?q=Cohere+AI+OR+Cohere+release&points=30",
+    },
+    "techcrunch_ai": {
+        "name": "TechCrunch AI",
+        "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+    },
+    "theverge_ai": {
+        "name": "The Verge AI",
+        "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+    },
 }
 
 # Pre-filter keywords — article must contain at least one to proceed to Claude
@@ -175,6 +205,12 @@ PREFILTER_KEYWORDS = [
     "ai vulnerability", "ai security", "ai attack", "ai exploit",
     "ml security", "ml attack", "llm vulnerability", "llm exploit",
     "ai safety", "alignment", "ai red team",
+    # Capability release signals (for First Look: Security)
+    "launches", "ships", "releases", "announces", "generally available",
+    "developer preview", "new capability", "new feature", "sdk",
+    "mcp", "model context protocol", "tool use", "function calling",
+    "code execution", "computer use", "web browsing", "file access",
+    "agent framework", "model release", "api update",
 ]
 
 # Categories mapping — used to classify articles
@@ -190,6 +226,7 @@ VALID_CATEGORIES = [
     "Regulatory",
     "Research",
     "Industry News",
+    "First Look",
 ]
 
 # MITRE ATLAS techniques reference (for Claude's context)
@@ -308,8 +345,34 @@ IMAGE_KEYWORD_MAP = [
      "cybersecurity vulnerability lock crack code"),
 ]
 
+# First Look: Security — threshold and classification
+FIRST_LOOK_THRESHOLD = float(os.getenv("FIRST_LOOK_THRESHOLD", "5.5"))
+
+FIRST_LOOK_KEYWORDS = [
+    "launches", "announces", "releases", "ships", "introduces",
+    "rolls out", "unveils", "debuts", "now available", "general availability",
+    "new feature", "new capability", "update brings", "adds support for",
+    "beta", "preview", "early access", "developer preview", "sdk",
+    "open source", "open-source", "model release",
+]
+
+THREAT_REPORT_KEYWORDS = [
+    "vulnerability", "exploit", "breach", "attack", "compromise",
+    "malicious", "hack", "cve-", "zero-day", "zero day", "ransomware",
+    "data leak", "stolen", "trojan", "backdoor", "phishing",
+    "botnet", "apt", "threat actor", "malware",
+]
+
+# Feeds primarily expected to yield First Look content
+FIRST_LOOK_FEEDS = {
+    "google_ai_blog", "microsoft_ai", "huggingface", "hn_openai",
+    "hn_anthropic", "aws_ml", "github_blog", "hn_meta_ai",
+    "hn_mistral", "hn_cohere", "techcrunch_ai", "theverge_ai",
+    "simonwillison",
+}
+
 # Pipeline version — bump when changing the Claude prompt
-PIPELINE_VERSION = "1.0.0"
+PIPELINE_VERSION = "2.0.0"
 
 # ─────────────────────────────────────────────
 # 2. LOGGING
@@ -725,6 +788,133 @@ If the article is NOT AI security relevant (score < 4), still return valid JSON 
 """
 
 
+FIRST_LOOK_PROMPT_TEMPLATE = """\
+You are a senior AI security analyst working for Grid the Grey, an intelligence platform that proactively assesses the security implications of new AI capabilities as they ship.
+
+Your task: analyse this newly-released AI capability/feature and map its attack surface to security frameworks.
+
+## Capability Details
+Title: {title}
+Source: {source}
+Published: {published}
+URL: {url}
+
+## Article Content
+{content}
+
+## Your Task
+Return a single valid JSON object (no markdown fences, no extra text) with exactly these fields:
+
+{{
+  "relevance_score": <float 0.0–10.0>,
+  "is_ai_security_relevant": <true/false>,
+  "content_type": "first_look",
+  "generated_title": "<Security-focused headline prefixed with 'First Look:'. Max 14 words. Focus on what attack surface this creates, not what the feature does. Example: 'First Look: Claude Code Terminal Access Creates Uncontrolled Agent Execution Surface'. Never start with 'How', 'Why', 'What', or a number after 'First Look:'.>",
+  "summary": "<2-3 sentence editorial summary focused on the NEW ATTACK SURFACE this capability creates, not what it does for users>",
+  "attack_surface_score": <float 0.0–10.0 — how much does this change the attack surface for defenders?>,
+  "adoption_velocity": "<RAPID|MODERATE|GRADUAL|NICHE>",
+  "capability_category": "<one of: model-release, api-feature, agent-tooling, developer-sdk, platform-integration, safety-mechanism, open-source-release>",
+  "attack_vectors_introduced": ["<concise description of each new attack vector this enables>", ...],
+  "threat_level": "<CRITICAL|HIGH|MEDIUM|LOW|NONE>",
+  "mitre_techniques": ["<AML.TXXXX - Technique Name>", ...],
+  "owasp_categories": ["<LLMXX - Category Name>", ...],
+  "categories": ["First Look", "<additional category from the valid list>", ...],
+  "tags": ["<lowercase-hyphenated>", ...],
+  "threat_actors": ["<who would most likely exploit this: nation-state|cybercriminal|researcher|insider|hacktivist>", ...],
+  "tldr_what": "<1 punchy sentence — what shipped and the primary attack surface it creates, max 25 words>",
+  "tldr_who_at_risk": "<1 concise sentence: who is newly exposed because of this capability>",
+  "tldr_actions": ["<short imperative action 1>", "<short imperative action 2>", "<short imperative action 3>"],
+  "article_body": "<full markdown article body — see format below>"
+}}
+
+## Attack Surface Scoring Guide
+- 9-10: Fundamentally new attack surface with no existing mitigations (e.g., first agent with arbitrary code execution)
+- 7-8: Significant expansion of existing attack surface or new class of risk (e.g., new model with tool-use that bypasses existing controls)
+- 6-7: Meaningful new vectors that defenders should assess (e.g., new API feature chainable with existing attacks)
+- 4-5: Minor surface changes, mostly covered by existing defences
+- 0-3: No meaningful security implications
+
+## Framework Reference
+{mitre_context}
+{owasp_context}
+
+## Valid Categories (use only from this list — always include "First Look" as the first category)
+{valid_categories}
+
+## Article Body Format
+Write the article_body as a markdown string with these sections (include only sections that apply):
+- ## Capability Overview — what shipped and why it matters to defenders
+- ## Attack Surface Analysis — what new vectors does this introduce? What can an attacker now do that they couldn't before?
+- ## Framework Mapping — which ATLAS/OWASP categories apply and why
+- ## Threat Scenarios — concrete attack scenarios this enables (be specific)
+- ## Defender Checklist — actionable assessment steps for security teams deploying or encountering this capability
+- ## References — link back to original source
+
+Keep the body between 400–700 words. Tone: analytical, forward-looking, never celebratory of the capability. Always frame from the defender's perspective.
+CRITICAL: If you cannot identify at least one new attack vector, set relevance_score below 4.0 and article_body to an empty string.
+"""
+
+
+CLASSIFY_PROMPT_TEMPLATE = """\
+Given this article title and description, classify it as one of:
+- "first_look": A NEW AI capability, feature, product, model, or update has shipped or been announced. The security angle is "what attack surface does this create?"
+- "threat_report": An active threat, vulnerability, exploit, breach, or attack has been discovered or disclosed.
+- "skip": Not relevant to AI security at all.
+
+Return ONLY one word: first_look, threat_report, or skip.
+
+Title: {title}
+Description: {description}
+"""
+
+
+def classify_content_type(article: dict, client: Anthropic, log: logging.Logger) -> str:
+    """
+    Classify article as 'first_look', 'threat_report', or 'skip'.
+    Uses keyword heuristics first, falls back to Claude if ambiguous.
+    """
+    text = (article["title"] + " " + article["description"]).lower()
+
+    fl_hits = sum(1 for kw in FIRST_LOOK_KEYWORDS if kw in text)
+    tr_hits = sum(1 for kw in THREAT_REPORT_KEYWORDS if kw in text)
+
+    # Clear signal: one type dominates
+    if fl_hits >= 2 and tr_hits == 0:
+        log.debug(f"  Classification (heuristic): first_look (fl={fl_hits}, tr={tr_hits})")
+        return "first_look"
+    if tr_hits >= 2 and fl_hits == 0:
+        log.debug(f"  Classification (heuristic): threat_report (fl={fl_hits}, tr={tr_hits})")
+        return "threat_report"
+
+    # Ambiguous: ask Claude with a short, cheap call
+    prompt = CLASSIFY_PROMPT_TEMPLATE.format(
+        title=article["title"],
+        description=article["description"][:500],
+    )
+    try:
+        response = client.messages.create(
+            model=CLAUDE_MODEL,
+            max_tokens=10,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        result = response.content[0].text.strip().lower().replace('"', '').replace("'", "")
+        if result in ("first_look", "threat_report", "skip"):
+            log.debug(f"  Classification (Claude): {result}")
+            return result
+        log.debug(f"  Classification (Claude): ambiguous response '{result}', defaulting to threat_report")
+        return "threat_report"
+    except Exception as e:
+        log.warning(f"  Classification fallback — Claude call failed: {e}")
+        return "threat_report"
+
+
+def validate_first_look(analysis: dict) -> bool:
+    """First Look articles MUST have framework mappings and attack vectors."""
+    has_frameworks = bool(analysis.get("mitre_techniques")) or bool(analysis.get("owasp_categories"))
+    has_vectors = bool(analysis.get("attack_vectors_introduced"))
+    return has_frameworks and has_vectors
+
+
 def analyse_with_claude(article: dict, content: str, client: Anthropic, log: logging.Logger) -> dict | None:
     """
     Call Claude API to score and analyse the article.
@@ -770,6 +960,52 @@ def analyse_with_claude(article: dict, content: str, client: Anthropic, log: log
         log.error(f"  ✗ Claude API error for '{article['title']}': {e}")
         return None
 
+
+def analyse_first_look(article: dict, content: str, client: Anthropic, log: logging.Logger) -> dict | None:
+    """
+    Call Claude API with the First Look prompt to assess attack surface of a new capability.
+    Returns parsed dict or None on failure.
+    """
+    article_text = content if len(content) > 200 else article["description"]
+    if not article_text:
+        article_text = "(No article content available — analyse based on title and source only)"
+
+    prompt = FIRST_LOOK_PROMPT_TEMPLATE.format(
+        title=article["title"],
+        source=article["source"],
+        published=article["published"].strftime("%Y-%m-%d"),
+        url=article["url"],
+        content=article_text,
+        mitre_context=MITRE_ATLAS_CONTEXT,
+        owasp_context=OWASP_LLM_CONTEXT,
+        valid_categories="\n".join(f"- {c}" for c in VALID_CATEGORIES),
+    )
+
+    try:
+        response = client.messages.create(
+            model=CLAUDE_MODEL,
+            max_tokens=2048,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+
+        raw = re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = re.sub(r"\s*```$", "", raw)
+
+        result = json.loads(raw)
+        result["content_type"] = "first_look"
+        log.debug(f"  First Look parsed OK. Attack surface: {result.get('attack_surface_score')}")
+        return result
+
+    except json.JSONDecodeError as e:
+        log.error(f"  ✗ Claude returned invalid JSON (First Look) for '{article['title']}': {e}")
+        log.debug(f"  Raw response: {raw[:500]}")
+        return None
+    except Exception as e:
+        log.error(f"  ✗ Claude API error (First Look) for '{article['title']}': {e}")
+        return None
+
+
 # ─────────────────────────────────────────────
 # 8. HUGO MARKDOWN GENERATION
 # ─────────────────────────────────────────────
@@ -796,16 +1032,29 @@ def generate_hugo_markdown(article: dict, analysis: dict, slug: str) -> str:
     and Claude's analysis. Matches the post archetype exactly.
     """
     now = datetime.now(timezone.utc)
-    # date: is set to NOW (pipeline fetch time) — updated to actual publish time
-    # when the article is published via publish-draft.yml
     fetch_date = now.strftime("%Y-%m-%dT%H:%M:%S+00:00")
-    # Preserve the original source publication date for reference
     source_date = article["published"].strftime("%Y-%m-%dT%H:%M:%S+00:00")
 
-    # Use Claude-generated title if available, fall back to original
     display_title = analysis.get("generated_title", "").strip() or article["title"]
+    content_type = analysis.get("content_type", "threat_report")
 
-    # Front matter
+    # Build First Look fields section (only included for first_look content)
+    first_look_section = ""
+    if content_type == "first_look":
+        first_look_section = f"""
+# ── First Look: Attack Surface Assessment ──
+content_type: "first_look"
+attack_surface_score: {analysis.get('attack_surface_score', 0.0)}
+adoption_velocity: {json.dumps(analysis.get('adoption_velocity', 'MODERATE'))}
+capability_category: {json.dumps(analysis.get('capability_category', ''))}
+attack_vectors_introduced: {to_yaml_list(analysis.get('attack_vectors_introduced', []))}
+"""
+    else:
+        first_look_section = """
+# ── Content Type ──
+content_type: "threat_report"
+"""
+
     front_matter = f"""---
 title: {json.dumps(display_title)}
 date: {fetch_date}
@@ -821,7 +1070,7 @@ source_date: {source_date}
 author: "Grid the Grey Editorial"
 thumbnail: {json.dumps(article.get('thumbnail', ''))}
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
-
+{first_look_section}
 # ── AI Security Classification ──
 relevance_score: {analysis.get('relevance_score', 0.0)}
 threat_level: {json.dumps(analysis.get('threat_level', 'LOW'))}
@@ -900,15 +1149,17 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
 
     # ── Stats tracking ──
     stats = {
-        "feeds_fetched":    0,
-        "articles_found":   0,
-        "already_seen":     0,
-        "prefilter_pass":   0,
-        "prefilter_fail":   0,
-        "claude_scored":    0,
-        "below_threshold":  0,
-        "posts_written":    0,
-        "errors":           0,
+        "feeds_fetched":        0,
+        "articles_found":       0,
+        "already_seen":         0,
+        "prefilter_pass":       0,
+        "prefilter_fail":       0,
+        "claude_scored":        0,
+        "below_threshold":      0,
+        "posts_written":        0,
+        "first_look_written":   0,
+        "threat_report_written": 0,
+        "errors":               0,
     }
 
     # ── Step 1: Fetch feeds ──
@@ -998,8 +1249,8 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         _print_stats(stats, log)
         return
 
-    # ── Step 4: Claude scoring ──
-    log.info(f"\nSTEP 4 — Claude Analysis  (threshold: {RELEVANCE_THRESHOLD})")
+    # ── Step 4: Classify + Claude scoring ──
+    log.info(f"\nSTEP 4 — Classify & Analyse  (threat threshold: {RELEVANCE_THRESHOLD}, first look threshold: {FIRST_LOOK_THRESHOLD})")
     log.info("=" * 60)
 
     # Pre-load recently used thumbnails to avoid Pexels image repeats
@@ -1026,15 +1277,25 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
             stats["claude_scored"] += 1
             continue
 
-        # Call Claude
-        analysis = analyse_with_claude(article, full_content, client, log)
+        # ── Classify content type ──
+        content_type = classify_content_type(article, client, log)
+        if content_type == "skip":
+            log.info("  ↓ Classified as 'skip' — not AI security relevant")
+            stats["below_threshold"] += 1
+            continue
+        log.info(f"  Type: {content_type.upper().replace('_', ' ')}")
+
+        # ── Call Claude with appropriate prompt ──
+        if content_type == "first_look":
+            analysis = analyse_first_look(article, full_content, client, log)
+        else:
+            analysis = analyse_with_claude(article, full_content, client, log)
+
         if analysis is None:
             stats["errors"] += 1
             continue
 
         # Fetch thumbnail: Unsplash (primary) → Pexels (fallback) → OG image (last resort)
-        # Done here so categories from Claude analysis improve keyword matching.
-        # recent_thumbnails ensures the same photo isn't reused across the last 20 posts.
         categories = analysis.get("categories", [])
         title_for_image = analysis.get("generated_title", "") or article["title"]
         log.debug(f"  Fetching thumbnail (categories: {categories})")
@@ -1057,11 +1318,24 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
 
         stats["claude_scored"] += 1
         score = analysis.get("relevance_score", 0.0)
-        log.info(f"  Score: {score:.1f}  |  Threat: {analysis.get('threat_level', '?')}  |  Relevant: {analysis.get('is_ai_security_relevant')}")
 
-        # Check threshold
-        if score < RELEVANCE_THRESHOLD:
-            log.info(f"  ↓ Below threshold ({score:.1f} < {RELEVANCE_THRESHOLD}) — skipping")
+        # ── Apply type-specific threshold ──
+        if content_type == "first_look":
+            threshold = FIRST_LOOK_THRESHOLD
+            attack_score = analysis.get("attack_surface_score", 0.0)
+            log.info(f"  Score: {score:.1f}  |  Attack Surface: {attack_score:.1f}  |  Velocity: {analysis.get('adoption_velocity', '?')}")
+
+            # First Look validation gate
+            if not validate_first_look(analysis):
+                log.info("  ↓ First Look rejected — missing framework mappings or attack vectors")
+                stats["below_threshold"] += 1
+                continue
+        else:
+            threshold = RELEVANCE_THRESHOLD
+            log.info(f"  Score: {score:.1f}  |  Threat: {analysis.get('threat_level', '?')}  |  Relevant: {analysis.get('is_ai_security_relevant')}")
+
+        if score < threshold:
+            log.info(f"  ↓ Below threshold ({score:.1f} < {threshold}) — skipping")
             stats["below_threshold"] += 1
             continue
 
@@ -1080,6 +1354,10 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         written = write_hugo_post(slug, markdown, log)
         if written:
             stats["posts_written"] += 1
+            if content_type == "first_look":
+                stats["first_look_written"] += 1
+            else:
+                stats["threat_report_written"] += 1
         else:
             stats["errors"] += 1
 
@@ -1104,6 +1382,8 @@ def _print_stats(stats: dict, log: logging.Logger) -> None:
     log.info(f"  Scored by Claude:       {stats['claude_scored']}")
     log.info(f"  Below threshold:        {stats['below_threshold']}")
     log.info(f"  Posts written:          {stats['posts_written']}")
+    log.info(f"    ├─ Threat reports:    {stats['threat_report_written']}")
+    log.info(f"    └─ First Look:        {stats['first_look_written']}")
     log.info(f"  Errors:                 {stats['errors']}")
     log.info("=" * 60)
     if stats["posts_written"] > 0:
