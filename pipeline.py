@@ -984,7 +984,7 @@ def analyse_first_look(article: dict, content: str, client: Anthropic, log: logg
     try:
         response = client.messages.create(
             model=CLAUDE_MODEL,
-            max_tokens=2048,
+            max_tokens=4096,
             messages=[{"role": "user", "content": prompt}],
         )
         raw = response.content[0].text.strip()
