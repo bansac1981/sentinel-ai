@@ -32,6 +32,30 @@ on:
           - schneier
           - projectzero
           - krebsonsecurity
+          - hn_openai
+          - hn_anthropic
+          - google_ai_blog
+          - microsoft_ai
+          - unit42
+          - talos
+          - microsoft_security
+          - sentinelone
+          - mandiant
+          - qualys
+          - checkpoint
+          - ncsc_uk
+          - bleepingcomputer
+          - simonwillison
+          - huggingface
+          - wired_security
+          - arstechnica
+          - aws_ml
+          - github_blog
+          - hn_meta_ai
+          - hn_mistral
+          - hn_cohere
+          - techcrunch_ai
+          - theverge_ai
 
 # ─────────────────────────────────────────────
 # Permissions
