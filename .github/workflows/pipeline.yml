@@ -16,6 +16,11 @@ on:
         type: boolean
         required: false
         default: false
+      reprocess:
+        description: "Reprocess — ignore seen_urls cache and re-evaluate all articles"
+        type: boolean
+        required: false
+        default: false
       feed:
         description: "Run a single feed only (leave blank for all feeds)"
         required: false
@@ -110,6 +115,10 @@ jobs:
 
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
+          fi
+
+          if [ "${{ github.event.inputs.reprocess }}" = "true" ]; then
+            ARGS="$ARGS --reprocess"
           fi
 
           LIMIT="${{ github.event.inputs.limit }}"
