@@ -9,7 +9,7 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
 
 [params]
   description = "AI Security Intelligence — Real-time threat analysis, MITRE ATLAS mapping, and OWASP LLM Top 10 coverage."
-  tagline = "AI Security News. Framework Analysis."
+  tagline = "AI Security Intelligence. Framework Analysis."
   tagline2 = "Structural Insight."
   taglineSub = "Every article scored, classified, and mapped to MITRE ATLAS and OWASP LLM Top 10 — so you always know what matters and why."
   accentColor = "#ff3b3b"
@@ -60,6 +60,10 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
   disableJS = false
 
 [menu]
+  [[menu.main]]
+    name = "First Look"
+    url = "/categories/first-look/"
+    weight = 1
   [[menu.main]]
     name = "MITRE ATLAS"
     url = "/frameworks/mitre-atlas/"

@@ -46,6 +46,30 @@
   </ol>
 </div>
 
+{{/* ── FIRST LOOK: LATEST ── */}}
+{{ $flPosts := where .Site.RegularPages "Params.content_type" "first_look" }}
+{{ $flPosts = first 3 $flPosts }}
+{{ if $flPosts }}
+<div class="sidebar-widget sidebar-widget--first-look">
+  <div class="widget-header">
+    <span class="widget-header__icon" style="color:var(--first-look-color)">&#x25C8;</span>
+    <span class="widget-header__title">FIRST LOOK</span>
+  </div>
+  <ul class="fl-sidebar-list">
+    {{ range $flPosts }}
+    <li class="fl-sidebar-list__item">
+      <a href="{{ .RelPermalink }}" class="fl-sidebar-list__link">
+        <span class="fl-sidebar-list__title">{{ .Title | truncate 60 }}</span>
+        <span class="fl-sidebar-list__meta">
+          {{ .Params.capability_category | default "" }}{{ if .Params.adoption_velocity }} &middot; {{ .Params.adoption_velocity }}{{ end }}
+        </span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
+
 {{/* ── FRAMEWORK BREAKDOWN ── */}}
 {{ if .Site.Params.enableFrameworkBadges }}
 <div class="sidebar-widget">
