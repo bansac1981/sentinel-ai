@@ -11,6 +11,17 @@
   },
   "episodes": [
     {
+      "episode_num": 4,
+      "week": "2026-W25",
+      "title": "Week 25, 2026 — AI Security Briefing",
+      "description": "This week's Grid-the-Grey CISO AI Security Brief — the AI development stack itself has become the attack surface, and exploitation is no longer theoretical.",
+      "r2_url": "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W25-onyx.mp3",
+      "pub_date": "2026-06-15T10:45:46.786869+00:00",
+      "duration_secs": 208,
+      "size_bytes": 3608160,
+      "voice": "onyx"
+    },
+    {
       "episode_num": 3,
       "week": "2026-W24",
       "title": "Week 24, 2026 — AI Security Briefing",
