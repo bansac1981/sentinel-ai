@@ -1,7 +1,7 @@
 ---
 title: "Brazilian Government LLM Exposed as Unauthorised Merge of Third-Party Models"
 date: 2026-06-15T06:54:17+00:00
-draft: true
+draft: false 
 slug: "brazilian-government-llm-exposed-as-unauthorised-merge-of-third-party-models"
 
 # ── Content metadata ──
