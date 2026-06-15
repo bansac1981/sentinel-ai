@@ -1,7 +1,7 @@
 <div class="ticker-bar" role="marquee" aria-label="Live threat feed">
   <div class="ticker-bar__label">
     <span class="pulse-dot pulse-dot--red"></span>
-    LIVE THREATS
+    LIVE FEED
   </div>
   <div class="ticker-bar__track">
     <div class="ticker-bar__inner" id="tickerInner">
@@ -10,9 +10,13 @@
       {{ $posts = first 10 $posts }}
       {{ range $posts }}
       <a href="{{ .RelPermalink }}" class="ticker-item">
+        {{ if eq (.Params.content_type | default "threat_report") "first_look" }}
+        <span class="ticker-item__severity ticker-severity--first-look">FIRST LOOK</span>
+        {{ else }}
         <span class="ticker-item__severity ticker-severity--{{ lower (.Params.threat_level | default "info") }}">
           {{- .Params.threat_level | default "INFO" -}}
         </span>
+        {{ end }}
         <span class="ticker-item__text">{{ .Title | truncate 90 }}</span>
         <span class="ticker-item__sep">//</span>
       </a>
@@ -20,9 +24,13 @@
       {{/* Duplicate for seamless CSS loop */}}
       {{ range $posts }}
       <a href="{{ .RelPermalink }}" class="ticker-item" aria-hidden="true">
+        {{ if eq (.Params.content_type | default "threat_report") "first_look" }}
+        <span class="ticker-item__severity ticker-severity--first-look">FIRST LOOK</span>
+        {{ else }}
         <span class="ticker-item__severity ticker-severity--{{ lower (.Params.threat_level | default "info") }}">
           {{- .Params.threat_level | default "INFO" -}}
         </span>
+        {{ end }}
         <span class="ticker-item__text">{{ .Title | truncate 90 }}</span>
         <span class="ticker-item__sep">//</span>
       </a>
