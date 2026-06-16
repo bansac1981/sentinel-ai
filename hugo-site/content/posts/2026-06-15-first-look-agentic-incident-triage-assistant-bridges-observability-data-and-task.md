@@ -1,6 +1,6 @@
 ---
 title: "First Look: Amazon Quick's Agentic Incident Triage Assistant Bridges Observability Data and Task Automation"
-date: 2026-06-15T14:03:29+00:00
+date: "2026-06-16T01:43:14+00:00"
 draft: false 
 slug: "first-look-agentic-incident-triage-assistant-bridges-observability-data-and-task"
 
