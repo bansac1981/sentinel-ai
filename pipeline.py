@@ -79,13 +79,21 @@ RSS_FEEDS = {
     },
 
     # ── AI Vendors ────────────────────────────────────────────────────────────
+    "openai_blog": {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/blog/rss.xml",
+    },
     "hn_openai": {
         "name": "OpenAI (via HN)",
-        "url": "https://hnrss.org/newest?q=OpenAI+security&points=30",
+        "url": "https://hnrss.org/newest?q=OpenAI+OR+GPT+OR+ChatGPT&points=50",
+    },
+    "anthropic_blog": {
+        "name": "Anthropic Blog",
+        "url": "https://www.anthropic.com/rss.xml",
     },
     "hn_anthropic": {
         "name": "Anthropic (via HN)",
-        "url": "https://hnrss.org/newest?q=Anthropic+Claude+security&points=30",
+        "url": "https://hnrss.org/newest?q=Anthropic+OR+Claude&points=50",
     },
     "google_ai_blog": {
         "name": "Google DeepMind Blog",
@@ -165,15 +173,19 @@ RSS_FEEDS = {
     },
     "hn_meta_ai": {
         "name": "Meta AI (via HN)",
-        "url": "https://hnrss.org/newest?q=Meta+AI+OR+Llama+release&points=30",
+        "url": "https://hnrss.org/newest?q=Meta+AI+OR+Llama&points=30",
     },
     "hn_mistral": {
         "name": "Mistral AI (via HN)",
-        "url": "https://hnrss.org/newest?q=Mistral+AI+OR+Mistral+release&points=30",
+        "url": "https://hnrss.org/newest?q=Mistral+AI+OR+Mistral+model&points=30",
     },
     "hn_cohere": {
         "name": "Cohere AI (via HN)",
-        "url": "https://hnrss.org/newest?q=Cohere+AI+OR+Cohere+release&points=30",
+        "url": "https://hnrss.org/newest?q=Cohere+AI+OR+Cohere+model&points=30",
+    },
+    "nvidia_ai": {
+        "name": "NVIDIA AI Blog",
+        "url": "https://blogs.nvidia.com/feed/",
     },
     "techcrunch_ai": {
         "name": "TechCrunch AI",
@@ -365,10 +377,10 @@ THREAT_REPORT_KEYWORDS = [
 
 # Feeds primarily expected to yield First Look content
 FIRST_LOOK_FEEDS = {
-    "google_ai_blog", "microsoft_ai", "huggingface", "hn_openai",
-    "hn_anthropic", "aws_ml", "github_blog", "hn_meta_ai",
-    "hn_mistral", "hn_cohere", "techcrunch_ai", "theverge_ai",
-    "simonwillison",
+    "openai_blog", "hn_openai", "anthropic_blog", "hn_anthropic",
+    "google_ai_blog", "microsoft_ai", "huggingface",
+    "aws_ml", "github_blog", "hn_meta_ai", "hn_mistral", "hn_cohere",
+    "nvidia_ai", "techcrunch_ai", "theverge_ai", "simonwillison",
 }
 
 # Pipeline version — bump when changing the Claude prompt
@@ -909,10 +921,10 @@ def classify_content_type(article: dict, client: Anthropic, log: logging.Logger)
 
 
 def validate_first_look(analysis: dict) -> bool:
-    """First Look articles MUST have framework mappings and attack vectors."""
+    """First Look articles must have framework mappings or attack vectors."""
     has_frameworks = bool(analysis.get("mitre_techniques")) or bool(analysis.get("owasp_categories"))
     has_vectors = bool(analysis.get("attack_vectors_introduced"))
-    return has_frameworks and has_vectors
+    return has_frameworks or has_vectors
 
 
 def analyse_with_claude(article: dict, content: str, client: Anthropic, log: logging.Logger) -> dict | None:
@@ -1171,8 +1183,21 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
     stats["articles_found"] = len(all_articles)
     log.info(f"Total articles fetched: {len(all_articles)}")
 
-    # Sort by date descending (newest first)
+    # Sort by date descending (newest first), then interleave first-look and
+    # threat sources to maintain ~50/50 balance within the processing window.
     all_articles.sort(key=lambda a: a["published"], reverse=True)
+    fl_articles = [a for a in all_articles if a["source"] in FIRST_LOOK_FEEDS]
+    tr_articles = [a for a in all_articles if a["source"] not in FIRST_LOOK_FEEDS]
+    interleaved = []
+    fi, ti = 0, 0
+    while fi < len(fl_articles) or ti < len(tr_articles):
+        if fi < len(fl_articles):
+            interleaved.append(fl_articles[fi])
+            fi += 1
+        if ti < len(tr_articles):
+            interleaved.append(tr_articles[ti])
+            ti += 1
+    all_articles = interleaved
 
     # ── Age filter: drop articles older than MAX_ARTICLE_AGE_DAYS ──
     cutoff = datetime.now(timezone.utc).replace(

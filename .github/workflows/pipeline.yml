@@ -37,7 +37,9 @@ on:
           - schneier
           - projectzero
           - krebsonsecurity
+          - openai_blog
           - hn_openai
+          - anthropic_blog
           - hn_anthropic
           - google_ai_blog
           - microsoft_ai
@@ -59,6 +61,7 @@ on:
           - hn_meta_ai
           - hn_mistral
           - hn_cohere
+          - nvidia_ai
           - techcrunch_ai
           - theverge_ai
 
