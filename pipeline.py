@@ -280,11 +280,12 @@ OWASP LLM Top 10 Categories:
 # Settings from environment
 ANTHROPIC_API_KEY   = os.getenv("ANTHROPIC_API_KEY", "")
 CLAUDE_MODEL        = os.getenv("CLAUDE_MODEL", "claude-sonnet-4-6")
+CLASSIFY_MODEL      = os.getenv("CLASSIFY_MODEL", "claude-haiku-4-5")
 RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "6.0"))
 HUGO_POSTS_DIR      = Path(os.getenv("HUGO_POSTS_DIR", "hugo-site/content/posts"))
 HUGO_DRAFTS_DIR     = HUGO_POSTS_DIR / "drafts"
 SEEN_URLS_FILE      = Path(os.getenv("SEEN_URLS_FILE", "seen_urls.json"))
-MAX_ARTICLES        = int(os.getenv("MAX_ARTICLES_PER_RUN", "20"))
+MAX_ARTICLES        = int(os.getenv("MAX_ARTICLES_PER_RUN", "15"))
 FETCH_FULL_CONTENT  = os.getenv("FETCH_FULL_CONTENT", "true").lower() == "true"
 FETCH_TIMEOUT       = int(os.getenv("FETCH_TIMEOUT", "10"))
 
@@ -898,14 +899,14 @@ def classify_content_type(article: dict, client: Anthropic, log: logging.Logger)
         log.debug(f"  Classification (heuristic): threat_report (fl={fl_hits}, tr={tr_hits})")
         return "threat_report"
 
-    # Ambiguous: ask Claude with a short, cheap call
+    # Ambiguous: ask Claude Haiku with a short, cheap call
     prompt = CLASSIFY_PROMPT_TEMPLATE.format(
         title=article["title"],
         description=article["description"][:500],
     )
     try:
         response = client.messages.create(
-            model=CLAUDE_MODEL,
+            model=CLASSIFY_MODEL,
             max_tokens=10,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -930,6 +931,7 @@ def validate_first_look(analysis: dict) -> bool:
 def analyse_with_claude(article: dict, content: str, client: Anthropic, log: logging.Logger) -> dict | None:
     """
     Call Claude API to score and analyse the article.
+    Uses prompt caching to reduce cost for the repeated framework context.
     Returns parsed dict or None on failure.
     """
     # Build the content block — prefer full content if available, fall back to description
@@ -952,6 +954,7 @@ def analyse_with_claude(article: dict, content: str, client: Anthropic, log: log
         response = client.messages.create(
             model=CLAUDE_MODEL,
             max_tokens=2048,
+            cache_control={"type": "ephemeral"},
             messages=[{"role": "user", "content": prompt}],
         )
         raw = response.content[0].text.strip()
@@ -976,6 +979,7 @@ def analyse_with_claude(article: dict, content: str, client: Anthropic, log: log
 def analyse_first_look(article: dict, content: str, client: Anthropic, log: logging.Logger) -> dict | None:
     """
     Call Claude API with the First Look prompt to assess attack surface of a new capability.
+    Uses prompt caching to reduce cost for the repeated framework context.
     Returns parsed dict or None on failure.
     """
     article_text = content if len(content) > 200 else article["description"]
@@ -997,6 +1001,7 @@ def analyse_first_look(article: dict, content: str, client: Anthropic, log: logg
         response = client.messages.create(
             model=CLAUDE_MODEL,
             max_tokens=4096,
+            cache_control={"type": "ephemeral"},
             messages=[{"role": "user", "content": prompt}],
         )
         raw = response.content[0].text.strip()
