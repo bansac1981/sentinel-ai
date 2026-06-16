@@ -30,33 +30,6 @@
   {{ partial "podcast-player.html" . }}
 </div>
 
-{{/* ── FIRST LOOK: SECURITY STRIP ── */}}
-{{ $firstLookPosts := where $allPosts "Params.content_type" "first_look" }}
-{{ $firstLookPosts = first 3 $firstLookPosts }}
-{{ if $firstLookPosts }}
-<section class="first-look-strip">
-  <div class="first-look-strip__header">
-    <span>&#x25C8;</span>
-    <span>FIRST LOOK: SECURITY</span>
-    <span class="first-look-strip__sub">New capabilities &rarr; New attack surfaces</span>
-  </div>
-  <div class="first-look-strip__cards">
-    {{ range $firstLookPosts }}
-    <a href="{{ .RelPermalink }}" class="fl-card">
-      <div class="fl-card__badge">FIRST LOOK</div>
-      <h4 class="fl-card__title">{{ .Title }}</h4>
-      <div class="fl-card__meta">
-        {{ partial "framework-badges.html" . }}
-        {{ if .Params.adoption_velocity }}
-        <span class="velocity-badge velocity-badge--{{ lower .Params.adoption_velocity }}">{{ .Params.adoption_velocity }}</span>
-        {{ end }}
-      </div>
-    </a>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
-
 {{/* ── PAGINATED ARTICLE LISTING ── */}}
 <section class="posts-section">
   {{ $paginator := .Paginate $allPosts 15 }}
