@@ -1,7 +1,7 @@
 ---
-title: "First Look: AgentCore RAG Agent Exposes Multi-Layer Injection and Data Poisoning Surface"
+title: "First Look: Amazon Bedrock AgentCore RAG Agent Exposes Multi-Layer Injection and Data Poisoning Surface"
 date: 2026-06-15T14:02:36+00:00
-draft: true
+draft: false 
 slug: "first-look-agentcore-rag-agent-exposes-multi-layer-injection-and-data-poisoning"
 
 # ── Content metadata ──
