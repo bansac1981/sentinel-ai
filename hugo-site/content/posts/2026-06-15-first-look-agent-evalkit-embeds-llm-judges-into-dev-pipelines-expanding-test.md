@@ -1,6 +1,6 @@
 ---
 title: "First Look: AWS Agent-EvalKit Embeds LLM Judges Into Dev Pipelines, Expanding Adversarial Test Surface"
-date: 2026-06-15T14:01:39+00:00
+date: "2026-06-16T01:45:50+00:00"
 draft: false 
 slug: "first-look-agent-evalkit-embeds-llm-judges-into-dev-pipelines-expanding-test"
 
