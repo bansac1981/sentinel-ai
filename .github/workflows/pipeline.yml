@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Max articles to process (0 = use .env default of 20)"
+        description: "Max articles to process (0 = use .env default of 15)"
         required: false
-        default: "20"
+        default: "15"
       dry_run:
         description: "Dry run — fetch and filter but skip Claude API and file writes"
         type: boolean
