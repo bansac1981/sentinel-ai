@@ -1,6 +1,6 @@
 ---
 title: "First Look: Gemini Omni Deep OS Integration Expands Ambient AI Attack Surface on Android 17"
-date: 2026-06-17T04:16:07+00:00
+date: "2026-06-17T04:23:19+00:00"
 draft: false 
 slug: "first-look-gemini-omni-deep-os-integration-expands-ambient-ai-attack-surface-on"
 
