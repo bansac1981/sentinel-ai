@@ -822,7 +822,7 @@ Return a single valid JSON object (no markdown fences, no extra text) with exact
   "relevance_score": <float 0.0–10.0>,
   "is_ai_security_relevant": <true/false>,
   "content_type": "first_look",
-  "generated_title": "<Neutral, descriptive headline prefixed with 'First Look:'. Max 14 words. Describe what shipped or launched — not the security risk. Examples: 'First Look: Claude Code Ships Terminal Access for Autonomous Coding Agents', 'First Look: OpenAI Launches GPT-5 with Native Tool Execution'. Never start with 'How', 'Why', 'What', or a number after 'First Look:'.>",
+  "generated_title": "<Neutral, descriptive headline prefixed with 'First Look:'. Max 14 words. MUST include the vendor/OEM name (e.g. Google, OpenAI, Anthropic, Meta, Microsoft, AWS) prominently. Describe what shipped or launched — not the security risk. Examples: 'First Look: Anthropic Ships Claude Code with Terminal Access for Coding Agents', 'First Look: OpenAI Launches GPT-5 with Native Tool Execution', 'First Look: Google DeepMind Releases Gemini 2.5 with Agentic Capabilities'. Never start with 'How', 'Why', 'What', or a number after 'First Look:'.>",
   "summary": "<2-3 sentence editorial summary: first sentence describes the capability neutrally, remaining sentences cover the security implications for defenders>",
   "attack_surface_score": <float 0.0–10.0 — how much does this change the attack surface for defenders?>,
   "adoption_velocity": "<RAPID|MODERATE|GRADUAL|NICHE>",
