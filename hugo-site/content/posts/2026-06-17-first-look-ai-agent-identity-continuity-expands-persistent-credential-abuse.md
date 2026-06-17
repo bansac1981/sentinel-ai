@@ -1,6 +1,6 @@
 ---
 title: "First Look: AI Agent Identity Continuity Expands Persistent Credential Abuse Surface"
-date: 2026-06-17T04:12:45+00:00
+date: "2026-06-17T04:25:03+00:00"
 draft: false 
 slug: "first-look-ai-agent-identity-continuity-expands-persistent-credential-abuse"
 
