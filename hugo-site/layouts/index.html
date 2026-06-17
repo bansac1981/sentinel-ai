@@ -62,13 +62,6 @@
             <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
           </div>
           <p class="post-card__summary--h">{{ .Params.summary | default (.Summary | truncate 200) }}</p>
-          {{ if .Params.mitre_techniques }}
-          <div class="post-card__techniques">
-            {{ range .Params.mitre_techniques }}
-            <span class="card-technique-tag">{{ . }}</span>
-            {{ end }}
-          </div>
-          {{ end }}
         </div>
       </article>
       {{ end }}
