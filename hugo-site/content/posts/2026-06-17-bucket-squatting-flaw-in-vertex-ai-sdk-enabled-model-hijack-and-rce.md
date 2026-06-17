@@ -1,6 +1,6 @@
 ---
 title: "Bucket Squatting Flaw in Vertex AI SDK Enabled Model Hijack and RCE"
-date: 2026-06-17T04:15:11+00:00
+date: "2026-06-17T04:20:26+00:00"
 draft: false 
 slug: "bucket-squatting-flaw-in-vertex-ai-sdk-enabled-model-hijack-and-rce"
 
