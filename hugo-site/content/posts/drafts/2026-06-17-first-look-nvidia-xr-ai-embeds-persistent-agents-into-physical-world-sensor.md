@@ -1,7 +1,7 @@
 ---
 title: "First Look: NVIDIA XR AI Embeds Persistent Agents Into Physical-World Sensor Streams"
 date: 2026-06-17T04:13:36+00:00
-draft: true
+draft: false 
 slug: "first-look-nvidia-xr-ai-embeds-persistent-agents-into-physical-world-sensor"
 
 # ── Content metadata ──
