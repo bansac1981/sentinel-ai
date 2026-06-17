@@ -306,17 +306,29 @@ PEXELS_API_KEY      = os.getenv("PEXELS_API_KEY", "")
 # All queries chosen to return professional, relevant landscape photos.
 # ─────────────────────────────────────────────
 IMAGE_KEYWORD_MAP = [
-    # Generative AI / LLM
-    (["prompt injection", "jailbreak", "system prompt"],
-     "artificial intelligence robot security"),
-    (["llm", "large language model", "gpt", "chatgpt", "gemini", "openai", "anthropic"],
-     "artificial intelligence technology neural network"),
+    # Generative AI / LLM — diversified queries
+    (["prompt injection", "jailbreak"],
+     "computer security shield warning"),
+    (["system prompt", "guardrail", "alignment"],
+     "artificial intelligence safety controls"),
+    (["llm", "large language model"],
+     "language model text generation technology"),
+    (["gpt", "chatgpt", "openai"],
+     "conversational AI chatbot technology"),
+    (["gemini", "google ai", "deepmind"],
+     "search engine artificial intelligence"),
+    (["claude", "anthropic"],
+     "artificial intelligence research laboratory"),
+    (["agent", "agentic", "autonomous"],
+     "robot automation autonomous workflow"),
     (["rag", "retrieval augmented", "embedding", "vector db"],
-     "database search artificial intelligence"),
+     "database search information retrieval"),
     (["deepfake", "synthetic media", "voice clone"],
-     "deepfake face identity technology"),
+     "digital identity face recognition"),
     (["neural network", "deep learning", "machine learning"],
-     "neural network deep learning data"),
+     "data science visualization network"),
+    (["model release", "open source", "weights"],
+     "software release download server"),
     # Ransomware / Malware
     (["ransomware", "ransom demand"],
      "ransomware encrypted lock cybercrime dark"),
@@ -546,17 +558,41 @@ def fetch_og_image(url: str, log: logging.Logger) -> str:
     return ""
 
 
+_VENDOR_NAMES = [
+    "openai", "anthropic", "google", "deepmind", "microsoft", "meta",
+    "nvidia", "aws", "amazon", "mistral", "cohere", "hugging face",
+    "github", "apple", "tesla", "ibm", "oracle", "salesforce",
+]
+
+
+def _extract_vendor(title: str) -> str:
+    """Extract a vendor name from the title if present."""
+    text = title.lower()
+    for v in _VENDOR_NAMES:
+        if v in text:
+            return v.title()
+    return ""
+
+
 def _image_query(title: str, categories: list) -> str:
-    """Build the best image search query for this article (shared by Unsplash + Pexels)."""
+    """Build a diverse image search query for this article."""
     text = title.lower()
     for keywords, query in IMAGE_KEYWORD_MAP:
         if any(kw in text for kw in keywords):
+            vendor = _extract_vendor(title)
+            if vendor:
+                return f"{vendor} {query}"
             return query
-    # Fall back to first category
+    # Use vendor + category for more specific results
+    vendor = _extract_vendor(title)
     if categories:
         cat = categories[0].replace("-", " ")
+        if vendor:
+            return f"{vendor} {cat} technology"
         return f"{cat} cybersecurity technology"
-    return "cybersecurity technology dark computer"
+    if vendor:
+        return f"{vendor} artificial intelligence technology"
+    return "cybersecurity artificial intelligence technology"
 
 
 def get_recent_thumbnails(n: int = 20) -> set:
@@ -588,6 +624,7 @@ def fetch_unsplash_image(
     categories: list,
     log: logging.Logger,
     used_urls: set | None = None,
+    date_seed: str = "",
 ) -> str:
     """
     Search Unsplash for a relevant landscape photo. Primary image source.
@@ -611,7 +648,7 @@ def fetch_unsplash_image(
     try:
         resp = httpx.get(
             "https://api.unsplash.com/search/photos",
-            params={"query": query, "per_page": 15, "orientation": "landscape"},
+            params={"query": query, "per_page": 30, "orientation": "landscape"},
             headers={"Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}"},
             timeout=8.0,
         )
@@ -622,7 +659,7 @@ def fetch_unsplash_image(
             log.debug(f"  Unsplash: no results for '{query}'")
             return ""
 
-        start = abs(hash(title)) % len(results)
+        start = abs(hash(title + date_seed)) % len(results)
         for i in range(len(results)):
             candidate = results[(start + i) % len(results)]["urls"]["regular"]
             if candidate not in used_urls:
@@ -642,6 +679,7 @@ def fetch_pexels_image(
     categories: list,
     log: logging.Logger,
     used_urls: set | None = None,
+    date_seed: str = "",
 ) -> str:
     """
     Search Pexels for a relevant landscape photo. Fallback image source.
@@ -665,7 +703,7 @@ def fetch_pexels_image(
     try:
         resp = httpx.get(
             "https://api.pexels.com/v1/search",
-            params={"query": query, "per_page": 15, "orientation": "landscape"},
+            params={"query": query, "per_page": 30, "orientation": "landscape"},
             headers={"Authorization": PEXELS_API_KEY},
             timeout=8.0,
         )
@@ -676,16 +714,13 @@ def fetch_pexels_image(
             log.debug(f"  Pexels: no results for '{query}'")
             return ""
 
-        # Start from a deterministic offset so the same article always maps to
-        # the same candidate slot, then walk forward to find a fresh image.
-        start = abs(hash(title)) % len(photos)
+        start = abs(hash(title + date_seed)) % len(photos)
         for i in range(len(photos)):
             candidate = photos[(start + i) % len(photos)]["src"]["large"]
             if candidate not in used_urls:
                 log.debug(f"  Pexels photo (slot {(start+i)%len(photos)}): {candidate[:80]}")
                 return candidate
 
-        # All 15 results are already used — fall back to the deterministic pick
         log.debug("  Pexels: all candidates already used, reusing deterministic pick")
         return photos[start]["src"]["large"]
 
@@ -1283,8 +1318,8 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
     log.info(f"\nSTEP 4 — Classify & Analyse  (threat threshold: {RELEVANCE_THRESHOLD}, first look threshold: {FIRST_LOOK_THRESHOLD})")
     log.info("=" * 60)
 
-    # Pre-load recently used thumbnails to avoid Pexels image repeats
-    recent_thumbnails = get_recent_thumbnails(n=20)
+    # Pre-load recently used thumbnails to avoid image repeats
+    recent_thumbnails = get_recent_thumbnails(n=50)
     log.debug(f"  Recent thumbnails loaded: {len(recent_thumbnails)}")
 
     for i, article in enumerate(candidate_articles, 1):
@@ -1325,25 +1360,21 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
             stats["errors"] += 1
             continue
 
-        # Fetch thumbnail: Unsplash (primary) → Pexels (fallback) → OG image (last resort)
+        # Fetch thumbnail: Unsplash (primary) → Pexels (fallback)
         categories = analysis.get("categories", [])
         title_for_image = analysis.get("generated_title", "") or article["title"]
+        date_seed = article["published"].strftime("%Y-%m-%d")
         log.debug(f"  Fetching thumbnail (categories: {categories})")
-        thumbnail = fetch_unsplash_image(title_for_image, categories, log, used_urls=recent_thumbnails)
+        thumbnail = fetch_unsplash_image(title_for_image, categories, log, used_urls=recent_thumbnails, date_seed=date_seed)
         if thumbnail:
             log.debug(f"  Unsplash image: {thumbnail[:80]}")
             recent_thumbnails.add(thumbnail)
         else:
             log.debug(f"  Unsplash returned nothing, trying Pexels")
-            thumbnail = fetch_pexels_image(title_for_image, categories, log, used_urls=recent_thumbnails)
+            thumbnail = fetch_pexels_image(title_for_image, categories, log, used_urls=recent_thumbnails, date_seed=date_seed)
             if thumbnail:
                 log.debug(f"  Pexels image: {thumbnail[:80]}")
                 recent_thumbnails.add(thumbnail)
-            else:
-                log.debug(f"  Pexels returned nothing, falling back to OG image")
-                thumbnail = fetch_og_image(article["url"], log)
-                if thumbnail:
-                    log.debug(f"  OG image: {thumbnail[:80]}")
         article["thumbnail"] = thumbnail
 
         stats["claude_scored"] += 1
