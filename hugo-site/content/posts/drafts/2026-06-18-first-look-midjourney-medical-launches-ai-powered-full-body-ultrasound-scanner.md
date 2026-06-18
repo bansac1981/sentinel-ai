@@ -1,7 +1,7 @@
 ---
 title: "First Look: Midjourney Medical Launches AI-Powered Full-Body Ultrasound Scanner Hardware"
 date: 2026-06-18T04:02:03+00:00
-draft: true
+draft: false 
 slug: "first-look-midjourney-medical-launches-ai-powered-full-body-ultrasound-scanner"
 
 # ── Content metadata ──
