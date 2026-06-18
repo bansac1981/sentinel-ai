@@ -1,7 +1,7 @@
 ---
 title: "First Look: AWS Launches Amazon Quick Autonomous Agents with Continuous Background Execution"
 date: 2026-06-18T04:05:49+00:00
-draft: true
+draft: false 
 slug: "first-look-aws-launches-amazon-quick-autonomous-agents-with-continuous-execution"
 
 # ── Content metadata ──
