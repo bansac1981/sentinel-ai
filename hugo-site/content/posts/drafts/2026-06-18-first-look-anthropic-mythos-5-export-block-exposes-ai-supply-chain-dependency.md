@@ -1,7 +1,7 @@
 ---
 title: "First Look: Anthropic Mythos 5 Export Block Exposes AI Supply Chain Dependency Risk"
 date: 2026-06-18T04:07:34+00:00
-draft: true
+draft: false 
 slug: "first-look-anthropic-mythos-5-export-block-exposes-ai-supply-chain-dependency"
 
 # ── Content metadata ──
