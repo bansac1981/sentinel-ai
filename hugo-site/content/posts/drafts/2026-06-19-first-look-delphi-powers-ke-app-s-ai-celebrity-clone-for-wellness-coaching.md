@@ -1,7 +1,7 @@
 ---
 title: "First Look: Delphi Powers K\u0113 App's AI Celebrity Clone for Wellness Coaching"
 date: 2026-06-19T07:20:28+00:00
-draft: true
+draft: false 
 slug: "first-look-delphi-powers-ke-app-s-ai-celebrity-clone-for-wellness-coaching"
 
 # ── Content metadata ──
