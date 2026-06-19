@@ -1,6 +1,6 @@
 ---
 title: "First Look: AWS Launches Amazon Bedrock AgentCore Harness for Production-Grade Agents"
-date: 2026-06-19T07:19:00+00:00
+date: "2026-06-19T07:54:42+00:00"
 draft: false 
 slug: "first-look-aws-launches-amazon-bedrock-agentcore-harness-for-production-grade"
 
