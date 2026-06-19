@@ -1,6 +1,6 @@
 ---
 title: "First Look: AWS SageMaker Ships 100+ Detailed Inference Metrics with CloudWatch Insights Dashboard"
-date: 2026-06-19T07:17:49+00:00
+date: "2026-06-19T07:56:59+00:00"
 draft: false 
 slug: "first-look-aws-sagemaker-ships-100-detailed-inference-metrics-with-cloudwatch"
 
