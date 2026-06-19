@@ -1,6 +1,6 @@
 ---
 title: "Orphaned AI Agents Retain Privileged Access After Employee Departures"
-date: 2026-06-19T07:21:01+00:00
+date: "2026-06-19T07:41:47+00:00"
 draft: false 
 slug: "orphaned-ai-agents-retain-privileged-access-after-employee-departures"
 
