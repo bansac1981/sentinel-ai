@@ -1,7 +1,7 @@
 ---
 title: "First Look: Token Security Launches AI Agent Identity Governance Platform for Enterprise"
 date: 2026-06-20T04:04:42+00:00
-draft: true
+draft: false 
 slug: "first-look-token-security-launches-ai-agent-identity-governance-platform-for"
 
 # ── Content metadata ──
