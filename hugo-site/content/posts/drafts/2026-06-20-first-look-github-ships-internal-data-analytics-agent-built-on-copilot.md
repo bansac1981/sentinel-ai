@@ -1,7 +1,7 @@
 ---
 title: "First Look: GitHub Ships Internal Data Analytics Agent Built on Copilot"
 date: 2026-06-20T04:01:14+00:00
-draft: true
+draft: false 
 slug: "first-look-github-ships-internal-data-analytics-agent-built-on-copilot"
 
 # ── Content metadata ──
