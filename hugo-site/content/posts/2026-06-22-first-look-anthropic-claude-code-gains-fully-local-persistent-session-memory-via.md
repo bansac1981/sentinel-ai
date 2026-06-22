@@ -1,6 +1,6 @@
 ---
 title: "First Look: Anthropic Claude Code Gains Fully-Local Persistent Session Memory via Recall"
-date: 2026-06-22T03:45:13+00:00
+date: "2026-06-22T05:12:25+00:00"
 draft: false 
 slug: "first-look-anthropic-claude-code-gains-fully-local-persistent-session-memory-via"
 
