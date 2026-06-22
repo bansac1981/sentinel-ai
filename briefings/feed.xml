@@ -9,7 +9,7 @@
     <link>https://gridthegrey.com</link>
     <description>Weekly audio briefings covering the most critical AI security developments, threat actor activity, and framework updates. Every story scored, classified, and mapped to MITRE ATLAS and OWASP LLM Top 10.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 15 Jun 2026 10:45:47 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 10:23:59 +0000</lastBuildDate>
     <atom:link href="https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/feed.xml" rel="self" type="application/rss+xml"/>
 
     <itunes:author>Grid the Grey</itunes:author>
@@ -22,6 +22,19 @@
     </itunes:owner>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
+
+    <item>
+      <title>Week 26, 2026 — AI Security Briefing</title>
+      <description>This week's Grid-the-Grey CISO AI Security Brief — the attack surface has moved from your models to your agents, and three stories this week show exactly how that plays out.</description>
+      <pubDate>Mon, 22 Jun 2026 10:23:58 +0000</pubDate>
+      <enclosure url="https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W26-onyx.mp3" length="3675360" type="audio/mpeg"/>
+      <guid isPermaLink="false">https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W26-onyx.mp3</guid>
+      <itunes:title>Week 26, 2026 — AI Security Briefing</itunes:title>
+      <itunes:duration>03:34</itunes:duration>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
 
     <item>
       <title>Week 25, 2026 — AI Security Briefing</title>
