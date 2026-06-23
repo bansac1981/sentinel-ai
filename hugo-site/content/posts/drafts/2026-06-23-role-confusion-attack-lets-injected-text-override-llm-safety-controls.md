@@ -1,7 +1,7 @@
 ---
 title: "Role Confusion Attack Lets Injected Text Override LLM Safety Controls"
 date: 2026-06-23T04:03:13+00:00
-draft: true
+draft: false 
 slug: "role-confusion-attack-lets-injected-text-override-llm-safety-controls"
 
 # ── Content metadata ──
