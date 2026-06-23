@@ -1,7 +1,7 @@
 ---
 title: "First Look: AWS Launches Amazon Bedrock AgentCore Payments Enabling Autonomous Agent Transactions"
 date: 2026-06-23T04:05:21+00:00
-draft: true
+draft: false 
 slug: "first-look-aws-launches-amazon-bedrock-agentcore-payments-enabling-autonomous"
 
 # ── Content metadata ──
