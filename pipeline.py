@@ -396,8 +396,11 @@ FIRST_LOOK_FEEDS = {
     "nvidia_ai", "techcrunch_ai", "theverge_ai", "simonwillison",
 }
 
+# Story deduplication — suppress same-event articles from different sources
+STORY_WINDOW_DAYS = int(os.getenv("STORY_WINDOW_DAYS", "7"))  # look-back window for story index
+
 # Pipeline version — bump when changing the Claude prompt
-PIPELINE_VERSION = "2.0.0"
+PIPELINE_VERSION = "2.1.0"
 
 # ─────────────────────────────────────────────
 # 2. LOGGING
@@ -434,6 +437,14 @@ def load_seen_urls(path: Path) -> set:
 def save_seen_urls(path: Path, seen: set) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump({"urls": sorted(seen), "updated_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
+
+
+def flush_seen_urls(path: Path, seen: set) -> None:
+    """Write seen_urls mid-run so partial progress survives crashes/interrupts."""
+    try:
+        save_seen_urls(path, seen)
+    except OSError:
+        pass
 
 # ─────────────────────────────────────────────
 # 4. RSS FEED FETCHING
@@ -1070,6 +1081,146 @@ def build_slug(title: str, published: datetime) -> str:
     return slug
 
 
+# ── Story deduplication helpers ────────────────────────────────────────────────
+# Strategy: entity + event-type fingerprint.
+# An article is a duplicate if it shares at least one SPECIFIC named entity AND
+# at least one event type with an existing post/draft from the past STORY_WINDOW_DAYS.
+# "Broad" platform names (aws, google…) alone aren't specific enough — they require
+# 2+ shared event types to fire, preventing false positives across unrelated stories.
+
+_STORY_ENTITIES = {
+    "anthropic", "openai", "google", "deepmind", "microsoft", "nvidia",
+    "cloudflare", "aws", "amazon", "apple", "meta", "huggingface", "github",
+    "cisco", "crowdstrike", "samsung", "sagemaker", "bedrock", "claude",
+    "chatgpt", "gemini", "llama", "mistral", "fable", "mythos", "copilot",
+    "codex", "talos", "adobe", "agentcore", "difytap", "apertus", "vbdec",
+    "trail", "hermes", "glm", "swiss",
+}
+
+# Platform names that appear in many unrelated stories — require stronger signal
+_BROAD_ENTITIES = frozenset({"aws", "amazon", "google", "microsoft", "meta", "openai"})
+
+_EVENT_SYNONYMS = {
+    "ban": "restriction",       "bans": "restriction",       "banned": "restriction",
+    "export": "restriction",    "controls": "restriction",   "restricted": "restriction",
+    "shutdown": "restriction",  "blocked": "restriction",    "sanctions": "restriction",
+    "jailbreak": "bypass",      "bypass": "bypass",          "guardrail": "bypass",
+    "vulnerability": "vuln",    "flaw": "vuln",              "exploit": "vuln",
+    "cve": "vuln",              "zero-day": "vuln",
+    "breach": "breach",         "leak": "breach",            "exfiltration": "breach",
+    "stolen": "breach",         "theft": "breach",
+    "malware": "malware",       "trojan": "malware",         "backdoor": "malware",
+    "ransomware": "malware",    "botnet": "malware",
+    "supply": "supply-chain",   "chain": "supply-chain",     "trojan": "supply-chain",
+    "launch": "release",        "launches": "release",       "releases": "release",
+    "ships": "release",         "announces": "release",      "rolls": "release",
+    "deploys": "release",       "introduces": "release",     "unveils": "release",
+    "temporary": "temp-accounts",  "accountless": "temp-accounts",
+    "identity": "identity",     "verification": "identity",  "credential": "identity",
+    "injection": "prompt-injection",
+    "poisoning": "data-poisoning",
+}
+
+_STORY_MIN_TOKENS = 2  # minimum tokens to bother comparing
+
+
+def _story_fingerprint(title: str) -> tuple[frozenset, frozenset]:
+    """Return (entities, event_types) extracted from a title."""
+    words = re.findall(r"[a-z0-9]+", title.lower())
+    entities = frozenset(w for w in words if w in _STORY_ENTITIES)
+    events = frozenset(_EVENT_SYNONYMS[w] for w in words if w in _EVENT_SYNONYMS)
+    return entities, events
+
+
+def _fingerprint_match(title_a: str, title_b: str) -> bool:
+    """Return True if the two titles describe the same story."""
+    e1, ev1 = _story_fingerprint(title_a)
+    e2, ev2 = _story_fingerprint(title_b)
+    shared_entities = e1 & e2
+    shared_events = ev1 & ev2
+    if not shared_entities or not shared_events:
+        return False
+    # Broad-only entity match needs 2+ shared event types to avoid false positives
+    specific_shared = shared_entities - _BROAD_ENTITIES
+    if not specific_shared and len(shared_events) < 2:
+        return False
+    return True
+
+
+def build_story_index(log: logging.Logger) -> list[tuple[str, str]]:
+    """
+    Build a list of (title, filepath) for existing posts/drafts within STORY_WINDOW_DAYS.
+    Used to fingerprint-match incoming articles against already-published content.
+    """
+    from datetime import timedelta
+    cutoff = datetime.now(timezone.utc) - timedelta(days=STORY_WINDOW_DAYS)
+    date_prefix_re = re.compile(r"^(\d{4}-\d{2}-\d{2})-")
+    index = []
+    for search_dir in [HUGO_POSTS_DIR, HUGO_DRAFTS_DIR]:
+        if not search_dir.exists():
+            continue
+        for f in search_dir.glob("*.md"):
+            if f.stem == "_index":
+                continue
+            m = date_prefix_re.match(f.stem)
+            if not m:
+                continue
+            try:
+                file_date = datetime.strptime(m.group(1), "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            except ValueError:
+                continue
+            if file_date < cutoff:
+                continue
+            try:
+                head = f.read_text(encoding="utf-8", errors="ignore").splitlines()[:20]
+            except OSError:
+                continue
+            for line in head:
+                if line.startswith("title:"):
+                    title = line.split(":", 1)[1].strip().strip('"').strip("'")
+                    e, ev = _story_fingerprint(title)
+                    if e or ev:
+                        index.append((title, str(f)))
+                    break
+    log.info(f"Story index: {len(index)} posts/drafts from last {STORY_WINDOW_DAYS} days")
+    return index
+
+
+def build_source_url_index() -> set:
+    """
+    Return a set of all original_url values recorded in existing posts and drafts.
+    Catches the case where the same article URL entered the pipeline via two different feeds.
+    """
+    url_re = re.compile(r'^original_url:\s*"?([^"\n]+)"?', re.MULTILINE)
+    urls: set = set()
+    for search_dir in [HUGO_POSTS_DIR, HUGO_DRAFTS_DIR]:
+        if not search_dir.exists():
+            continue
+        for f in search_dir.glob("*.md"):
+            if f.stem == "_index":
+                continue
+            try:
+                text = f.read_text(encoding="utf-8", errors="ignore")
+                m = url_re.search(text)
+                if m:
+                    urls.add(m.group(1).strip())
+            except OSError:
+                continue
+    return urls
+
+
+def is_story_duplicate(title: str, story_index: list[tuple[str, str]], log: logging.Logger) -> bool:
+    """Return True if this title matches an already-indexed story via entity+event fingerprint."""
+    e, ev = _story_fingerprint(title)
+    if not e and not ev:
+        return False  # no signal to compare — let it through
+    for existing_title, filepath in story_index:
+        if _fingerprint_match(title, existing_title):
+            log.info(f"  ↓ Story duplicate: matches '{Path(filepath).name}'")
+            return True
+    return False
+
+
 def to_yaml_list(items: list | None) -> str:
     """Convert a Python list to YAML inline list string."""
     if not items:
@@ -1270,16 +1421,32 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
                 existing_slugs.add(stem)  # also keep full name just in case
     log.info(f"Existing posts on disk (published + drafts): {len(existing_slugs)}")
 
+    # Build story fingerprint index (Fix 3) — covers existing posts + drafts within window
+    story_index = build_story_index(log)
+
+    # Fix 2: build set of source URLs already recorded in frontmatter (catches feed-alias duplicates)
+    source_url_index = build_source_url_index()
+    log.info(f"Source URL index: {len(source_url_index)} original_url values on disk")
+
     new_articles = []
     for a in all_articles:
         if a["url"] in seen_urls:
             stats["already_seen"] += 1
+        # Fix 2: check if this exact URL is already recorded as original_url in a post/draft
+        elif a["url"] in source_url_index:
+            log.info(f"  Skipping (original_url on disk): {a['url'][:80]}")
+            seen_urls.add(a["url"])
+            stats["already_seen"] += 1
         else:
-            # Also check if the slug this title would produce already exists on disk
+            # Check original-title slug against disk (existing guard)
             candidate_slug = build_slug(a["title"], a["published"])
             if candidate_slug in existing_slugs:
                 log.info(f"  Skipping (slug exists on disk): {candidate_slug}")
-                seen_urls.add(a["url"])  # add to seen so we don't check again
+                seen_urls.add(a["url"])
+                stats["already_seen"] += 1
+            # Fix 3: story fingerprint check — same event from a different source
+            elif is_story_duplicate(a["title"], story_index, log):
+                seen_urls.add(a["url"])
                 stats["already_seen"] += 1
             else:
                 new_articles.append(a)
@@ -1408,9 +1575,29 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
         if owasp:
             log.info(f"  OWASP: {', '.join(owasp[:2])}{'...' if len(owasp) > 2 else ''}")
 
-        # Generate and write Hugo post — slug based on generated title if available
+        # Generate slug from Claude's title (may differ from original RSS title)
         slug_title = analysis.get("generated_title", "").strip() or article["title"]
         slug = build_slug(slug_title, article["published"])
+
+        # Fix 1: check generated slug against disk index before writing
+        if slug in existing_slugs:
+            log.info(f"  ↓ Skipping — generated slug already on disk: {slug}")
+            stats["already_seen"] += 1
+            # Fix 4: flush so this URL won't be re-processed if pipeline restarts
+            if not args.dry_run:
+                flush_seen_urls(SEEN_URLS_FILE, seen_urls)
+            time.sleep(1.0)
+            continue
+
+        # Fix 3b: also story-check against generated title (catches renamed variants)
+        if is_story_duplicate(slug_title, story_index, log):
+            seen_urls.add(article["url"])
+            stats["already_seen"] += 1
+            if not args.dry_run:
+                flush_seen_urls(SEEN_URLS_FILE, seen_urls)
+            time.sleep(1.0)
+            continue
+
         markdown = generate_hugo_markdown(article, analysis, slug)
         written = write_hugo_post(slug, markdown, log)
         if written:
@@ -1419,8 +1606,18 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
                 stats["first_look_written"] += 1
             else:
                 stats["threat_report_written"] += 1
+            # Add new slug to index so subsequent articles in the same run can see it
+            existing_slugs.add(slug)
+            # Fix 3c: add to story index so same-run duplicates are also caught
+            e, ev = _story_fingerprint(slug_title)
+            if e or ev:
+                story_index.append((slug_title, slug))
         else:
             stats["errors"] += 1
+
+        # Fix 4: flush seen_urls after each scored article so crashes don't lose progress
+        if not args.dry_run:
+            flush_seen_urls(SEEN_URLS_FILE, seen_urls)
 
         # Polite rate limiting — avoid hitting API rate limits
         time.sleep(1.0)
