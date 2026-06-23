@@ -1,6 +1,6 @@
 ---
 title: "Legacy Infrastructure Becomes Primary Attack Path into Enterprise AI Agents"
-date: 2026-06-23T04:08:32+00:00
+date: "2026-06-23T04:36:27+00:00"
 draft: false 
 slug: "legacy-infrastructure-becomes-primary-attack-path-into-enterprise-ai-agents"
 
