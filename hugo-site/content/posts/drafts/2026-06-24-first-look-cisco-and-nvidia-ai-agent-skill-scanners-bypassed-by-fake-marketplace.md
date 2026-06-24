@@ -1,7 +1,7 @@
 ---
-title: "First Look: Cisco and NVIDIA AI Agent Skill Scanners Bypassed by Fake Marketplace Skill"
+title: "Cisco and NVIDIA AI Agent Skill Scanners Bypassed by Fake Marketplace Skill"
 date: 2026-06-24T04:12:43+00:00
-draft: true
+draft: false 
 slug: "first-look-cisco-and-nvidia-ai-agent-skill-scanners-bypassed-by-fake-marketplace"
 
 # ── Content metadata ──
