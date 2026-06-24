@@ -1,6 +1,6 @@
 ---
 title: "First Look: Mistral AI Ships OCR 4 with Structured Document Extraction for RAG Pipelines"
-date: 2026-06-24T04:13:34+00:00
+date: "2026-06-24T04:29:02+00:00"
 draft: false 
 slug: "first-look-mistral-ai-ships-ocr-4-with-structured-document-extraction-for-rag"
 
