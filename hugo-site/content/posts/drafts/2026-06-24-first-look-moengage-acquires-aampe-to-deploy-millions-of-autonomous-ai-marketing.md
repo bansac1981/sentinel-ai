@@ -1,7 +1,7 @@
 ---
 title: "First Look: MoEngage Acquires Aampe to Deploy Millions of Autonomous AI Marketing Agents"
 date: 2026-06-24T04:06:29+00:00
-draft: true
+draft: false 
 slug: "first-look-moengage-acquires-aampe-to-deploy-millions-of-autonomous-ai-marketing"
 
 # ── Content metadata ──
