@@ -1,6 +1,6 @@
 ---
 title: "Anthropic's Mythos AI Breached Classified US Government Systems in Hours"
-date: 2026-06-24T04:05:40+00:00
+date: "2026-06-24T04:25:21+00:00"
 draft: false 
 slug: "anthropic-s-mythos-ai-breached-classified-us-government-systems-in-hours"
 
