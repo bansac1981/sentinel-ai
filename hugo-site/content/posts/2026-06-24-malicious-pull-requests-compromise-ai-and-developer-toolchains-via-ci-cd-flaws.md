@@ -1,6 +1,6 @@
 ---
 title: "Malicious Pull Requests Compromise AI and Developer Toolchains via CI/CD Flaws"
-date: 2026-06-24T04:07:22+00:00
+date: "2026-06-24T04:27:38+00:00"
 draft: false 
 slug: "malicious-pull-requests-compromise-ai-and-developer-toolchains-via-ci-cd-flaws"
 
