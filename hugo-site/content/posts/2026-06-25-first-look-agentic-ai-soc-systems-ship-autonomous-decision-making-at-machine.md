@@ -1,6 +1,6 @@
 ---
 title: "First Look: Agentic AI SOC Systems Ship Autonomous Decision-Making at Machine Speed"
-date: 2026-06-25T04:08:20+00:00
+date: "2026-06-25T04:27:29+00:00"
 draft: false 
 slug: "first-look-agentic-ai-soc-systems-ship-autonomous-decision-making-at-machine"
 
