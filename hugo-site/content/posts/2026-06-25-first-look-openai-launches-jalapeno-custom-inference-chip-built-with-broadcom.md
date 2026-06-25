@@ -1,6 +1,6 @@
 ---
 title: "First Look: OpenAI Launches Jalape\u00f1o Custom Inference Chip Built with Broadcom"
-date: 2026-06-25T04:06:48+00:00
+date: "2026-06-25T04:30:53+00:00"
 draft: false
 slug: "first-look-openai-launches-jalapeno-custom-inference-chip-built-with-broadcom"
 
