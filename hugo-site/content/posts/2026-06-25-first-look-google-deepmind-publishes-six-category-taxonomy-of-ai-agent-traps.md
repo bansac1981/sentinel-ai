@@ -1,6 +1,6 @@
 ---
 title: "First Look: Google DeepMind Publishes Six-Category Taxonomy of AI Agent Traps"
-date: 2026-06-25T04:05:09+00:00
+date: "2026-06-25T04:29:18+00:00"
 draft: false 
 slug: "first-look-google-deepmind-publishes-six-category-taxonomy-of-ai-agent-traps"
 
