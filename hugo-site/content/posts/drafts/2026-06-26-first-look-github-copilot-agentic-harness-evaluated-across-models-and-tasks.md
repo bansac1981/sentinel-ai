@@ -1,7 +1,7 @@
 ---
 title: "First Look: GitHub Copilot Agentic Harness Evaluated Across Models and Tasks"
 date: 2026-06-26T05:09:52+00:00
-draft: true
+draft: false 
 slug: "first-look-github-copilot-agentic-harness-evaluated-across-models-and-tasks"
 
 # ── Content metadata ──
