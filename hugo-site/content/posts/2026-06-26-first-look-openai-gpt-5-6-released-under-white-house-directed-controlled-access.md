@@ -1,6 +1,6 @@
 ---
 title: "First Look: OpenAI GPT-5.6 Released Under White House-Directed Controlled Access Program"
-date: 2026-06-26T05:09:06+00:00
+date: "2026-06-26T05:25:53+00:00"
 draft: false 
 slug: "first-look-openai-gpt-5-6-released-under-white-house-directed-controlled-access"
 
