@@ -1,7 +1,7 @@
 ---
 title: "First Look: OpenAI Launches GPT-5.6 Lineup with Enhanced Agentic and Cybersecurity Capabilities"
 date: 2026-06-27T03:45:37+00:00
-draft: true
+draft: false 
 slug: "first-look-openai-launches-gpt-5-6-lineup-with-enhanced-agentic-and-capabilities"
 
 # ── Content metadata ──
