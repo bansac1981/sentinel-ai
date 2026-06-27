@@ -1,6 +1,6 @@
 ---
 title: "First Look: Anthropic's Claude Mythos 5 Released Under U.S. Government Controlled Access Framework"
-date: 2026-06-27T03:41:33+00:00
+date: "2026-06-27T04:00:07+00:00"
 draft: false 
 slug: "first-look-anthropic-s-claude-mythos-5-released-under-u-s-government-controlled"
 
