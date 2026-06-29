@@ -1,6 +1,6 @@
 ---
 title: "First Look: Anthropic CEO Warns Lawmakers Open-Source AI Poses Safety Control Risks"
-date: 2026-06-29T13:53:56+00:00
+date: "2026-06-29T14:00:53+00:00"
 draft: false 
 slug: "first-look-anthropic-ceo-warns-lawmakers-open-source-ai-poses-safety-control"
 
