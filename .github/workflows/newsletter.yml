@@ -4,18 +4,17 @@ name: "Grid the Grey — Newsletter Dispatch"
 # Triggers
 # ─────────────────────────────────────────────
 on:
-  # Twice a week: Tuesday and Friday at 9:30 AM IST (04:00 UTC)
+  # Daily at 9:30 AM IST (04:00 UTC), Monday–Sunday
   schedule:
-    - cron: "0 4 * * 2"   # Tuesday
-    - cron: "0 4 * * 5"   # Friday
+    - cron: "0 4 * * *"
 
   # Manual trigger from GitHub Actions UI
   workflow_dispatch:
     inputs:
       days:
-        description: "Look back N days for posts (default: 4)"
+        description: "Look back N days for posts (default: 1)"
         required: false
-        default: "4"
+        default: "1"
       dry_run:
         description: "Dry run — build digest but skip API send"
         type: boolean
@@ -62,7 +61,7 @@ jobs:
       # 4. Save digest HTML as artifact (always, even on dry run)
       - name: Generate digest HTML
         run: |
-          DAYS="${{ github.event.inputs.days || '4' }}"
+          DAYS="${{ github.event.inputs.days || '1' }}"
           python newsletter_digest.py --days "$DAYS" --output digest.html
           echo "Digest saved to digest.html"
           wc -c digest.html
@@ -82,7 +81,7 @@ jobs:
           MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
           MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
         run: |
-          DAYS="${{ github.event.inputs.days || '4' }}"
+          DAYS="${{ github.event.inputs.days || '1' }}"
           DRY_RUN="${{ github.event.inputs.dry_run }}"
           SUBJECT="${{ github.event.inputs.subject }}"
 
