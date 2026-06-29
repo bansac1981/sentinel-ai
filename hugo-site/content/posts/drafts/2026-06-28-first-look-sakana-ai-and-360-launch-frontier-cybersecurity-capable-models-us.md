@@ -1,7 +1,7 @@
 ---
 title: "First Look: Sakana AI and 360 Launch Frontier Cybersecurity-Capable Models Outside US Export Controls"
 date: 2026-06-28T06:33:02+00:00
-draft: true
+draft: false 
 slug: "first-look-sakana-ai-and-360-launch-frontier-cybersecurity-capable-models-us"
 
 # ── Content metadata ──
