@@ -1,6 +1,6 @@
 ---
 title: "First Look: Z.ai Releases Open-Weight GLM-5.2 Matching Frontier Models on Cybersecurity Tasks"
-date: 2026-06-29T13:56:24+00:00
+date: "2026-06-29T14:32:17+00:00"
 draft: false 
 slug: "first-look-z-ai-releases-open-weight-glm-5-2-matching-frontier-models-on-tasks"
 
