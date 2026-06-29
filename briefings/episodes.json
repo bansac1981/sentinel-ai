@@ -11,6 +11,17 @@
   },
   "episodes": [
     {
+      "episode_num": 6,
+      "week": "2026-W27",
+      "title": "Week 27, 2026 — AI Security Briefing",
+      "description": "This week's Grid-the-Grey CISO AI Security Brief — the attack surface has shifted from your models to everything around them.",
+      "r2_url": "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W27-onyx.mp3",
+      "pub_date": "2026-06-29T09:17:44.662412+00:00",
+      "duration_secs": 219,
+      "size_bytes": 3665280,
+      "voice": "onyx"
+    },
+    {
       "episode_num": 5,
       "week": "2026-W26",
       "title": "Week 26, 2026 — AI Security Briefing",
