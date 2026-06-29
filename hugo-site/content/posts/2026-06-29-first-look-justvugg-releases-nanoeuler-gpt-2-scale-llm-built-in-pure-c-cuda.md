@@ -1,6 +1,6 @@
 ---
 title: "First Look: JustVugg Releases NanoEuler GPT-2 Scale LLM Built in Pure C/CUDA"
-date: 2026-06-29T13:58:53+00:00
+date: "2026-06-29T14:35:58+00:00"
 draft: false 
 slug: "first-look-justvugg-releases-nanoeuler-gpt-2-scale-llm-built-in-pure-c-cuda"
 
