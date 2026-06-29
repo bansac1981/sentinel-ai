@@ -1,7 +1,7 @@
 ---
 title: "First Look: Meta AI Releases AgentKits with 60 Production-Ready Agent Blueprints"
 date: 2026-06-28T06:35:27+00:00
-draft: true
+draft: false 
 slug: "first-look-meta-ai-releases-agentkits-with-60-production-ready-agent-blueprints"
 
 # ── Content metadata ──
