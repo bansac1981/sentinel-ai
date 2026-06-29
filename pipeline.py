@@ -23,6 +23,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse, urlunparse, urlencode, parse_qsl
 
 import feedparser
 import httpx
@@ -446,6 +447,31 @@ def flush_seen_urls(path: Path, seen: set) -> None:
     except OSError:
         pass
 
+
+# Tracking/referral params that carry no identity — strip before dedup
+_STRIP_PARAMS = {
+    "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+    "ref", "referrer", "source", "mc_cid", "mc_eid",
+    "fbclid", "gclid", "msclkid", "twclid",
+    "_hsenc", "_hsmi", "hsCtaTracking",
+}
+
+def canonicalize_url(url: str) -> str:
+    """Normalize a URL for deduplication: lowercase scheme+host, strip tracking
+    query params, remove trailing slash from path, drop fragment."""
+    try:
+        p = urlparse(url.strip())
+        scheme = p.scheme.lower()
+        netloc = p.netloc.lower()
+        path = p.path.rstrip("/") or "/"
+        # Keep only non-tracking query params, sorted for stable comparison
+        kept = [(k, v) for k, v in parse_qsl(p.query) if k.lower() not in _STRIP_PARAMS]
+        query = urlencode(sorted(kept))
+        return urlunparse((scheme, netloc, path, "", query, ""))
+    except Exception:
+        return url
+
+
 # ─────────────────────────────────────────────
 # 4. RSS FEED FETCHING
 # ─────────────────────────────────────────────
@@ -461,7 +487,7 @@ def fetch_feed(feed_key: str, feed_info: dict, log: logging.Logger) -> list[dict
 
         articles = []
         for entry in parsed.entries:
-            url = entry.get("link", "")
+            url = canonicalize_url(entry.get("link", ""))
             if not url:
                 continue
 
