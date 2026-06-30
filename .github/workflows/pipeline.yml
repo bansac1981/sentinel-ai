@@ -21,6 +21,15 @@ on:
         type: boolean
         required: false
         default: false
+      mode:
+        description: "Article type to process (all = full pipeline, threat = security feeds only, first_look = AI capability/vendor feeds only)"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - threat
+          - first_look
       feed:
         description: "Run a single feed only (leave blank for all feeds)"
         required: false
@@ -127,6 +136,11 @@ jobs:
           LIMIT="${{ github.event.inputs.limit }}"
           if [ -n "$LIMIT" ] && [ "$LIMIT" != "0" ]; then
             ARGS="$ARGS --limit $LIMIT"
+          fi
+
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -n "$MODE" ] && [ "$MODE" != "all" ]; then
+            ARGS="$ARGS --mode $MODE"
           fi
 
           FEED="${{ github.event.inputs.feed }}"
