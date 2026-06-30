@@ -6,12 +6,14 @@ Fetches AI security news from RSS feeds, scores articles with Claude API,
 maps them to MITRE ATLAS / OWASP LLM Top 10, and generates Hugo draft posts.
 
 Usage:
-    python pipeline.py                    # Normal run
-    python pipeline.py --dry-run          # Preview without writing files
-    python pipeline.py --limit 5          # Process max 5 articles
-    python pipeline.py --feed thehackernews  # Single feed only
-    python pipeline.py --reprocess        # Ignore seen_urls cache
-    python pipeline.py --verbose          # Detailed logging
+    python pipeline.py                           # Normal run (all feeds)
+    python pipeline.py --mode threat             # Threat/security feeds only
+    python pipeline.py --mode first_look         # AI capability/vendor feeds only
+    python pipeline.py --dry-run                 # Preview without writing files
+    python pipeline.py --limit 5                 # Process max 5 articles
+    python pipeline.py --feed thehackernews      # Single feed only
+    python pipeline.py --reprocess               # Ignore seen_urls cache
+    python pipeline.py --verbose                 # Detailed logging
 """
 
 import argparse
@@ -525,14 +527,19 @@ def fetch_feed(feed_key: str, feed_info: dict, log: logging.Logger) -> list[dict
         return []
 
 
-def fetch_all_feeds(selected_feed: str | None, log: logging.Logger) -> list[dict]:
-    """Fetch all configured RSS feeds (or just one if selected_feed is set)."""
+def fetch_all_feeds(selected_feed: str | None, log: logging.Logger, feed_subset: set | None = None) -> list[dict]:
+    """Fetch all configured RSS feeds (or just one if selected_feed is set).
+
+    feed_subset: optional set of feed keys to restrict to (applied after selected_feed).
+    """
     feeds_to_fetch = {}
     if selected_feed:
         if selected_feed not in RSS_FEEDS:
             log.error(f"Unknown feed key '{selected_feed}'. Valid keys: {list(RSS_FEEDS.keys())}")
             sys.exit(1)
         feeds_to_fetch = {selected_feed: RSS_FEEDS[selected_feed]}
+    elif feed_subset is not None:
+        feeds_to_fetch = {k: v for k, v in RSS_FEEDS.items() if k in feed_subset}
     else:
         feeds_to_fetch = RSS_FEEDS
 
@@ -1158,8 +1165,10 @@ def _story_fingerprint(title: str) -> tuple[frozenset, frozenset]:
     return entities, events
 
 
-def _fingerprint_match(title_a: str, title_b: str) -> bool:
+def _fingerprint_match(title_a: str, title_b: str, url_a: str = "", url_b: str = "") -> bool:
     """Return True if the two titles describe the same story."""
+    if url_a and url_b and canonicalize_url(url_a) == canonicalize_url(url_b):
+        return True
     e1, ev1 = _story_fingerprint(title_a)
     e2, ev2 = _story_fingerprint(title_b)
     shared_entities = e1 & e2
@@ -1229,7 +1238,7 @@ def build_source_url_index() -> set:
                 text = f.read_text(encoding="utf-8", errors="ignore")
                 m = url_re.search(text)
                 if m:
-                    urls.add(m.group(1).strip())
+                    urls.add(canonicalize_url(m.group(1).strip()))
             except OSError:
                 continue
     return urls
@@ -1393,28 +1402,40 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
 
     # ── Step 1: Fetch feeds ──
     log.info("=" * 60)
-    log.info("STEP 1 — Fetching RSS Feeds")
+    mode = getattr(args, "mode", "all")
+    mode_label = {"all": "All feeds", "threat": "Threat feeds only", "first_look": "First-Look feeds only"}[mode]
+    log.info(f"STEP 1 — Fetching RSS Feeds  [{mode_label}]")
     log.info("=" * 60)
-    all_articles = fetch_all_feeds(args.feed, log)
-    stats["feeds_fetched"]  = len(RSS_FEEDS) if not args.feed else 1
+
+    if mode == "threat":
+        feed_subset = {k for k in RSS_FEEDS if k not in FIRST_LOOK_FEEDS}
+    elif mode == "first_look":
+        feed_subset = FIRST_LOOK_FEEDS
+    else:
+        feed_subset = None  # fetch everything
+
+    all_articles = fetch_all_feeds(args.feed, log, feed_subset=feed_subset)
+    stats["feeds_fetched"]  = len(feed_subset) if feed_subset else (1 if args.feed else len(RSS_FEEDS))
     stats["articles_found"] = len(all_articles)
     log.info(f"Total articles fetched: {len(all_articles)}")
 
-    # Sort by date descending (newest first), then interleave first-look and
-    # threat sources to maintain ~50/50 balance within the processing window.
+    # Sort by date descending (newest first). In 'all' mode, interleave first-look
+    # and threat sources to maintain ~50/50 balance within the processing window.
+    # In single-mode runs the list is already homogeneous so interleaving is skipped.
     all_articles.sort(key=lambda a: a["published"], reverse=True)
-    fl_articles = [a for a in all_articles if a["source"] in FIRST_LOOK_FEEDS]
-    tr_articles = [a for a in all_articles if a["source"] not in FIRST_LOOK_FEEDS]
-    interleaved = []
-    fi, ti = 0, 0
-    while fi < len(fl_articles) or ti < len(tr_articles):
-        if fi < len(fl_articles):
-            interleaved.append(fl_articles[fi])
-            fi += 1
-        if ti < len(tr_articles):
-            interleaved.append(tr_articles[ti])
-            ti += 1
-    all_articles = interleaved
+    if mode == "all":
+        fl_articles = [a for a in all_articles if a["source"] in FIRST_LOOK_FEEDS]
+        tr_articles = [a for a in all_articles if a["source"] not in FIRST_LOOK_FEEDS]
+        interleaved = []
+        fi, ti = 0, 0
+        while fi < len(fl_articles) or ti < len(tr_articles):
+            if fi < len(fl_articles):
+                interleaved.append(fl_articles[fi])
+                fi += 1
+            if ti < len(tr_articles):
+                interleaved.append(tr_articles[ti])
+                ti += 1
+        all_articles = interleaved
 
     # ── Age filter: drop articles older than MAX_ARTICLE_AGE_DAYS ──
     cutoff = datetime.now(timezone.utc).replace(
@@ -1455,12 +1476,18 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
     log.info(f"Source URL index: {len(source_url_index)} original_url values on disk")
 
     new_articles = []
+    batch_seen: set[str] = set()  # tracks URLs added to new_articles this run
     for a in all_articles:
         if a["url"] in seen_urls:
             stats["already_seen"] += 1
-        # Fix 2: check if this exact URL is already recorded as original_url in a post/draft
+        # check if this exact URL is already recorded as original_url in a post/draft
         elif a["url"] in source_url_index:
             log.info(f"  Skipping (original_url on disk): {a['url'][:80]}")
+            seen_urls.add(a["url"])
+            stats["already_seen"] += 1
+        # check if this URL already appeared from another feed in this same run
+        elif a["url"] in batch_seen:
+            log.info(f"  Skipping (duplicate URL in this run): {a['url'][:80]}")
             seen_urls.add(a["url"])
             stats["already_seen"] += 1
         else:
@@ -1470,11 +1497,12 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
                 log.info(f"  Skipping (slug exists on disk): {candidate_slug}")
                 seen_urls.add(a["url"])
                 stats["already_seen"] += 1
-            # Fix 3: story fingerprint check — same event from a different source
+            # story fingerprint check — same event from a different source
             elif is_story_duplicate(a["title"], story_index, log):
                 seen_urls.add(a["url"])
                 stats["already_seen"] += 1
             else:
+                batch_seen.add(a["url"])
                 new_articles.append(a)
     log.info(f"New articles (not yet seen): {len(new_articles)}  |  Already seen: {stats['already_seen']}")
 
@@ -1696,6 +1724,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--feed", type=str, default=None, metavar="KEY",
         help=f"Only fetch from one feed. Keys: {', '.join(RSS_FEEDS.keys())}",
+    )
+    parser.add_argument(
+        "--mode", type=str, default="all", choices=["all", "threat", "first_look"],
+        help=(
+            "Which article type to fetch and process. "
+            "'all' (default) = full pipeline as normal; "
+            "'threat' = security/threat feeds only; "
+            "'first_look' = AI capability/vendor feeds only."
+        ),
     )
     parser.add_argument(
         "--reprocess", action="store_true",
