@@ -1,7 +1,7 @@
 ---
 title: "AI Tools Discover WebKit Vulnerabilities as Apple Accelerates Patch Cadence"
 date: 2026-06-30T10:53:32+00:00
-draft: true
+draft: false
 slug: "ai-tools-discover-webkit-vulnerabilities-as-apple-accelerates-patch-cadence"
 
 # ── Content metadata ──
