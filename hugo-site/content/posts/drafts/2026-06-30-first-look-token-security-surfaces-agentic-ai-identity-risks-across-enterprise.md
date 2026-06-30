@@ -1,7 +1,7 @@
 ---
 title: "First Look: Token Security Surfaces Agentic AI Identity Risks Across Enterprise Deployments"
 date: 2026-06-30T10:54:55+00:00
-draft: true
+draft: false
 slug: "first-look-token-security-surfaces-agentic-ai-identity-risks-across-enterprise"
 
 # ── Content metadata ──
