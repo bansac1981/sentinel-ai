@@ -1,7 +1,7 @@
 ---
-title: "First Look: Anthropic Restores Global Access to Mythos and Fable Models After Export Restrictions Lifted"
+title: "Anthropic Restores Global Access to Mythos and Fable Models After Export Restrictions Lifted"
 date: 2026-07-01T03:38:16+00:00
-draft: true
+draft: false 
 slug: "first-look-anthropic-restores-global-access-to-mythos-and-fable-models-after"
 
 # ── Content metadata ──
