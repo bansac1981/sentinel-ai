@@ -1,6 +1,6 @@
 ---
 title: "AI-Hallucinated Domains Weaponised in Active Software Supply Chain Attacks"
-date: 2026-07-01T03:33:28+00:00
+date: "2026-07-01T05:45:29+00:00"
 draft: false 
 slug: "ai-hallucinated-domains-weaponised-in-active-software-supply-chain-attacks"
 
