@@ -1,6 +1,6 @@
 ---
 title: "First Look: Google Launches Gemini Spark Agentic Assistant on Mac with File and App Access"
-date: 2026-07-02T04:15:37+00:00
+date: "2026-07-02T04:35:20+00:00"
 draft: false 
 slug: "first-look-google-launches-gemini-spark-agentic-assistant-on-mac-with-file-and"
 
