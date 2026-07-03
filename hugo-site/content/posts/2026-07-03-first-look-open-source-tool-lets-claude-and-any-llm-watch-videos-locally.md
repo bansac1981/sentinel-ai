@@ -1,6 +1,6 @@
 ---
 title: "First Look: Open-Source Tool Lets Claude and Any LLM Watch Videos Locally"
-date: 2026-07-03T03:19:45+00:00
+date: "2026-07-03T09:31:07+00:00"
 draft: false
 slug: "first-look-open-source-tool-lets-claude-and-any-llm-watch-videos-locally"
 
