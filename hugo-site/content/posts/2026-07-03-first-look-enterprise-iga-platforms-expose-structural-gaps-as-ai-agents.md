@@ -1,6 +1,6 @@
 ---
 title: "First Look: Enterprise IGA Platforms Expose Structural Gaps as AI Agents Proliferate"
-date: 2026-07-03T03:21:30+00:00
+date: "2026-07-03T09:30:12+00:00"
 draft: false
 slug: "first-look-enterprise-iga-platforms-expose-structural-gaps-as-ai-agents"
 
