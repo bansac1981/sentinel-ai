@@ -11,7 +11,7 @@ source_url: "https://thehackernews.com/2026/07/ai-agent-exploits-langflow-rce-to
 source_title: "AI Agent Exploits Langflow RCE to Automate Database Ransomware Attack"
 source_date: 2026-07-02T09:13:13+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.unsplash.com/photo-1782712819390-b738e9ddb5f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5Mzc1ODZ8MHwxfHNlYXJjaHwxMXx8cm9ib3QlMjBhdXRvbWF0aW9uJTIwYXV0b25vbW91cyUyMHdvcmtmbG93fGVufDB8MHx8fDE3ODMwNTMwMjh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+thumbnail: ["https://images.unsplash.com/photo-1782712819390-b738e9ddb5f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5Mzc1ODZ8MHwxfHNlYXJjaHwxMXx8cm9ib3QlMjBhdXRvbWF0aW9uJTIwYXV0b25vbW91cyUyMHdvcmtmbG93fGVufDB8MHx8fDE3ODMwNTMwMjh8MA&ixlib=rb-4.1.0&q=80&w=1080"](https://images.pexels.com/photos/6019019/pexels-photo-6019019.jpeg)
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── Content Type ──
