@@ -1,6 +1,6 @@
 ---
 title: "DeepSeek Turns LLM Hallucination Into Working Browser-Only Ransomware Technique"
-date: 2026-07-03T04:32:36+00:00
+date: "2026-07-03T09:45:56+00:00"
 draft: false
 slug: "deepseek-turns-llm-hallucination-into-working-browser-only-ransomware-technique"
 
