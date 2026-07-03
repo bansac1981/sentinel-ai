@@ -1,7 +1,7 @@
 ---
 title: "Claude Opus 4.7 Used to Discover Critical API Flaw in Major Ticketing Platform"
 date: 2026-07-03T04:33:14+00:00
-draft: true
+draft: false
 slug: "claude-opus-4-7-used-to-discover-critical-api-flaw-in-major-ticketing-platform"
 
 # ── Content metadata ──
