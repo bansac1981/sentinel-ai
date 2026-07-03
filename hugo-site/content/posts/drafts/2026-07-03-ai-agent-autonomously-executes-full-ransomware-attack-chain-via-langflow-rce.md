@@ -1,7 +1,7 @@
 ---
 title: "AI Agent Autonomously Executes Full Ransomware Attack Chain via Langflow RCE"
 date: 2026-07-03T04:30:28+00:00
-draft: true
+draft: false
 slug: "ai-agent-autonomously-executes-full-ransomware-attack-chain-via-langflow-rce"
 
 # ── Content metadata ──
