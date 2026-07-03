@@ -1,7 +1,7 @@
 ---
 title: "Prompt Injection Chain Breaks Cursor AI Sandbox, Enables Full RCE"
 date: 2026-07-03T04:31:55+00:00
-draft: true
+draft: false
 slug: "prompt-injection-chain-breaks-cursor-ai-sandbox-enables-full-rce"
 
 # ── Content metadata ──
