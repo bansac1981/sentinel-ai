@@ -1,6 +1,6 @@
 ---
 title: "Zero-Click Prompt Injection Flaws in Cursor IDE Enable OS-Level Code Execution"
-date: 2026-07-04T08:24:37+00:00
+date: "2026-07-04T10:47:24+00:00"
 draft: false 
 slug: "zero-click-prompt-injection-flaws-in-cursor-ide-enable-os-level-code-execution"
 
