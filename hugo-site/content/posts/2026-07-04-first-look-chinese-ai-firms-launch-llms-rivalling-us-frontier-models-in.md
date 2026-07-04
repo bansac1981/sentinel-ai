@@ -1,7 +1,7 @@
 ---
 title: "First Look: Chinese AI Firms Launch LLMs Rivalling US Frontier Models in Capability"
 date: "2026-07-04T10:53:05+00:00"
-draft: false 
+draft: false
 slug: "first-look-chinese-ai-firms-launch-llms-rivalling-us-frontier-models-in"
 
 # ── Content metadata ──
