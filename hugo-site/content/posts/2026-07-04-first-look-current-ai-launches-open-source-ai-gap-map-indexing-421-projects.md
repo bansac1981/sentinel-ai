@@ -1,6 +1,6 @@
 ---
 title: "First Look: Current AI Launches Open Source AI Gap Map Indexing 421 Projects"
-date: 2026-07-04T08:08:42+00:00
+date: "2026-07-04T08:53:39+00:00"
 draft: false 
 slug: "first-look-current-ai-launches-open-source-ai-gap-map-indexing-421-projects"
 
