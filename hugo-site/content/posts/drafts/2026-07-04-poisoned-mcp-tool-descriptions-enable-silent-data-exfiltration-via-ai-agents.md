@@ -1,7 +1,7 @@
 ---
 title: "Poisoned MCP Tool Descriptions Enable Silent Data Exfiltration via AI Agents"
 date: 2026-07-04T08:26:01+00:00
-draft: true
+draft: false 
 slug: "poisoned-mcp-tool-descriptions-enable-silent-data-exfiltration-via-ai-agents"
 
 # ── Content metadata ──
