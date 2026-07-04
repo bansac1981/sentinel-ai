@@ -1,6 +1,6 @@
 ---
 title: "LLM Agents Weaponised to Deliver Ransomware via Langflow Platform"
-date: 2026-07-04T08:24:05+00:00
+date: "2026-07-04T10:52:14+00:00"
 draft: false 
 slug: "llm-agents-weaponised-to-deliver-ransomware-via-langflow-platform"
 
