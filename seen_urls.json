@@ -26,6 +26,7 @@
     "https://arstechnica.com/security/2026/07/new-pamstealer-macos-malware-uses-clever-tradecraft-to-remain-stealthy",
     "https://arstechnica.com/space/2026/07/nasa-inspector-general-suggests-boeings-starliner-will-now-be-a-decade-late",
     "https://artificialanalysis.ai/articles/glm-5-2-is-the-new-leading-open-weights-model-on-the-artificial-analysis-intelligence-index",
+    "https://arxiv.org/abs/2602.09239",
     "https://arxiv.org/abs/2606.16140",
     "https://arxiv.org/abs/2606.22748",
     "https://aws.amazon.com/blogs/machine-learning/accelerate-campaign-workflow-with-insights-from-adobe-marketing-agent-for-amazon-quick/",
@@ -198,6 +199,7 @@
     "https://github.blog/security/supply-chain-security/inside-the-advisory-database-and-what-happens-when-vulnerability-volume-breaks-records",
     "https://github.com/HUANGCHIHHUNGLeo/claude-real-video",
     "https://github.com/JustVugg/nanoeuler",
+    "https://github.com/Trystan-SA/claude-design-system-prompt",
     "https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf",
     "https://github.com/jyn514/flower",
     "https://github.com/raiyanyahya/recall",
@@ -225,6 +227,7 @@
     "https://huggingface.co/blog/vllm-jobs",
     "https://huggingface.co/blog/zai-org/glm-52-blog",
     "https://hustvl.github.io/Moebius/",
+    "https://intextbooks.science.uu.nl/workshop2026/files/itb26_s1s2.pdf",
     "https://intrepidkarthi.com/writing/the-gauge-broke",
     "https://isc.sans.edu/diary/rss/33066",
     "https://isc.sans.edu/diary/rss/33068",
@@ -481,6 +484,7 @@
     "https://techcrunch.com/2026/07/01/spacex-has-an-ai-device-prototype-and-it-sure-sounds-phone-ish",
     "https://techcrunch.com/2026/07/01/venice-ai-becomes-a-unicorn-with-65m-series-a-as-its-privacy-first-ai-platform-takes-off",
     "https://techcrunch.com/2026/07/02/jersey-mikes-ipo-illustrates-how-bad-the-ai-hype-has-become",
+    "https://techcrunch.com/2026/07/02/mark-zuckerberg-tells-staff-that-ai-agents-havent-progressed-as-quickly-as-hed-hoped",
     "https://techcrunch.com/2026/07/03/artificial-intelligence-definition-glossary-hallucinations-guide-to-common-ai-terms",
     "https://techcrunch.com/2026/07/03/as-the-browser-wars-heat-up-here-are-the-hottest-alternatives-to-chrome-and-safari-in-2026",
     "https://techcrunch.com/podcast/neas-tiffany-luck-on-ai-ipos-personal-agents-and-the-roi-reckoning/",
@@ -612,6 +616,7 @@
     "https://thehackernews.com/2026/07/new-avalon-malware-framework-packs.html",
     "https://thehackernews.com/2026/07/new-bad-epoll-linux-kernel-flaw-lets.html",
     "https://thehackernews.com/2026/07/new-chocopoc-rat-targets-vulnerability.html",
+    "https://thehackernews.com/2026/07/new-skillcloak-technique-lets-malicious.html",
     "https://thehackernews.com/2026/07/north-korea-linked-npm-packages-mimic.html",
     "https://thehackernews.com/2026/07/north-korean-hackers-publish-108.html",
     "https://thehackernews.com/2026/07/ousaban-banking-trojan-targets-iberian.html",
@@ -723,6 +728,7 @@
     "https://www.bleepingcomputer.com/news/security/fbi-russian-hackers-now-target-signal-backup-recovery-keys",
     "https://www.bleepingcomputer.com/news/security/fbi-russian-hackers-now-target-signal-backup-recovery-keys/",
     "https://www.bleepingcomputer.com/news/security/ffmpeg-fixes-pixelsmash-flaw-in-widely-used-video-decoder/",
+    "https://www.bleepingcomputer.com/news/security/flipper-zero-firmware-development-continues-with-community-help",
     "https://www.bleepingcomputer.com/news/security/fortibleed-campaign-used-custom-fortigate-sniffer-to-steal-credentials/",
     "https://www.bleepingcomputer.com/news/security/fortibleed-credential-theft-campaign-linked-to-lynx-ransomware",
     "https://www.bleepingcomputer.com/news/security/fortibleed-leak-exposes-fortinet-vpn-credentials-for-73-000-devices/",
@@ -953,6 +959,7 @@
     "https://www.nytimes.com/2026/06/25/technology/openai-ipo-artificial-intelligence.html",
     "https://www.pcgamer.com/gaming-industry/open-source-game-engine-godot-will-no-longer-accept-ai-authored-code-contributions-we-cant-trust-heavy-users-of-ai-to-understand-their-code-enough-to-fix-it",
     "https://www.phantafield.com/whitepaper",
+    "https://www.readtheline.ca/p/al-vigier-canadas-ai-strategy-shouldnt",
     "https://www.reuters.com/business/meta-sell-excess-ai-computing-capacity-via-cloud-business-bloomberg-news-reports-2026-07-01",
     "https://www.reuters.com/business/world-at-work/oracle-workforce-shrinks-by-about-13-2026-06-22/",
     "https://www.reuters.com/business/zuckerberg-says-ai-agent-development-going-slower-than-expected-2026-07-02",
@@ -1210,5 +1217,5 @@
     "https://xcancel.com/coinbureau/status/2071330294452666695",
     "https://zcode.z.ai/cn"
   ],
-  "updated_at": "2026-07-05T02:11:47.171782+00:00"
+  "updated_at": "2026-07-06T07:28:39.304960+00:00"
 }
