@@ -1,7 +1,7 @@
 ---
 title: "First Look: OfficeCLI Ships Open-Source Microsoft Office Automation Suite for AI Agents"
 date: 2026-07-07T03:55:02+00:00
-draft: true
+draft: false
 slug: "first-look-officecli-ships-open-source-microsoft-office-automation-suite-for-ai"
 
 # ── Content metadata ──
