@@ -1,6 +1,6 @@
 ---
 title: "Indirect Prompt Injections Weaponised to Drain Crypto via AI Agents"
-date: 2026-07-07T03:57:10+00:00
+date: "2026-07-07T07:39:12+00:00"
 draft: false
 slug: "indirect-prompt-injections-weaponised-to-drain-crypto-via-ai-agents"
 
