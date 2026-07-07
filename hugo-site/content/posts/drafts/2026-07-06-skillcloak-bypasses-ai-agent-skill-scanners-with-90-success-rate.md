@@ -1,7 +1,7 @@
 ---
 title: "SkillCloak Bypasses AI Agent Skill Scanners with 90%+ Success Rate"
 date: 2026-07-06T07:27:50+00:00
-draft: true
+draft: false
 slug: "skillcloak-bypasses-ai-agent-skill-scanners-with-90-success-rate"
 
 # ── Content metadata ──
