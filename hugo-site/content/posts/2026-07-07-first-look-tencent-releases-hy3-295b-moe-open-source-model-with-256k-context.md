@@ -1,6 +1,6 @@
 ---
 title: "First Look: Tencent Releases Hy3 295B MoE Open-Source Model with 256K Context"
-date: 2026-07-07T07:43:31+00:00
+date: "2026-07-07T07:50:28+00:00"
 draft: false
 slug: "first-look-tencent-releases-hy3-295b-moe-open-source-model-with-256k-context"
 
