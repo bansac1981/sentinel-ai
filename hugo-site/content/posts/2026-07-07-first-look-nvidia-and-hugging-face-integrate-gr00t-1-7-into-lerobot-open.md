@@ -1,6 +1,6 @@
 ---
 title: "First Look: NVIDIA and Hugging Face Integrate GR00T 1.7 into LeRobot Open Robotics Platform"
-date: 2026-07-07T07:42:38+00:00
+date: "2026-07-07T07:49:34+00:00"
 draft: false
 slug: "first-look-nvidia-and-hugging-face-integrate-gr00t-1-7-into-lerobot-open"
 
