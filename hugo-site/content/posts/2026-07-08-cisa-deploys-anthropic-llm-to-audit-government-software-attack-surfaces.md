@@ -1,6 +1,6 @@
 ---
 title: "CISA Deploys Anthropic LLM to Audit Government Software Attack Surfaces"
-date: 2026-07-08T06:14:06+00:00
+date: "2026-07-08T11:59:32+00:00"
 draft: false
 slug: "cisa-deploys-anthropic-llm-to-audit-government-software-attack-surfaces"
 
