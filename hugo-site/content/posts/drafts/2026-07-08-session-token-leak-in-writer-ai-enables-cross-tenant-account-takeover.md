@@ -1,7 +1,7 @@
 ---
 title: "Session Token Leak in Writer AI Enables Cross-Tenant Account Takeover"
 date: 2026-07-08T06:13:31+00:00
-draft: true
+draft: false
 slug: "session-token-leak-in-writer-ai-enables-cross-tenant-account-takeover"
 
 # ── Content metadata ──
