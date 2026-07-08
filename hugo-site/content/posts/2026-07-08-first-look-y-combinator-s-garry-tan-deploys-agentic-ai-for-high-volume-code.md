@@ -1,6 +1,6 @@
 ---
 title: "First Look: Y Combinator's Garry Tan Deploys Agentic AI for High-Volume Code Generation"
-date: 2026-07-08T06:15:29+00:00
+date: "2026-07-08T12:06:51+00:00"
 draft: false
 slug: "first-look-y-combinator-s-garry-tan-deploys-agentic-ai-for-high-volume-code"
 
