@@ -1,5 +1,5 @@
 ---
-title: "Indirect Prompt Injection in Repositories Gives Claude Code Full Shell Access"
+title: "Claude Code Prompt Injection Enables Reverse Shell Access"
 date: "2026-06-30T10:59:28+00:00"
 draft: false
 slug: "indirect-prompt-injection-in-repositories-gives-claude-code-full-shell-access"

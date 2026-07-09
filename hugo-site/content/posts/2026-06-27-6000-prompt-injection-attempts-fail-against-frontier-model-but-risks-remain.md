@@ -1,5 +1,5 @@
 ---
-title: "6,000 Prompt Injection Attempts Fail Against Frontier Model \u2014 But Risks Remain"
+title: "Claude Opus 4.6 Resists 6,000 Prompt Injection Attempts"
 date: "2026-06-27T03:57:24+00:00"
 draft: false 
 slug: "6000-prompt-injection-attempts-fail-against-frontier-model-but-risks-remain"

@@ -1,5 +1,5 @@
 ---
-title: "TanStack Supply Chain Attack Compromises OpenAI Developer Devices and Signing Certificates"
+title: "TanStack Supply Chain Attack Exposes OpenAI Code-Signing Keys"
 date: "2026-05-15T21:16:27+00:00"
 draft: false
 slug: "tanstack-supply-chain-attack-compromises-openai-developer-devices-and-signing"

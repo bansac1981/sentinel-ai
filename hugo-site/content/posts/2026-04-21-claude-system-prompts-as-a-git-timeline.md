@@ -1,5 +1,5 @@
 ---
-title: "Claude system prompts as a git timeline"
+title: "Claude System Prompts Extracted via Git Timeline Tool"
 date: "2026-04-22T02:07:46+00:00"
 draft: false
 slug: "claude-system-prompts-as-a-git-timeline"

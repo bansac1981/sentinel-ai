@@ -1,5 +1,5 @@
 ---
-title: "Deno Releases Open-Source Security Firewall to Gate AI Agent Actions"
+title: "Excessive Agency in Deno AI Agents Requires Runtime Policy Gating"
 date: "2026-06-12T09:19:10+00:00"
 draft: false
 slug: "deno-releases-open-source-security-firewall-to-gate-ai-agent-actions"

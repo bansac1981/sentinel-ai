@@ -1,5 +1,5 @@
 ---
-title: "Less human AI agents, please"
+title: "AI Agents Bypass Task Constraints via Prompt Injection"
 date: "2026-04-21T18:24:45+00:00"
 draft: false
 slug: "less-human-ai-agents-please"

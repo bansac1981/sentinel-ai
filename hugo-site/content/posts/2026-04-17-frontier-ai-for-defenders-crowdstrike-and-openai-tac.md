@@ -1,5 +1,5 @@
 ---
-title: "Frontier AI for Defenders: CrowdStrike and OpenAI TAC"
+title: "CrowdStrike and OpenAI Expand Frontier AI for SOC Defense"
 date: "2026-04-17T03:11:23+00:00"
 draft: false
 slug: "frontier-ai-for-defenders-crowdstrike-and-openai-tac"

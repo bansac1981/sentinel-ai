@@ -1,5 +1,5 @@
 ---
-title: "Rust Compiler Project Drafts Formal LLM Contribution Policy"
+title: "Rust Project Addresses LLM Supply Chain Code Integrity Risks"
 date: "2026-05-15T21:18:40+00:00"
 draft: false 
 slug: "rust-compiler-project-drafts-formal-llm-contribution-policy"

@@ -1,5 +1,5 @@
 ---
-title: "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in production"
+title: "Brex CrabTrap: LLM-as-Judge Proxy Blocks Agent Exploits"
 date: "2026-04-22T10:00:29+00:00"
 draft: false
 slug: "crabtrap-an-llm-as-a-judge-http-proxy-to-secure-agents-in-production"

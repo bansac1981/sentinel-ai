@@ -1,5 +1,5 @@
 ---
-title: "GTIG AI Threat Tracker: Distillation, Experimentation, and (Continued) Integration of AI for Adversarial Use"
+title: "Google GTIG: Model Extraction Attacks Surge in Q4 2025"
 date: "2026-04-26T12:09:12+00:00"
 draft: false
 slug: "gtig-ai-threat-tracker-distillation-experimentation-and-continued-integration-of"

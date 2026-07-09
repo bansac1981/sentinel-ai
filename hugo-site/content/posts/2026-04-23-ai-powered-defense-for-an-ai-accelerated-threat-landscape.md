@@ -1,5 +1,5 @@
 ---
-title: "AI-powered defense for an AI-accelerated threat landscape"
+title: "AI Models Autonomously Discover Vulnerabilities, Chain Exploits"
 date: "2026-04-23T12:12:12+00:00"
 draft: false
 slug: "ai-powered-defense-for-an-ai-accelerated-threat-landscape"

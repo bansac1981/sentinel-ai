@@ -1,5 +1,5 @@
 ---
-title: "Malicious Repos Trigger Silent Code Execution in Claude, Cursor, Gemini CLIs"
+title: "TrustFall: Repository Poisoning RCE in Claude, Cursor, Gemini"
 date: "2026-05-08T03:10:50+00:00"
 draft: false
 slug: "malicious-repos-trigger-silent-code-execution-in-claude-cursor-gemini-clis"

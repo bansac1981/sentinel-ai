@@ -1,5 +1,5 @@
 ---
-title: "Mini Shai-Hulud Supply Chain Worm Compromises Mistral AI, Guardrails AI and TanStack Packages"
+title: "CVE-2026-45321: Supply Chain Worm Hits Mistral AI"
 date: "2026-05-13T08:08:33+00:00"
 draft: false
 slug: "supply-chain-worm-compromises-mistral-ai-guardrails-ai-and-tanstack-packages"

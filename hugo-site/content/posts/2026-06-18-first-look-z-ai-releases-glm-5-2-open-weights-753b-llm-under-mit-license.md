@@ -1,5 +1,5 @@
 ---
-title: "First Look: Z.ai Releases GLM-5.2 Open-Weights 753B LLM Under MIT License"
+title: "Z.ai Releases GLM-5.2 Open-Weights 753B LLM"
 date: "2026-06-18T04:14:35+00:00"
 draft: false 
 slug: "first-look-z-ai-releases-glm-5-2-open-weights-753b-llm-under-mit-license"

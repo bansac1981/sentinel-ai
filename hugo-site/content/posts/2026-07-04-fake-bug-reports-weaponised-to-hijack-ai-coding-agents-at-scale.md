@@ -1,5 +1,5 @@
 ---
-title: "Fake Bug Reports Weaponised to Hijack AI Coding Agents at Scale"
+title: "Agentjacking: Fake Bug Reports Hijack AI Coding Agents"
 date: "2026-07-04T10:50:04+00:00"
 draft: false
 slug: "fake-bug-reports-weaponised-to-hijack-ai-coding-agents-at-scale"

@@ -1,5 +1,5 @@
 ---
-title: "First Look: Delphi Powers K\u0113 App's AI Celebrity Clone for Wellness Coaching"
+title: "Delphi Powers Karamo Brown's K\u0113 App with AI Celebrity Clone"
 date: "2026-06-19T07:57:43+00:00"
 draft: false 
 slug: "first-look-delphi-powers-ke-app-s-ai-celebrity-clone-for-wellness-coaching"

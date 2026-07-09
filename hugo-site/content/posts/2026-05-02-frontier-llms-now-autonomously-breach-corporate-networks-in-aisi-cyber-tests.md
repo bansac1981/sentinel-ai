@@ -1,5 +1,5 @@
 ---
-title: "Frontier LLMs Now Autonomously Breach Corporate Networks in AISI Cyber Tests"
+title: "GPT-5.5 and Mythos Complete Autonomous Network Intrusions"
 date: "2026-05-02T04:50:23+00:00"
 draft: false
 slug: "frontier-llms-now-autonomously-breach-corporate-networks-in-aisi-cyber-tests"

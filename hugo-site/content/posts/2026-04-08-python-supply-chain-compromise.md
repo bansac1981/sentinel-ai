@@ -1,5 +1,5 @@
 ---
-title: "Python Supply-Chain Compromise"
+title: "litellm Supply-Chain Compromise: .pth File Injection"
 date: "2026-04-13T15:41:27+00:00"
 draft: false
 

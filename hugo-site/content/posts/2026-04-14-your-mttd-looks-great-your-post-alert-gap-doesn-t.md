@@ -1,5 +1,5 @@
 ---
-title: "Your MTTD Looks Great. Your Post-Alert Gap Doesn't"
+title: "Post-Alert Gap: AI Adversaries Outpace SOC Response"
 date: "2026-04-14T09:40:03+00:00"
 draft: false
 slug: "your-mttd-looks-great-your-post-alert-gap-doesn-t"

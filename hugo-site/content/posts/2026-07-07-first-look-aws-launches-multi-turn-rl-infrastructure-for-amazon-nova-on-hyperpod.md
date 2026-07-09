@@ -1,5 +1,5 @@
 ---
-title: "First Look: AWS Launches Multi-Turn RL Infrastructure for Amazon Nova on SageMaker HyperPod"
+title: "AWS Launches Multi-Turn RL for Amazon Nova"
 date: "2026-07-07T07:48:45+00:00"
 draft: false
 slug: "first-look-aws-launches-multi-turn-rl-infrastructure-for-amazon-nova-on-hyperpod"

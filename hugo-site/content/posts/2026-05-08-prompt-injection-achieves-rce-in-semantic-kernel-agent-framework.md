@@ -1,5 +1,5 @@
 ---
-title: "Prompt Injection Achieves Remote Code Execution in Semantic Kernel Agent Framework"
+title: "CVE-2026-26030: Semantic Kernel RCE via Prompt Injection"
 date: "2026-05-08T03:01:32+00:00"
 draft: false
 slug: "prompt-injection-achieves-rce-in-semantic-kernel-agent-framework"

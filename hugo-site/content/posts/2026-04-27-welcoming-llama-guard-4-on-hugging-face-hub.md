@@ -1,5 +1,5 @@
 ---
-title: "Welcoming Llama Guard 4 on Hugging Face Hub"
+title: "Llama Guard 4 Detects Jailbreaks and Prompt Injection"
 date: "2026-04-28T05:53:37+00:00"
 draft: false
 slug: "welcoming-llama-guard-4-on-hugging-face-hub"

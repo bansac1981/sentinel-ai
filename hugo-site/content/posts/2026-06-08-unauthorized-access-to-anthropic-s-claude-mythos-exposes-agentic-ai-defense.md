@@ -1,5 +1,5 @@
 ---
-title: "Unauthorized Access to Anthropic's Claude Mythos Exposes Agentic AI Defense Risks"
+title: "Claude Mythos Unauthorized Access Exposes Agentic AI Risks"
 date: "2026-06-08T14:02:42+00:00"
 draft: false 
 slug: "unauthorized-access-to-anthropic-s-claude-mythos-exposes-agentic-ai-defense"

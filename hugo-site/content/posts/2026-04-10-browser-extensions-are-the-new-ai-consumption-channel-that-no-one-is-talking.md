@@ -1,5 +1,5 @@
 ---
-title: "Browser Extensions Are the New AI Consumption Channel That No One Is Talking About"
+title: "AI Browser Extensions Pose Enterprise Data Exfiltration Risk"
 date: 2026-04-10T11:00:00+00:00
 draft: false
 

@@ -1,5 +1,5 @@
 ---
-title: "Bleeding Llama Flaw Exposes 300,000 Ollama Servers to Unauthenticated Data Theft"
+title: "CVE-2026-7482: Ollama Heap Read Exposes API Keys"
 date: "2026-05-06T04:16:56+00:00"
 draft: false
 slug: "bleeding-llama-flaw-exposes-300000-ollama-servers-to-unauthenticated-data-theft"

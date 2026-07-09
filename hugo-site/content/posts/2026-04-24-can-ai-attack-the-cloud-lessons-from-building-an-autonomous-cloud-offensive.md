@@ -1,5 +1,5 @@
 ---
-title: "Paloalto's Zealot successfully attacks misconfigured cloud environments"
+title: "Zealot LLM-Powered Cloud Penetration Testing System"
 date: "2026-04-24T03:43:52+00:00"
 draft: false
 slug: "can-ai-attack-the-cloud-lessons-from-building-an-autonomous-cloud-offensive"

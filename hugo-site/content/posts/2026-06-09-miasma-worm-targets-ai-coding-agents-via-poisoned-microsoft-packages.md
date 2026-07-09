@@ -1,5 +1,5 @@
 ---
-title: "Miasma Worm Targets AI Coding Agents via Poisoned Microsoft Packages"
+title: "Miasma Worm Compromises 73 Microsoft NPM Packages for AI Agents"
 date: "2026-06-09T10:45:08+00:00"
 draft: false 
 slug: "miasma-worm-targets-ai-coding-agents-via-poisoned-microsoft-packages"

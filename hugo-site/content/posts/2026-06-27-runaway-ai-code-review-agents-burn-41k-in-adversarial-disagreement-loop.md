@@ -1,5 +1,5 @@
 ---
-title: "Runaway AI Code Review Agents Burn $41K in Adversarial Disagreement Loop"
+title: "AI Code Review Agents in Denial-of-Service Loop Cost $41K"
 date: "2026-06-27T04:08:34+00:00"
 draft: false 
 slug: "runaway-ai-code-review-agents-burn-41k-in-adversarial-disagreement-loop"

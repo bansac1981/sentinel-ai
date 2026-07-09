@@ -1,5 +1,5 @@
 ---
-title: "AI Security M&A Surge: Agentic Identity, LLM Evaluation, and Browser Control Targeted"
+title: "Cisco, Check Point Acquisitions Secure AI Agent Infrastructure"
 date: "2026-06-08T14:06:27+00:00"
 draft: false 
 slug: "ai-security-m-a-surge-agentic-identity-llm-evaluation-and-browser-control"

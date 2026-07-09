@@ -1,5 +1,5 @@
 ---
-title: "Desktop Automation CLI Grants AI Agents Deep OS-Level Control"
+title: "agent-desktop Prompt Injection Grants AI Agents OS Control"
 date: "2026-05-03T03:30:02+00:00"
 draft: false
 slug: "desktop-automation-cli-grants-ai-agents-deep-os-level-control"

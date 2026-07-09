@@ -1,5 +1,5 @@
 ---
-title: "First Look: Agentic AI Security Platforms Emerge Promising Autonomous CTEM Operationalization"
+title: "Agentic AI Security Platforms Enable Autonomous CTEM"
 date: "2026-06-21T09:05:17+00:00"
 draft: false 
 slug: "first-look-agentic-ai-security-platforms-emerge-promising-autonomous-ctem"

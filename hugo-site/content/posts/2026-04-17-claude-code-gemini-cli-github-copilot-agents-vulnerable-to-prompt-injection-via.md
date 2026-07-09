@@ -1,5 +1,5 @@
 ---
-title: "Claude Code, Gemini CLI, GitHub Copilot Agents Vulnerable to Prompt Injection via Comments"
+title: "Comment and Control: Prompt Injection in AI Coding Agents"
 date: "2026-04-17T03:41:16+00:00"
 draft: false
 slug: "claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via"

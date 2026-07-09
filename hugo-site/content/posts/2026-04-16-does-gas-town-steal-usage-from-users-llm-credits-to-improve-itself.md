@@ -1,5 +1,5 @@
 ---
-title: "Does Gas Town 'steal' usage from users' LLM credits to improve itself?"
+title: "Gas Town Supply Chain Attack Abuses LLM Credits"
 date: "2026-04-16T04:20:31+00:00"
 draft: false
 slug: "does-gas-town-steal-usage-from-users-llm-credits-to-improve-itself"

@@ -1,5 +1,5 @@
 ---
-title: "AI Tools Discover WebKit Vulnerabilities as Apple Accelerates Patch Cadence"
+title: "CVE-2026-43715: Apple WebKit Memory Corruption"
 date: "2026-06-30T11:03:15+00:00"
 draft: false
 slug: "ai-tools-discover-webkit-vulnerabilities-as-apple-accelerates-patch-cadence"

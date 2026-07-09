@@ -1,5 +1,5 @@
 ---
-title: "Over 1,000 Exposed ComfyUI Instances Targeted in Cryptomining Botnet Campaign"
+title: "ComfyUI RCE Exploited in Cryptomining Botnet Campaign"
 date: "2026-04-13T14:44:56+00:00"
 draft: false
 

@@ -1,5 +1,5 @@
 ---
-title: "Hugging Face 'Spaces' now acts as an MCP-App-Store. Anybody thinking on the security consequence?"
+title: "Hugging Face Spaces Supply Chain Risk Exposes AI Agents"
 date: "2026-04-27T09:54:03+00:00"
 draft: false
 slug: "upskill-your-llms-with-gradio-mcp-servers"

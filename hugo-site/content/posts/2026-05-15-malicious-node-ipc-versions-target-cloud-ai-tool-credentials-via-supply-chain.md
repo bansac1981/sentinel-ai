@@ -1,5 +1,5 @@
 ---
-title: "Malicious node-ipc Versions Target Cloud, AI Tool Credentials via Supply Chain Backdoor"
+title: "node-ipc Supply Chain Backdoor Steals Cloud and AI Credentials"
 date: "2026-05-15T21:24:13+00:00"
 draft: false 
 slug: "malicious-node-ipc-versions-target-cloud-ai-tool-credentials-via-supply-chain"

@@ -1,5 +1,5 @@
 ---
-title: "Claude Code GitHub Action Leaked CI/CD Secrets via Prompt Injection"
+title: "Prompt Injection in Claude Code GitHub Action Leaks CI/CD Secrets"
 date: "2026-06-08T14:05:30+00:00"
 draft: false 
 slug: "claude-code-github-action-leaked-ci-cd-secrets-via-prompt-injection"

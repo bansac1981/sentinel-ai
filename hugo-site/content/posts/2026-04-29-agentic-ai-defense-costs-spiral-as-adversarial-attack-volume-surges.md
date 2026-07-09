@@ -1,5 +1,5 @@
 ---
-title: "Agentic AI Defense Costs Spiral as Adversarial Attack Volume Surges"
+title: "Sevii Cyber Swarm Defense Faces Token Cost Surges"
 date: "2026-04-29T13:33:26+00:00"
 draft: false
 slug: "agentic-ai-defense-costs-spiral-as-adversarial-attack-volume-surges"

@@ -1,5 +1,5 @@
 ---
-title: "AI Coding Agents Trigger EDR Rules via DPAPI and LOLBAS"
+title: "Claude Code, Cursor Trigger EDR Rules via DPAPI"
 date: "2026-07-09T06:48:39+00:00"
 draft: false
 slug: "ai-coding-agents-trigger-edr-rules-via-dpapi-and-lolbas"

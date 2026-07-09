@@ -1,5 +1,5 @@
 ---
-title: "Moltbook breach: When Cross-App Permissions Stack into Risk"
+title: "Moltbook Exposes 1.5M Tokens via Cross-App OAuth Risk"
 date: "2026-04-23T11:39:35+00:00"
 draft: false
 slug: "toxic-combinations-when-cross-app-permissions-stack-into-risk"

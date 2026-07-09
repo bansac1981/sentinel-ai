@@ -1,5 +1,5 @@
 ---
-title: "ClaudeBleed Flaw Lets Rogue Chrome Extensions Hijack AI Agent"
+title: "ClaudeBleed: Claude Chrome Extension Prompt Injection"
 date: "2026-05-09T04:08:41+00:00"
 draft: false
 slug: "claudebleed-flaw-lets-rogue-chrome-extensions-hijack-ai-agent"

@@ -1,5 +1,5 @@
 ---
-title: "Claude Source Code Leak Highlights Big Supply Chain Missteps"
+title: "Claude Source Code Leak Exposes AI Supply Chain Compromise"
 date: 2026-04-03T13:00:00+00:00
 draft: false
 

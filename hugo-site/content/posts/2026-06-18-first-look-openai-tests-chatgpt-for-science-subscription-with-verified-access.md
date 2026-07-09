@@ -1,5 +1,5 @@
 ---
-title: "First Look: OpenAI Tests ChatGPT for Science Subscription with Verified Institutional Access"
+title: "OpenAI Launches ChatGPT for Science with Institutional Access"
 date: "2026-06-18T04:16:02+00:00"
 draft: false 
 slug: "first-look-openai-tests-chatgpt-for-science-subscription-with-verified-access"

@@ -1,5 +1,5 @@
 ---
-title: "Project Glasswing Proved AI Can Find the Bugs. Who's Going to Fix Them?"
+title: "Project Glasswing: Anthropic's AI Autonomous Exploit Success"
 date: "2026-04-24T02:57:23+00:00"
 draft: false
 slug: "project-glasswing-proved-ai-can-find-the-bugs-who-s-going-to-fix-them"

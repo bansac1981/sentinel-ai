@@ -1,5 +1,5 @@
 ---
-title: "Microsoft Open-Sources RAMPART and Clarity to Harden AI Agent Security"
+title: "RAMPART and Clarity: Microsoft AI Agent Security Tools"
 date: "2026-05-22T02:18:06+00:00"
 draft: false
 slug: "microsoft-open-sources-rampart-and-clarity-to-harden-ai-agent-security"

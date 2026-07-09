@@ -1,5 +1,5 @@
 ---
-title: "OWASP GenAI Security Project Gets Update, New Tools Matrix"
+title: "OWASP GenAI Security Project Expands LLM Top 10 Framework"
 date: "2026-04-14T08:18:19+00:00"
 draft: false
 

@@ -1,5 +1,5 @@
 ---
-title: "First Look: Dragos Launches EmberAI, an OT-Specific AI Security Intelligence Platform"
+title: "Dragos Launches EmberAI, an OT-Specific AI Platform"
 date: "2026-06-24T04:30:55+00:00"
 draft: false 
 slug: "first-look-dragos-launches-emberai-an-ot-specific-ai-security-intelligence"

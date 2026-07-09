@@ -1,5 +1,5 @@
 ---
-title: "Deterministic + Agentic AI: The Architecture Exposure Validation Requires"
+title: "Agentic AI Validation Gaps Create Repeatability Security Risks"
 date: "2026-04-16T04:44:10+00:00"
 draft: false
 slug: "deterministic-agentic-ai-the-architecture-exposure-validation-requires"

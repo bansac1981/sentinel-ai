@@ -1,5 +1,5 @@
 ---
-title: "AI Email Agent Susceptible to Classic Phishing Tactics, Leaks Credentials and CRM Data"
+title: "OpenClaw AI Agent Vulnerable to Phishing, Leaks AWS Credentials"
 date: "2026-06-10T13:24:07+00:00"
 draft: false 
 slug: "ai-email-agent-susceptible-to-classic-phishing-tactics-leaks-credentials-and-crm"

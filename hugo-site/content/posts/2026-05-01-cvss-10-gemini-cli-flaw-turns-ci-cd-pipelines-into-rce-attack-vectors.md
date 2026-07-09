@@ -1,5 +1,5 @@
 ---
-title: "CVSS 10 Gemini CLI Flaw Turns CI/CD Pipelines Into RCE Attack Vectors"
+title: "Gemini CLI CVSS 10 RCE in CI/CD Pipelines via Config Injection"
 date: "2026-05-01T06:54:32+00:00"
 draft: false
 slug: "cvss-10-gemini-cli-flaw-turns-ci-cd-pipelines-into-rce-attack-vectors"

@@ -1,5 +1,5 @@
 ---
-title: "First Look: Odyssey Launches Physical World Model Platform Backed by Amazon at $1.45B Valuation"
+title: "Odyssey Launches Physical World Model Platform Backed by Amazon"
 date: "2026-06-18T04:21:04+00:00"
 draft: false 
 slug: "first-look-odyssey-launches-physical-world-model-platform-backed-by-amazon-at-1"

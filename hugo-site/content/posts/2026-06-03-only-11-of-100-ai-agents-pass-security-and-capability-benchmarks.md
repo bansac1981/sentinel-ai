@@ -1,5 +1,5 @@
 ---
-title: "Only 11 of 100 AI Agents Pass Security and Capability Benchmarks"
+title: "Adversa AI: Only 11 of 100 Agents Pass Security Tests"
 date: "2026-06-04T05:38:21+00:00"
 draft: false 
 slug: "only-11-of-100-ai-agents-pass-security-and-capability-benchmarks"

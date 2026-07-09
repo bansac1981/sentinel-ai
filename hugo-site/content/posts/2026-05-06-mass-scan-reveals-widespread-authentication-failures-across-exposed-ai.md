@@ -1,5 +1,5 @@
 ---
-title: "Mass Scan Reveals Widespread Authentication Failures Across Exposed AI Infrastructure"
+title: "Flowise and n8n Exposed: Million-Service Scan Finds Auth Bypass"
 date: "2026-05-06T04:15:21+00:00"
 draft: false
 slug: "mass-scan-reveals-widespread-authentication-failures-across-exposed-ai"

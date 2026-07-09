@@ -1,5 +1,5 @@
 ---
-title: "Microsoft, Salesforce Patch AI Agent Data Leak Flaws"
+title: "Prompt Injection Flaws in Salesforce, Microsoft AI Agents"
 date: "2026-04-16T04:19:34+00:00"
 draft: false
 slug: "microsoft-salesforce-patch-ai-agent-data-leak-flaws"

@@ -1,5 +1,5 @@
 ---
-title: "First Look: OpenAI ChatGPT Image Generator Bypasses Content Filters via Viral Prompt"
+title: "OpenAI ChatGPT Image Generator Bypasses Content Filters"
 date: "2026-06-22T05:19:54+00:00"
 draft: false 
 slug: "first-look-openai-chatgpt-image-generator-bypasses-content-filters-via-viral"

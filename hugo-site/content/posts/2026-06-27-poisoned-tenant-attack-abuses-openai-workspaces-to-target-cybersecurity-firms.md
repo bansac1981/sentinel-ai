@@ -1,5 +1,5 @@
 ---
-title: "Poisoned Tenant Attack Abuses OpenAI Workspaces to Target Cybersecurity Firms"
+title: "Poisoned Tenant: OpenAI Workspace Phishing Targets Security Firms"
 date: "2026-06-27T04:02:04+00:00"
 draft: false 
 slug: "poisoned-tenant-attack-abuses-openai-workspaces-to-target-cybersecurity-firms"

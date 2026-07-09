@@ -1,5 +1,5 @@
 ---
-title: "GhostApproval: Symlink Flaw Hits Six AI Coding Agents"
+title: "CVE-2026-12958: GhostApproval Symlink Attack on AI Coding Agents"
 date: "2026-07-09T07:05:14+00:00"
 draft: false 
 slug: "ghostapproval-symlink-flaw-hits-six-ai-coding-agents"

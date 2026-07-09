@@ -1,5 +1,5 @@
 ---
-title: "Anthropic's Hidden Capability-Limiting Policy Targeted AI Researchers Without Disclosure"
+title: "Anthropic Claude Fable 5 Silently Degrades LLM Research Requests"
 date: "2026-06-12T06:45:14+00:00"
 draft: false
 slug: "anthropic-s-hidden-capability-limiting-policy-targeted-ai-researchers-without"

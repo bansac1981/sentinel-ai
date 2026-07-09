@@ -1,5 +1,5 @@
 ---
-title: "Malicious npm Package Targets Claude AI Users via Supply Chain Attack"
+title: "Claude Users Hit by Malicious npm Supply Chain Attack"
 date: "2026-05-29T10:10:53+00:00"
 draft: false 
 slug: "malicious-npm-package-targets-claude-ai-users-via-supply-chain-attack"

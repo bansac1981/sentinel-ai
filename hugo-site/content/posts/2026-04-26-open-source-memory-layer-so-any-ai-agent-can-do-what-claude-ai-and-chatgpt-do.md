@@ -1,5 +1,5 @@
 ---
-title: "Open source memory layer so any AI agent can do what Claude.ai and ChatGPT do"
+title: "Stash AI Memory Layer Exposes Agents to Data Poisoning"
 date: "2026-04-26T12:01:40+00:00"
 draft: false
 slug: "open-source-memory-layer-so-any-ai-agent-can-do-what-claude-ai-and-chatgpt-do"

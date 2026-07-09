@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Autonomously Executes Full Ransomware Attack Chain via Langflow RCE"
+title: "CVE-2025-3248: Langflow RCE Enables Autonomous Ransomware Attack"
 date: "2026-07-03T09:25:09+00:00"
 draft: false
 slug: "ai-agent-autonomously-executes-full-ransomware-attack-chain-via-langflow-rce"

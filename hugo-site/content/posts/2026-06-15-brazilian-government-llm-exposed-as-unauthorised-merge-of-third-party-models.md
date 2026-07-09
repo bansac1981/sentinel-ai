@@ -1,5 +1,5 @@
 ---
-title: "Brazilian Government LLM Exposed as Unauthorised Merge of Third-Party Models"
+title: "Rio de Janeiro's 397B LLM is Undisclosed Qwen/Nex Merge"
 date: "2026-06-15T08:02:56+00:00"
 draft: false 
 slug: "brazilian-government-llm-exposed-as-unauthorised-merge-of-third-party-models"

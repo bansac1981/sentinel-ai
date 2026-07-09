@@ -1,5 +1,5 @@
 ---
-title: "Show HN: Browser Harness \u2013 Gives LLM freedom to complete any browser task"
+title: "Browser Harness Grants LLMs Unrestricted Chrome Control"
 date: "2026-04-25T05:08:06+00:00"
 draft: false
 slug: "show-hn-browser-harness-gives-llm-freedom-to-complete-any-browser-task"

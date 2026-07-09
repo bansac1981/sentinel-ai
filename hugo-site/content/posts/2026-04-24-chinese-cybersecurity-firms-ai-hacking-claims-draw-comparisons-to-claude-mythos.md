@@ -1,5 +1,5 @@
 ---
-title: "Claude's Mythos rival: Chinese Cybersecurity Firm claims finding 1000 vulnerabilities"
+title: "Qihoo 360 AI System Discovers Zero-Day Vulnerabilities"
 date: "2026-04-24T03:14:26+00:00"
 draft: false
 slug: "chinese-cybersecurity-firms-ai-hacking-claims-draw-comparisons-to-claude-mythos"

@@ -1,5 +1,5 @@
 ---
-title: "Prompt Injection Chain Breaks Cursor AI Sandbox, Enables Full RCE"
+title: "CVE-2026-50548: Cursor IDE Prompt Injection RCE"
 date: "2026-07-03T09:44:45+00:00"
 draft: false
 slug: "prompt-injection-chain-breaks-cursor-ai-sandbox-enables-full-rce"

@@ -1,5 +1,5 @@
 ---
-title: "Typosquatted OpenAI Repo on Hugging Face Delivered Rust Infostealer to 244K Users"
+title: "Typosquatted OpenAI Repo Delivers Rust Infostealer to 244K Users"
 date: "2026-05-11T09:31:05+00:00"
 draft: false
 slug: "typosquatted-openai-repo-on-hugging-face-delivered-rust-infostealer-to-244k"

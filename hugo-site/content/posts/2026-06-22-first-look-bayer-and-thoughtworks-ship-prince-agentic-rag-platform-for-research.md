@@ -1,5 +1,5 @@
 ---
-title: "First Look: Bayer and Thoughtworks Ship PRINCE Agentic RAG Platform for Pharmaceutical Research"
+title: "Bayer and Thoughtworks Ship PRINCE Agentic RAG Platform"
 date: "2026-06-22T05:14:20+00:00"
 draft: false 
 slug: "first-look-bayer-and-thoughtworks-ship-prince-agentic-rag-platform-for-research"

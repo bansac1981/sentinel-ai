@@ -1,5 +1,5 @@
 ---
-title: "Process-Level CAPTCHA Analysis Exposes Behavioural Fingerprints of AI Agents"
+title: "CogCAPTCHA30 Fingerprints AI Agent Behavior in CAPTCHA Solving"
 date: "2026-05-31T01:32:12+00:00"
 draft: false 
 slug: "process-level-captcha-analysis-exposes-behavioural-fingerprints-of-ai-agents"

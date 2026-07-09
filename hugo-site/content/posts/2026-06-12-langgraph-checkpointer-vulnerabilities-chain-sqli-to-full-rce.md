@@ -1,5 +1,5 @@
 ---
-title: "LangGraph Checkpointer Vulnerabilities Chain SQLi to Full RCE"
+title: "CVE-2025-67644: LangGraph SQLi to RCE via Checkpointer"
 date: "2026-06-12T09:23:45+00:00"
 draft: false
 slug: "langgraph-checkpointer-vulnerabilities-chain-sqli-to-full-rce"

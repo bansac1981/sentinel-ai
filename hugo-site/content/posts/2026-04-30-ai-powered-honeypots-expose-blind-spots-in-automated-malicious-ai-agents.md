@@ -1,5 +1,5 @@
 ---
-title: "AI-Powered Honeypots Expose Blind Spots in Automated Malicious AI Agents"
+title: "Cisco Talos Honeypots Expose AI Agent Prompt Injection Blindness"
 date: "2026-04-30T05:34:41+00:00"
 draft: false
 slug: "ai-powered-honeypots-expose-blind-spots-in-automated-malicious-ai-agents"

@@ -1,5 +1,5 @@
 ---
-title: "First Look: OpenAI Ships GPT-5.5 Instant with Enhanced Health Intelligence in ChatGPT"
+title: "OpenAI Ships GPT-5.5 Instant with Health Intelligence"
 date: "2026-06-21T09:10:25+00:00"
 draft: false 
 slug: "first-look-openai-ships-gpt-5-5-instant-with-enhanced-health-intelligence-in"

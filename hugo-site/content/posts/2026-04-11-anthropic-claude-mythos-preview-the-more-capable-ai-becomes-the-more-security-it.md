@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Claude Mythos Preview: The More Capable AI Becomes, the More Security It Needs"
+title: "Anthropic Mythos Program Addresses Frontier AI Security Risks"
 date: 2026-04-11T09:21:26+00:00
 draft: false
 

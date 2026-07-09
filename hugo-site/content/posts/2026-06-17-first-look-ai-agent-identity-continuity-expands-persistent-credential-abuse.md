@@ -1,5 +1,5 @@
 ---
-title: "First Look: AI Agent Identity Continuity Expands Persistent Credential Abuse Surface"
+title: "CrowdStrike Launches Continuous Identity for AI Agents"
 date: "2026-06-17T04:25:03+00:00"
 draft: false 
 slug: "first-look-ai-agent-identity-continuity-expands-persistent-credential-abuse"

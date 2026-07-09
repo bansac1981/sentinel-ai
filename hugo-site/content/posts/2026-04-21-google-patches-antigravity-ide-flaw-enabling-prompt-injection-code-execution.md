@@ -1,5 +1,5 @@
 ---
-title: "Google Patches Antigravity IDE Flaw Enabling Prompt Injection Code Execution"
+title: "Google Antigravity Prompt Injection Enables Code Execution"
 date: "2026-04-21T18:32:25+00:00"
 draft: false
 slug: "google-patches-antigravity-ide-flaw-enabling-prompt-injection-code-execution"

@@ -1,5 +1,5 @@
 ---
-title: "LLM Activation Steering Goes Local: Security Implications of Direct Model Manipulation"
+title: "DeepSeek Activation Steering Enables Local LLM Jailbreak"
 date: "2026-05-17T02:17:55+00:00"
 draft: false 
 slug: "llm-activation-steering-goes-local-security-implications-of-direct-model"
