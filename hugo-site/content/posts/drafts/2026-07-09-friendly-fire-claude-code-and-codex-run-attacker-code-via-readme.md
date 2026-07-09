@@ -1,7 +1,7 @@
 ---
 title: "Friendly Fire: Claude Code and Codex Run Attacker Code Via README"
 date: 2026-07-09T06:37:40+00:00
-draft: true
+draft: false
 slug: "friendly-fire-claude-code-and-codex-run-attacker-code-via-readme"
 
 # ── Content metadata ──
