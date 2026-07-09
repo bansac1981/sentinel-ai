@@ -38,30 +38,38 @@ You are an SEO specialist reviewing article titles for gridthegrey.com, an AI se
 
 Evaluate the CURRENT TITLE against these rules, then decide whether to keep or replace it.
 
-## SEO Rules for threat report titles
-1. Length: 50-60 characters total
+## SEO Rules for threat_report titles
+1. Length: 50-65 characters total
 2. Front-load the primary keyword: CVE ID > product/tool name > attack technique > vendor
-3. If a CVE number is in the tags or summary, it MUST appear in the title
+3. If a CVE number appears in the CVE tags field, it MUST appear in the title
 4. Include the affected product or vendor name if one is clearly identified
-5. Use plain English — avoid jargon acronyms unless they are the search term
-6. Do NOT start with "How", "Why", "What", or a number
-7. Do NOT use clickbait or vague phrases
+5. Use plain English — avoid jargon acronyms unless they ARE the search term (e.g. RCE, SQLi are fine)
+6. Do NOT start with "How", "Why", "What", or a bare number (e.g. "1,000...")
+7. Do NOT use clickbait or vague phrases ("No one is talking about", "Here's why", etc.)
+8. KEEP the title if it is already 50-65 chars, starts with a keyword, has no How/Why/What, and contains the CVE if one exists — do not rewrite for minor style preferences
 
 ## SEO Rules for first_look titles
-1. Must start with "First Look: " (12 chars)
-2. Remaining text: 43-58 characters (total 55-70 chars)
-3. MUST include the vendor name (Google, OpenAI, Anthropic, AWS, etc.)
-4. MUST include the product or model name if mentioned
+1. Do NOT use any "First Look:" prefix — the site badge and /categories/first-look/ taxonomy handle that label
+2. Length: 50-65 characters total
+3. MUST include the vendor name (Google, OpenAI, Anthropic, Meta, Microsoft, AWS, NVIDIA, etc.)
+4. MUST include the product or model name if one is mentioned
 5. Use action verbs: Ships, Launches, Releases, Adds, Brings, Opens
 6. Describe what shipped — not the security risk
+7. Do NOT start with "How", "Why", or "What"
+8. KEEP the title if it already satisfies rules 2-7 — even if it currently has a "First Look:" prefix, that alone is not sufficient reason to replace if the rest is good (just strip the prefix in new_title)
+
+## Invented facts rule (critical)
+Do NOT add attack techniques, vulnerability types, CVE IDs, vendor names, product names, statistics, or any other claims that are NOT explicitly present in the summary or tags provided. If you cannot write a strictly better title using only the provided information, set keep=true.
+
+## Content type prefix rule (critical)
+Never add or remove meaning by changing content type framing. If content_type is threat_report, the new title must NOT describe a product launch. If content_type is first_look, the new title must NOT describe an active exploit or breach.
 
 ## Good examples
-- "CVE-2025-59528: Flowise RCE Exploited Across 12,000 Instances"  (threat)
-- "Cursor IDE Prompt Injection Enables Full OS Code Execution"  (threat)
-- "Gemini Used to Mass-Produce Government Phishing Templates"  (threat)
-- "SkillCloak Bypasses AI Agent Skill Scanners at 90% Rate"  (threat)
-- "First Look: Anthropic Ships Claude Code with Terminal Access"  (first_look)
-- "First Look: Google Launches Gemini 2.5 with Agentic File Access"  (first_look)
+- "CVE-2025-59528: Flowise RCE Exploited Across 12,000 Instances"  (threat, 61 chars — keep)
+- "Cursor IDE Prompt Injection Enables Full OS Code Execution"  (threat, 58 chars — keep)
+- "SkillCloak Bypasses AI Agent Skill Scanners at 90% Rate"  (threat, 56 chars — keep)
+- "Anthropic Ships Claude Code with Terminal Access"  (first_look, 48 chars — keep)
+- "Google Launches Gemini 2.5 with Agentic File Access"  (first_look, 52 chars — keep)
 
 ## Article to evaluate
 Content type: {content_type}
@@ -80,7 +88,7 @@ Return a single JSON object with no markdown fences:
   "new_title": "<the improved title — only required when keep=false, otherwise empty string>"
 }}
 
-If keep=false, new_title must strictly follow the rules above. Do NOT change the meaning or accuracy of the article. Do NOT invent facts not present in the summary or tags.
+When keep=false: new_title must be 50-65 characters, use only facts from the summary/tags above, and follow all rules. Verify your character count before returning.
 """
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
