@@ -1,7 +1,7 @@
 ---
 title: "AI Coding Agents Trigger EDR Rules via DPAPI and LOLBAS"
 date: 2026-07-09T06:39:41+00:00
-draft: true
+draft: false
 slug: "ai-coding-agents-trigger-edr-rules-via-dpapi-and-lolbas"
 
 # ── Content metadata ──
