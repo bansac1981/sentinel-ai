@@ -1,5 +1,5 @@
 ---
-title: "Rio de Janeiro's 397B LLM is Undisclosed Qwen/Nex Merge"
+title: "Qwen 3.5-397B Stolen and Rebranded as Rio's Homegrown LLM"
 date: "2026-06-15T08:02:56+00:00"
 draft: false 
 slug: "brazilian-government-llm-exposed-as-unauthorised-merge-of-third-party-models"

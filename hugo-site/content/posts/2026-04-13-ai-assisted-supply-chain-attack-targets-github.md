@@ -1,5 +1,5 @@
 ---
-title: "PRT-scan Campaign Uses AI for GitHub Supply Chain Attacks"
+title: "GitHub Supply Chain Attacks via PRT-scan AI Campaign"
 date: 2026-04-06T21:38:53+00:00
 draft: false
 

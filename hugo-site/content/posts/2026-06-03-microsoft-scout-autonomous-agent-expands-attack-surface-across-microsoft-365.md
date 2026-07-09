@@ -1,5 +1,5 @@
 ---
-title: "Microsoft Scout Agent: Prompt Injection Risks in Microsoft 365"
+title: "Prompt Injection Risks in Microsoft Scout Agent"
 date: "2026-06-04T05:41:41+00:00"
 draft: false 
 slug: "microsoft-scout-autonomous-agent-expands-attack-surface-across-microsoft-365"

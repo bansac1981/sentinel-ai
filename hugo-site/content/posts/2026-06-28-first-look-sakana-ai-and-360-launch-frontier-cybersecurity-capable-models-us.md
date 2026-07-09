@@ -1,5 +1,5 @@
 ---
-title: "Sakana AI and 360 Launch Fugu and Tulongfeng Models"
+title: "Sakana AI and 360 Release Fugu and Tulongfeng Models"
 date: "2026-06-29T03:13:50+00:00"
 draft: false 
 slug: "first-look-sakana-ai-and-360-launch-frontier-cybersecurity-capable-models-us"

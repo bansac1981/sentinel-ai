@@ -1,5 +1,5 @@
 ---
-title: "AI Agent with Excessive Permissions Deletes Production Database"
+title: "Excessive Agency: AI Agent Deletes Production Database"
 date: "2026-04-27T09:39:26+00:00"
 draft: false
 slug: "an-ai-agent-deleted-our-production-database-the-agent-s-confession-is-below"

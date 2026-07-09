@@ -1,5 +1,5 @@
 ---
-title: "DoD AI Supply Chain Risk Across Google, Microsoft, OpenAI"
+title: "ML Supply Chain Compromise in DoD AI Integration"
 date: "2026-05-04T03:28:36+00:00"
 draft: false
 slug: "pentagon-deploys-classified-ai-across-seven-tech-giants-for-warfighter-systems"

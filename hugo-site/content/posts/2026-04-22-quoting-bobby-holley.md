@@ -1,5 +1,5 @@
 ---
-title: "Firefox: Claude Mythos Discovered 271 Vulnerabilities"
+title: "Claude Mythos Discovers 271 Firefox Vulnerabilities"
 date: "2026-04-22T09:52:31+00:00"
 draft: false
 slug: "quoting-bobby-holley"

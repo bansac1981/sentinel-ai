@@ -1,5 +1,5 @@
 ---
-title: "Claude Fable 5 Classifier Bypassed by Prompt Injection"
+title: "Claude Fable 5 Bypassed by Prompt Injection Attack"
 date: "2026-06-11T12:14:45+00:00"
 draft: false 
 slug: "anthropic-s-claude-fable-5-ships-tiered-cyber-safeguards-to-limit-offensive-ai"

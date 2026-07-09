@@ -1,5 +1,5 @@
 ---
-title: "Google Patches Prompt Injection RCE in Agentic AI Tool"
+title: "Google Patches Prompt Injection RCE in AI Agent Tool"
 date: "2026-04-22T02:01:29+00:00"
 draft: false
 slug: "google-fixes-critical-rce-flaw-in-ai-based-antigravity-tool"

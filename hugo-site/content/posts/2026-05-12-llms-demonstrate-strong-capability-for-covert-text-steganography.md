@@ -1,5 +1,5 @@
 ---
-title: "LLM Text Steganography Enables Covert Data Exfiltration"
+title: "Text Steganography in LLMs Enables Covert Data Exfiltration"
 date: "2026-05-12T04:26:49+00:00"
 draft: false
 slug: "llms-demonstrate-strong-capability-for-covert-text-steganography"

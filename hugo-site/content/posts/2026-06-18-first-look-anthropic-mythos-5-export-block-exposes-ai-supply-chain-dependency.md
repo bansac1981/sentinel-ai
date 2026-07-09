@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Mythos 5 and Fable 5 Models Face Export Block"
+title: "Anthropic Releases Mythos 5 and Fable 5 AI Models"
 date: "2026-06-18T04:28:40+00:00"
 draft: false 
 slug: "first-look-anthropic-mythos-5-export-block-exposes-ai-supply-chain-dependency"

@@ -1,5 +1,5 @@
 ---
-title: "TeamPCP Supply Chain Attack: xinference PyPI Poisoned"
+title: "xinference PyPI Package Poisoned in TeamPCP Campaign"
 date: "2026-04-28T05:48:19+00:00"
 draft: false
 slug: "teampcp-supply-chain-campaign-update-008-26-day-pause-ends-with-three-concurrent"

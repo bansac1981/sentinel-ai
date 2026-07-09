@@ -1,5 +1,5 @@
 ---
-title: "Prompt Injection Threats in Agentic AI: SentinelOne Guidance"
+title: "Prompt Injection Threats in Agentic AI Systems"
 date: "2026-05-25T15:42:13+00:00"
 draft: false
 slug: "sentinelone-prompt-security-targets-agentic-ai-trust-verification-gap"

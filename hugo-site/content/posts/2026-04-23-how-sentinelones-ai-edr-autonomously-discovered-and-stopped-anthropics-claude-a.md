@@ -1,5 +1,5 @@
 ---
-title: "Claude Zero-Day Supply Chain Attack Blocked by SentinelOne EDR"
+title: "Claude Supply Chain Attack Blocked by SentinelOne EDR"
 date: "2026-04-23T11:58:53+00:00"
 draft: false
 slug: "how-sentinelones-ai-edr-autonomously-discovered-and-stopped-anthropics-claude-a"

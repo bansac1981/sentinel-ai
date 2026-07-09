@@ -1,5 +1,5 @@
 ---
-title: "Claude-Real-Video: Open-Source Local Video Analysis for LLMs"
+title: "Anthropic Releases Claude-Real-Video for Local Video Analysis"
 date: "2026-07-03T09:31:07+00:00"
 draft: false
 slug: "first-look-open-source-tool-lets-claude-and-any-llm-watch-videos-locally"

@@ -1,5 +1,5 @@
 ---
-title: "Google Vertex AI Over-Privilege Enables Data Exfiltration"
+title: "Over-Privilege in Google Vertex AI Enables Data Exfiltration"
 date: "2026-04-13T14:39:34+00:00"
 draft: false
 

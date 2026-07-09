@@ -1,5 +1,5 @@
 ---
-title: "NanoEuler: Open-Source GPT-2 LLM Built in Pure C/CUDA"
+title: "Open-Source NanoEuler GPT-2 LLM Launches in Pure C/CUDA"
 date: "2026-06-29T14:35:58+00:00"
 draft: false 
 slug: "first-look-justvugg-releases-nanoeuler-gpt-2-scale-llm-built-in-pure-c-cuda"

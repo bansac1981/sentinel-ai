@@ -1,5 +1,5 @@
 ---
-title: "NVIDIA XR AI Embeds Persistent Agents in AR Glasses"
+title: "NVIDIA Launches XR AI for Agentic AR Glasses"
 date: "2026-06-17T04:21:59+00:00"
 draft: false 
 slug: "first-look-nvidia-xr-ai-embeds-persistent-agents-into-physical-world-sensor"

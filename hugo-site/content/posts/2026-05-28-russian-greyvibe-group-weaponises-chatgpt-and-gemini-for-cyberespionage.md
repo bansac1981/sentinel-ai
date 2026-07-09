@@ -1,5 +1,5 @@
 ---
-title: "GreyVibe Uses ChatGPT and Gemini for Ukraine Cyberespionage"
+title: "GreyVibe Weaponizes ChatGPT and Gemini for Ukraine Cyberespionage"
 date: "2026-05-29T00:21:08+00:00"
 draft: false 
 slug: "russian-greyvibe-group-weaponises-chatgpt-and-gemini-for-cyberespionage"

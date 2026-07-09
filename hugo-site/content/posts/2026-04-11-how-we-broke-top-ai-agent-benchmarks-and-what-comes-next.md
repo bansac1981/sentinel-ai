@@ -1,5 +1,5 @@
 ---
-title: "How We Broke Top AI Agent Benchmarks: And What Comes Next"
+title: "AI Agent Benchmarks Exploited via Environmental Manipulation"
 date: 2026-04-11T19:15:56+00:00
 draft: false
 

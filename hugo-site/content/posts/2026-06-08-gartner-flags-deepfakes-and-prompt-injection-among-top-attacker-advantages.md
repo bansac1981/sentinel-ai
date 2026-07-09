@@ -1,5 +1,5 @@
 ---
-title: "Prompt Injection and Deepfakes: Gartner's Top Threats"
+title: "Gartner: Deepfakes and Prompt Injection Top AI Threats"
 date: "2026-06-08T14:05:30+00:00"
 draft: false 
 slug: "gartner-flags-deepfakes-and-prompt-injection-among-top-attacker-advantages"

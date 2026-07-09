@@ -1,5 +1,5 @@
 ---
-title: "LLM Agents: Human Over-Trust in Strategic Game Environments"
+title: "LLM Agents Exploit Human Over-Trust in Strategic Games"
 date: "2026-04-17T03:37:49+00:00"
 draft: false
 slug: "human-trust-of-ai-agents"

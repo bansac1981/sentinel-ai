@@ -1,5 +1,5 @@
 ---
-title: "Robinhood AI Agents Enable Prompt Injection Financial Attacks"
+title: "Robinhood Agentic Trading Enables Prompt Injection Attacks"
 date: "2026-05-31T01:31:37+00:00"
 draft: false 
 slug: "robinhood-mcp-integration-grants-ai-agents-autonomous-financial-trading-powers"

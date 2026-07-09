@@ -1,5 +1,5 @@
 ---
-title: "Axios Supply Chain Attack Impacts OpenAI via Code Signing"
+title: "Supply Chain Attack Compromises OpenAI via Axios Certificate"
 date: "2026-04-14T07:39:02+00:00"
 draft: false
 slug: "openai-impacted-by-north-korea-linked-axios-supply-chain-hack"

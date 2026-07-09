@@ -1,5 +1,5 @@
 ---
-title: "CVE-2026-33579: OpenClaw Privilege Escalation to Admin"
+title: "CVE-2026-33579: OpenClaw Privilege Escalation to Full Admin"
 date: "2026-04-23T11:48:38+00:00"
 draft: false
 slug: "openclaw-gives-users-yet-another-reason-to-be-freaked-out-about-security"

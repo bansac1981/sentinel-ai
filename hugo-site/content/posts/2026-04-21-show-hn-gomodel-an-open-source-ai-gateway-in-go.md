@@ -1,5 +1,5 @@
 ---
-title: "GoModel AI Gateway Supply Chain Attack Vector"
+title: "GoModel AI Gateway Supply Chain Compromise"
 date: "2026-04-21T18:19:00+00:00"
 draft: false
 slug: "show-hn-gomodel-an-open-source-ai-gateway-in-go"

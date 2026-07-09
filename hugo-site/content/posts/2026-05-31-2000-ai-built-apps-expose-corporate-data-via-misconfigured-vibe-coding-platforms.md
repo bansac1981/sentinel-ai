@@ -1,5 +1,5 @@
 ---
-title: "Shadow-Built AI Apps Expose Corporate Data via Misconfiguration"
+title: "Shadow-AI Apps Expose Corporate Data via Misconfiguration"
 date: "2026-05-31T01:44:50+00:00"
 draft: false 
 slug: "2000-ai-built-apps-expose-corporate-data-via-misconfigured-vibe-coding-platforms"

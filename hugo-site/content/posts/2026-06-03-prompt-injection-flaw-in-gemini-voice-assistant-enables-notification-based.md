@@ -1,5 +1,5 @@
 ---
-title: "Google Gemini Voice Assistant Prompt Injection Attack"
+title: "Google Gemini Voice Prompt Injection via Notifications"
 date: "2026-06-04T05:37:37+00:00"
 draft: false 
 slug: "prompt-injection-flaw-in-gemini-voice-assistant-enables-notification-based"

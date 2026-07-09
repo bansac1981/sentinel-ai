@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Identity Sprawl Enables IAM Bypass"
+title: "AI Agent Identity Sprawl Bypasses Enterprise IAM"
 date: "2026-05-22T02:22:18+00:00"
 draft: false 
 slug: "ai-agent-identity-sprawl-creates-new-attack-surface-in-enterprise-iam"

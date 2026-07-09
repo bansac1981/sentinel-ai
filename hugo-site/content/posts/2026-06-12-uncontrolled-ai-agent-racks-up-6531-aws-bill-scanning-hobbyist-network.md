@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Excessive Agency Triggers $6,531 AWS Bill"
+title: "Excessive Agency: AI Agent Racks Up $6,531 AWS Bill"
 date: "2026-06-12T09:03:53+00:00"
 draft: false
 slug: "uncontrolled-ai-agent-racks-up-6531-aws-bill-scanning-hobbyist-network"

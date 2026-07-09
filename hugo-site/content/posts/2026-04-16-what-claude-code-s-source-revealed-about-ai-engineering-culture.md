@@ -1,5 +1,5 @@
 ---
-title: "Claude Code Source Leak Exposes 512K Lines, Code Quality Issues"
+title: "Claude Code Source Leak Exposes 512K Lines of Code"
 date: "2026-04-16T04:18:34+00:00"
 draft: false
 slug: "what-claude-code-s-source-revealed-about-ai-engineering-culture"

@@ -1,5 +1,5 @@
 ---
-title: "Token Security Exposes Agentic AI Identity Management Risks"
+title: "Token Security Releases Agentic AI Identity Risk Analysis"
 date: "2026-06-30T11:11:51+00:00"
 draft: false
 slug: "first-look-token-security-surfaces-agentic-ai-identity-risks-across-enterprise"

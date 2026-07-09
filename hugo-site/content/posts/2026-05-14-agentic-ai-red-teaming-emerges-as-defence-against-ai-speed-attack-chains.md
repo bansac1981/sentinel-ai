@@ -1,5 +1,5 @@
 ---
-title: "Sweet Attack: Agentic AI Red Teaming Platform"
+title: "Agentic AI Red Teaming Threats Target Cloud Security"
 date: "2026-05-14T04:48:10+00:00"
 draft: false
 slug: "agentic-ai-red-teaming-emerges-as-defence-against-ai-speed-attack-chains"

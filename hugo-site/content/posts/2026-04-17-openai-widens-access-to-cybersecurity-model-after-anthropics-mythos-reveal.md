@@ -1,5 +1,5 @@
 ---
-title: "OpenAI GPT-5.4-Cyber Widens Access Amid Dual-Use Risks"
+title: "OpenAI Expands GPT-5.4-Cyber Access Amid Dual-Use Risks"
 date: "2026-04-17T03:39:14+00:00"
 draft: false
 slug: "openai-widens-access-to-cybersecurity-model-after-anthropics-mythos-reveal"

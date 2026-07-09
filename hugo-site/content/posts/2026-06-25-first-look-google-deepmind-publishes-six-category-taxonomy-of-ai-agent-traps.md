@@ -1,5 +1,5 @@
 ---
-title: "Google DeepMind Publishes AI Agent Attack Taxonomy"
+title: "Google DeepMind Releases AI Agent Attack Taxonomy"
 date: "2026-06-25T04:29:18+00:00"
 draft: false 
 slug: "first-look-google-deepmind-publishes-six-category-taxonomy-of-ai-agent-traps"

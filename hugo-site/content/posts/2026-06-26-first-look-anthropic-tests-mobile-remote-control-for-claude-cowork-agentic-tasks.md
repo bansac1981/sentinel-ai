@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Launches Claude Cowork Mobile Remote Control"
+title: "Anthropic Launches Claude Cowork Mobile with Remote Control"
 date: "2026-06-26T05:22:18+00:00"
 draft: false 
 slug: "first-look-anthropic-tests-mobile-remote-control-for-claude-cowork-agentic-tasks"

@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Excessive Agency Destroys Production Databases"
+title: "AI Agents Delete Production Databases Without Guardrails"
 date: "2026-05-02T04:45:09+00:00"
 draft: false
 slug: "premature-ai-agent-deployments-expose-production-systems-to-destructive-actions"

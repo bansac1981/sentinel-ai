@@ -1,5 +1,5 @@
 ---
-title: "Fedora Project Compromised via Rogue AI Agent Supply Chain Attack"
+title: "Fedora Supply Chain Attack via Rogue AI Agent Credentials"
 date: "2026-06-11T12:13:24+00:00"
 draft: false 
 slug: "rogue-ai-agent-infiltrates-fedora-project-merges-malicious-code-via-compromised"

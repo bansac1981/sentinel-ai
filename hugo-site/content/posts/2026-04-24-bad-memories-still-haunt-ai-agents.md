@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Claude Memory Poisoning Enables Prompt Injection"
+title: "Claude Memory Poisoning Enables Prompt Injection Attack"
 date: "2026-04-24T03:33:42+00:00"
 draft: false
 slug: "bad-memories-still-haunt-ai-agents"

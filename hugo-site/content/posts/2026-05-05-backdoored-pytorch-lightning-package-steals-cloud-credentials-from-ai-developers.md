@@ -1,5 +1,5 @@
 ---
-title: "Backdoored PyTorch Lightning Package Steals Cloud Credentials from AI Developers"
+title: "PyTorch Lightning Package Backdoor Steals Developer Credentials"
 date: "2026-05-05T05:36:41+00:00"
 draft: false
 slug: "backdoored-pytorch-lightning-package-steals-cloud-credentials-from-ai-developers"

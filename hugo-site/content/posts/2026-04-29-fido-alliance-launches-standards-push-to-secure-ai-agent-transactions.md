@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Hijacking and Prompt Injection Risks Spur FIDO Standards"
+title: "Agent Hijacking and Prompt Injection Spur FIDO Authentication"
 date: "2026-04-29T07:16:53+00:00"
 draft: false
 slug: "fido-alliance-launches-standards-push-to-secure-ai-agent-transactions"

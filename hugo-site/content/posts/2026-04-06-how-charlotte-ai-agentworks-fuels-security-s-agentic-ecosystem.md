@@ -1,5 +1,5 @@
 ---
-title: "CrowdStrike Charlotte AI Enables Excessive Agency Risk"
+title: "CrowdStrike Charlotte AI Excessive Agency in Agents"
 date: 2026-04-06T16:52:49+00:00
 draft: false
 

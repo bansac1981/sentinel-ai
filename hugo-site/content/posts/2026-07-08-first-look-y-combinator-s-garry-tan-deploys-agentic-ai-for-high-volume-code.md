@@ -1,5 +1,5 @@
 ---
-title: "Y Combinator's Garry Tan Deploys Agentic Code Generation"
+title: "Y Combinator Ships Agentic Code Generation at 37K Lines Daily"
 date: "2026-07-08T12:06:51+00:00"
 draft: false
 slug: "first-look-y-combinator-s-garry-tan-deploys-agentic-ai-for-high-volume-code"

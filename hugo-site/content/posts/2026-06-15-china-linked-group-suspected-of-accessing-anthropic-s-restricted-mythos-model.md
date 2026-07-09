@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Mythos Model Stolen by China-Linked Group"
+title: "Anthropic Mythos Model Theft Linked to China Nation-State"
 date: "2026-06-16T16:07:11+00:00"
 draft: false 
 slug: "china-linked-group-suspected-of-accessing-anthropic-s-restricted-mythos-model"

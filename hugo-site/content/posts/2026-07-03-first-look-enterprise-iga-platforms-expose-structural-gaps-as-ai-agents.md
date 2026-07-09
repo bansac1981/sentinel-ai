@@ -1,5 +1,5 @@
 ---
-title: "IGA Platforms Struggle to Govern AI Agents as Principals"
+title: "Enterprise IGA Platforms Add AI Agent Governance Support"
 date: "2026-07-03T09:30:12+00:00"
 draft: false
 slug: "first-look-enterprise-iga-platforms-expose-structural-gaps-as-ai-agents"

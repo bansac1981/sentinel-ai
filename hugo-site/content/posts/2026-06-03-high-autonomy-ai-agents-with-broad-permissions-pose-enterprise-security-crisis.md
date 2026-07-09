@@ -1,5 +1,5 @@
 ---
-title: "AI Agents With Excessive Permissions Enable Enterprise Breaches"
+title: "Excessive Agency in AI Agents Enables Enterprise Breaches"
 date: "2026-06-04T05:40:36+00:00"
 draft: false 
 slug: "high-autonomy-ai-agents-with-broad-permissions-pose-enterprise-security-crisis"

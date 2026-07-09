@@ -1,5 +1,5 @@
 ---
-title: "Claude Opus 4.6 Resists 6,000 Prompt Injection Attempts"
+title: "Claude Opus 4.6 Prompt Injection: Email-Based Attack Surface"
 date: "2026-06-27T03:57:24+00:00"
 draft: false 
 slug: "6000-prompt-injection-attempts-fail-against-frontier-model-but-risks-remain"

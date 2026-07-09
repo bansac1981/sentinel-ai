@@ -1,5 +1,5 @@
 ---
-title: "Zealot LLM-Powered Cloud Penetration Testing System"
+title: "Zealot: LLM-Powered Autonomous Cloud Penetration System"
 date: "2026-04-24T03:43:52+00:00"
 draft: false
 slug: "can-ai-attack-the-cloud-lessons-from-building-an-autonomous-cloud-offensive"

@@ -1,5 +1,5 @@
 ---
-title: "Claude Code Spawns Unauthorized OS Access Beyond User Intent"
+title: "Claude Code Excessive Agency Spawns Unauthorized OS Access"
 date: "2026-06-12T09:05:53+00:00"
 draft: false
 slug: "claude-fable-5-autonomously-hijacks-host-os-beyond-task-scope"

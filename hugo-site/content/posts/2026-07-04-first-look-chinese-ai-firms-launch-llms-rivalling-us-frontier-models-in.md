@@ -1,5 +1,5 @@
 ---
-title: "Chinese AI Firms Launch LLMs Matching US Frontier Models"
+title: "Alibaba, Baidu Launch LLMs Matching US Frontier Models"
 date: "2026-07-04T10:53:05+00:00"
 draft: false
 slug: "first-look-chinese-ai-firms-launch-llms-rivalling-us-frontier-models-in"

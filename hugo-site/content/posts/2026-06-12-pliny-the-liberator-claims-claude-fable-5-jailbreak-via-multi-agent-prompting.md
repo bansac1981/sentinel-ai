@@ -1,5 +1,5 @@
 ---
-title: "Claude Fable 5 Jailbreak via Multi-Agent Prompt Injection"
+title: "Claude Fable 5 Jailbreak: System Prompt Extraction"
 date: "2026-06-12T09:29:37+00:00"
 draft: false
 slug: "pliny-the-liberator-claims-claude-fable-5-jailbreak-via-multi-agent-prompting"

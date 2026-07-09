@@ -1,5 +1,5 @@
 ---
-title: "Claude Users Hit by Malicious npm Supply Chain Attack"
+title: "mouse5212-super-formatter npm Package Steals Claude User Files"
 date: "2026-05-29T10:10:53+00:00"
 draft: false 
 slug: "malicious-npm-package-targets-claude-ai-users-via-supply-chain-attack"

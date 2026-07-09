@@ -1,5 +1,5 @@
 ---
-title: "Anthropic's Mythos-Class Claude Fable 5 Ships With Cybersecurity Fallback Guardrails"
+title: "Claude Fable 5 Jailbreak Resistance Through Fallback Mechanism"
 date: "2026-06-10T13:21:39+00:00"
 draft: false 
 slug: "anthropic-s-mythos-class-claude-fable-5-ships-with-cybersecurity-fallback"

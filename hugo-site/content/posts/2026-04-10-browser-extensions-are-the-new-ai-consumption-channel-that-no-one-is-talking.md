@@ -1,5 +1,5 @@
 ---
-title: "AI Browser Extensions Pose Enterprise Data Exfiltration Risk"
+title: "LayerX: AI Extensions 60% Riskier Than Standard Browser Tools"
 date: 2026-04-10T11:00:00+00:00
 draft: false
 

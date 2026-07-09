@@ -1,5 +1,5 @@
 ---
-title: "Token Security Launches AI Agent Identity Governance"
+title: "Token Security Launches AI Agent Identity Platform"
 date: "2026-06-20T04:35:56+00:00"
 draft: false 
 slug: "first-look-token-security-launches-ai-agent-identity-governance-platform-for"

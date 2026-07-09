@@ -1,5 +1,5 @@
 ---
-title: "ClaudeBleed: Claude Chrome Extension Prompt Injection"
+title: "ClaudeBleed: Claude Extension Agent Takeover via Injection"
 date: "2026-05-09T04:08:41+00:00"
 draft: false
 slug: "claudebleed-flaw-lets-rogue-chrome-extensions-hijack-ai-agent"

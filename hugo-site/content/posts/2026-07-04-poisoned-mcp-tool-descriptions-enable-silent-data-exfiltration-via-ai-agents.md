@@ -1,5 +1,5 @@
 ---
-title: "MCP Tool Poisoning Enables Silent Data Exfiltration"
+title: "Microsoft Copilot MCP Tool Poisoning Enables Data Exfiltration"
 date: "2026-07-04T10:50:50+00:00"
 draft: false 
 slug: "poisoned-mcp-tool-descriptions-enable-silent-data-exfiltration-via-ai-agents"

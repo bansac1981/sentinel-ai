@@ -1,5 +1,5 @@
 ---
-title: "CVE-2026-44112: OpenClaw Sandbox Escape Chain RCE"
+title: "CVE-2026-44112: OpenClaw Chain RCE and Privilege Escalation"
 date: "2026-05-15T21:24:57+00:00"
 draft: false 
 slug: "four-openclaw-flaws-chain-together-for-full-ai-agent-compromise"

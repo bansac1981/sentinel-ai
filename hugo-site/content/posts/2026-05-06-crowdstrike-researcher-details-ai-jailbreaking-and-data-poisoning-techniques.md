@@ -1,5 +1,5 @@
 ---
-title: "CrowdStrike: LLM Jailbreaking and Data Poisoning Techniques"
+title: "LLM Jailbreaking and Data Poisoning Bypass AI Guardrails"
 date: "2026-05-06T04:15:58+00:00"
 draft: false
 slug: "crowdstrike-researcher-details-ai-jailbreaking-and-data-poisoning-techniques"

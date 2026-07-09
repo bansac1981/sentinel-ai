@@ -1,5 +1,5 @@
 ---
-title: "Agentic AI Validation Gaps Create Repeatability Security Risks"
+title: "Agentic AI Systems Bypass Security Validation Frameworks"
 date: "2026-04-16T04:44:10+00:00"
 draft: false
 slug: "deterministic-agentic-ai-the-architecture-exposure-validation-requires"

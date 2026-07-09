@@ -1,5 +1,5 @@
 ---
-title: "Claude Mythos Autonomous Exploit Generation Threat"
+title: "Claude Mythos Autonomous Exploit Generation Risk"
 date: "2026-04-20T15:26:24+00:00"
 draft: false
 slug: "on-anthropics-mythos-preview-and-project-glasswing"

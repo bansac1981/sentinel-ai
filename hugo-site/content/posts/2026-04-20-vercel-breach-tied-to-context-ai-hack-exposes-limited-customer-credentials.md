@@ -1,5 +1,5 @@
 ---
-title: "Vercel Breach: Context.ai OAuth Token Hijack Exposes Credentials"
+title: "Context.ai OAuth Token Hijack Exposes Vercel Credentials"
 date: "2026-04-20T18:32:20+00:00"
 draft: false
 slug: "vercel-breach-tied-to-context-ai-hack-exposes-limited-customer-credentials"

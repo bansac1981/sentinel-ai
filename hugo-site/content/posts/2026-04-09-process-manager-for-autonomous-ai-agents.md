@@ -1,5 +1,5 @@
 ---
-title: "botctl Process Manager Enables Prompt Injection in AI Agents"
+title: "botctl Process Manager Enables Prompt Injection Attacks"
 date: 2026-04-09T06:00:55+00:00
 draft: false
 

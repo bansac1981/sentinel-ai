@@ -1,5 +1,5 @@
 ---
-title: "Claude Fable 5 Jailbreak Triggers US Export Control Suspension"
+title: "Claude Fable 5 Jailbreak Triggers US Export Control Ban"
 date: "2026-06-13T06:50:16+00:00"
 draft: false 
 slug: "us-government-forces-anthropic-to-suspend-claude-fable-5-over-jailbreak-concerns"

@@ -1,5 +1,5 @@
 ---
-title: "New CrowdStrike Innovations Secure AI Agents and Govern Shadow AI Across Endpoints, SaaS, and Cloud"
+title: "CrowdStrike Releases Charlotte AI for Shadow AI Governance"
 date: 2026-04-06T16:52:49+00:00
 draft: false
 

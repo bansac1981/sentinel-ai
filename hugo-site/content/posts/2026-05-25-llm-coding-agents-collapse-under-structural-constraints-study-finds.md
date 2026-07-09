@@ -1,5 +1,5 @@
 ---
-title: "LLM Code Agents Fail Under Structural Constraints"
+title: "Constraint Decay: LLM Code Agents Fail at Scale"
 date: "2026-05-25T15:42:13+00:00"
 draft: false 
 slug: "llm-coding-agents-collapse-under-structural-constraints-study-finds"
