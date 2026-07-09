@@ -1,5 +1,5 @@
 ---
-title: "Zero-Day Vulnerability Discovery via AI Multi-Agent System"
+title: "Qihoo 360 AI System Discovers 1,000 Vulnerabilities"
 date: "2026-04-24T03:14:26+00:00"
 draft: false
 slug: "chinese-cybersecurity-firms-ai-hacking-claims-draw-comparisons-to-claude-mythos"

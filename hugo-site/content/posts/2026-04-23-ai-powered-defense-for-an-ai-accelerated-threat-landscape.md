@@ -1,5 +1,5 @@
 ---
-title: "Microsoft: AI Models Autonomously Chain Exploits"
+title: "Microsoft: AI Models Chain Exploits Autonomously"
 date: "2026-04-23T12:12:12+00:00"
 draft: false
 slug: "ai-powered-defense-for-an-ai-accelerated-threat-landscape"

@@ -1,5 +1,5 @@
 ---
-title: "Statewright Framework Restricts AI Agent Tool Access"
+title: "Excessive Agency in AI Agents: Tool Access Control Gaps"
 date: "2026-05-13T08:26:56+00:00"
 draft: false
 slug: "state-machine-guardrails-proposed-to-rein-in-uncontrolled-ai-agent-tool-access"

@@ -1,5 +1,5 @@
 ---
-title: "Mindgard Uncovers ChatGPT Image Generation Content Filter Bypass"
+title: "OpenAI's ChatGPT Image Generation Fails Content Moderation"
 date: "2026-06-22T05:19:54+00:00"
 draft: false 
 slug: "first-look-openai-chatgpt-image-generator-bypasses-content-filters-via-viral"

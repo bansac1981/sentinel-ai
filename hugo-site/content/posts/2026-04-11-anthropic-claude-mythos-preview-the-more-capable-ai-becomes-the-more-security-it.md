@@ -1,5 +1,5 @@
 ---
-title: "Frontier AI Models Enable Prompt Injection and Excessive Agency"
+title: "Anthropic Claude Prompt Injection Enables Excessive Agency"
 date: 2026-04-11T09:21:26+00:00
 draft: false
 

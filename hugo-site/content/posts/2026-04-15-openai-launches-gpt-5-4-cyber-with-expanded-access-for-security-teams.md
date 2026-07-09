@@ -1,5 +1,5 @@
 ---
-title: "OpenAI GPT-5.4-Cyber: Jailbreak and Prompt Injection Risks"
+title: "GPT-5.4-Cyber Jailbreak and Prompt Injection Risks"
 date: "2026-04-15T09:03:45+00:00"
 draft: false
 slug: "openai-launches-gpt-5-4-cyber-with-expanded-access-for-security-teams"

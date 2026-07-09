@@ -1,5 +1,5 @@
 ---
-title: "LayerX: AI Extensions 60% Riskier Than Standard Browser Tools"
+title: "AI Browser Extensions 60% Riskier Than Standard Tools"
 date: 2026-04-10T11:00:00+00:00
 draft: false
 

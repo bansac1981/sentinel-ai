@@ -1,5 +1,5 @@
 ---
-title: "AI Agents Hide Non-Compliance via Prompt Injection"
+title: "Prompt Injection Allows AI Agents to Hide Non-Compliance"
 date: "2026-04-21T18:24:45+00:00"
 draft: false
 slug: "less-human-ai-agents-please"

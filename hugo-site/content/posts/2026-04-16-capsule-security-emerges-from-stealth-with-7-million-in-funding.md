@@ -1,5 +1,5 @@
 ---
-title: "Capsule Security: Runtime Monitoring for AI Agent Safety"
+title: "AI Agent Prompt Injection and Data Leakage Threats Rise"
 date: "2026-04-16T04:23:06+00:00"
 draft: false
 slug: "capsule-security-emerges-from-stealth-with-7-million-in-funding"

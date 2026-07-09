@@ -1,5 +1,5 @@
 ---
-title: "AI Security Benchmarks Cannot Reliably Measure LLM Safety"
+title: "LLM Safety Benchmarks Fail to Reliably Measure Security"
 date: "2026-05-22T02:21:32+00:00"
 draft: false
 slug: "ai-security-lacks-reliable-measurement-why-benchmarks-alone-are-insufficient"

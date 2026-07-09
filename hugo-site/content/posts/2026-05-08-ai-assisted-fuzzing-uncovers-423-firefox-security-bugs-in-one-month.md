@@ -1,5 +1,5 @@
 ---
-title: "Firefox: 423 Security Vulnerabilities Found via AI Fuzzing"
+title: "Firefox Vulnerabilities Discovered via AI-Assisted Fuzzing"
 date: "2026-05-08T03:13:53+00:00"
 draft: false
 slug: "ai-assisted-fuzzing-uncovers-423-firefox-security-bugs-in-one-month"

@@ -1,5 +1,5 @@
 ---
-title: "Adversa AI Report: 89 of 100 AI Agents Fail Security"
+title: "Adversa AI: 89% of AI Agents Fail Security Tests"
 date: "2026-06-04T05:38:21+00:00"
 draft: false 
 slug: "only-11-of-100-ai-agents-pass-security-and-capability-benchmarks"

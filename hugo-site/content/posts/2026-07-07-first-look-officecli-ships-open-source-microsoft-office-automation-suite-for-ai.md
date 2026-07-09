@@ -1,5 +1,5 @@
 ---
-title: "OfficeCLI Enables AI Agents to Automate Microsoft Office Files"
+title: "OfficeCLI Brings Microsoft Office Automation to AI Agents"
 date: "2026-07-07T07:40:52+00:00"
 draft: false
 slug: "first-look-officecli-ships-open-source-microsoft-office-automation-suite-for-ai"

@@ -1,5 +1,5 @@
 ---
-title: "Role Confusion Attack Bypasses LLM Safety at 61%"
+title: "LLM Role Confusion Attack Bypasses Safety at 61%"
 date: "2026-06-23T04:35:39+00:00"
 draft: false 
 slug: "role-confusion-attack-lets-injected-text-override-llm-safety-controls"

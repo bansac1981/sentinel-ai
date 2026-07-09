@@ -1,5 +1,5 @@
 ---
-title: "10,000+ Open-Source Flaws Discovered by Anthropic Claude"
+title: "CVE-2026-5194: Anthropic Claude Discovers 10,000+ Flaws"
 date: "2026-05-25T15:43:34+00:00"
 draft: false
 slug: "anthropic-s-claude-mythos-autonomously-uncovers-10000-critical-software-flaws"

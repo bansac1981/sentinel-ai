@@ -1,5 +1,5 @@
 ---
-title: "Agentic AI Security Platforms Enable Autonomous Response"
+title: "Enterprise Security Platforms Ship Autonomous Threat Response"
 date: "2026-06-21T09:05:17+00:00"
 draft: false 
 slug: "first-look-agentic-ai-security-platforms-emerge-promising-autonomous-ctem"

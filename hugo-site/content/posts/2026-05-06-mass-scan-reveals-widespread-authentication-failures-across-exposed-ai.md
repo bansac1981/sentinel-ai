@@ -1,5 +1,5 @@
 ---
-title: "Flowise and n8n: Auth Bypass in Million-Service Exposure"
+title: "Flowise and n8n: Auth Bypass in Exposed LLM Services"
 date: "2026-05-06T04:15:21+00:00"
 draft: false
 slug: "mass-scan-reveals-widespread-authentication-failures-across-exposed-ai"

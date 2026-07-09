@@ -1,5 +1,5 @@
 ---
-title: "AI Agents Bypass IAM Visibility, Escalate Privileges Silently"
+title: "AI Agent Privilege Escalation Bypasses IAM Visibility"
 date: "2026-05-07T03:56:03+00:00"
 draft: false
 slug: "unmanaged-ai-agents-expose-enterprise-identity-perimeters-to-silent-compromise"

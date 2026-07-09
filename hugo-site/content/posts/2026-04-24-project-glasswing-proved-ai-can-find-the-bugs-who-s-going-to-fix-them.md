@@ -1,5 +1,5 @@
 ---
-title: "Anthropic's Mythos AI Achieves 72% Autonomous Exploit Success"
+title: "Anthropic Mythos AI Achieves 72% Autonomous Exploit Success"
 date: "2026-04-24T02:57:23+00:00"
 draft: false
 slug: "project-glasswing-proved-ai-can-find-the-bugs-who-s-going-to-fix-them"

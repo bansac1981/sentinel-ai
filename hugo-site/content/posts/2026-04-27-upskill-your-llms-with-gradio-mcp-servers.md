@@ -1,5 +1,5 @@
 ---
-title: "Gradio MCP Server Supply Chain Risk Exposes AI Agents"
+title: "Supply Chain Risk: Gradio MCP Server Exposes AI Agents"
 date: "2026-04-27T09:54:03+00:00"
 draft: false
 slug: "upskill-your-llms-with-gradio-mcp-servers"

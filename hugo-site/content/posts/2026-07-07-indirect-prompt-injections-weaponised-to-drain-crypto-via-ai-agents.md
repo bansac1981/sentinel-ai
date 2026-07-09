@@ -1,5 +1,5 @@
 ---
-title: "Prompt Injection Attacks Target AI Agent Crypto Wallets"
+title: "Prompt Injection Attacks Manipulate AI Crypto Agents"
 date: "2026-07-07T07:39:12+00:00"
 draft: false
 slug: "indirect-prompt-injections-weaponised-to-drain-crypto-via-ai-agents"

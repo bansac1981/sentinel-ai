@@ -1,5 +1,5 @@
 ---
-title: "Denial-of-Service Loop: AI Code Review Agents Cost $41K"
+title: "AI Code Review Agents: DoS Loop Costs $41K in Inference"
 date: "2026-06-27T04:08:34+00:00"
 draft: false 
 slug: "runaway-ai-code-review-agents-burn-41k-in-adversarial-disagreement-loop"

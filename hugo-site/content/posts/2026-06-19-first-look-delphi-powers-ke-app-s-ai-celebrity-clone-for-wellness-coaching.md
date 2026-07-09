@@ -1,5 +1,5 @@
 ---
-title: "Delphi Launches AI Karamo Brown Celebrity Clone for K\u0113 Wellness"
+title: "Delphi Ships AI Karamo Brown Clone for K\u0113 Wellness App"
 date: "2026-06-19T07:57:43+00:00"
 draft: false 
 slug: "first-look-delphi-powers-ke-app-s-ai-celebrity-clone-for-wellness-coaching"

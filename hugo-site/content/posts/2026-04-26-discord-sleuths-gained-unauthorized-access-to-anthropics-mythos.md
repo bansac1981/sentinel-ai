@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Mythos Exposed via Unauthorized Access Chain"
+title: "Anthropic Mythos Preview Breached via Contractor Credentials"
 date: "2026-04-26T12:22:46+00:00"
 draft: false
 slug: "discord-sleuths-gained-unauthorized-access-to-anthropics-mythos"

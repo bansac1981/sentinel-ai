@@ -1,5 +1,5 @@
 ---
-title: "AWS Launches Amazon Bedrock AgentCore Payments"
+title: "AWS Launches Bedrock AgentCore for Autonomous Payments"
 date: "2026-06-23T04:32:37+00:00"
 draft: false 
 slug: "first-look-aws-launches-amazon-bedrock-agentcore-payments-enabling-autonomous"

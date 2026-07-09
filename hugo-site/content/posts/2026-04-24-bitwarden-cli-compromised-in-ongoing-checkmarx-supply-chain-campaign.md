@@ -1,5 +1,5 @@
 ---
-title: "Supply Chain Attack: Bitwarden CLI npm Package Steals Secrets"
+title: "Bitwarden CLI npm Package Supply Chain Attack Steals Secrets"
 date: "2026-04-24T03:40:25+00:00"
 draft: false
 slug: "bitwarden-cli-compromised-in-ongoing-checkmarx-supply-chain-campaign"

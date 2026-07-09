@@ -1,5 +1,5 @@
 ---
-title: "SQLite Prohibits Agentic AI Code Contributions"
+title: "SQLite Blocks AI-Generated Code Contributions"
 date: "2026-05-29T00:17:23+00:00"
 draft: false 
 slug: "sqlite-bans-agentic-code-submissions-as-ai-bug-report-floods-begin"

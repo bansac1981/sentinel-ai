@@ -1,5 +1,5 @@
 ---
-title: "Claude Fable 5 Jailbreak: Dual-Use AI Security Risk"
+title: "Anthropic Releases Claude Fable 5 with Jailbreak Resistance"
 date: "2026-06-13T06:49:01+00:00"
 draft: false 
 slug: "claude-fable-5-launch-sparks-warnings-over-ai-orchestrated-cyberattacks"

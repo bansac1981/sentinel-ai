@@ -1,5 +1,5 @@
 ---
-title: "Repository Poisoning RCE in Claude, Cursor, Gemini"
+title: "TrustFall: Repository Poisoning RCE in AI Coding Tools"
 date: "2026-05-08T03:10:50+00:00"
 draft: false
 slug: "malicious-repos-trigger-silent-code-execution-in-claude-cursor-gemini-clis"

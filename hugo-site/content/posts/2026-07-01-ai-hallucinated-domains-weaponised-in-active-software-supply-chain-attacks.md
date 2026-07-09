@@ -1,5 +1,5 @@
 ---
-title: "Phantom Squatting: LLM Hallucinations Enable Supply Chain Attacks"
+title: "Phantom Squatting: LLM Hallucinations in Supply Chain"
 date: "2026-07-01T05:45:29+00:00"
 draft: false 
 slug: "ai-hallucinated-domains-weaponised-in-active-software-supply-chain-attacks"

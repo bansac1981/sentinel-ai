@@ -1,5 +1,5 @@
 ---
-title: "Microsoft 365 Copilot Prompt Injection Detection Playbook"
+title: "Microsoft 365 Copilot Prompt Injection Threats in Enterprise"
 date: "2026-06-10T12:06:48+00:00"
 draft: false 
 slug: "microsoft-publishes-investigator-playbook-for-ai-telemetry-and-incident"

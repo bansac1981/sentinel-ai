@@ -1,5 +1,5 @@
 ---
-title: "Claude Opus 4.7 Used to Discover Critical API Flaw in Major Ticketing Platform"
+title: "Claude Opus Discovers API Flaw Enabling Ticket Fraud"
 date: "2026-07-03T09:28:45+00:00"
 draft: false
 slug: "claude-opus-4-7-used-to-discover-critical-api-flaw-in-major-ticketing-platform"

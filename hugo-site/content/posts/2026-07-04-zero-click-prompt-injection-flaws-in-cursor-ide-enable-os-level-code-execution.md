@@ -1,5 +1,5 @@
 ---
-title: "DuneSlide: Cursor IDE Zero-Click Prompt Injection RCE"
+title: "Cursor IDE DuneSlide Zero-Click Prompt Injection RCE"
 date: "2026-07-04T10:47:24+00:00"
 draft: false 
 slug: "zero-click-prompt-injection-flaws-in-cursor-ide-enable-os-level-code-execution"

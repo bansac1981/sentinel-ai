@@ -1,5 +1,5 @@
 ---
-title: "AI Adversaries Exploit Zero-Days Faster Than SOC Response"
+title: "Anthropic Model Exploits Zero-Days Faster Than SOC Response"
 date: "2026-04-14T09:40:03+00:00"
 draft: false
 slug: "your-mttd-looks-great-your-post-alert-gap-doesn-t"

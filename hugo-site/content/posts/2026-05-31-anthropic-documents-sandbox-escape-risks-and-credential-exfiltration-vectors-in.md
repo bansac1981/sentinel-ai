@@ -1,5 +1,5 @@
 ---
-title: "Claude Credential Exfiltration via Sandbox Escape"
+title: "Claude Sandbox Escape Enables Credential Exfiltration"
 date: "2026-05-31T01:34:23+00:00"
 draft: false 
 slug: "anthropic-documents-sandbox-escape-risks-and-credential-exfiltration-vectors-in"

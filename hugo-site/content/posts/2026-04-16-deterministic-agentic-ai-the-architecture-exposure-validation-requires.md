@@ -1,5 +1,5 @@
 ---
-title: "Agentic AI Systems Bypass Security Validation Frameworks"
+title: "Agentic AI Excessive Agency Bypasses Security Testing"
 date: "2026-04-16T04:44:10+00:00"
 draft: false
 slug: "deterministic-agentic-ai-the-architecture-exposure-validation-requires"

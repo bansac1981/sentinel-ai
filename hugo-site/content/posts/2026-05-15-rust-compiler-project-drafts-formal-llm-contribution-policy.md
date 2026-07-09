@@ -1,5 +1,5 @@
 ---
-title: "Rust Compiler Formalizes LLM Supply Chain Code Policy"
+title: "Rust Compiler Tightens LLM Code Policy for Supply Chain"
 date: "2026-05-15T21:18:40+00:00"
 draft: false 
 slug: "rust-compiler-project-drafts-formal-llm-contribution-policy"

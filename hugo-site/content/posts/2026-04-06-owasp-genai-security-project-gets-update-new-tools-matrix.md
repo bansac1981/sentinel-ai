@@ -1,5 +1,5 @@
 ---
-title: "OWASP Identifies 21 GenAI Security Risks in Updated LLM Framework"
+title: "GenAI Security Risks: OWASP Updates LLM Top 10 Framework"
 date: "2026-04-14T08:18:19+00:00"
 draft: false
 

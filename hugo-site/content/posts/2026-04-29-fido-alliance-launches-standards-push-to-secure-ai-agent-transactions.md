@@ -1,5 +1,5 @@
 ---
-title: "Agent Hijacking and Prompt Injection Spur FIDO Authentication"
+title: "Agent Hijacking and Prompt Injection Threaten AI Payments"
 date: "2026-04-29T07:16:53+00:00"
 draft: false
 slug: "fido-alliance-launches-standards-push-to-secure-ai-agent-transactions"

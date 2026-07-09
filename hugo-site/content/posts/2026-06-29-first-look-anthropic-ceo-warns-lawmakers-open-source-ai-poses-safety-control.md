@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Releases Claude with Enhanced Safety Guardrails"
+title: "Anthropic CEO: Open-Source AI Models Pose Systemic Safety Risk"
 date: "2026-06-29T14:00:53+00:00"
 draft: false 
 slug: "first-look-anthropic-ceo-warns-lawmakers-open-source-ai-poses-safety-control"

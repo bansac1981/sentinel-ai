@@ -1,5 +1,5 @@
 ---
-title: "CrowdStrike Charlotte AI Excessive Agency in Agents"
+title: "CrowdStrike Charlotte AI Vulnerable to Prompt Injection"
 date: 2026-04-06T16:52:49+00:00
 draft: false
 

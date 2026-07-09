@@ -1,5 +1,5 @@
 ---
-title: "Enterprise IGA Platforms Add AI Agent Governance Support"
+title: "IGA Platforms Add AI Agent Governance and Access Control"
 date: "2026-07-03T09:30:12+00:00"
 draft: false
 slug: "first-look-enterprise-iga-platforms-expose-structural-gaps-as-ai-agents"

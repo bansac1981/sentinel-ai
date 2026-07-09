@@ -1,5 +1,5 @@
 ---
-title: "Deno Claw Patrol Blocks Excessive Agency in AI Agents"
+title: "Excessive Agency in Deno AI Agents Demands Security Controls"
 date: "2026-06-12T09:19:10+00:00"
 draft: false
 slug: "deno-releases-open-source-security-firewall-to-gate-ai-agent-actions"

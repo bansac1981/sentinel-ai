@@ -1,5 +1,5 @@
 ---
-title: "Gemini Prompt Injection Powers Mass Smishing Campaign"
+title: "Google Gemini Prompt Injection Powers Smishing Campaign"
 date: "2026-06-13T06:49:38+00:00"
 draft: false 
 slug: "gemini-ai-weaponised-by-chinese-phaas-network-in-mass-smishing-campaign"

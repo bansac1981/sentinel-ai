@@ -1,5 +1,5 @@
 ---
-title: "Amazon Q VS Code Extension: Cloud Credential Theft via MCP"
+title: "Amazon Q Extension Credential Theft via MCP Injection"
 date: "2026-07-05T15:12:50+00:00"
 draft: false 
 slug: "amazon-q-vs-code-extension-flaw-enables-cloud-credential-theft-via-mcp"

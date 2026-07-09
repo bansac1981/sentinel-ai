@@ -1,5 +1,5 @@
 ---
-title: "Claude Code MCP OAuth Token Theft via npm Supply Chain"
+title: "Claude Code OAuth Token Theft via npm Supply Chain"
 date: "2026-05-08T03:04:52+00:00"
 draft: false
 slug: "mcp-hijack-attack-steals-claude-code-oauth-tokens-via-silent-man-in-the-middle"

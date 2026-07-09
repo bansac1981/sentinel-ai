@@ -1,5 +1,5 @@
 ---
-title: "Threat Actors Adopt AI Tools Across 160+ Cybercrime Forums"
+title: "LLM Jailbreak Adoption Surges Across 160+ Cybercrime Forums"
 date: "2026-04-14T16:52:07+00:00"
 draft: false
 slug: "how-hackers-are-thinking-about-ai"

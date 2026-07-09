@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Infrastructure Security Gaps Drive M&A Wave"
+title: "Cisco, Check Point M&A Targets AI Agent Identity Gaps"
 date: "2026-06-08T14:06:27+00:00"
 draft: false 
 slug: "ai-security-m-a-surge-agentic-identity-llm-evaluation-and-browser-control"

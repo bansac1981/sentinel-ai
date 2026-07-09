@@ -1,5 +1,5 @@
 ---
-title: "Claude 4.7 Prompt Injection Risk from Agentic Tool Expansion"
+title: "Prompt Injection Risk: Claude 4.7 Agentic Tool Expansion"
 date: "2026-04-20T18:36:24+00:00"
 draft: false
 slug: "changes-in-the-system-prompt-between-claude-opus-4-6-and-4-7"

@@ -1,5 +1,5 @@
 ---
-title: "AI Agents Vulnerable to Prompt Injection via Honeypot Blindness"
+title: "Cisco AI Agents Vulnerable to Prompt Injection Honeypots"
 date: "2026-04-30T05:34:41+00:00"
 draft: false
 slug: "ai-powered-honeypots-expose-blind-spots-in-automated-malicious-ai-agents"

@@ -1,5 +1,5 @@
 ---
-title: "Prompt Injection: Claude Code and Codex Execution Attack"
+title: "Prompt Injection Attacks Claude Code and Codex Execution"
 date: "2026-07-09T07:05:14+00:00"
 draft: false 
 slug: "friendly-fire-claude-code-and-codex-run-attacker-code-via-readme"

@@ -1,5 +1,5 @@
 ---
-title: "Midjourney Medical Launches AI Ultrasound Scanner Hardware"
+title: "Midjourney Medical Releases Full-Body AI Ultrasound Scanner"
 date: "2026-06-18T04:22:14+00:00"
 draft: false 
 slug: "first-look-midjourney-medical-launches-ai-powered-full-body-ultrasound-scanner"

@@ -1,5 +1,5 @@
 ---
-title: "Model Extraction Attacks Surge in Q4 2025: Google GTIG"
+title: "Model Extraction Attacks Surge: Google GTIG Q4 Report"
 date: "2026-04-26T12:09:12+00:00"
 draft: false
 slug: "gtig-ai-threat-tracker-distillation-experimentation-and-continued-integration-of"

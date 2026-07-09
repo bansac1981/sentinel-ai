@@ -1,5 +1,5 @@
 ---
-title: "RAMPART Harness Tests AI Agents for Prompt Injection"
+title: "Microsoft RAMPART Tests AI Agents for Prompt Injection"
 date: "2026-05-22T02:18:06+00:00"
 draft: false
 slug: "microsoft-open-sources-rampart-and-clarity-to-harden-ai-agent-security"

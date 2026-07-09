@@ -1,5 +1,5 @@
 ---
-title: "CI/CD Poisoning: Cordyceps Campaign Targets Open Source"
+title: "Cordyceps Campaign Poisons CI/CD Workflows in Open Source"
 date: "2026-06-24T04:27:38+00:00"
 draft: false 
 slug: "malicious-pull-requests-compromise-ai-and-developer-toolchains-via-ci-cd-flaws"

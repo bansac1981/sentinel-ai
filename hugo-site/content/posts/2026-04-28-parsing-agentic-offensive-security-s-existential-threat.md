@@ -1,5 +1,5 @@
 ---
-title: "Agentic LLMs Enable Industrialised Cyberattacks at Scale"
+title: "Frontier LLMs Enable Industrialised Cyberattacks at Scale"
 date: "2026-04-28T05:49:58+00:00"
 draft: false
 slug: "parsing-agentic-offensive-security-s-existential-threat"

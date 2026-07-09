@@ -1,5 +1,5 @@
 ---
-title: "Malicious AI Skill Bypasses Cisco and NVIDIA Scanners"
+title: "Anthropic Enhances AI Agent Skill Scanner Security"
 date: "2026-06-24T04:24:31+00:00"
 draft: false 
 slug: "first-look-cisco-and-nvidia-ai-agent-skill-scanners-bypassed-by-fake-marketplace"

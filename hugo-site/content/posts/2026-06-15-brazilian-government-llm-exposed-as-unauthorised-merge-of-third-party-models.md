@@ -1,5 +1,5 @@
 ---
-title: "Qwen 3.5-397B Stolen and Rebranded as Rio's Homegrown LLM"
+title: "Qwen 3.5-397B Model Theft: Rio's LLM Exposed as Rebranded Clone"
 date: "2026-06-15T08:02:56+00:00"
 draft: false 
 slug: "brazilian-government-llm-exposed-as-unauthorised-merge-of-third-party-models"

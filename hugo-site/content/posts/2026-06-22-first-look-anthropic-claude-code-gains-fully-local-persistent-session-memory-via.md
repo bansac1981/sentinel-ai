@@ -1,5 +1,5 @@
 ---
-title: "Anthropic Launches Recall: Claude Code Local Memory Layer"
+title: "Anthropic Launches Claude Code with Local Memory Layer"
 date: "2026-06-22T05:12:25+00:00"
 draft: false 
 slug: "first-look-anthropic-claude-code-gains-fully-local-persistent-session-memory-via"

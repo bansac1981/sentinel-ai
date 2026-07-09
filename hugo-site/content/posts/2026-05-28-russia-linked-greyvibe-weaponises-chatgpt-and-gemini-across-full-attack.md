@@ -1,5 +1,5 @@
 ---
-title: "GreyVibe Uses ChatGPT and Gemini in LLM-Powered Attack Chain"
+title: "GreyVibe Deploys ChatGPT and Gemini in LLM Attack Chain"
 date: "2026-05-29T10:09:20+00:00"
 draft: false 
 slug: "russia-linked-greyvibe-weaponises-chatgpt-and-gemini-across-full-attack"

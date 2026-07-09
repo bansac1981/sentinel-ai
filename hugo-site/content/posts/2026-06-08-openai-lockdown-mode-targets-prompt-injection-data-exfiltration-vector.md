@@ -1,5 +1,5 @@
 ---
-title: "ChatGPT Prompt Injection Data Exfiltration Threat Blocked"
+title: "ChatGPT Prompt Injection Enables Data Exfiltration"
 date: "2026-06-08T14:04:03+00:00"
 draft: false 
 slug: "openai-lockdown-mode-targets-prompt-injection-data-exfiltration-vector"

@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Benchmarks Exploited via Environmental Manipulation"
+title: "SWE-bench, WebArena Exploited via Environmental Manipulation"
 date: 2026-04-11T19:15:56+00:00
 draft: false
 

@@ -1,5 +1,5 @@
 ---
-title: "Claude Code and Cursor Trigger EDR via DPAPI Abuse"
+title: "DPAPI Abuse in Claude Code and Cursor Triggers EDR"
 date: "2026-07-09T06:48:39+00:00"
 draft: false
 slug: "ai-coding-agents-trigger-edr-rules-via-dpapi-and-lolbas"
