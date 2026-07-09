@@ -159,13 +159,19 @@ def evaluate_title(fields: dict, client: Anthropic, log: logging.Logger) -> dict
     try:
         response = client.messages.create(
             model=RETITLE_MODEL,
-            max_tokens=256,
+            max_tokens=384,
             messages=[{"role": "user", "content": prompt}],
         )
         raw = response.content[0].text.strip()
         raw = re.sub(r"^```(?:json)?\s*", "", raw)
         raw = re.sub(r"\s*```$", "", raw)
-        return json.loads(raw)
+        # Extract only the first complete JSON object — Claude sometimes appends
+        # extra reasoning text after the closing brace which breaks json.loads()
+        match = re.search(r'\{.*?\}', raw, re.DOTALL)
+        if not match:
+            log.error(f"  No JSON object found in response | raw: {raw[:200]}")
+            return None
+        return json.loads(match.group(0))
     except json.JSONDecodeError as e:
         log.error(f"  Invalid JSON from Claude: {e} | raw: {raw[:200]}")
         return None
@@ -221,10 +227,13 @@ def run(args: argparse.Namespace, log: logging.Logger) -> None:
             if not new_title:
                 log.warning("  Claude said replace but gave no new_title — skipping")
                 stats["skipped"] += 1
+            elif len(new_title) > 65:
+                log.warning(f"  REJECTED — new_title is {len(new_title)} chars (>65): {new_title}")
+                stats["skipped"] += 1
             else:
                 log.info(f"  REPLACE — {result.get('reason', '')}")
                 log.info(f"    OLD: {fields['title']}")
-                log.info(f"    NEW: {new_title}")
+                log.info(f"    NEW: {new_title} ({len(new_title)} chars)")
                 if args.apply:
                     ok = replace_title_in_file(path, new_title)
                     if ok:
