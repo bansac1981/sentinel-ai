@@ -227,6 +227,9 @@ def run(args: argparse.Namespace, log: logging.Logger) -> None:
             if not new_title:
                 log.warning("  Claude said replace but gave no new_title — skipping")
                 stats["skipped"] += 1
+            elif len(new_title) < 40:
+                log.warning(f"  REJECTED — new_title is {len(new_title)} chars (<40): {new_title}")
+                stats["skipped"] += 1
             elif len(new_title) > 65:
                 log.warning(f"  REJECTED — new_title is {len(new_title)} chars (>65): {new_title}")
                 stats["skipped"] += 1
