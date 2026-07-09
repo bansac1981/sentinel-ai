@@ -56,7 +56,8 @@ Evaluate the CURRENT TITLE against these rules, then decide whether to keep or r
 5. Use action verbs: Ships, Launches, Releases, Adds, Brings, Opens
 6. Describe what shipped — not the security risk
 7. Do NOT start with "How", "Why", or "What"
-8. KEEP the title if it already satisfies rules 2-7 — even if it currently has a "First Look:" prefix, that alone is not sufficient reason to replace if the rest is good (just strip the prefix in new_title)
+8. If the current title starts with "First Look:" — set keep=false and write new_title as the title with that prefix stripped (and any leading space removed). Do this even if everything else is perfect. The prefix must never appear in new_title.
+9. KEEP the title (keep=true) only if it satisfies rules 1-7 AND does NOT start with "First Look:"
 
 ## Invented facts rule (critical)
 Do NOT add attack techniques, vulnerability types, CVE IDs, vendor names, product names, statistics, or any other claims that are NOT explicitly present in the summary or tags provided. If you cannot write a strictly better title using only the provided information, set keep=true.
@@ -218,6 +219,14 @@ def run(args: argparse.Namespace, log: logging.Logger) -> None:
             stats["errors"] += 1
             time.sleep(1.0)
             continue
+
+        # Safety net: if Claude kept a first_look title that still has the
+        # "First Look:" prefix, force a replace using the stripped title.
+        current_title = fields.get("title", "")
+        if result.get("keep") and current_title.startswith("First Look:"):
+            stripped = current_title[len("First Look:"):].strip()
+            log.warning(f"  FORCE REPLACE — 'First Look:' prefix not stripped by Claude")
+            result = {"keep": False, "reason": "First Look: prefix must be removed", "new_title": stripped}
 
         if result.get("keep"):
             log.info(f"  KEEP  — {result.get('reason', '')}")
