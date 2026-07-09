@@ -1,7 +1,7 @@
 ---
 title: "GhostApproval: Symlink Flaw Hits Six AI Coding Agents"
 date: "2026-07-09T07:05:14+00:00"
-draft: false
+draft: false 
 slug: "ghostapproval-symlink-flaw-hits-six-ai-coding-agents"
 
 # ── Content metadata ──
