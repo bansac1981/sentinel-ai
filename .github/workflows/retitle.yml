@@ -81,7 +81,7 @@ jobs:
           fi
 
           CHANGED=$(git diff --staged --name-only | grep "\.md$" | wc -l | tr -d ' ')
-          git commit -m "seo: retitle ${CHANGED} article(s) for keyword optimisation [skip ci]"
+          git commit -m "seo: retitle ${CHANGED} article(s) for keyword optimisation"
           git pull --rebase origin main
           git push
           echo "✓ Committed $CHANGED retitled article(s)."
