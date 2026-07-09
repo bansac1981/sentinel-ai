@@ -1,0 +1,86 @@
+name: "Grid the Grey — SEO Title Backfill"
+
+# ─────────────────────────────────────────────
+# Triggers
+# ─────────────────────────────────────────────
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "Apply changes — write new titles to disk (default: dry run only)"
+        type: boolean
+        required: false
+        default: false
+      limit:
+        description: "Process at most N articles (0 = all)"
+        required: false
+        default: "0"
+
+# ─────────────────────────────────────────────
+# Permissions
+# ─────────────────────────────────────────────
+permissions:
+  contents: write
+
+# ─────────────────────────────────────────────
+# Job
+# ─────────────────────────────────────────────
+jobs:
+  retitle:
+    name: "Evaluate → Retitle → Commit"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run SEO title backfill
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUGO_POSTS_DIR: "hugo-site/content/posts"
+          RETITLE_MODEL: "claude-haiku-4-5-20251001"
+        run: |
+          ARGS="--verbose"
+
+          if [ "${{ github.event.inputs.apply }}" = "true" ]; then
+            ARGS="$ARGS --apply"
+          fi
+
+          LIMIT="${{ github.event.inputs.limit }}"
+          if [ -n "$LIMIT" ] && [ "$LIMIT" != "0" ]; then
+            ARGS="$ARGS --limit $LIMIT"
+          fi
+
+          echo "Running: python retitle_articles.py $ARGS"
+          python retitle_articles.py $ARGS
+
+      - name: Commit retitled articles
+        if: ${{ github.event.inputs.apply == 'true' }}
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+
+          git add hugo-site/content/posts/
+
+          if git diff --staged --quiet; then
+            echo "No titles changed — all articles already SEO-optimised."
+            exit 0
+          fi
+
+          CHANGED=$(git diff --staged --name-only | grep "\.md$" | wc -l | tr -d ' ')
+          git commit -m "seo: retitle ${CHANGED} article(s) for keyword optimisation [skip ci]"
+          git push
+          echo "✓ Committed $CHANGED retitled article(s)."
