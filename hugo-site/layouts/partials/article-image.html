@@ -6,7 +6,7 @@
     2 = HEX CASCADE    — columns of falling hex characters (data-rain)
 */}}
 
-{{ $thumb := .Params.thumbnail }}
+{{ $thumb := .Params.thumbnail_card | default .Params.thumbnail }}
 {{ $title := .Title }}
 {{ $cat   := "AI Security" }}
 {{ if .Params.categories }}{{ $cat = index .Params.categories 0 | title }}{{ end }}
