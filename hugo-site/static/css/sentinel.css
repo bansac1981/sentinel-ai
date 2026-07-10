@@ -2818,6 +2818,15 @@ blockquote {
   color: var(--first-look-color);
 }
 
+.tldr-box--deep-signal {
+  border-left-color: var(--deep-signal-color);
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--deep-signal-bg) 100%);
+}
+
+.tldr-box--deep-signal .tldr-box__label {
+  color: var(--deep-signal-color);
+}
+
 /* ── Attack Vectors Panel ── */
 .attack-vectors-panel {
   margin: var(--space-lg) 0;

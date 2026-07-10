@@ -2,11 +2,16 @@
    Content-type-aware: adapts labels for First Look vs Threat Report.
    MITRE/OWASP shown in the framework panel below — not repeated here.
 ── */}}
-{{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
+{{ $isFirstLook  := eq (.Params.content_type | default "threat_report") "first_look" }}
+{{ $isDeepSignal := eq (.Params.content_type | default "") "deep_signal" }}
 {{ if or .Params.tldr_what .Params.summary }}
-<div class="tldr-box {{ if $isFirstLook }}tldr-box--first-look{{ end }}">
+<div class="tldr-box {{ if $isFirstLook }}tldr-box--first-look{{ else if $isDeepSignal }}tldr-box--deep-signal{{ end }}">
   <div class="tldr-box__header">
-    <span class="tldr-box__label">{{ if $isFirstLook }}ATTACK SURFACE BRIEF{{ else }}TL;DR{{ end }}</span>
+    <span class="tldr-box__label">
+      {{- if $isDeepSignal }}ANALYSIS BRIEF
+      {{- else if $isFirstLook }}ATTACK SURFACE BRIEF
+      {{- else }}TL;DR{{ end -}}
+    </span>
     {{ if .Params.threat_level }}
     <span class="threat-badge threat-badge--{{ lower .Params.threat_level }}">{{ .Params.threat_level }}</span>
     {{ end }}
@@ -18,18 +23,30 @@
   <ul class="tldr-list">
 
     <li>
-      <strong>{{ if $isFirstLook }}What shipped:{{ else }}What happened:{{ end }}</strong> {{ with .Params.tldr_what }}{{ . }}{{ else }}{{ .Params.summary }}{{ end }}
+      <strong>
+        {{- if $isDeepSignal }}What this covers:
+        {{- else if $isFirstLook }}What shipped:
+        {{- else }}What happened:{{ end -}}
+      </strong> {{ with .Params.tldr_what }}{{ . }}{{ else }}{{ .Params.summary }}{{ end }}
     </li>
 
     {{ with .Params.tldr_who_at_risk }}
     <li>
-      <strong>{{ if $isFirstLook }}Who's now exposed:{{ else }}Who's at risk:{{ end }}</strong> {{ . }}
+      <strong>
+        {{- if $isDeepSignal }}Who it's for:
+        {{- else if $isFirstLook }}Who's now exposed:
+        {{- else }}Who's at risk:{{ end -}}
+      </strong> {{ . }}
     </li>
     {{ end }}
 
     {{ if .Params.tldr_actions }}
     <li>
-      <strong>{{ if $isFirstLook }}Assess now:{{ else }}Act now:{{ end }}</strong> {{ range $i, $a := .Params.tldr_actions }}{{ if $i }} &middot; {{ end }}{{ $a }}{{ end }}
+      <strong>
+        {{- if $isDeepSignal }}Key takeaways:
+        {{- else if $isFirstLook }}Assess now:
+        {{- else }}Act now:{{ end -}}
+      </strong> {{ range $i, $a := .Params.tldr_actions }}{{ if $i }} &middot; {{ end }}{{ $a }}{{ end }}
     </li>
     {{ end }}
 
