@@ -84,7 +84,3 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
     name = "Categories"
     url = "/categories/"
     weight = 6
-  [[menu.main]]
-    name = "Newsletter"
-    url = "https://preview.mailerlite.io/forms/2303110/186108792273896900/share"
-    weight = 7
