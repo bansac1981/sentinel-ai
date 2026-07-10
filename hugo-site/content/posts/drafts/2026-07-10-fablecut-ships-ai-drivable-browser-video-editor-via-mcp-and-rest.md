@@ -1,7 +1,7 @@
 ---
 title: "FableCut Ships AI-Drivable Browser Video Editor via MCP and REST"
 date: 2026-07-10T03:46:00+00:00
-draft: true
+draft: false
 slug: "fablecut-ships-ai-drivable-browser-video-editor-via-mcp-and-rest"
 
 # ── Content metadata ──
