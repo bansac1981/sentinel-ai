@@ -1,5 +1,26 @@
-{{/* ── WEEKLY BRIEFING PODCAST PLAYER ── */}}
-{{ partial "podcast-player.html" . }}
+{{/* ── DEEP SIGNAL: ORIGINAL ANALYSIS ── */}}
+{{ $dsPages := where .Site.RegularPages "Params.content_type" "deep_signal" }}
+{{ $dsPages = first 3 $dsPages }}
+{{ if $dsPages }}
+<div class="sidebar-widget sidebar-widget--deep-signal">
+  <div class="widget-header">
+    <span class="widget-header__icon" style="color:var(--deep-signal-color)">◈</span>
+    <span class="widget-header__title">DEEP SIGNAL</span>
+    <a href="/deep-signal/" class="widget-header__more">ALL →</a>
+  </div>
+  <ul class="ds-sidebar-list">
+    {{ range $dsPages }}
+    <li class="ds-sidebar-list__item">
+      <a href="{{ .RelPermalink }}" class="ds-sidebar-list__link">
+        <span class="ds-sidebar-list__label">ANALYSIS</span>
+        <span class="ds-sidebar-list__title">{{ .Title | truncate 65 }}</span>
+        <time class="ds-sidebar-list__date">{{ .Date.Format "Jan 02, 2006" }}</time>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
 
 {{/* ── THREAT RADAR ── */}}
 {{ if .Site.Params.enableThreatRadar }}

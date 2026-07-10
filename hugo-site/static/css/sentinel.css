@@ -40,6 +40,11 @@
   --first-look-border:  rgba(6, 182, 212, 0.25);
   --first-look-glow:    rgba(6, 182, 212, 0.06);
 
+  --deep-signal-color:  #a78bfa;
+  --deep-signal-bg:     rgba(167, 139, 250, 0.08);
+  --deep-signal-border: rgba(167, 139, 250, 0.30);
+  --deep-signal-glow:   rgba(167, 139, 250, 0.05);
+
   /* Typography */
   --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
   --font-serif:   'Source Serif 4', Georgia, serif;
@@ -2926,5 +2931,275 @@ blockquote {
   letter-spacing: 0.05em;
   margin-top: 2px;
   display: block;
+}
+
+/* ============================================================
+   DEEP SIGNAL — Original Analysis Section
+   ============================================================ */
+
+/* ── Badge ── */
+.badge--deep-signal {
+  background: var(--deep-signal-bg);
+  color: var(--deep-signal-color);
+  border: 1px solid var(--deep-signal-border);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Post card variant in main feed ── */
+.post-card--deep-signal {
+  border-left: 3px solid var(--deep-signal-color);
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(167, 139, 250, 0.04) 100%);
+  box-shadow: 0 0 0 1px var(--deep-signal-border), 0 4px 20px var(--deep-signal-glow);
+}
+
+.post-card--deep-signal:hover {
+  background: linear-gradient(135deg, var(--bg-card-hover) 0%, rgba(167, 139, 250, 0.08) 100%);
+  box-shadow: 0 0 0 1px var(--deep-signal-color), 0 6px 28px rgba(167, 139, 250, 0.12);
+}
+
+.post-card--deep-signal .post-card__title--h a {
+  color: var(--text-primary);
+}
+
+.post-card--deep-signal .post-card__title--h a:hover {
+  color: var(--deep-signal-color);
+}
+
+/* ── Sidebar widget ── */
+.sidebar-widget--deep-signal {
+  border-left: 2px solid var(--deep-signal-color);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+}
+
+.sidebar-widget--deep-signal .widget-header__title {
+  color: var(--deep-signal-color);
+}
+
+.widget-header__more {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color var(--transition);
+}
+
+.widget-header__more:hover {
+  color: var(--deep-signal-color);
+}
+
+.ds-sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-sidebar-list__item {
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 10px 0;
+}
+
+.ds-sidebar-list__item:last-child {
+  border-bottom: none;
+}
+
+.ds-sidebar-list__link {
+  text-decoration: none;
+  display: block;
+}
+
+.ds-sidebar-list__label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--deep-signal-color);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.ds-sidebar-list__title {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  display: block;
+  line-height: 1.4;
+}
+
+.ds-sidebar-list__link:hover .ds-sidebar-list__title {
+  color: var(--deep-signal-color);
+}
+
+.ds-sidebar-list__date {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+}
+
+/* ── Section index page ── */
+.ds-section-header {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-xl);
+}
+
+.ds-section-header__eyebrow {
+  margin-bottom: var(--space-sm);
+}
+
+.ds-section-header__title {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm);
+  line-height: 1.15;
+}
+
+.ds-section-header__sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ds-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-2xl);
+}
+
+.ds-read-more {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--deep-signal-color);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: opacity var(--transition);
+}
+
+.ds-read-more:hover {
+  opacity: 0.75;
+}
+
+/* ── Full-width single article layout ── */
+.site-body--fullwidth .layout-wrapper {
+  display: block;
+}
+
+.ds-layout-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.ds-main {
+  width: 100%;
+}
+
+.ds-article {
+  padding: var(--space-xl) 0 var(--space-2xl);
+}
+
+.ds-article__header {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+}
+
+.ds-article__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.ds-article__title {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md);
+  font-weight: 700;
+}
+
+.ds-article__deck {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-md);
+  font-family: var(--font-sans);
+}
+
+.ds-article__byline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.ds-article__author {
+  color: var(--deep-signal-color);
+}
+
+.ds-article__reading-time {
+  color: var(--text-muted);
+}
+
+.ds-article__body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+}
+
+.ds-article__footer {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.ds-article__back {
+  margin-top: var(--space-lg);
+}
+
+.ds-back-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color var(--transition);
+}
+
+.ds-back-link:hover {
+  color: var(--deep-signal-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ds-article__title {
+    font-size: 1.7rem;
+  }
+  .ds-section-header__title {
+    font-size: 1.7rem;
+  }
+  .ds-layout-wrapper {
+    padding: 0 var(--space-md);
+  }
 }
 

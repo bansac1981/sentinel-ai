@@ -1,0 +1,38 @@
+{{ define "main" }}
+
+<section class="ds-section-header">
+  <div class="ds-section-header__eyebrow">
+    <span class="badge badge--deep-signal">DEEP SIGNAL</span>
+  </div>
+  <h1 class="ds-section-header__title">Original Analysis</h1>
+  <p class="ds-section-header__sub">In-depth practitioner research on AI security tools, threats, and operational practice — written by Grid the Grey Editorial.</p>
+</section>
+
+<section class="ds-list-section">
+  {{ range .Pages }}
+  <article class="post-card post-card--h post-card--deep-signal">
+    <div class="post-card__body--h">
+      <div class="post-card__meta-line">
+        <span class="badge badge--deep-signal badge--sm">DEEP SIGNAL</span>
+        {{ if .Params.categories }}
+          {{ range .Params.categories }}
+          <a href="/categories/{{ . | urlize }}/" class="article-category">{{ . }}</a>
+          {{ end }}
+        {{ end }}
+        <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+      </div>
+      <h2 class="post-card__title--h">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      {{ if .Params.description }}
+      <p class="post-card__summary--h">{{ .Params.description }}</p>
+      {{ else }}
+      <p class="post-card__summary--h">{{ .Summary | truncate 250 }}</p>
+      {{ end }}
+      <a href="{{ .RelPermalink }}" class="ds-read-more">Read analysis →</a>
+    </div>
+  </article>
+  {{ end }}
+</section>
+
+{{ end }}

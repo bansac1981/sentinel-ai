@@ -42,26 +42,32 @@
     <h3 class="date-group__heading">{{ .Key }}</h3>
     <div class="posts-list">
       {{ range .Pages }}
-      <article class="post-card post-card--h {{ if eq (.Params.content_type | default "threat_report") "first_look" }}post-card--first-look{{ end }}">
+      {{ $isDeepSignal := eq (.Params.content_type | default "") "deep_signal" }}
+      {{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
+      <article class="post-card post-card--h {{ if $isDeepSignal }}post-card--deep-signal{{ else if $isFirstLook }}post-card--first-look{{ end }}">
+        {{ if not $isDeepSignal }}
         <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
           {{ partial "article-image.html" . }}
         </a>
+        {{ end }}
         <div class="post-card__body--h">
           <h3 class="post-card__title--h">
             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           </h3>
           <div class="post-card__meta-line">
-            {{ if eq (.Params.content_type | default "threat_report") "first_look" }}
+            {{ if $isDeepSignal }}
+            <span class="badge badge--deep-signal badge--sm">DEEP SIGNAL</span>
+            {{ else if $isFirstLook }}
             <span class="badge badge--first-look badge--sm">FIRST LOOK</span>
             {{ end }}
-            {{ partial "framework-badges.html" . }}
-            {{ if .Params.relevance_score }}
+            {{ if not $isDeepSignal }}{{ partial "framework-badges.html" . }}{{ end }}
+            {{ if and (not $isDeepSignal) .Params.relevance_score }}
             <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">▲ {{ printf "%.1f" .Params.relevance_score }}</span>
             {{ end }}
-            {{ if .Params.source }}<span class="post-card__source">{{ .Params.source }}</span>{{ end }}
+            {{ if and (not $isDeepSignal) .Params.source }}<span class="post-card__source">{{ .Params.source }}</span>{{ end }}
             <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
           </div>
-          <p class="post-card__summary--h">{{ .Params.summary | default (.Summary | truncate 200) }}</p>
+          <p class="post-card__summary--h">{{ .Params.description | default (.Params.summary | default (.Summary | truncate 200)) }}</p>
         </div>
       </article>
       {{ end }}

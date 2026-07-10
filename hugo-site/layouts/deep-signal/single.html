@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" class="dark">
+<head>
+  {{ partial "meta.html" . }}
+</head>
+<body class="site-body site-body--fullwidth">
+
+  {{- if .Site.Params.enableTicker }}
+  {{ partial "ticker.html" . }}
+  {{- end }}
+
+  {{ partial "header.html" . }}
+
+  <div class="ds-layout-wrapper">
+    <main class="ds-main" role="main">
+      <article class="ds-article" itemscope itemtype="https://schema.org/Article">
+
+        {{/* ── ARTICLE HEADER ── */}}
+        <header class="ds-article__header">
+          <div class="ds-article__meta">
+            <span class="badge badge--deep-signal">DEEP SIGNAL</span>
+            {{ if .Params.categories }}
+              {{ range .Params.categories }}
+              <a href="/categories/{{ . | urlize }}/" class="article-category">{{ . }}</a>
+              {{ end }}
+            {{ end }}
+            <time class="article-date" datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">
+              {{ .Date.Format "January 02, 2006" }}
+            </time>
+          </div>
+
+          <h1 class="ds-article__title" itemprop="headline">{{ .Title }}</h1>
+
+          {{ if .Params.description }}
+          <p class="ds-article__deck">{{ .Params.description }}</p>
+          {{ end }}
+
+          <div class="ds-article__byline">
+            <span class="ds-article__author" itemprop="author">
+              {{ .Params.author | default "Grid the Grey Editorial" }}
+            </span>
+            {{ if .Params.reading_time }}
+            <span class="ds-article__reading-time">{{ .Params.reading_time }} min read</span>
+            {{ end }}
+          </div>
+        </header>
+
+        {{/* ── ARTICLE BODY ── */}}
+        <div class="ds-article__body article-body" itemprop="articleBody">
+          {{ .Content }}
+        </div>
+
+        {{/* ── SUBSCRIBE CTA ── */}}
+        {{ partial "article-subscribe.html" . }}
+
+        {{/* ── ARTICLE FOOTER ── */}}
+        <footer class="ds-article__footer article-footer">
+          {{ if .Params.tags }}
+          <div class="article-tags">
+            <span class="article-tags__label">Tags:</span>
+            {{ range .Params.tags }}
+            <a href="/tags/{{ . | urlize }}/" class="tag-chip">{{ . }}</a>
+            {{ end }}
+          </div>
+          {{ end }}
+
+          <div class="article-share">
+            <span class="article-share__label">Share:</span>
+            <a href="https://twitter.com/intent/tweet?text={{ .Title | urlize }}&url={{ .Permalink | urlize }}"
+               target="_blank" rel="noopener" class="share-btn share-btn--twitter">Twitter</a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlize }}"
+               target="_blank" rel="noopener" class="share-btn share-btn--linkedin">LinkedIn</a>
+          </div>
+
+          <div class="article-nav">
+            {{ with .PrevInSection }}
+            <a href="{{ .RelPermalink }}" class="article-nav__link article-nav__link--prev">
+              <span class="article-nav__dir">← Previous</span>
+              <span class="article-nav__title">{{ .Title | truncate 60 }}</span>
+            </a>
+            {{ end }}
+            {{ with .NextInSection }}
+            <a href="{{ .RelPermalink }}" class="article-nav__link article-nav__link--next">
+              <span class="article-nav__dir">Next →</span>
+              <span class="article-nav__title">{{ .Title | truncate 60 }}</span>
+            </a>
+            {{ end }}
+          </div>
+
+          <div class="ds-article__back">
+            <a href="/deep-signal/" class="ds-back-link">← Back to Deep Signal</a>
+          </div>
+        </footer>
+
+      </article>
+    </main>
+  </div>
+
+  {{ partial "footer.html" . }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>
