@@ -6,6 +6,7 @@ content_type: "deep_signal"
 author: "Grid the Grey Editorial"
 description: "A practitioner's guide to deploying Claude Code in security operations — threat intelligence automation, compliance gap analysis, token management, and enterprise hardening."
 reading_time: 18
+thumbnail: "/img/deep-signal-claude-code-playbook.svg"
 tldr_what: "A hands-on guide to deploying Claude Code — Anthropic's agentic CLI — in security operations. Covers two worked use cases (daily CVE triage automation and ISO 27001 compliance gap analysis), token optimisation for long sessions, and a full enterprise hardening checklist including managed settings, hook-based audit trails, and data residency options."
 tldr_who_at_risk: "SOC analysts, security engineers, and GRC teams evaluating AI-assisted tooling for operational security work. Also relevant to security architects and CISOs assessing deployment risk and data handling requirements before organisation-wide rollout."
 tldr_actions:

@@ -35,6 +35,13 @@
   {{/* ── TL;DR BOX ── */}}
   {{ partial "tldr.html" . }}
 
+  {{/* ── HERO IMAGE ── */}}
+  {{ if .Params.thumbnail }}
+  <div class="ds-article__hero">
+    <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" class="ds-article__hero-img">
+  </div>
+  {{ end }}
+
   {{/* ── ARTICLE BODY ── */}}
   <div class="ds-article__body article-body" itemprop="articleBody">
     {{ .Content }}

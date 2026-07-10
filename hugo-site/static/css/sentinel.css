@@ -3129,6 +3129,20 @@ blockquote {
   opacity: 0.75;
 }
 
+/* ── Hero image in Deep Signal articles ── */
+.ds-article__hero {
+  margin: 0 0 var(--space-xl);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.ds-article__hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ── Mermaid diagrams in Deep Signal articles ── */
 .ds-article__body .mermaid {
   background: var(--bg-card);
