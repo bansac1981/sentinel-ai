@@ -25,11 +25,6 @@
   </div>
 </section>
 
-{{/* ── MOBILE-ONLY PODCAST PLAYER (hidden on desktop via CSS) ── */}}
-<div class="mobile-podcast-wrap">
-  {{ partial "podcast-player.html" . }}
-</div>
-
 {{/* ── DEEP SIGNAL PINNED FEATURE ── */}}
 {{ $latestDS := where .Site.RegularPages "Params.content_type" "deep_signal" }}
 {{ $latestDS = first 1 $latestDS }}

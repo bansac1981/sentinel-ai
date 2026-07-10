@@ -6,6 +6,12 @@ content_type: "deep_signal"
 author: "Grid the Grey Editorial"
 description: "A practitioner's guide to deploying Claude Code in security operations — threat intelligence automation, compliance gap analysis, token management, and enterprise hardening."
 reading_time: 18
+tldr_what: "Claude Code is an agentic CLI that orchestrates shell commands, file operations, and external APIs from a terminal — a qualitatively different tool from browser-based AI assistants. Security teams can use it for CVE triage automation, compliance gap analysis, and CI/CD security gates."
+tldr_who_at_risk: "Security teams running Claude Code on consumer-tier accounts (Free, Pro, Max) risk exposing incident data and compliance evidence to Anthropic's training pipeline. Commercial tier (Team/Enterprise/API) is required for any real security work."
+tldr_actions:
+  - "Enforce commercial tier via MDM-deployed managed-settings.json with forceLoginOrgUUID"
+  - "Set allowManagedHooksOnly and allowManagedMcpServersOnly to true before any analyst deployment"
+  - "Start with manual permission mode — never use auto mode on sessions with production system access"
 categories:
   - "AI Security Tools"
   - "Security Operations"
