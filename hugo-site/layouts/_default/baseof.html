@@ -68,7 +68,6 @@
   </div>
 
   <script>
-  /* Subscribe modal — loaded last so DOM is fully ready */
   (function() {
     var modal    = document.getElementById('subscribeModal');
     var backdrop = document.getElementById('subscribeModalBackdrop');
@@ -78,13 +77,13 @@
     var success  = document.getElementById('subscribeModalSuccess');
 
     function openModal() {
+      modal.style.display = 'flex';
       modal.setAttribute('aria-hidden', 'false');
-      modal.classList.add('subscribe-modal--open');
       document.documentElement.style.overflow = 'hidden';
     }
 
     function closeModal() {
-      modal.classList.remove('subscribe-modal--open');
+      modal.style.display = 'none';
       modal.setAttribute('aria-hidden', 'true');
       document.documentElement.style.overflow = '';
     }
@@ -102,12 +101,21 @@
       }, 800);
     });
 
-    /* Delegate clicks from any [data-subscribe-modal] trigger on the page */
+    function isTrigger(el) {
+      while (el && el !== document.body) {
+        if (el.hasAttribute && el.hasAttribute('data-subscribe-modal')) return true;
+        el = el.parentNode;
+      }
+      return false;
+    }
+
     document.addEventListener('click', function(e) {
-      if (e.target.closest('[data-subscribe-modal]')) openModal();
+      if (isTrigger(e.target)) openModal();
+    });
+    document.addEventListener('touchend', function(e) {
+      if (isTrigger(e.target)) { e.preventDefault(); openModal(); }
     });
 
-    /* Also keep window.gtgOpenSubscribeModal for any remaining inline calls */
     window.gtgOpenSubscribeModal = openModal;
   })();
   </script>

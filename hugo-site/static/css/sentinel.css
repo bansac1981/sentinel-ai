@@ -3239,9 +3239,7 @@ blockquote {
   box-sizing: border-box;
 }
 
-.subscribe-modal--open {
-  display: flex;
-}
+/* display toggled directly via JS style.display for mobile reliability */
 
 .subscribe-modal__backdrop {
   position: fixed;
