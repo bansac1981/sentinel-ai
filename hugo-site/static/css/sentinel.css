@@ -2998,12 +2998,12 @@ blockquote {
 .ds-sidebar-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: var(--space-sm) 0;
 }
 
 .ds-sidebar-list__item {
   border-bottom: 1px solid var(--border-subtle);
-  padding: 10px 0;
+  padding: var(--space-sm) var(--space-md);
 }
 
 .ds-sidebar-list__item:last-child {
@@ -3042,6 +3042,33 @@ blockquote {
   color: var(--text-muted);
   margin-top: 3px;
   display: block;
+}
+
+/* ── Homepage pinned feature ── */
+.ds-pinned {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--deep-signal-border);
+}
+
+.ds-pinned__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.ds-pinned__label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-card--deep-signal-featured .post-card__title--featured a {
+  font-size: 1.2rem;
+  line-height: 1.3;
 }
 
 /* ── Section index page ── */
@@ -3093,21 +3120,7 @@ blockquote {
   opacity: 0.75;
 }
 
-/* ── Full-width single article layout ── */
-.site-body--fullwidth .layout-wrapper {
-  display: block;
-}
-
-.ds-layout-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 var(--space-lg);
-}
-
-.ds-main {
-  width: 100%;
-}
-
+/* ── Single article layout (uses standard sidebar layout) ── */
 .ds-article {
   padding: var(--space-xl) 0 var(--space-2xl);
 }

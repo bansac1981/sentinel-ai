@@ -30,6 +30,33 @@
   {{ partial "podcast-player.html" . }}
 </div>
 
+{{/* ── DEEP SIGNAL PINNED FEATURE ── */}}
+{{ $latestDS := where .Site.RegularPages "Params.content_type" "deep_signal" }}
+{{ $latestDS = first 1 $latestDS }}
+{{ range $latestDS }}
+<section class="ds-pinned">
+  <div class="ds-pinned__eyebrow">
+    <span class="badge badge--deep-signal">DEEP SIGNAL</span>
+    <span class="ds-pinned__label">Original Analysis</span>
+  </div>
+  <article class="post-card post-card--h post-card--deep-signal post-card--deep-signal-featured">
+    <div class="post-card__body--h">
+      <div class="post-card__meta-line">
+        <span class="badge badge--deep-signal badge--sm">DEEP SIGNAL</span>
+        <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+      </div>
+      <h2 class="post-card__title--h post-card__title--featured">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      {{ if .Params.description }}
+      <p class="post-card__summary--h">{{ .Params.description }}</p>
+      {{ end }}
+      <a href="{{ .RelPermalink }}" class="ds-read-more">Read full analysis →</a>
+    </div>
+  </article>
+</section>
+{{ end }}
+
 {{/* ── PAGINATED ARTICLE LISTING ── */}}
 <section class="posts-section">
   {{ $paginator := .Paginate $allPosts 15 }}
