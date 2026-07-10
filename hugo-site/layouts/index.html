@@ -35,6 +35,11 @@
     <span class="ds-pinned__label">Original Analysis</span>
   </div>
   <article class="post-card post-card--h post-card--deep-signal post-card--deep-signal-featured">
+    {{ if .Params.thumbnail_card }}
+    <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
+      {{ partial "article-image.html" . }}
+    </a>
+    {{ end }}
     <div class="post-card__body--h">
       <div class="post-card__meta-line">
         <span class="badge badge--deep-signal badge--sm">DEEP SIGNAL</span>
@@ -67,7 +72,7 @@
       {{ $isDeepSignal := eq (.Params.content_type | default "") "deep_signal" }}
       {{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
       <article class="post-card post-card--h {{ if $isDeepSignal }}post-card--deep-signal{{ else if $isFirstLook }}post-card--first-look{{ end }}">
-        {{ if not $isDeepSignal }}
+        {{ if or (not $isDeepSignal) .Params.thumbnail_card }}
         <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
           {{ partial "article-image.html" . }}
         </a>
