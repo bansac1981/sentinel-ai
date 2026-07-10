@@ -1,234 +1,238 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <style>
-      .scan  { animation: scan  6s linear infinite; }
-      @keyframes scan  { 0%{transform:translateY(0)} 100%{transform:translateY(560px)} }
-      .flow  { stroke-dasharray:14 7; animation: flow  1.6s linear infinite; }
-      .flow2 { stroke-dasharray:14 7; animation: flow2 1.6s linear infinite; }
-      @keyframes flow  { to { stroke-dashoffset: -63; } }
-      @keyframes flow2 { to { stroke-dashoffset: -63; } }
+      .scan  { animation: scan 7s linear infinite; }
+      @keyframes scan { 0%{transform:translateY(-30px)} 100%{transform:translateY(660px)} }
+      .flow  { stroke-dasharray:12 6; animation: flow  1.8s linear infinite; }
+      .flow2 { stroke-dasharray:12 6; animation: flow2 1.8s linear infinite; }
+      @keyframes flow  { to { stroke-dashoffset: -54; } }
+      @keyframes flow2 { to { stroke-dashoffset: -54; } }
       .blink { animation: blink 1.1s step-end infinite; }
       @keyframes blink { 50%{opacity:0} }
+      .pulse { animation: pulse 2.4s ease-in-out infinite; }
+      @keyframes pulse { 0%,100%{opacity:.6} 50%{opacity:1} }
     </style>
     <marker id="arr-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/>
+      <path d="M0 0 L10 5 L0 10 z" fill="#d97706"/>
     </marker>
     <marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="#22c55e"/>
+      <path d="M0 0 L10 5 L0 10 z" fill="#059669"/>
     </marker>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M40 0L0 0 0 40" fill="none" stroke="#14142a" stroke-width="0.7"/>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#d1d5e8" opacity="0.6"/>
     </pattern>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#c7d2fe" flood-opacity="0.4"/>
+    </filter>
+    <filter id="shadow-green" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#a7f3d0" flood-opacity="0.5"/>
+    </filter>
   </defs>
 
-  <!-- Base -->
-  <rect width="1200" height="630" fill="#07070e"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Base: light paper -->
+  <rect width="1200" height="630" fill="#f8f9ff"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
 
   <!-- Scan shimmer -->
-  <g class="scan" opacity="0.025">
-    <rect x="0" y="80" width="1200" height="28" fill="#00d4ff"/>
+  <g class="scan" opacity="0.06">
+    <rect x="0" y="0" width="1200" height="22" fill="#6366f1"/>
   </g>
 
   <!-- Left accent bar -->
-  <rect x="0" y="0" width="4" height="630" fill="#ff3b3b"/>
+  <rect x="0" y="0" width="5" height="630" fill="#e11d48"/>
 
   <!-- ─── HEADER ─── -->
-  <rect x="0" y="0" width="1200" height="82" fill="rgba(0,212,255,0.05)"/>
-  <line x1="0" y1="82" x2="1200" y2="82" stroke="#00d4ff" stroke-width="1.2" opacity="0.5"/>
-  <text x="24" y="28" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#00d4ff" letter-spacing="3.5" font-weight="600">DEEP SIGNAL  ◈  GRID THE GREY</text>
-  <text x="24" y="64" font-family="IBM Plex Mono,Courier New,monospace" font-size="24" fill="#ffffff" font-weight="700" letter-spacing="0.5">THE SECURITY ANALYST'S CLAUDE CODE PLAYBOOK</text>
-  <text x="1176" y="30" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#444466" text-anchor="end">2026-07-11</text>
-  <text x="1176" y="64" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#444466" text-anchor="end">gridthegrey.com</text>
+  <rect x="0" y="0" width="1200" height="82" fill="#1e1b4b"/>
+  <line x1="0" y1="82" x2="1200" y2="82" stroke="#4f46e5" stroke-width="2"/>
+
+  <text x="24" y="28" font-family="IBM Plex Mono,Courier New,monospace" font-size="9.5" fill="#a5b4fc" letter-spacing="3.5" font-weight="600">DEEP SIGNAL  ◈  GRID THE GREY</text>
+  <text x="24" y="64" font-family="IBM Plex Mono,Courier New,monospace" font-size="23" fill="#ffffff" font-weight="700" letter-spacing="0.3">THE SECURITY ANALYST'S CLAUDE CODE PLAYBOOK</text>
+  <text x="1176" y="30" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#6366f1" text-anchor="end">2026-07-11</text>
+  <text x="1176" y="64" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#6366f1" text-anchor="end">gridthegrey.com</text>
 
   <!-- ─── COLUMN HEADERS ─── -->
-  <text x="50" y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#fbbf24" letter-spacing="3" font-weight="700">DATA SOURCES</text>
-  <line x1="40" y1="109" x2="338" y2="109" stroke="#fbbf24" stroke-width="0.7" opacity="0.45"/>
+  <text x="50"  y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#b45309" letter-spacing="3" font-weight="700">DATA SOURCES</text>
+  <line x1="40"  y1="109" x2="338" y2="109" stroke="#d97706" stroke-width="1" opacity="0.5"/>
 
-  <text x="600" y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#00d4ff" letter-spacing="3" font-weight="700" text-anchor="middle">CLAUDE CODE ORCHESTRATOR</text>
-  <line x1="408" y1="109" x2="792" y2="109" stroke="#00d4ff" stroke-width="0.7" opacity="0.45"/>
+  <text x="600" y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#4338ca" letter-spacing="3" font-weight="700" text-anchor="middle">CLAUDE CODE ORCHESTRATOR</text>
+  <line x1="408" y1="109" x2="792" y2="109" stroke="#4f46e5" stroke-width="1" opacity="0.5"/>
 
-  <text x="862" y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#22c55e" letter-spacing="3" font-weight="700">SECURITY OUTPUTS</text>
-  <line x1="858" y1="109" x2="1158" y2="109" stroke="#22c55e" stroke-width="0.7" opacity="0.45"/>
+  <text x="862" y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#065f46" letter-spacing="3" font-weight="700">SECURITY OUTPUTS</text>
+  <line x1="858" y1="109" x2="1158" y2="109" stroke="#059669" stroke-width="1" opacity="0.5"/>
 
   <!-- ─── INPUT BOXES ─── -->
 
   <!-- NVD API -->
-  <rect x="40" y="120" width="296" height="58" rx="4" fill="rgba(251,191,36,0.05)" stroke="#fbbf24" stroke-width="1"/>
-  <rect x="40" y="120" width="4" height="58" fill="#fbbf24"/>
-  <text x="56" y="139" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#fbbf24" font-weight="700" letter-spacing="0.5">NVD CVE API v2.0</text>
-  <text x="56" y="156" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">services.nvd.nist.gov</text>
-  <text x="56" y="171" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">lastModStartDate · CVSS Severity</text>
+  <rect x="40" y="120" width="296" height="58" rx="5" fill="#ffffff" stroke="#f59e0b" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="40" y="120" width="5" height="58" rx="2" fill="#f59e0b"/>
+  <text x="57" y="140" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#92400e" font-weight="700">NVD CVE API v2.0</text>
+  <text x="57" y="157" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">services.nvd.nist.gov</text>
+  <text x="57" y="172" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">lastModStartDate · CVSS Severity</text>
 
   <!-- SIEM -->
-  <rect x="40" y="192" width="296" height="58" rx="4" fill="rgba(251,191,36,0.05)" stroke="#fbbf24" stroke-width="1"/>
-  <rect x="40" y="192" width="4" height="58" fill="#fbbf24"/>
-  <text x="56" y="211" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#fbbf24" font-weight="700" letter-spacing="0.5">SIEM / Sentinel</text>
-  <text x="56" y="228" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">Azure CLI · Splunk · Graph API</text>
-  <text x="56" y="243" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">KQL · SPL · REST · Webhook Triggers</text>
+  <rect x="40" y="192" width="296" height="58" rx="5" fill="#ffffff" stroke="#f59e0b" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="40" y="192" width="5" height="58" rx="2" fill="#f59e0b"/>
+  <text x="57" y="212" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#92400e" font-weight="700">SIEM / Sentinel</text>
+  <text x="57" y="229" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">Azure CLI · Splunk · Graph API</text>
+  <text x="57" y="244" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">KQL · SPL · REST · Webhook Triggers</text>
 
   <!-- Asset Inventory -->
-  <rect x="40" y="264" width="296" height="58" rx="4" fill="rgba(251,191,36,0.05)" stroke="#fbbf24" stroke-width="1"/>
-  <rect x="40" y="264" width="4" height="58" fill="#fbbf24"/>
-  <text x="56" y="283" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#fbbf24" font-weight="700" letter-spacing="0.5">Asset Inventory</text>
-  <text x="56" y="300" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">asset-inventory.json</text>
-  <text x="56" y="315" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">Products · Versions · Owner Mapping</text>
+  <rect x="40" y="264" width="296" height="58" rx="5" fill="#ffffff" stroke="#f59e0b" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="40" y="264" width="5" height="58" rx="2" fill="#f59e0b"/>
+  <text x="57" y="284" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#92400e" font-weight="700">Asset Inventory</text>
+  <text x="57" y="301" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">asset-inventory.json</text>
+  <text x="57" y="316" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">Products · Versions · Owner Mapping</text>
 
   <!-- Evidence Vault -->
-  <rect x="40" y="336" width="296" height="58" rx="4" fill="rgba(251,191,36,0.05)" stroke="#fbbf24" stroke-width="1"/>
-  <rect x="40" y="336" width="4" height="58" fill="#fbbf24"/>
-  <text x="56" y="355" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#fbbf24" font-weight="700" letter-spacing="0.5">Evidence Vault</text>
-  <text x="56" y="372" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">./evidence/ · ./policies/</text>
-  <text x="56" y="387" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">ISO 27001 · NIST CSF 2.0 Controls</text>
+  <rect x="40" y="336" width="296" height="58" rx="5" fill="#ffffff" stroke="#f59e0b" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="40" y="336" width="5" height="58" rx="2" fill="#f59e0b"/>
+  <text x="57" y="356" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#92400e" font-weight="700">Evidence Vault</text>
+  <text x="57" y="373" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">./evidence/  ·  ./policies/</text>
+  <text x="57" y="388" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">ISO 27001 · NIST CSF 2.0 Controls</text>
 
-  <!-- ─── CONNECTORS: Left → Center ─── -->
-  <line x1="336" y1="149" x2="408" y2="149" stroke="#fbbf24" stroke-width="1.4" opacity="0.8" class="flow" marker-end="url(#arr-amber)"/>
-  <line x1="336" y1="221" x2="408" y2="221" stroke="#fbbf24" stroke-width="1.4" opacity="0.8" class="flow" marker-end="url(#arr-amber)"/>
-  <line x1="336" y1="293" x2="408" y2="293" stroke="#fbbf24" stroke-width="1.4" opacity="0.8" class="flow" marker-end="url(#arr-amber)"/>
-  <line x1="336" y1="365" x2="408" y2="365" stroke="#fbbf24" stroke-width="1.4" opacity="0.8" class="flow" marker-end="url(#arr-amber)"/>
+  <!-- ─── CONNECTORS left → centre ─── -->
+  <line x1="336" y1="149" x2="408" y2="149" stroke="#d97706" stroke-width="1.6" class="flow"  marker-end="url(#arr-amber)"/>
+  <line x1="336" y1="221" x2="408" y2="221" stroke="#d97706" stroke-width="1.6" class="flow"  marker-end="url(#arr-amber)"/>
+  <line x1="336" y1="293" x2="408" y2="293" stroke="#d97706" stroke-width="1.6" class="flow"  marker-end="url(#arr-amber)"/>
+  <line x1="336" y1="365" x2="408" y2="365" stroke="#d97706" stroke-width="1.6" class="flow"  marker-end="url(#arr-amber)"/>
 
-  <!-- ─── CENTER BOX ─── -->
-  <rect x="408" y="116" width="384" height="296" rx="6" fill="rgba(0,212,255,0.04)" stroke="#00d4ff" stroke-width="1.5"/>
-  <line x1="408" y1="116" x2="792" y2="116" stroke="#00d4ff" stroke-width="3" opacity="0.9"/>
+  <!-- ─── CENTRE BOX ─── -->
+  <rect x="408" y="116" width="384" height="296" rx="8" fill="#1e1b4b" filter="url(#shadow)"/>
+  <rect x="408" y="116" width="384" height="4"   rx="2" fill="#4f46e5"/>
 
   <!-- Terminal titlebar -->
-  <rect x="408" y="116" width="384" height="30" rx="5" fill="rgba(0,212,255,0.12)"/>
-  <circle cx="427" cy="131" r="5" fill="#ff5f57"/>
-  <circle cx="443" cy="131" r="5" fill="#febc2e"/>
-  <circle cx="459" cy="131" r="5" fill="#28c840"/>
-  <text x="600" y="136" font-family="IBM Plex Mono,Courier New,monospace" font-size="9.5" fill="#00d4ff" text-anchor="middle" font-weight="700" letter-spacing="2">claude-code — bash</text>
+  <rect x="408" y="120" width="384" height="28" fill="#2d2a5e"/>
+  <circle cx="428" cy="134" r="5" fill="#ef4444"/>
+  <circle cx="444" cy="134" r="5" fill="#f59e0b"/>
+  <circle cx="460" cy="134" r="5" fill="#22c55e"/>
+  <text x="600" y="138" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#a5b4fc" text-anchor="middle" font-weight="700" letter-spacing="2">claude-code — bash</text>
 
-  <!-- Terminal lines -->
-  <text x="424" y="165" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#22c55e" font-weight="700">$</text>
-  <text x="438" y="165" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e8e8e8">claude -p --output-format json \</text>
-  <text x="438" y="181" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e8e8e8">  --allowedTools "Read,Bash,Glob" \</text>
-  <text x="438" y="197" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e8e8e8">  --json-schema ./schema.json</text>
+  <!-- Terminal code -->
+  <text x="424" y="167" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#4ade80" font-weight="700">$</text>
+  <text x="438" y="167" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e2e8f0">claude -p --output-format json \</text>
+  <text x="438" y="183" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e2e8f0">  --allowedTools "Read,Bash,Glob" \</text>
+  <text x="438" y="199" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e2e8f0">  --json-schema ./schema.json</text>
+  <rect x="438" y="207" width="7" height="11" fill="#818cf8" class="blink"/>
 
-  <!-- Blinking cursor -->
-  <rect x="438" y="205" width="7" height="11" fill="#00d4ff" class="blink"/>
+  <line x1="420" y1="224" x2="780" y2="224" stroke="#2d2a5e" stroke-width="1.2"/>
+  <text x="422" y="241" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#6366f1" letter-spacing="2.5">CORE CAPABILITIES</text>
 
-  <!-- Divider -->
-  <line x1="422" y1="222" x2="778" y2="222" stroke="#1a2535" stroke-width="1"/>
+  <!-- Capability pills — light text on dark bg -->
+  <rect x="422" y="248" width="156" height="24" rx="12" fill="#312e81" stroke="#6366f1" stroke-width="1"/>
+  <text x="500" y="264" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#c7d2fe" text-anchor="middle" font-weight="600">⚡ Shell Execution</text>
 
-  <!-- Capability pills -->
-  <text x="422" y="240" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#00d4ff" letter-spacing="2.5">CORE CAPABILITIES</text>
+  <rect x="588" y="248" width="156" height="24" rx="12" fill="#312e81" stroke="#6366f1" stroke-width="1"/>
+  <text x="666" y="264" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#c7d2fe" text-anchor="middle" font-weight="600">◈ Sub-agents</text>
 
-  <rect x="422" y="248" width="158" height="24" rx="12" fill="rgba(0,212,255,0.07)" stroke="#00d4ff" stroke-width="0.8"/>
-  <text x="501" y="264" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#00d4ff" text-anchor="middle" font-weight="600">&#x26A1; Shell Execution</text>
+  <rect x="422" y="280" width="156" height="24" rx="12" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1"/>
+  <text x="500" y="296" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#7dd3fc" text-anchor="middle" font-weight="600">🔒 Hook System</text>
 
-  <rect x="590" y="248" width="158" height="24" rx="12" fill="rgba(0,212,255,0.07)" stroke="#00d4ff" stroke-width="0.8"/>
-  <text x="669" y="264" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#00d4ff" text-anchor="middle" font-weight="600">&#x25C8; Sub-agents</text>
+  <rect x="588" y="280" width="156" height="24" rx="12" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1"/>
+  <text x="666" y="296" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#7dd3fc" text-anchor="middle" font-weight="600">⬡ MCP Protocol</text>
 
-  <rect x="422" y="280" width="158" height="24" rx="12" fill="rgba(167,139,250,0.07)" stroke="#a78bfa" stroke-width="0.8"/>
-  <text x="501" y="296" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#a78bfa" text-anchor="middle" font-weight="600">&#x1F512; Hook System</text>
+  <rect x="422" y="312" width="156" height="24" rx="12" fill="#2d1f4e" stroke="#a78bfa" stroke-width="1"/>
+  <text x="500" y="328" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#ddd6fe" text-anchor="middle" font-weight="600">📋 CLAUDE.md</text>
 
-  <rect x="590" y="280" width="158" height="24" rx="12" fill="rgba(167,139,250,0.07)" stroke="#a78bfa" stroke-width="0.8"/>
-  <text x="669" y="296" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#a78bfa" text-anchor="middle" font-weight="600">&#x2B21; MCP Protocol</text>
+  <rect x="588" y="312" width="156" height="24" rx="12" fill="#2d1f4e" stroke="#a78bfa" stroke-width="1"/>
+  <text x="666" y="328" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#ddd6fe" text-anchor="middle" font-weight="600">— Headless -p</text>
 
-  <rect x="422" y="312" width="158" height="24" rx="12" fill="rgba(251,191,36,0.07)" stroke="#fbbf24" stroke-width="0.8"/>
-  <text x="501" y="328" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#fbbf24" text-anchor="middle" font-weight="600">&#x1F4CB; CLAUDE.md</text>
+  <line x1="420" y1="346" x2="780" y2="346" stroke="#2d2a5e" stroke-width="1.2"/>
 
-  <rect x="590" y="312" width="158" height="24" rx="12" fill="rgba(251,191,36,0.07)" stroke="#fbbf24" stroke-width="0.8"/>
-  <text x="669" y="328" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#fbbf24" text-anchor="middle" font-weight="600">&#x2014; Headless -p</text>
-
-  <!-- Divider 2 -->
-  <line x1="422" y1="346" x2="778" y2="346" stroke="#1a2535" stroke-width="1"/>
-
-  <!-- Permission mode -->
-  <text x="422" y="364" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555577" letter-spacing="1.5">PERMISSION MODE</text>
-  <rect x="540" y="352" width="76" height="18" rx="9" fill="rgba(34,197,94,0.14)" stroke="#22c55e" stroke-width="0.8"/>
-  <text x="578" y="365" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#22c55e" text-anchor="middle" font-weight="700">MANUAL</text>
+  <text x="422" y="364" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#6366f1" letter-spacing="1.5">PERMISSION MODE</text>
+  <rect x="540" y="352" width="76" height="18" rx="9" fill="#064e3b" stroke="#34d399" stroke-width="1"/>
+  <text x="578" y="365" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#6ee7b7" text-anchor="middle" font-weight="700">MANUAL</text>
 
   <!-- Warning strip -->
-  <rect x="422" y="377" width="356" height="22" rx="3" fill="rgba(255,59,59,0.07)" stroke="#ff3b3b" stroke-width="0.7" stroke-dasharray="4 2"/>
-  <text x="600" y="392" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#ff3b3b" text-anchor="middle" letter-spacing="0.5">&#x26A0;  COMMERCIAL TIER REQUIRED — Team / Enterprise / API</text>
+  <rect x="420" y="377" width="358" height="22" rx="3" fill="#fff1f2" stroke="#e11d48" stroke-width="0.8" stroke-dasharray="4 2"/>
+  <text x="599" y="392" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#e11d48" text-anchor="middle" letter-spacing="0.3">⚠  COMMERCIAL TIER REQUIRED — Team / Enterprise / API</text>
 
-  <!-- ─── CONNECTORS: Center → Right ─── -->
-  <line x1="792" y1="149" x2="858" y2="149" stroke="#00d4ff" stroke-width="1.4" opacity="0.8" class="flow2" marker-end="url(#arr-green)"/>
-  <line x1="792" y1="221" x2="858" y2="221" stroke="#00d4ff" stroke-width="1.4" opacity="0.8" class="flow2" marker-end="url(#arr-green)"/>
-  <line x1="792" y1="293" x2="858" y2="293" stroke="#00d4ff" stroke-width="1.4" opacity="0.8" class="flow2" marker-end="url(#arr-green)"/>
-  <line x1="792" y1="365" x2="858" y2="365" stroke="#00d4ff" stroke-width="1.4" opacity="0.8" class="flow2" marker-end="url(#arr-green)"/>
+  <!-- ─── CONNECTORS centre → right ─── -->
+  <line x1="792" y1="149" x2="858" y2="149" stroke="#059669" stroke-width="1.6" class="flow2" marker-end="url(#arr-green)"/>
+  <line x1="792" y1="221" x2="858" y2="221" stroke="#059669" stroke-width="1.6" class="flow2" marker-end="url(#arr-green)"/>
+  <line x1="792" y1="293" x2="858" y2="293" stroke="#059669" stroke-width="1.6" class="flow2" marker-end="url(#arr-green)"/>
+  <line x1="792" y1="365" x2="858" y2="365" stroke="#059669" stroke-width="1.6" class="flow2" marker-end="url(#arr-green)"/>
 
   <!-- ─── OUTPUT BOXES ─── -->
 
   <!-- CVE Digest -->
-  <rect x="858" y="120" width="300" height="58" rx="4" fill="rgba(34,197,94,0.05)" stroke="#22c55e" stroke-width="1"/>
-  <rect x="1154" y="120" width="4" height="58" fill="#22c55e"/>
-  <text x="874" y="139" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#22c55e" font-weight="700" letter-spacing="0.5">CVE Triage Digest</text>
-  <text x="874" y="156" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">./reports/cve-digest-DATE.md</text>
-  <text x="874" y="171" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">CVSS · CISA KEV · NIST CSF RS.MI</text>
+  <rect x="858" y="120" width="300" height="58" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.4" filter="url(#shadow-green)"/>
+  <rect x="1154" y="120" width="4" height="58" rx="2" fill="#059669"/>
+  <text x="874" y="140" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#065f46" font-weight="700">CVE Triage Digest</text>
+  <text x="874" y="157" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">./reports/cve-digest-DATE.md</text>
+  <text x="874" y="172" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">CVSS · CISA KEV · NIST CSF RS.MI</text>
 
   <!-- Gap Report -->
-  <rect x="858" y="192" width="300" height="58" rx="4" fill="rgba(34,197,94,0.05)" stroke="#22c55e" stroke-width="1"/>
-  <rect x="1154" y="192" width="4" height="58" fill="#22c55e"/>
-  <text x="874" y="211" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#22c55e" font-weight="700" letter-spacing="0.5">Compliance Gap Report</text>
-  <text x="874" y="228" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">./output/gap-report-DATE.md</text>
-  <text x="874" y="243" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">ISO 27001 · NIST CSF 2.0 · HIGH/MED/LOW</text>
+  <rect x="858" y="192" width="300" height="58" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.4" filter="url(#shadow-green)"/>
+  <rect x="1154" y="192" width="4" height="58" rx="2" fill="#059669"/>
+  <text x="874" y="212" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#065f46" font-weight="700">Compliance Gap Report</text>
+  <text x="874" y="229" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">./output/gap-report-DATE.md</text>
+  <text x="874" y="244" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">ISO 27001 · NIST CSF 2.0 · HIGH/MED/LOW</text>
 
   <!-- Audit Trail -->
-  <rect x="858" y="264" width="300" height="58" rx="4" fill="rgba(34,197,94,0.05)" stroke="#22c55e" stroke-width="1"/>
-  <rect x="1154" y="264" width="4" height="58" fill="#22c55e"/>
-  <text x="874" y="283" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#22c55e" font-weight="700" letter-spacing="0.5">SIEM Audit Trail</text>
-  <text x="874" y="300" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">PostToolUse hook &#x2192; Sentinel webhook</text>
-  <text x="874" y="315" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">Every Bash cmd logged · Git committed</text>
+  <rect x="858" y="264" width="300" height="58" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.4" filter="url(#shadow-green)"/>
+  <rect x="1154" y="264" width="4" height="58" rx="2" fill="#059669"/>
+  <text x="874" y="284" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#065f46" font-weight="700">SIEM Audit Trail</text>
+  <text x="874" y="301" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">PostToolUse hook → Sentinel webhook</text>
+  <text x="874" y="316" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">Every Bash cmd logged · Git committed</text>
 
-  <!-- Analyst Review -->
-  <rect x="858" y="336" width="300" height="58" rx="4" fill="rgba(34,197,94,0.05)" stroke="#22c55e" stroke-width="1"/>
-  <rect x="1154" y="336" width="4" height="58" fill="#22c55e"/>
-  <text x="874" y="355" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#22c55e" font-weight="700" letter-spacing="0.5">Analyst Review Gate</text>
-  <text x="874" y="372" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#888899">15-min approval workflow</text>
-  <text x="874" y="387" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#555566">Human owns: priority · final sign-off</text>
+  <!-- Analyst Gate -->
+  <rect x="858" y="336" width="300" height="58" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.4" filter="url(#shadow-green)"/>
+  <rect x="1154" y="336" width="4" height="58" rx="2" fill="#059669"/>
+  <text x="874" y="356" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#065f46" font-weight="700">Analyst Review Gate</text>
+  <text x="874" y="373" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">15-min approval workflow</text>
+  <text x="874" y="388" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">Human owns: priority · final sign-off</text>
 
   <!-- ─── FOOTER ─── -->
-  <rect x="0" y="430" width="1200" height="200" fill="rgba(0,0,0,0.5)"/>
-  <line x1="0" y1="430" x2="1200" y2="430" stroke="#1a1a2e" stroke-width="1"/>
+  <rect x="0" y="430" width="1200" height="200" fill="#f0f2ff"/>
+  <line x1="0" y1="430" x2="1200" y2="430" stroke="#c7d2fe" stroke-width="1.2"/>
 
-  <text x="40" y="456" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#333355" letter-spacing="3">FRAMEWORK COVERAGE</text>
-  <line x1="40" y1="461" x2="1160" y2="461" stroke="#1a1a2e" stroke-width="0.8"/>
+  <text x="40" y="456" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#6366f1" letter-spacing="3" font-weight="700">FRAMEWORK COVERAGE</text>
+  <line x1="40" y1="461" x2="1160" y2="461" stroke="#c7d2fe" stroke-width="0.8"/>
 
   <!-- Framework badges -->
-  <rect x="40"  y="470" width="138" height="25" rx="4" fill="rgba(59,130,246,0.1)"   stroke="#3b82f6" stroke-width="0.7"/>
-  <text x="109" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#3b82f6"  text-anchor="middle" font-weight="700">NIST CSF 2.0</text>
+  <rect x="40"   y="470" width="138" height="25" rx="4" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+  <text x="109"  y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#1d4ed8" text-anchor="middle" font-weight="700">NIST CSF 2.0</text>
 
-  <rect x="188" y="470" width="138" height="25" rx="4" fill="rgba(59,130,246,0.1)"   stroke="#3b82f6" stroke-width="0.7"/>
-  <text x="257" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#3b82f6"  text-anchor="middle" font-weight="700">NIST SP 800-207</text>
+  <rect x="188"  y="470" width="138" height="25" rx="4" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+  <text x="257"  y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#1d4ed8" text-anchor="middle" font-weight="700">NIST SP 800-207</text>
 
-  <rect x="336" y="470" width="138" height="25" rx="4" fill="rgba(168,85,247,0.1)"   stroke="#a855f7" stroke-width="0.7"/>
-  <text x="405" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#a855f7" text-anchor="middle" font-weight="700">ISO 27001:2022</text>
+  <rect x="336"  y="470" width="138" height="25" rx="4" fill="#faf5ff" stroke="#a855f7" stroke-width="1"/>
+  <text x="405"  y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#7e22ce" text-anchor="middle" font-weight="700">ISO 27001:2022</text>
 
-  <rect x="484" y="470" width="138" height="25" rx="4" fill="rgba(239,68,68,0.1)"    stroke="#ef4444" stroke-width="0.7"/>
-  <text x="553" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#ef4444" text-anchor="middle" font-weight="700">MITRE ATT&amp;CK</text>
+  <rect x="484"  y="470" width="138" height="25" rx="4" fill="#fff1f2" stroke="#e11d48" stroke-width="1"/>
+  <text x="553"  y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#9f1239" text-anchor="middle" font-weight="700">MITRE ATT&amp;CK</text>
 
-  <rect x="632" y="470" width="138" height="25" rx="4" fill="rgba(251,191,36,0.1)"   stroke="#fbbf24" stroke-width="0.7"/>
-  <text x="701" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#fbbf24" text-anchor="middle" font-weight="700">CISA KEV</text>
+  <rect x="632"  y="470" width="138" height="25" rx="4" fill="#fefce8" stroke="#d97706" stroke-width="1"/>
+  <text x="701"  y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#92400e" text-anchor="middle" font-weight="700">CISA KEV</text>
 
-  <rect x="780" y="470" width="138" height="25" rx="4" fill="rgba(251,113,133,0.1)"  stroke="#fb7185" stroke-width="0.7"/>
-  <text x="849" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#fb7185" text-anchor="middle" font-weight="700">AWS Bedrock</text>
+  <rect x="780"  y="470" width="138" height="25" rx="4" fill="#fff7ed" stroke="#f97316" stroke-width="1"/>
+  <text x="849"  y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#c2410c" text-anchor="middle" font-weight="700">AWS Bedrock</text>
 
-  <rect x="928" y="470" width="156" height="25" rx="4" fill="rgba(52,211,153,0.1)"   stroke="#34d399" stroke-width="0.7"/>
-  <text x="1006" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#34d399" text-anchor="middle" font-weight="700">Google Vertex AI</text>
+  <rect x="928"  y="470" width="160" height="25" rx="4" fill="#f0fdf4" stroke="#059669" stroke-width="1"/>
+  <text x="1008" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#065f46" text-anchor="middle" font-weight="700">Google Vertex AI</text>
 
   <!-- Stats row -->
-  <line x1="40" y1="511" x2="1160" y2="511" stroke="#1a1a2e" stroke-width="0.8"/>
+  <line x1="40" y1="511" x2="1160" y2="511" stroke="#c7d2fe" stroke-width="0.8"/>
 
-  <text x="40"  y="538" font-family="IBM Plex Mono,Courier New,monospace" font-size="22" fill="#ffffff" font-weight="700">2</text>
-  <text x="63"  y="535" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#444466">Worked</text>
-  <text x="63"  y="547" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#444466">Use Cases</text>
+  <text x="40"  y="540" font-family="IBM Plex Mono,Courier New,monospace" font-size="26" fill="#1e1b4b" font-weight="700">2</text>
+  <text x="70"  y="535" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">Worked</text>
+  <text x="70"  y="548" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">Use Cases</text>
 
-  <text x="190" y="538" font-family="IBM Plex Mono,Courier New,monospace" font-size="22" fill="#ffffff" font-weight="700">~$13</text>
-  <text x="248" y="535" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#444466">avg / analyst</text>
-  <text x="248" y="547" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#444466">active day</text>
+  <text x="200" y="540" font-family="IBM Plex Mono,Courier New,monospace" font-size="26" fill="#1e1b4b" font-weight="700">~$13</text>
+  <text x="268" y="535" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">avg / analyst</text>
+  <text x="268" y="548" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">active day</text>
 
-  <text x="390" y="538" font-family="IBM Plex Mono,Courier New,monospace" font-size="22" fill="#ffffff" font-weight="700">7</text>
-  <text x="413" y="535" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#444466">Enterprise</text>
-  <text x="413" y="547" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#444466">Lockdown Settings</text>
+  <text x="410" y="540" font-family="IBM Plex Mono,Courier New,monospace" font-size="26" fill="#1e1b4b" font-weight="700">7</text>
+  <text x="438" y="535" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">Enterprise</text>
+  <text x="438" y="548" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">Lockdown Settings</text>
 
-  <text x="590" y="538" font-family="IBM Plex Mono,Courier New,monospace" font-size="22" fill="#ff3b3b" font-weight="700">Commercial</text>
-  <text x="590" y="554" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#444466">Tier only — consumer accounts expose session data to training pipelines</text>
+  <rect x="610" y="522" width="220" height="30" rx="4" fill="#fff1f2" stroke="#e11d48" stroke-width="1"/>
+  <text x="720" y="534" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#e11d48" text-anchor="middle" font-weight="700">⚠ Commercial Tier Only</text>
+  <text x="720" y="547" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="#9f1239" text-anchor="middle">Consumer accounts expose session data</text>
 
-  <text x="1160" y="572" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#333355" text-anchor="end">gridthegrey.com/deep-signal/claude-code-security-playbook/</text>
+  <text x="1160" y="575" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#a5b4fc" text-anchor="end">gridthegrey.com/deep-signal/claude-code-security-playbook/</text>
 
   <!-- Corner brackets -->
-  <polyline points="1155,610 1178,610 1178,588" fill="none" stroke="#ff3b3b" stroke-width="1.2" opacity="0.4"/>
-  <polyline points="22,610 22,627 44,627"        fill="none" stroke="#ff3b3b" stroke-width="1.2" opacity="0.4"/>
+  <polyline points="1155,614 1178,614 1178,592" fill="none" stroke="#4f46e5" stroke-width="1.4" opacity="0.5"/>
+  <polyline points="22,614 22,628 44,628"       fill="none" stroke="#4f46e5" stroke-width="1.4" opacity="0.5"/>
 </svg>

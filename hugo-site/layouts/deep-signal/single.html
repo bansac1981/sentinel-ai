@@ -38,8 +38,36 @@
   {{/* ── HERO IMAGE ── */}}
   {{ if .Params.thumbnail }}
   <div class="ds-article__hero">
-    <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" class="ds-article__hero-img">
+    <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" class="ds-article__hero-img ds-lightbox-trigger" title="Click to enlarge" tabindex="0" role="button" aria-label="Enlarge diagram">
+    <span class="ds-article__hero-hint">click to enlarge</span>
   </div>
+
+  <!-- Lightbox -->
+  <div class="ds-lightbox" id="dsLightbox" aria-hidden="true" role="dialog" aria-label="Enlarged diagram">
+    <div class="ds-lightbox__backdrop" id="dsLightboxBackdrop"></div>
+    <div class="ds-lightbox__box">
+      <button class="ds-lightbox__close" id="dsLightboxClose" aria-label="Close">✕</button>
+      <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" class="ds-lightbox__img">
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var lb       = document.getElementById('dsLightbox');
+    var backdrop = document.getElementById('dsLightboxBackdrop');
+    var closeBtn = document.getElementById('dsLightboxClose');
+    var trigger  = document.querySelector('.ds-lightbox-trigger');
+
+    function open()  { lb.style.display = 'flex'; lb.setAttribute('aria-hidden','false'); document.documentElement.style.overflow = 'hidden'; }
+    function close() { lb.style.display = 'none'; lb.setAttribute('aria-hidden','true');  document.documentElement.style.overflow = ''; }
+
+    trigger.addEventListener('click', open);
+    trigger.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') open(); });
+    closeBtn.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  })();
+  </script>
   {{ end }}
 
   {{/* ── ARTICLE BODY ── */}}

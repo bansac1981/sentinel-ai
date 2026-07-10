@@ -3135,13 +3135,92 @@ blockquote {
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
+  position: relative;
 }
 
 .ds-article__hero-img {
   width: 100%;
   height: auto;
   display: block;
+  cursor: zoom-in;
+  transition: opacity 0.15s ease;
 }
+
+.ds-article__hero-img:hover { opacity: 0.92; }
+
+.ds-article__hero-hint {
+  position: absolute;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.ds-article__hero:hover .ds-article__hero-hint { opacity: 1; }
+
+/* ── Lightbox ── */
+.ds-lightbox {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  box-sizing: border-box;
+}
+
+.ds-lightbox__backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.88);
+}
+
+.ds-lightbox__box {
+  position: relative;
+  z-index: 10000;
+  max-width: min(1200px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+}
+
+.ds-lightbox__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.ds-lightbox__close {
+  position: fixed;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 10001;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.ds-lightbox__close:hover { background: rgba(255,59,59,0.8); }
 
 /* ── Mermaid diagrams in Deep Signal articles ── */
 .ds-article__body .mermaid {
