@@ -36,88 +36,60 @@
 
   {{ partial "footer.html" . }}
 
-  {{ partial "scripts.html" . }}
-
-  {{/* ── SUBSCRIBE MODAL — must be last child of body, outside all stacking contexts ── */}}
-  <div class="subscribe-modal" id="subscribeModal" role="dialog" aria-modal="true" aria-labelledby="subscribeModalTitle" aria-hidden="true">
-    <div class="subscribe-modal__backdrop" id="subscribeModalBackdrop"></div>
-    <div class="subscribe-modal__box">
-      <button class="subscribe-modal__close" id="subscribeModalClose" aria-label="Close">✕</button>
-      <div class="subscribe-modal__eyebrow">◉ AI THREAT BRIEFING</div>
-      <h2 class="subscribe-modal__title" id="subscribeModalTitle">Stay ahead of the threat.</h2>
-      <p class="subscribe-modal__desc">Twice-weekly digest of critical AI security developments — every story mapped to MITRE ATLAS and OWASP LLM Top 10. Free.</p>
-      <iframe name="gtg-modal-sink" style="display:none;" aria-hidden="true"></iframe>
-      <div class="subscribe-modal__form-wrap" id="subscribeModalFormWrap">
-        <form class="subscribe-modal__form"
-          id="subscribeModalForm"
-          action="https://assets.mailerlite.com/jsonp/2303110/forms/186108792273896900/subscribe"
-          method="post"
-          target="gtg-modal-sink">
-          <input type="email" name="fields[email]"
-            class="subscribe-modal__input"
-            placeholder="your@email.com"
-            required autocomplete="email" aria-label="Email address">
-          <input type="hidden" name="ml-submit" value="1">
-          <input type="hidden" name="anticsrf" value="true">
-          <button type="submit" class="subscribe-modal__btn">SUBSCRIBE FREE →</button>
-        </form>
-        <p class="subscribe-modal__fine">No spam. Unsubscribe anytime.</p>
+  {{/* ── SUBSCRIBE STICKY BAR ── */}}
+  <div class="sub-bar" id="subBar" role="complementary" aria-label="Newsletter signup">
+    <div class="sub-bar__inner">
+      <div class="sub-bar__text">
+        <span class="sub-bar__label">◉ AI THREAT BRIEFING</span>
+        <span class="sub-bar__desc">Twice-weekly digest. Free.</span>
       </div>
-      <p class="subscribe-modal__success" id="subscribeModalSuccess" style="display:none;">✓ You're in — first briefing lands Tuesday or Friday.</p>
+      <iframe name="gtg-sub-sink" style="display:none;" aria-hidden="true"></iframe>
+      <form class="sub-bar__form" id="subBarForm"
+        action="https://assets.mailerlite.com/jsonp/2303110/forms/186108792273896900/subscribe"
+        method="post"
+        target="gtg-sub-sink">
+        <input type="email" name="fields[email]"
+          class="sub-bar__input"
+          placeholder="your@email.com"
+          required autocomplete="email" aria-label="Email address">
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+        <button type="submit" class="sub-bar__btn">Subscribe →</button>
+      </form>
+      <p class="sub-bar__success" id="subBarSuccess" style="display:none;">✓ You're in — check your inbox.</p>
+      <button class="sub-bar__dismiss" id="subBarDismiss" aria-label="Dismiss">✕</button>
     </div>
   </div>
 
   <script>
   (function() {
-    var modal    = document.getElementById('subscribeModal');
-    var backdrop = document.getElementById('subscribeModalBackdrop');
-    var closeBtn = document.getElementById('subscribeModalClose');
-    var form     = document.getElementById('subscribeModalForm');
-    var formWrap = document.getElementById('subscribeModalFormWrap');
-    var success  = document.getElementById('subscribeModalSuccess');
+    var bar     = document.getElementById('subBar');
+    var dismiss = document.getElementById('subBarDismiss');
+    var form    = document.getElementById('subBarForm');
+    var success = document.getElementById('subBarSuccess');
 
-    function openModal() {
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden', 'false');
-      document.documentElement.style.overflow = 'hidden';
+    if (sessionStorage.getItem('gtg-sub-dismissed')) {
+      bar.style.display = 'none';
     }
 
-    function closeModal() {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      document.documentElement.style.overflow = '';
-    }
-
-    closeBtn.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', closeModal);
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
+    dismiss.addEventListener('click', function() {
+      bar.style.display = 'none';
+      sessionStorage.setItem('gtg-sub-dismissed', '1');
     });
 
     form.addEventListener('submit', function() {
       setTimeout(function() {
-        if (formWrap) formWrap.style.display = 'none';
-        if (success)  success.style.display  = 'block';
+        if (form)    form.style.display    = 'none';
+        if (success) success.style.display = 'block';
+        setTimeout(function() {
+          bar.style.display = 'none';
+          sessionStorage.setItem('gtg-sub-dismissed', '1');
+        }, 3000);
       }, 800);
     });
-
-    function isTrigger(el) {
-      while (el && el !== document.body) {
-        if (el.hasAttribute && el.hasAttribute('data-subscribe-modal')) return true;
-        el = el.parentNode;
-      }
-      return false;
-    }
-
-    document.addEventListener('click', function(e) {
-      if (isTrigger(e.target)) openModal();
-    });
-    document.addEventListener('touchend', function(e) {
-      if (isTrigger(e.target)) { e.preventDefault(); openModal(); }
-    });
-
-    window.gtgOpenSubscribeModal = openModal;
   })();
   </script>
+
+  {{ partial "scripts.html" . }}
 </body>
 </html>
