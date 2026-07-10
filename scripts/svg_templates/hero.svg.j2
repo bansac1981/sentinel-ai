@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <style>
+      .scan  { animation: scan 7s linear infinite; }
+      @keyframes scan { 0%{transform:translateY(-30px)} 100%{transform:translateY(660px)} }
+      .flow  { stroke-dasharray:12 6; animation: flow  1.8s linear infinite; }
+      .flow2 { stroke-dasharray:12 6; animation: flow2 1.8s linear infinite; }
+      @keyframes flow  { to { stroke-dashoffset: -54; } }
+      @keyframes flow2 { to { stroke-dashoffset: -54; } }
+      .blink { animation: blink 1.1s step-end infinite; }
+      @keyframes blink { 50%{opacity:0} }
+    </style>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#059669"/>
+    </marker>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#d1d5e8" opacity="0.6"/>
+    </pattern>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#c7d2fe" flood-opacity="0.4"/>
+    </filter>
+    <filter id="shadow-green">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#a7f3d0" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="#f8f9ff"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <g class="scan" opacity="0.06"><rect x="0" y="0" width="1200" height="22" fill="#6366f1"/></g>
+  <rect x="0" y="0" width="5" height="630" fill="#e11d48"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="82" fill="#1e1b4b"/>
+  <line x1="0" y1="82" x2="1200" y2="82" stroke="#4f46e5" stroke-width="2"/>
+  <text x="24" y="28" font-family="IBM Plex Mono,Courier New,monospace" font-size="9.5" fill="#a5b4fc" letter-spacing="3.5" font-weight="600">DEEP SIGNAL  ◈  GRID THE GREY</text>
+  <text x="24" y="64" font-family="IBM Plex Mono,Courier New,monospace" font-size="22" fill="#ffffff" font-weight="700" letter-spacing="0.3">{{ title|upper|truncate(72, false, '') }}</text>
+  <text x="1176" y="30" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#6366f1" text-anchor="end">{{ date }}</text>
+  <text x="1176" y="64" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#6366f1" text-anchor="end">gridthegrey.com</text>
+
+  <!-- Column headers -->
+  <text x="50"  y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#b45309" letter-spacing="3" font-weight="700">DATA SOURCES</text>
+  <line x1="40"  y1="109" x2="338" y2="109" stroke="#d97706" stroke-width="1" opacity="0.5"/>
+  <text x="600" y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#4338ca" letter-spacing="3" font-weight="700" text-anchor="middle">{{ center_label|upper }}</text>
+  <line x1="408" y1="109" x2="792" y2="109" stroke="#4f46e5" stroke-width="1" opacity="0.5"/>
+  <text x="862" y="104" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#065f46" letter-spacing="3" font-weight="700">{{ right_label|upper }}</text>
+  <line x1="858" y1="109" x2="1158" y2="109" stroke="#059669" stroke-width="1" opacity="0.5"/>
+
+  <!-- Input boxes (up to 4) -->
+  {% for box in inputs %}
+  <rect x="40" y="{{ 120 + loop.index0 * 72 }}" width="296" height="60" rx="5" fill="#ffffff" stroke="#f59e0b" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="40" y="{{ 120 + loop.index0 * 72 }}" width="5" height="60" rx="2" fill="#f59e0b"/>
+  <text x="57" y="{{ 140 + loop.index0 * 72 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#92400e" font-weight="700">{{ box.title }}</text>
+  <text x="57" y="{{ 157 + loop.index0 * 72 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">{{ box.subtitle }}</text>
+  <text x="57" y="{{ 172 + loop.index0 * 72 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">{{ box.detail }}</text>
+  {% endfor %}
+
+  <!-- Flow arrows left→centre -->
+  {% for box in inputs %}
+  <line x1="336" y1="{{ 150 + loop.index0 * 72 }}" x2="408" y2="{{ 150 + loop.index0 * 72 }}" stroke="#d97706" stroke-width="1.6" class="flow" marker-end="url(#arr-amber)"/>
+  {% endfor %}
+
+  <!-- Centre terminal box -->
+  <rect x="408" y="116" width="384" height="296" rx="8" fill="#1e1b4b" filter="url(#shadow)"/>
+  <rect x="408" y="116" width="384" height="4" rx="2" fill="#4f46e5"/>
+  <rect x="408" y="120" width="384" height="28" fill="#2d2a5e"/>
+  <circle cx="428" cy="134" r="5" fill="#ef4444"/>
+  <circle cx="444" cy="134" r="5" fill="#f59e0b"/>
+  <circle cx="460" cy="134" r="5" fill="#22c55e"/>
+  <text x="600" y="138" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#a5b4fc" text-anchor="middle" font-weight="700" letter-spacing="2">{{ terminal_title }}</text>
+
+  <text x="424" y="167" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#4ade80" font-weight="700">$</text>
+  <text x="438" y="167" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e2e8f0">{{ cmd_line1 }}</text>
+  <text x="438" y="183" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e2e8f0">{{ cmd_line2 }}</text>
+  <text x="438" y="199" font-family="IBM Plex Mono,Courier New,monospace" font-size="10.5" fill="#e2e8f0">{{ cmd_line3 }}</text>
+  <rect x="438" y="207" width="7" height="11" fill="#818cf8" class="blink"/>
+
+  <line x1="420" y1="224" x2="780" y2="224" stroke="#2d2a5e" stroke-width="1.2"/>
+  <text x="422" y="241" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#6366f1" letter-spacing="2.5">CORE CAPABILITIES</text>
+
+  <!-- Capability pills (6) -->
+  {% set pill_colors = [('#312e81','#6366f1','#c7d2fe'), ('#312e81','#6366f1','#c7d2fe'), ('#1e3a5f','#38bdf8','#7dd3fc'), ('#1e3a5f','#38bdf8','#7dd3fc'), ('#2d1f4e','#a78bfa','#ddd6fe'), ('#2d1f4e','#a78bfa','#ddd6fe')] %}
+  {% for cap in capabilities[:6] %}
+  {% set col = pill_colors[loop.index0] %}
+  {% set px = 422 if loop.index0 % 2 == 0 else 588 %}
+  {% set py = 248 + (loop.index0 // 2) * 32 %}
+  <rect x="{{ px }}" y="{{ py }}" width="156" height="24" rx="12" fill="{{ col[0] }}" stroke="{{ col[1] }}" stroke-width="1"/>
+  <text x="{{ px + 78 }}" y="{{ py + 16 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="{{ col[2] }}" text-anchor="middle" font-weight="600">{{ cap }}</text>
+  {% endfor %}
+
+  <line x1="420" y1="346" x2="780" y2="346" stroke="#2d2a5e" stroke-width="1.2"/>
+  <text x="422" y="364" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#6366f1" letter-spacing="1.5">{{ mode_label }}</text>
+  <rect x="540" y="352" width="90" height="18" rx="9" fill="#064e3b" stroke="#34d399" stroke-width="1"/>
+  <text x="585" y="365" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#6ee7b7" text-anchor="middle" font-weight="700">{{ mode_value }}</text>
+
+  <rect x="420" y="377" width="358" height="22" rx="3" fill="#fff1f2" stroke="#e11d48" stroke-width="0.8" stroke-dasharray="4 2"/>
+  <text x="599" y="392" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#e11d48" text-anchor="middle">⚠  {{ warning }}</text>
+
+  <!-- Flow arrows centre→right -->
+  {% for box in outputs %}
+  <line x1="792" y1="{{ 150 + loop.index0 * 72 }}" x2="858" y2="{{ 150 + loop.index0 * 72 }}" stroke="#059669" stroke-width="1.6" class="flow2" marker-end="url(#arr-green)"/>
+  {% endfor %}
+
+  <!-- Output boxes (up to 4) -->
+  {% for box in outputs %}
+  <rect x="858" y="{{ 120 + loop.index0 * 72 }}" width="300" height="60" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.4" filter="url(#shadow-green)"/>
+  <rect x="1154" y="{{ 120 + loop.index0 * 72 }}" width="4" height="60" rx="2" fill="#059669"/>
+  <text x="874" y="{{ 140 + loop.index0 * 72 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="10" fill="#065f46" font-weight="700">{{ box.title }}</text>
+  <text x="874" y="{{ 157 + loop.index0 * 72 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">{{ box.subtitle }}</text>
+  <text x="874" y="{{ 172 + loop.index0 * 72 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#9ca3af">{{ box.detail }}</text>
+  {% endfor %}
+
+  <!-- Footer -->
+  <rect x="0" y="430" width="1200" height="200" fill="#f0f2ff"/>
+  <line x1="0" y1="430" x2="1200" y2="430" stroke="#c7d2fe" stroke-width="1.2"/>
+  <text x="40" y="456" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#6366f1" letter-spacing="3" font-weight="700">FRAMEWORK COVERAGE</text>
+  <line x1="40" y1="461" x2="1160" y2="461" stroke="#c7d2fe" stroke-width="0.8"/>
+
+  <!-- Framework badges (up to 7) -->
+  {% set badge_colors = [('#eff6ff','#3b82f6','#1d4ed8'),('#faf5ff','#a855f7','#7e22ce'),('#fff1f2','#e11d48','#9f1239'),('#fefce8','#d97706','#92400e'),('#fff7ed','#f97316','#c2410c'),('#f0fdf4','#059669','#065f46'),('#f0f9ff','#0ea5e9','#0369a1')] %}
+  {% for badge in frameworks[:7] %}
+  {% set bc = badge_colors[loop.index0] %}
+  <rect x="{{ 40 + loop.index0 * 162 }}" y="470" width="150" height="25" rx="4" fill="{{ bc[0] }}" stroke="{{ bc[1] }}" stroke-width="1"/>
+  <text x="{{ 115 + loop.index0 * 162 }}" y="486" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="{{ bc[2] }}" text-anchor="middle" font-weight="700">{{ badge }}</text>
+  {% endfor %}
+
+  <!-- Stats -->
+  <line x1="40" y1="511" x2="1160" y2="511" stroke="#c7d2fe" stroke-width="0.8"/>
+  {% for stat in stats[:3] %}
+  <text x="{{ 40 + loop.index0 * 200 }}" y="540" font-family="IBM Plex Mono,Courier New,monospace" font-size="26" fill="#1e1b4b" font-weight="700">{{ stat.value }}</text>
+  <text x="{{ 40 + loop.index0 * 200 + (stat.value|length) * 14 + 8 }}" y="535" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">{{ stat.label_top }}</text>
+  <text x="{{ 40 + loop.index0 * 200 + (stat.value|length) * 14 + 8 }}" y="548" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#6b7280">{{ stat.label_bot }}</text>
+  {% endfor %}
+
+  {% if warning_stat %}
+  <rect x="660" y="522" width="240" height="30" rx="4" fill="#fff1f2" stroke="#e11d48" stroke-width="1"/>
+  <text x="780" y="534" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#e11d48" text-anchor="middle" font-weight="700">{{ warning_stat.line1 }}</text>
+  <text x="780" y="547" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="#9f1239" text-anchor="middle">{{ warning_stat.line2 }}</text>
+  {% endif %}
+
+  <text x="1160" y="575" font-family="IBM Plex Mono,Courier New,monospace" font-size="8" fill="#a5b4fc" text-anchor="end">gridthegrey.com/deep-signal/{{ slug }}/</text>
+  <polyline points="1155,614 1178,614 1178,592" fill="none" stroke="#4f46e5" stroke-width="1.4" opacity="0.5"/>
+  <polyline points="22,614 22,628 44,628"       fill="none" stroke="#4f46e5" stroke-width="1.4" opacity="0.5"/>
+</svg>
