@@ -47,10 +47,10 @@
       <iframe name="gtg-modal-sink" style="display:none;" aria-hidden="true"></iframe>
       <div class="subscribe-modal__form-wrap" id="subscribeModalFormWrap">
         <form class="subscribe-modal__form"
+          id="subscribeModalForm"
           action="https://assets.mailerlite.com/jsonp/2303110/forms/186108792273896900/subscribe"
           method="post"
-          target="gtg-modal-sink"
-          onsubmit="gtgModalSubscribe(this)">
+          target="gtg-modal-sink">
           <input type="email" name="fields[email]"
             class="subscribe-modal__input"
             placeholder="your@email.com"
@@ -65,23 +65,37 @@
     </div>
   </div>
 
+  {{ partial "scripts.html" . }}
+
   <script>
+  /* Subscribe modal — loaded last so DOM is fully ready */
   (function() {
     var modal    = document.getElementById('subscribeModal');
     var backdrop = document.getElementById('subscribeModalBackdrop');
     var closeBtn = document.getElementById('subscribeModalClose');
-    var success  = document.getElementById('subscribeModalSuccess');
+    var form     = document.getElementById('subscribeModalForm');
     var formWrap = document.getElementById('subscribeModalFormWrap');
+    var success  = document.getElementById('subscribeModalSuccess');
+    var scrollY  = 0;
 
     function openModal() {
+      /* iOS Safari: lock body by fixing position to prevent scroll-behind */
+      scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = '-' + scrollY + 'px';
+      document.body.style.width = '100%';
       modal.setAttribute('aria-hidden', 'false');
       modal.classList.add('subscribe-modal--open');
-      document.body.classList.add('modal-open');
     }
+
     function closeModal() {
       modal.classList.remove('subscribe-modal--open');
       modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
+      /* Restore scroll position after body unlock */
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
     }
 
     closeBtn.addEventListener('click', closeModal);
@@ -90,21 +104,21 @@
       if (e.key === 'Escape') closeModal();
     });
 
-    // Expose open function globally for trigger buttons anywhere on the page
+    form.addEventListener('submit', function() {
+      setTimeout(function() {
+        if (formWrap) formWrap.style.display = 'none';
+        if (success)  success.style.display  = 'block';
+      }, 800);
+    });
+
+    /* Delegate clicks from any [data-subscribe-modal] trigger on the page */
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('[data-subscribe-modal]')) openModal();
+    });
+
+    /* Also keep window.gtgOpenSubscribeModal for any remaining inline calls */
     window.gtgOpenSubscribeModal = openModal;
   })();
-
-  function gtgModalSubscribe(form) {
-    setTimeout(function() {
-      var wrap = document.getElementById('subscribeModalFormWrap');
-      var succ = document.getElementById('subscribeModalSuccess');
-      if (wrap) wrap.style.display = 'none';
-      if (succ) succ.style.display = 'block';
-    }, 800);
-    return true;
-  }
   </script>
-
-  {{ partial "scripts.html" . }}
 </body>
 </html>
