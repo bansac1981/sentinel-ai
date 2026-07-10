@@ -36,34 +36,32 @@
 {{/* Posts list */}}
 <div class="posts-list">
   {{ range .Paginator.Pages }}
-  <article class="post-row">
-    <a href="{{ .RelPermalink }}" class="post-row__image">
+  {{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
+  {{ $isDeepSignal := eq (.Params.content_type | default "") "deep_signal" }}
+  <article class="post-card post-card--h {{ if $isDeepSignal }}post-card--deep-signal{{ else if $isFirstLook }}post-card--first-look{{ end }}">
+    {{ if not $isDeepSignal }}
+    <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
       {{ partial "article-image.html" . }}
     </a>
-    <div class="post-row__meta">
-      {{ partial "framework-badges.html" . }}
-      <span class="post-row__source">{{ .Params.source }}</span>
-      <time class="post-row__date" datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format "Jan 02, 2006" }}
-      </time>
-      {{ if .Params.relevance_score }}
-      <span class="post-row__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">
-        ▲ {{ printf "%.1f" .Params.relevance_score }}
-      </span>
-      {{ end }}
-    </div>
-    <div class="post-row__body">
-      <h2 class="post-row__title">
+    {{ end }}
+    <div class="post-card__body--h">
+      <h2 class="post-card__title--h">
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
       </h2>
-      <p class="post-row__summary">{{ .Params.summary | default .Summary | truncate 200 }}</p>
-      {{ if .Params.mitre_techniques }}
-      <div class="post-row__techniques">
-        {{ range first 3 .Params.mitre_techniques }}
-        <span class="technique-tag">{{ . }}</span>
+      <div class="post-card__meta-line">
+        {{ if $isDeepSignal }}
+        <span class="badge badge--deep-signal badge--sm">DEEP SIGNAL</span>
+        {{ else if $isFirstLook }}
+        <span class="badge badge--first-look badge--sm">FIRST LOOK</span>
         {{ end }}
+        {{ if not $isDeepSignal }}{{ partial "framework-badges.html" . }}{{ end }}
+        {{ if and (not $isDeepSignal) .Params.relevance_score }}
+        <span class="post-card__score score--{{ if ge .Params.relevance_score 8.0 }}high{{ else if ge .Params.relevance_score 6.0 }}med{{ else }}low{{ end }}">▲ {{ printf "%.1f" .Params.relevance_score }}</span>
+        {{ end }}
+        {{ if and (not $isDeepSignal) .Params.source }}<span class="post-card__source">{{ .Params.source }}</span>{{ end }}
+        <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
       </div>
-      {{ end }}
+      <p class="post-card__summary--h">{{ .Params.description | default (.Params.summary | default (.Summary | truncate 200)) }}</p>
     </div>
   </article>
   {{ end }}
