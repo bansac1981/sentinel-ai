@@ -1,6 +1,6 @@
 ---
 title: "Netwrix Analysis: AI Agents Widen the Non-Human Identity Gap"
-date: 2026-07-11T10:40:35+00:00
+date: "2026-07-11T16:41:38+00:00"
 draft: false
 slug: "netwrix-analysis-ai-agents-widen-the-non-human-identity-gap"
 
