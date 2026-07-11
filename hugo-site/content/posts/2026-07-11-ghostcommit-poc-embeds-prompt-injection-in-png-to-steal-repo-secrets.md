@@ -1,6 +1,6 @@
 ---
 title: "Ghostcommit PoC Embeds Prompt Injection in PNG to Steal Repo Secrets"
-date: 2026-07-11T10:37:46+00:00
+date: "2026-07-11T16:39:30+00:00"
 draft: false
 slug: "ghostcommit-poc-embeds-prompt-injection-in-png-to-steal-repo-secrets"
 
