@@ -1,7 +1,7 @@
 ---
 title: "OpenClaw AI Assistant Flaws Enable WhatsApp-to-Host RCE"
 date: 2026-07-11T10:39:39+00:00
-draft: true
+draft: false 
 slug: "openclaw-ai-assistant-flaws-enable-whatsapp-to-host-rce"
 
 # ── Content metadata ──
