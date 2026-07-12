@@ -1,6 +1,6 @@
 ---
 title: "Iroh Launches Mesh LLM for Distributed AI Across Peer Nodes"
-date: 2026-07-12T04:11:42+00:00
+date: "2026-07-12T04:22:19+00:00"
 draft: false 
 slug: "iroh-launches-mesh-llm-for-distributed-ai-across-peer-nodes"
 
