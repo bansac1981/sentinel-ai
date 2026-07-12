@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Expands ChatGPT Into Family and Caregiver Households"
 date: 2026-07-12T04:25:04+00:00
-draft: true
+draft: false 
 slug: "openai-expands-chatgpt-into-family-and-caregiver-households"
 
 # ── Content metadata ──
