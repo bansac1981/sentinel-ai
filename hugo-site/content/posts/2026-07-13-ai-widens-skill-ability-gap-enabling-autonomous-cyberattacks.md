@@ -11,7 +11,7 @@ source_url: "https://www.schneier.com/blog/archives/2026/07/cybersecurity-and-th
 source_title: "Cybersecurity and the Gap Between Skill and Ability"
 source_date: 2026-07-08T11:03:04+00:00
 author: "Grid the Grey Editorial"
-thumbnail:https://plus.unsplash.com/premium_vector-1726335197071-71964bc4eab3?q=80&w=1232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D 
+thumbnail: https://plus.unsplash.com/premium_vector-1726335197071-71964bc4eab3?q=80&w=1232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── Content Type ──
