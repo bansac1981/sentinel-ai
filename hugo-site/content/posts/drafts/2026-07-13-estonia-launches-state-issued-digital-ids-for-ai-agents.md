@@ -1,7 +1,7 @@
 ---
 title: "Estonia Launches State-Issued Digital IDs for AI Agents"
 date: 2026-07-13T04:12:47+00:00
-draft: true
+draft: false 
 slug: "estonia-launches-state-issued-digital-ids-for-ai-agents"
 
 # ── Content metadata ──
