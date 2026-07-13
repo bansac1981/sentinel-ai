@@ -11,7 +11,7 @@ source_url: "https://www.darkreading.com/cybersecurity-operations/state-ids-ai-a
 source_title: "State IDs for AI Agents: Will Estonia Set a Precedent?"
 source_date: 2026-07-08T08:01:00+00:00
 author: "Grid the Grey Editorial"
-thumbnail: "https://images.unsplash.com/photo-1782712819421-8e8ad803b6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5Mzc1ODZ8MHwxfHNlYXJjaHwxN3x8cm9ib3QlMjBhdXRvbWF0aW9uJTIwYXV0b25vbW91cyUyMHdvcmtmbG93fGVufDB8MHx8fDE3ODM5MTU5MjB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+thumbnail: https://plus.unsplash.com/premium_vector-1726316958331-fb261e6dc9cd?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D 
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
 # ── First Look: Attack Surface Assessment ──
