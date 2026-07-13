@@ -1,6 +1,6 @@
 ---
 title: "OpenAI GPT-5.6 Sol Ships Faster Parallel Tool-Use for Agents"
-date: 2026-07-13T05:25:10+00:00
+date: "2026-07-13T06:00:02+00:00"
 draft: false 
 slug: "openai-gpt-5-6-sol-ships-faster-parallel-tool-use-for-agents"
 
