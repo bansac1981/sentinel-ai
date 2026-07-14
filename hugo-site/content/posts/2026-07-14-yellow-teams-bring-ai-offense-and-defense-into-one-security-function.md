@@ -1,6 +1,6 @@
 ---
 title: "Yellow Teams Bring AI Offense and Defense Into One Security Function"
-date: 2026-07-14T03:50:42+00:00
+date: "2026-07-14T19:52:20+00:00"
 draft: false 
 slug: "yellow-teams-bring-ai-offense-and-defense-into-one-security-function"
 
