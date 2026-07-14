@@ -1,6 +1,6 @@
 ---
 title: "Tracebit Ships AWS Context Bombing Defence Against AI Hacking Agents"
-date: 2026-07-14T03:52:45+00:00
+date: "2026-07-14T19:50:38+00:00"
 draft: false 
 slug: "tracebit-ships-aws-context-bombing-defence-against-ai-hacking-agents"
 
