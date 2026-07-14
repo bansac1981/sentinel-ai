@@ -1,7 +1,7 @@
 ---
 title: "FriendMachine Launches Jacquard Lang for AI-Written Code Review"
 date: 2026-07-14T03:51:38+00:00
-draft: true
+draft: false 
 slug: "friendmachine-launches-jacquard-lang-for-ai-written-code-review"
 
 # ── Content metadata ──
