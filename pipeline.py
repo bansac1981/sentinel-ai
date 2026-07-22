@@ -1477,6 +1477,7 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
 
     new_articles = []
     batch_seen: set[str] = set()  # tracks URLs added to new_articles this run
+    batch_fingerprints: list[tuple[str, str]] = []  # (title, url) for same-run fingerprint dedup
     for a in all_articles:
         if a["url"] in seen_urls:
             stats["already_seen"] += 1
@@ -1497,12 +1498,13 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
                 log.info(f"  Skipping (slug exists on disk): {candidate_slug}")
                 seen_urls.add(a["url"])
                 stats["already_seen"] += 1
-            # story fingerprint check — same event from a different source
-            elif is_story_duplicate(a["title"], story_index, log):
+            # story fingerprint check — same event from disk content or earlier in this batch
+            elif is_story_duplicate(a["title"], story_index + batch_fingerprints, log):
                 seen_urls.add(a["url"])
                 stats["already_seen"] += 1
             else:
                 batch_seen.add(a["url"])
+                batch_fingerprints.append((a["title"], a["url"]))
                 new_articles.append(a)
     log.info(f"New articles (not yet seen): {len(new_articles)}  |  Already seen: {stats['already_seen']}")
 
