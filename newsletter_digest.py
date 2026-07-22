@@ -30,10 +30,11 @@ from pathlib import Path
 # Config
 # ─────────────────────────────────────────────────────────────────────────────
 
-SITE_URL        = "https://gridthegrey.com"
-POSTS_DIR       = Path(__file__).parent / "hugo-site" / "content" / "posts"
-MAX_STORIES     = 8       # maximum articles in the digest
-TOP_STORY_MIN   = 7.5     # minimum score to be the lead story
+SITE_URL          = "https://gridthegrey.com"
+POSTS_DIR         = Path(__file__).parent / "hugo-site" / "content" / "posts"
+DEEP_SIGNAL_DIR   = Path(__file__).parent / "hugo-site" / "content" / "deep-signal"
+MAX_STORIES       = 8       # maximum articles in the digest
+TOP_STORY_MIN     = 7.5     # minimum score to be the lead story
 
 MAILERLITE_API  = "https://connect.mailerlite.com/api"
 RESEND_BATCH_URL = "https://api.resend.com/emails/batch"
@@ -109,6 +110,53 @@ def parse_frontmatter(text: str) -> dict:
     result["owasp_categories"] = _get_list("owasp_categories")
     result["categories"]       = _get_list("categories")
     return result
+
+
+def load_deep_signal_posts(days: int) -> list[dict]:
+    cutoff = datetime.now(tz=timezone.utc) - timedelta(days=days)
+    posts = []
+
+    if not DEEP_SIGNAL_DIR.exists():
+        return []
+
+    for md_file in DEEP_SIGNAL_DIR.glob("*.md"):
+        if md_file.name == "_index.md":
+            continue
+        text = md_file.read_text(encoding="utf-8")
+        fm = parse_frontmatter(text)
+        if not fm or fm.get("draft"):
+            continue
+
+        # Deep Signal uses 'description' not 'summary'
+        if not fm.get("summary") and fm.get("description"):
+            fm["summary"] = fm["description"]
+
+        date_str = fm.get("date", "")
+        try:
+            for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S+05:30",
+                        "%Y-%m-%d", "%Y-%m-%dT%H:%M:%SZ"):
+                try:
+                    pub_date = datetime.strptime(date_str[:25], fmt)
+                    if pub_date.tzinfo is None:
+                        pub_date = pub_date.replace(tzinfo=timezone.utc)
+                    break
+                except ValueError:
+                    continue
+            else:
+                continue
+        except Exception:
+            continue
+
+        if pub_date < cutoff:
+            continue
+
+        fm["pub_date"] = pub_date
+        fm["slug"]     = md_file.stem
+        fm["url"]      = f"{SITE_URL}/deep-signal/{md_file.stem}/"
+        posts.append(fm)
+
+    posts.sort(key=lambda p: p["pub_date"], reverse=True)
+    return posts
 
 
 def load_posts(days: int) -> list[dict]:
@@ -258,7 +306,58 @@ def secondary_story_html(p: dict) -> str:
 </table>"""
 
 
-def build_html(posts: list[dict], days: int) -> str:
+DEEP_SIGNAL_ACCENT = "#0ea5e9"   # sky-blue / teal — distinct from news red
+
+def deep_signal_html(p: dict) -> str:
+    img_block = ""
+    if p.get("thumbnail"):
+        thumb = p["thumbnail"]
+        if thumb.startswith("/"):
+            thumb = f"{SITE_URL}{thumb}"
+        img_block = (
+            f'<a href="{p["url"]}" style="display:block;margin-bottom:16px;">'
+            f'<img src="{thumb}" alt="{p["title"]}" '
+            f'style="width:100%;max-height:200px;object-fit:cover;'
+            f'border-radius:6px;border:1px solid {DEEP_SIGNAL_ACCENT}44;" /></a>'
+        )
+
+    reading_time = p.get("reading_time", "")
+    reading_time_html = (
+        f'&nbsp;·&nbsp; {reading_time} min read' if reading_time else ""
+    )
+
+    summary = (p.get("summary") or "")[:280]
+    if len(p.get("summary", "")) > 280:
+        summary += "…"
+
+    return f"""
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+  <tr><td style="background:#0a1929;border:1px solid {DEEP_SIGNAL_ACCENT}44;
+     border-left:3px solid {DEEP_SIGNAL_ACCENT};border-radius:8px;padding:24px;">
+    <p style="margin:0 0 10px 0;font-family:monospace;font-size:10px;
+       color:{DEEP_SIGNAL_ACCENT};letter-spacing:0.15em;font-weight:700;">◈ DEEP SIGNAL</p>
+    {img_block}
+    <h2 style="margin:0 0 12px 0;font-family:Georgia,serif;font-size:20px;
+       font-weight:700;line-height:1.3;color:{TEXT_HEAD};">
+      <a href="{p['url']}" style="color:{TEXT_HEAD};text-decoration:none;">{p['title']}</a>
+    </h2>
+    <p style="margin:0 0 14px 0;font-size:14px;line-height:1.6;color:{TEXT_BODY};">
+      {summary}
+    </p>
+    <p style="margin:0 0 14px 0;font-size:12px;color:{TEXT_MUTED};">
+      {p['pub_date'].strftime('%b %d, %Y')}{reading_time_html}
+    </p>
+    <p style="margin:0;">
+      <a href="{p['url']}" style="display:inline-block;padding:10px 20px;
+         background:{DEEP_SIGNAL_ACCENT};color:#fff;border-radius:4px;font-size:13px;
+         font-weight:700;text-decoration:none;font-family:monospace;
+         letter-spacing:0.05em;">READ DEEP SIGNAL →</a>
+    </p>
+  </td></tr>
+</table>"""
+
+
+def build_html(posts: list[dict], days: int, deep_signal: list[dict] | None = None) -> str:
     if not posts:
         return "<p>No posts found for the given time period.</p>"
 
@@ -270,6 +369,22 @@ def build_html(posts: list[dict], days: int) -> str:
 
     lead_html      = lead_story_html(lead) if lead else ""
     secondary_html = "".join(secondary_story_html(p) for p in secondary)
+
+    deep_signal_section = ""
+    if deep_signal:
+        ds_cards = "".join(deep_signal_html(p) for p in deep_signal)
+        deep_signal_section = f"""
+  <!-- DEEP SIGNAL -->
+  <tr><td style="padding:20px 0 4px 0;">
+    <p style="margin:0 0 14px 0;font-family:monospace;font-size:10px;
+       color:{DEEP_SIGNAL_ACCENT};letter-spacing:0.15em;">── DEEP SIGNAL ─────────────────────────────────</p>
+    {ds_cards}
+  </td></tr>
+  <!-- DIVIDER AFTER DEEP SIGNAL -->
+  <tr><td style="padding:0 0 20px 0;">
+    <p style="margin:0;font-family:monospace;font-size:10px;
+       color:{TEXT_MUTED};letter-spacing:0.15em;">── THIS WEEK IN AI SECURITY ────────────────────</p>
+  </td></tr>"""
 
     cat_counts: dict[str, int] = {}
     for p in posts:
@@ -308,7 +423,7 @@ def build_html(posts: list[dict], days: int) -> str:
     </h1>
     <p style="margin:8px 0 0 0;font-size:13px;color:{TEXT_MUTED};">
       Issue #{issue_num} &nbsp;·&nbsp; {date_range} &nbsp;·&nbsp;
-      {len(posts)} stor{'y' if len(posts)==1 else 'ies'} this period
+      {len(posts) + len(deep_signal or [])} stor{'y' if len(posts) + len(deep_signal or []) == 1 else 'ies'} this period
     </p>
   </td></tr>
 
@@ -321,6 +436,8 @@ def build_html(posts: list[dict], days: int) -> str:
       <strong style="color:{TEXT_HEAD};">OWASP LLM Top 10</strong>.
     </p>
   </td></tr>
+
+  {deep_signal_section}
 
   <!-- LEAD STORY -->
   {lead_html}
@@ -557,6 +674,10 @@ def main():
 
     print(f"[newsletter] Scanning posts from last {args.days} days…", file=sys.stderr)
     posts = load_posts(args.days)
+    deep_signal = load_deep_signal_posts(args.days)
+
+    if deep_signal:
+        print(f"[newsletter] Found {len(deep_signal)} Deep Signal post(s).", file=sys.stderr)
 
     if not posts:
         print(f"[newsletter] No published posts found in the last {args.days} days.",
@@ -565,7 +686,7 @@ def main():
         sys.exit(1)
 
     print(f"[newsletter] Found {len(posts)} posts. Building digest…", file=sys.stderr)
-    html = build_html(posts, args.days)
+    html = build_html(posts, args.days, deep_signal=deep_signal)
 
     subject = args.subject or build_subject(posts)
     print(f"[newsletter] Subject: {subject}", file=sys.stderr)
@@ -589,7 +710,7 @@ def main():
         print(html)
 
     print(f"[newsletter] Done. Lead story: {posts[0]['title'][:60]}…", file=sys.stderr)
-    print(f"[newsletter] Stories included: {len(posts)}", file=sys.stderr)
+    print(f"[newsletter] Stories included: {len(posts)} news + {len(deep_signal)} Deep Signal", file=sys.stderr)
 
 
 if __name__ == "__main__":
