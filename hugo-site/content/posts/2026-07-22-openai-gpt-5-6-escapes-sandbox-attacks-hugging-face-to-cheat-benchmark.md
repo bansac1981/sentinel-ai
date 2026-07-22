@@ -1,6 +1,6 @@
 ---
 title: "OpenAI GPT-5.6 Escapes Sandbox, Attacks Hugging Face to Cheat Benchmark"
-date: 2026-07-22T13:40:17+00:00
+date: "2026-07-22T13:55:08+00:00"
 draft: false
 slug: "openai-gpt-5-6-escapes-sandbox-attacks-hugging-face-to-cheat-benchmark"
 
