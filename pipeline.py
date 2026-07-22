@@ -20,6 +20,7 @@ import argparse
 import json
 import logging
 import os
+import random
 import re
 import sys
 import time
@@ -309,68 +310,176 @@ PEXELS_API_KEY      = os.getenv("PEXELS_API_KEY", "")
 # All queries chosen to return professional, relevant landscape photos.
 # ─────────────────────────────────────────────
 IMAGE_KEYWORD_MAP = [
-    # Generative AI / LLM — diversified queries
-    (["prompt injection", "jailbreak"],
-     "computer security shield warning"),
-    (["system prompt", "guardrail", "alignment"],
-     "artificial intelligence safety controls"),
-    (["llm", "large language model"],
-     "language model text generation technology"),
-    (["gpt", "chatgpt", "openai"],
-     "conversational AI chatbot technology"),
-    (["gemini", "google ai", "deepmind"],
-     "search engine artificial intelligence"),
-    (["claude", "anthropic"],
-     "artificial intelligence research laboratory"),
-    (["agent", "agentic", "autonomous"],
-     "robot automation autonomous workflow"),
-    (["rag", "retrieval augmented", "embedding", "vector db"],
-     "database search information retrieval"),
-    (["deepfake", "synthetic media", "voice clone"],
-     "digital identity face recognition"),
-    (["neural network", "deep learning", "machine learning"],
-     "data science visualization network"),
-    (["model release", "open source", "weights"],
-     "software release download server"),
+    # Generative AI / LLM
+    (["prompt injection", "jailbreak"], [
+        "maze labyrinth escape abstract",
+        "code terminal text injection abstract",
+        "puzzle pieces misfit concept",
+        "broken fence gap abstract light",
+    ]),
+    (["system prompt", "guardrail", "alignment"], [
+        "architectural blueprint technical drawing",
+        "balance scale justice abstract",
+        "compass navigation direction concept",
+        "traffic control signal overhead",
+    ]),
+    (["llm", "large language model"], [
+        "library books knowledge rows",
+        "text typography abstract letters",
+        "neural pattern abstract network light",
+        "scroll manuscript ancient knowledge",
+    ]),
+    (["gpt", "chatgpt", "openai"], [
+        "conversation speech bubbles abstract",
+        "microphone broadcast studio",
+        "language translation abstract",
+        "dialogue meeting people talking",
+    ]),
+    (["gemini", "google ai", "deepmind"], [
+        "telescope observatory night sky",
+        "search explore discovery abstract",
+        "twin mirror reflection abstract",
+        "research laboratory science experiment",
+    ]),
+    (["claude", "anthropic"], [
+        "research whiteboard brainstorm",
+        "laboratory science discovery",
+        "open book knowledge concept",
+        "scientist thinking abstract",
+    ]),
+    (["agent", "agentic", "autonomous"], [
+        "chess piece strategy board game",
+        "pipeline workflow automation abstract",
+        "drone aerial autonomous flight",
+        "mechanical gears interlocking machine",
+    ]),
+    (["rag", "retrieval augmented", "embedding", "vector db"], [
+        "library archive filing system",
+        "map coordinates navigation abstract",
+        "index card catalog research",
+        "honeycomb structure pattern abstract",
+    ]),
+    (["deepfake", "synthetic media", "voice clone"], [
+        "mirror reflection distorted abstract",
+        "mask theater disguise concept",
+        "doppelganger shadow silhouette",
+        "wax sculpture face art",
+    ]),
+    (["neural network", "deep learning", "machine learning"], [
+        "constellation stars night sky connected",
+        "brain neuron abstract biology",
+        "circuit board aerial macro abstract",
+        "spider web morning dew pattern",
+    ]),
+    (["model release", "open source", "weights"], [
+        "gift unwrapping launch celebration",
+        "building construction architecture reveal",
+        "open door threshold light",
+        "rocket launch pad aerial",
+    ]),
     # Ransomware / Malware
-    (["ransomware", "ransom demand"],
-     "ransomware encrypted lock cybercrime dark"),
-    (["malware", "trojan", "virus", "worm", "spyware", "infostealer"],
-     "malware computer virus dark hacker"),
-    (["backdoor", "rootkit"],
-     "backdoor shadow hacking server"),
-    (["cryptojacking", "cryptomining"],
-     "cryptocurrency mining server"),
+    (["ransomware", "ransom demand"], [
+        "chains broken industrial abstract",
+        "wildfire forest destruction aerial",
+        "factory shutdown industrial abandoned",
+        "red alert warning lights abstract",
+    ]),
+    (["malware", "trojan", "virus", "worm", "spyware", "infostealer"], [
+        "microscope biology cell abstract",
+        "parasite nature close-up macro",
+        "contamination hazmat warning abstract",
+        "invasive plant growth abstract",
+    ]),
+    (["backdoor", "rootkit"], [
+        "hidden passage secret door architecture",
+        "underground tunnel shadow exploration",
+        "narrow alley urban shadow",
+        "trapdoor wooden floor abstract",
+    ]),
+    (["cryptojacking", "cryptomining"], [
+        "gold mine excavation industrial",
+        "electric meter power consumption abstract",
+        "server farm cooling aerial view",
+        "turbine energy production industrial",
+    ]),
     # Social / Credential
-    (["phishing", "spear phish", "social engineering"],
-     "phishing email hook scam"),
-    (["credential", "password spray", "brute force", "mfa bypass"],
-     "password authentication security lock"),
+    (["phishing", "spear phish", "social engineering"], [
+        "fishing boat ocean water aerial",
+        "bait hook fishing nature",
+        "impersonation theater mask stage",
+        "trust handshake business meeting",
+    ]),
+    (["credential", "password spray", "brute force", "mfa bypass"], [
+        "key collection vintage macro",
+        "fingerprint biometric close-up",
+        "door handle entrance architecture",
+        "identity card badge close-up",
+    ]),
     # Data exfiltration
-    (["data breach", "data leak", "exfiltrat", "stolen data"],
-     "data breach privacy security padlock server"),
-    (["surveillance", "spyware", "stalkerware"],
-     "surveillance camera privacy security"),
+    (["data breach", "data leak", "exfiltrat", "stolen data"], [
+        "water leak pipe burst abstract",
+        "open vault empty bank abstract",
+        "envelope letter open abstract",
+        "sieve colander kitchen abstract",
+    ]),
+    (["surveillance", "spyware", "stalkerware"], [
+        "shadow silhouette following urban",
+        "binoculars observation nature landscape",
+        "window curtain peek light abstract",
+        "periscope submarine abstract",
+    ]),
     # Infrastructure
-    (["supply chain", "pypi", "npm", "package", "dependency"],
-     "supply chain software packages"),
-    (["critical infrastructure", "ics", "scada", "ot ", "industrial"],
-     "industrial infrastructure power grid"),
-    (["cloud", "aws", "azure", "gcp", "kubernetes", "container"],
-     "cloud computing server data center"),
-    (["api ", "web application", "owasp"],
-     "web application programming code security"),
-    (["iot", "firmware", "embedded", "router"],
-     "iot device circuit board electronics"),
-    (["ddos", "denial of service", "botnet"],
-     "network server traffic cybersecurity"),
+    (["supply chain", "pypi", "npm", "package", "dependency"], [
+        "cargo ship port aerial logistics",
+        "assembly line factory industrial",
+        "domino effect sequence abstract",
+        "jigsaw puzzle pieces fitting",
+    ]),
+    (["critical infrastructure", "ics", "scada", "ot ", "industrial"], [
+        "power plant aerial industrial",
+        "pipeline oil gas industrial landscape",
+        "dam water infrastructure aerial",
+        "wind turbine farm landscape",
+    ]),
+    (["cloud", "aws", "azure", "gcp", "kubernetes", "container"], [
+        "data center aerial architecture",
+        "sky clouds aerial sunlight",
+        "warehouse storage containers aerial",
+        "server rack abstract blue light",
+    ]),
+    (["api ", "web application", "owasp"], [
+        "electrical plug socket connection abstract",
+        "train tracks junction intersection",
+        "bridge engineering architecture",
+        "pipe fitting plumbing abstract",
+    ]),
+    (["iot", "firmware", "embedded", "router"], [
+        "circuit board macro electronics",
+        "smart home interior modern",
+        "antenna radio tower landscape",
+        "electronic components soldering macro",
+    ]),
+    (["ddos", "denial of service", "botnet"], [
+        "traffic jam highway aerial",
+        "crowd rush stampede abstract",
+        "flood wave overwhelming abstract",
+        "overloaded bridge weight abstract",
+    ]),
     # Threat actors
     (["nation state", "apt ", "state-sponsored", "espionage",
-      "china", "russia", "iran", "north korea"],
-     "cyber espionage government hacking globe"),
+      "china", "russia", "iran", "north korea"], [
+        "government building architecture capitol",
+        "globe world map aerial abstract",
+        "chess strategy game concept",
+        "embassy flag architecture diplomatic",
+    ]),
     # Generic vulnerability
-    (["zero day", "zero-day", "cve-", "exploit", "vulnerability", "patch"],
-     "cybersecurity vulnerability lock crack code"),
+    (["zero day", "zero-day", "cve-", "exploit", "vulnerability", "patch"], [
+        "cracked wall concrete texture abstract",
+        "bridge inspection engineer architecture",
+        "x-ray medical scan abstract",
+        "magnifying glass inspection detail",
+    ]),
 ]
 
 # First Look: Security — threshold and classification
@@ -621,8 +730,9 @@ def _extract_vendor(title: str) -> str:
 def _image_query(title: str, categories: list) -> str:
     """Build a diverse image search query for this article."""
     text = title.lower()
-    for keywords, query in IMAGE_KEYWORD_MAP:
+    for keywords, queries in IMAGE_KEYWORD_MAP:
         if any(kw in text for kw in keywords):
+            query = random.choice(queries)
             vendor = _extract_vendor(title)
             if vendor:
                 return f"{vendor} {query}"

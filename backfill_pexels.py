@@ -24,6 +24,7 @@ Requirements:
 import argparse
 import logging
 import os
+import random
 import re
 import sys
 from pathlib import Path
@@ -38,42 +39,127 @@ POSTS_DIR = Path(__file__).parent / "hugo-site" / "content" / "posts"
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 
 # Keyword map — same as pipeline.py
-PEXELS_KEYWORD_MAP: list[tuple[list[str], str]] = [
-    (["ransomware", "ransom"],                "ransomware cyber attack locked computer"),
-    (["phishing", "spear-phishing"],          "phishing email scam hacker"),
-    (["vulnerability", "cve", "patch", "zero-day", "zero day"],
-                                               "software vulnerability security patch"),
-    (["llm", "large language model", "gpt", "chatgpt", "ai model"],
-                                               "artificial intelligence neural network digital"),
-    (["prompt injection", "jailbreak"],        "ai robot hacking digital injection"),
-    (["supply chain", "third-party", "dependency"],
-                                               "supply chain logistics network connected"),
-    (["malware", "trojan", "backdoor", "rootkit"],
-                                               "malware computer virus dark hacker"),
-    (["data breach", "data leak", "exposed data", "leaked"],
-                                               "data breach privacy leak digital"),
-    (["nation state", "apt", "state-sponsored", "espionage"],
-                                               "espionage surveillance government hacker"),
-    (["deepfake", "synthetic media", "disinformation"],
-                                               "deepfake artificial face digital manipulation"),
-    (["critical infrastructure", "power grid", "scada", "ics"],
-                                               "critical infrastructure power grid industrial"),
-    (["cloud", "aws", "azure", "gcp", "misconfiguration"],
-                                               "cloud computing server data center"),
-    (["social engineering", "impersonation", "pretexting"],
-                                               "social engineering manipulation deception"),
-    (["encryption", "cryptography", "key", "cipher"],
-                                               "encryption cryptography digital security lock"),
-    (["api", "authentication", "oauth", "jwt", "credential"],
-                                               "api authentication security access control"),
-    (["botnet", "ddos", "distributed"],        "botnet network attack servers"),
-    (["insider threat", "insider"],            "insider threat office security monitoring"),
-    (["mobile", "android", "ios", "smartphone"],
-                                               "mobile phone security hacking smartphone"),
-    (["iot", "embedded", "firmware", "hardware"],
-                                               "iot internet of things devices connected"),
-    (["regulation", "compliance", "gdpr", "nist", "framework"],
-                                               "compliance regulation business security policy"),
+PEXELS_KEYWORD_MAP: list[tuple[list[str], list[str]]] = [
+    (["ransomware", "ransom"], [
+        "chains broken industrial abstract",
+        "red alert warning lights abstract",
+        "factory shutdown industrial abandoned",
+        "wildfire forest destruction aerial",
+    ]),
+    (["phishing", "spear-phishing"], [
+        "fishing boat ocean water aerial",
+        "bait hook fishing nature",
+        "impersonation theater mask stage",
+        "trust handshake business meeting",
+    ]),
+    (["vulnerability", "cve", "patch", "zero-day", "zero day"], [
+        "cracked wall concrete texture abstract",
+        "bridge inspection engineer architecture",
+        "magnifying glass inspection detail",
+        "x-ray medical scan abstract",
+    ]),
+    (["llm", "large language model", "gpt", "chatgpt", "ai model"], [
+        "library books knowledge rows",
+        "text typography abstract letters",
+        "conversation speech bubbles abstract",
+        "neural pattern abstract network light",
+    ]),
+    (["prompt injection", "jailbreak"], [
+        "maze labyrinth escape abstract",
+        "puzzle pieces misfit concept",
+        "broken fence gap abstract light",
+        "code terminal text abstract",
+    ]),
+    (["supply chain", "third-party", "dependency"], [
+        "cargo ship port aerial logistics",
+        "assembly line factory industrial",
+        "domino effect sequence abstract",
+        "jigsaw puzzle pieces fitting",
+    ]),
+    (["malware", "trojan", "backdoor", "rootkit"], [
+        "microscope biology cell abstract",
+        "parasite nature close-up macro",
+        "hidden passage secret door architecture",
+        "contamination hazmat warning abstract",
+    ]),
+    (["data breach", "data leak", "exposed data", "leaked"], [
+        "water leak pipe burst abstract",
+        "open vault empty bank abstract",
+        "envelope letter open abstract",
+        "sieve colander kitchen abstract",
+    ]),
+    (["nation state", "apt", "state-sponsored", "espionage"], [
+        "government building architecture capitol",
+        "globe world map aerial abstract",
+        "chess strategy game concept",
+        "embassy flag architecture diplomatic",
+    ]),
+    (["deepfake", "synthetic media", "disinformation"], [
+        "mirror reflection distorted abstract",
+        "mask theater disguise concept",
+        "doppelganger shadow silhouette",
+        "wax sculpture face art",
+    ]),
+    (["critical infrastructure", "power grid", "scada", "ics"], [
+        "power plant aerial industrial",
+        "pipeline oil gas industrial landscape",
+        "dam water infrastructure aerial",
+        "wind turbine farm landscape",
+    ]),
+    (["cloud", "aws", "azure", "gcp", "misconfiguration"], [
+        "data center aerial architecture",
+        "sky clouds aerial sunlight",
+        "warehouse storage containers aerial",
+        "server rack abstract blue light",
+    ]),
+    (["social engineering", "impersonation", "pretexting"], [
+        "shadow silhouette following urban",
+        "theater stage performance acting",
+        "mask disguise costume carnival",
+        "puppet strings control abstract",
+    ]),
+    (["encryption", "cryptography", "key", "cipher"], [
+        "key collection vintage macro",
+        "envelope wax seal letter",
+        "safe vault combination lock",
+        "ancient code hieroglyphics abstract",
+    ]),
+    (["api", "authentication", "oauth", "jwt", "credential"], [
+        "electrical plug socket connection abstract",
+        "fingerprint biometric close-up",
+        "identity card badge close-up",
+        "train tracks junction intersection",
+    ]),
+    (["botnet", "ddos", "distributed"], [
+        "traffic jam highway aerial",
+        "crowd rush stampede abstract",
+        "flood wave overwhelming abstract",
+        "flock birds murmuration aerial",
+    ]),
+    (["insider threat", "insider"], [
+        "empty office corridor perspective",
+        "shadow person silhouette window",
+        "surveillance mirror office abstract",
+        "confidential folder desk abstract",
+    ]),
+    (["mobile", "android", "ios", "smartphone"], [
+        "smartphone screen glow abstract",
+        "hand holding device close-up",
+        "mobile app interface modern",
+        "wireless signal tower landscape",
+    ]),
+    (["iot", "embedded", "firmware", "hardware"], [
+        "circuit board macro electronics",
+        "smart home interior modern",
+        "antenna radio tower landscape",
+        "electronic components soldering macro",
+    ]),
+    (["regulation", "compliance", "gdpr", "nist", "framework"], [
+        "courthouse architecture columns",
+        "contract document signing abstract",
+        "scales justice balance architecture",
+        "blueprint technical drawing engineering",
+    ]),
 ]
 
 
@@ -90,9 +176,9 @@ log = logging.getLogger("backfill")
 def _pexels_query(title: str, categories: list) -> str:
     """Build the best Pexels search query for this article."""
     text = title.lower()
-    for keywords, query in PEXELS_KEYWORD_MAP:
+    for keywords, queries in PEXELS_KEYWORD_MAP:
         if any(kw in text for kw in keywords):
-            return query
+            return random.choice(queries)
     if categories:
         cat = categories[0].replace("-", " ")
         return f"{cat} cybersecurity technology"
