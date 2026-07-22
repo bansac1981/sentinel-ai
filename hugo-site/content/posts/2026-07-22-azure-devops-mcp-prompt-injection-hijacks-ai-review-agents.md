@@ -1,6 +1,6 @@
 ---
 title: "Azure DevOps MCP Prompt Injection Hijacks AI Review Agents"
-date: 2026-07-22T13:39:40+00:00
+date: "2026-07-22T13:45:40+00:00"
 draft: false
 slug: "azure-devops-mcp-prompt-injection-hijacks-ai-review-agents"
 
