@@ -1225,77 +1225,83 @@ def build_slug(title: str, published: datetime) -> str:
 
 
 # ── Story deduplication helpers ────────────────────────────────────────────────
-# Strategy: entity + event-type fingerprint.
-# An article is a duplicate if it shares at least one SPECIFIC named entity AND
-# at least one event type with an existing post/draft from the past STORY_WINDOW_DAYS.
-# "Broad" platform names (aws, google…) alone aren't specific enough — they require
-# 2+ shared event types to fire, preventing false positives across unrelated stories.
+# Strategy: hybrid entity-substring matching + Jaccard word similarity.
+# Fires if ANY of:
+#   (a) 2+ shared entities (substring-matched) — same story, regardless of phrasing
+#   (b) 1 shared entity + Jaccard similarity >= 0.35 on meaningful words
+#   (c) Jaccard >= 0.55 with no entity signal — catches fully reworded titles
 
-_STORY_ENTITIES = {
-    "anthropic", "openai", "google", "deepmind", "microsoft", "nvidia",
-    "cloudflare", "aws", "amazon", "apple", "meta", "huggingface", "github",
-    "cisco", "crowdstrike", "samsung", "sagemaker", "bedrock", "claude",
-    "chatgpt", "gemini", "llama", "mistral", "fable", "mythos", "copilot",
-    "codex", "talos", "adobe", "agentcore", "difytap", "apertus", "vbdec",
-    "trail", "hermes", "glm", "swiss",
-}
+_STORY_ENTITIES = [
+    "anthropic", "openai", "deepmind", "microsoft", "nvidia",
+    "cloudflare", "amazon", "apple", "meta ai",
+    "hugging face", "huggingface",
+    "github", "cisco", "crowdstrike", "samsung", "sagemaker", "bedrock",
+    "claude", "chatgpt", "gemini", "llama", "mistral", "copilot",
+    "codex", "talos", "adobe", "agentcore",
+    "palo alto", "unit 42", "sentinelone", "mandiant", "qualys",
+    "check point", "checkpoint",
+]
 
-# Platform names that appear in many unrelated stories — require stronger signal
-_BROAD_ENTITIES = frozenset({"aws", "amazon", "google", "microsoft", "meta", "openai"})
+_STOPWORDS = frozenset({
+    "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for",
+    "of", "with", "by", "from", "is", "are", "was", "were", "be", "been",
+    "its", "it", "this", "that", "how", "what", "why", "when", "where",
+    "says", "said", "new", "has", "have", "had", "via", "during", "after",
+    "can", "could", "will", "would", "may", "might", "should", "about",
+    "into", "over", "than", "then", "also", "just", "more", "most", "all",
+})
 
-_EVENT_SYNONYMS = {
-    "ban": "restriction",       "bans": "restriction",       "banned": "restriction",
-    "export": "restriction",    "controls": "restriction",   "restricted": "restriction",
-    "shutdown": "restriction",  "blocked": "restriction",    "sanctions": "restriction",
-    "jailbreak": "bypass",      "bypass": "bypass",          "guardrail": "bypass",
-    "vulnerability": "vuln",    "flaw": "vuln",              "exploit": "vuln",
-    "cve": "vuln",              "zero-day": "vuln",
-    "breach": "breach",         "leak": "breach",            "exfiltration": "breach",
-    "stolen": "breach",         "theft": "breach",
-    "malware": "malware",       "trojan": "malware",         "backdoor": "malware",
-    "ransomware": "malware",    "botnet": "malware",
-    "supply": "supply-chain",   "chain": "supply-chain",     "trojan": "supply-chain",
-    "launch": "release",        "launches": "release",       "releases": "release",
-    "ships": "release",         "announces": "release",      "rolls": "release",
-    "deploys": "release",       "introduces": "release",     "unveils": "release",
-    "temporary": "temp-accounts",  "accountless": "temp-accounts",
-    "identity": "identity",     "verification": "identity",  "credential": "identity",
-    "injection": "prompt-injection",
-    "poisoning": "data-poisoning",
-}
-
-_STORY_MIN_TOKENS = 2  # minimum tokens to bother comparing
+JACCARD_ENTITY_THRESHOLD = 0.35
+JACCARD_NO_ENTITY_THRESHOLD = 0.55
 
 
-def _story_fingerprint(title: str) -> tuple[frozenset, frozenset]:
-    """Return (entities, event_types) extracted from a title."""
-    words = re.findall(r"[a-z0-9]+", title.lower())
-    entities = frozenset(w for w in words if w in _STORY_ENTITIES)
-    events = frozenset(_EVENT_SYNONYMS[w] for w in words if w in _EVENT_SYNONYMS)
-    return entities, events
+def _extract_entities(title: str) -> frozenset:
+    """Substring-based entity detection — handles multi-word names."""
+    text = title.lower()
+    return frozenset(e for e in _STORY_ENTITIES if e in text)
 
 
-def _fingerprint_match(title_a: str, title_b: str, url_a: str = "", url_b: str = "") -> bool:
+def _title_words(title: str) -> set:
+    """Extract meaningful words (lowercase, no stopwords, length >= 3)."""
+    words = set(re.findall(r"[a-z0-9]+", title.lower()))
+    return {w for w in words if w not in _STOPWORDS and len(w) >= 3}
+
+
+def _jaccard(a: set, b: set) -> float:
+    """Jaccard similarity coefficient."""
+    if not a or not b:
+        return 0.0
+    return len(a & b) / len(a | b)
+
+
+def _story_match(title_a: str, title_b: str) -> bool:
     """Return True if the two titles describe the same story."""
-    if url_a and url_b and canonicalize_url(url_a) == canonicalize_url(url_b):
+    ent_a = _extract_entities(title_a)
+    ent_b = _extract_entities(title_b)
+    shared_ent = ent_a & ent_b
+
+    # (a) Two+ shared entities = almost certainly same story
+    if len(shared_ent) >= 2:
         return True
-    e1, ev1 = _story_fingerprint(title_a)
-    e2, ev2 = _story_fingerprint(title_b)
-    shared_entities = e1 & e2
-    shared_events = ev1 & ev2
-    if not shared_entities or not shared_events:
-        return False
-    # Broad-only entity match needs 2+ shared event types to avoid false positives
-    specific_shared = shared_entities - _BROAD_ENTITIES
-    if not specific_shared and len(shared_events) < 2:
-        return False
-    return True
+
+    # (b) One shared entity + moderate word overlap
+    if shared_ent:
+        sim = _jaccard(_title_words(title_a), _title_words(title_b))
+        if sim >= JACCARD_ENTITY_THRESHOLD:
+            return True
+
+    # (c) Very high word overlap even without entity signal
+    sim = _jaccard(_title_words(title_a), _title_words(title_b))
+    if sim >= JACCARD_NO_ENTITY_THRESHOLD:
+        return True
+
+    return False
 
 
 def build_story_index(log: logging.Logger) -> list[tuple[str, str]]:
     """
     Build a list of (title, filepath) for existing posts/drafts within STORY_WINDOW_DAYS.
-    Used to fingerprint-match incoming articles against already-published content.
+    Used to match incoming articles against already-published content.
     """
     from datetime import timedelta
     cutoff = datetime.now(timezone.utc) - timedelta(days=STORY_WINDOW_DAYS)
@@ -1323,8 +1329,7 @@ def build_story_index(log: logging.Logger) -> list[tuple[str, str]]:
             for line in head:
                 if line.startswith("title:"):
                     title = line.split(":", 1)[1].strip().strip('"').strip("'")
-                    e, ev = _story_fingerprint(title)
-                    if e or ev:
+                    if title:
                         index.append((title, str(f)))
                     break
     log.info(f"Story index: {len(index)} posts/drafts from last {STORY_WINDOW_DAYS} days")
@@ -1355,12 +1360,9 @@ def build_source_url_index() -> set:
 
 
 def is_story_duplicate(title: str, story_index: list[tuple[str, str]], log: logging.Logger) -> bool:
-    """Return True if this title matches an already-indexed story via entity+event fingerprint."""
-    e, ev = _story_fingerprint(title)
-    if not e and not ev:
-        return False  # no signal to compare — let it through
+    """Return True if this title matches an already-indexed story via entity + Jaccard similarity."""
     for existing_title, filepath in story_index:
-        if _fingerprint_match(title, existing_title):
+        if _story_match(title, existing_title):
             log.info(f"  ↓ Story duplicate: matches '{Path(filepath).name}'")
             return True
     return False
@@ -1774,10 +1776,8 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
                 stats["threat_report_written"] += 1
             # Add new slug to index so subsequent articles in the same run can see it
             existing_slugs.add(slug)
-            # Fix 3c: add to story index so same-run duplicates are also caught
-            e, ev = _story_fingerprint(slug_title)
-            if e or ev:
-                story_index.append((slug_title, slug))
+            # Add to story index so same-run duplicates are also caught
+            story_index.append((slug_title, slug))
         else:
             stats["errors"] += 1
 
