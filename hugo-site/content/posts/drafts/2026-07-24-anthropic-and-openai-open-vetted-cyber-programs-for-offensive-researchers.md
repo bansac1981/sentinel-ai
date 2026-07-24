@@ -1,7 +1,7 @@
 ---
 title: "Anthropic and OpenAI Open Vetted Cyber Programs for Offensive Researchers"
 date: 2026-07-24T07:07:30+00:00
-draft: true
+draft: false 
 slug: "anthropic-and-openai-open-vetted-cyber-programs-for-offensive-researchers"
 
 # ── Content metadata ──
