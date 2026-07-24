@@ -1,7 +1,7 @@
 ---
 title: "AgentForger Flaw Lets Attackers Plant Invisible AI Agents in Orgs"
 date: 2026-07-24T05:39:41+00:00
-draft: true
+draft: false
 slug: "agentforger-flaw-lets-attackers-plant-invisible-ai-agents-in-orgs"
 
 # ── Content metadata ──
