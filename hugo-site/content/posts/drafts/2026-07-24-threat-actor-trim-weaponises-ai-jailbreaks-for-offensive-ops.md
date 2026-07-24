@@ -1,7 +1,7 @@
 ---
 title: "Threat Actor Trim Weaponises AI Jailbreaks for Offensive Ops"
 date: 2026-07-24T05:42:17+00:00
-draft: true
+draft: false 
 slug: "threat-actor-trim-weaponises-ai-jailbreaks-for-offensive-ops"
 
 # ── Content metadata ──
