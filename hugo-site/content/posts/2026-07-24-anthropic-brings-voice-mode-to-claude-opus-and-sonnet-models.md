@@ -1,6 +1,6 @@
 ---
 title: "Anthropic Brings Voice Mode to Claude Opus and Sonnet Models"
-date: 2026-07-24T07:10:35+00:00
+date: "2026-07-24T09:16:40+00:00"
 draft: false 
 slug: "anthropic-brings-voice-mode-to-claude-opus-and-sonnet-models"
 
