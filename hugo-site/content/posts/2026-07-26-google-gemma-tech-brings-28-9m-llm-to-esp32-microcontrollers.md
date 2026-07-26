@@ -1,6 +1,6 @@
 ---
 title: "Google Gemma Tech Brings 28.9M LLM to ESP32 Microcontrollers"
-date: 2026-07-26T10:48:42+00:00
+date: "2026-07-26T12:18:51+00:00"
 draft: false 
 slug: "google-gemma-tech-brings-28-9m-llm-to-esp32-microcontrollers"
 
