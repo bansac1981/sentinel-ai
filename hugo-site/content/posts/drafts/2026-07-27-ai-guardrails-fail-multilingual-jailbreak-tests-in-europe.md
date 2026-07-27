@@ -1,7 +1,7 @@
 ---
 title: "AI Guardrails Fail Multilingual Jailbreak Tests in Europe"
 date: 2026-07-27T08:21:56+00:00
-draft: true
+draft: false
 slug: "ai-guardrails-fail-multilingual-jailbreak-tests-in-europe"
 
 # ── Content metadata ──
