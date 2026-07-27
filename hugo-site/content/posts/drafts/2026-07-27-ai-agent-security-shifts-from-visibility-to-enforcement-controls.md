@@ -1,7 +1,7 @@
 ---
 title: "AI Agent Security Shifts From Visibility to Enforcement Controls"
 date: 2026-07-27T08:21:21+00:00
-draft: true
+draft: false
 slug: "ai-agent-security-shifts-from-visibility-to-enforcement-controls"
 
 # ── Content metadata ──
