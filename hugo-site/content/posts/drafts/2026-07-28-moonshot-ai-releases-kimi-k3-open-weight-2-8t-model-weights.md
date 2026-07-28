@@ -1,7 +1,7 @@
 ---
 title: "Moonshot AI Releases Kimi K3 Open-Weight 2.8T Model Weights"
 date: 2026-07-28T08:17:03+00:00
-draft: true
+draft: false 
 slug: "moonshot-ai-releases-kimi-k3-open-weight-2-8t-model-weights"
 
 # ── Content metadata ──
