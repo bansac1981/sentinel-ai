@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Launches MAI-Cyber-1-Flash Inside MDASH Platform"
 date: 2026-07-28T08:15:14+00:00
-draft: true
+draft: false 
 slug: "microsoft-launches-mai-cyber-1-flash-inside-mdash-platform"
 
 # ── Content metadata ──
