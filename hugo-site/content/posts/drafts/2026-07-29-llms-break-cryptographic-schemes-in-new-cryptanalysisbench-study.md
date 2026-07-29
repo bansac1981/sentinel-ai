@@ -1,7 +1,7 @@
 ---
 title: "LLMs Break Cryptographic Schemes in New CryptanalysisBench Study"
 date: 2026-07-29T07:24:40+00:00
-draft: true
+draft: false
 slug: "llms-break-cryptographic-schemes-in-new-cryptanalysisbench-study"
 
 # ── Content metadata ──
