@@ -1,6 +1,6 @@
 ---
 title: "Perplexity Launches Personal Computer AI Agent for Windows PCs"
-date: 2026-07-29T08:14:45+00:00
+date: "2026-07-29T09:16:06+00:00"
 draft: false 
 slug: "perplexity-launches-personal-computer-ai-agent-for-windows-pcs"
 
