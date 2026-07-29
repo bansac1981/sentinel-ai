@@ -1,7 +1,7 @@
 ---
 title: "AWS AgentCore Gateway Adds Support for MCP 2026-07-28 Spec"
 date: 2026-07-29T08:13:09+00:00
-draft: true
+draft: false 
 slug: "aws-agentcore-gateway-adds-support-for-mcp-2026-07-28-spec"
 
 # ── Content metadata ──
