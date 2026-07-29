@@ -1,7 +1,7 @@
 ---
 title: "Google Gemini API Adds Hooks, Budget Controls, and 3.6 Flash Agents"
 date: 2026-07-29T08:13:56+00:00
-draft: true
+draft: false 
 slug: "google-gemini-api-adds-hooks-budget-controls-and-3-6-flash-agents"
 
 # ── Content metadata ──
