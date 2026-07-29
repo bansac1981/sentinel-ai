@@ -107,6 +107,7 @@
     "https://aws.amazon.com/blogs/machine-learning/get-back-hours-every-day-with-autonomous-agents-in-amazon-quick/",
     "https://aws.amazon.com/blogs/machine-learning/hands-free-first-notice-of-loss-using-strands-agents-and-amazon-bedrock-agentcore-browser-tool-for-intelligent-claims-intake/",
     "https://aws.amazon.com/blogs/machine-learning/hipporag-neurobiologically-inspired-rag-using-amazon-bedrock-amazon-neptune-and-personalized-pagerank",
+    "https://aws.amazon.com/blogs/machine-learning/how-agentcore-gateway-supports-the-mcp-2026-07-28-spec",
     "https://aws.amazon.com/blogs/machine-learning/how-couchbase-built-a-multi-model-ai-architecture-for-capella-iq-with-amazon-bedrock",
     "https://aws.amazon.com/blogs/machine-learning/how-frontier-teams-are-reinventing-ai-native-development/",
     "https://aws.amazon.com/blogs/machine-learning/how-guardoc-transforms-medical-document-processing-with-amazon-nova-models",
@@ -167,6 +168,7 @@
     "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-for-disease-management-in-nature/",
     "https://blog.google/innovation-and-ai/technology/ai/full-stack-ai-explainer",
     "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-june-2026",
+    "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks",
     "https://blog.google/innovation-and-ai/technology/research/understanding-the-ai-economy",
     "https://blog.google/products-and-platforms/platforms/android/galaxy-unpacked-2026",
     "https://blog.google/products-and-platforms/products/education/nyc-ai-summit",
@@ -1659,6 +1661,7 @@
     "https://www.darkreading.com/vulnerabilities-threats/winner-dominant-malware-delivery-clickfix",
     "https://www.darpa.mil/news/2026/darpa-us-air-force-fly-ai-controlled-f-16",
     "https://www.debian.org/vote/2026/vote_002",
+    "https://www.dropsitenews.com/p/israel-brad-parscale-ai-chatbots-gaza",
     "https://www.economist.com/business/2026/06/14/companies-are-scrambling-to-curtail-soaring-ai-costs",
     "https://www.economist.com/finance-and-economics/2026/07/28/ai-revenues-are-growing-fast-but-not-fast-enough",
     "https://www.economist.com/leaders/2026/06/25/the-ai-backlash-is-only-getting-started",
@@ -2063,7 +2066,9 @@
     "https://www.theverge.com/ai-artificial-intelligence/971281/nvidia-open-secure-ai-alliance-cybersecurity",
     "https://www.theverge.com/ai-artificial-intelligence/971444/how-chinese-open-weight-ai-models-impact-us-companies",
     "https://www.theverge.com/ai-artificial-intelligence/971723/hugging-face-nudify-deepfake-undress-women-children",
+    "https://www.theverge.com/ai-artificial-intelligence/971750/perplexity-personal-computer-windows-ai-agents",
     "https://www.theverge.com/ai-artificial-intelligence/972119/ai-stock-fall-google-capex",
+    "https://www.theverge.com/ai-artificial-intelligence/972161/ai-leaders-us-government-openai-anthropic-google-meta",
     "https://www.theverge.com/column/959433/libby-ai-filter",
     "https://www.theverge.com/column/961707/smart-glasses-ai-wearables-meta-surveillance-privacy",
     "https://www.theverge.com/column/963346/ai-data-centers-fight",
@@ -2072,6 +2077,7 @@
     "https://www.theverge.com/gadgets/950229/qualcomm-snapdragon-reality-elite-xr-smart-glasses-wearables",
     "https://www.theverge.com/gadgets/955537/google-home-smart-speaker-hands-on",
     "https://www.theverge.com/gadgets/959899/meta-ai-glasses-paywall-rate-limit",
+    "https://www.theverge.com/gadgets/971744/smart-ring-ai-gadget-stream-index",
     "https://www.theverge.com/news/961528/microsoft-layoffs-july-2026-sales-xbox",
     "https://www.theverge.com/podcast/949195/skydio-ceo-adam-bry-autonmous-drones-china-red-lines-military",
     "https://www.theverge.com/podcast/951542/anthropic-claude-fable-5-mythos-ban-pentagon-ai-regulation-trump",
@@ -2188,5 +2194,5 @@
     "https://xcancel.com/coinbureau/status/2071330294452666695",
     "https://zcode.z.ai/cn"
   ],
-  "updated_at": "2026-07-29T07:28:11.077888+00:00"
+  "updated_at": "2026-07-29T08:14:49.090763+00:00"
 }
