@@ -1,6 +1,6 @@
 ---
 title: "Meta Plans Billions of Personal AI Agents on WhatsApp"
-date: 2026-07-30T06:59:59+00:00
+date: "2026-07-30T07:30:14+00:00"
 draft: false
 slug: "meta-plans-billions-of-personal-ai-agents-on-whatsapp"
 
