@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Copilot Super App Merges Chat, Code, and Agents"
 date: 2026-07-30T07:01:43+00:00
-draft: true
+draft: false
 slug: "microsoft-copilot-super-app-merges-chat-code-and-agents"
 
 # ── Content metadata ──
