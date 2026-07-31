@@ -1,7 +1,7 @@
 ---
 title: "Claude Hacked 3 Organizations in Misconfigured AI Security Tests"
 date: 2026-07-31T04:20:01+00:00
-draft: true
+draft: false 
 slug: "claude-hacked-3-organizations-in-misconfigured-ai-security-tests"
 
 # ── Content metadata ──
