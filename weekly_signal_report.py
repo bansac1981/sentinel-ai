@@ -508,14 +508,13 @@ Based on this data, generate a comprehensive intelligence report with the follow
 {{
   "headline": "A catchy, concise headline (max 12 words) that captures the week's dominant theme — like a newspaper headline. Example: 'AI Goes Offensive: From Research to Real-World Attacks'. Do NOT include the week number.",
   "story_hook": "2-3 short paragraphs (max 200 words total) that open the report like a compelling intelligence briefing. Lead with the 2-3 most significant stories of the week — name the events, the actors, and why they matter. This should read like the opening of a Reuters or Bloomberg intelligence report: punchy, specific, immediately grabs a senior security leader's attention. Reference specific article titles and findings. End with a single sentence framing what the rest of the report will unpack.",
-  "executive_summary": "3-4 paragraphs analysing this week's dominant themes, patterns, and what's shifting in the AI threat landscape. Write in analytical prose, not bullet points. Identify what's accelerating and decelerating. Be specific — reference actual technique IDs, threat actors, and article findings.",
-  "enterprise_focus": ["3-5 bullet points for CISOs. Each should be a concrete, actionable recommendation grounded in this week's data. Not generic security advice — specific to what THIS week's signal tells us."],
-  "trajectory_watch": "2-3 paragraphs on where things are heading based on the trend data. What's the 4-8 week outlook? What should security teams be preparing for that hasn't yet materialised as a headline?",
-  "blind_spots": "2 paragraphs identifying quiet-but-risky areas. What SHOULD be getting attention based on the underlying data but ISN'T making headlines? What attack surfaces are being ignored?",
-  "attack_chain_analysis": "2-3 paragraphs analysing how MITRE ATLAS techniques are chaining together in this week's incidents. Which technique combinations represent coherent attack narratives? What does the co-occurrence data tell us about adversary operational patterns?",
+  "executive_summary": "2 short paragraphs (max 120 words total) analysing this week's dominant themes and what's shifting. Be specific — reference technique IDs and findings. No filler.",
+  "enterprise_focus": ["3-4 bullet points for CISOs. One sentence each — concrete and specific to THIS week's data."],
+  "trajectory_watch": "1 short paragraph (max 80 words) on the 4-8 week outlook. What should security teams prepare for?",
+  "attack_chain_analysis": "1 short paragraph (max 80 words) on how MITRE ATLAS techniques chain together this week. Reference specific technique pairs from the co-occurrence data.",
   "attack_chain_mermaid": "A Mermaid flowchart diagram (flowchart LR) showing the dominant attack chain patterns. Use subgraphs for 'Initial Access', 'Exploitation', and 'Impact'. Nodes should use MITRE technique IDs with brief labels (e.g. T0047[AML.T0047<br/>ML-Enabled Product]). Edges should have short descriptive labels. Keep it to 4-7 nodes maximum. Output ONLY the mermaid code, no code fences.",
-  "readiness_score": "1-2 paragraphs providing an enterprise readiness assessment. Which threats from this week have readily available mitigations vs. which are novel with no established defence? Assign an overall readiness grade (A-F) with justification.",
-  "geographic_sector_analysis": "1-2 paragraphs on geographic and sector targeting patterns inferred from article content. Which regions or industries appear most targeted? Any shifts in targeting?"
+  "readiness_score": "1 short paragraph (max 60 words) with an enterprise readiness grade (A-F) and 1-2 sentence justification.",
+  "geographic_sector_analysis": "1 short paragraph (max 60 words) on geographic and sector targeting patterns this week."
 }}
 
 IMPORTANT:
@@ -524,6 +523,7 @@ IMPORTANT:
 - Use framework language (MITRE ATLAS technique IDs, OWASP LLM category codes) precisely.
 - The "so what" must be clear: what does this mean for an enterprise security programme?
 - Write in British English spelling (analyse, defence, organisation, etc.)
+- BREVITY IS CRITICAL: the total article (excluding story_hook) must fit in a 5-minute read (~800-1000 words). Every section has a word cap — respect them strictly. No padding, no filler sentences.
 - Output ONLY the JSON object. No markdown code fences, no preamble."""
 
     client = Anthropic(api_key=ANTHROPIC_API_KEY)
@@ -828,14 +828,8 @@ def generate_hugo_article(
     date_str = now.strftime("%Y-%m-%d")
     week_lower = week_label.lower().replace("-", "")  # e.g. "2026w31"
 
-    # Estimate reading time (~200 words per minute)
-    content_words = len(narrative.get("executive_summary", "").split()) + \
-                    len(narrative.get("trajectory_watch", "").split()) + \
-                    len(narrative.get("blind_spots", "").split()) + \
-                    len(narrative.get("attack_chain_analysis", "").split()) + \
-                    len(narrative.get("readiness_score", "").split()) + \
-                    len(narrative.get("geographic_sector_analysis", "").split())
-    reading_time = max(5, content_words // 200 + 3)  # Add 3 min for data sections
+    # Reading time — target 5 minutes
+    reading_time = 5
 
     # Build chart data JSON
     chart_data = build_chart_data(analytics, wow, articles)
@@ -916,30 +910,6 @@ tags: {tags_yaml}
 
 ---
 
-## Enterprise Focus Areas
-
-{enterprise_bullets}
-
----
-
-## Week-over-Week Changes
-
-{wow_section}
-
----
-
-## Trajectory Watch
-
-{narrative.get("trajectory_watch", "No trajectory analysis available.")}
-
----
-
-## Emerging Blind Spots
-
-{narrative.get("blind_spots", "No blind spot analysis available.")}
-
----
-
 ## Attack Chain Analysis
 
 ```mermaid
@@ -947,6 +917,18 @@ tags: {tags_yaml}
 ```
 
 {narrative.get("attack_chain_analysis", "No attack chain analysis available.")}
+
+---
+
+## Enterprise Focus Areas
+
+{enterprise_bullets}
+
+---
+
+## Trajectory Watch
+
+{narrative.get("trajectory_watch", "No trajectory analysis available.")}
 
 ---
 
@@ -967,6 +949,12 @@ tags: {tags_yaml}
 | Title | Threat | Relevance | Source |
 |-------|--------|-----------|--------|
 {top_articles_table}
+
+---
+
+## Week-over-Week Changes
+
+{wow_section}
 '''
 
     return markdown
