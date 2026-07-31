@@ -1096,11 +1096,11 @@ tags: {tags_yaml}
 {chart_json}
 </div>
 
-<div class="ds-article__hero" style="margin:0.5rem 0;">
+<div class="ds-article__hero" style="margin:1.5rem 0;">
   <img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
 </div>
 
-<div class="ds-article__hero" style="margin:0.5rem 0;">
+<div class="ds-article__hero" style="margin:1.5rem 0;">
   <img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
 </div>
 
