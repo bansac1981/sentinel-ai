@@ -1185,6 +1185,7 @@ def cmd_generate(days: int, use_mock: bool = False, as_draft: bool = False) -> N
     print(f"  History weeks stored: {len(history['weeks'])}")
     print()
     if as_draft:
+        week_lower = label.lower().replace("-", "")
         slug = f"weekly-signal-report-{week_lower}"
         print("  STATUS: DRAFT (not yet published)")
         print()
@@ -1197,6 +1198,7 @@ def cmd_generate(days: int, use_mock: bool = False, as_draft: bool = False) -> N
         print("  To publish after review:")
         print(f"    python weekly_signal_report.py --publish {slug}")
     else:
+        week_lower = label.lower().replace("-", "")
         print("  STATUS: PUBLISHED (draft: false)")
         print(f"  Live at: /deep-signal/weekly-signal-report-{week_lower}/")
     print("=" * 70)
