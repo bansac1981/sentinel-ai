@@ -45,13 +45,14 @@
     <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" class="ds-article__hero-img ds-lightbox-trigger" title="Click to enlarge" tabindex="0" role="button" aria-label="Enlarge diagram">
     <span class="ds-article__hero-hint">click to enlarge</span>
   </div>
+  {{ end }}
 
-  <!-- Lightbox -->
-  <div class="ds-lightbox" id="dsLightbox" aria-hidden="true" role="dialog" aria-label="Enlarged diagram">
+  <!-- Lightbox (supports hero image + any .ds-lightbox-trigger in article body) -->
+  <div class="ds-lightbox" id="dsLightbox" aria-hidden="true" role="dialog" aria-label="Enlarged image">
     <div class="ds-lightbox__backdrop" id="dsLightboxBackdrop"></div>
     <div class="ds-lightbox__box">
       <button class="ds-lightbox__close" id="dsLightboxClose" aria-label="Close">✕</button>
-      <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" class="ds-lightbox__img">
+      <img src="" alt="" class="ds-lightbox__img">
     </div>
   </div>
 
@@ -60,19 +61,27 @@
     var lb       = document.getElementById('dsLightbox');
     var backdrop = document.getElementById('dsLightboxBackdrop');
     var closeBtn = document.getElementById('dsLightboxClose');
-    var trigger  = document.querySelector('.ds-lightbox-trigger');
+    var lbImg    = lb.querySelector('.ds-lightbox__img');
 
-    function open()  { lb.style.display = 'flex'; lb.setAttribute('aria-hidden','false'); document.documentElement.style.overflow = 'hidden'; }
-    function close() { lb.style.display = 'none'; lb.setAttribute('aria-hidden','true');  document.documentElement.style.overflow = ''; }
+    function open(src)  {
+      lbImg.src = src;
+      lb.style.display = 'flex';
+      lb.setAttribute('aria-hidden','false');
+      document.documentElement.style.overflow = 'hidden';
+    }
+    function close() { lb.style.display = 'none'; lb.setAttribute('aria-hidden','true'); document.documentElement.style.overflow = ''; }
 
-    trigger.addEventListener('click', open);
-    trigger.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') open(); });
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('ds-lightbox-trigger')) open(e.target.src);
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.target.classList.contains('ds-lightbox-trigger') && (e.key === 'Enter' || e.key === ' ')) open(e.target.src);
+      if (e.key === 'Escape') close();
+    });
     closeBtn.addEventListener('click', close);
     backdrop.addEventListener('click', close);
-    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
   })();
   </script>
-  {{ end }}
 
   {{/* ── SIGNAL REPORT CHARTS (before article body for visual impact) ── */}}
   {{ if eq .Params.content_type "signal_report" }}

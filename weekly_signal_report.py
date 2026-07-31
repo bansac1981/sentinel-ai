@@ -774,7 +774,7 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
         log.warning("  matplotlib not available — skipping chart generation")
         return
 
-    fig, ax = plt.subplots(1, 1, figsize=(10, 7), dpi=250)
+    fig, ax = plt.subplots(1, 1, figsize=(10, 8), dpi=250)
     fig.patch.set_facecolor('#FFFFFF')
     ax.set_facecolor('#FAFBFC')
 
@@ -881,8 +881,9 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
             color = palette[i % len(palette)]
         legend_items.append(mpatches.Patch(color=color, label=f"{item['id']} {item['label']}"))
 
-    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.1),
-              ncol=3, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
+    ncols = 4 if len(legend_items) > 8 else 3
+    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.08),
+              ncol=ncols, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
 
     plt.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1097,9 +1098,13 @@ tags: {tags_yaml}
 
 {narrative.get("story_hook", "")}
 
-<img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" style="width:100%;border-radius:8px;margin:1.5rem 0;">
+<div class="ds-article__hero" style="margin:1.5rem 0;">
+  <img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
+</div>
 
-<img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" style="width:100%;border-radius:8px;margin:1.5rem 0;">
+<div class="ds-article__hero" style="margin:1.5rem 0;">
+  <img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
+</div>
 
 ---
 
