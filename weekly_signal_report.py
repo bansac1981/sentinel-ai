@@ -774,7 +774,7 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
         log.warning("  matplotlib not available — skipping chart generation")
         return
 
-    fig, ax = plt.subplots(1, 1, figsize=(10, 8), dpi=250)
+    fig, ax = plt.subplots(1, 1, figsize=(12, 6), dpi=250)
     fig.patch.set_facecolor('#FFFFFF')
     ax.set_facecolor('#FAFBFC')
 
