@@ -1,0 +1,817 @@
+{{/*
+  Signal Report Charts — Three-panel threat intelligence visualization
+  1. OWASP LLM Top 10 Quadrant (warm accent)
+  2. MITRE ATLAS Technique Landscape (cool accent)
+  3. Geographic Threat Map (world map + sector bars)
+  Light-themed, presentation-quality, no external dependencies.
+  Only renders when a div#signal-chart-data exists in the page content.
+*/}}
+
+<link rel="stylesheet" href="{{ "css/signal-report.css" | relURL }}">
+
+<div class="signal-tooltip" id="signalTooltip"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var dataEl = document.getElementById('signal-chart-data');
+    if (!dataEl) return;
+
+    var data;
+    try {
+      data = JSON.parse(dataEl.textContent || dataEl.innerText);
+    } catch(e) {
+      console.warn('[Signal Charts] Invalid JSON:', e);
+      return;
+    }
+    if (!data) return;
+
+    // ── Build chart section (OWASP + MITRE only) ──
+    var section = document.createElement('div');
+    section.className = 'signal-charts';
+    section.innerHTML =
+      '<div class="signal-charts__title">Weekly Threat Intelligence</div>' +
+      buildStatsHTML(data.summary_stats) +
+      '<div class="signal-charts__stack">' +
+        // Chart 1: OWASP Warm
+        '<div class="signal-chart signal-chart--warm" id="owaspChart">' +
+          '<div class="signal-chart__header">' +
+            '<span class="signal-chart__label">OWASP LLM Top 10 — Threat Quadrant</span>' +
+            '<span class="signal-chart__badge signal-chart__badge--warm">Frequency vs Relevance</span>' +
+          '</div>' +
+          '<div class="signal-chart__canvas-wrap">' +
+            '<canvas id="owaspCanvas"></canvas>' +
+          '</div>' +
+          '<div class="signal-chart__legend" id="owaspLegend"></div>' +
+          '<div class="signal-chart__actions">' +
+            '<button class="signal-chart__download" data-canvas="owaspCanvas" data-name="owasp-threat-quadrant">Export PNG</button>' +
+          '</div>' +
+        '</div>' +
+        // Chart 2: MITRE Cool
+        '<div class="signal-chart signal-chart--cool" id="mitreChart">' +
+          '<div class="signal-chart__header">' +
+            '<span class="signal-chart__label">MITRE ATLAS — Technique Landscape</span>' +
+            '<span class="signal-chart__badge signal-chart__badge--cool">Frequency vs Relevance</span>' +
+          '</div>' +
+          '<div class="signal-chart__canvas-wrap">' +
+            '<canvas id="mitreCanvas"></canvas>' +
+          '</div>' +
+          '<div class="signal-chart__legend" id="mitreLegend"></div>' +
+          '<div class="signal-chart__actions">' +
+            '<button class="signal-chart__download" data-canvas="mitreCanvas" data-name="mitre-atlas-landscape">Export PNG</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    // Insert before article body
+    var body = document.querySelector('.ds-article__body');
+    if (body && body.parentNode) {
+      body.parentNode.insertBefore(section, body);
+    } else {
+      dataEl.parentNode.insertBefore(section, dataEl.nextSibling);
+    }
+
+    // ── Build Geographic chart separately and insert before "Geographic and Sector Analysis" heading ──
+    var geoSection = document.createElement('div');
+    geoSection.className = 'signal-charts';
+    geoSection.innerHTML =
+      '<div class="signal-charts__stack">' +
+        '<div class="signal-chart signal-chart--geo" id="geoChart">' +
+          '<div class="signal-chart__header">' +
+            '<span class="signal-chart__label">Geographic Threat Distribution</span>' +
+            '<span class="signal-chart__badge signal-chart__badge--geo">Regional Activity</span>' +
+          '</div>' +
+          '<div class="signal-chart__map-wrap" id="geoMapWrap"></div>' +
+          '<div class="signal-chart__sectors" id="sectorBars"></div>' +
+          '<div class="signal-chart__actions">' +
+            '<button class="signal-chart__download" data-canvas="geoOverlayCanvas" data-name="geo-threat-map">Export PNG</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    // Find the "Geographic and Sector Analysis" heading and insert before it
+    var geoInserted = false;
+    if (body) {
+      var headings = body.querySelectorAll('h2');
+      for (var hi = 0; hi < headings.length; hi++) {
+        if (headings[hi].textContent.indexOf('Geographic') !== -1) {
+          headings[hi].parentNode.insertBefore(geoSection, headings[hi]);
+          geoInserted = true;
+          break;
+        }
+      }
+    }
+    if (!geoInserted) {
+      section.querySelector('.signal-charts__stack').appendChild(geoSection.querySelector('.signal-chart--geo'));
+    }
+
+    // ── Shared tooltip reference ──
+    var tooltip = document.getElementById('signalTooltip');
+
+    // ── PNG Download (attach to both sections) ──
+    function attachDownloadHandlers(container) {
+      container.querySelectorAll('.signal-chart__download').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var canvasId = btn.getAttribute('data-canvas');
+          var filename = btn.getAttribute('data-name') + '-' + (data.week || 'report') + '.png';
+          var canvas = document.getElementById(canvasId);
+          if (!canvas) return;
+          var dpr = window.devicePixelRatio || 1;
+          var exportCanvas = document.createElement('canvas');
+          var pad = 32;
+          var brandH = 36;
+          exportCanvas.width = canvas.width + (pad * 2 * dpr);
+          exportCanvas.height = canvas.height + (pad * 2 * dpr) + (brandH * dpr);
+          var ectx = exportCanvas.getContext('2d');
+          ectx.scale(dpr, dpr);
+          ectx.fillStyle = '#FFFFFF';
+          ectx.fillRect(0, 0, exportCanvas.width / dpr, exportCanvas.height / dpr);
+          ectx.drawImage(canvas, pad, pad, canvas.width / dpr, canvas.height / dpr);
+          var bY = pad + (canvas.height / dpr) + 20;
+          ectx.fillStyle = '#64748B';
+          ectx.font = '500 10px "IBM Plex Mono", monospace';
+          ectx.textAlign = 'left';
+          ectx.fillText('gridthegrey.com | AI Security Intelligence', pad, bY);
+          ectx.textAlign = 'right';
+          ectx.fillText(data.week || '', (exportCanvas.width / dpr) - pad, bY);
+          var link = document.createElement('a');
+          link.download = filename;
+          link.href = exportCanvas.toDataURL('image/png');
+          link.click();
+        });
+      });
+    }
+    attachDownloadHandlers(section);
+    attachDownloadHandlers(geoSection);
+
+    // ── Render OWASP Chart ──
+    if (data.owasp_quadrant && data.owasp_quadrant.length > 0) {
+      renderQuadrantChart('owaspCanvas', 'owaspLegend', data.owasp_quadrant, {
+        xLabel: 'Event Frequency',
+        yLabel: 'Avg Relevance Score',
+        palette: OWASP_PALETTE,
+        tooltip: tooltip,
+        quadrantLabels: ['CRITICAL FOCUS', 'EMERGING RISK', 'TRENDING', 'MONITOR'],
+        quadrantTints: [
+          'rgba(230, 57, 70, 0.07)',   // top-right: soft red
+          'rgba(247, 127, 0, 0.06)',   // top-left: soft orange
+          'rgba(251, 191, 36, 0.05)',  // bottom-right: soft amber
+          'rgba(74, 222, 128, 0.05)'   // bottom-left: soft green
+        ],
+        quadrantLabelColors: ['#C0392B', '#E67E22', '#D97706', '#16A34A']
+      });
+    }
+
+    // ── Render MITRE Chart ──
+    if (data.mitre_quadrant && data.mitre_quadrant.length > 0) {
+      renderQuadrantChart('mitreCanvas', 'mitreLegend', data.mitre_quadrant, {
+        xLabel: 'Event Frequency',
+        yLabel: 'Avg Relevance Score',
+        palette: MITRE_PALETTE,
+        tooltip: tooltip,
+        quadrantLabels: ['ACTIVE THREAT', 'NOVEL VECTOR', 'PERSISTENT', 'LATENT'],
+        quadrantTints: [
+          'rgba(99, 48, 195, 0.07)',   // top-right: soft blue-purple
+          'rgba(67, 56, 202, 0.06)',   // top-left: soft indigo
+          'rgba(20, 184, 166, 0.05)',  // bottom-right: soft teal
+          'rgba(34, 211, 238, 0.04)'   // bottom-left: soft cyan
+        ],
+        quadrantLabelColors: ['#6930C3', '#4338CA', '#0D9488', '#06B6D4']
+      });
+    }
+
+    // ── Render Geographic Map ──
+    if (data.geography && data.geography.length > 0) {
+      renderGeoMap('geoMapWrap', data.geography, data.sectors || [], tooltip);
+    }
+  });
+
+  // ══════════════════════════════════════════════════════
+  //  STATS HTML
+  // ══════════════════════════════════════════════════════
+  function buildStatsHTML(stats) {
+    if (!stats) return '';
+    var tl = stats.threat_levels || {};
+    return '<div class="signal-stats">' +
+      statBox(stats.total_articles || 0, 'Events Analysed', true) +
+      statBox((stats.avg_relevance || 0).toFixed(1) + '/10', 'Avg Relevance', false) +
+      statBox(stats.dominant_theme || 'N/A', 'Dominant Theme', false) +
+      statBox((tl.CRITICAL || 0) + (tl.HIGH || 0), 'Critical + High', true) +
+    '</div>';
+  }
+
+  function statBox(value, label, isAccent) {
+    return '<div class="signal-stat">' +
+      '<div class="signal-stat__value' + (isAccent ? ' signal-stat__value--accent' : '') + '">' + value + '</div>' +
+      '<div class="signal-stat__label">' + label + '</div>' +
+    '</div>';
+  }
+
+  // ══════════════════════════════════════════════════════
+  //  COLOR PALETTES
+  // ══════════════════════════════════════════════════════
+  var OWASP_PALETTE = {
+    'LLM01': '#E63946', 'LLM02': '#2A9D8F', 'LLM03': '#6930C3', 'LLM04': '#F77F00',
+    'LLM05': '#264653', 'LLM06': '#E76F51', 'LLM07': '#3B82F6', 'LLM08': '#D946EF',
+    'LLM09': '#059669', 'LLM10': '#7C3AED'
+  };
+
+  var MITRE_PALETTE = {
+    'AML.T0006': '#E63946', 'AML.T0010': '#2A9D8F', 'AML.T0012': '#F59E0B',
+    'AML.T0015': '#7C3AED', 'AML.T0018': '#059669', 'AML.T0019': '#EC4899',
+    'AML.T0020': '#3B82F6', 'AML.T0031': '#D946EF', 'AML.T0040': '#F97316',
+    'AML.T0043': '#264653', 'AML.T0044': '#06B6D4', 'AML.T0047': '#DC2626',
+    'AML.T0051': '#1D4ED8', 'AML.T0054': '#16A34A', 'AML.T0056': '#9333EA',
+    'AML.T0057': '#CA8A04'
+  };
+
+  // ══════════════════════════════════════════════════════
+  //  UTILITIES
+  // ══════════════════════════════════════════════════════
+  function hexToRgba(hex, alpha) {
+    var r = parseInt(hex.slice(1,3),16);
+    var g = parseInt(hex.slice(3,5),16);
+    var b = parseInt(hex.slice(5,7),16);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+  }
+
+  function setupCanvas(canvas, w, h) {
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    return ctx;
+  }
+
+  function lerpColor(c1, c2, t) {
+    var r1 = parseInt(c1.slice(1,3),16), g1 = parseInt(c1.slice(3,5),16), b1 = parseInt(c1.slice(5,7),16);
+    var r2 = parseInt(c2.slice(1,3),16), g2 = parseInt(c2.slice(3,5),16), b2 = parseInt(c2.slice(5,7),16);
+    var r = Math.round(r1 + (r2 - r1) * t);
+    var g = Math.round(g1 + (g2 - g1) * t);
+    var b = Math.round(b1 + (b2 - b1) * t);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+
+  // ══════════════════════════════════════════════════════
+  //  QUADRANT SCATTER/BUBBLE CHART
+  // ══════════════════════════════════════════════════════
+  function renderQuadrantChart(canvasId, legendId, items, opts) {
+    var canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+
+    // Responsive width
+    var container = canvas.parentElement;
+    var W = Math.min(800, container.clientWidth - 32);
+    if (W < 400) W = 400;
+    var H = Math.round(W * 0.65);
+    var pad = { top: 40, right: 40, bottom: 90, left: 62 };
+    var ctx = setupCanvas(canvas, W, H);
+
+    // Relevance range: 0 to 10.0, quadrant center at 5.0
+    var minRel = 0, maxRel = 10.0;
+    var maxFreq = Math.max.apply(null, items.map(function(d) { return d.frequency; }));
+    maxFreq = Math.max(maxFreq, 4);
+    maxFreq = Math.ceil(maxFreq * 1.15);
+
+    var plotW = W - pad.left - pad.right;
+    var plotH = H - pad.top - pad.bottom;
+    var midX = pad.left + (maxFreq / 2) / maxFreq * plotW;
+    var midY = pad.top + plotH - (5.0 / maxRel) * plotH;
+
+    var dots = [];
+
+    function draw(progress) {
+      ctx.clearRect(0, 0, W, H);
+
+      // White background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, W, H);
+
+      // Quadrant fills
+      var qa = progress;
+      // Top-right
+      ctx.fillStyle = opts.quadrantTints[0].replace(/[\d.]+\)$/, (parseFloat(opts.quadrantTints[0].match(/[\d.]+\)$/)[0]) * qa) + ')');
+      ctx.fillRect(midX, pad.top, plotW / 2, plotH / 2);
+      // Top-left
+      ctx.fillStyle = opts.quadrantTints[1].replace(/[\d.]+\)$/, (parseFloat(opts.quadrantTints[1].match(/[\d.]+\)$/)[0]) * qa) + ')');
+      ctx.fillRect(pad.left, pad.top, midX - pad.left, plotH / 2);
+      // Bottom-right
+      ctx.fillStyle = opts.quadrantTints[2].replace(/[\d.]+\)$/, (parseFloat(opts.quadrantTints[2].match(/[\d.]+\)$/)[0]) * qa) + ')');
+      ctx.fillRect(midX, midY, plotW / 2, plotH / 2);
+      // Bottom-left
+      ctx.fillStyle = opts.quadrantTints[3].replace(/[\d.]+\)$/, (parseFloat(opts.quadrantTints[3].match(/[\d.]+\)$/)[0]) * qa) + ')');
+      ctx.fillRect(pad.left, midY, midX - pad.left, plotH / 2);
+
+      // Grid lines
+      ctx.strokeStyle = '#F1F5F9';
+      ctx.lineWidth = 0.5;
+      ctx.setLineDash([]);
+      for (var gi = 0; gi <= 5; gi++) {
+        var gy = pad.top + (gi / 5) * plotH;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, gy);
+        ctx.lineTo(pad.left + plotW, gy);
+        ctx.stroke();
+      }
+      var fStep = Math.ceil(maxFreq / 5);
+      for (var gj = 0; gj <= maxFreq; gj += fStep) {
+        var gx = pad.left + (gj / maxFreq) * plotW;
+        ctx.beginPath();
+        ctx.moveTo(gx, pad.top);
+        ctx.lineTo(gx, pad.top + plotH);
+        ctx.stroke();
+      }
+
+      // Quadrant dividers (dashed)
+      ctx.strokeStyle = '#94A3B8';
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([6, 4]);
+      ctx.beginPath();
+      ctx.moveTo(midX, pad.top); ctx.lineTo(midX, pad.top + plotH);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pad.left, midY); ctx.lineTo(pad.left + plotW, midY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Quadrant labels
+      ctx.font = '700 9px "IBM Plex Mono", monospace';
+      ctx.globalAlpha = 0.6 * progress;
+      ctx.textAlign = 'right';
+      ctx.fillStyle = opts.quadrantLabelColors[0];
+      ctx.fillText(opts.quadrantLabels[0], pad.left + plotW - 8, pad.top + 16);
+      ctx.textAlign = 'left';
+      ctx.fillStyle = opts.quadrantLabelColors[1];
+      ctx.fillText(opts.quadrantLabels[1], pad.left + 8, pad.top + 16);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = opts.quadrantLabelColors[2];
+      ctx.fillText(opts.quadrantLabels[2], pad.left + plotW - 8, pad.top + plotH - 8);
+      ctx.textAlign = 'left';
+      ctx.fillStyle = opts.quadrantLabelColors[3];
+      ctx.fillText(opts.quadrantLabels[3], pad.left + 8, pad.top + plotH - 8);
+      ctx.globalAlpha = 1;
+
+      // Axes
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top);
+      ctx.lineTo(pad.left, pad.top + plotH);
+      ctx.lineTo(pad.left + plotW, pad.top + plotH);
+      ctx.stroke();
+
+      // Axis titles
+      ctx.fillStyle = '#334155';
+      ctx.font = '600 11px "IBM Plex Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(opts.xLabel, pad.left + plotW / 2, pad.top + plotH + 38);
+      ctx.save();
+      ctx.translate(16, pad.top + plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(opts.yLabel, 0, 0);
+      ctx.restore();
+
+      // Y-axis ticks (0 to 10.0)
+      ctx.textAlign = 'right';
+      ctx.font = '500 9px "IBM Plex Mono", monospace';
+      ctx.fillStyle = '#64748B';
+      for (var yi = 0; yi <= 10; yi += 2) {
+        var yy = pad.top + plotH - (yi / maxRel) * plotH;
+        ctx.fillText(yi.toFixed(1), pad.left - 8, yy + 3);
+      }
+
+      // X-axis ticks
+      ctx.textAlign = 'center';
+      for (var xi = 0; xi <= maxFreq; xi += fStep) {
+        var xx = pad.left + (xi / maxFreq) * plotW;
+        ctx.fillText(xi.toString(), xx, pad.top + plotH + 18);
+      }
+
+      // Data points
+      dots = [];
+      items.forEach(function(item, idx) {
+        var delay = idx * 0.04;
+        var dp = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)));
+        if (dp <= 0) return;
+
+        var x = pad.left + (item.frequency / maxFreq) * plotW;
+        var normRel = Math.max(0, Math.min(1, (item.relevance - minRel) / (maxRel - minRel)));
+        var y = pad.top + plotH - normRel * plotH;
+        var radius = Math.max(10, Math.min(30, item.frequency * 2.2)) * dp;
+        var color = (opts.palette && opts.palette[item.id]) || '#888';
+
+        // Drop shadow
+        ctx.shadowColor = hexToRgba(color, 0.35);
+        ctx.shadowBlur = 14;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 5;
+
+        // Filled bubble
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = hexToRgba(color, 0.85 * dp);
+        ctx.fill();
+
+        // Reset shadow
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+
+        // White stroke
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,' + (0.9 * dp) + ')';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // ID label
+        if (dp > 0.4) {
+          ctx.fillStyle = 'rgba(30, 41, 59, ' + (dp * 0.9) + ')';
+          ctx.font = '700 9px "IBM Plex Mono", monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(item.id, x, y - radius - 7);
+        }
+
+        dots.push({ x: x, y: y, r: radius, item: item, color: color });
+      });
+    }
+
+    // Animation — draw immediately then animate on first visibility
+    var animated = false;
+    var startTime = null;
+    function animate(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min(1, (ts - startTime) / 1200);
+      var eased = 1 - Math.pow(1 - p, 3);
+      draw(eased);
+      if (p < 1) requestAnimationFrame(animate);
+    }
+
+    // Draw once immediately so dots array is populated for hover
+    draw(1);
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !animated) {
+          animated = true;
+          startTime = null;
+          requestAnimationFrame(animate);
+          observer.unobserve(canvas);
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(canvas);
+
+    // Build HTML legend below canvas
+    var legendEl = document.getElementById(legendId);
+    if (legendEl) {
+      var legendHTML = '';
+      items.forEach(function(item) {
+        var c = (opts.palette && opts.palette[item.id]) || '#888';
+        legendHTML += '<span class="signal-legend-item">' +
+          '<span class="signal-legend-dot" style="background:' + c + '"></span>' +
+          '<span>' + item.id + ' ' + item.label + '</span>' +
+        '</span>';
+      });
+      legendEl.innerHTML = legendHTML;
+    }
+
+    // Hover tooltip
+    var tip = opts.tooltip;
+    canvas.addEventListener('mousemove', function(e) {
+      var mx = e.offsetX;
+      var my = e.offsetY;
+
+      var hit = null;
+      for (var i = dots.length - 1; i >= 0; i--) {
+        var d = dots[i];
+        var dx = mx - d.x, dy = my - d.y;
+        if ((dx * dx + dy * dy) <= (d.r + 8) * (d.r + 8)) {
+          hit = d; break;
+        }
+      }
+
+      if (hit) {
+        canvas.style.cursor = 'pointer';
+        var chStr = hit.item.change > 0 ? '+' + (hit.item.change * 100).toFixed(0) + '% ↑' :
+                    hit.item.change < 0 ? (hit.item.change * 100).toFixed(0) + '% ↓' : 'stable';
+        var chClass = hit.item.change > 0 ? 'signal-tooltip__change--up' :
+                      hit.item.change < 0 ? 'signal-tooltip__change--down' : 'signal-tooltip__change--neutral';
+        tip.innerHTML =
+          '<div class="signal-tooltip__title">' + hit.item.label + '</div>' +
+          '<div class="signal-tooltip__row"><span>ID:</span><span class="signal-tooltip__value">' + hit.item.id + '</span></div>' +
+          '<div class="signal-tooltip__row"><span>Events:</span><span class="signal-tooltip__value">' + hit.item.frequency + '</span></div>' +
+          '<div class="signal-tooltip__row"><span>Relevance:</span><span class="signal-tooltip__value">' + hit.item.relevance.toFixed(2) + ' / 10</span></div>' +
+          '<div class="signal-tooltip__row"><span>WoW:</span><span class="' + chClass + '">' + chStr + '</span></div>';
+        tip.style.left = (e.clientX + 14) + 'px';
+        tip.style.top = (e.clientY - 10) + 'px';
+        tip.classList.add('signal-tooltip--visible');
+      } else {
+        canvas.style.cursor = 'default';
+        tip.classList.remove('signal-tooltip--visible');
+      }
+    });
+
+    canvas.addEventListener('mouseleave', function() {
+      tip.classList.remove('signal-tooltip--visible');
+    });
+
+    // Responsive resize
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        var newW = Math.min(800, container.clientWidth - 32);
+        if (newW < 400) newW = 400;
+        if (Math.abs(newW - W) > 20) {
+          W = newW;
+          H = Math.round(W * 0.65);
+          plotW = W - pad.left - pad.right;
+          plotH = H - pad.top - pad.bottom;
+          midX = pad.left + (maxFreq / 2) / maxFreq * plotW;
+          midY = pad.top + plotH - (5.0 / maxRel) * plotH;
+          ctx = setupCanvas(canvas, W, H);
+          draw(1);
+        }
+      }, 200);
+    });
+  }
+
+  // ══════════════════════════════════════════════════════
+  //  GEOGRAPHIC THREAT MAP (SVG landmass + Canvas overlay)
+  // ══════════════════════════════════════════════════════
+  function renderGeoMap(wrapperId, geoData, sectors, tooltip) {
+    var wrap = document.getElementById(wrapperId);
+    if (!wrap) return;
+
+    // Map dimensions
+    var mapW = Math.min(800, wrap.clientWidth);
+    var mapH = Math.round(mapW * 0.5);
+
+    wrap.innerHTML =
+      '<div class="signal-geo__container" style="position:relative;width:' + mapW + 'px;height:' + mapH + 'px;margin:0 auto;background:#F8FAFC;border-radius:8px;overflow:hidden;">' +
+        '<canvas id="geoBaseCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;"></canvas>' +
+        '<canvas id="geoOverlayCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;"></canvas>' +
+      '</div>';
+
+    // Draw world map from Natural Earth GeoJSON
+    var baseCanvas = document.getElementById('geoBaseCanvas');
+    if (baseCanvas) {
+      var dprBase = window.devicePixelRatio || 1;
+      baseCanvas.width = mapW * dprBase;
+      baseCanvas.height = mapH * dprBase;
+      baseCanvas.style.width = mapW + 'px';
+      baseCanvas.style.height = mapH + 'px';
+      var bctx = baseCanvas.getContext('2d');
+      bctx.scale(dprBase, dprBase);
+
+      // Equirectangular projection
+      function projX(lng) { return ((lng + 180) / 360) * mapW; }
+      function projY(lat) { return ((90 - lat) / 180) * mapH; }
+
+      // Draw background and graticule immediately
+      bctx.fillStyle = '#F8FAFC';
+      bctx.fillRect(0, 0, mapW, mapH);
+      bctx.strokeStyle = '#E2E8F0';
+      bctx.lineWidth = 0.5;
+      bctx.setLineDash([4, 4]);
+      for (var lat = -60; lat <= 60; lat += 30) {
+        bctx.beginPath();
+        bctx.moveTo(0, projY(lat));
+        bctx.lineTo(mapW, projY(lat));
+        bctx.stroke();
+      }
+      for (var lng = -120; lng <= 120; lng += 60) {
+        bctx.beginPath();
+        bctx.moveTo(projX(lng), 0);
+        bctx.lineTo(projX(lng), mapH);
+        bctx.stroke();
+      }
+      bctx.setLineDash([]);
+
+      // Load Natural Earth 110m land GeoJSON and render
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/data/ne_110m_land.json', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          try {
+            var geo = JSON.parse(xhr.responseText);
+            bctx.fillStyle = '#E2E8F0';
+            bctx.strokeStyle = '#CBD5E1';
+            bctx.lineWidth = 0.6;
+
+            function drawRing(coords) {
+              bctx.beginPath();
+              for (var i = 0; i < coords.length; i++) {
+                var x = projX(coords[i][0]);
+                var y = projY(coords[i][1]);
+                if (i === 0) bctx.moveTo(x, y);
+                else bctx.lineTo(x, y);
+              }
+              bctx.closePath();
+            }
+
+            geo.features.forEach(function(feature) {
+              var geom = feature.geometry;
+              if (geom.type === 'Polygon') {
+                geom.coordinates.forEach(function(ring, ri) {
+                  drawRing(ring);
+                  if (ri === 0) bctx.fill();
+                });
+                bctx.stroke();
+              } else if (geom.type === 'MultiPolygon') {
+                geom.coordinates.forEach(function(polygon) {
+                  polygon.forEach(function(ring, ri) {
+                    drawRing(ring);
+                    if (ri === 0) bctx.fill();
+                  });
+                });
+                bctx.stroke();
+              }
+            });
+          } catch(e) {
+            console.warn('[Signal Charts] GeoJSON parse error:', e);
+          }
+        }
+      };
+      xhr.send();
+    }
+
+    var canvas = document.getElementById('geoOverlayCanvas');
+    if (!canvas) return;
+
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = mapW * dpr;
+    canvas.height = mapH * dpr;
+    canvas.style.width = mapW + 'px';
+    canvas.style.height = mapH + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    // Convert lat/lng to x/y on 1000x500 viewBox then scale to mapW x mapH
+    function latLngToXY(lat, lng) {
+      var svgX = ((lng + 180) / 360) * 1000;
+      var svgY = ((90 - lat) / 180) * 500;
+      return { x: (svgX / 1000) * mapW, y: (svgY / 500) * mapH };
+    }
+
+    // Determine max events for color scaling
+    var maxEvents = Math.max.apply(null, geoData.map(function(d) { return d.events; }));
+    if (maxEvents < 1) maxEvents = 1;
+
+    var geoDots = [];
+    var animFrame = 0;
+
+    function drawGeo(progress) {
+      ctx.clearRect(0, 0, mapW, mapH);
+      geoDots = [];
+
+      geoData.forEach(function(item, idx) {
+        var delay = idx * 0.08;
+        var dp = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)));
+        if (dp <= 0) return;
+
+        var pos = latLngToXY(item.lat, item.lng);
+        var t = item.events / maxEvents;
+        var color = lerpColor('#3B82F6', '#EF4444', t);
+        var radius = (6 + (item.events / maxEvents) * 18) * dp;
+
+        // Pulse ring
+        var pulseR = radius + 4 + Math.sin(animFrame * 0.04 + idx) * 3;
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, pulseR, 0, Math.PI * 2);
+        ctx.strokeStyle = hexToRgba(color.replace('rgb(', '#').replace(/,/g, '').replace(')', ''), 0.25 * dp);
+        // Convert rgb to direct usage
+        ctx.strokeStyle = color.replace('rgb', 'rgba').replace(')', ',' + (0.25 * dp) + ')');
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Main circle
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = color.replace('rgb', 'rgba').replace(')', ',' + (0.75 * dp) + ')');
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,' + (0.9 * dp) + ')';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Inner highlight
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, radius * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + (0.5 * dp) + ')';
+        ctx.fill();
+
+        geoDots.push({ x: pos.x, y: pos.y, r: radius, item: item, color: color });
+      });
+    }
+
+    // Animation
+    var startTime = null;
+    var pulseRunning = false;
+
+    function animateGeo(ts) {
+      if (!startTime) startTime = ts;
+      animFrame++;
+      var p = Math.min(1, (ts - startTime) / 1400);
+      var eased = 1 - Math.pow(1 - p, 3);
+      drawGeo(eased);
+      if (p < 1) {
+        requestAnimationFrame(animateGeo);
+      } else if (!pulseRunning) {
+        pulseRunning = true;
+        pulseAnimate();
+      }
+    }
+
+    function pulseAnimate() {
+      animFrame++;
+      drawGeo(1);
+      requestAnimationFrame(pulseAnimate);
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(animateGeo);
+          observer.unobserve(canvas);
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(canvas);
+
+    // Hover tooltip on geo dots
+    canvas.addEventListener('mousemove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      var sx = mapW / rect.width, sy = mapH / rect.height;
+      var mx = (e.clientX - rect.left) * sx;
+      var my = (e.clientY - rect.top) * sy;
+
+      var hit = null;
+      for (var i = geoDots.length - 1; i >= 0; i--) {
+        var d = geoDots[i];
+        if (Math.sqrt(Math.pow(mx - d.x, 2) + Math.pow(my - d.y, 2)) <= d.r + 6) {
+          hit = d; break;
+        }
+      }
+
+      if (hit) {
+        canvas.style.cursor = 'pointer';
+        tooltip.innerHTML =
+          '<div class="signal-tooltip__title">' + hit.item.region + '</div>' +
+          '<div class="signal-tooltip__row"><span>Events:</span><span class="signal-tooltip__value">' + hit.item.events + '</span></div>' +
+          '<div class="signal-tooltip__row"><span>Detail:</span><span class="signal-tooltip__value">' + (hit.item.label || '') + '</span></div>';
+        tooltip.style.left = (e.clientX + 14) + 'px';
+        tooltip.style.top = (e.clientY - 10) + 'px';
+        tooltip.classList.add('signal-tooltip--visible');
+      } else {
+        canvas.style.cursor = 'default';
+        tooltip.classList.remove('signal-tooltip--visible');
+      }
+    });
+
+    canvas.addEventListener('mouseleave', function() {
+      tooltip.classList.remove('signal-tooltip--visible');
+    });
+
+    // Sector distribution bar chart
+    if (sectors && sectors.length > 0) {
+      renderSectorBars('sectorBars', sectors);
+    }
+  }
+
+  // ══════════════════════════════════════════════════════
+  //  SECTOR DISTRIBUTION BARS
+  // ══════════════════════════════════════════════════════
+  function renderSectorBars(containerId, sectors) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+
+    var maxEvents = Math.max.apply(null, sectors.map(function(s) { return s.events; }));
+    if (maxEvents < 1) maxEvents = 1;
+
+    var sectorColors = ['#3B82F6', '#8B5CF6', '#EC4899', '#F59E0B', '#10B981', '#6366F1', '#EF4444', '#14B8A6'];
+
+    var html = '<div class="signal-sectors__title">Sector Distribution</div>';
+    html += '<div class="signal-sectors__list">';
+    sectors.forEach(function(s, idx) {
+      var pct = ((s.events / maxEvents) * 100).toFixed(0);
+      var color = sectorColors[idx % sectorColors.length];
+      html += '<div class="signal-sector-row">' +
+        '<span class="signal-sector-row__name">' + s.name + '</span>' +
+        '<div class="signal-sector-row__bar-wrap">' +
+          '<div class="signal-sector-row__bar" style="width:' + pct + '%;background:' + color + '"></div>' +
+        '</div>' +
+        '<span class="signal-sector-row__count">' + s.events + '</span>' +
+      '</div>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+})();
+</script>

@@ -1,0 +1,61 @@
+{
+  "weeks": [
+    {
+      "week": "2026-W31",
+      "date": "2026-07-31",
+      "article_count": 19,
+      "mitre_distribution": {
+        "AML.T0047 - ML-Enabled Product or Service": 17,
+        "AML.T0051 - LLM Prompt Injection": 16,
+        "AML.T0010 - ML Supply Chain Compromise": 13,
+        "AML.T0057 - LLM Data Leakage": 11,
+        "AML.T0040 - ML Model Inference API Access": 8,
+        "AML.T0054 - LLM Jailbreak": 7,
+        "AML.T0012 - Valid Accounts": 7,
+        "AML.T0018 - Backdoor ML Model": 6,
+        "AML.T0044 - Full ML Model Access": 5,
+        "AML.T0043 - Craft Adversarial Data": 3,
+        "AML.T0056 - LLM Meta Prompt Extraction": 3,
+        "AML.T0015 - Evade ML Model": 2,
+        "AML.T0031 - Erode ML Model Integrity": 1,
+        "AML.T0020 - Poison Training Data": 1
+      },
+      "owasp_distribution": {
+        "LLM08 - Excessive Agency": 16,
+        "LLM05 - Supply Chain Vulnerabilities": 14,
+        "LLM01 - Prompt Injection": 13,
+        "LLM02 - Insecure Output Handling": 11,
+        "LLM07 - Insecure Plugin Design": 11,
+        "LLM06 - Sensitive Information Disclosure": 11,
+        "LLM09 - Overreliance": 7,
+        "LLM10 - Model Theft": 2,
+        "LLM03 - Training Data Poisoning": 1,
+        "LLM04 - Model Denial of Service": 1
+      },
+      "threat_level_distribution": {
+        "HIGH": 14,
+        "MEDIUM": 3,
+        "CRITICAL": 2
+      },
+      "threat_actor_distribution": {
+        "cybercriminal": 17,
+        "nation-state": 13,
+        "researcher": 10,
+        "insider": 9
+      },
+      "avg_relevance": 7.51,
+      "top_categories": [
+        "LLM Security",
+        "Agentic AI",
+        "First Look",
+        "Industry News",
+        "Supply Chain",
+        "Prompt Injection",
+        "Research",
+        "Adversarial ML",
+        "Jailbreaks",
+        "Regulatory"
+      ]
+    }
+  ]
+}

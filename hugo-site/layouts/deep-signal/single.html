@@ -16,6 +16,10 @@
       </time>
     </div>
 
+    {{ if .Params.subtitle }}
+    <p class="ds-article__subtitle">{{ .Params.subtitle }}</p>
+    {{ end }}
+
     <h1 class="ds-article__title" itemprop="headline">{{ .Title }}</h1>
 
     {{ if .Params.description }}
@@ -70,6 +74,11 @@
   </script>
   {{ end }}
 
+  {{/* ── SIGNAL REPORT CHARTS (before article body for visual impact) ── */}}
+  {{ if eq .Params.content_type "signal_report" }}
+    {{ partial "signal-charts.html" . }}
+  {{ end }}
+
   {{/* ── ARTICLE BODY ── */}}
   <div class="ds-article__body article-body" itemprop="articleBody">
     {{ .Content }}
@@ -80,20 +89,20 @@
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
     mermaid.initialize({
       startOnLoad: false,
-      theme: 'dark',
+      theme: 'default',
       themeVariables: {
-        background:      '#0E1117',
-        mainBkg:         '#141B24',
-        nodeBorder:      '#ff3b3b',
-        clusterBkg:      '#131820',
-        titleColor:      '#E8ECF0',
-        edgeLabelBackground: '#131820',
-        lineColor:       '#ff3b3b',
-        primaryColor:    '#141B24',
-        primaryTextColor:'#E8ECF0',
-        primaryBorderColor: '#ff3b3b',
-        secondaryColor:  '#1F2D3D',
-        tertiaryColor:   '#181F2A',
+        background:      '#FFFFFF',
+        mainBkg:         '#F8FAFC',
+        nodeBorder:      '#334155',
+        clusterBkg:      '#F1F5F9',
+        titleColor:      '#1E293B',
+        edgeLabelBackground: '#FFFFFF',
+        lineColor:       '#475569',
+        primaryColor:    '#F1F5F9',
+        primaryTextColor:'#1E293B',
+        primaryBorderColor: '#334155',
+        secondaryColor:  '#E2E8F0',
+        tertiaryColor:   '#F8FAFC',
         fontFamily:      'IBM Plex Mono, monospace'
       }
     });

@@ -1,0 +1,204 @@
+name: "Grid the Grey — Weekly Signal Report"
+
+# ─────────────────────────────────────────────
+# Weekly AI Security Intelligence Digest
+#   Step 1 (auto/manual): Generate report as DRAFT → push → deploy preview
+#   Step 2 (manual from phone): Approve → flip to published → redeploy prod
+# ─────────────────────────────────────────────
+on:
+  # Every Monday at 11:00 AM IST (05:30 UTC)
+  schedule:
+    - cron: "30 5 * * 1"
+
+  # Manual trigger for ad-hoc reports
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "How many days of articles to include"
+        required: false
+        default: "7"
+      action:
+        description: "What to do"
+        required: true
+        default: "generate-draft"
+        type: choice
+        options:
+          - generate-draft
+          - publish-latest
+          - dry-run
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  # ══════════════════════════════════════════════════════════════
+  # JOB 1: Generate signal report as a DRAFT
+  # ══════════════════════════════════════════════════════════════
+  generate:
+    name: "Generate Signal Report (Draft)"
+    if: ${{ github.event.inputs.action != 'publish-latest' && github.event.inputs.action != 'dry-run' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate weekly signal report (as draft)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL:      ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
+        run: |
+          DAYS="${{ github.event.inputs.days || '7' }}"
+          echo "Generating signal report (DRAFT) for last ${DAYS} days..."
+          python weekly_signal_report.py --generate --draft --days "${DAYS}"
+
+      - name: Commit draft report
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          git add hugo-site/content/deep-signal/ signal-reports/
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          WEEK=$(date -u +'%Y-W%V')
+          git commit -m "feat: add draft signal report — ${WEEK} [preview]"
+          git push
+          echo ""
+          echo "══════════════════════════════════════════════"
+          echo "  ✓ Draft signal report committed"
+          echo "  ✓ Week: ${WEEK}"
+          echo ""
+          echo "  NEXT STEP: Preview the draft, then run this"
+          echo "  workflow again with action = 'publish-latest'"
+          echo "══════════════════════════════════════════════"
+
+      # Deploy a preview build (includes drafts) to GitHub Pages
+      - name: Setup Hugo (extended)
+        run: |
+          HUGO_VERSION="0.140.2"
+          curl -Lo /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          tar -xzf /tmp/hugo.tar.gz -C /tmp
+          sudo install /tmp/hugo /usr/local/bin/hugo
+
+      - name: Build site with drafts
+        working-directory: hugo-site
+        env:
+          HUGO_ENVIRONMENT: production
+          TZ: Asia/Kolkata
+        run: |
+          hugo --minify --buildDrafts --baseURL "https://gridthegrey.com/"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: hugo-site/public
+
+  # Deploy preview (with drafts visible for proofreading)
+  deploy-preview:
+    name: "Deploy Preview (with drafts)"
+    needs: generate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ══════════════════════════════════════════════════════════════
+  # JOB 2: Publish the latest draft (triggered manually from phone)
+  # ══════════════════════════════════════════════════════════════
+  publish:
+    name: "Publish Latest Draft"
+    if: ${{ github.event.inputs.action == 'publish-latest' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 1
+
+      - name: Find and publish latest draft signal report
+        run: |
+          # Find the most recent draft signal report
+          DRAFT_FILE=$(grep -rl "^draft: true" hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | sort | tail -1)
+
+          if [ -z "$DRAFT_FILE" ]; then
+            echo "ERROR: No draft signal report found to publish."
+            echo "Run this workflow with action='generate-draft' first."
+            exit 1
+          fi
+
+          echo "Publishing: $DRAFT_FILE"
+          sed -i 's/^draft: true/draft: false/' "$DRAFT_FILE"
+
+          TITLE=$(grep "^title:" "$DRAFT_FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
+          echo "Title: $TITLE"
+
+      - name: Commit and push
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          git add hugo-site/content/deep-signal/
+          if git diff --staged --quiet; then
+            echo "No changes — report may already be published."
+            exit 0
+          fi
+          WEEK=$(date -u +'%Y-W%V')
+          git commit -m "feat: publish weekly signal report — ${WEEK}"
+          git push
+          echo ""
+          echo "══════════════════════════════════════════════"
+          echo "  ✓ Signal Report PUBLISHED"
+          echo "  ✓ Site rebuild triggered (deploy.yml)"
+          echo "══════════════════════════════════════════════"
+
+  # ══════════════════════════════════════════════════════════════
+  # JOB 3: Dry run (analytics only)
+  # ══════════════════════════════════════════════════════════════
+  dry-run:
+    name: "Dry Run (Analytics Only)"
+    if: ${{ github.event.inputs.action == 'dry-run' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run dry analysis
+        run: |
+          DAYS="${{ github.event.inputs.days || '7' }}"
+          python weekly_signal_report.py --dry-run --days "${DAYS}"
