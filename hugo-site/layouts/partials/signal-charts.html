@@ -264,12 +264,14 @@
     var canvas = document.getElementById(canvasId);
     if (!canvas) return;
 
-    // Responsive width
+    // Responsive width — respect viewport on mobile
     var container = canvas.parentElement;
-    var W = Math.min(800, container.clientWidth - 32);
-    if (W < 400) W = 400;
+    var viewportW = document.documentElement.clientWidth;
+    var availW = Math.min(container.clientWidth - 32, viewportW - 48);
+    var W = Math.min(800, availW);
+    if (W < 280) W = 280;
     var H = Math.round(W * 0.65);
-    var pad = { top: 40, right: 40, bottom: 90, left: 62 };
+    var pad = { top: 40, right: 30, bottom: 80, left: 52 };
     var ctx = setupCanvas(canvas, W, H);
 
     // Relevance range: 0 to 10.0, quadrant center at 5.0
@@ -527,8 +529,9 @@
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function() {
-        var newW = Math.min(800, container.clientWidth - 32);
-        if (newW < 400) newW = 400;
+        var vpW = document.documentElement.clientWidth;
+        var newW = Math.min(800, container.clientWidth - 32, vpW - 48);
+        if (newW < 280) newW = 280;
         if (Math.abs(newW - W) > 20) {
           W = newW;
           H = Math.round(W * 0.65);
