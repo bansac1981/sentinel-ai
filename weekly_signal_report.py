@@ -1055,15 +1055,15 @@ categories: {categories_yaml}
 tags: {tags_yaml}
 ---
 
+<div id="signal-chart-data" style="display:none">
+{chart_json}
+</div>
+
 {narrative.get("story_hook", "")}
 
 <img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" style="width:100%;border-radius:8px;margin:1.5rem 0;">
 
 <img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" style="width:100%;border-radius:8px;margin:1.5rem 0;">
-
-<div id="signal-chart-data" style="display:none">
-{chart_json}
-</div>
 
 ---
 

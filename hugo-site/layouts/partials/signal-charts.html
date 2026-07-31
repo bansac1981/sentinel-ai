@@ -28,42 +28,12 @@
     }
     if (!data) return;
 
-    // ── Build chart section (OWASP + MITRE only) ──
+    // ── Build chart section (stats only — OWASP/MITRE are now static images in markdown) ──
     var section = document.createElement('div');
     section.className = 'signal-charts';
     section.innerHTML =
       '<div class="signal-charts__title">Weekly Threat Intelligence</div>' +
-      buildStatsHTML(data.summary_stats) +
-      '<div class="signal-charts__stack">' +
-        // Chart 1: OWASP Warm
-        '<div class="signal-chart signal-chart--warm" id="owaspChart">' +
-          '<div class="signal-chart__header">' +
-            '<span class="signal-chart__label">OWASP LLM Top 10 — Threat Quadrant</span>' +
-            '<span class="signal-chart__badge signal-chart__badge--warm">Frequency vs Relevance</span>' +
-          '</div>' +
-          '<div class="signal-chart__canvas-wrap">' +
-            '<canvas id="owaspCanvas"></canvas>' +
-          '</div>' +
-          '<div class="signal-chart__legend" id="owaspLegend"></div>' +
-          '<div class="signal-chart__actions">' +
-            '<button class="signal-chart__download" data-canvas="owaspCanvas" data-name="owasp-threat-quadrant">Export PNG</button>' +
-          '</div>' +
-        '</div>' +
-        // Chart 2: MITRE Cool
-        '<div class="signal-chart signal-chart--cool" id="mitreChart">' +
-          '<div class="signal-chart__header">' +
-            '<span class="signal-chart__label">MITRE ATLAS — Technique Landscape</span>' +
-            '<span class="signal-chart__badge signal-chart__badge--cool">Frequency vs Relevance</span>' +
-          '</div>' +
-          '<div class="signal-chart__canvas-wrap">' +
-            '<canvas id="mitreCanvas"></canvas>' +
-          '</div>' +
-          '<div class="signal-chart__legend" id="mitreLegend"></div>' +
-          '<div class="signal-chart__actions">' +
-            '<button class="signal-chart__download" data-canvas="mitreCanvas" data-name="mitre-atlas-landscape">Export PNG</button>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
+      buildStatsHTML(data.summary_stats);
 
     // Insert before article body
     var body = document.querySelector('.ds-article__body');
@@ -145,42 +115,6 @@
     }
     attachDownloadHandlers(section);
     attachDownloadHandlers(geoSection);
-
-    // ── Render OWASP Chart ──
-    if (data.owasp_quadrant && data.owasp_quadrant.length > 0) {
-      renderQuadrantChart('owaspCanvas', 'owaspLegend', data.owasp_quadrant, {
-        xLabel: 'Event Frequency',
-        yLabel: 'Avg Relevance Score',
-        palette: OWASP_PALETTE,
-        tooltip: tooltip,
-        quadrantLabels: ['CRITICAL FOCUS', 'EMERGING RISK', 'TRENDING', 'MONITOR'],
-        quadrantTints: [
-          'rgba(230, 57, 70, 0.07)',   // top-right: soft red
-          'rgba(247, 127, 0, 0.06)',   // top-left: soft orange
-          'rgba(251, 191, 36, 0.05)',  // bottom-right: soft amber
-          'rgba(74, 222, 128, 0.05)'   // bottom-left: soft green
-        ],
-        quadrantLabelColors: ['#C0392B', '#E67E22', '#D97706', '#16A34A']
-      });
-    }
-
-    // ── Render MITRE Chart ──
-    if (data.mitre_quadrant && data.mitre_quadrant.length > 0) {
-      renderQuadrantChart('mitreCanvas', 'mitreLegend', data.mitre_quadrant, {
-        xLabel: 'Event Frequency',
-        yLabel: 'Avg Relevance Score',
-        palette: MITRE_PALETTE,
-        tooltip: tooltip,
-        quadrantLabels: ['ACTIVE THREAT', 'NOVEL VECTOR', 'PERSISTENT', 'LATENT'],
-        quadrantTints: [
-          'rgba(99, 48, 195, 0.07)',   // top-right: soft blue-purple
-          'rgba(67, 56, 202, 0.06)',   // top-left: soft indigo
-          'rgba(20, 184, 166, 0.05)',  // bottom-right: soft teal
-          'rgba(34, 211, 238, 0.04)'   // bottom-left: soft cyan
-        ],
-        quadrantLabelColors: ['#6930C3', '#4338CA', '#0D9488', '#06B6D4']
-      });
-    }
 
     // ── Render Geographic Map ──
     if (data.geography && data.geography.length > 0) {
