@@ -3227,14 +3227,16 @@ blockquote {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: var(--radius-md);
-  padding: var(--space-lg);
+  padding: var(--space-xl) var(--space-lg);
   margin: var(--space-lg) 0;
   overflow-x: auto;
 }
 
 .ds-article__body .mermaid svg {
-  max-width: 100%;
+  width: 100%;
+  min-height: 280px;
   height: auto;
+  font-size: 16px;
 }
 
 /* ── Single article layout (uses standard sidebar layout) ── */
