@@ -63,6 +63,16 @@ except ImportError:
     Anthropic = None
 
 try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as mpatches
+    from matplotlib.offsetbox import AnchoredText
+    HAS_MATPLOTLIB = True
+except ImportError:
+    HAS_MATPLOTLIB = False
+
+try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
@@ -741,6 +751,152 @@ def infer_sectors(articles: list) -> list:
     return result
 
 
+# ── Chart image generation (matplotlib) ──────────────────────────────────────
+CHART_OUTPUT_DIR = Path(__file__).parent / "hugo-site" / "static" / "img" / "signal"
+
+OWASP_COLORS = {
+    'LLM01': '#E63946', 'LLM02': '#2A9D8F', 'LLM03': '#6930C3', 'LLM04': '#F77F00',
+    'LLM05': '#264653', 'LLM06': '#E76F51', 'LLM07': '#3B82F6', 'LLM08': '#D946EF',
+    'LLM09': '#059669', 'LLM10': '#7C3AED'
+}
+
+MITRE_COLORS = [
+    '#E63946', '#2A9D8F', '#F59E0B', '#7C3AED', '#059669', '#EC4899',
+    '#3B82F6', '#D946EF', '#F97316', '#264653', '#06B6D4', '#DC2626',
+    '#1D4ED8', '#16A34A', '#9333EA', '#CA8A04'
+]
+
+
+def generate_quadrant_chart(items: list, title: str, palette: dict | list, output_path: Path) -> None:
+    """Generate a quadrant scatter/bubble chart as PNG."""
+    if not HAS_MATPLOTLIB:
+        log.warning("  matplotlib not available — skipping chart generation")
+        return
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 5.5), dpi=150)
+    fig.patch.set_facecolor('#FFFFFF')
+    ax.set_facecolor('#FFFFFF')
+
+    # Data
+    freqs = [item['frequency'] for item in items]
+    rels = [item['relevance'] for item in items]
+    max_freq = max(freqs) * 1.15
+
+    # Quadrant center
+    mid_x = max_freq / 2
+    mid_y = (max(rels) + min(rels)) / 2 if rels else 5.0
+
+    # Quadrant background tints
+    ax.axhspan(mid_y, max(rels) + 1, xmin=0.5, xmax=1.0, alpha=0.06, color='#E63946')
+    ax.axhspan(mid_y, max(rels) + 1, xmin=0.0, xmax=0.5, alpha=0.05, color='#F77F00')
+    ax.axhspan(min(rels) - 1, mid_y, xmin=0.5, xmax=1.0, alpha=0.04, color='#FBB03B')
+    ax.axhspan(min(rels) - 1, mid_y, xmin=0.0, xmax=0.5, alpha=0.04, color='#4ADE80')
+
+    # Quadrant dividers
+    ax.axhline(y=mid_y, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.7)
+    ax.axvline(x=mid_x, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.7)
+
+    # Plot bubbles
+    for i, item in enumerate(items):
+        if isinstance(palette, dict):
+            color = palette.get(item['id'], '#888888')
+        else:
+            color = palette[i % len(palette)]
+
+        size = max(80, item['frequency'] * 35)
+        ax.scatter(item['frequency'], item['relevance'], s=size,
+                   c=color, alpha=0.8, edgecolors='white', linewidth=1.5, zorder=5)
+        ax.annotate(item['id'], (item['frequency'], item['relevance']),
+                    textcoords="offset points", xytext=(0, 10),
+                    ha='center', fontsize=7, fontweight='bold', color='#1E293B',
+                    fontfamily='monospace')
+
+    # Axis config
+    rel_min = min(rels) - 0.5 if rels else 0
+    rel_max = max(rels) + 0.5 if rels else 10
+    ax.set_xlim(0, max_freq)
+    ax.set_ylim(rel_min, rel_max)
+    ax.set_xlabel('Event Frequency', fontsize=10, fontfamily='monospace', color='#334155')
+    ax.set_ylabel('Avg Relevance Score', fontsize=10, fontfamily='monospace', color='#334155')
+    ax.set_title(title, fontsize=11, fontweight='bold', fontfamily='monospace', color='#1E293B', pad=12)
+
+    # Quadrant labels
+    ax.text(max_freq * 0.95, rel_max - 0.15, 'CRITICAL FOCUS', ha='right', fontsize=7,
+            fontfamily='monospace', fontweight='bold', color='#C0392B', alpha=0.6)
+    ax.text(max_freq * 0.05, rel_max - 0.15, 'EMERGING RISK', ha='left', fontsize=7,
+            fontfamily='monospace', fontweight='bold', color='#E67E22', alpha=0.6)
+    ax.text(max_freq * 0.95, rel_min + 0.15, 'TRENDING', ha='right', fontsize=7,
+            fontfamily='monospace', fontweight='bold', color='#D97706', alpha=0.6)
+    ax.text(max_freq * 0.05, rel_min + 0.15, 'MONITOR', ha='left', fontsize=7,
+            fontfamily='monospace', fontweight='bold', color='#16A34A', alpha=0.6)
+
+    # Grid
+    ax.grid(True, alpha=0.3, linewidth=0.5, color='#E2E8F0')
+    ax.tick_params(labelsize=8, colors='#64748B')
+    for spine in ax.spines.values():
+        spine.set_color('#CBD5E1')
+
+    # Legend
+    legend_items = []
+    for i, item in enumerate(items):
+        if isinstance(palette, dict):
+            color = palette.get(item['id'], '#888888')
+        else:
+            color = palette[i % len(palette)]
+        legend_items.append(mpatches.Patch(color=color, label=f"{item['id']} {item['label']}"))
+
+    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.18),
+              ncol=3, fontsize=6.5, frameon=False, prop={'family': 'monospace'})
+
+    plt.tight_layout()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, bbox_inches='tight', facecolor='#FFFFFF', edgecolor='none')
+    plt.close(fig)
+    log.info(f"  Chart saved: {output_path}")
+
+
+def generate_charts(analytics: dict, wow: dict, week_label: str) -> dict:
+    """Generate all chart PNGs and return paths relative to /img/signal/."""
+    week_lower = week_label.lower().replace("-", "")
+    CHART_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    paths = {}
+
+    # OWASP quadrant
+    owasp_items = []
+    for cat, count in sorted(analytics["owasp_distribution"].items(), key=lambda x: x[1], reverse=True):
+        parts = cat.split(" - ", 1)
+        cat_id = parts[0].strip() if parts else cat
+        cat_label = parts[1].strip() if len(parts) > 1 else cat
+        owasp_items.append({
+            "id": cat_id, "label": cat_label,
+            "frequency": count,
+            "relevance": analytics["owasp_avg_relevance"].get(cat, 0),
+        })
+
+    owasp_path = CHART_OUTPUT_DIR / f"owasp-{week_lower}.png"
+    generate_quadrant_chart(owasp_items, "OWASP LLM Top 10 — Threat Quadrant", OWASP_COLORS, owasp_path)
+    paths["owasp"] = f"/img/signal/owasp-{week_lower}.png"
+
+    # MITRE quadrant
+    mitre_items = []
+    for tech, count in sorted(analytics["mitre_distribution"].items(), key=lambda x: x[1], reverse=True)[:16]:
+        parts = tech.split(" - ", 1)
+        tech_id = parts[0].strip() if parts else tech
+        tech_label = parts[1].strip() if len(parts) > 1 else tech
+        mitre_items.append({
+            "id": tech_id, "label": tech_label,
+            "frequency": count,
+            "relevance": analytics["mitre_avg_relevance"].get(tech, 0),
+        })
+
+    mitre_path = CHART_OUTPUT_DIR / f"mitre-{week_lower}.png"
+    generate_quadrant_chart(mitre_items, "MITRE ATLAS — Technique Landscape", MITRE_COLORS, mitre_path)
+    paths["mitre"] = f"/img/signal/mitre-{week_lower}.png"
+
+    return paths
+
+
 # ── Hugo markdown generation ──────────────────────────────────────────────────
 def build_chart_data(analytics: dict, wow: dict, articles: list = None) -> dict:
     """
@@ -831,7 +987,10 @@ def generate_hugo_article(
     # Reading time — target 5 minutes
     reading_time = 5
 
-    # Build chart data JSON
+    # Generate chart images (PNG)
+    chart_paths = generate_charts(analytics, wow, week_label) if HAS_MATPLOTLIB else {}
+
+    # Build chart data JSON (still used for geo map)
     chart_data = build_chart_data(analytics, wow, articles)
     chart_json = json.dumps(chart_data, indent=2)
 
@@ -897,6 +1056,10 @@ tags: {tags_yaml}
 ---
 
 {narrative.get("story_hook", "")}
+
+<img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" style="width:100%;max-width:800px;border-radius:12px;margin:1.5rem 0;">
+
+<img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" style="width:100%;max-width:800px;border-radius:12px;margin:1.5rem 0;">
 
 <div id="signal-chart-data" style="display:none">
 {chart_json}

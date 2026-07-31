@@ -84,6 +84,7 @@ jobs:
           name: signal-report-files
           path: |
             hugo-site/content/deep-signal/*weekly-signal-report*.md
+            hugo-site/static/img/signal/
             signal-reports/history.json
           retention-days: 7
 
@@ -189,7 +190,7 @@ jobs:
         run: |
           git config user.name  "Grid the Grey Bot"
           git config user.email "bot@gridthegrey.com"
-          git add hugo-site/content/deep-signal/ signal-reports/
+          git add hugo-site/content/deep-signal/ hugo-site/static/img/signal/ signal-reports/
           if git diff --staged --quiet; then
             echo "No changes — report may already be published."
             exit 0
