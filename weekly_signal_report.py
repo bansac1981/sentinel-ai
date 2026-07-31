@@ -773,7 +773,7 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
         log.warning("  matplotlib not available — skipping chart generation")
         return
 
-    fig, ax = plt.subplots(1, 1, figsize=(8, 5.5), dpi=150)
+    fig, ax = plt.subplots(1, 1, figsize=(10, 6), dpi=200)
     fig.patch.set_facecolor('#FFFFFF')
     ax.set_facecolor('#FFFFFF')
 
@@ -807,8 +807,8 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
         ax.scatter(item['frequency'], item['relevance'], s=size,
                    c=color, alpha=0.8, edgecolors='white', linewidth=1.5, zorder=5)
         ax.annotate(item['id'], (item['frequency'], item['relevance']),
-                    textcoords="offset points", xytext=(0, 10),
-                    ha='center', fontsize=7, fontweight='bold', color='#1E293B',
+                    textcoords="offset points", xytext=(0, 12),
+                    ha='center', fontsize=9, fontweight='bold', color='#1E293B',
                     fontfamily='monospace')
 
     # Axis config
@@ -816,23 +816,23 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
     rel_max = max(rels) + 0.5 if rels else 10
     ax.set_xlim(0, max_freq)
     ax.set_ylim(rel_min, rel_max)
-    ax.set_xlabel('Event Frequency', fontsize=10, fontfamily='monospace', color='#334155')
-    ax.set_ylabel('Avg Relevance Score', fontsize=10, fontfamily='monospace', color='#334155')
-    ax.set_title(title, fontsize=11, fontweight='bold', fontfamily='monospace', color='#1E293B', pad=12)
+    ax.set_xlabel('Event Frequency', fontsize=12, fontfamily='monospace', color='#334155')
+    ax.set_ylabel('Avg Relevance Score', fontsize=12, fontfamily='monospace', color='#334155')
+    ax.set_title(title, fontsize=14, fontweight='bold', fontfamily='monospace', color='#1E293B', pad=14)
 
     # Quadrant labels
-    ax.text(max_freq * 0.95, rel_max - 0.15, 'CRITICAL FOCUS', ha='right', fontsize=7,
+    ax.text(max_freq * 0.95, rel_max - 0.12, 'CRITICAL FOCUS', ha='right', fontsize=9,
             fontfamily='monospace', fontweight='bold', color='#C0392B', alpha=0.6)
-    ax.text(max_freq * 0.05, rel_max - 0.15, 'EMERGING RISK', ha='left', fontsize=7,
+    ax.text(max_freq * 0.05, rel_max - 0.12, 'EMERGING RISK', ha='left', fontsize=9,
             fontfamily='monospace', fontweight='bold', color='#E67E22', alpha=0.6)
-    ax.text(max_freq * 0.95, rel_min + 0.15, 'TRENDING', ha='right', fontsize=7,
+    ax.text(max_freq * 0.95, rel_min + 0.12, 'TRENDING', ha='right', fontsize=9,
             fontfamily='monospace', fontweight='bold', color='#D97706', alpha=0.6)
-    ax.text(max_freq * 0.05, rel_min + 0.15, 'MONITOR', ha='left', fontsize=7,
+    ax.text(max_freq * 0.05, rel_min + 0.12, 'MONITOR', ha='left', fontsize=9,
             fontfamily='monospace', fontweight='bold', color='#16A34A', alpha=0.6)
 
     # Grid
     ax.grid(True, alpha=0.3, linewidth=0.5, color='#E2E8F0')
-    ax.tick_params(labelsize=8, colors='#64748B')
+    ax.tick_params(labelsize=10, colors='#64748B')
     for spine in ax.spines.values():
         spine.set_color('#CBD5E1')
 
@@ -845,8 +845,8 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
             color = palette[i % len(palette)]
         legend_items.append(mpatches.Patch(color=color, label=f"{item['id']} {item['label']}"))
 
-    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.18),
-              ncol=3, fontsize=6.5, frameon=False, prop={'family': 'monospace'})
+    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.15),
+              ncol=3, fontsize=8.5, frameon=False, prop={'family': 'monospace'})
 
     plt.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1057,9 +1057,9 @@ tags: {tags_yaml}
 
 {narrative.get("story_hook", "")}
 
-<img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" style="width:100%;max-width:800px;border-radius:12px;margin:1.5rem 0;">
+<img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" style="width:100%;border-radius:8px;margin:1.5rem 0;">
 
-<img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" style="width:100%;max-width:800px;border-radius:12px;margin:1.5rem 0;">
+<img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" style="width:100%;border-radius:8px;margin:1.5rem 0;">
 
 <div id="signal-chart-data" style="display:none">
 {chart_json}
