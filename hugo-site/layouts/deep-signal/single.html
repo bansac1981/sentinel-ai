@@ -90,6 +90,7 @@
     mermaid.initialize({
       startOnLoad: false,
       theme: 'default',
+      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
       themeVariables: {
         background:      '#FFFFFF',
         mainBkg:         '#F8FAFC',
@@ -104,7 +105,7 @@
         secondaryColor:  '#E2E8F0',
         tertiaryColor:   '#F8FAFC',
         fontFamily:      'IBM Plex Mono, monospace',
-        fontSize:        '16px'
+        fontSize:        '18px'
       }
     });
     document.querySelectorAll('pre code.language-mermaid').forEach(function(block) {

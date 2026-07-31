@@ -512,7 +512,7 @@ Based on this data, generate a comprehensive intelligence report with the follow
   "enterprise_focus": ["3-4 bullet points for CISOs. One sentence each — concrete and specific to THIS week's data."],
   "trajectory_watch": "1 short paragraph (max 80 words) on the 4-8 week outlook. What should security teams prepare for?",
   "attack_chain_analysis": "1 short paragraph (max 80 words) on how MITRE ATLAS techniques chain together this week. Reference specific technique pairs from the co-occurrence data.",
-  "attack_chain_mermaid": "A Mermaid flowchart diagram (flowchart LR) showing the dominant attack chain patterns. Use subgraphs for 'Initial Access', 'Exploitation', and 'Impact'. Nodes should use MITRE technique IDs with brief labels (e.g. T0047[AML.T0047<br/>ML-Enabled Product]). Edges should have short descriptive labels. Keep it to 4-7 nodes maximum. Output ONLY the mermaid code, no code fences.",
+  "attack_chain_mermaid": "A Mermaid flowchart diagram (flowchart TD — top to bottom) showing the dominant attack chain patterns. Use subgraphs for 'Initial Access', 'Exploitation', and 'Impact'. Nodes should use MITRE technique IDs with brief labels (e.g. T0047[AML.T0047<br/>ML-Enabled Product]). Edges should have short descriptive labels. Keep it to 4-6 nodes maximum for readability. Output ONLY the mermaid code, no code fences.",
   "readiness_score": "1 short paragraph (max 60 words) with an enterprise readiness grade (A-F) and 1-2 sentence justification.",
   "geographic_sector_analysis": "1 short paragraph (max 60 words) on geographic and sector targeting patterns this week."
 }}
@@ -1041,10 +1041,10 @@ def mock_narrative(analytics: dict, wow: dict) -> dict:
             f"than for denial of service."
         ),
         "attack_chain_mermaid": (
-            "flowchart LR\n"
+            "flowchart TD\n"
             "    subgraph Initial Access\n"
-            "        T0047[AML.T0047<br/>ML-Enabled Product]\n"
             "        T0010[AML.T0010<br/>Supply Chain Compromise]\n"
+            "        T0047[AML.T0047<br/>ML-Enabled Product]\n"
             "    end\n"
             "\n"
             "    subgraph Exploitation\n"
@@ -1054,14 +1054,13 @@ def mock_narrative(analytics: dict, wow: dict) -> dict:
             "\n"
             "    subgraph Impact\n"
             "        T0057[AML.T0057<br/>Data Leakage]\n"
-            "        EXE[Code Execution]\n"
             "        PERSIST[Persistence]\n"
             "    end\n"
             "\n"
+            '    T0010 -->|"poisons pipeline"| T0047\n'
             '    T0047 -->|"exploited via"| T0051\n'
-            '    T0010 -->|"enables"| T0044\n'
-            '    T0051 -->|"primary vector"| T0057\n'
-            "    T0051 --> EXE\n"
+            '    T0051 -->|"exfiltrates"| T0057\n'
+            '    T0047 -->|"enables"| T0044\n'
             '    T0044 -->|"establishes"| PERSIST'
         ),
         "readiness_score": (
