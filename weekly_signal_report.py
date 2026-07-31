@@ -1096,8 +1096,6 @@ tags: {tags_yaml}
 {chart_json}
 </div>
 
-{narrative.get("story_hook", "")}
-
 <div class="ds-article__hero" style="margin:1.5rem 0;">
   <img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
 </div>
@@ -1105,6 +1103,8 @@ tags: {tags_yaml}
 <div class="ds-article__hero" style="margin:1.5rem 0;">
   <img src="{chart_paths.get('mitre', '')}" alt="MITRE ATLAS — Technique Landscape" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
 </div>
+
+{narrative.get("story_hook", "")}
 
 ---
 
