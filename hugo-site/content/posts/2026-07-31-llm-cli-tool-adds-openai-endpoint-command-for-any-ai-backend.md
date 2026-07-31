@@ -1,6 +1,6 @@
 ---
 title: "LLM CLI Tool Adds OpenAI Endpoint Command for Any AI Backend"
-date: 2026-07-31T07:01:08+00:00
+date: "2026-07-31T15:56:09+00:00"
 draft: false
 slug: "llm-cli-tool-adds-openai-endpoint-command-for-any-ai-backend"
 
