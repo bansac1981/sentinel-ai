@@ -774,7 +774,8 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
         log.warning("  matplotlib not available — skipping chart generation")
         return
 
-    fig, ax = plt.subplots(1, 1, figsize=(12, 6), dpi=250)
+    fig, ax = plt.subplots(1, 1, figsize=(12, 8), dpi=250)
+    fig.subplots_adjust(left=0.08, right=0.97, top=0.93, bottom=0.18)
     fig.patch.set_facecolor('#FFFFFF')
     ax.set_facecolor('#FAFBFC')
 
@@ -885,9 +886,8 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
     ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.08),
               ncol=ncols, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
 
-    plt.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, bbox_inches='tight', facecolor='#FFFFFF', edgecolor='none', pad_inches=0.2)
+    fig.savefig(output_path, facecolor='#FFFFFF', edgecolor='none')
     plt.close(fig)
     log.info(f"  Chart saved: {output_path}")
 
