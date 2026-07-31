@@ -432,8 +432,8 @@
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        // ID label
-        if (dp > 0.4) {
+        // ID label — hide on mobile (legend provides identification)
+        if (dp > 0.4 && W >= 500) {
           ctx.fillStyle = 'rgba(30, 41, 59, ' + (dp * 0.9) + ')';
           ctx.font = '700 9px "IBM Plex Mono", monospace';
           ctx.textAlign = 'center';
