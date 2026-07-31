@@ -3,13 +3,13 @@
     {
       "week": "2026-W31",
       "date": "2026-07-31",
-      "article_count": 19,
+      "article_count": 20,
       "mitre_distribution": {
-        "AML.T0047 - ML-Enabled Product or Service": 17,
-        "AML.T0051 - LLM Prompt Injection": 16,
-        "AML.T0010 - ML Supply Chain Compromise": 13,
-        "AML.T0057 - LLM Data Leakage": 11,
-        "AML.T0040 - ML Model Inference API Access": 8,
+        "AML.T0047 - ML-Enabled Product or Service": 18,
+        "AML.T0051 - LLM Prompt Injection": 17,
+        "AML.T0010 - ML Supply Chain Compromise": 14,
+        "AML.T0057 - LLM Data Leakage": 12,
+        "AML.T0040 - ML Model Inference API Access": 9,
         "AML.T0054 - LLM Jailbreak": 7,
         "AML.T0012 - Valid Accounts": 7,
         "AML.T0018 - Backdoor ML Model": 6,
@@ -21,12 +21,12 @@
         "AML.T0020 - Poison Training Data": 1
       },
       "owasp_distribution": {
-        "LLM08 - Excessive Agency": 16,
-        "LLM05 - Supply Chain Vulnerabilities": 14,
-        "LLM01 - Prompt Injection": 13,
+        "LLM08 - Excessive Agency": 17,
+        "LLM05 - Supply Chain Vulnerabilities": 15,
+        "LLM01 - Prompt Injection": 14,
+        "LLM07 - Insecure Plugin Design": 12,
+        "LLM06 - Sensitive Information Disclosure": 12,
         "LLM02 - Insecure Output Handling": 11,
-        "LLM07 - Insecure Plugin Design": 11,
-        "LLM06 - Sensitive Information Disclosure": 11,
         "LLM09 - Overreliance": 7,
         "LLM10 - Model Theft": 2,
         "LLM04 - Model Denial of Service": 1,
@@ -34,22 +34,22 @@
       },
       "threat_level_distribution": {
         "HIGH": 14,
-        "MEDIUM": 3,
+        "MEDIUM": 4,
         "CRITICAL": 2
       },
       "threat_actor_distribution": {
-        "cybercriminal": 17,
+        "cybercriminal": 18,
         "nation-state": 13,
-        "researcher": 10,
-        "insider": 9
+        "researcher": 11,
+        "insider": 10
       },
-      "avg_relevance": 7.51,
+      "avg_relevance": 7.45,
       "top_categories": [
         "LLM Security",
         "Agentic AI",
         "First Look",
-        "Industry News",
         "Supply Chain",
+        "Industry News",
         "Prompt Injection",
         "Research",
         "Adversarial ML",
