@@ -404,8 +404,8 @@
         var x = pad.left + (item.frequency / maxFreq) * plotW;
         var normRel = Math.max(0, Math.min(1, (item.relevance - minRel) / (maxRel - minRel)));
         var y = pad.top + plotH - normRel * plotH;
-        var rScale = W / 800;
-        var radius = Math.max(6 * rScale, Math.min(20 * rScale, item.frequency * 1.4 * rScale)) * dp;
+        var rScale = W < 500 ? W / 1200 : W / 800;
+        var radius = Math.max(4 * rScale, Math.min(14 * rScale, item.frequency * 1.0 * rScale)) * dp;
         var color = (opts.palette && opts.palette[item.id]) || '#888';
 
         // Drop shadow
