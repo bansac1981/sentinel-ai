@@ -2,8 +2,8 @@ name: "Grid the Grey — Weekly Signal Report"
 
 # ─────────────────────────────────────────────
 # Weekly AI Security Intelligence Digest
-#   Step 1 (auto/manual): Generate report as DRAFT → push → deploy preview
-#   Step 2 (manual from phone): Approve → flip to published → redeploy prod
+#   Step 1 (auto/manual): Generate report → deploy preview (not pushed to main)
+#   Step 2 (manual from phone): Approve → commit to main → prod deploy
 # ─────────────────────────────────────────────
 on:
   # Every Monday at 11:00 AM IST (05:30 UTC)
@@ -20,10 +20,10 @@ on:
       action:
         description: "What to do"
         required: true
-        default: "generate-draft"
+        default: "generate-preview"
         type: choice
         options:
-          - generate-draft
+          - generate-preview
           - publish-latest
           - dry-run
 
@@ -34,10 +34,14 @@ permissions:
 
 jobs:
   # ══════════════════════════════════════════════════════════════
-  # JOB 1: Generate signal report as a DRAFT
+  # JOB 1: Generate signal report and deploy a PREVIEW
+  #   - Generates the article (draft: false so Hugo renders it)
+  #   - Builds Hugo and deploys to Pages for proofreading
+  #   - Saves the generated file as an artifact (NOT pushed to main)
+  #   - deploy.yml does NOT trigger since we don't push to main
   # ══════════════════════════════════════════════════════════════
   generate:
-    name: "Generate Signal Report (Draft)"
+    name: "Generate Signal Report & Preview"
     if: ${{ github.event.inputs.action != 'publish-latest' && github.event.inputs.action != 'dry-run' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -58,37 +62,31 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate weekly signal report (as draft)
+      - name: Generate weekly signal report
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL:      ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
         run: |
           DAYS="${{ github.event.inputs.days || '7' }}"
-          echo "Generating signal report (DRAFT) for last ${DAYS} days..."
-          python weekly_signal_report.py --generate --draft --days "${DAYS}"
+          echo "Generating signal report for last ${DAYS} days..."
+          python weekly_signal_report.py --generate --days "${DAYS}"
 
-      - name: Commit draft report
+      - name: Determine preview URL
+        id: url
         run: |
-          git config user.name  "Grid the Grey Bot"
-          git config user.email "bot@gridthegrey.com"
-          git add hugo-site/content/deep-signal/ signal-reports/
-          if git diff --staged --quiet; then
-            echo "No changes to commit."
-            exit 0
-          fi
-          WEEK=$(date -u +'%Y-W%V')
-          git commit -m "feat: add draft signal report — ${WEEK} [preview]"
-          git push
-          echo ""
-          echo "══════════════════════════════════════════════"
-          echo "  ✓ Draft signal report committed"
-          echo "  ✓ Week: ${WEEK}"
-          echo ""
-          echo "  NEXT STEP: Preview the draft, then run this"
-          echo "  workflow again with action = 'publish-latest'"
-          echo "══════════════════════════════════════════════"
+          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug: *"//;s/"$//')
+          echo "slug=${SLUG}" >> $GITHUB_OUTPUT
+          echo "preview_url=https://gridthegrey.com/deep-signal/${SLUG}/" >> $GITHUB_OUTPUT
 
-      # Deploy a preview build (includes drafts) to GitHub Pages
+      - name: Save generated files as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: signal-report-files
+          path: |
+            hugo-site/content/deep-signal/*weekly-signal-report*.md
+            signal-reports/history.json
+          retention-days: 7
+
       - name: Setup Hugo (extended)
         run: |
           HUGO_VERSION="0.140.2"
@@ -96,22 +94,49 @@ jobs:
           tar -xzf /tmp/hugo.tar.gz -C /tmp
           sudo install /tmp/hugo /usr/local/bin/hugo
 
-      - name: Build site with drafts
+      - name: Build site (includes new report for preview)
         working-directory: hugo-site
         env:
           HUGO_ENVIRONMENT: production
           TZ: Asia/Kolkata
-        run: |
-          hugo --minify --buildDrafts --baseURL "https://gridthegrey.com/"
+        run: hugo --minify --baseURL "https://gridthegrey.com/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: hugo-site/public
 
-  # Deploy preview (with drafts visible for proofreading)
+      - name: Summary
+        run: |
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+          echo ""
+          echo "  ✓ Signal Report generated and preview deployed"
+          echo ""
+          echo "  📱 PROOFREAD HERE:"
+          echo "     ${{ steps.url.outputs.preview_url }}"
+          echo ""
+          echo "  When satisfied, run this workflow again with:"
+          echo "     action = 'publish-latest'"
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+
+          # Also write to GitHub Actions Job Summary (visible in UI)
+          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
+          ## 📰 Weekly Signal Report — Preview Ready
+
+          **Proofread the report here:**
+
+          🔗 [${{ steps.url.outputs.preview_url }}](${{ steps.url.outputs.preview_url }})
+
+          ---
+
+          When satisfied, run this workflow again with `action: publish-latest` to commit to main and trigger the production deploy.
+          EOF
+
+  # Deploy preview to GitHub Pages
   deploy-preview:
-    name: "Deploy Preview (with drafts)"
+    name: "Deploy Preview"
     needs: generate
     runs-on: ubuntu-latest
     environment:
@@ -124,10 +149,10 @@ jobs:
         uses: actions/deploy-pages@v4
 
   # ══════════════════════════════════════════════════════════════
-  # JOB 2: Publish the latest draft (triggered manually from phone)
+  # JOB 2: Publish (commit to main → triggers regular deploy.yml)
   # ══════════════════════════════════════════════════════════════
   publish:
-    name: "Publish Latest Draft"
+    name: "Publish Signal Report"
     if: ${{ github.event.inputs.action == 'publish-latest' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -139,40 +164,57 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           fetch-depth: 1
 
-      - name: Find and publish latest draft signal report
-        run: |
-          # Find the most recent draft signal report
-          DRAFT_FILE=$(grep -rl "^draft: true" hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | sort | tail -1)
+      - name: Download report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: signal-report-files
+          path: .
+        continue-on-error: true
 
-          if [ -z "$DRAFT_FILE" ]; then
-            echo "ERROR: No draft signal report found to publish."
-            echo "Run this workflow with action='generate-draft' first."
-            exit 1
+      - name: Check for artifact or regenerate
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL:      ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-6' }}
+        run: |
+          # Check if we got the article from artifact
+          if ls hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | grep -q "weekly-signal"; then
+            echo "Found report from artifact — using it."
+          else
+            echo "No artifact found — regenerating report..."
+            pip install -r requirements.txt
+            python weekly_signal_report.py --generate --days 7
           fi
 
-          echo "Publishing: $DRAFT_FILE"
-          sed -i 's/^draft: true/draft: false/' "$DRAFT_FILE"
-
-          TITLE=$(grep "^title:" "$DRAFT_FILE" | head -1 | sed 's/^title: *//;s/^"//;s/"$//')
-          echo "Title: $TITLE"
-
-      - name: Commit and push
+      - name: Commit and push to main
         run: |
           git config user.name  "Grid the Grey Bot"
           git config user.email "bot@gridthegrey.com"
-          git add hugo-site/content/deep-signal/
+          git add hugo-site/content/deep-signal/ signal-reports/
           if git diff --staged --quiet; then
             echo "No changes — report may already be published."
             exit 0
           fi
           WEEK=$(date -u +'%Y-W%V')
+          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug: *"//;s/"$//')
           git commit -m "feat: publish weekly signal report — ${WEEK}"
           git push
+
           echo ""
-          echo "══════════════════════════════════════════════"
-          echo "  ✓ Signal Report PUBLISHED"
-          echo "  ✓ Site rebuild triggered (deploy.yml)"
-          echo "══════════════════════════════════════════════"
+          echo "══════════════════════════════════════════════════════════════"
+          echo ""
+          echo "  ✓ Signal Report PUBLISHED to main"
+          echo "  ✓ deploy.yml will rebuild production site"
+          echo "  🔗 https://gridthegrey.com/deep-signal/${SLUG}/"
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## ✅ Signal Report Published
+
+          The report is now live:
+
+          🔗 [https://gridthegrey.com/deep-signal/${SLUG}/](https://gridthegrey.com/deep-signal/${SLUG}/)
+          EOF
 
   # ══════════════════════════════════════════════════════════════
   # JOB 3: Dry run (analytics only)
