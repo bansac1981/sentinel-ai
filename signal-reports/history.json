@@ -29,8 +29,8 @@
         "LLM06 - Sensitive Information Disclosure": 11,
         "LLM09 - Overreliance": 7,
         "LLM10 - Model Theft": 2,
-        "LLM03 - Training Data Poisoning": 1,
-        "LLM04 - Model Denial of Service": 1
+        "LLM04 - Model Denial of Service": 1,
+        "LLM03 - Training Data Poisoning": 1
       },
       "threat_level_distribution": {
         "HIGH": 14,
