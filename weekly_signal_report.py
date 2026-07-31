@@ -767,90 +767,126 @@ MITRE_COLORS = [
 ]
 
 
-def generate_quadrant_chart(items: list, title: str, palette: dict | list, output_path: Path) -> None:
-    """Generate a quadrant scatter/bubble chart as PNG."""
+def generate_quadrant_chart(items: list, title: str, palette: dict | list, output_path: Path,
+                            quadrant_labels: tuple = ('CRITICAL FOCUS', 'EMERGING RISK', 'TRENDING', 'MONITOR')) -> None:
+    """Generate a polished quadrant bubble chart as PNG."""
     if not HAS_MATPLOTLIB:
         log.warning("  matplotlib not available — skipping chart generation")
         return
 
-    fig, ax = plt.subplots(1, 1, figsize=(10, 6), dpi=200)
+    fig, ax = plt.subplots(1, 1, figsize=(10, 7), dpi=250)
     fig.patch.set_facecolor('#FFFFFF')
-    ax.set_facecolor('#FFFFFF')
+    ax.set_facecolor('#FAFBFC')
 
-    # Data
+    # Data ranges
     freqs = [item['frequency'] for item in items]
     rels = [item['relevance'] for item in items]
-    max_freq = max(freqs) * 1.15
+    max_freq = max(freqs) * 1.2
+    rel_min = min(rels) - 0.6 if rels else 0
+    rel_max = max(rels) + 0.6 if rels else 10
 
     # Quadrant center
     mid_x = max_freq / 2
-    mid_y = (max(rels) + min(rels)) / 2 if rels else 5.0
+    mid_y = (rel_max + rel_min) / 2
 
-    # Quadrant background tints
-    ax.axhspan(mid_y, max(rels) + 1, xmin=0.5, xmax=1.0, alpha=0.06, color='#E63946')
-    ax.axhspan(mid_y, max(rels) + 1, xmin=0.0, xmax=0.5, alpha=0.05, color='#F77F00')
-    ax.axhspan(min(rels) - 1, mid_y, xmin=0.5, xmax=1.0, alpha=0.04, color='#FBB03B')
-    ax.axhspan(min(rels) - 1, mid_y, xmin=0.0, xmax=0.5, alpha=0.04, color='#4ADE80')
+    # Subtle quadrant tints
+    ax.axhspan(mid_y, rel_max + 1, xmin=0.5, xmax=1.0, alpha=0.07, color='#E63946', zorder=0)
+    ax.axhspan(mid_y, rel_max + 1, xmin=0.0, xmax=0.5, alpha=0.05, color='#F59E0B', zorder=0)
+    ax.axhspan(rel_min - 1, mid_y, xmin=0.5, xmax=1.0, alpha=0.04, color='#3B82F6', zorder=0)
+    ax.axhspan(rel_min - 1, mid_y, xmin=0.0, xmax=0.5, alpha=0.04, color='#10B981', zorder=0)
 
-    # Quadrant dividers
-    ax.axhline(y=mid_y, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.7)
-    ax.axvline(x=mid_x, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.7)
+    # Quadrant dividers — dashed
+    ax.axhline(y=mid_y, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.6, zorder=2)
+    ax.axvline(x=mid_x, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.6, zorder=2)
 
-    # Plot bubbles
+    # Plot bubbles — size proportional to frequency
+    placed = []
     for i, item in enumerate(items):
         if isinstance(palette, dict):
-            color = palette.get(item['id'], '#888888')
+            color = palette.get(item['id'], '#4A6FA5')
         else:
             color = palette[i % len(palette)]
 
-        size = max(80, item['frequency'] * 35)
+        size = 60 + item['frequency'] * 18
         ax.scatter(item['frequency'], item['relevance'], s=size,
-                   c=color, alpha=0.8, edgecolors='white', linewidth=1.5, zorder=5)
-        ax.annotate(item['id'], (item['frequency'], item['relevance']),
-                    textcoords="offset points", xytext=(0, 12),
-                    ha='center', fontsize=9, fontweight='bold', color='#1E293B',
-                    fontfamily='monospace')
+                   c=color, alpha=0.85, edgecolors='white', linewidth=2, zorder=5)
+        placed.append((item['frequency'], item['relevance']))
+
+    # Labels with white halo — positioned to avoid dots
+    for i, item in enumerate(items):
+        lx, ly = item['frequency'], item['relevance']
+
+        # Determine best offset direction
+        offset_x, offset_y = 0, 10
+        ha = 'center'
+
+        # Check proximity to other points and nudge
+        for j, (px, py) in enumerate(placed):
+            if j == i:
+                continue
+            if abs(lx - px) < max_freq * 0.06 and abs(ly - py) < (rel_max - rel_min) * 0.05:
+                offset_y += 8
+
+        # If near right edge, shift label left
+        if lx > max_freq * 0.8:
+            offset_x = -10
+            ha = 'right'
+        elif lx < max_freq * 0.15:
+            offset_x = 10
+            ha = 'left'
+
+        ax.annotate(item['id'], (lx, ly),
+                    textcoords="offset points", xytext=(offset_x, offset_y),
+                    ha=ha, fontsize=8.5, fontweight='bold', color='#1E293B',
+                    fontfamily='monospace', zorder=8,
+                    bbox=dict(boxstyle='round,pad=0.15', facecolor='white',
+                              edgecolor='none', alpha=0.85))
 
     # Axis config
-    rel_min = min(rels) - 0.5 if rels else 0
-    rel_max = max(rels) + 0.5 if rels else 10
     ax.set_xlim(0, max_freq)
     ax.set_ylim(rel_min, rel_max)
-    ax.set_xlabel('Event Frequency', fontsize=12, fontfamily='monospace', color='#334155')
-    ax.set_ylabel('Avg Relevance Score', fontsize=12, fontfamily='monospace', color='#334155')
-    ax.set_title(title, fontsize=14, fontweight='bold', fontfamily='monospace', color='#1E293B', pad=14)
+    ax.set_xlabel('Event Frequency', fontsize=11, fontfamily='monospace',
+                  color='#334155', fontweight='bold', labelpad=10)
+    ax.set_ylabel('Avg Relevance Score', fontsize=11, fontfamily='monospace',
+                  color='#334155', fontweight='bold', labelpad=10)
 
-    # Quadrant labels
-    ax.text(max_freq * 0.95, rel_max - 0.12, 'CRITICAL FOCUS', ha='right', fontsize=9,
-            fontfamily='monospace', fontweight='bold', color='#C0392B', alpha=0.6)
-    ax.text(max_freq * 0.05, rel_max - 0.12, 'EMERGING RISK', ha='left', fontsize=9,
-            fontfamily='monospace', fontweight='bold', color='#E67E22', alpha=0.6)
-    ax.text(max_freq * 0.95, rel_min + 0.12, 'TRENDING', ha='right', fontsize=9,
-            fontfamily='monospace', fontweight='bold', color='#D97706', alpha=0.6)
-    ax.text(max_freq * 0.05, rel_min + 0.12, 'MONITOR', ha='left', fontsize=9,
-            fontfamily='monospace', fontweight='bold', color='#16A34A', alpha=0.6)
+    # Title
+    ax.set_title(title, fontsize=14, fontweight='bold', fontfamily='monospace',
+                 color='#0F172A', pad=16)
 
-    # Grid
-    ax.grid(True, alpha=0.3, linewidth=0.5, color='#E2E8F0')
-    ax.tick_params(labelsize=10, colors='#64748B')
+    # Quadrant labels — bold, positioned in quadrant interiors
+    ql_props = dict(fontsize=9, fontfamily='monospace', fontweight='bold', alpha=0.5, zorder=1)
+    ax.text(max_freq * 0.75, rel_max - (rel_max - rel_min) * 0.07, quadrant_labels[0],
+            ha='center', color='#B91C1C', **ql_props)
+    ax.text(max_freq * 0.25, rel_max - (rel_max - rel_min) * 0.07, quadrant_labels[1],
+            ha='center', color='#D97706', **ql_props)
+    ax.text(max_freq * 0.75, rel_min + (rel_max - rel_min) * 0.07, quadrant_labels[2],
+            ha='center', color='#1D4ED8', **ql_props)
+    ax.text(max_freq * 0.25, rel_min + (rel_max - rel_min) * 0.07, quadrant_labels[3],
+            ha='center', color='#059669', **ql_props)
+
+    # Light grid
+    ax.grid(True, alpha=0.15, linewidth=0.5, color='#94A3B8')
+    ax.tick_params(labelsize=9, colors='#475569', direction='out', length=4)
     for spine in ax.spines.values():
         spine.set_color('#CBD5E1')
+        spine.set_linewidth(0.8)
 
     # Legend
     legend_items = []
     for i, item in enumerate(items):
         if isinstance(palette, dict):
-            color = palette.get(item['id'], '#888888')
+            color = palette.get(item['id'], '#4A6FA5')
         else:
             color = palette[i % len(palette)]
         legend_items.append(mpatches.Patch(color=color, label=f"{item['id']} {item['label']}"))
 
-    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.15),
-              ncol=3, fontsize=8.5, frameon=False, prop={'family': 'monospace'})
+    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.1),
+              ncol=3, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
 
     plt.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, bbox_inches='tight', facecolor='#FFFFFF', edgecolor='none')
+    fig.savefig(output_path, bbox_inches='tight', facecolor='#FFFFFF', edgecolor='none', pad_inches=0.2)
     plt.close(fig)
     log.info(f"  Chart saved: {output_path}")
 
