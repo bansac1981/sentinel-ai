@@ -46,6 +46,7 @@
   border: 1px solid #E2E8F0;
   border-radius: 12px;
   overflow: hidden;
+  overflow-x: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
@@ -119,10 +120,13 @@
   position: relative;
   padding: var(--space-lg);
   background: #FFFFFF;
+  overflow-x: auto;
 }
 
 .signal-chart__canvas-wrap canvas {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* ── Map Wrap (for geographic chart) ── */
