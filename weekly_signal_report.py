@@ -873,7 +873,7 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
         spine.set_color('#CBD5E1')
         spine.set_linewidth(0.8)
 
-    # Legend
+    # Legend — fixed 2-column layout for clean vertical alignment
     legend_items = []
     for i, item in enumerate(items):
         if isinstance(palette, dict):
@@ -882,9 +882,8 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
             color = palette[i % len(palette)]
         legend_items.append(mpatches.Patch(color=color, label=f"{item['id']} {item['label']}"))
 
-    ncols = 5 if len(legend_items) > 10 else 4 if len(legend_items) > 6 else 3
     ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.10),
-              ncol=ncols, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
+              ncol=2, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_path, facecolor='#FFFFFF', edgecolor='none', bbox_inches='tight', pad_inches=0.15)
