@@ -26,7 +26,7 @@
 </section>
 
 {{/* ── DEEP SIGNAL PINNED FEATURE ── */}}
-{{ $latestDS := where .Site.RegularPages "Params.content_type" "deep_signal" }}
+{{ $latestDS := where .Site.RegularPages "Params.content_type" "in" (slice "deep_signal" "signal_report") }}
 {{ $latestDS = first 1 $latestDS }}
 {{ range $latestDS }}
 <section class="ds-pinned">
@@ -69,7 +69,7 @@
     <h3 class="date-group__heading">{{ .Key }}</h3>
     <div class="posts-list">
       {{ range .Pages }}
-      {{ $isDeepSignal := eq (.Params.content_type | default "") "deep_signal" }}
+      {{ $isDeepSignal := or (eq (.Params.content_type | default "") "deep_signal") (eq (.Params.content_type | default "") "signal_report") }}
       {{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
       <article class="post-card post-card--h {{ if $isDeepSignal }}post-card--deep-signal{{ else if $isFirstLook }}post-card--first-look{{ end }}">
         {{ if or (not $isDeepSignal) .Params.thumbnail_card }}

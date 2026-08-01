@@ -1,5 +1,5 @@
 {{/* ── DEEP SIGNAL: ORIGINAL ANALYSIS ── */}}
-{{ $dsPages := where .Site.RegularPages "Params.content_type" "deep_signal" }}
+{{ $dsPages := where .Site.RegularPages "Params.content_type" "in" (slice "deep_signal" "signal_report") }}
 {{ $dsPages = first 3 $dsPages }}
 {{ if $dsPages }}
 <div class="sidebar-widget sidebar-widget--deep-signal">

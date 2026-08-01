@@ -37,7 +37,7 @@
 <div class="posts-list">
   {{ range .Paginator.Pages }}
   {{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
-  {{ $isDeepSignal := eq (.Params.content_type | default "") "deep_signal" }}
+  {{ $isDeepSignal := or (eq (.Params.content_type | default "") "deep_signal") (eq (.Params.content_type | default "") "signal_report") }}
   <article class="post-card post-card--h {{ if $isDeepSignal }}post-card--deep-signal{{ else if $isFirstLook }}post-card--first-look{{ end }}">
     {{ if or (not $isDeepSignal) .Params.thumbnail_card }}
     <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
