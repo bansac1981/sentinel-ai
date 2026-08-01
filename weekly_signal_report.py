@@ -882,12 +882,12 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
             color = palette[i % len(palette)]
         legend_items.append(mpatches.Patch(color=color, label=f"{item['id']} {item['label']}"))
 
-    ncols = 4 if len(legend_items) > 8 else 3
-    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.08),
+    ncols = 5 if len(legend_items) > 10 else 4 if len(legend_items) > 6 else 3
+    ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.10),
               ncol=ncols, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, facecolor='#FFFFFF', edgecolor='none')
+    fig.savefig(output_path, facecolor='#FFFFFF', edgecolor='none', bbox_inches='tight', pad_inches=0.15)
     plt.close(fig)
     log.info(f"  Chart saved: {output_path}")
 
