@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Unpublish an article by slug — set to draft or delete entirely."""
+"""Unpublish an article by URL, slug, title, or partial filename."""
 
 import argparse
 import re
-import shutil
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 CONTENT_DIRS = [
     Path(__file__).parent / "hugo-site" / "content" / "posts",
@@ -14,17 +14,52 @@ CONTENT_DIRS = [
 SIGNAL_IMG_DIR = Path(__file__).parent / "hugo-site" / "static" / "img" / "signal"
 
 
-def find_article(slug: str) -> Path | None:
-    """Find an article file matching the given slug (filename or front-matter slug)."""
+def extract_slug_from_url(url: str) -> str | None:
+    """Extract the slug from a gridthegrey.com URL."""
+    parsed = urlparse(url)
+    path = parsed.path.strip("/")
+    if not path:
+        return None
+    # URL like /deep-signal/weekly-signal-report-2026w31/ or /posts/some-article/
+    parts = path.split("/")
+    return parts[-1] if parts else None
+
+
+def normalize_input(identifier: str) -> str:
+    """Detect if input is a URL and extract slug, otherwise return as-is."""
+    if identifier.startswith("http://") or identifier.startswith("https://"):
+        slug = extract_slug_from_url(identifier)
+        if slug:
+            print(f"  Extracted slug from URL: {slug}")
+            return slug
+    return identifier
+
+
+def find_article(identifier: str) -> Path | None:
+    """Find an article file matching by slug, title, partial filename, or URL."""
+    slug = normalize_input(identifier)
+
     for content_dir in CONTENT_DIRS:
         if not content_dir.exists():
             continue
         for md_file in content_dir.glob("*.md"):
-            if slug in md_file.stem:
+            # Match by filename
+            if slug.lower() in md_file.stem.lower():
                 return md_file
+
             text = md_file.read_text(encoding="utf-8")
-            if re.search(rf'^slug:\s*"?{re.escape(slug)}"?\s*$', text, re.MULTILINE):
+
+            # Match by front-matter slug
+            if re.search(rf'^slug:\s*"?{re.escape(slug)}"?\s*$', text, re.MULTILINE | re.IGNORECASE):
                 return md_file
+
+            # Match by title (exact or substring)
+            title_match = re.search(r'^title:\s*"?([^"\n]+)"?\s*$', text, re.MULTILINE)
+            if title_match:
+                title = title_match.group(1).strip().strip('"')
+                if slug.lower() in title.lower() or title.lower() in slug.lower():
+                    return md_file
+
     return None
 
 
@@ -47,7 +82,6 @@ def set_draft(article_path: Path) -> None:
 
 def delete_article(article_path: Path) -> None:
     """Delete the article file and any associated signal chart images."""
-    # Check for associated chart images (signal reports)
     text = article_path.read_text(encoding="utf-8")
     slug_match = re.search(r'^slug:\s*"?([^"\n]+)"?\s*$', text, re.MULTILINE)
     if slug_match:
@@ -65,7 +99,10 @@ def delete_article(article_path: Path) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="Unpublish a mistakenly published article")
-    parser.add_argument("slug", help="Article slug or partial filename to match")
+    parser.add_argument(
+        "identifier",
+        help="Article URL (https://gridthegrey.com/...), slug, title, or partial filename",
+    )
     parser.add_argument(
         "--mode",
         choices=["draft", "delete"],
@@ -74,10 +111,16 @@ def main():
     )
     args = parser.parse_args()
 
-    article = find_article(args.slug)
+    article = find_article(args.identifier)
     if not article:
-        print(f"ERROR: No article found matching '{args.slug}'")
+        print(f"ERROR: No article found matching '{args.identifier}'")
         print(f"  Searched: {', '.join(str(d) for d in CONTENT_DIRS)}")
+        print()
+        print("  Tip: Use the full URL, slug, article title, or part of the filename.")
+        print("  Examples:")
+        print("    python unpublish.py https://gridthegrey.com/deep-signal/weekly-signal-report-2026w31/")
+        print("    python unpublish.py weekly-signal-report-2026w31")
+        print('    python unpublish.py "Claude Code Security Playbook"')
         sys.exit(1)
 
     print(f"Found: {article.relative_to(Path(__file__).parent)}")

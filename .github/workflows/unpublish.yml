@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: "Article slug or partial filename (e.g. 'weekly-signal-report-2026w31' or 'llm-cli-tool')"
+        description: "Article URL, slug, title, or partial filename (e.g. 'https://gridthegrey.com/deep-signal/weekly-signal-report-2026w31/' or 'Claude Code Security Playbook')"
         required: true
         type: string
       mode:
