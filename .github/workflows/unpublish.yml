@@ -1,0 +1,72 @@
+name: "Grid the Grey — Unpublish Article"
+
+# ─────────────────────────────────────────────
+# Remove a mistakenly published article
+# Works for regular posts and deep-signal articles
+# ─────────────────────────────────────────────
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Article slug or partial filename (e.g. 'weekly-signal-report-2026w31' or 'llm-cli-tool')"
+        required: true
+        type: string
+      mode:
+        description: "What to do with the article"
+        required: true
+        default: "draft"
+        type: choice
+        options:
+          - draft
+          - delete
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  unpublish:
+    name: "Unpublish Article"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Unpublish article
+        run: |
+          python unpublish.py "${{ inputs.slug }}" --mode "${{ inputs.mode }}"
+
+      - name: Commit and push
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          git add -A hugo-site/content/ hugo-site/static/img/signal/
+          if git diff --staged --quiet; then
+            echo "No changes — article may not exist or was already in desired state."
+            exit 0
+          fi
+          MODE="${{ inputs.mode }}"
+          SLUG="${{ inputs.slug }}"
+          if [ "$MODE" = "draft" ]; then
+            git commit -m "fix: unpublish article — set to draft ($SLUG)"
+          else
+            git commit -m "fix: unpublish article — deleted ($SLUG)"
+          fi
+          git push
+
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+          echo "  ✓ Article '$SLUG' has been ${MODE}ed"
+          echo "  ✓ deploy.yml will rebuild the site without this article"
+          echo "══════════════════════════════════════════════════════════════"
