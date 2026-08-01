@@ -2,7 +2,7 @@
   "weeks": [
     {
       "week": "2026-W31",
-      "date": "2026-07-31",
+      "date": "2026-08-01",
       "article_count": 20,
       "mitre_distribution": {
         "AML.T0047 - ML-Enabled Product or Service": 18,
