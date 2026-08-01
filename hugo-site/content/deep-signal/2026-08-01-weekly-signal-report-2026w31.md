@@ -2,7 +2,7 @@
 title: "Agentic AI Goes Operational: Espionage, Rogue Models, and Cryptographic Breaks"
 subtitle: "Weekly Signal Report: 2026-Week31"
 date: "2026-08-01T07:35:56+00:00"
-draft: true
+draft: false
 slug: "weekly-signal-report-2026w31"
 content_type: "signal_report"
 author: "Grid the Grey Editorial"
