@@ -1,7 +1,7 @@
 ---
 title: "The Security Analyst's Claude Code Playbook"
 date: 2026-07-10
-draft: false
+draft: true
 content_type: "deep_signal"
 author: "Grid the Grey Editorial"
 description: "A practitioner's guide to deploying Claude Code in security operations — threat intelligence automation, compliance gap analysis, token management, and enterprise hardening."
