@@ -2,7 +2,7 @@
 title: "Agents Gone Rogue: AI Autonomy Becomes This Season's Attack Vector"
 subtitle: "Weekly Signal Report: 2026-Week31"
 date: "2026-07-31T19:35:30+00:00"
-draft: false
+draft: true
 slug: "weekly-signal-report-2026w31"
 content_type: "signal_report"
 author: "Grid the Grey Editorial"
