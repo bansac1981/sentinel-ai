@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Astra Model Solves 10 Open Math and CS Problems"
-date: 2026-08-02T14:36:15+00:00
+date: "2026-08-02T16:20:34+00:00"
 draft: false 
 slug: "openai-astra-model-solves-10-open-math-and-cs-problems"
 
