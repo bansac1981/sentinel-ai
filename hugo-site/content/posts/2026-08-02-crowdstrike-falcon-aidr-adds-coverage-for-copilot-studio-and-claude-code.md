@@ -1,6 +1,6 @@
 ---
 title: "CrowdStrike Falcon AIDR Adds Coverage for Copilot Studio and Claude Code"
-date: 2026-08-02T14:24:05+00:00
+date: "2026-08-02T16:17:55+00:00"
 draft: false 
 slug: "crowdstrike-falcon-aidr-adds-coverage-for-copilot-studio-and-claude-code"
 
