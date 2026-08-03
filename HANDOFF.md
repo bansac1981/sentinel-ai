@@ -12,7 +12,7 @@
 
 ## 1. Project Purpose
 
-An automated AI security news aggregation website targeting CISO-level readers. Every article is scored by Claude for relevance, mapped to MITRE ATLAS techniques and OWASP LLM Top 10 categories, and given a Claude-generated punchy headline. The site also produces a weekly audio briefing (podcast) distributed via Spotify, and sends an automated twice-weekly newsletter via Mailerlite.
+An automated AI security news aggregation website targeting CISO-level readers. Every article is scored by Claude for relevance, mapped to MITRE ATLAS techniques and OWASP LLM Top 10 categories, and given a Claude-generated punchy headline. The site sends an automated twice-weekly newsletter via Mailerlite.
 
 Key differentiator: framework mapping (MITRE ATLAS + OWASP LLM Top 10) applied to every article, giving CISOs structured intelligence rather than raw news.
 
@@ -43,13 +43,6 @@ deploy.yml (GitHub Actions)
     │       ├── newsletter_digest.py --send --days 4
     │       └── Sends via Mailerlite API → subscriber inboxes
     │
-    ├── weekly_briefing.py (manual, GitHub Actions: ciso-briefing.yml)
-    │       ├── Claude: writes ~450-word spoken script
-    │       ├── OpenAI TTS (tts-1-hd, onyx voice): generates MP3
-    │       ├── Uploads MP3 to Cloudflare R2
-    │       └── Updates hugo.toml + episodes.json → triggers site rebuild
-    │
-    └── podcast_feed.py → feed.xml on R2 → Spotify (submitted, pending approval)
 ```
 
 ---
@@ -64,8 +57,6 @@ deploy.yml (GitHub Actions)
 | CI/CD | GitHub Actions | 7 workflows (see Section 7) |
 | AI scoring | Anthropic Claude | `claude-sonnet-4-6` (configurable via `CLAUDE_MODEL` var) |
 | AI backfill | Anthropic Claude | `claude-haiku-4-5-20251001` (backfill_tldr.py — cheap) |
-| TTS | OpenAI | `tts-1-hd`, default voice: `onyx` |
-| Podcast storage | Cloudflare R2 | S3-compatible, public dev URL |
 | Newsletter | **Mailerlite** | Free tier — fully automated, twice weekly |
 | Images (primary) | Unsplash API | `urls.regular` (~1080px), `Client-ID` auth |
 | Images (fallback) | Pexels API | Fallback if Unsplash returns no result |
@@ -80,13 +71,7 @@ Set at: repo Settings → Secrets and variables → Actions → Repository secre
 
 | Secret | Used By | Notes |
 |--------|---------|-------|
-| `ANTHROPIC_API_KEY` | pipeline.yml, ciso-briefing.yml, backfill | Required |
-| `OPENAI_API_KEY` | ciso-briefing.yml (produce step) | Required for TTS |
-| `R2_ACCOUNT_ID` | ciso-briefing.yml, podcast_feed.py | Cloudflare account ID |
-| `R2_ACCESS_KEY_ID` | ciso-briefing.yml, podcast_feed.py | R2 API token |
-| `R2_SECRET_ACCESS_KEY` | ciso-briefing.yml, podcast_feed.py | R2 API token secret |
-| `R2_BUCKET_NAME` | ciso-briefing.yml, podcast_feed.py | R2 bucket name |
-| `R2_PUBLIC_URL` | ciso-briefing.yml, podcast_feed.py | e.g. `https://pub-XXX.r2.dev` |
+| `ANTHROPIC_API_KEY` | pipeline.yml, backfill | Required |
 | `PEXELS_API_KEY` | pipeline.py (image fallback) | Free at pexels.com/api |
 | `UNSPLASH_ACCESS_KEY` | pipeline.py (primary images) | Free at unsplash.com/developers |
 | `MAILERLITE_API_KEY` | newsletter.yml | Mailerlite API token |
@@ -108,10 +93,6 @@ Optional GitHub Actions variable (not secret):
 | GitHub repo | https://github.com/bansac1981/sentinel-ai |
 | Newsletter subscribe | https://preview.mailerlite.io/forms/2303110/186108792273896900/share |
 | Mailerlite dashboard | https://dashboard.mailerlite.com |
-| Podcast R2 feed | https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/feed.xml |
-| Podcast R2 base | https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/ |
-| Podcast W17 MP3 | https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W17-onyx.mp3 |
-| Spotify submission | Submitted — pending approval |
 
 ---
 
@@ -121,8 +102,6 @@ Optional GitHub Actions variable (not secret):
 sentinel-ai/
 ├── pipeline.py              # RSS fetch → Claude scoring → Hugo markdown drafts
 │                            # Includes: age filter, catchy title gen, Unsplash images
-├── weekly_briefing.py       # CISO audio briefing: Claude script + OpenAI TTS + R2 upload
-├── podcast_feed.py          # iTunes-compatible RSS feed generator → R2
 ├── newsletter_digest.py     # Newsletter digest — generates HTML + sends via Mailerlite API
 │                            # Usage: python newsletter_digest.py --send --days 4
 │                            # Flags: --send, --dry-run, --days N, --output file, --subject "..."
@@ -133,16 +112,10 @@ sentinel-ai/
 ├── .env                     # Local secrets — NEVER commit (gitignored)
 ├── .env.example             # Template for .env
 ├── welcome_email_template.html  # Mailerlite welcome email HTML (paste into automation editor)
-├── briefings/
-│   ├── episodes.json        # Podcast episode metadata + show config
-│   ├── feed.xml             # Local copy of podcast RSS (also uploaded to R2)
-│   ├── draft-2026-W16.md    # Generated briefing script — Week 16
-│   └── draft-2026-W17.md    # Generated briefing script — Week 17
 ├── .github/workflows/
 │   ├── deploy.yml           # Build + GitHub Pages deploy (triggered on push to main)
 │   ├── pipeline.yml         # RSS pipeline — manual only (no cron)
 │   ├── newsletter.yml       # Newsletter dispatch — Tue + Fri 9:30 AM IST (AUTOMATED)
-│   ├── ciso-briefing.yml    # CISO audio briefing: generate + produce steps
 │   ├── publish-draft.yml    # Manual: publish a specific draft by slug
 │   └── draft-cleanup.yml    # Cleanup stale drafts
 ├── HANDOFF.md               # This file — complete project state for agent handoff
@@ -157,7 +130,7 @@ sentinel-ai/
     │   ├── categories/      # Category _index.md files (6 categories)
     │   └── about.md
     ├── layouts/
-    │   ├── index.html       # Homepage: hero + ticker + mobile podcast + article grid
+    │   ├── index.html       # Homepage: hero + ticker + article grid
     │   ├── _default/
     │   │   ├── single.html  # Article page: header → TL;DR → framework panel →
     │   │   │                #   image → body → subscribe form → footer
@@ -165,14 +138,13 @@ sentinel-ai/
     │   └── partials/
     │       ├── header.html           # Nav bar — Subscribe button anchors to #gtg-newsletter
     │       ├── footer.html
-    │       ├── sidebar.html          # Podcast player → Threat Radar → Trending →
+    │       ├── sidebar.html          # Threat Radar → Trending →
     │       │                         # Framework Index → Categories → Newsletter form
     │       │                         # Newsletter widget has id="gtg-newsletter"
     │       ├── article-subscribe.html # Inline subscribe form at bottom of every article
     │       │                          # Uses hidden iframe — no new tab on submit
     │       ├── ticker.html
     │       ├── tldr.html
-    │       ├── podcast-player.html
     │       ├── scripts.html
     │       ├── article-image.html
     │       └── framework-panel.html
@@ -209,13 +181,6 @@ sentinel-ai/
 - **Process:** `newsletter_digest.py --send --days 4` → Mailerlite API creates + sends campaign
 - **Artifact:** Digest HTML uploaded as GitHub Actions artifact (retained 14 days) for inspection
 - **Required secrets:** `MAILERLITE_API_KEY`, `MAILERLITE_LIST_ID`
-
-### ciso-briefing.yml — Audio Briefing (TWO-STEP)
-- **Trigger:** Manual only
-- **Step 1 (generate):** Claude reads recent posts → writes `briefings/draft-YYYY-WXX.md` → commits
-- **Step 2 (produce):** OpenAI TTS → MP3 → R2 upload → updates `hugo.toml` + `episodes.json` → commits
-- **IMPORTANT:** Review the draft script between step 1 and step 2
-- **Fixed bug:** `input()` prompt auto-confirms when `sys.stdin.isatty()` is False (CI safe)
 
 ### publish-draft.yml — Manual publish
 - **Trigger:** Manual
@@ -349,33 +314,6 @@ tldr_actions: ["Action 1", "Action 2", "Action 3"]
 
 ---
 
-## 11. Podcast System
-
-### Episodes
-- **W16:** Week of April 14 — first episode, 5:25 min, onyx voice
-- **W17:** Week of April 21 — second episode, ~3.6 min, onyx voice
-
-### hugo.toml podcast params
-```toml
-enablePodcastPlayer = true
-latestEpisodeUrl = "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/grid-the-grey-briefing-2026-W17-onyx.mp3"
-latestEpisodeTitle = "Week 17, 2026 — AI Security Briefing"
-podcastFeedUrl = "https://pub-935e4acdc21d48bc8e73087b20f1dc3f.r2.dev/feed.xml"
-```
-
-**After each new episode:** Update both `latestEpisodeUrl` and `latestEpisodeTitle` in `hugo.toml`.
-
-### Player placement
-- **Desktop:** Top of sidebar, above Threat Radar
-- **Mobile:** Between hero banner and article grid (CSS breakpoint: 1024px)
-
-### Podcast artwork
-**PENDING:** Spotify requires square JPEG 1400×1400 to 3000×3000px uploaded to R2 as `podcast-artwork.jpg`. The `episodes.json` `image_url` already points to the expected URL.
-
-### Spotify
-- Feed submitted — pending approval
-- Once approved, new episodes appear automatically within ~1 hour of `produce` step
-
 ---
 
 ## 12. TL;DR System
@@ -445,7 +383,7 @@ del .git\index.lock
 | Body font | DM Sans |
 | Mono/technical | IBM Plex Mono |
 
-Sidebar widgets (top to bottom): Podcast Player → Threat Radar → Trending Now → Framework Index → Categories → Newsletter Subscribe Form
+Sidebar widgets (top to bottom): Threat Radar → Trending Now → Framework Index → Categories → Newsletter Subscribe Form
 
 Tags cloud widget was removed — grew too large, low value.
 
@@ -454,7 +392,6 @@ Tags cloud widget was removed — grew too large, low value.
 ## 15. Content State (as of 2026-05-01)
 
 - **Published articles:** ~44 (all with TL;DR fields backfilled)
-- **Podcast episodes:** 2 (W16, W17)
 - **Newsletter subscribers:** Growing (Mailerlite, double opt-in disabled)
 
 ---
@@ -476,10 +413,6 @@ Tags cloud widget was removed — grew too large, low value.
 8. **Double opt-in:** Disabled. Subscribers are confirmed immediately on form submit
 9. **Newsletter lookback:** `--days 4` covers Tue→Fri and Fri→Tue cycles. Adjust if gaps appear
 
-### Podcast-specific
-10. **CI input() prompt:** `weekly_briefing.py --produce` auto-confirms when `sys.stdin.isatty()` is False
-11. **latest_draft() sorting:** Sorts by filename, not mtime — GitHub Actions gives all files same mtime
-
 ### Git-specific
 12. **Actions commit timing:** Always pull before pushing
 13. **-X ours merge:** Keeps local version of conflicts — can overwrite remote-only changes
@@ -490,8 +423,6 @@ Tags cloud widget was removed — grew too large, low value.
 ## 17. Pending Work (Roadmap)
 
 ### Immediate (owner action required)
-- [ ] Upload podcast artwork to R2 as `podcast-artwork.jpg` (1400×1400+ JPEG)
-- [ ] Confirm Spotify approval and test episode playback
 - [ ] Verify Mailerlite domain DNS (gridthegrey.com) shows Verified in Mailerlite dashboard
 
 ### Feature: Deep Security Agent (Phase 2 — approved concept)
@@ -504,7 +435,6 @@ Pulls new CVEs from NVD API (free), filters for AI/ML relevance, generates origi
 
 ### Ongoing
 - [ ] Regular pipeline runs (manual via GitHub Actions UI)
-- [ ] Weekly CISO briefing (manual: generate → review → produce)
 - [ ] Update `ticker.json`, `threats.json`, `stats.json` data files periodically
 - [ ] Update README.md (partially outdated — still references Beehiiv)
 
@@ -540,15 +470,6 @@ python newsletter_digest.py --days 4 --send --dry-run
 
 # Newsletter — breaking story send
 python newsletter_digest.py --days 2 --send --subject "Breaking: Major LLM Vulnerability Disclosed"
-
-# Podcast: generate script
-python weekly_briefing.py --generate --days 7
-
-# Podcast: produce audio (after reviewing script)
-python weekly_briefing.py --produce --voice onyx
-
-# Podcast: update feed.xml on R2
-python podcast_feed.py --update
 
 # Preview site locally (requires Hugo installed)
 cd hugo-site && hugo server -D

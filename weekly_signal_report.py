@@ -174,7 +174,6 @@ def parse_post(path: Path) -> dict | None:
 def get_articles(days: int = DEFAULT_DAYS) -> list:
     """
     Return ALL published posts from the last N days, sorted by relevance_score desc.
-    Unlike weekly_briefing.py, we do not cap the number — signal reports need full data.
     """
     cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     articles = []
