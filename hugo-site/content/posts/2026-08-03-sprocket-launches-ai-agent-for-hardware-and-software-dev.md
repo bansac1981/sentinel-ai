@@ -1,6 +1,6 @@
 ---
 title: "Sprocket Launches AI Agent for Hardware and Software Dev"
-date: 2026-08-03T07:09:27+00:00
+date: "2026-08-03T10:52:23+00:00"
 draft: false 
 slug: "sprocket-launches-ai-agent-for-hardware-and-software-dev"
 
