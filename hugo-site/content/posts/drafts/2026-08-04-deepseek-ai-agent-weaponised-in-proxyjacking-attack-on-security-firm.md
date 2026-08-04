@@ -1,7 +1,7 @@
 ---
 title: "DeepSeek AI Agent Weaponised in Proxyjacking Attack on Security Firm"
 date: 2026-08-04T04:50:17+00:00
-draft: true
+draft: false 
 slug: "deepseek-ai-agent-weaponised-in-proxyjacking-attack-on-security-firm"
 
 # ── Content metadata ──
