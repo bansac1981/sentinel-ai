@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Launches Zero Trust for AI Agent Security Tools"
 date: 2026-08-05T04:25:09+00:00
-draft: true
+draft: false 
 slug: "microsoft-launches-zero-trust-for-ai-agent-security-tools"
 
 # ── Content metadata ──
