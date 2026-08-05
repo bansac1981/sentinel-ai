@@ -1,7 +1,7 @@
 ---
 title: "Varonis Launches Agent IBAC to Constrain AI Agent Actions at Runtime"
 date: 2026-08-05T04:26:41+00:00
-draft: true
+draft: false 
 slug: "varonis-launches-agent-ibac-to-constrain-ai-agent-actions-at-runtime"
 
 # ── Content metadata ──
