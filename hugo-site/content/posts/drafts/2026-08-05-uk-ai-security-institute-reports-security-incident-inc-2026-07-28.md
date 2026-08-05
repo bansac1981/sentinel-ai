@@ -1,7 +1,7 @@
 ---
 title: "UK AI Security Institute Reports Security Incident INC-2026-07-28"
 date: 2026-08-05T04:40:30+00:00
-draft: true
+draft: false 
 slug: "uk-ai-security-institute-reports-security-incident-inc-2026-07-28"
 
 # ── Content metadata ──
