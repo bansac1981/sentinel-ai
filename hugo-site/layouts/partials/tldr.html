@@ -9,7 +9,7 @@
   <div class="tldr-box__header">
     <span class="tldr-box__label">
       {{- if $isDeepSignal }}ANALYSIS BRIEF
-      {{- else if $isFirstLook }}ATTACK SURFACE BRIEF
+      {{- else if $isFirstLook }}FIRST LOOK
       {{- else }}TL;DR{{ end -}}
     </span>
     {{ if .Params.threat_level }}
@@ -34,7 +34,7 @@
     <li>
       <strong>
         {{- if $isDeepSignal }}Who it's for:
-        {{- else if $isFirstLook }}Who's now exposed:
+        {{- else if $isFirstLook }}Who benefits:
         {{- else }}Who's at risk:{{ end -}}
       </strong> {{ . }}
     </li>
@@ -44,7 +44,7 @@
     <li>
       <strong>
         {{- if $isDeepSignal }}Key takeaways:
-        {{- else if $isFirstLook }}Assess now:
+        {{- else if $isFirstLook }}Next steps:
         {{- else }}Act now:{{ end -}}
       </strong> {{ range $i, $a := .Params.tldr_actions }}{{ if $i }} &middot; {{ end }}{{ $a }}{{ end }}
     </li>
