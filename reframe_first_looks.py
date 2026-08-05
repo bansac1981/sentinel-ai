@@ -118,13 +118,13 @@ def parse_article(filepath: Path) -> tuple[str, str]:
     return front_matter, body
 
 
+ARRAY_FIELDS = {"attack_vectors_introduced", "tldr_actions", "mitre_techniques", "owasp_categories", "categories", "tags", "threat_actors"}
+
+
 def update_front_matter_field(front_matter: str, field: str, new_value: str) -> str:
     """Replace a YAML field value in front matter. Handles multi-line arrays."""
-    if field == "attack_vectors_introduced":
-        # This field spans multiple lines as a YAML array
-        pattern = rf'^({field}: \[).*?(\])\s*$'
-        replacement = f'{field}: {new_value}'
-        # Use a more robust approach: find the field and replace everything until the next field or section
+    if field in ARRAY_FIELDS:
+        # Array fields may span multiple lines — find and replace the whole value
         lines = front_matter.split('\n')
         new_lines = []
         in_field = False
@@ -145,7 +145,7 @@ def update_front_matter_field(front_matter: str, field: str, new_value: str) -> 
                 new_lines.append(line)
         return '\n'.join(new_lines)
     else:
-        # Simple single-line field replacement
+        # Scalar field — wrap in JSON quotes
         lines = front_matter.split('\n')
         new_lines = []
         for line in lines:
@@ -220,6 +220,46 @@ def reframe_article(filepath: Path, client: Anthropic, log: logging.Logger, dry_
     return True
 
 
+def fix_double_serialized_arrays(log: logging.Logger, dry_run: bool = False) -> int:
+    """Find and fix articles where array fields were double-JSON-serialized."""
+    # Pattern: a field that looks like tldr_actions: "[\"...\", \"...\"]"
+    # (the array was wrapped in json.dumps as a scalar string)
+    double_ser_pattern = re.compile(r'^((?:tldr_actions|attack_vectors_introduced):\s*)"(\[.*\])"$')
+
+    fixed = 0
+    for f in sorted(POSTS_DIR.glob("2026-*.md")):
+        if "drafts" in str(f):
+            continue
+        content = f.read_text(encoding="utf-8")
+        lines = content.split('\n')
+        changed = False
+        new_lines = []
+        for line in lines:
+            m = double_ser_pattern.match(line)
+            if m:
+                prefix = m.group(1)
+                escaped_array = m.group(2)
+                try:
+                    actual_array = json.loads(escaped_array)
+                    if isinstance(actual_array, list):
+                        new_lines.append(f"{prefix}{json.dumps(actual_array, ensure_ascii=False)}")
+                        changed = True
+                        continue
+                except json.JSONDecodeError:
+                    pass
+            new_lines.append(line)
+
+        if changed:
+            if dry_run:
+                log.info(f"  [DRY RUN] Would fix arrays in {f.name}")
+            else:
+                f.write_text('\n'.join(new_lines), encoding="utf-8")
+                log.info(f"  ✓ Fixed arrays in {f.name}")
+            fixed += 1
+
+    return fixed
+
+
 def main():
     parser = argparse.ArgumentParser(description="Reframe First Look articles")
     parser.add_argument("--limit", type=int, default=0, help="Max articles to process (0 = all)")
@@ -227,6 +267,7 @@ def main():
     parser.add_argument("--verbose", action="store_true", help="Detailed logging")
     parser.add_argument("--start-from", type=int, default=0, help="Skip first N articles (for resuming)")
     parser.add_argument("--status", action="store_true", help="Show tracker status and exit")
+    parser.add_argument("--fix-arrays", action="store_true", help="Fix double-serialized array fields in already-reframed articles")
     args = parser.parse_args()
 
     log = logging.getLogger("reframe")
@@ -244,6 +285,12 @@ def main():
         log.info(f"Remaining: {len(remaining)}")
         if remaining:
             log.info(f"Next up: {remaining[0].name}")
+        return
+
+    if args.fix_arrays:
+        log.info("Scanning for double-serialized array fields...")
+        fixed = fix_double_serialized_arrays(log, dry_run=args.dry_run)
+        log.info(f"Fixed: {fixed} article(s)")
         return
 
     articles = find_first_look_articles(tracker)
