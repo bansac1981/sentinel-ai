@@ -77,15 +77,23 @@ Rewrite the body with these sections:
 """
 
 
+def is_already_reframed(content: str) -> bool:
+    """Detect if an article has already been reframed (has new section headers)."""
+    return "## Defender Impact" in content and "## Defensive Advances" in content
+
+
 def find_first_look_articles() -> list[Path]:
-    """Find all published first_look articles (not drafts)."""
+    """Find all published first_look articles that haven't been reframed yet."""
     articles = []
     for f in sorted(POSTS_DIR.glob("2026-*.md")):
         if "drafts" in str(f):
             continue
         content = f.read_text(encoding="utf-8")
-        if 'content_type: "first_look"' in content:
-            articles.append(f)
+        if 'content_type: "first_look"' not in content:
+            continue
+        if is_already_reframed(content):
+            continue
+        articles.append(f)
     return articles
 
 
