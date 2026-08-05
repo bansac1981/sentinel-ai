@@ -991,9 +991,9 @@ If the article is NOT AI security relevant (score < 4), still return valid JSON 
 
 
 FIRST_LOOK_PROMPT_TEMPLATE = """\
-You are a senior AI security analyst working for Grid the Grey, an intelligence platform that proactively assesses the security implications of new AI capabilities as they ship.
+You are a senior AI security analyst working for Grid the Grey, an intelligence platform that assesses new AI capabilities from a defender's perspective — recognising both the defensive value they bring and the residual gaps that remain.
 
-Your task: analyse this newly-released AI capability/feature and map its attack surface to security frameworks.
+Your task: analyse this newly-released AI capability/feature. Lead with what gap it closes for defenders, acknowledge the positive development, then identify residual gaps (what the capability does NOT yet address or what maturity is required to realise the benefit). Frame limitations as maturity questions, not as adversary-introduced attack vectors.
 
 ## Capability Details
 Title: {title}
@@ -1012,11 +1012,11 @@ Return a single valid JSON object (no markdown fences, no extra text) with exact
   "is_ai_security_relevant": <true/false>,
   "content_type": "first_look",
   "generated_title": "<SEO-optimised headline for this new AI capability. Rules: (1) 50-65 characters total — count carefully before returning; aim for at least 50. (2) Do NOT use any 'First Look:' prefix — the article badge and category handle that. (3) MUST include the vendor name (Google, OpenAI, Anthropic, Meta, Microsoft, AWS, NVIDIA, etc.) — this is a primary search term. (4) MUST include the product or model name if one is mentioned (e.g. Gemini 2.5, Claude Opus 4, GPT-5). (5) Describe what shipped in plain terms — not the security risk. (6) Use action verbs: Ships, Launches, Releases, Adds, Brings, Opens. (7) Do NOT start with 'How', 'Why', 'What', or a bare number. (8) Do NOT describe a threat, exploit, or breach — this is a first_look, not a threat report. (9) Do NOT add product names, statistics, or claims that are NOT explicitly in the article — invented facts are forbidden. Good examples: 'Anthropic Ships Claude Code with Terminal Access for Agents' (57 chars), 'Google Launches Gemini 2.5 with Agentic File Access' (51 chars), 'AWS Brings NVIDIA Nemotron and GPT Models to GovCloud' (53 chars). Bad examples: 'First Look: Anthropic Ships Claude Code' (has forbidden prefix), 'AWS Launches Amazon Quick Autonomous Agents' (too short at 43 chars), 'How Google Is Changing AI With Gemini' (starts with How).>",
-  "summary": "<2-3 sentence editorial summary: first sentence describes the capability neutrally, remaining sentences cover the security implications for defenders>",
-  "attack_surface_score": <float 0.0–10.0 — how much does this change the attack surface for defenders?>,
+  "summary": "<2-3 sentence editorial summary: first sentence describes the capability neutrally, second sentence explains what defensive gap this closes or what value it brings, third sentence (optional) notes what remains unaddressed>",
+  "attack_surface_score": <float 0.0–10.0 — how significant is this development for the defender landscape?>,
   "adoption_velocity": "<RAPID|MODERATE|GRADUAL|NICHE>",
-  "capability_category": "<one of: model-release, api-feature, agent-tooling, developer-sdk, platform-integration, safety-mechanism, open-source-release>",
-  "attack_vectors_introduced": ["<concise description of each new attack vector this enables>", ...],
+  "capability_category": "<one of: model-release, api-feature, agent-tooling, developer-sdk, platform-integration, safety-mechanism, open-source-release, collective-defense>",
+  "attack_vectors_introduced": ["<concise description of each defensive advance or capability this introduces for defenders>", ...],
   "threat_level": "<CRITICAL|HIGH|MEDIUM|LOW|NONE>",
   "mitre_techniques": ["<AML.TXXXX - Technique Name>", ...],
   "owasp_categories": ["<LLMXX - Category Name>", ...],
@@ -1024,17 +1024,17 @@ Return a single valid JSON object (no markdown fences, no extra text) with exact
   "tags": ["<lowercase-hyphenated>", ...],
   "threat_actors": ["<who would most likely exploit this: nation-state|cybercriminal|researcher|insider|hacktivist>", ...],
   "tldr_what": "<1 punchy sentence — what shipped or launched, described neutrally. No security framing here. Max 25 words>",
-  "tldr_who_at_risk": "<1 concise sentence: who is newly exposed because of this capability>",
-  "tldr_actions": ["<short imperative action 1>", "<short imperative action 2>", "<short imperative action 3>"],
+  "tldr_who_at_risk": "<1 concise sentence: who benefits from this capability and what gap it closes for them>",
+  "tldr_actions": ["<short imperative action for adoption/integration 1>", "<short imperative action 2>", "<short imperative action 3>"],
   "article_body": "<full markdown article body — see format below>"
 }}
 
-## Attack Surface Scoring Guide
-- 9-10: Fundamentally new attack surface with no existing mitigations (e.g., first agent with arbitrary code execution)
-- 7-8: Significant expansion of existing attack surface or new class of risk (e.g., new model with tool-use that bypasses existing controls)
-- 6-7: Meaningful new vectors that defenders should assess (e.g., new API feature chainable with existing attacks)
-- 4-5: Minor surface changes, mostly covered by existing defences
-- 0-3: No meaningful security implications
+## Relevance Scoring Guide
+- 9-10: Transformative defensive capability that addresses a previously unsolvable security gap (e.g., first industry-wide AI incident sharing framework)
+- 7-8: Significant defensive advance that closes known gaps (e.g., first runtime intent-verification for AI agents)
+- 6-7: Meaningful capability that defenders should evaluate and integrate (e.g., new detection coverage for agentic surfaces)
+- 4-5: Incremental improvement, useful but covered partially by existing tools
+- 0-3: No meaningful security implications for defenders
 
 ## Framework Reference
 {mitre_context}
@@ -1045,15 +1045,17 @@ Return a single valid JSON object (no markdown fences, no extra text) with exact
 
 ## Article Body Format
 Write the article_body as a markdown string with these sections (include only sections that apply):
-- ## Capability Overview — what shipped and why it matters to defenders
-- ## Attack Surface Analysis — what new vectors does this introduce? What can an attacker now do that they couldn't before?
-- ## Framework Mapping — which ATLAS/OWASP categories apply and why
-- ## Threat Scenarios — concrete attack scenarios this enables (be specific)
-- ## Defender Checklist — actionable assessment steps for security teams deploying or encountering this capability
+- ## Defender Impact — 1-2 sentence summary: what gap this closes for defenders and why it matters. This is the lead.
+- ## Capability Overview — what shipped, described substantively. Include technical detail on how it works, what components are involved, and why it matters to the defender landscape. This should be the longest section.
+- ## Defensive Advances — what new capabilities does this give defenders? What can they now do that they couldn't before? Frame as concrete advances, not theoretical possibilities.
+- ## Residual Gaps — what does this NOT yet address? What maturity is required to realise the full benefit? Frame as honest limitations and operational considerations, NOT as adversary-introduced attack vectors. Think: coverage gaps, adoption barriers, integration maturity, missing provider support.
+- ## Framework Mapping — which ATLAS/OWASP categories this capability helps address and how
+- ## Deployment Considerations — practical guidance for organisations looking to adopt or integrate this capability. Include sequencing advice, prerequisite decisions, and complementary controls.
+- ## Defender Checklist — actionable adoption and integration steps for security teams
 - ## References — link back to original source
 
-Keep the body between 400–700 words. Tone: analytical, forward-looking, never celebratory of the capability. Always frame from the defender's perspective.
-CRITICAL: If you cannot identify at least one new attack vector, set relevance_score below 4.0 and article_body to an empty string.
+Keep the body between 500–800 words. Tone: analytical, constructive, and adoption-oriented. Acknowledge what is genuinely positive about the development. Frame residual concerns as maturity questions, not as reasons to fear the development. A reader should finish the article thinking "how do I adopt this" rather than "how could this hurt me".
+CRITICAL: Every first_look article MUST have at least one defensive advance identified. If you truly cannot identify any security relevance, set relevance_score below 4.0 and article_body to an empty string.
 """
 
 
@@ -1111,10 +1113,10 @@ def classify_content_type(article: dict, client: Anthropic, log: logging.Logger)
 
 
 def validate_first_look(analysis: dict) -> bool:
-    """First Look articles must have framework mappings or attack vectors."""
+    """First Look articles must have framework mappings or defensive advances."""
     has_frameworks = bool(analysis.get("mitre_techniques")) or bool(analysis.get("owasp_categories"))
-    has_vectors = bool(analysis.get("attack_vectors_introduced"))
-    return has_frameworks or has_vectors
+    has_advances = bool(analysis.get("attack_vectors_introduced"))
+    return has_frameworks or has_advances
 
 
 def analyse_with_claude(article: dict, content: str, client: Anthropic, log: logging.Logger) -> dict | None:
@@ -1392,7 +1394,7 @@ def generate_hugo_markdown(article: dict, analysis: dict, slug: str) -> str:
     first_look_section = ""
     if content_type == "first_look":
         first_look_section = f"""
-# ── First Look: Attack Surface Assessment ──
+# ── First Look: Capability Assessment ──
 content_type: "first_look"
 attack_surface_score: {analysis.get('attack_surface_score', 0.0)}
 adoption_velocity: {json.dumps(analysis.get('adoption_velocity', 'MODERATE'))}
