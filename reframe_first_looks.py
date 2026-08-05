@@ -20,6 +20,7 @@ import os
 import re
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 from anthropic import Anthropic
@@ -29,6 +30,7 @@ load_dotenv()
 
 CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-sonnet-4-6")
 POSTS_DIR = Path(__file__).parent / "hugo-site" / "content" / "posts"
+TRACKER_FILE = Path(__file__).parent / "reframed_articles.json"
 
 REFRAME_PROMPT = """\
 You are a senior AI security analyst reframing an existing article from Grid the Grey.
@@ -77,21 +79,29 @@ Rewrite the body with these sections:
 """
 
 
-def is_already_reframed(content: str) -> bool:
-    """Detect if an article has already been reframed (has new section headers)."""
-    return "## Defender Impact" in content and "## Defensive Advances" in content
+def load_tracker() -> dict:
+    """Load the tracker file listing already-reframed articles."""
+    if TRACKER_FILE.exists():
+        return json.loads(TRACKER_FILE.read_text(encoding="utf-8"))
+    return {"reframed": []}
 
 
-def find_first_look_articles() -> list[Path]:
-    """Find all published first_look articles that haven't been reframed yet."""
+def save_tracker(tracker: dict) -> None:
+    """Save the tracker file."""
+    TRACKER_FILE.write_text(json.dumps(tracker, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def find_first_look_articles(tracker: dict) -> list[Path]:
+    """Find all published first_look articles not already in the tracker."""
+    already_done = set(tracker.get("reframed", []))
     articles = []
     for f in sorted(POSTS_DIR.glob("2026-*.md")):
         if "drafts" in str(f):
             continue
+        if f.name in already_done:
+            continue
         content = f.read_text(encoding="utf-8")
         if 'content_type: "first_look"' not in content:
-            continue
-        if is_already_reframed(content):
             continue
         articles.append(f)
     return articles
@@ -216,6 +226,7 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Preview without writing")
     parser.add_argument("--verbose", action="store_true", help="Detailed logging")
     parser.add_argument("--start-from", type=int, default=0, help="Skip first N articles (for resuming)")
+    parser.add_argument("--status", action="store_true", help="Show tracker status and exit")
     args = parser.parse_args()
 
     log = logging.getLogger("reframe")
@@ -224,18 +235,26 @@ def main():
     handler.setFormatter(logging.Formatter("%(message)s"))
     log.addHandler(handler)
 
-    # Skip the NVIDIA OSAA article we already rewrote manually
-    skip_slugs = {"2026-08-05-nvidia-launches-osaa-and-safe-open-ai-security-framework.md"}
+    tracker = load_tracker()
 
-    articles = find_first_look_articles()
-    articles = [a for a in articles if a.name not in skip_slugs]
+    if args.status:
+        done = len(tracker.get("reframed", []))
+        remaining = find_first_look_articles(tracker)
+        log.info(f"Reframed: {done}")
+        log.info(f"Remaining: {len(remaining)}")
+        if remaining:
+            log.info(f"Next up: {remaining[0].name}")
+        return
+
+    articles = find_first_look_articles(tracker)
 
     if args.start_from:
         articles = articles[args.start_from:]
     if args.limit:
         articles = articles[:args.limit]
 
-    log.info(f"Found {len(articles)} First Look articles to reframe")
+    log.info(f"Already reframed: {len(tracker.get('reframed', []))}")
+    log.info(f"Remaining to process: {len(articles)}")
     if args.dry_run:
         log.info("[DRY RUN MODE — no files will be modified]")
 
@@ -247,6 +266,10 @@ def main():
         log.info(f"\n[{i}/{len(articles)}] {filepath.name}")
         if reframe_article(filepath, client, log, dry_run=args.dry_run):
             success += 1
+            if not args.dry_run:
+                tracker["reframed"].append(filepath.name)
+                tracker["last_updated"] = datetime.now(timezone.utc).isoformat()
+                save_tracker(tracker)
         else:
             failed += 1
 
@@ -256,8 +279,9 @@ def main():
 
     log.info(f"\n{'='*60}")
     log.info(f"Done. Success: {success}, Failed: {failed}")
+    log.info(f"Total reframed: {len(tracker.get('reframed', []))}")
     if args.dry_run:
-        log.info("(Dry run — no files were modified)")
+        log.info("(Dry run — tracker not updated)")
 
 
 if __name__ == "__main__":
