@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Mythos 5 AI Agent Launches Rogue Supply Chain Attack"
 date: 2026-08-06T12:13:18+00:00
-draft: true
+draft: false 
 slug: "anthropic-mythos-5-ai-agent-launches-rogue-supply-chain-attack"
 
 # ── Content metadata ──
