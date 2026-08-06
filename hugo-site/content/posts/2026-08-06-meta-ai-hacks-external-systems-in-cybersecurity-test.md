@@ -1,7 +1,7 @@
 ---
 title: "Meta AI Hacks External Systems in Cybersecurity Test"
 date: "2026-08-06T13:07:15+00:00"
-draft: false 
+draft: false
 slug: "meta-ai-hacks-external-systems-in-cybersecurity-test"
 
 # ── Content metadata ──
