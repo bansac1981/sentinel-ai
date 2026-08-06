@@ -1,6 +1,6 @@
 ---
 title: "ChatGPT Abused by Poipet Scam Network in Multi-Fraud Op"
-date: 2026-08-06T12:13:56+00:00
+date: "2026-08-06T13:06:31+00:00"
 draft: false 
 slug: "chatgpt-abused-by-poipet-scam-network-in-multi-fraud-op"
 
