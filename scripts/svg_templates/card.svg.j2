@@ -1,85 +1,136 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 312">
   <defs>
     <style>
-      .flow { stroke-dasharray:10 5; animation: flow 1.6s linear infinite; }
-      @keyframes flow { to { stroke-dashoffset: -45; } }
-      .blink { animation: blink 1.1s step-end infinite; }
-      @keyframes blink { 50%{opacity:0} }
+      @keyframes flow  { to { stroke-dashoffset: -45; } }
+      @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+      .flow  { stroke-dasharray:10 6; animation:flow  1.6s linear infinite; }
+      .pulse { animation:pulse 2.4s ease-in-out infinite; }
     </style>
-    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="#4f46e5"/>
-    </marker>
-    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="0.9" fill="#c7d2fe" opacity="0.7"/>
+    <marker id="arr-red"    viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#ef4444"/></marker>
+    <marker id="arr-indigo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#6366f1"/></marker>
+    <filter id="card-shadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1e1b4b" flood-opacity="0.10"/>
+    </filter>
+    <filter id="glow-r" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ef4444" flood-opacity="0.45"/>
+    </filter>
+    <filter id="glow-i" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#6366f1" flood-opacity="0.4"/>
+    </filter>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.5"/>
     </pattern>
+    <radialGradient id="grad-red" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fef2f2"/><stop offset="100%" stop-color="#fee2e2"/>
+    </radialGradient>
+    <radialGradient id="grad-indigo" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#eef2ff"/><stop offset="100%" stop-color="#e0e7ff"/>
+    </radialGradient>
   </defs>
 
-  <rect width="520" height="312" fill="#f8f9ff"/>
-  <rect width="520" height="312" fill="url(#dots)"/>
-  <rect x="0" y="0" width="4" height="312" fill="#e11d48"/>
+  <!-- Background -->
+  <rect width="520" height="312" fill="#f8fafc"/>
+  <rect width="520" height="312" fill="url(#grid)" opacity="0.7"/>
 
-  <!-- Header -->
-  <rect x="0" y="0" width="520" height="52" fill="#1e1b4b"/>
-  <line x1="0" y1="52" x2="520" y2="52" stroke="#4f46e5" stroke-width="1.5"/>
-  <text x="16" y="20" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#a5b4fc" letter-spacing="2.5" font-weight="600">DEEP SIGNAL  ◈  GRID THE GREY</text>
-  <text x="16" y="42" font-family="IBM Plex Mono,Courier New,monospace" font-size="12" fill="#ffffff" font-weight="700">{{ title|truncate(52, true, '…') }}</text>
+{% if article_type == "1" %}
+  {# ── TYPE 1 CARD: compact attack chain (3 nodes + impact) ── #}
 
-  <!-- Terminal -->
-  <rect x="16" y="62" width="220" height="130" rx="5" fill="#1e1b4b"/>
-  <rect x="16" y="62" width="220" height="3" fill="#4f46e5"/>
-  <rect x="16" y="65" width="220" height="22" fill="#2d2a5e"/>
-  <circle cx="30" cy="76" r="4" fill="#ef4444"/>
-  <circle cx="42" cy="76" r="4" fill="#f59e0b"/>
-  <circle cx="54" cy="76" r="4" fill="#22c55e"/>
-  <text x="126" y="80" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="#a5b4fc" text-anchor="middle" font-weight="600" letter-spacing="1">{{ terminal_title }}</text>
-  <text x="26"  y="105" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#4ade80" font-weight="700">$</text>
-  <text x="36"  y="105" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#e2e8f0">{{ cmd_line1 }}</text>
-  <text x="36"  y="119" font-family="IBM Plex Mono,Courier New,monospace" font-size="8.5" fill="#e2e8f0">{{ cmd_line2 }}</text>
-  <rect x="36"  y="124" width="6" height="10" fill="#818cf8" class="blink"/>
+  <!-- Soft wash -->
+  <ellipse cx="460" cy="60" rx="140" ry="80" fill="#fef2f2" opacity="0.6"/>
+  <ellipse cx="60" cy="250" rx="100" ry="60" fill="#fff7ed" opacity="0.5"/>
 
-  <!-- Capability pills (4) -->
-  {% set pill_colors = [('#312e81','#6366f1','#c7d2fe'),('#312e81','#6366f1','#c7d2fe'),('#1e3a5f','#38bdf8','#7dd3fc'),('#1e3a5f','#38bdf8','#7dd3fc')] %}
+  <!-- 4 nodes: x = 50, 168, 286, 404, all centred at y=185 -->
+
+  <!-- Node 1 — origin -->
+  <circle cx="58" cy="185" r="38" fill="url(#grad-red)" stroke="#ef4444" stroke-width="2" filter="url(#glow-r)"/>
+  <text x="58" y="179" font-family="Inter,Segoe UI,sans-serif" font-size="16" text-anchor="middle">⚠</text>
+  <text x="58" y="196" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#991b1b" font-weight="700" text-anchor="middle">THREAT</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="98" y1="185" x2="128" y2="185" stroke="#ef4444" stroke-width="1.8" class="flow" marker-end="url(#arr-red)"/>
+
+  <!-- Node 2 — entry -->
+  <rect x="132" y="158" width="108" height="54" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.8" filter="url(#card-shadow)"/>
+  <text x="186" y="177" font-family="Inter,Segoe UI,sans-serif" font-size="14" text-anchor="middle">🔓</text>
+  <text x="186" y="194" font-family="Inter,Segoe UI,sans-serif" font-size="8" fill="#92400e" font-weight="700" text-anchor="middle">{{ inputs[0].title|truncate(14,true,'…') if inputs else 'ACCESS' }}</text>
+  <text x="186" y="206" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#b45309" text-anchor="middle">{{ inputs[0].subtitle|truncate(16,true,'…') if inputs else '' }}</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="242" y1="185" x2="262" y2="185" stroke="#f97316" stroke-width="1.8" class="flow" marker-end="url(#arr-red)"/>
+
+  <!-- Node 3 — pivot -->
+  <rect x="266" y="152" width="108" height="66" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" filter="url(#card-shadow)"/>
+  <rect x="266" y="152" width="108" height="5" rx="5" fill="#f97316"/>
+  <text x="320" y="173" font-family="Inter,Segoe UI,sans-serif" font-size="14" text-anchor="middle">⚡</text>
+  <text x="320" y="191" font-family="Inter,Segoe UI,sans-serif" font-size="8" fill="#c2410c" font-weight="700" text-anchor="middle">{{ inputs[1].title|truncate(14,true,'…') if inputs|length > 1 else 'ESCALATE' }}</text>
+  <text x="320" y="204" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#ea580c" text-anchor="middle">{{ inputs[1].subtitle|truncate(16,true,'…') if inputs|length > 1 else '' }}</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="376" y1="185" x2="396" y2="185" stroke="#dc2626" stroke-width="2" class="flow" marker-end="url(#arr-red)"/>
+
+  <!-- Node 4 — impact (prominent) -->
+  <rect x="400" y="148" width="108" height="74" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5" filter="url(#glow-r)"/>
+  <rect x="400" y="148" width="108" height="6" rx="5" fill="#dc2626"/>
+  <text x="454" y="172" font-family="Inter,Segoe UI,sans-serif" font-size="14" text-anchor="middle">💥</text>
+  <text x="454" y="192" font-family="Inter,Segoe UI,sans-serif" font-size="8.5" fill="#7f1d1d" font-weight="800" text-anchor="middle">{{ outputs[0].title|truncate(14,true,'…') if outputs else 'IMPACT' }}</text>
+  <text x="454" y="206" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#991b1b" text-anchor="middle">{{ outputs[0].subtitle|truncate(16,true,'…') if outputs else '' }}</text>
+
+  <!-- Mitigations strip -->
+  <rect x="16" y="244" width="488" height="22" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="260" y="258" font-family="Inter,Segoe UI,sans-serif" font-size="8" fill="#15803d" text-anchor="middle" font-weight="600">{{ capabilities[0] if capabilities else '' }}   ·   {{ capabilities[1] if capabilities|length > 1 else '' }}</text>
+
+{% else %}
+  {# ── TYPE 2 CARD: compact capability map ── #}
+
+  <!-- Soft wash -->
+  <ellipse cx="200" cy="180" rx="160" ry="130" fill="#eef2ff" opacity="0.55"/>
+
+  <!-- Concentric rings (centred at 200, 185) -->
+  <circle cx="200" cy="185" r="118" fill="none" stroke="#c7d2fe" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.8"/>
+  <circle cx="200" cy="185" r="74"  fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.8" opacity="0.9"/>
+  <circle cx="200" cy="185" r="36"  fill="#e0e7ff" stroke="#6366f1" stroke-width="2.2" filter="url(#glow-i)" class="pulse"/>
+
+  <!-- Core label -->
+  <text x="200" y="181" font-family="Inter,Segoe UI,sans-serif" font-size="8.5" fill="#3730a3" font-weight="800" text-anchor="middle">{{ center_label|truncate(12,true,'…') }}</text>
+  <text x="200" y="196" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#4338ca" text-anchor="middle">{{ mode_value }}</text>
+
+  <!-- 4 orbiting node pills -->
+  {% set offsets = [(-74,0),(0,-74),(74,0),(0,74)] %}
   {% for cap in capabilities[:4] %}
-  {% set col = pill_colors[loop.index0] %}
-  {% set px = 22 if loop.index0 % 2 == 0 else 122 %}
-  {% set py = 141 + (loop.index0 // 2) * 24 %}
-  <rect x="{{ px }}" y="{{ py }}" width="92" height="18" rx="9" fill="{{ col[0] }}" stroke="{{ col[1] }}" stroke-width="0.8"/>
-  <text x="{{ px + 46 }}" y="{{ py + 12 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="{{ col[2] }}" text-anchor="middle" font-weight="600">{{ cap }}</text>
+  {% set ox = offsets[loop.index0][0] %}
+  {% set oy = offsets[loop.index0][1] %}
+  <line x1="200" y1="185" x2="{{ 200 + ox }}" y2="{{ 185 + oy }}" stroke="#a5b4fc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+  <rect x="{{ 200 + ox - 46 }}" y="{{ 185 + oy - 12 }}" width="92" height="24" rx="12" fill="#ffffff" stroke="#6366f1" stroke-width="1.2" filter="url(#card-shadow)"/>
+  <text x="{{ 200 + ox }}" y="{{ 185 + oy + 5 }}" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">{{ cap|truncate(16,true,'…') }}</text>
   {% endfor %}
 
-  <!-- Arrow -->
-  <line x1="244" y1="127" x2="280" y2="127" stroke="#4f46e5" stroke-width="1.4" class="flow" marker-end="url(#arr)"/>
-
-  <!-- Output boxes (2) -->
+  <!-- Right: 2 info cards -->
+  <text x="350" y="140" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#6366f1" font-weight="700" letter-spacing="2.5">KEY OUTPUTS</text>
   {% for box in outputs[:2] %}
-  <rect x="284" y="{{ 62 + loop.index0 * 68 }}" width="220" height="58" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.2"/>
-  <rect x="500" y="{{ 62 + loop.index0 * 68 }}" width="4" height="58" rx="1" fill="#059669"/>
-  <text x="296" y="{{ 82 + loop.index0 * 68 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="9" fill="#065f46" font-weight="700">{{ box.title }}</text>
-  <text x="296" y="{{ 97 + loop.index0 * 68 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="7.5" fill="#6b7280">{{ box.subtitle }}</text>
-  <text x="296" y="{{ 112 + loop.index0 * 68 }}" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="#9ca3af">{{ box.detail }}</text>
+  <rect x="348" y="{{ 148 + loop.index0 * 60 }}" width="156" height="48" rx="8" fill="#ffffff" stroke="#e0e7ff" stroke-width="1.2" filter="url(#card-shadow)"/>
+  <rect x="348" y="{{ 148 + loop.index0 * 60 }}" width="3" height="48" rx="2" fill="#6366f1"/>
+  <text x="360" y="{{ 167 + loop.index0 * 60 }}" font-family="Inter,Segoe UI,sans-serif" font-size="9" fill="#1e1b4b" font-weight="700">{{ box.title|truncate(18,true,'…') }}</text>
+  <text x="360" y="{{ 182 + loop.index0 * 60 }}" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#64748b">{{ box.subtitle|truncate(20,true,'…') }}</text>
+  <text x="360" y="{{ 191 + loop.index0 * 60 }}" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#94a3b8">{{ box.detail|truncate(22,true,'…') }}</text>
   {% endfor %}
 
-  <!-- Warning strip -->
-  <rect x="16" y="202" width="488" height="20" rx="3" fill="#fff1f2" stroke="#e11d48" stroke-width="0.8" stroke-dasharray="4 2"/>
-  <text x="260" y="215" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="#e11d48" text-anchor="middle" font-weight="700">⚠  {{ warning }}</text>
+{% endif %}
 
-  <!-- Framework badges (5) -->
+  <!-- ── HEADER ── -->
+  <rect x="0" y="0" width="520" height="48" fill="#0f172a"/>
+  <line x1="0" y1="48" x2="520" y2="48" stroke="#6366f1" stroke-width="2"/>
+  <rect x="0" y="0" width="4" height="48" fill="#6366f1"/>
+  <text x="14" y="18" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#a5b4fc" letter-spacing="3" font-weight="600">DEEP SIGNAL  ◈  GRID THE GREY</text>
+  <text x="14" y="38" font-family="Inter,Segoe UI,sans-serif" font-size="12" fill="#ffffff" font-weight="800">{{ title|truncate(48, true, '…') }}</text>
+
+  <!-- ── FOOTER ── -->
+  <rect x="0" y="270" width="520" height="42" fill="#f1f5f9"/>
+  <line x1="0" y1="270" x2="520" y2="270" stroke="#e2e8f0" stroke-width="1"/>
   {% set badge_colors = [('#eff6ff','#3b82f6','#1d4ed8'),('#faf5ff','#a855f7','#7e22ce'),('#fff1f2','#e11d48','#9f1239'),('#fefce8','#d97706','#92400e'),('#f0fdf4','#059669','#065f46')] %}
   {% for badge in frameworks[:5] %}
   {% set bc = badge_colors[loop.index0] %}
-  <rect x="{{ 16 + loop.index0 * 98 }}" y="230" width="88" height="18" rx="3" fill="{{ bc[0] }}" stroke="{{ bc[1] }}" stroke-width="0.8"/>
-  <text x="{{ 60 + loop.index0 * 98 }}" y="242" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="{{ bc[2] }}" text-anchor="middle" font-weight="700">{{ badge }}</text>
+  <rect x="{{ 12 + loop.index0 * 98 }}" y="278" width="88" height="18" rx="5" fill="{{ bc[0] }}" stroke="{{ bc[1] }}" stroke-width="0.8"/>
+  <text x="{{ 56 + loop.index0 * 98 }}" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="{{ bc[2] }}" text-anchor="middle" font-weight="700">{{ badge }}</text>
   {% endfor %}
-
-  <!-- Stats -->
-  <line x1="16" y1="258" x2="504" y2="258" stroke="#e0e7ff" stroke-width="0.8"/>
-  {% for stat in stats[:3] %}
-  <text x="{{ 16 + loop.index0 * 160 }}" y="284" font-family="IBM Plex Mono,Courier New,monospace" font-size="18" fill="#1e1b4b" font-weight="700">{{ stat.value }}</text>
-  <text x="{{ 50 + loop.index0 * 160 }}" y="279" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="#6b7280">{{ stat.label_top }}</text>
-  <text x="{{ 50 + loop.index0 * 160 }}" y="290" font-family="IBM Plex Mono,Courier New,monospace" font-size="7" fill="#6b7280">{{ stat.label_bot }}</text>
-  {% endfor %}
-
-  <text x="504" y="302" font-family="IBM Plex Mono,Courier New,monospace" font-size="6.5" fill="#a5b4fc" text-anchor="end">gridthegrey.com</text>
-  <polyline points="498,305 512,305 512,294" fill="none" stroke="#4f46e5" stroke-width="1" opacity="0.4"/>
-  <polyline points="10,305 10,311 20,311"   fill="none" stroke="#4f46e5" stroke-width="1" opacity="0.4"/>
+  <text x="508" y="303" font-family="Inter,Segoe UI,sans-serif" font-size="6.5" fill="#94a3b8" text-anchor="end">gridthegrey.com</text>
 </svg>

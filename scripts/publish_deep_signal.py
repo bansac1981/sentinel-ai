@@ -327,6 +327,7 @@ def main(source_path: str, article_type: str):
         "title":          meta["title"],
         "slug":           slug,
         "date":           today,
+        "article_type":   article_type,
         "center_label":   meta.get("center_label", "Orchestrator"),
         "right_label":    meta.get("right_label",  "Outputs"),
         "terminal_title": meta.get("terminal_title", "terminal"),
