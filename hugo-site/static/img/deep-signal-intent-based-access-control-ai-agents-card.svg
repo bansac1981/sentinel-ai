@@ -44,7 +44,7 @@
   <circle cx="200" cy="185" r="36"  fill="#e0e7ff" stroke="#6366f1" stroke-width="2.2" filter="url(#glow-i)" class="pulse"/>
 
   <!-- Core label -->
-  <text x="200" y="181" font-family="Inter,Segoe UI,sans-serif" font-size="8.5" fill="#3730a3" font-weight="800" text-anchor="middle">IBAC Policy…</text>
+  <text x="200" y="181" font-family="Inter,Segoe UI,sans-serif" font-size="8.5" fill="#3730a3" font-weight="800" text-anchor="middle">IBAC Enforc…</text>
   <text x="200" y="196" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#4338ca" text-anchor="middle">MONITOR</text>
 
   <!-- 4 orbiting node pills at left/top/right/bottom of middle ring -->
@@ -55,25 +55,25 @@
   
   <line x1="200" y1="185" x2="126" y2="185" stroke="#a5b4fc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
   <rect x="80" y="173" width="92" height="24" rx="12" fill="#ffffff" stroke="#6366f1" stroke-width="1.2" filter="url(#card-shadow)"/>
-  <text x="126" y="190" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">⚡ Semantic inte…</text>
+  <text x="126" y="190" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">⚡ Session-conte…</text>
   
   
   
   <line x1="200" y1="185" x2="200" y2="111" stroke="#a5b4fc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
   <rect x="154" y="99" width="92" height="24" rx="12" fill="#ffffff" stroke="#6366f1" stroke-width="1.2" filter="url(#card-shadow)"/>
-  <text x="200" y="116" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">◈ Cross-session…</text>
+  <text x="200" y="116" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">◈ Semantic inte…</text>
   
   
   
   <line x1="200" y1="185" x2="274" y2="185" stroke="#a5b4fc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
   <rect x="228" y="173" width="92" height="24" rx="12" fill="#ffffff" stroke="#6366f1" stroke-width="1.2" filter="url(#card-shadow)"/>
-  <text x="274" y="190" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">🔒 Composite att…</text>
+  <text x="274" y="190" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">🔒 Compositional…</text>
   
   
   
   <line x1="200" y1="185" x2="200" y2="259" stroke="#a5b4fc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
   <rect x="154" y="247" width="92" height="24" rx="12" fill="#ffffff" stroke="#6366f1" stroke-width="1.2" filter="url(#card-shadow)"/>
-  <text x="200" y="264" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">⬡ Graduated esc…</text>
+  <text x="200" y="264" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#3730a3" text-anchor="middle" font-weight="600">⬡ Multi-layer e…</text>
   
 
   <!-- Right: 2 info cards -->
@@ -81,15 +81,15 @@
   
   <rect x="348" y="148" width="156" height="48" rx="8" fill="#ffffff" stroke="#e0e7ff" stroke-width="1.2" filter="url(#card-shadow)"/>
   <rect x="348" y="148" width="3" height="48" rx="2" fill="#6366f1"/>
-  <text x="360" y="167" font-family="Inter,Segoe UI,sans-serif" font-size="9" fill="#1e1b4b" font-weight="700">Policy Decision</text>
-  <text x="360" y="182" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#64748b">Allow/Deny/Escalate</text>
-  <text x="360" y="191" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#94a3b8">Graduated outcomes wi…</text>
+  <text x="360" y="167" font-family="Inter,Segoe UI,sans-serif" font-size="9" fill="#1e1b4b" font-weight="700">Authorization Decision</text>
+  <text x="360" y="182" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#64748b">Allow / Deny / Escalate</text>
+  <text x="360" y="191" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#94a3b8">Semantic alignment ve…</text>
   
   <rect x="348" y="208" width="156" height="48" rx="8" fill="#ffffff" stroke="#e0e7ff" stroke-width="1.2" filter="url(#card-shadow)"/>
   <rect x="348" y="208" width="3" height="48" rx="2" fill="#6366f1"/>
-  <text x="360" y="227" font-family="Inter,Segoe UI,sans-serif" font-size="9" fill="#1e1b4b" font-weight="700">Session Context</text>
-  <text x="360" y="242" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#64748b">SIEM telemetry feed</text>
-  <text x="360" y="251" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#94a3b8">Intent drift detectio…</text>
+  <text x="360" y="227" font-family="Inter,Segoe UI,sans-serif" font-size="9" fill="#1e1b4b" font-weight="700">SIEM Events</text>
+  <text x="360" y="242" font-family="Inter,Segoe UI,sans-serif" font-size="7.5" fill="#64748b">Splunk / Sentinel /…</text>
+  <text x="360" y="251" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#94a3b8">Structured telemetry …</text>
   
 
 
@@ -108,23 +108,23 @@
   
   
   <rect x="12" y="278" width="88" height="18" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-width="0.8"/>
-  <text x="56" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#1d4ed8" text-anchor="middle" font-weight="700">NIST Zero Trust</text>
+  <text x="56" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#1d4ed8" text-anchor="middle" font-weight="700">OWASP LLM Top 10 2025</text>
   
   
   <rect x="110" y="278" width="88" height="18" rx="5" fill="#faf5ff" stroke="#a855f7" stroke-width="0.8"/>
-  <text x="154" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#7e22ce" text-anchor="middle" font-weight="700">OWASP LLM Top 10</text>
+  <text x="154" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#7e22ce" text-anchor="middle" font-weight="700">EU AI Act (Dec 2027)</text>
   
   
   <rect x="208" y="278" width="88" height="18" rx="5" fill="#fff1f2" stroke="#e11d48" stroke-width="0.8"/>
-  <text x="252" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#9f1239" text-anchor="middle" font-weight="700">EU AI Act</text>
+  <text x="252" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#9f1239" text-anchor="middle" font-weight="700">NIST AI RMF</text>
   
   
   <rect x="306" y="278" width="88" height="18" rx="5" fill="#fefce8" stroke="#d97706" stroke-width="0.8"/>
-  <text x="350" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#92400e" text-anchor="middle" font-weight="700">AARM Specification</text>
+  <text x="350" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#92400e" text-anchor="middle" font-weight="700">MITRE ATLAS</text>
   
   
   <rect x="404" y="278" width="88" height="18" rx="5" fill="#f0fdf4" stroke="#059669" stroke-width="0.8"/>
-  <text x="448" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#065f46" text-anchor="middle" font-weight="700">SPIFFE/SPIRE</text>
+  <text x="448" y="291" font-family="Inter,Segoe UI,sans-serif" font-size="7" fill="#065f46" text-anchor="middle" font-weight="700">SPIFFE/SPIRE Workload Identity</text>
   
   <text x="508" y="303" font-family="Inter,Segoe UI,sans-serif" font-size="6.5" fill="#94a3b8" text-anchor="end">gridthegrey.com</text>
 </svg>
