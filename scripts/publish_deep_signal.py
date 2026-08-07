@@ -85,7 +85,7 @@ RULES:
 - No "this paper argues", "the study found", "according to the report" — state facts directly
 - One concrete scenario per major section, not multiple hypotheticals
 - Tables only where a reader will genuinely consult them, not to replicate research appendices
-- All mermaid diagrams must use the flowchart TD type
+- Mermaid diagrams: if the research contains a flow diagram, attack chain, or sequence diagram that clearly illustrates a concept in the article, include it — adapted to fit the editorial context, not copied verbatim. Convert any non-flowchart types (sequence, graph, etc.) to flowchart TD. All mermaid code blocks must open with ```mermaid and use flowchart TD
 
 RESEARCH INPUT:
 """
@@ -124,7 +124,7 @@ RULES:
 - No "this paper argues", "the study found", "according to the report" — state facts directly
 - One analogy and one concrete example in the explanation section — not multiple
 - Tables only where a reader will genuinely consult them, not to replicate research appendices
-- All mermaid diagrams must use the flowchart TD type
+- Mermaid diagrams: if the research contains a flow diagram, architecture diagram, or sequence diagram that clearly illustrates a concept in the article, include it — adapted to fit the editorial context, not copied verbatim. Convert any non-flowchart types (sequence, graph, etc.) to flowchart TD. All mermaid code blocks must open with ```mermaid and use flowchart TD
 
 RESEARCH INPUT:
 """
