@@ -130,7 +130,7 @@ def extract_metadata(article_text: str) -> dict:
 def render_svg(template_name: str, data: dict) -> str:
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES)),
-        autoescape=False
+        autoescape=True   # SVG is XML — escape & < > in all text values
     )
     tmpl = env.get_template(template_name)
     return tmpl.render(**data)
