@@ -1,7 +1,7 @@
 ---
 title: "Claude and ChatGPT Hijacked via Zero-Click Prompt Injection"
 date: 2026-08-07T09:07:15+00:00
-draft: true
+draft: false 
 slug: "claude-and-chatgpt-hijacked-via-zero-click-prompt-injection"
 
 # ── Content metadata ──
