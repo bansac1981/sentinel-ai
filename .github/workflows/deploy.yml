@@ -12,6 +12,12 @@ on:
       - "hugo-site/**"
       - ".github/workflows/deploy.yml"
 
+  # Trigger after publish-deep-signal.yml completes (bot commits don't fire push triggers)
+  workflow_run:
+    workflows: ["Publish Deep Signal Article"]
+    types: [completed]
+    branches: [main]
+
   # Manual trigger from GitHub Actions UI
   workflow_dispatch:
 
