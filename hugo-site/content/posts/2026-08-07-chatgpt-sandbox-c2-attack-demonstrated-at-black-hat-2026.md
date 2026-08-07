@@ -1,6 +1,6 @@
 ---
 title: "ChatGPT Sandbox C2 Attack Demonstrated at Black Hat 2026"
-date: 2026-08-07T09:05:40+00:00
+date: "2026-08-07T11:39:46+00:00"
 draft: false 
 slug: "chatgpt-sandbox-c2-attack-demonstrated-at-black-hat-2026"
 
