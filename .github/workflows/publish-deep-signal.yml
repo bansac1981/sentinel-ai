@@ -49,6 +49,16 @@ jobs:
           echo "${{ steps.find.outputs.files }}" | while IFS= read -r f; do
             if [ -n "$f" ] && [ -f "$f" ]; then
               echo "Publishing: $f"
-              python scripts/publish_deep_signal.py "$f"
+              base=$(basename "$f")
+              if [[ "$base" == gap-* ]]; then
+                article_type="1"
+              elif [[ "$base" == cap-* ]]; then
+                article_type="2"
+              else
+                echo "ERROR: filename must start with 'gap-' or 'cap-' to set article type"
+                echo "  Rename the file and push again."
+                exit 1
+              fi
+              python scripts/publish_deep_signal.py "$f" "$article_type"
             fi
           done

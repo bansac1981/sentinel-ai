@@ -10,11 +10,13 @@ site, commits, pushes, and archives the source file.
 Usage:
     python scripts/publish_deep_signal.py <path-to-article.md> [1|2]
 
-    Article type (required):
+    Article type (required — pass as argument or select interactively):
         1 — Security Gap / Event  (threat, attack, broken control)
         2 — Research / Capability (emerging technology, new approach)
 
-    If type is omitted the script prompts interactively.
+    Via GitHub Actions (non-interactive): prefix the filename instead:
+        gap-my-article.md  →  type 1
+        cap-my-article.md  →  type 2
 """
 
 import os
