@@ -9,7 +9,10 @@ summary: "OpenAI has launched GPT-5.4-Cyber, a cybersecurity-optimised model var
 # ── TL;DR ──
 tldr_what: "OpenAI releases GPT-5.4-Cyber for security teams; dual-use vulnerability model risks adversarial inversion by threat actors."
 tldr_who_at_risk: "Security teams and defenders using TAC programme; threat actors seeking to weaponise vulnerability-detection capabilities at scale."
-tldr_actions: ["Monitor TAC access logs for anomalous prompt patterns and jailbreak attempts.", "Implement strict rate-limiting and output filtering on vulnerability reasoning chains.", "Assume model access compromised; design detection pipelines independent of AI-assisted tools."]
+tldr_actions:
+  - "Monitor TAC access logs for anomalous prompt patterns and jailbreak attempts."
+  - "Implement strict rate-limiting and output filtering on vulnerability reasoning chains."
+  - "Assume model access compromised; design detection pipelines independent of AI-assisted tools."
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/openai-launches-gpt-54-cyber-with.html"
 source_date: 2026-04-15T04:30:00+00:00

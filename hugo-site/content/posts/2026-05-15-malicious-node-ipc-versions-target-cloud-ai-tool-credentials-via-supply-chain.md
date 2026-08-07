@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Three node-ipc npm versions backdoored to steal developer and AI tool credentials via obfuscated payload."
 tldr_who_at_risk: "Developers using node-ipc@9.1.6, 9.2.3, or 12.0.1 are directly exposed, with cloud and AI platform credentials at immediate risk of exfiltration."
-tldr_actions: ["Audit package.json and lock files for node-ipc versions 9.1.6, 9.2.3, and 12.0.1 and remove immediately", "Rotate all cloud credentials, SSH keys, GitHub tokens, and AI tool API keys on any system that loaded these versions", "Block or monitor DNS and HTTPS traffic to sh.azurestaticprovider[.]net and investigate for exfiltration activity"]
+tldr_actions:
+  - "Audit package.json and lock files for node-ipc versions 9.1.6, 9.2.3, and 12.0.1 and remove immediately"
+  - "Rotate all cloud credentials, SSH keys, GitHub tokens, and AI tool API keys on any system that loaded these versions"
+  - "Block or monitor DNS and HTTPS traffic to sh.azurestaticprovider[.]net and investigate for exfiltration activity"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "LLM Security", "Industry News"]

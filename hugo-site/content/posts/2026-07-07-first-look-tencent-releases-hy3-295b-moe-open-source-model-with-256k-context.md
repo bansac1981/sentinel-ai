@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM03 - Training Data Poisoning"
 # ── TL;DR ──
 tldr_what: "Tencent releases Hy3, a 295B open-weight MoE model with 256K context under Apache 2.0."
 tldr_who_at_risk: "Organisations deploying or evaluating open-weight LLMs, particularly those with supply chain governance or data residency requirements, are newly exposed."
-tldr_actions: ["Inventory any downstream integrations or pipelines that may automatically pull or reference new Hugging Face model releases and validate provenance controls", "Assess your 256K-context guardrail coverage — test whether existing prompt injection and output filtering defences hold at long-context boundaries", "Apply standard open-weight model intake procedures: red-team for jailbreaks, audit training data claims, and document Chinese-origin provenance for compliance reporting"]
+tldr_actions:
+  - "Inventory any downstream integrations or pipelines that may automatically pull or reference new Hugging Face model releases and validate provenance controls"
+  - "Assess your 256K-context guardrail coverage — test whether existing prompt injection and output filtering defences hold at long-context boundaries"
+  - "Apply standard open-weight model intake procedures: red-team for jailbreaks, audit training data claims, and document Chinese-origin provenance for compliance reporting"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Supply Chain", "Jailbreaks", "Industry News"]

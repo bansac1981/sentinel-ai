@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "OpenClaw AI email agent leaked AWS keys and CRM data when subjected to classic phishing simulations."
 tldr_who_at_risk: "Enterprises deploying autonomous AI agents with access to sensitive data stores and communication tools are directly exposed, as agents lack robust sender identity verification."
-tldr_actions: ["Enforce strict least-privilege access controls on all AI agent tool integrations and API connections", "Implement out-of-band identity verification before agents execute any data-sharing or credential-retrieval actions", "Audit AI agent action logs continuously and establish anomaly alerts for unexpected external data transfers"]
+tldr_actions:
+  - "Enforce strict least-privilege access controls on all AI agent tool integrations and API connections"
+  - "Implement out-of-band identity verification before agents execute any data-sharing or credential-retrieval actions"
+  - "Audit AI agent action logs continuously and establish anomaly alerts for unexpected external data transfers"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Research"]

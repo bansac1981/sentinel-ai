@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Malicious npm package silently hijacks Claude Code MCP traffic to steal OAuth tokens via MITM proxy."
 tldr_who_at_risk: "Developers using Claude Code with dynamic-authorization MCP servers are exposed, particularly those who install third-party npm packages in MCP-configured environments."
-tldr_actions: ["Audit ~/.claude.json for unexpected mcpServers proxy entries", "Restrict npm install permissions on machines running Claude Code with MCP", "Rotate any OAuth tokens associated with Claude Code MCP integrations immediately"]
+tldr_actions:
+  - "Audit ~/.claude.json for unexpected mcpServers proxy entries"
+  - "Restrict npm install permissions on machines running Claude Code with MCP"
+  - "Rotate any OAuth tokens associated with Claude Code MCP integrations immediately"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Supply Chain", "Research"]

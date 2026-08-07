@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Chinese PhaaS network used Gemini AI to auto-generate phishing pages, victimising over 100,000 Americans."
 tldr_who_at_risk: "US consumers are most exposed, particularly those receiving SMS messages impersonating banks, brokerages, and mobile carriers."
-tldr_actions: ["Block or flag SMS links to newly registered or unrecognised domains at the carrier and endpoint level", "Audit LLM deployment guardrails to detect prompt patterns disguised as innocuous programming requests", "Educate users to avoid clicking unsolicited SMS links regardless of apparent brand legitimacy"]
+tldr_actions:
+  - "Block or flag SMS links to newly registered or unrecognised domains at the carrier and endpoint level"
+  - "Audit LLM deployment guardrails to detect prompt patterns disguised as innocuous programming requests"
+  - "Educate users to avoid clicking unsolicited SMS links regardless of apparent brand legitimacy"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Jailbreaks", "Industry News"]

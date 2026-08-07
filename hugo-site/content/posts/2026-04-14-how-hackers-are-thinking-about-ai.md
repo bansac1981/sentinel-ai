@@ -9,7 +9,10 @@ summary: "A new academic paper analysed over 160 cybercrime forum conversations 
 # ── TL;DR ──
 tldr_what: "Academic study documents how cybercriminals are actively adopting and experimenting with AI tools."
 tldr_who_at_risk: "Law enforcement, security teams, and enterprise defenders tracking evolving AI-enabled threat capabilities."
-tldr_actions: ["Monitor cybercrime forums for jailbreak techniques and prompt injection discussions.", "Implement guardrails on enterprise LLM access to prevent criminal misuse.", "Map capability gaps in criminal AI adoption to guide defensive prioritization."]
+tldr_actions:
+  - "Monitor cybercrime forums for jailbreak techniques and prompt injection discussions."
+  - "Implement guardrails on enterprise LLM access to prevent criminal misuse."
+  - "Map capability gaps in criminal AI adoption to guide defensive prioritization."
 source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/how-hackers-are-thinking-about-ai.html"
 source_date: 2026-04-14T10:49:50+00:00

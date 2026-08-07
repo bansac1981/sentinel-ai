@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Enterprises deploying high-autonomy AI agents with broad permissions are creating largely ungovernable attack surfaces."
 tldr_who_at_risk: "Enterprises running autonomous AI agents with broad API, data, or system access are most exposed due to inadequate permission scoping and monitoring gaps."
-tldr_actions: ["Enforce strict least-privilege permissions for all AI agent identities and tool access", "Implement human-in-the-loop approval gates for high-impact agent actions", "Deploy runtime monitoring and anomaly detection on all agent execution pipelines"]
+tldr_actions:
+  - "Enforce strict least-privilege permissions for all AI agent identities and tool access"
+  - "Implement human-in-the-loop approval gates for high-impact agent actions"
+  - "Deploy runtime monitoring and anomaly detection on all agent execution pipelines"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

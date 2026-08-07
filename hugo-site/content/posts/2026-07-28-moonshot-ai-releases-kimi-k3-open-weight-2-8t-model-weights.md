@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM10 - Model Theft"
 # ── TL;DR ──
 tldr_what: "Moonshot AI released Kimi K3 open weights \u2014 a 2.8T parameter model now downloadable at 1.56TB."
 tldr_who_at_risk: "Enterprises deploying K3 locally or via third-party inference providers, and any platform that accepts user-supplied model checkpoints sourced from the K3 weight ecosystem."
-tldr_actions: ["Verify checkpoint integrity via cryptographic hashes before deployment — do not trust Hugging Face forks without provenance checks", "Assess licence compliance posture now: large MaaS operators must execute a separate agreement with Moonshot AI before any commercial use", "Apply your standard open-weight threat model: assume safety alignment can be removed by adversaries with access to the weights and plan inference-layer controls accordingly"]
+tldr_actions:
+  - "Verify checkpoint integrity via cryptographic hashes before deployment — do not trust Hugging Face forks without provenance checks"
+  - "Assess licence compliance posture now: large MaaS operators must execute a separate agreement with Moonshot AI before any commercial use"
+  - "Apply your standard open-weight threat model: assume safety alignment can be removed by adversaries with access to the weights and plan inference-layer controls accordingly"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Supply Chain", "Adversarial ML", "Model Theft", "Industry News"]

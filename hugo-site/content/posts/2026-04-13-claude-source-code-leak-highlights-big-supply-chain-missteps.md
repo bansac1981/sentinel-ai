@@ -8,7 +8,10 @@ summary: "A reported source code leak affecting Claude, Anthropic's large langua
 # ── TL;DR ──
 tldr_what: "Claude source code leak exposes LLM architecture, prompts, and safety mechanisms to adversaries."
 tldr_who_at_risk: "AI developers and organizations relying on Anthropic's Claude; competitors seeking model intelligence; threat actors planning LLM attacks."
-tldr_actions: ["Audit Git repositories and access controls for overly permissive configurations immediately.", "Rotate all developer credentials, tokens, and CI/CD pipeline authentication across supply chain.", "Review third-party dependencies and build processes for exfiltration vulnerabilities in model artifacts."]
+tldr_actions:
+  - "Audit Git repositories and access controls for overly permissive configurations immediately."
+  - "Rotate all developer credentials, tokens, and CI/CD pipeline authentication across supply chain."
+  - "Review third-party dependencies and build processes for exfiltration vulnerabilities in model artifacts."
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/application-security/source-code-leaks-highlight-lack-supply-chain-oversight"
 author: "Grid the Grey Editorial"

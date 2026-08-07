@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM07 - Insecure Plu
 # ── TL;DR ──
 tldr_what: "Gemini CLI auto-trusted workspace configs, enabling pre-sandbox RCE without prompt injection."
 tldr_who_at_risk: "Developers and organisations running Gemini CLI in CI/CD pipelines are most exposed, due to the agent's trusted contributor-level access to secrets and source code."
-tldr_actions: ["Update Gemini CLI and the run-gemini-cli GitHub Action to the patched versions immediately", "Audit CI/CD pipeline permissions granted to AI coding agents and apply least-privilege principles", "Enforce workspace configuration review policies to prevent automatic loading of untrusted agent configs"]
+tldr_actions:
+  - "Update Gemini CLI and the run-gemini-cli GitHub Action to the patched versions immediately"
+  - "Audit CI/CD pipeline permissions granted to AI coding agents and apply least-privilege principles"
+  - "Enforce workspace configuration review policies to prevent automatic loading of untrusted agent configs"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Supply Chain", "LLM Security"]

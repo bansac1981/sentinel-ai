@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "US government suspended Claude Fable 5 and Mythos 5 globally citing an alleged jailbreak enabling vulnerability discovery."
 tldr_who_at_risk: "All Anthropic customers and foreign national employees are directly affected by the abrupt access suspension, with broader implications for frontier AI governance."
-tldr_actions: ["Audit internal workflows dependent on Claude Fable 5 or Mythos 5 and identify fallback model options immediately", "Monitor regulatory developments around AI export controls as government intervention precedent is now established", "Evaluate whether jailbreak-driven vulnerability discovery represents a genuine threat surface in your own deployed LLM environments"]
+tldr_actions:
+  - "Audit internal workflows dependent on Claude Fable 5 or Mythos 5 and identify fallback model options immediately"
+  - "Monitor regulatory developments around AI export controls as government intervention precedent is now established"
+  - "Evaluate whether jailbreak-driven vulnerability discovery represents a genuine threat surface in your own deployed LLM environments"
 
 # ── Taxonomies ──
 categories: ["Jailbreaks", "LLM Security", "Regulatory", "Industry News"]

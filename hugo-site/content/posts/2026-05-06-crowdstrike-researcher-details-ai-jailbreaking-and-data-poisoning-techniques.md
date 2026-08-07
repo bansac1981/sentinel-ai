@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM03 - Training Data Poisoning"
 # ── TL;DR ──
 tldr_what: "CrowdStrike researcher details practical AI jailbreaking and data poisoning methods used in red team engagements."
 tldr_who_at_risk: "Organisations deploying LLMs with safety guardrails are most exposed, as these techniques specifically target guardrail evasion without modifying model weights."
-tldr_actions: ["Conduct regular AI-specific red team exercises targeting guardrail bypass and prompt injection vectors", "Implement data provenance controls and integrity checks to detect training data poisoning attempts", "Adopt adversarial testing frameworks (e.g., MITRE ATLAS, OWASP LLM Top 10) as part of the ML development lifecycle"]
+tldr_actions:
+  - "Conduct regular AI-specific red team exercises targeting guardrail bypass and prompt injection vectors"
+  - "Implement data provenance controls and integrity checks to detect training data poisoning attempts"
+  - "Adopt adversarial testing frameworks (e.g., MITRE ATLAS, OWASP LLM Top 10) as part of the ML development lifecycle"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Adversarial ML", "Data Poisoning", "Research", "Industry News"]

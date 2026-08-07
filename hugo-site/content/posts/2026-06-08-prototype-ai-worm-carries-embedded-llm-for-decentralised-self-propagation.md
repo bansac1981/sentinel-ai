@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Researchers built a self-propagating worm that carries and runs its own LLM on compromised hosts."
 tldr_who_at_risk: "Any internet-connected system is at risk as a propagation node, with unpatched machines most immediately exploitable."
-tldr_actions: ["Prioritise patching known vulnerabilities promptly — WannaCry proved months-old patches go undeployed at scale", "Deploy network segmentation to limit lateral movement if a host is compromised", "Monitor for anomalous local compute spikes that may indicate unauthorised LLM inference activity on endpoints"]
+tldr_actions:
+  - "Prioritise patching known vulnerabilities promptly — WannaCry proved months-old patches go undeployed at scale"
+  - "Deploy network segmentation to limit lateral movement if a host is compromised"
+  - "Monitor for anomalous local compute spikes that may indicate unauthorised LLM inference activity on endpoints"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Adversarial ML", "Research"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "TeamPCP injected credential-stealing malware into AI and developer npm/PyPI packages via chained GitHub Actions exploits."
 tldr_who_at_risk: "Developers and organisations consuming TanStack, Mistral AI, Guardrails AI, UiPath, or OpenSearch packages are directly exposed to credential theft and CI/CD pipeline compromise."
-tldr_actions: ["Audit all installed versions of affected packages and update to clean releases immediately", "Rotate all GitHub tokens, cloud provider credentials, and CI/CD secrets on affected machines", "Review GitHub Actions workflows for unauthorised modifications and restrict pull_request_target trigger permissions"]
+tldr_actions:
+  - "Audit all installed versions of affected packages and update to clean releases immediately"
+  - "Rotate all GitHub tokens, cloud provider credentials, and CI/CD secrets on affected machines"
+  - "Review GitHub Actions workflows for unauthorised modifications and restrict pull_request_target trigger permissions"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "LLM Security", "Agentic AI", "Industry News"]

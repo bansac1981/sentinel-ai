@@ -8,7 +8,10 @@ summary: "botctl is an open-source process manager that enables persistent, auto
 # ── TL;DR ──
 tldr_what: "botctl process manager for autonomous AI agents aggregates unattended execution, supply chain, and prompt injection risks."
 tldr_who_at_risk: "Developers deploying Claude-backed autonomous agents with GitHub-sourced skill modules and persistent daemon permissions."
-tldr_actions: ["Audit third-party skill modules before installation; verify GitHub repository ownership and commit history.", "Restrict agent filesystem and shell permissions to minimal required scope via OS-level controls.", "Implement per-action human approval workflows or rate-limiting on sensitive tool calls (file write, HTTP, bash)."]
+tldr_actions:
+  - "Audit third-party skill modules before installation; verify GitHub repository ownership and commit history."
+  - "Restrict agent filesystem and shell permissions to minimal required scope via OS-level controls."
+  - "Implement per-action human approval workflows or rate-limiting on sensitive tool calls (file write, HTTP, bash)."
 source: "HN AI Security"
 source_url: "https://botctl.dev/"
 author: "Grid the Grey Editorial"

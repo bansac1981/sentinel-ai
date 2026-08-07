@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "SentinelOne promotes prompt security controls to replace blind trust in agentic AI deployments."
 tldr_who_at_risk: "Enterprises deploying autonomous AI agents at scale, where unverified agent actions can lead to data leakage or unauthorised operations."
-tldr_actions: ["Implement prompt inspection and filtering layers on all agentic AI pipelines", "Enforce least-privilege access for AI agents interacting with enterprise systems", "Audit AI agent outputs and tool-call logs for anomalous or policy-violating behaviour"]
+tldr_actions:
+  - "Implement prompt inspection and filtering layers on all agentic AI pipelines"
+  - "Enforce least-privilege access for AI agents interacting with enterprise systems"
+  - "Audit AI agent outputs and tool-call logs for anomalous or policy-violating behaviour"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Industry News"]

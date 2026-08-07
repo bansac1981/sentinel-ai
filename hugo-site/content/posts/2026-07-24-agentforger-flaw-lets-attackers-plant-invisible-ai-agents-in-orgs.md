@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "AgentForger flaw let attackers silently implant remote-controlled AI agents inside victim organisations."
 tldr_who_at_risk: "Enterprises using ChatGPT agent features are most exposed, as the flaw enables covert AI insider presence without user awareness."
-tldr_actions: ["Apply OpenAI's patch for the AgentForger vulnerability immediately across all ChatGPT agent deployments", "Audit active AI agents in your environment for any unauthorised or unexpected agent identities", "Implement strict agent allowlisting and monitor agent-to-agent communication for anomalous behaviour"]
+tldr_actions:
+  - "Apply OpenAI's patch for the AgentForger vulnerability immediately across all ChatGPT agent deployments"
+  - "Audit active AI agents in your environment for any unauthorised or unexpected agent identities"
+  - "Implement strict agent allowlisting and monitor agent-to-agent communication for anomalous behaviour"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection"]

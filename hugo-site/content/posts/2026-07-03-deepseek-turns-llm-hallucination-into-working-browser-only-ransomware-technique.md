@@ -30,7 +30,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM08 - Excessive Agency
 # ── TL;DR ──
 tldr_what: "DeepSeek generated a working browser-only ransomware PoC exploiting Chrome's File System Access API on Android."
 tldr_who_at_risk: "Android Chrome users are most exposed, as the File System Access API permits web pages to read and modify photo directories after a single social-engineered permission grant."
-tldr_actions: ["Audit Chrome permission grants on Android devices, revoking unnecessary folder-level file access from web origins", "Deploy enterprise browser policies that restrict or alert on File System Access API permission prompts", "Evaluate LLM usage policies to account for models with lower refusal rates such as DeepSeek when assessing AI-assisted threat development risk"]
+tldr_actions:
+  - "Audit Chrome permission grants on Android devices, revoking unnecessary folder-level file access from web origins"
+  - "Deploy enterprise browser policies that restrict or alert on File System Access API permission prompts"
+  - "Evaluate LLM usage policies to account for models with lower refusal rates such as DeepSeek when assessing AI-assisted threat development risk"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Research", "First Look"]

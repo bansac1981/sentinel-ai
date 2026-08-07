@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Open-source AI agent memory layer Stash exposes 28 MCP tools backed by PostgreSQL, creating new memory poisoning and leakage risks."
 tldr_who_at_risk: "Developers and enterprises deploying autonomous AI agents with persistent memory backends are most exposed, particularly where agents act on recalled context without human verification."
-tldr_actions: ["Treat the Stash PostgreSQL backend as critical infrastructure — enforce strict authentication, encryption at rest, and network segmentation", "Audit all 28 MCP tool endpoints for input validation and implement allowlisting to prevent adversarial memory writes", "Establish memory integrity checks and anomaly detection to identify poisoned or injected memories before agents act on them"]
+tldr_actions:
+  - "Treat the Stash PostgreSQL backend as critical infrastructure — enforce strict authentication, encryption at rest, and network segmentation"
+  - "Audit all 28 MCP tool endpoints for input validation and implement allowlisting to prevent adversarial memory writes"
+  - "Establish memory integrity checks and anomaly detection to identify poisoned or injected memories before agents act on them"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Data Poisoning", "Supply Chain"]

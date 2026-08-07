@@ -27,7 +27,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "Russian-linked GreyVibe used ChatGPT and Gemini to craft realistic phishing lures targeting Ukrainian entities."
 tldr_who_at_risk: "Ukrainian military, government, telecom, and energy organisations are primary targets; any org in the conflict zone or supporting Ukraine is exposed."
-tldr_actions: ["Block or alert on LLM-generated content markers in email attachments and web assets", "Train staff to recognise AI-enhanced phishing lures, including hyper-realistic decoy PDFs and fake CAPTCHA flows", "Restrict execution of clipboard-injected commands and enforce application allowlisting to counter ClickFix-style delivery"]
+tldr_actions:
+  - "Block or alert on LLM-generated content markers in email attachments and web assets"
+  - "Train staff to recognise AI-enhanced phishing lures, including hyper-realistic decoy PDFs and fake CAPTCHA flows"
+  - "Restrict execution of clipboard-injected commands and enforce application allowlisting to counter ClickFix-style delivery"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Industry News", "Research"]

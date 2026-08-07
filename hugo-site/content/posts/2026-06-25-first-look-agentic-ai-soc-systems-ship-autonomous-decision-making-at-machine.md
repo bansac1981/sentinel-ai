@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Agentic AI systems are now making autonomous security decisions at machine speed using LLM confidence regardless of context accuracy."
 tldr_who_at_risk: "Enterprises and SOC teams deploying agentic AI for automated triage, remediation, or threat response are exposed if adversaries manipulate the context those agents consume."
-tldr_actions: ["Audit all data sources feeding agentic AI context (CMDBs, threat intel feeds, SIEM telemetry) for integrity and tamper controls", "Implement mandatory human-in-the-loop checkpoints for high-impact agentic actions (firewall changes, account lockouts, incident closure)", "Deploy anomaly detection on agent decision outputs to identify statistically abnormal action patterns indicating context manipulation"]
+tldr_actions:
+  - "Audit all data sources feeding agentic AI context (CMDBs, threat intel feeds, SIEM telemetry) for integrity and tamper controls"
+  - "Implement mandatory human-in-the-loop checkpoints for high-impact agentic actions (firewall changes, account lockouts, incident closure)"
+  - "Deploy anomaly detection on agent decision outputs to identify statistically abnormal action patterns indicating context manipulation"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection", "Industry News"]

@@ -34,7 +34,10 @@ owasp_categories: ["LLM03 - Training Data Poisoning", "LLM05 - Supply Chain Vuln
 # ── TL;DR ──
 tldr_what: "NanoEuler ships a fully self-contained GPT-2-scale LLM training stack in pure C/CUDA with no ML framework dependencies."
 tldr_who_at_risk: "Organisations deploying or auditing open-source LLM pipelines are newly exposed to covert, telemetry-free model training and backdoor insertion workflows."
-tldr_actions: ["Inventory any internal deployments of dependency-free LLM training codebases and apply the same supply chain controls as for framework-based pipelines", "Assess whether your model integrity checks and provenance tooling cover models trained outside standard frameworks like PyTorch or TensorFlow", "Monitor for use of minimal C/CUDA LLM stacks in CI/CD or research environments as a potential indicator of covert fine-tuning activity"]
+tldr_actions:
+  - "Inventory any internal deployments of dependency-free LLM training codebases and apply the same supply chain controls as for framework-based pipelines"
+  - "Assess whether your model integrity checks and provenance tooling cover models trained outside standard frameworks like PyTorch or TensorFlow"
+  - "Monitor for use of minimal C/CUDA LLM stacks in CI/CD or research environments as a potential indicator of covert fine-tuning activity"
 
 # ── Taxonomies ──
 categories: ["First Look", "Adversarial ML", "Supply Chain", "Research", "LLM Security"]

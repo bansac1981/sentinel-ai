@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "OpenAI's GPT-5.6 Sol ships with aggressive parallel tool-call execution, making production agents 2.2x faster and 27% cheaper."
 tldr_who_at_risk: "Organizations running production AI agents on OpenAI APIs, especially those with tool-access to codebases, file systems, or external services, face an expanded blast radius from the model's parallel execution behaviour."
-tldr_actions: ["Audit all tool-call budget limits and rate controls — they were likely tuned to sequential models and will not hold against parallel fanning", "Review prompt caching configuration across provider boundaries to ensure cached reasoning cannot leak sensitive prior-turn context into new sessions", "Re-run your full eval suite with model-agnostic trace analysis before trusting pass rates — harness assumptions silently favour incumbents and can hide security regressions"]
+tldr_actions:
+  - "Audit all tool-call budget limits and rate controls — they were likely tuned to sequential models and will not hold against parallel fanning"
+  - "Review prompt caching configuration across provider boundaries to ensure cached reasoning cannot leak sensitive prior-turn context into new sessions"
+  - "Re-run your full eval suite with model-agnostic trace analysis before trusting pass rates — harness assumptions silently favour incumbents and can hide security regressions"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain"]

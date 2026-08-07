@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "Security industry analysis identifies AI agent enforcement \u2014 not visibility \u2014 as the unsolved control problem for enterprise defenders."
 tldr_who_at_risk: "Any enterprise running AI agents in SaaS, cloud workflows, or developer environments without identity-bound enforcement controls is exposed to uncontrolled privilege and data access."
-tldr_actions: ["Audit all AI agents for consistent identity, owner attribution, and documented permission scope — not just existence", "Implement dynamic, intent-aware access controls rather than static role assignments for every deployed agent", "Establish agent lifecycle governance including regular access reviews and automated revocation when business context changes"]
+tldr_actions:
+  - "Audit all AI agents for consistent identity, owner attribution, and documented permission scope — not just existence"
+  - "Implement dynamic, intent-aware access controls rather than static role assignments for every deployed agent"
+  - "Establish agent lifecycle governance including regular access reviews and automated revocation when business context changes"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Industry News"]

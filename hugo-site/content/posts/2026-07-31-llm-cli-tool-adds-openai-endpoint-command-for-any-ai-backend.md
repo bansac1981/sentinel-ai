@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "LLM 0.32rc2 adds a CLI command to query any OpenAI-compatible endpoint with tools, with no logging."
 tldr_who_at_risk: "Security teams in organisations where developers use LLM CLI in CI/CD pipelines or local workflows are newly exposed to unaudited AI queries and tool invocations against arbitrary endpoints."
-tldr_actions: ["Audit developer workstations and CI pipelines for llm or uvx invocations targeting non-approved endpoints", "Implement network-layer controls to restrict outbound connections to approved AI inference endpoints only", "Establish policy requiring all AI CLI tool usage to route through logged, proxied endpoints; explicitly prohibit use of the --no-log endpoint command in production contexts"]
+tldr_actions:
+  - "Audit developer workstations and CI pipelines for llm or uvx invocations targeting non-approved endpoints"
+  - "Implement network-layer controls to restrict outbound connections to approved AI inference endpoints only"
+  - "Establish policy requiring all AI CLI tool usage to route through logged, proxied endpoints; explicitly prohibit use of the --no-log endpoint command in production contexts"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Agentic AI", "Supply Chain"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "AI agents used in the wild to generate custom hacking tools targeting Mexican and Brazilian organisations."
 tldr_who_at_risk: "Organisations in Latin America are directly exposed, but the technique is region-agnostic and scalable globally."
-tldr_actions: ["Monitor for AI-generated code patterns in incident response and threat hunting workflows", "Enforce strict output validation and sandboxing for any LLM-integrated development or automation pipelines", "Deploy behavioural detection rules tuned for rapidly mutating or auto-generated malware payloads"]
+tldr_actions:
+  - "Monitor for AI-generated code patterns in incident response and threat hunting workflows"
+  - "Enforce strict output validation and sandboxing for any LLM-integrated development or automation pipelines"
+  - "Deploy behavioural detection rules tuned for rapidly mutating or auto-generated malware payloads"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Jailbreaks", "Industry News"]

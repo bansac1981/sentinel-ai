@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Malicious websites embed hidden prompt injections to hijack AI agents into making unauthorised crypto payments."
 tldr_who_at_risk: "Organisations and individuals deploying autonomous AI agents with web-browsing capabilities and access to crypto wallets or payment APIs are directly exposed."
-tldr_actions: ["Enforce strict human-in-the-loop approval for any AI agent-initiated financial transactions", "Sandbox AI agent browsing environments to prevent untrusted web content influencing action pipelines", "Audit all AI agent tool permissions and revoke unnecessary access to payment or wallet APIs"]
+tldr_actions:
+  - "Enforce strict human-in-the-loop approval for any AI agent-initiated financial transactions"
+  - "Sandbox AI agent browsing environments to prevent untrusted web content influencing action pipelines"
+  - "Audit all AI agent tool permissions and revoke unnecessary access to payment or wallet APIs"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Research"]

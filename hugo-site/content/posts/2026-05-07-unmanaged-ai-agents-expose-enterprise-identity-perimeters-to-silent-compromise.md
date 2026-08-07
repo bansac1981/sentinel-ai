@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "AI agents are proliferating inside enterprise perimeters with no centralised inventory or IAM visibility."
 tldr_who_at_risk: "Enterprises deploying AI agents across business units without unified identity governance are most exposed, particularly those relying solely on traditional IAM tooling."
-tldr_actions: ["Conduct an immediate discovery audit to enumerate all AI agents operating across your environment, including third-party SaaS integrations", "Extend IAM policies to explicitly cover non-human machine identities, enforcing least-privilege principles on all agent accounts", "Implement continuous runtime monitoring of agent authentication flows and permission usage to detect opportunistic privilege accumulation"]
+tldr_actions:
+  - "Conduct an immediate discovery audit to enumerate all AI agents operating across your environment, including third-party SaaS integrations"
+  - "Extend IAM policies to explicitly cover non-human machine identities, enforcing least-privilege principles on all agent accounts"
+  - "Implement continuous runtime monitoring of agent authentication flows and permission usage to detect opportunistic privilege accumulation"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Regulatory", "Industry News"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Cisco Talos shows how generative AI honeypots can trap and study automated AI attack agents."
 tldr_who_at_risk: "Organizations facing AI-orchestrated scanning and exploitation campaigns, where speed-over-stealth attack patterns make honeypot deception highly effective."
-tldr_actions: ["Deploy AI-generated honeypots to capture and analyse automated attacker behaviour in real-time", "Instrument honeypot environments to log AI agent command sequences for threat intelligence", "Integrate honeypot telemetry with SIEM platforms to detect early-stage AI-driven reconnaissance"]
+tldr_actions:
+  - "Deploy AI-generated honeypots to capture and analyse automated attacker behaviour in real-time"
+  - "Instrument honeypot environments to log AI agent command sequences for threat intelligence"
+  - "Integrate honeypot telemetry with SIEM platforms to detect early-stage AI-driven reconnaissance"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research", "Prompt Injection"]

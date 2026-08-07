@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Bayer and Thoughtworks published PRINCE, a production multi-agent RAG system for pharmaceutical preclinical research and regulatory document drafting."
 tldr_who_at_risk: "Pharmaceutical organisations and regulated industries deploying multi-agent LLM systems with Text-to-SQL access to sensitive safety and regulatory databases."
-tldr_actions: ["Treat every inter-agent message boundary as an untrusted input and apply prompt injection defences at each handoff, not just the user-facing entry point", "Audit Text-to-SQL translation layers for indirect injection paths; enforce parameterised query generation and schema-level access controls independent of the LLM", "Classify chain-of-thought traces and explainability outputs as sensitive data and apply the same access controls as the underlying preclinical datasets they reference"]
+tldr_actions:
+  - "Treat every inter-agent message boundary as an untrusted input and apply prompt injection defences at each handoff, not just the user-facing entry point"
+  - "Audit Text-to-SQL translation layers for indirect injection paths; enforce parameterised query generation and schema-level access controls independent of the LLM"
+  - "Classify chain-of-thought traces and explainability outputs as sensitive data and apply the same access controls as the underlying preclinical datasets they reference"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security", "Regulatory"]

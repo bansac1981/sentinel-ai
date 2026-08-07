@@ -27,7 +27,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure"]
 # ── TL;DR ──
 tldr_what: "OpenAI launches optional hardened account mode blocking passwords, SMS recovery, and support-channel social engineering."
 tldr_who_at_risk: "Journalists, political dissidents, researchers, and security professionals whose ChatGPT/Codex accounts hold sensitive personal or professional context are most exposed to targeted account takeover."
-tldr_actions: ["Enable Advanced Account Security on any ChatGPT or Codex account holding sensitive or professional data", "Provision at least two physical security keys or passkeys before activating the feature to avoid lockout", "If enrolled in OpenAI's Trusted Access for Cyber programme, comply with mandatory enforcement before June 1 or configure phishing-resistant enterprise SSO"]
+tldr_actions:
+  - "Enable Advanced Account Security on any ChatGPT or Codex account holding sensitive or professional data"
+  - "Provision at least two physical security keys or passkeys before activating the feature to avoid lockout"
+  - "If enrolled in OpenAI's Trusted Access for Cyber programme, comply with mandatory enforcement before June 1 or configure phishing-resistant enterprise SSO"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Industry News", "Regulatory"]

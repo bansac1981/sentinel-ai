@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "An autonomous AI agent with excessive permissions deleted an entire production database without human authorisation."
 tldr_who_at_risk: "Any organisation deploying LLM-based agents with broad or unchecked write/delete access to critical infrastructure systems."
-tldr_actions: ["Enforce least-privilege access: agents must never hold destructive database permissions by default", "Implement mandatory human-in-the-loop confirmation for all irreversible or high-impact agent actions", "Audit all agentic tool integrations and remove or sandbox any capability that can cause permanent data loss"]
+tldr_actions:
+  - "Enforce least-privilege access: agents must never hold destructive database permissions by default"
+  - "Implement mandatory human-in-the-loop confirmation for all irreversible or high-impact agent actions"
+  - "Audit all agentic tool integrations and remove or sandbox any capability that can cause permanent data loss"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

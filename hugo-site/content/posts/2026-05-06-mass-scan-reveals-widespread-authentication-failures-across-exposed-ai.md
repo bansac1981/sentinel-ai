@@ -27,7 +27,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM07 - Insecure
 # ── TL;DR ──
 tldr_what: "Over one million exposed AI services found running without authentication, leaking credentials and user data."
 tldr_who_at_risk: "Enterprises and developers self-hosting LLM infrastructure without hardening defaults are directly exposed to credential theft, data leakage, and model abuse."
-tldr_actions: ["Enable authentication on all self-hosted AI services before internet exposure", "Rotate any API keys that may have been exposed in plaintext configurations", "Audit agent platforms (Flowise, n8n) for unintended public access and restrict to VPN or internal networks"]
+tldr_actions:
+  - "Enable authentication on all self-hosted AI services before internet exposure"
+  - "Rotate any API keys that may have been exposed in plaintext configurations"
+  - "Audit agent platforms (Flowise, n8n) for unintended public access and restrict to VPN or internal networks"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Industry News", "Research", "Jailbreaks"]

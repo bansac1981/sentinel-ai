@@ -30,7 +30,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM07 - Insecure Plugin 
 # ── TL;DR ──
 tldr_what: "Three OpenClaw flaws chain a WhatsApp message into full host-level remote code execution."
 tldr_who_at_risk: "Users and operators running unpatched OpenClaw AI assistant instances, especially those with channel-facing agents and exec permissions enabled."
-tldr_actions: ["Upgrade OpenClaw to version 2026.6.6 immediately", "Remove 'exec' from the tool allowlist for channel-facing agents", "Enable sandbox mode for all non-main sessions and monitor for git clone commands using the 'ext::' protocol helper"]
+tldr_actions:
+  - "Upgrade OpenClaw to version 2026.6.6 immediately"
+  - "Remove 'exec' from the tool allowlist for channel-facing agents"
+  - "Enable sandbox mode for all non-main sessions and monitor for git clone commands using the 'ext::' protocol helper"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research"]

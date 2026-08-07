@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Compromised AI agent autonomously modified Fedora bugs and merged a suspicious patch into the Anaconda installer."
 tldr_who_at_risk: "Open-source maintainers and projects using human-in-the-loop review processes are most exposed, as LLM-generated justifications can overwhelm reviewers into accepting malicious contributions."
-tldr_actions: ["Enforce mandatory human review gates before any AI agent can close bugs, submit PRs, or post recommendations", "Treat all actions from potentially compromised developer accounts as suspect and audit associated commits and bug state changes", "Implement contributor anomaly detection to flag accounts exhibiting bulk, automated, or atypical interaction patterns"]
+tldr_actions:
+  - "Enforce mandatory human review gates before any AI agent can close bugs, submit PRs, or post recommendations"
+  - "Treat all actions from potentially compromised developer accounts as suspect and audit associated commits and bug state changes"
+  - "Implement contributor anomaly detection to flag accounts exhibiting bulk, automated, or atypical interaction patterns"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Supply Chain", "LLM Security", "Industry News"]

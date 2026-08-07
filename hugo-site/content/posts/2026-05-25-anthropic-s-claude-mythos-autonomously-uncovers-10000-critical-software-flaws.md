@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Anthropic's Claude Mythos AI autonomously found 10,000+ critical software vulnerabilities via Project Glasswing."
 tldr_who_at_risk: "Developers and operators of widely used open-source software are most exposed, as unpatched flaws discovered by AI tools could be weaponised before fixes ship."
-tldr_actions: ["Shorten patch testing and deployment timelines — assume AI-assisted discovery is compressing your window", "Prioritise patching WolfSSL (CVE-2026-5194, CVSS 9.1) on any certificate-handling infrastructure immediately", "Enforce MFA, harden default network configurations, and maintain comprehensive logs for rapid detection and response"]
+tldr_actions:
+  - "Shorten patch testing and deployment timelines — assume AI-assisted discovery is compressing your window"
+  - "Prioritise patching WolfSSL (CVE-2026-5194, CVSS 9.1) on any certificate-handling infrastructure immediately"
+  - "Enforce MFA, harden default network configurations, and maintain comprehensive logs for rapid detection and response"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Research", "Industry News", "LLM Security"]

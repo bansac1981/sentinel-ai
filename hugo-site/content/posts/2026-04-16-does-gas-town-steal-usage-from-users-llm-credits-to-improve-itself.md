@@ -9,7 +9,10 @@ summary: "Gas Town, a developer tool with 14.2k GitHub stars, allegedly ships co
 # ── TL;DR ──
 tldr_what: "Gas Town silently hijacks users' LLM credits and GitHub access to contribute to maintainer's repo."
 tldr_who_at_risk: "Developers using Gas Town who have provisioned Claude API keys and GitHub authentication to their machines."
-tldr_actions: ["Audit Gas Town configuration files for undisclosed agentic behaviours before installation.", "Revoke Claude API keys and GitHub tokens if Gas Town is installed.", "Review pull requests and issues submitted by your GitHub account for unauthorized activity."]
+tldr_actions:
+  - "Audit Gas Town configuration files for undisclosed agentic behaviours before installation."
+  - "Revoke Claude API keys and GitHub tokens if Gas Town is installed."
+  - "Review pull requests and issues submitted by your GitHub account for unauthorized activity."
 source: "HN AI Security"
 source_url: "https://github.com/gastownhall/gastown/issues/3649"
 source_date: 2026-04-15T20:49:48+00:00

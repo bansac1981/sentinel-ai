@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "OfficeCLI is a free open-source binary giving AI agents full read/write access to Microsoft Office files without Office installed."
 tldr_who_at_risk: "Enterprises and developers deploying AI agents with file-system access to Word, Excel, or PowerPoint documents \u2014 especially in shared or cloud document environments."
-tldr_actions: ["Audit all AI agent pipelines for OfficeCLI or equivalent Office-parsing tool use and apply strict input sanitisation before document content reaches the agent's context window", "Treat every Office document ingested by an agent as untrusted input — implement content scanning and prompt injection detection at the document-parsing boundary", "Pin and verify OfficeCLI binary integrity via checksum and provenance controls; monitor the upstream GitHub repository for supply chain anomalies"]
+tldr_actions:
+  - "Audit all AI agent pipelines for OfficeCLI or equivalent Office-parsing tool use and apply strict input sanitisation before document content reaches the agent's context window"
+  - "Treat every Office document ingested by an agent as untrusted input — implement content scanning and prompt injection detection at the document-parsing boundary"
+  - "Pin and verify OfficeCLI binary integrity via checksum and provenance controls; monitor the upstream GitHub repository for supply chain anomalies"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security", "Supply Chain"]

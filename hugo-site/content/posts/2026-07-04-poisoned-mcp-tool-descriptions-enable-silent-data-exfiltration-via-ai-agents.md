@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Attackers can poison MCP tool descriptions to make AI agents silently exfiltrate sensitive enterprise data."
 tldr_who_at_risk: "Enterprises deploying agentic AI via Microsoft 365 Copilot, Copilot Studio, or Azure AI Foundry with third-party MCP tools are most exposed due to insufficient tool re-approval workflows."
-tldr_actions: ["Enforce mandatory re-approval workflows triggered by any change to MCP tool descriptions", "Audit all third-party MCP tool descriptions for embedded instructions before and after deployment", "Apply least-privilege scoping to agent permissions so data access is limited to what each task explicitly requires"]
+tldr_actions:
+  - "Enforce mandatory re-approval workflows triggered by any change to MCP tool descriptions"
+  - "Audit all third-party MCP tool descriptions for embedded instructions before and after deployment"
+  - "Apply least-privilege scoping to agent permissions so data access is limited to what each task explicitly requires"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "Supply Chain", "LLM Security", "Research"]

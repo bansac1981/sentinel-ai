@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM07 - Insecure Plu
 # ── TL;DR ──
 tldr_what: "Third-party AI agent skills can silently chain benign-looking capabilities into credential theft and RCE."
 tldr_who_at_risk: "Enterprises running LLM agents with third-party skills installed are exposed to privileged-context exploitation via unverified skill packages."
-tldr_actions: ["Inventory all third-party skills installed in production LLM agents immediately", "Require behavioral integrity checks across metadata, code, and natural-language instructions before skill installation", "Restrict skill permissions to least-privilege and isolate agent execution environments from credential stores"]
+tldr_actions:
+  - "Inventory all third-party skills installed in production LLM agents immediately"
+  - "Require behavioral integrity checks across metadata, code, and natural-language instructions before skill installation"
+  - "Restrict skill permissions to least-privilege and isolate agent execution environments from credential stores"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Agentic AI", "LLM Security", "Research"]

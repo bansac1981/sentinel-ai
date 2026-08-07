@@ -30,7 +30,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM06 - Sensitive Inform
 # ── TL;DR ──
 tldr_what: "A single preview link in Writer AI could steal session tokens and hijack accounts across any organisation."
 tldr_who_at_risk: "All enterprise Writer AI users are at risk \u2014 an attacker needed no prior access to any victim organisation to execute the attack."
-tldr_actions: ["Verify your Writer platform instance is running the patched version with sandbox origin isolation", "Rotate all active Writer session tokens and LLM credentials stored within the platform", "Audit agent-sharing permissions and restrict public preview link generation to trusted users"]
+tldr_actions:
+  - "Verify your Writer platform instance is running the patched version with sandbox origin isolation"
+  - "Rotate all active Writer session tokens and LLM credentials stored within the platform"
+  - "Audit agent-sharing permissions and restrict public preview link generation to trusted users"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Research", "First Look"]

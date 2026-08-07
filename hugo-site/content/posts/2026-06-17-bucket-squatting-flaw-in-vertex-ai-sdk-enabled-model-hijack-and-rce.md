@@ -30,7 +30,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM03 - Training Dat
 # ── TL;DR ──
 tldr_what: "Predictable Vertex AI staging bucket names let attackers swap uploaded models with malicious pickle payloads."
 tldr_who_at_risk: "Developers using the Vertex AI Python SDK without an explicit staging bucket on new projects are directly exposed to model hijacking."
-tldr_actions: ["Update the Vertex AI Python SDK to v1.148.0 or later immediately", "Explicitly set the staging_bucket parameter in all SDK calls rather than relying on defaults", "Audit existing staging buckets for unexpected ownership and verify bucket access controls"]
+tldr_actions:
+  - "Update the Vertex AI Python SDK to v1.148.0 or later immediately"
+  - "Explicitly set the staging_bucket parameter in all SDK calls rather than relying on defaults"
+  - "Audit existing staging buckets for unexpected ownership and verify bucket access controls"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Adversarial ML", "Research", "LLM Security"]

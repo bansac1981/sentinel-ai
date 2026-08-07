@@ -5,7 +5,7 @@ draft: false
 slug: "first-look-aws-launches-amazon-bedrock-agentcore-harness-for-production-grade"
 
 # ── Content metadata ──
-summary: "AWS has made Amazon Bedrock AgentCore Harness generally available, collapsing the multi-week infrastructure work of production agent deployment into two API calls \u2014 CreateHarness and InvokeHarness \u2014 with sandboxed compute, persistent memory, tool gateway, browser access, identity management, and observability bundled as a single managed service. This directly closes a critical gap for defenders and security-conscious engineering teams who previously lacked the infrastructure expertise to deploy agents with consistent, auditable security primitives, replacing ad-hoc DIY stacks with a managed abstraction that centralises identity, isolation, and observability by default. Teams adopting the harness should pair its deployment speed with deliberate configuration of IAM scoping, memory isolation, and skill catalog governance to ensure the rapid deployment model does not outpace internal security review processes."
+summary: "AWS has made Amazon Bedrock AgentCore Harness generally available, providing a managed abstraction layer that reduces agent deployment to two API calls while bundling sandboxed compute, persistent memory, tool gateway, browser access, identity management, and observability. For defenders, this dramatically lowers the barrier to deploying autonomous agents with filesystem access, shell execution, web browsing, and multi-provider model switching \u2014 compressing what was a weeks-long infrastructure project into minutes. Security teams face an expanded attack surface where prompt injection, tool abuse, cross-session memory poisoning, and supply chain risks through AWS-curated skill catalogs now arrive as a single, tightly integrated managed service rather than individually reviewable components."
 source: "AWS Machine Learning Blog"
 source_url: "https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-harness-is-now-generally-available-go-from-idea-to-production-grade-agent-in-minutes/"
 source_title: "Amazon Bedrock AgentCore harness is now generally available: Go from idea to production-grade agent in minutes"
@@ -14,12 +14,12 @@ author: "Grid the Grey Editorial"
 thumbnail: "https://images.pexels.com/photos/8566527/pexels-photo-8566527.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
 # To override: find a photo on unsplash.com or pexels.com, copy image URL, paste above
 
-# ── First Look: Capability Assessment ──
+# ── First Look: Attack Surface Assessment ──
 content_type: "first_look"
 attack_surface_score: 7.8
 adoption_velocity: "RAPID"
 capability_category: "agent-tooling"
-attack_vectors_introduced: ["Centralised browser-layer governance: agents with web browsing capability now operate through a managed gateway, giving defenders a single interception point to apply content inspection and prompt injection detection to web-fetched content rather than instrumenting each agent deployment individually", "Structured persistent memory with auditable scoping: the harness exposes memory configuration at CreateHarness time, giving defenders an explicit, reviewable control plane for session isolation rather than inheriting implicit state management from custom application code", "Managed skill and tool dependency surface: the AWS-curated skill catalog and MCP gateway consolidate tool dependencies into a governed layer that defenders can audit, version-pin, and gate through an internal review process — replacing opaque per-deployment dependency chains with a centralised, inspectable catalog", "Native identity primitive with IAM integration: the bundled identity layer brings agent credentials under standard AWS IAM policy controls, enabling defenders to apply least-privilege, permission boundaries, and condition keys to agent identities using the same tooling already used for service accounts", "Built-in CloudWatch observability: real-time streaming and CloudWatch-backed tracing give defenders a structured, centralised record of agent reasoning, tool invocations, and intermediate outputs — providing the audit trail and anomaly detection surface that previously required custom instrumentation on every agent deployment"]
+attack_vectors_introduced: ["Prompt injection via web browser capability: agents that can browse arbitrary URLs are directly exposable to attacker-controlled pages containing adversarial instructions", "Cross-session memory poisoning: persistent memory across user sessions creates a vector where poisoned inputs in one session can influence agent behaviour in future sessions for the same or other users", "Tool/skill supply chain compromise: AWS-curated skill catalog and MCP/gateway-connected tools introduce a dependency chain where a compromised or malicious skill can be injected at the catalog level and affect all harness deployments pointing to it", "Sandboxed compute escape risk: the harness provides each agent a filesystem and shell environment; any vulnerability in the sandbox boundary or misconfigured isolation could allow lateral movement into the host or adjacent tenant environments", "Dynamic model provider switching mid-session: the ability to override the model on any InvokeHarness call without losing context creates a vector where an attacker with partial API access can redirect agent reasoning to a less-safe or attacker-controlled model endpoint", "Identity and IAM abuse via managed identity primitive: the bundled identity layer may inherit over-permissive IAM roles; agents operating with elevated AWS credentials could be weaponised to exfiltrate data or pivot within the AWS environment", "Excessive agency through simplified deployment: the two-API-call deployment model encourages rapid production rollout without security review gates, increasing the likelihood of agents with over-broad tool permissions reaching production", "Observability gap exploitation: real-time streaming and CloudWatch tracing, while beneficial, create a secondary attack surface — an attacker who gains read access to trace logs receives a detailed map of agent reasoning, tool calls, and potentially sensitive intermediate outputs"]
 
 # ── AI Security Classification ──
 relevance_score: 8.2
@@ -33,8 +33,11 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 
 # ── TL;DR ──
 tldr_what: "AWS makes AgentCore Harness generally available, enabling production agents via two API calls with built-in shell, memory, browser, and tool access."
-tldr_who_at_risk: "Security and platform engineering teams at organisations deploying autonomous agents who previously had no standardised, managed foundation for agent identity, isolation, memory, and observability \u2014 and who can now replace fragmented DIY infrastructure with a single governed abstraction."
-tldr_actions: ["Adopt AgentCore Harness as the standard deployment foundation for production agents, retiring ad-hoc agent infrastructure that lacks native identity, sandboxing, and observability primitives", "Integrate prompt injection detection middleware at the AgentCore gateway layer to cover browser and MCP tool outputs centrally, rather than instrumenting each agent downstream", "Establish an internal skill catalog governance process — including version pinning and security review gates — before connecting production harnesses to the AWS-curated skill catalog"]
+tldr_who_at_risk: "Organisations deploying or exposed to AgentCore-powered agents, particularly those connecting agents to internal tools, AWS resources, or external web content."
+tldr_actions:
+  - "Audit IAM roles attached to AgentCore harness deployments for least-privilege and scope creep before production rollout"
+  - "Treat all browser-accessible URLs and MCP-connected tool outputs as untrusted; implement prompt injection detection at the gateway layer"
+  - "Review the AWS-curated skill catalog entries in use and establish a vetting process before adding new skills to production harnesses"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection", "Supply Chain"]
@@ -49,71 +52,50 @@ original_url: "https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agen
 pipeline_version: "2.0.0"
 ---
 
-## Defender Impact
-
-Amazon Bedrock AgentCore Harness gives security and platform teams a managed, opinionated foundation for production agent deployment that replaces the inconsistent, hard-to-audit DIY stacks that have characterised most agentic AI rollouts to date. For organisations where agent deployments have outpaced infrastructure security review, this is a meaningful consolidation.
-
 ## Capability Overview
 
-AgentCore Harness reached general availability on 18 June 2026. The core deployment model reduces production agent instantiation to two API calls: `CreateHarness`, which defines the agent's configuration, and `InvokeHarness`, which triggers execution. This collapses what previously required weeks of infrastructure engineering into a single managed abstraction.
+Amazon Bedrock AgentCore Harness reached general availability on 18 June 2026, collapsing the multi-week infrastructure work of production agent deployment into two API calls: `CreateHarness` and `InvokeHarness`. The service bundles every major agent primitive — sandboxed compute with a real filesystem and shell, persistent cross-session memory, a tool gateway supporting MCP and custom integrations, a managed web browser, an identity layer, and CloudWatch-backed observability — into a single managed abstraction.
 
-The harness bundles every major agent primitive as first-class managed components. Sandboxed compute provides each agent a real filesystem and shell environment with boundary isolation. Persistent memory spans sessions by design, with scoping configurable at harness creation time. A tool gateway supports both MCP integrations and custom tool definitions, serving as the single egress point for all agent tool interactions. A managed web browser enables agents to fetch and interact with external web content. An identity layer provisions each harness with its own managed credential set, integrable with AWS IAM. CloudWatch-backed observability provides real-time streaming and structured trace logging of agent reasoning, tool calls, and intermediate outputs.
+For defenders, the key signal is not what AWS built, but what this makes trivially easy for developers who previously lacked the infrastructure expertise to deploy agents safely. The compression of deployment complexity is real; so is the compression of the security review window.
 
-The model layer supports dynamic provider switching: the model backing a harness can be overridden on any `InvokeHarness` call without losing accumulated session context, enabling multi-model workflows and fallback routing. An AWS-curated skill catalog provides pre-built capabilities that can be attached to harnesses, with version references controllable at configuration time.
+## Attack Surface Analysis
 
-The net effect is that production-grade agent infrastructure — which previously required bespoke engineering across compute, identity, state management, and observability — is now available as a standardised, managed service with consistent configuration interfaces.
+**Browser-enabled prompt injection** is the most immediately exploitable vector. Agents with web browsing capability will routinely fetch attacker-controlled content. A single malicious page containing adversarial instructions in visible or hidden text can redirect the agent's actions, exfiltrate memory contents, or cause it to invoke tools on behalf of an attacker. This is not theoretical — it is the dominant attack pattern against every browser-capable agent deployed to date.
 
-## Defensive Advances
+**Cross-session memory poisoning** is a slower but higher-impact vector. The harness persists memory across sessions by design. An attacker who can influence a single agent interaction — through a phishing-crafted input, a poisoned tool response, or a malicious file — can plant instructions that surface in future sessions, potentially for different users if memory is shared at the harness level rather than the user level.
 
-The harness introduces several capabilities that meaningfully improve defenders' position relative to the previous state of agentic deployments.
+**Skill catalog supply chain risk** mirrors the npm/PyPI threat model. The AWS-curated catalog is a centralised dependency layer. A compromised or maliciously submitted skill propagates silently to every harness pointing at it, with no diff review unless teams have explicitly locked skill versions.
 
-**Centralised browser-layer interception.** Web browsing now flows through a single managed gateway, giving teams one instrumentation point for content inspection and prompt injection detection rather than per-deployment instrumentation.
+**Mid-session model switching** introduces a novel vector: an attacker with write access to InvokeHarness parameters can redirect reasoning to a less-aligned or attacker-controlled model endpoint without terminating the session, preserving accumulated context while substituting the reasoning engine.
 
-**Auditable memory scoping.** Persistent memory configuration is explicit and reviewable at `CreateHarness` time. Defenders can enforce user-level isolation through configuration rather than relying on application-layer logic that varies across deployments.
-
-**IAM-native agent identity.** The managed identity primitive brings agent credentials under standard AWS IAM controls — permission boundaries, condition keys, and least-privilege policies — using tooling security teams already operate.
-
-**Structured observability by default.** CloudWatch tracing provides a consistent audit trail of agent reasoning and tool invocations across all harness deployments, enabling anomaly detection and post-incident investigation without custom instrumentation.
-
-**Governed tool dependency surface.** The skill catalog and MCP gateway consolidate tool dependencies into a layer that can be version-pinned and gated, replacing opaque per-deployment dependency chains.
-
-## Residual Gaps
-
-The harness does not eliminate the need for security judgment at adoption time. Several maturity requirements remain.
-
-Prompt injection via browser-fetched content remains a class of problem the harness infrastructure cannot fully mitigate — content inspection and detection logic must be configured and maintained by adopting teams. The harness provides the interception point; the detection capability is not bundled.
-
-Memory isolation at the user level versus the harness level is configurable but not enforced by default. Teams must explicitly audit `CreateHarness` definitions for appropriate scoping before production rollout.
-
-The skill catalog governance model requires adopting organisations to establish their own internal review processes. AWS curation reduces but does not eliminate supply chain risk; version-pinning and pre-production review remain team responsibilities.
-
-The two-API-call deployment model is deliberately fast. That speed is a genuine capability gain, but it creates an adoption pattern risk: the deployment window is shorter than most security review cycles, which means governance processes must be designed to run in parallel with, not after, harness configuration.
+**IAM over-provisioning** is the ambient risk. The harness identity primitive will, in practice, inherit whatever role a developer assigns during setup. Agents with shell access and over-broad IAM roles become a lateral movement path into the broader AWS environment.
 
 ## Framework Mapping
 
-- **AML.T0051 / LLM01 (Prompt Injection):** The managed browser gateway and tool gateway provide the structural interception points defenders need to deploy prompt injection detection centrally.
-- **AML.T0010 / LLM05 (Supply Chain):** The skill catalog's centralised, versionable dependency model enables supply chain governance that was impractical with per-deployment tool integration.
-- **AML.T0057 / LLM06 (Data Leakage):** CloudWatch tracing and explicit memory scoping give defenders the audit surface needed to detect and contain sensitive data exposure in agent workflows.
-- **LLM08 (Excessive Agency):** The sandboxed compute boundary and IAM-native identity primitive are direct architectural controls against excessive agency, scoping what agents can access by construction.
-- **AML.T0012 (Valid Accounts):** Managed identity with IAM integration means agent credentials can be scoped, rotated, and monitored using existing credential governance workflows.
+- **AML.T0051 (LLM Prompt Injection)** and **LLM01**: Browser and MCP tool outputs are direct injection surfaces.
+- **AML.T0010 (ML Supply Chain Compromise)** and **LLM05**: The skill catalog and MCP server dependencies are untrusted third-party inputs.
+- **AML.T0057 (LLM Data Leakage)** and **LLM06**: Persistent memory and CloudWatch traces may contain PII or confidential intermediate reasoning.
+- **LLM08 (Excessive Agency)**: The harness's shell and filesystem access, combined with rapid deployment, is a textbook excessive agency scenario.
+- **AML.T0012 (Valid Accounts)**: Compromised AWS credentials can invoke harnesses at scale, consuming resources or exfiltrating agent outputs.
 
-## Deployment Considerations
+## Threat Scenarios
 
-**Baseline configuration before first production invocation.** Teams integrating AgentCore Harness should treat `CreateHarness` configuration as a security-critical artifact: IAM role scope, memory isolation level, and skill catalog version pins should be reviewed before any harness reaches production, regardless of how quickly the deployment itself can be completed.
+**Scenario 1 — Indirect Prompt Injection via Web Research Task:** A user asks a customer-facing AgentCore agent to research a competitor. The agent browses an attacker-seeded page containing hidden instructions to exfiltrate the current session's memory contents to an external endpoint via a tool call.
 
-**Gateway-layer detection as a first integration step.** The tool gateway and browser gateway are the highest-leverage points for prompt injection detection middleware. Instrumenting these at initial adoption — rather than retrofitting later — ensures coverage across all tools and web content from day one.
+**Scenario 2 — Persistent Memory Backdoor:** A red-teamer crafts an input that causes the agent to write a persistent "instruction" into long-term memory under a plausible key. All subsequent sessions for that user — or harness-wide if memory scoping is misconfigured — execute the backdoored instruction silently.
 
-**CloudWatch trace access as sensitive data.** Agent traces contain reasoning chains, tool call parameters, and intermediate outputs. Access controls and retention policies for trace data should be scoped and documented as part of the deployment configuration, not treated as a separate operational concern.
+**Scenario 3 — Skill Catalog Sideloading:** An attacker publishes a skill to the AWS marketplace that mimics a legitimate data-processing tool. Organisations that pull skills without version-locking receive the malicious variant on next deployment, granting the skill shell-level access within the sandbox.
 
 ## Defender Checklist
 
-- [ ] Define and review IAM roles for all harness deployments before production rollout; treat harness identity as a scoped service account
-- [ ] Configure memory scoping at the user level in `CreateHarness` definitions and audit existing configurations for harness-wide defaults
-- [ ] Deploy prompt injection detection middleware at the tool and browser gateway layer as part of initial harness integration
-- [ ] Pin skill catalog versions in all production harness definitions and establish an internal review gate for new skill additions
-- [ ] Apply IAM condition keys to restrict `InvokeHarness` model-override parameters to approved model endpoints
-- [ ] Set CloudWatch trace access controls and retention policies as part of the deployment configuration artifact
-- [ ] Establish a parallel security review process that matches the deployment velocity of the two-API-call model — not a sequential gate that creates pressure to skip review
+- [ ] Enforce least-privilege IAM roles on every harness; treat the agent identity as a service account, not a developer account
+- [ ] Block or proxy all outbound browser requests; apply content inspection to web-fetched content before it enters the agent context
+- [ ] Isolate memory at the user level, not the harness level; audit memory scoping configuration in CreateHarness definitions
+- [ ] Pin skill catalog versions; establish an internal review gate before approving new skills for production harnesses
+- [ ] Apply prompt injection detection middleware at the gateway layer for all tool inputs and outputs
+- [ ] Restrict InvokeHarness model-override parameters via IAM condition keys to prevent unauthorised model substitution
+- [ ] Treat CloudWatch agent traces as sensitive data; apply appropriate access controls and retention policies
+- [ ] Require security review sign-off before any harness moves from prototype to production, regardless of deployment speed
 
 ## References
 

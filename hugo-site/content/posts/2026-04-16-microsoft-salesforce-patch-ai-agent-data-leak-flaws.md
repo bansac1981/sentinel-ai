@@ -9,7 +9,10 @@ summary: "Prompt injection vulnerabilities in Salesforce Agentforce and Microsof
 # ── TL;DR ──
 tldr_what: "Prompt injection flaws in Microsoft Copilot and Salesforce Agentforce enabled data exfiltration via malicious inputs."
 tldr_who_at_risk: "Enterprise organisations deploying AI agents to process emails, documents, and external data without robust input sanitisation."
-tldr_actions: ["Apply patches for Copilot and Agentforce immediately", "Implement input validation and sanitisation on all agent data sources", "Audit AI agent permission scopes and data access policies"]
+tldr_actions:
+  - "Apply patches for Copilot and Agentforce immediately"
+  - "Implement input validation and sanitisation on all agent data sources"
+  - "Audit AI agent permission scopes and data access policies"
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/cloud-security/microsoft-salesforce-patch-ai-agent-data-leak-flaws"
 source_date: 2026-04-15T12:00:00+00:00

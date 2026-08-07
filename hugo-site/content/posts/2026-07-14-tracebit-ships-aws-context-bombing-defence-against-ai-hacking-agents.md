@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM04 - Model Denial of Service"
 # ── TL;DR ──
 tldr_what: "Tracebit's context bombing plants forbidden prompts in AWS secrets to halt AI hacking agents via their own safety guardrails."
 tldr_who_at_risk: "Organisations deploying AI security agents or operating cloud environments that may be targeted by LLM-driven attack tooling are most immediately affected by both the opportunity and the countermeasure arms race this technique initiates."
-tldr_actions: ["Evaluate context bombing as a complementary honeypot layer alongside existing cloud canary tokens in AWS IAM and Secrets Manager", "Audit any defensive or offensive AI agents in your environment for guardrail bypass susceptibility — assume adversaries will ship hardened agents to defeat context bombs", "Monitor for agentic scanning activity that shows abrupt termination patterns, as these may indicate context bomb triggers firing and reveal active intrusion attempts"]
+tldr_actions:
+  - "Evaluate context bombing as a complementary honeypot layer alongside existing cloud canary tokens in AWS IAM and Secrets Manager"
+  - "Audit any defensive or offensive AI agents in your environment for guardrail bypass susceptibility — assume adversaries will ship hardened agents to defeat context bombs"
+  - "Monitor for agentic scanning activity that shows abrupt termination patterns, as these may indicate context bomb triggers firing and reveal active intrusion attempts"
 
 # ── Taxonomies ──
 categories: ["First Look", "Prompt Injection", "Agentic AI", "LLM Security", "Research"]

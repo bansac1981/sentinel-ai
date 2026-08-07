@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "AWS published best-practice guidance for applying Bedrock Guardrails specifically to AI code generation workflows."
 tldr_who_at_risk: "Engineering teams and platform operators using Amazon Bedrock for AI-assisted code generation who treat guardrails as a default-sufficient control rather than a configured security layer."
-tldr_actions: ["Audit all Bedrock Guardrail configurations against the AWS guidance and close any code-specific filter gaps", "Test guardrails with adversarial code-context prompts — comments, docstrings, and multi-turn injections — not just prose payloads", "Enforce defence-in-depth: do not rely solely on guardrails; apply SAST, output validation, and human review downstream of any AI code generator"]
+tldr_actions:
+  - "Audit all Bedrock Guardrail configurations against the AWS guidance and close any code-specific filter gaps"
+  - "Test guardrails with adversarial code-context prompts — comments, docstrings, and multi-turn injections — not just prose payloads"
+  - "Enforce defence-in-depth: do not rely solely on guardrails; apply SAST, output validation, and human review downstream of any AI code generator"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Prompt Injection", "Agentic AI"]

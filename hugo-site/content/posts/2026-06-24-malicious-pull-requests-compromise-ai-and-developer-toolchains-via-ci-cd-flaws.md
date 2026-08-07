@@ -30,7 +30,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM03 - Training Dat
 # ── TL;DR ──
 tldr_what: "Malicious pull requests targeting CI/CD pipelines compromise AI and developer tools across major vendors."
 tldr_who_at_risk: "Developers and organisations consuming open-source packages from Azure Sentinel, Google's AI ADK, Apache Doris, Cloudflare Workers SDK, or Python Black are directly exposed to poisoned build artifacts."
-tldr_actions: ["Audit all recent pull request merges in affected repositories for unauthorised or anomalous changes", "Enforce mandatory code review and signed commit policies before any CI/CD pipeline execution", "Pin dependency versions and verify checksums/SBOMs for all third-party packages in AI and cloud toolchains"]
+tldr_actions:
+  - "Audit all recent pull request merges in affected repositories for unauthorised or anomalous changes"
+  - "Enforce mandatory code review and signed commit policies before any CI/CD pipeline execution"
+  - "Pin dependency versions and verify checksums/SBOMs for all third-party packages in AI and cloud toolchains"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Agentic AI", "LLM Security", "Industry News"]

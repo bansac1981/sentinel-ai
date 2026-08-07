@@ -8,7 +8,10 @@ summary: "CrowdStrike has announced new platform innovations targeting the gover
 # ── TL;DR ──
 tldr_what: "CrowdStrike releases AI agent security and Shadow AI governance controls across endpoints, SaaS, cloud."
 tldr_who_at_risk: "Enterprise SOC teams and security leaders managing uncontrolled AI tool sprawl and autonomous agent risks."
-tldr_actions: ["Inventory unsanctioned AI tools and SaaS integrations in your environment immediately.", "Evaluate Falcon's AgentWorks framework against your autonomous AI deployment roadmap.", "Establish AI-specific data handling policies before scaling agent-driven workflows."]
+tldr_actions:
+  - "Inventory unsanctioned AI tools and SaaS integrations in your environment immediately."
+  - "Evaluate Falcon's AgentWorks framework against your autonomous AI deployment roadmap."
+  - "Establish AI-specific data handling policies before scaling agent-driven workflows."
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/new-crowdstrike-innovations-secure-ai-agents-govern-shadow-ai/"
 author: "Grid the Grey Editorial"

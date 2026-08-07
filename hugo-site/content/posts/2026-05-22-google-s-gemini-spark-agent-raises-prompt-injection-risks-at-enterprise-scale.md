@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Google's Gemini Spark agent integrates deeply with sensitive user data, creating a high-value prompt injection target."
 tldr_who_at_risk: "Enterprise and consumer users piping Gmail, Drive, and Calendar data through Gemini Spark are most exposed to prompt injection-driven data exfiltration."
-tldr_actions: ["Audit what sensitive data sources are connected to any Gemini Spark deployment before enabling it", "Monitor Google's security advisories for prompt injection mitigations specific to Gemini Spark's agent runtime", "Treat the closed-source Antigravity CLI transition as a supply chain risk and assess before adoption"]
+tldr_actions:
+  - "Audit what sensitive data sources are connected to any Gemini Spark deployment before enabling it"
+  - "Monitor Google's security advisories for prompt injection mitigations specific to Gemini Spark's agent runtime"
+  - "Treat the closed-source Antigravity CLI transition as a supply chain risk and assess before adoption"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Supply Chain", "Industry News"]

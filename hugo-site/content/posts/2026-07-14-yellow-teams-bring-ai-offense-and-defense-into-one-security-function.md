@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM08 - Excessive Ag
 # ── TL;DR ──
 tldr_what: "Engineers at some companies now build both offensive and defensive AI security tools within a single yellow team function."
 tldr_who_at_risk: "Organisations adopting yellow team models are exposed to insider-threat and supply-chain risks stemming from concentrated offensive AI knowledge and tooling."
-tldr_actions: ["Audit access controls and code repositories associated with any yellow team AI tooling to limit blast radius of insider compromise", "Treat yellow team offensive tools as sensitive assets — apply the same supply-chain controls (signing, provenance, SBOM) as production AI components", "Establish knowledge-management and offboarding procedures to prevent offensive AI exploit techniques from leaking when yellow team personnel depart"]
+tldr_actions:
+  - "Audit access controls and code repositories associated with any yellow team AI tooling to limit blast radius of insider compromise"
+  - "Treat yellow team offensive tools as sensitive assets — apply the same supply-chain controls (signing, provenance, SBOM) as production AI components"
+  - "Establish knowledge-management and offboarding procedures to prevent offensive AI exploit techniques from leaking when yellow team personnel depart"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Adversarial ML", "Research", "Industry News"]

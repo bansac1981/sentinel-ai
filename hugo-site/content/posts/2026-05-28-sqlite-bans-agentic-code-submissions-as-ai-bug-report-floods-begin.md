@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "SQLite formally bans agentic code submissions after AI-generated bug reports overwhelm its forum."
 tldr_who_at_risk: "Open source maintainers of critical infrastructure libraries are most exposed, as autonomous agents flood contribution channels with low-quality or unvetted AI-generated content."
-tldr_actions: ["Establish explicit agentic contribution policies in AGENTS.md or CONTRIBUTING.md before agents target your repository", "Implement triage filters or separate intake channels for AI-generated bug reports to protect maintainer bandwidth", "Review any AI-agent-generated patches or issues against a reproducibility standard before acting on them"]
+tldr_actions:
+  - "Establish explicit agentic contribution policies in AGENTS.md or CONTRIBUTING.md before agents target your repository"
+  - "Implement triage filters or separate intake channels for AI-generated bug reports to protect maintainer bandwidth"
+  - "Review any AI-agent-generated patches or issues against a reproducibility standard before acting on them"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Industry News", "Research"]

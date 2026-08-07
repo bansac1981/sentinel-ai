@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Microsoft ships AI-focused Zero Trust Assessment tools and DevSecOps guidance for securing autonomous agents."
 tldr_who_at_risk: "Enterprises deploying AI agents and AI-assisted development pipelines that have not yet adapted their Zero Trust controls to cover agentic trust boundaries and persistent AI memory."
-tldr_actions: ["Run Microsoft's new Zero Trust AI Assessment against your current AI agent deployments to identify unaddressed trust boundary gaps", "Audit AI memory stores used by agents for unauthorised write access or prompt-injection pathways that persist across sessions", "Map your AI-assisted DevSecOps pipeline (source to deployment) against the new workshop guidance to identify supply chain exposure points before adversaries do"]
+tldr_actions:
+  - "Run Microsoft's new Zero Trust AI Assessment against your current AI agent deployments to identify unaddressed trust boundary gaps"
+  - "Audit AI memory stores used by agents for unauthorised write access or prompt-injection pathways that persist across sessions"
+  - "Map your AI-assisted DevSecOps pipeline (source to deployment) against the new workshop guidance to identify supply chain exposure points before adversaries do"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain", "Industry News"]

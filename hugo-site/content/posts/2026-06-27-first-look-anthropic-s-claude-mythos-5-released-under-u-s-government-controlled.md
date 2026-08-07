@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Anthropic's Claude Mythos 5 is now accessible to 100+ vetted U.S. companies and agencies under a new federal AI licensing framework."
 tldr_who_at_risk: "Security teams at Annex A-listed organizations, their foreign national employees, and any cloud intermediaries distributing Mythos 5 access are newly exposed to targeted compromise."
-tldr_actions: ["Treat Mythos 5 API credentials and access tokens as Tier-1 secrets — rotate on any suspected compromise and enforce hardware-bound authentication", "Audit all foreign national employee access granted under the 'deemed export' clause and apply need-to-know controls with enhanced logging", "Map your organization's position in the Mythos 5 supply chain (direct licensee vs. cloud intermediary) and apply commensurate threat modelling for each role"]
+tldr_actions:
+  - "Treat Mythos 5 API credentials and access tokens as Tier-1 secrets — rotate on any suspected compromise and enforce hardware-bound authentication"
+  - "Audit all foreign national employee access granted under the 'deemed export' clause and apply need-to-know controls with enhanced logging"
+  - "Map your organization's position in the Mythos 5 supply chain (direct licensee vs. cloud intermediary) and apply commensurate threat modelling for each role"
 
 # ── Taxonomies ──
 categories: ["First Look", "Regulatory", "LLM Security", "Jailbreaks", "Supply Chain", "Industry News"]

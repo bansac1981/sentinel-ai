@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM03 - Training Data Poisoning"
 # ── TL;DR ──
 tldr_what: "MoEngage acquires Aampe to assign a dedicated autonomous AI agent to every individual customer across its 1,350+ brand portfolio."
 tldr_who_at_risk: "Enterprise brands on MoEngage's platform and their end customers, whose behavioral data and messaging experiences are now governed by autonomous agents operating at massive scale."
-tldr_actions: ["Audit data flows into Aampe-powered agents, specifically what behavioral signals can be externally influenced or injected", "Demand multi-tenant isolation guarantees and penetration test evidence from MoEngage before onboarding sensitive customer data", "Establish human-in-the-loop approval gates for high-sensitivity agent actions (financial offers, health-related messaging) before full autonomous deployment"]
+tldr_actions:
+  - "Audit data flows into Aampe-powered agents, specifically what behavioral signals can be externally influenced or injected"
+  - "Demand multi-tenant isolation guarantees and penetration test evidence from MoEngage before onboarding sensitive customer data"
+  - "Establish human-in-the-loop approval gates for high-sensitivity agent actions (financial offers, health-related messaging) before full autonomous deployment"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain", "Industry News"]

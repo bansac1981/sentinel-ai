@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Two critical Cursor IDE flaws let prompt injection escape the AI sandbox and run arbitrary commands."
 tldr_who_at_risk: "Developers using Cursor versions prior to 3.0, especially enterprise users with cloud or SaaS workspaces connected to the editor."
-tldr_actions: ["Update Cursor to version 3.0 or later immediately", "Audit MCP-connected services and restrict agent access to external or untrusted data sources", "Review terminal command logs for anomalous working_directory values or unexpected symlink usage"]
+tldr_actions:
+  - "Update Cursor to version 3.0 or later immediately"
+  - "Audit MCP-connected services and restrict agent access to external or untrusted data sources"
+  - "Review terminal command logs for anomalous working_directory values or unexpected symlink usage"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "LLM Security", "Agentic AI", "Research"]

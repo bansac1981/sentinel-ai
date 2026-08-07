@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Token Security identifies agentic AI systems as a new class of under-governed machine identity creating enterprise-wide credential sprawl."
 tldr_who_at_risk: "Any enterprise deploying AI agents with OAuth grants, API keys, or cloud IAM roles without formal identity governance is newly exposed to credential abuse and lateral movement."
-tldr_actions: ["Immediately audit all active agent identities, credentials, and OAuth grants across cloud, SaaS, and DevOps environments", "Enforce time-limited, scoped credentials for every AI agent and implement automated revocation on task completion", "Apply prompt injection controls at every agent-to-API boundary to prevent credential misuse via injected instructions"]
+tldr_actions:
+  - "Immediately audit all active agent identities, credentials, and OAuth grants across cloud, SaaS, and DevOps environments"
+  - "Enforce time-limited, scoped credentials for every AI agent and implement automated revocation on task completion"
+  - "Apply prompt injection controls at every agent-to-API boundary to prevent credential misuse via injected instructions"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Industry News"]

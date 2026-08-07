@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance", "LLM05 - 
 # ── TL;DR ──
 tldr_what: "Microsoft's MDASH agentic AI system autonomously found 16 Windows flaws, two rated critical RCE."
 tldr_who_at_risk: "Windows environments with IKEv2 or IPSec enabled are most directly exposed via the two critical CVEs discovered by MDASH."
-tldr_actions: ["Apply May 2026 Patch Tuesday updates immediately, prioritising CVE-2026-33824 and CVE-2026-33827", "Audit internal use of agentic AI security tooling for excessive agency and insufficient human oversight controls", "Monitor for MDASH private preview access and evaluate its integration risks before broad deployment"]
+tldr_actions:
+  - "Apply May 2026 Patch Tuesday updates immediately, prioritising CVE-2026-33824 and CVE-2026-33827"
+  - "Audit internal use of agentic AI security tooling for excessive agency and insufficient human oversight controls"
+  - "Monitor for MDASH private preview access and evaluate its integration risks before broad deployment"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Research", "Industry News", "LLM Security"]

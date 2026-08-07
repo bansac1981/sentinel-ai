@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Unit 42 built an autonomous multi-agent AI system that successfully attacks misconfigured cloud environments end-to-end."
 tldr_who_at_risk: "Organizations running misconfigured cloud infrastructure \u2014 particularly GCP \u2014 are most exposed, as AI agents can now exploit known weaknesses at machine speed with minimal human oversight."
-tldr_actions: ["Audit and remediate cloud IAM misconfigurations and overly permissive service accounts immediately", "Deploy cloud-native threat detection (e.g., Cortex Cloud, CSPM tooling) to identify lateral movement and anomalous API calls indicative of automated attacks", "Conduct an AI Security Assessment to evaluate exposure to agentic offensive tooling and update incident response playbooks accordingly"]
+tldr_actions:
+  - "Audit and remediate cloud IAM misconfigurations and overly permissive service accounts immediately"
+  - "Deploy cloud-native threat detection (e.g., Cortex Cloud, CSPM tooling) to identify lateral movement and anomalous API calls indicative of automated attacks"
+  - "Conduct an AI Security Assessment to evaluate exposure to agentic offensive tooling and update incident response playbooks accordingly"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research"]

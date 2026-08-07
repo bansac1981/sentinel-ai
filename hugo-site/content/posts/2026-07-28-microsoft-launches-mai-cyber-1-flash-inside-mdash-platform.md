@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Microsoft integrates MAI-Cyber-1-Flash into MDASH, a multi-model agentic vulnerability identification and remediation harness."
 tldr_who_at_risk: "Organisations using MDASH in Azure AI Foundry private preview, particularly those exposing unpatched source code and vulnerability data to the agentic pipeline."
-tldr_actions: ["Audit access controls and data boundaries for all code and vulnerability data ingested by MDASH before enabling the private preview", "Validate and sanitise all inputs — including vulnerability descriptions and source code — entering the MDASH pipeline to reduce prompt injection risk", "Treat MDASH-generated proof-of-concept outputs as untrusted artefacts requiring human review before any operational use"]
+tldr_actions:
+  - "Audit access controls and data boundaries for all code and vulnerability data ingested by MDASH before enabling the private preview"
+  - "Validate and sanitise all inputs — including vulnerability descriptions and source code — entering the MDASH pipeline to reduce prompt injection risk"
+  - "Treat MDASH-generated proof-of-concept outputs as untrusted artefacts requiring human review before any operational use"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain"]

@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM04 - Model Denial
 # ── TL;DR ──
 tldr_what: "OpenAI unveiled Jalape\u00f1o, its first custom AI inference chip co-designed with Broadcom, targeting lower-cost model serving."
 tldr_who_at_risk: "Enterprises and API consumers reliant on OpenAI inference infrastructure are newly exposed to hardware-layer supply chain risks with limited visibility into mitigation status."
-tldr_actions: ["Classify OpenAI's custom silicon as a supply chain dependency in your AI risk register and track firmware update cadence", "Review your organisation's exposure to OpenAI inference infrastructure and assess contingency plans if chip-level vulnerabilities force service disruption", "Engage OpenAI's security disclosure programme to request transparency commitments around hardware security audits and firmware integrity verification"]
+tldr_actions:
+  - "Classify OpenAI's custom silicon as a supply chain dependency in your AI risk register and track firmware update cadence"
+  - "Review your organisation's exposure to OpenAI inference infrastructure and assess contingency plans if chip-level vulnerabilities force service disruption"
+  - "Engage OpenAI's security disclosure programme to request transparency commitments around hardware security audits and firmware integrity verification"
 
 # ── Taxonomies ──
 categories: ["First Look", "Supply Chain", "Industry News", "LLM Security"]

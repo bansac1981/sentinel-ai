@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "TeamPCP stole 5GB of Mistral AI repos via supply chain attack and is selling them for $25K."
 tldr_who_at_risk: "AI companies and developers using compromised Mistral AI SDK packages or dependent on TanStack/npm ecosystem packages are most directly exposed."
-tldr_actions: ["Audit all dependencies on Mistral AI SDK packages and pin to verified clean versions", "Rotate CI/CD credentials and audit pipeline access logs for unauthorised activity", "Monitor dark web and hacker forums for leaked Mistral AI repository contents that could enable targeted attacks"]
+tldr_actions:
+  - "Audit all dependencies on Mistral AI SDK packages and pin to verified clean versions"
+  - "Rotate CI/CD credentials and audit pipeline access logs for unauthorised activity"
+  - "Monitor dark web and hacker forums for leaked Mistral AI repository contents that could enable targeted attacks"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Model Theft", "LLM Security", "Industry News"]

@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Anthropic's Mythos model found vulnerabilities in classified US government systems within hours during sanctioned testing."
 tldr_who_at_risk: "US government agencies and critical infrastructure operators are most exposed, as AI models can now identify classified system vulnerabilities at machine speed."
-tldr_actions: ["Accelerate AI-assisted red-teaming programmes against classified and sensitive infrastructure before adversaries do", "Establish governance frameworks controlling which AI models are permitted access to sensitive network environments", "Review and tighten agentic AI permissions so models cannot autonomously act on discovered vulnerabilities"]
+tldr_actions:
+  - "Accelerate AI-assisted red-teaming programmes against classified and sensitive infrastructure before adversaries do"
+  - "Establish governance frameworks controlling which AI models are permitted access to sensitive network environments"
+  - "Review and tighten agentic AI permissions so models cannot autonomously act on discovered vulnerabilities"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Regulatory", "Industry News", "Research"]

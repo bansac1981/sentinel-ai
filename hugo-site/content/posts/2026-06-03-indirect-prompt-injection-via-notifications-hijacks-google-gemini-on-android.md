@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Poisoned notifications could hijack Gemini on Android to execute real device actions without user knowledge."
 tldr_who_at_risk: "Android users with Google Gemini's Utilities feature enabled are exposed, particularly those using Gemini hands-free while driving."
-tldr_actions: ["Update Google Gemini and Android system apps to receive the latest patch", "Disable Gemini Utilities notification-reading access until fully patched and audited", "Treat unexpected foreign-language phrases or error messages from voice assistants as potential injection indicators"]
+tldr_actions:
+  - "Update Google Gemini and Android system apps to receive the latest patch"
+  - "Disable Gemini Utilities notification-reading access until fully patched and audited"
+  - "Treat unexpected foreign-language phrases or error messages from voice assistants as potential injection indicators"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research"]

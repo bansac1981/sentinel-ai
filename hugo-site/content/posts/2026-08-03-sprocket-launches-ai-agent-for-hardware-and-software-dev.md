@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Sprocket is an open-source AI agent that generates both software code and hardware designs using live web context retrieval."
 tldr_who_at_risk: "Hardware engineers, embedded systems teams, and DevOps pipelines that integrate AI-assisted HDL or firmware generation without rigorous output validation."
-tldr_actions: ["Audit all AI-generated HDL and firmware outputs before committing to synthesis or build pipelines", "Implement URL allowlisting or sandboxed retrieval for any agent that fetches external context at runtime", "Apply code-review controls equivalent to human-authored commits for all agentic pull requests across hardware and software repos"]
+tldr_actions:
+  - "Audit all AI-generated HDL and firmware outputs before committing to synthesis or build pipelines"
+  - "Implement URL allowlisting or sandboxed retrieval for any agent that fetches external context at runtime"
+  - "Apply code-review controls equivalent to human-authored commits for all agentic pull requests across hardware and software repos"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Supply Chain", "Prompt Injection", "LLM Security"]

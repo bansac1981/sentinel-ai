@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Russian actor 'Trim' built an offensive attack platform by weaponising frontier AI model jailbreaks."
 tldr_who_at_risk: "Organisations relying on frontier AI models for internal or customer-facing operations are most exposed, as their safety guardrails may be actively bypassed and turned against them."
-tldr_actions: ["Audit deployed AI model integrations for exposure to jailbreak-based input manipulation", "Implement output filtering and runtime monitoring on all LLM-powered tooling", "Treat AI safety bypasses as a threat intelligence category and track emerging jailbreak techniques"]
+tldr_actions:
+  - "Audit deployed AI model integrations for exposure to jailbreak-based input manipulation"
+  - "Implement output filtering and runtime monitoring on all LLM-powered tooling"
+  - "Treat AI safety bypasses as a threat intelligence category and track emerging jailbreak techniques"
 
 # ── Taxonomies ──
 categories: ["Jailbreaks", "LLM Security", "Adversarial ML", "Agentic AI"]

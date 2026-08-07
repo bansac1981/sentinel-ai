@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM07 - Insecure Plu
 # ── TL;DR ──
 tldr_what: "Three LangGraph checkpointer vulnerabilities chain SQL injection with unsafe deserialization to achieve RCE."
 tldr_who_at_risk: "Teams self-hosting LangGraph with SQLite or Redis checkpointers where user input reaches the get_state_history() filter parameter."
-tldr_actions: ["Update to langgraph-checkpoint-sqlite 3.0.1+, langgraph 1.0.10+, and langgraph-checkpoint-redis 1.0.2+ immediately", "Audit all application code that passes user-controlled input into get_state_history() or list() filter arguments", "Restrict network access to LangGraph checkpointer backends and apply input validation at the application boundary"]
+tldr_actions:
+  - "Update to langgraph-checkpoint-sqlite 3.0.1+, langgraph 1.0.10+, and langgraph-checkpoint-redis 1.0.2+ immediately"
+  - "Audit all application code that passes user-controlled input into get_state_history() or list() filter arguments"
+  - "Restrict network access to LangGraph checkpointer backends and apply input validation at the application boundary"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Supply Chain", "Research"]

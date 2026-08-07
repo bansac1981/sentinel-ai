@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Microsoft is merging Copilot chat, GitHub Copilot coding, and agentic Autopilot into one unified super app for consumers and enterprises."
 tldr_who_at_risk: "Enterprise Microsoft 365 users and organisations relying on GitHub Copilot are newly exposed as a single AI platform now controls coding, collaboration, and autonomous task execution under one attack surface."
-tldr_actions: ["Map all Microsoft Copilot permissions and OAuth scopes before the super app rolls out and revoke any over-provisioned access", "Establish prompt injection detection controls at the API gateway layer covering all Copilot surfaces, particularly agentic Autopilot actions", "Define and enforce a data classification policy for what information is permitted to enter the unified Copilot context window in commercial environments"]
+tldr_actions:
+  - "Map all Microsoft Copilot permissions and OAuth scopes before the super app rolls out and revoke any over-provisioned access"
+  - "Establish prompt injection detection controls at the API gateway layer covering all Copilot surfaces, particularly agentic Autopilot actions"
+  - "Define and enforce a data classification policy for what information is permitted to enter the unified Copilot context window in commercial environments"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection", "Supply Chain"]

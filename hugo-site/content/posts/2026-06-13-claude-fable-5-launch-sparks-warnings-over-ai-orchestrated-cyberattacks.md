@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Anthropic's Claude Fable 5 launch highlights growing risk of frontier LLMs accelerating AI-powered cyberattacks at machine speed."
 tldr_who_at_risk: "Enterprise security teams and CISOs are most exposed, as frontier AI lowers the barrier for automated, AI-orchestrated attack chains against real production environments."
-tldr_actions: ["Test your real perimeter attack surface against AI-assisted offensive techniques now, not in sandboxed environments", "Evaluate your AI vendor's capability-gating and fallback mechanisms before deploying frontier models in sensitive pipelines", "Accelerate AI governance frameworks to account for tiered-access models and the security poverty line they create"]
+tldr_actions:
+  - "Test your real perimeter attack surface against AI-assisted offensive techniques now, not in sandboxed environments"
+  - "Evaluate your AI vendor's capability-gating and fallback mechanisms before deploying frontier models in sensitive pipelines"
+  - "Accelerate AI governance frameworks to account for tiered-access models and the security poverty line they create"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Agentic AI", "Industry News", "Regulatory"]

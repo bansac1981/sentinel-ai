@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Open-source CLI gives AI agents native OS-level control over any desktop application via accessibility trees."
 tldr_who_at_risk: "Developers and enterprises deploying AI agents on desktop environments are most exposed, as a compromised agent gains unrestricted native application control."
-tldr_actions: ["Restrict agent-desktop execution to sandboxed or containerised environments with minimal OS permissions", "Implement strict prompt injection defences before attaching any LLM to agent-desktop-style tooling", "Audit all accessibility API usage in AI agent pipelines for unintended data exposure or lateral movement"]
+tldr_actions:
+  - "Restrict agent-desktop execution to sandboxed or containerised environments with minimal OS permissions"
+  - "Implement strict prompt injection defences before attaching any LLM to agent-desktop-style tooling"
+  - "Audit all accessibility API usage in AI agent pipelines for unintended data exposure or lateral movement"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Research"]

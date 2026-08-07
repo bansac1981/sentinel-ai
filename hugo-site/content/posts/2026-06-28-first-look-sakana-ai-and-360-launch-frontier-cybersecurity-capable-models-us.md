@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Sakana AI's Fugu and 360's Tulongfeng launch as frontier, cybersecurity-capable AI models outside US export control jurisdiction."
 tldr_who_at_risk: "Enterprises and government agencies in Asia and globally that substitute these models into existing AI pipelines, plus defenders relying on US-model safety controls as a de facto guardrail."
-tldr_actions: ["Audit any AI model substitution decisions driven by export-control pressure and require equivalent security vetting before deployment", "Treat Fugu's multi-model API orchestration as an agentic trust boundary — apply prompt-injection controls at every inter-model handoff", "Flag 360/Tulongfeng adoption as elevated supply-chain risk given the vendor's government-adjacent profile and require enhanced data-flow isolation"]
+tldr_actions:
+  - "Audit any AI model substitution decisions driven by export-control pressure and require equivalent security vetting before deployment"
+  - "Treat Fugu's multi-model API orchestration as an agentic trust boundary — apply prompt-injection controls at every inter-model handoff"
+  - "Flag 360/Tulongfeng adoption as elevated supply-chain risk given the vendor's government-adjacent profile and require enhanced data-flow isolation"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Supply Chain", "Regulatory", "LLM Security", "Industry News"]

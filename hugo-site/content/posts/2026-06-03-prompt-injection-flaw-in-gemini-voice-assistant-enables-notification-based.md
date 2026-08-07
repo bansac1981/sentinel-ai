@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Gemini voice assistant processes malicious commands hidden in device notifications via prompt injection."
 tldr_who_at_risk: "Android users relying on Google Gemini as a voice assistant are exposed, particularly those who grant the assistant broad notification access."
-tldr_actions: ["Audit and restrict which apps are permitted to send notifications readable by Gemini", "Apply Google's latest Gemini security patches immediately when available", "Treat AI assistant integration with notification streams as a high-privilege attack surface requiring sandboxing"]
+tldr_actions:
+  - "Audit and restrict which apps are permitted to send notifications readable by Gemini"
+  - "Apply Google's latest Gemini security patches immediately when available"
+  - "Treat AI assistant integration with notification streams as a high-privilege attack surface requiring sandboxing"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI"]

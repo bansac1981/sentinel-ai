@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM08 - Excessive Ag
 # ── TL;DR ──
 tldr_what: "Pentagon signs classified AI deals with seven tech firms including OpenAI, Google, and Microsoft."
 tldr_who_at_risk: "US military decision-making systems and classified networks are most exposed, given multi-vendor AI integration without fully resolved oversight frameworks."
-tldr_actions: ["Mandate adversarial robustness testing for all AI models deployed in classified or high-stakes DoD environments", "Enforce strict supply chain vetting and continuous monitoring for all seven contracted AI vendors", "Implement mandatory human-in-the-loop controls for any AI-assisted targeting or kinetic decision workflows"]
+tldr_actions:
+  - "Mandate adversarial robustness testing for all AI models deployed in classified or high-stakes DoD environments"
+  - "Enforce strict supply chain vetting and continuous monitoring for all seven contracted AI vendors"
+  - "Implement mandatory human-in-the-loop controls for any AI-assisted targeting or kinetic decision workflows"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Supply Chain", "Regulatory", "Industry News", "LLM Security"]

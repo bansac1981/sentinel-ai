@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM10 - Model Theft"]
 # ── TL;DR ──
 tldr_what: "Local LLM activation steering is now practical for non-experts, enabling direct model behaviour manipulation at inference time."
 tldr_who_at_risk: "Organisations deploying locally-hosted LLMs for agentic coding or sensitive tasks are most exposed, as steering attacks bypass prompt-layer defences entirely."
-tldr_actions: ["Audit locally-deployed LLM tooling for steering or activation-manipulation capabilities introduced via third-party wrappers", "Treat model weight access as a critical security boundary — restrict and monitor who can load or modify local model files", "Incorporate activation-level threat scenarios into red team exercises for agentic LLM deployments"]
+tldr_actions:
+  - "Audit locally-deployed LLM tooling for steering or activation-manipulation capabilities introduced via third-party wrappers"
+  - "Treat model weight access as a critical security boundary — restrict and monitor who can load or modify local model files"
+  - "Incorporate activation-level threat scenarios into red team exercises for agentic LLM deployments"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Adversarial ML", "Jailbreaks", "Research"]

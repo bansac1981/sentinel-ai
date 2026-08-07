@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Anthropic's Mythos model autonomously found and chained critical exploits across major OSes with 72.4% success rate."
 tldr_who_at_risk: "Operators of major operating systems, browsers, and network appliances are most exposed, as AI-discovered vulnerabilities vastly outpace the ecosystem's patching capacity."
-tldr_actions: ["Prioritise AI-assisted patch triage pipelines to absorb high-volume vulnerability feeds from automated discovery tools", "Deploy continuous autonomous validation rather than periodic penetration testing to match adversarial machine-speed operations", "Audit any LLM-integrated tooling for excessive agency and lateral movement capability, especially MCP-style agentic deployments"]
+tldr_actions:
+  - "Prioritise AI-assisted patch triage pipelines to absorb high-volume vulnerability feeds from automated discovery tools"
+  - "Deploy continuous autonomous validation rather than periodic penetration testing to match adversarial machine-speed operations"
+  - "Audit any LLM-integrated tooling for excessive agency and lateral movement capability, especially MCP-style agentic deployments"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research", "Industry News"]

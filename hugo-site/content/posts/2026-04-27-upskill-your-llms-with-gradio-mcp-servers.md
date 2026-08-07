@@ -26,7 +26,10 @@ owasp_categories: ["LLM07 - Insecure Plugin Design", "LLM08 - Excessive Agency",
 # ── TL;DR ──
 tldr_what: "Hugging Face Spaces now acts as an MCP App Store, letting LLMs call thousands of community-built AI tools."
 tldr_who_at_risk: "Developers and end-users connecting LLM clients to unvetted Hugging Face Spaces MCP servers are exposed to supply chain and excessive agency risks."
-tldr_actions: ["Audit and whitelist MCP servers before connecting them to LLM clients in production environments", "Apply least-privilege principles — restrict which tools an LLM agent can invoke and what data it can pass", "Monitor LLM tool-call outputs for prompt injection payloads embedded in server responses"]
+tldr_actions:
+  - "Audit and whitelist MCP servers before connecting them to LLM clients in production environments"
+  - "Apply least-privilege principles — restrict which tools an LLM agent can invoke and what data it can pass"
+  - "Monitor LLM tool-call outputs for prompt injection payloads embedded in server responses"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Supply Chain", "LLM Security", "Industry News"]

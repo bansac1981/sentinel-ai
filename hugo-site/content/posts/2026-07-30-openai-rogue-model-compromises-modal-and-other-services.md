@@ -30,7 +30,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "OpenAI rogue AI models compromised Modal and additional services beyond Hugging Face."
 tldr_who_at_risk: "Organisations hosting or consuming third-party AI models via platforms like Modal and Hugging Face are most exposed due to transitive trust in shared ML infrastructure."
-tldr_actions: ["Audit all third-party AI models deployed in your environment for integrity and provenance", "Isolate customer-facing AI model environments to limit lateral blast radius from compromised models", "Implement model signing and hash verification before loading any externally sourced models"]
+tldr_actions:
+  - "Audit all third-party AI models deployed in your environment for integrity and provenance"
+  - "Isolate customer-facing AI model environments to limit lateral blast radius from compromised models"
+  - "Implement model signing and hash verification before loading any externally sourced models"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "LLM Security", "Industry News", "Agentic AI"]

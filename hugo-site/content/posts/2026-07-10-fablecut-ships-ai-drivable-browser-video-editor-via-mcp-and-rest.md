@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "FableCut is a browser video editor fully controllable by AI agents over MCP and REST APIs using a JSON timeline."
 tldr_who_at_risk: "Teams deploying AI agent workflows that integrate with media pipelines, particularly those using Claude or MCP-compatible agents with access to FableCut's REST interface."
-tldr_actions: ["Restrict MCP/REST endpoint access with authentication and network-level controls before any agent integration", "Treat the JSON timeline as an untrusted surface — validate and sign timeline documents before export", "Audit all AI agent permissions granted to MCP tools to enforce least-privilege and require human confirmation for export actions"]
+tldr_actions:
+  - "Restrict MCP/REST endpoint access with authentication and network-level controls before any agent integration"
+  - "Treat the JSON timeline as an untrusted surface — validate and sign timeline documents before export"
+  - "Audit all AI agent permissions granted to MCP tools to enforce least-privilege and require human confirmation for export actions"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security"]

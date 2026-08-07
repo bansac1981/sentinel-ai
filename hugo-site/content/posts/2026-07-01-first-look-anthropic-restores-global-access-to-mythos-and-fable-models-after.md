@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Anthropic's Mythos and Fable models regain global public access after US export restrictions are lifted following policy negotiations."
 tldr_who_at_risk: "Software vendors, critical infrastructure operators, and security teams are newly exposed as foreign threat actors gain access to a model with documented vulnerability discovery and exploitation capabilities."
-tldr_actions: ["Audit whether your organisation's software assets are exposed to AI-assisted vulnerability scanning and update your threat model accordingly", "Monitor Anthropic's approved-customer disclosure process for Mythos; treat any third party claiming Mythos access as a privileged supply chain node requiring enhanced vetting", "Review and stress-test existing LLM acceptable-use policies to account for Fable's public availability, including guardrail bypass scenarios previously considered low-probability"]
+tldr_actions:
+  - "Audit whether your organisation's software assets are exposed to AI-assisted vulnerability scanning and update your threat model accordingly"
+  - "Monitor Anthropic's approved-customer disclosure process for Mythos; treat any third party claiming Mythos access as a privileged supply chain node requiring enhanced vetting"
+  - "Review and stress-test existing LLM acceptable-use policies to account for Fable's public availability, including guardrail bypass scenarios previously considered low-probability"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Regulatory", "Jailbreaks", "Industry News"]

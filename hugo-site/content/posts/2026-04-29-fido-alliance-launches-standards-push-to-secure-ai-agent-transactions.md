@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "FIDO Alliance launches working groups to create cryptographic standards securing AI agent-initiated financial transactions."
 tldr_who_at_risk: "Consumers and merchants using AI-powered shopping or task agents are exposed to agent hijacking, unauthorised transactions, and rogue instruction injection without adequate standards in place."
-tldr_actions: ["Audit any AI agent integrations that have access to payment or financial APIs for authentication gaps", "Require explicit, cryptographically verifiable user authorisation before agents execute financial transactions", "Monitor FIDO Alliance AP2 and Verifiable Intent framework developments for early adoption opportunities"]
+tldr_actions:
+  - "Audit any AI agent integrations that have access to payment or financial APIs for authentication gaps"
+  - "Require explicit, cryptographically verifiable user authorisation before agents execute financial transactions"
+  - "Monitor FIDO Alliance AP2 and Verifiable Intent framework developments for early adoption opportunities"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Regulatory", "Industry News"]

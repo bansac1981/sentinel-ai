@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "CrowdStrike extends Falcon AIDR to monitor Microsoft Copilot Studio agents and Anthropic Claude Code at runtime."
 tldr_who_at_risk: "Enterprises running Copilot Studio agents or Claude Code in production are newly exposed through the integration's telemetry boundaries and the higher-value target profile that formal security instrumentation creates."
-tldr_actions: ["Audit Copilot Studio and Claude Code agent identities and scopes before Falcon AIDR integration goes live", "Validate that AIDR telemetry pipelines are integrity-protected and cannot be suppressed by a compromised agent process", "Define detection thresholds carefully to prevent adversarial prompt crafting from generating alert fatigue that masks genuine compromise"]
+tldr_actions:
+  - "Audit Copilot Studio and Claude Code agent identities and scopes before Falcon AIDR integration goes live"
+  - "Validate that AIDR telemetry pipelines are integrity-protected and cannot be suppressed by a compromised agent process"
+  - "Define detection thresholds carefully to prevent adversarial prompt crafting from generating alert fatigue that masks genuine compromise"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain"]

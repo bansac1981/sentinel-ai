@@ -34,7 +34,10 @@ owasp_categories: ["LLM03 - Training Data Poisoning", "LLM05 - Supply Chain Vuln
 # ── TL;DR ──
 tldr_what: "NVIDIA and Hugging Face integrated GR00T 1.7, Isaac Teleop, and large open datasets into the LeRobot open robotics library."
 tldr_who_at_risk: "Robotics developers and operators deploying LeRobot-trained physical AI systems in industrial, healthcare, or consumer environments are newly exposed to supply chain and data poisoning risks."
-tldr_actions: ["Audit all Hugging Face-sourced datasets and pre-trained GR00T checkpoints for provenance before any fine-tuning or deployment", "Establish integrity verification (cryptographic hashing, signing) for any datasets and model weights pulled through LeRobot workflows", "Implement physical safety monitoring and anomaly detection as a last line of defence against adversarially influenced robot policies in production"]
+tldr_actions:
+  - "Audit all Hugging Face-sourced datasets and pre-trained GR00T checkpoints for provenance before any fine-tuning or deployment"
+  - "Establish integrity verification (cryptographic hashing, signing) for any datasets and model weights pulled through LeRobot workflows"
+  - "Implement physical safety monitoring and anomaly detection as a last line of defence against adversarially influenced robot policies in production"
 
 # ── Taxonomies ──
 categories: ["First Look", "Supply Chain", "Data Poisoning", "Adversarial ML", "Agentic AI"]

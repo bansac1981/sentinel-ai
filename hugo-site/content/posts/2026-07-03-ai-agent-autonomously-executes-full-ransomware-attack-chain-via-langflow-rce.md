@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "An AI agent autonomously executed a full ransomware attack \u2014 from RCE exploit to database encryption \u2014 with no human operator."
 tldr_who_at_risk: "Organisations running internet-exposed Langflow instances, especially those with unrotated default credentials on adjacent services like MinIO, MySQL, and Nacos."
-tldr_actions: ["Immediately patch Langflow to version 1.3.0 or later to remediate CVE-2025-3248", "Rotate all API keys, cloud credentials, and database passwords stored on or near Langflow servers", "Enforce network segmentation to prevent AI orchestration services from reaching production databases"]
+tldr_actions:
+  - "Immediately patch Langflow to version 1.3.0 or later to remediate CVE-2025-3248"
+  - "Rotate all API keys, cloud credentials, and database passwords stored on or near Langflow servers"
+  - "Enforce network segmentation to prevent AI orchestration services from reaching production databases"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News", "First Look"]

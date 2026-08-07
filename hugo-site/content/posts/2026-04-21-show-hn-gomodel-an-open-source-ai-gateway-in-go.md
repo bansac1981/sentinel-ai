@@ -26,7 +26,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Open-source Go AI gateway GoModel unifies multiple LLM provider APIs, centralising a sensitive credential and traffic interception surface."
 tldr_who_at_risk: "Organisations self-hosting GoModel to proxy LLM API traffic are most exposed, particularly if API keys, guardrail configs, or gateway dependencies are compromised."
-tldr_actions: ["Audit GoModel's dependency chain (go.mod/go.sum) for malicious or compromised packages before deployment", "Enforce strict secrets management — never store provider API keys in .env files committed to repositories", "Enable and validate guardrail configurations to prevent prompt injection and sensitive data exfiltration through the gateway"]
+tldr_actions:
+  - "Audit GoModel's dependency chain (go.mod/go.sum) for malicious or compromised packages before deployment"
+  - "Enforce strict secrets management — never store provider API keys in .env files committed to repositories"
+  - "Enable and validate guardrail configurations to prevent prompt injection and sensitive data exfiltration through the gateway"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Supply Chain", "Industry News"]

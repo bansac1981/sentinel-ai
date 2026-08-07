@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Google patched a critical prompt injection RCE flaw in an agentic AI filesystem tool enabling sandbox escape."
 tldr_who_at_risk: "Users and enterprises deploying Google's agentic AI filesystem tool are directly exposed to arbitrary code execution if unpatched."
-tldr_actions: ["Apply Google's patch immediately to all affected agentic AI tool deployments", "Audit agentic AI components for unsanitised input paths and filesystem access permissions", "Enforce strict sandbox boundaries and least-privilege principles for all AI agents with OS-level access"]
+tldr_actions:
+  - "Apply Google's patch immediately to all affected agentic AI tool deployments"
+  - "Audit agentic AI components for unsanitised input paths and filesystem access permissions"
+  - "Enforce strict sandbox boundaries and least-privilege principles for all AI agents with OS-level access"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI"]

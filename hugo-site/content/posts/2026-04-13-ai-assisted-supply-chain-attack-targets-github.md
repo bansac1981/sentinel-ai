@@ -8,7 +8,10 @@ summary: "A threat actor identified as part of the PRT-scan campaign has leverag
 # ── TL;DR ──
 tldr_what: "PRT-scan campaign uses AI automation to exploit GitHub misconfigurations at scale."
 tldr_who_at_risk: "Organizations relying on GitHub-hosted dependencies, CI/CD pipelines, and ML training workflows downstream."
-tldr_actions: ["Audit GitHub repository permissions and token scopes immediately.", "Monitor CI/CD workflows for unauthorized code injection or credential exfiltration.", "Implement secrets scanning and rotate exposed GitHub tokens."]
+tldr_actions:
+  - "Audit GitHub repository permissions and token scopes immediately."
+  - "Monitor CI/CD workflows for unauthorized code injection or credential exfiltration."
+  - "Implement secrets scanning and rotate exposed GitHub tokens."
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/application-security/ai-assisted-supply-chain-attack-targets-github"
 author: "Grid the Grey Editorial"

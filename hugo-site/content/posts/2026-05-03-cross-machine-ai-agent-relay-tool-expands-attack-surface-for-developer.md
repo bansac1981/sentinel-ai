@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "Loopsy relays AI agent commands and shell access across machines via a self-hosted Cloudflare Worker."
 tldr_who_at_risk: "Developers using AI coding agents (Claude Code, Cursor, Codex) who deploy Loopsy are exposed to relay hijacking, prompt injection via mobile input, and lateral movement if the relay is compromised."
-tldr_actions: ["Audit network exposure of any Cloudflare Worker relay before deploying Loopsy in production or sensitive environments", "Restrict shell command scope accessible via the relay using allowlists and sandboxing", "Treat mobile-originated inputs to AI agents as untrusted and apply prompt injection defences before execution"]
+tldr_actions:
+  - "Audit network exposure of any Cloudflare Worker relay before deploying Loopsy in production or sensitive environments"
+  - "Restrict shell command scope accessible via the relay using allowlists and sandboxing"
+  - "Treat mobile-originated inputs to AI agents as untrusted and apply prompt injection defences before execution"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Supply Chain", "LLM Security", "Industry News"]

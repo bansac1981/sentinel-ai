@@ -34,7 +34,10 @@ owasp_categories: ["LLM03 - Training Data Poisoning", "LLM05 - Supply Chain Vuln
 # ── TL;DR ──
 tldr_what: "Anthropic's CEO publicly warned US lawmakers that open-source AI model releases permanently remove operator safety controls."
 tldr_who_at_risk: "Enterprises, platforms, and governments relying on API-level safety controls are newly exposed when users or adversaries substitute governed endpoints with locally-run open-weight alternatives."
-tldr_actions: ["Audit your AI stack for any open-weight model integrations and verify what safety layers remain after fine-tuning", "Establish model provenance checks on all downloaded artifacts against known-good hashes from official repositories", "Develop a threat model that assumes safety guardrails are absent for any locally-deployed model, and apply compensating controls at the application layer"]
+tldr_actions:
+  - "Audit your AI stack for any open-weight model integrations and verify what safety layers remain after fine-tuning"
+  - "Establish model provenance checks on all downloaded artifacts against known-good hashes from official repositories"
+  - "Develop a threat model that assumes safety guardrails are absent for any locally-deployed model, and apply compensating controls at the application layer"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Supply Chain", "Regulatory", "Industry News", "Jailbreaks"]

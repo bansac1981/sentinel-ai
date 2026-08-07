@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Researcher claims multi-agent prompt jailbreak of Claude Fable 5; Anthropic denies core safety bypass occurred."
 tldr_who_at_risk: "Enterprises and developers deploying Fable 5 in sensitive domains are at risk if safety fallback mechanisms can be circumvented through conversational manipulation."
-tldr_actions: ["Monitor model outputs in high-risk domains for unexpected compliance with restricted topics", "Do not rely solely on conversational refusals — enforce hard guardrails at the API and application layer", "Treat any published system prompt leaks as valid attack surface and review fallback logic for adversarial prompt sequences"]
+tldr_actions:
+  - "Monitor model outputs in high-risk domains for unexpected compliance with restricted topics"
+  - "Do not rely solely on conversational refusals — enforce hard guardrails at the API and application layer"
+  - "Treat any published system prompt leaks as valid attack surface and review fallback logic for adversarial prompt sequences"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Prompt Injection", "Research", "Industry News"]

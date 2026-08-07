@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Dolphin X RAT uses an embedded AI profiler to automatically score and rank infected victims by value."
 tldr_who_at_risk: "Corporate employees, cryptocurrency holders, and cloud environment users are most at risk as the AI profiler specifically targets access to these high-value account types."
-tldr_actions: ["Deploy endpoint detection capable of identifying RAT agent network traffic patterns and operator panel communication", "Monitor for unusual credential access patterns across 300+ application categories flagged by Dolphin X", "Enforce MFA on all corporate, cloud, and cryptocurrency accounts to reduce value of stolen credentials"]
+tldr_actions:
+  - "Deploy endpoint detection capable of identifying RAT agent network traffic patterns and operator panel communication"
+  - "Monitor for unusual credential access patterns across 300+ application categories flagged by Dolphin X"
+  - "Enforce MFA on all corporate, cloud, and cryptocurrency accounts to reduce value of stolen credentials"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Industry News", "Research"]

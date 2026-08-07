@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Estonia is piloting state-issued digital identity credentials for AI agents acting in official government contexts."
 tldr_who_at_risk: "Citizens, government agencies, and any organisation relying on state-validated AI agent actions are exposed to credential abuse and unauthorised agent delegation."
-tldr_actions: ["Map all agent delegation and credential issuance flows to identify trust boundary gaps before similar frameworks reach your jurisdiction", "Assess your incident response playbook for agent credential revocation — ensure revocation is near-real-time and auditable", "Implement prompt injection controls on all data inputs an authenticated government agent will consume during official transactions"]
+tldr_actions:
+  - "Map all agent delegation and credential issuance flows to identify trust boundary gaps before similar frameworks reach your jurisdiction"
+  - "Assess your incident response playbook for agent credential revocation — ensure revocation is near-real-time and auditable"
+  - "Implement prompt injection controls on all data inputs an authenticated government agent will consume during official transactions"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Regulatory", "LLM Security"]

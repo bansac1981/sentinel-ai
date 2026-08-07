@@ -34,7 +34,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM05 - Supply Chain Vul
 # ── TL;DR ──
 tldr_what: "Y Combinator CEO Garry Tan publicly ships ~37K lines of AI-generated code daily using agentic coding tools."
 tldr_who_at_risk: "Development teams and downstream users of software built with high-velocity, low-review AI coding pipelines modelled on or inspired by this workflow."
-tldr_actions: ["Mandate automated SAST scanning on all AI-generated code before merge, regardless of author seniority or perceived velocity benefits", "Establish a maximum AI-generated code ratio per pull request to enforce minimum human review coverage", "Treat agentic coding tool configurations and prompt templates as secrets — restrict disclosure and monitor for targeted prompt injection attempts"]
+tldr_actions:
+  - "Mandate automated SAST scanning on all AI-generated code before merge, regardless of author seniority or perceived velocity benefits"
+  - "Establish a maximum AI-generated code ratio per pull request to enforce minimum human review coverage"
+  - "Treat agentic coding tool configurations and prompt templates as secrets — restrict disclosure and monitor for targeted prompt injection attempts"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Supply Chain", "LLM Security"]

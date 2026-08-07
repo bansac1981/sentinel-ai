@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM03 - Training Dat
 # ── TL;DR ──
 tldr_what: "Current AI released a structured, MIT-licensed index of 421 open-source AI products across models, datasets, tools, and hardware."
 tldr_who_at_risk: "Organisations consuming open-source AI components are newly exposed if adversaries use this map to prioritise supply chain compromise targets."
-tldr_actions: ["Cross-reference your AI dependency stack against the Gap Map's 16,000+ tracked repos to identify overlap with high-risk, low-maintainer projects", "Monitor the currentai-org/os-ai-map repository for changes that add or re-categorise components you depend on", "Treat the YAML dataset as adversary recon material and use it proactively to harden your most exposed upstream dependencies before attackers act on it"]
+tldr_actions:
+  - "Cross-reference your AI dependency stack against the Gap Map's 16,000+ tracked repos to identify overlap with high-risk, low-maintainer projects"
+  - "Monitor the currentai-org/os-ai-map repository for changes that add or re-categorise components you depend on"
+  - "Treat the YAML dataset as adversary recon material and use it proactively to harden your most exposed upstream dependencies before attackers act on it"
 
 # ── Taxonomies ──
 categories: ["First Look", "Supply Chain", "Research", "Industry News"]

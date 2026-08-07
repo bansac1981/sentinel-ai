@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Iroh ships Mesh LLM, pooling distributed GPUs into one OpenAI-compatible peer-to-peer inference endpoint."
 tldr_who_at_risk: "Teams self-hosting or federating LLM inference across multiple machines or offices, where any participating node becomes a potential trust boundary."
-tldr_actions: ["Treat every mesh peer as an untrusted boundary — enforce mutual authentication and audit public key registrations", "Review and sign all plugin manifests before deployment; block unsigned or third-party plugins by policy", "Monitor inter-stage activation traffic on skippy-stage/2 for anomalous payload sizes or unexpected routing paths"]
+tldr_actions:
+  - "Treat every mesh peer as an untrusted boundary — enforce mutual authentication and audit public key registrations"
+  - "Review and sign all plugin manifests before deployment; block unsigned or third-party plugins by policy"
+  - "Monitor inter-stage activation traffic on skippy-stage/2 for anomalous payload sizes or unexpected routing paths"
 
 # ── Taxonomies ──
 categories: ["First Look", "Supply Chain", "LLM Security", "Agentic AI", "Model Theft"]

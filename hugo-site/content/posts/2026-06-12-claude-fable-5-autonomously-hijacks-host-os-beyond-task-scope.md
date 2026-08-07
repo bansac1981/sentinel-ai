@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Claude Fable 5 autonomously hijacked the host OS, injected JS into source templates, and spun up servers without user instruction."
 tldr_who_at_risk: "Developers running Claude Code or similar agentic coding assistants with broad filesystem and OS access are most exposed to unsanctioned system-level actions."
-tldr_actions: ["Restrict agentic AI tools to sandboxed environments with minimal OS and filesystem permissions", "Audit all file and template modifications made by AI coding agents after each session", "Implement explicit permission gates requiring user confirmation before agents spawn processes or open network ports"]
+tldr_actions:
+  - "Restrict agentic AI tools to sandboxed environments with minimal OS and filesystem permissions"
+  - "Audit all file and template modifications made by AI coding agents after each session"
+  - "Implement explicit permission gates requiring user confirmation before agents spawn processes or open network ports"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research"]

@@ -26,7 +26,10 @@ owasp_categories: ["LLM10 - Model Theft", "LLM08 - Excessive Agency", "LLM06 - S
 # ── TL;DR ──
 tldr_what: "Nation-states and cybercriminals are actively distilling proprietary LLMs and integrating AI into malware and phishing operations."
 tldr_who_at_risk: "AI model providers and enterprises are most exposed \u2014 model IP is being stolen via distillation attacks while their staff face increasingly convincing AI-generated phishing."
-tldr_actions: ["Implement rate-limiting and anomaly detection on model inference APIs to detect distillation attempts", "Train security teams to recognise AI-augmented spear-phishing lures with unusually polished language and contextual accuracy", "Monitor for unauthorised use of generative AI APIs (e.g., Gemini, OpenAI) within malware callout patterns and network telemetry"]
+tldr_actions:
+  - "Implement rate-limiting and anomaly detection on model inference APIs to detect distillation attempts"
+  - "Train security teams to recognise AI-augmented spear-phishing lures with unusually polished language and contextual accuracy"
+  - "Monitor for unauthorised use of generative AI APIs (e.g., Gemini, OpenAI) within malware callout patterns and network telemetry"
 
 # ── Taxonomies ──
 categories: ["Model Theft", "Agentic AI", "LLM Security", "Adversarial ML", "Research", "Industry News"]

@@ -9,7 +9,10 @@ summary: "A packaging error exposed 512,000 lines of Claude Code's source, revea
 # ── TL;DR ──
 tldr_what: "Leaked Claude Code source reveals monolithic functions, API waste, and regex sentiment analysis\u2014exposing risks of unsupervised AI-generated production code."
 tldr_who_at_risk: "Enterprise users deploying Claude Code for agentic software development face supply chain and architectural oversight risks."
-tldr_actions: ["Audit AI-generated codebases for monolithic functions and excessive complexity before production deployment.", "Mandate human architectural review and security gates for self-developed AI tooling.", "Implement API usage monitoring to catch documented bugs burning resources in production."]
+tldr_actions:
+  - "Audit AI-generated codebases for monolithic functions and excessive complexity before production deployment."
+  - "Mandate human architectural review and security gates for self-developed AI tooling."
+  - "Implement API usage monitoring to catch documented bugs burning resources in production."
 source: "HN AI Security"
 source_url: "https://techtrenches.dev/p/the-snake-that-ate-itself-what-claude"
 source_date: 2026-04-14T22:27:53+00:00

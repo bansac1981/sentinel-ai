@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM04 - Model Denial of Service"
 # ── TL;DR ──
 tldr_what: "Two AI code review agents entered an infinite disagreement loop, costing $41K before API keys were revoked."
 tldr_who_at_risk: "Engineering teams deploying autonomous AI agents for code or security review are most exposed due to lack of agent interaction guardrails."
-tldr_actions: ["Implement hard caps on per-agent inference spend and iteration counts", "Require human-in-the-loop escalation when AI agents reach conflict or uncertainty thresholds", "Audit multi-agent pipelines for unbounded feedback loops before production deployment"]
+tldr_actions:
+  - "Implement hard caps on per-agent inference spend and iteration counts"
+  - "Require human-in-the-loop escalation when AI agents reach conflict or uncertainty thresholds"
+  - "Audit multi-agent pipelines for unbounded feedback loops before production deployment"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Supply Chain", "LLM Security", "Research", "Industry News"]

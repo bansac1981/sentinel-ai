@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Enterprise IGA frameworks built for human HR lifecycles cannot govern AI agents acting as autonomous identity principals."
 tldr_who_at_risk: "Any enterprise deploying AI agents within environments governed by traditional IGA platforms such as SailPoint, Saviynt, or Azure AD-connected IGA tooling."
-tldr_actions: ["Audit all AI agent identities in your environment and catalogue their entitlements independently of HR-driven IGA workflows", "Implement purpose-built deprovisioning triggers for AI agent credentials tied to project lifecycle events, not employment status", "Extend SoD conflict detection and access certification campaigns to explicitly include non-human identity principals"]
+tldr_actions:
+  - "Audit all AI agent identities in your environment and catalogue their entitlements independently of HR-driven IGA workflows"
+  - "Implement purpose-built deprovisioning triggers for AI agent credentials tied to project lifecycle events, not employment status"
+  - "Extend SoD conflict detection and access certification campaigns to explicitly include non-human identity principals"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Regulatory", "Industry News"]

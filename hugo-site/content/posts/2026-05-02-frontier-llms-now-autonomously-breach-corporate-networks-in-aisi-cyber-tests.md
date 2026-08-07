@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "GPT-5.5 and Mythos Preview both autonomously completed a 32-step simulated corporate network breach \u2014 an AI first."
 tldr_who_at_risk: "Enterprise security teams are most exposed, as multiple frontier LLMs can now autonomously execute multi-stage network intrusion and data extraction tasks without human assistance."
-tldr_actions: ["Audit AI API access controls and enforce strict identity verification before granting frontier model access to any network-adjacent tooling", "Treat autonomous LLM agent deployments as high-risk attack surfaces and apply least-privilege principles to all agentic pipelines", "Monitor AISI and NIST AI RMF guidance for updated thresholds triggering restricted model deployment obligations"]
+tldr_actions:
+  - "Audit AI API access controls and enforce strict identity verification before granting frontier model access to any network-adjacent tooling"
+  - "Treat autonomous LLM agent deployments as high-risk attack surfaces and apply least-privilege principles to all agentic pipelines"
+  - "Monitor AISI and NIST AI RMF guidance for updated thresholds triggering restricted model deployment obligations"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Research", "Industry News", "Regulatory"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "Mozilla used Claude Mythos to find and fix 423 Firefox vulnerabilities in a single month."
 tldr_who_at_risk: "Open-source project maintainers and Firefox users are most exposed, as the same AI capability could be weaponised by adversaries to discover exploitable bugs faster than patches can ship."
-tldr_actions: ["Integrate LLM-assisted code auditing into your secure SDLC before adversaries apply the same capability offensively", "Treat AI-generated vulnerability reports with triage pipelines — validate signal before acting to avoid maintainer burnout", "Audit long-lived codebases for classes of legacy bugs now tractable to LLM-based analysis (e.g., XSLT, DOM edge cases)"]
+tldr_actions:
+  - "Integrate LLM-assisted code auditing into your secure SDLC before adversaries apply the same capability offensively"
+  - "Treat AI-generated vulnerability reports with triage pipelines — validate signal before acting to avoid maintainer burnout"
+  - "Audit long-lived codebases for classes of legacy bugs now tractable to LLM-based analysis (e.g., XSLT, DOM edge cases)"
 
 # ── Taxonomies ──
 categories: ["Research", "Industry News", "LLM Security", "Agentic AI"]

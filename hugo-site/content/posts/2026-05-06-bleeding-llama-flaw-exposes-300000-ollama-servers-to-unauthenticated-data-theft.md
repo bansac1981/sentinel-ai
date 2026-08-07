@@ -27,7 +27,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM05 - Supply C
 # ── TL;DR ──
 tldr_what: "Unauthenticated heap read bug in Ollama leaks API keys, prompts, and secrets from 300,000 exposed servers."
 tldr_who_at_risk: "Any organisation running Ollama as a self-hosted LLM inference engine without a firewall or authentication proxy in front of it \u2014 roughly 300,000 internet-facing instances \u2014 is immediately exploitable."
-tldr_actions: ["Upgrade Ollama to version 0.17.1 immediately", "Block public internet access to Ollama's API port via firewall rules", "Place an authentication proxy in front of all Ollama deployments and audit exposed API keys for rotation"]
+tldr_actions:
+  - "Upgrade Ollama to version 0.17.1 immediately"
+  - "Block public internet access to Ollama's API port via firewall rules"
+  - "Place an authentication proxy in front of all Ollama deployments and audit exposed API keys for rotation"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Research", "Industry News"]

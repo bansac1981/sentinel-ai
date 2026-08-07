@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "OpenAI Lockdown Mode blocks outbound data exfiltration channels exploitable via prompt injection attacks."
 tldr_who_at_risk: "ChatGPT users processing sensitive documents or private data in default mode remain exposed to exfiltration-capable prompt injection attacks."
-tldr_actions: ["Enable Lockdown Mode immediately if you process sensitive or confidential data in ChatGPT", "Audit uploaded files and cached web content as persistent prompt injection surfaces", "Do not rely solely on AI-evaluated guardrails — prefer deterministic network-level controls"]
+tldr_actions:
+  - "Enable Lockdown Mode immediately if you process sensitive or confidential data in ChatGPT"
+  - "Audit uploaded files and cached web content as persistent prompt injection surfaces"
+  - "Do not rely solely on AI-evaluated guardrails — prefer deterministic network-level controls"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Industry News"]

@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Mistral AI releases OCR 4, a structured document extraction model with bounding boxes and confidence scores targeting enterprise RAG and search pipelines."
 tldr_who_at_risk: "Enterprises using OCR 4 as an ingestion layer for RAG, enterprise search, or automated redaction workflows are newly exposed to adversarial document injection and pipeline poisoning."
-tldr_actions: ["Sanitise and validate all OCR output before it enters RAG indexes or search stores — treat extracted text as untrusted input", "Audit self-hosted container deployments for network exposure, image integrity, and dependency provenance before production rollout", "Do not rely solely on OCR 4 confidence scores as the gate for automated redaction — layer human review and rule-based controls for sensitive content decisions"]
+tldr_actions:
+  - "Sanitise and validate all OCR output before it enters RAG indexes or search stores — treat extracted text as untrusted input"
+  - "Audit self-hosted container deployments for network exposure, image integrity, and dependency provenance before production rollout"
+  - "Do not rely solely on OCR 4 confidence scores as the gate for automated redaction — layer human review and rule-based controls for sensitive content decisions"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Prompt Injection", "Supply Chain", "Agentic AI"]

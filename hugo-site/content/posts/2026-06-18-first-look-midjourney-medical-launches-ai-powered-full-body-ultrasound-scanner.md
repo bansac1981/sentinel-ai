@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Midjourney Medical launches a full-body AI ultrasound scanner claiming MRI-comparable image quality for daily personal health monitoring."
 tldr_who_at_risk: "Individuals, enterprise wellness programme operators, and healthcare providers stand to benefit most directly \u2014 gaining access to longitudinal, high-resolution anatomical monitoring at a cadence and cost point previously unavailable, provided appropriate governance and validation frameworks are in place at deployment."
-tldr_actions: "[\"Engage Midjourney Medical early to obtain a published SBOM and data residency documentation, so procurement decisions are informed by verified supply chain and compliance posture.\", \"Establish independent clinical validation workflows \u2014 pairing AI-generated diagnostic outputs with radiologist review \u2014 before integrating scanner outputs into any clinical or wellness decision process.\", \"Classify scanner-generated anatomical data at your organisation's highest sensitivity tier and deploy commensurate access logging, encryption, and DLP controls as a condition of rollout.\"]"
+tldr_actions:
+  - "Engage Midjourney Medical early to obtain a published SBOM and data residency documentation, so procurement decisions are informed by verified supply chain and compliance posture."
+  - "Establish independent clinical validation workflows — pairing AI-generated diagnostic outputs with radiologist review — before integrating scanner outputs into any clinical or wellness decision process."
+  - "Classify scanner-generated anatomical data at your organisation's highest sensitivity tier and deploy commensurate access logging, encryption, and DLP controls as a condition of rollout."
 
 # ── Taxonomies ──
 categories: ["First Look", "Adversarial ML", "Supply Chain", "Regulatory", "Industry News"]

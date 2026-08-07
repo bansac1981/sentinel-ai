@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "Attackers used Langflow-hosted LLM agents to autonomously orchestrate a full ransomware attack chain."
 tldr_who_at_risk: "Organisations running self-hosted or exposed Langflow instances and agentic AI pipelines with access to internal systems are directly at risk."
-tldr_actions: ["Immediately audit and restrict network exposure of Langflow and similar LLM orchestration platforms", "Apply least-privilege constraints to all agent tool integrations and disable unused capabilities", "Monitor AI agent execution logs for anomalous multi-step actions and lateral movement patterns"]
+tldr_actions:
+  - "Immediately audit and restrict network exposure of Langflow and similar LLM orchestration platforms"
+  - "Apply least-privilege constraints to all agent tool integrations and disable unused capabilities"
+  - "Monitor AI agent execution logs for anomalous multi-step actions and lateral movement patterns"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Supply Chain", "First Look"]

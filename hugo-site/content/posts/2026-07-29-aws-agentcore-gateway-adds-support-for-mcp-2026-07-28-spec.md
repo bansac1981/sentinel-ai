@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "AWS AgentCore Gateway now natively supports the MCP 2026-07-28 spec for standardised agentic tool-use."
 tldr_who_at_risk: "Organisations running agentic AI pipelines on AWS that connect external or third-party MCP tool servers through AgentCore Gateway."
-tldr_actions: ["Audit all MCP server registrations in AgentCore Gateway and enforce allowlisting of approved tool endpoints", "Apply least-privilege IAM policies to MCP session credentials to limit blast radius of a compromised tool call", "Instrument MCP tool responses for prompt injection payloads before they are returned to agent context"]
+tldr_actions:
+  - "Audit all MCP server registrations in AgentCore Gateway and enforce allowlisting of approved tool endpoints"
+  - "Apply least-privilege IAM policies to MCP session credentials to limit blast radius of a compromised tool call"
+  - "Instrument MCP tool responses for prompt injection payloads before they are returned to agent context"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain", "Prompt Injection"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Microsoft Scout is an always-on autonomous AI agent with persistent access to core Microsoft 365 data and external systems."
 tldr_who_at_risk: "Microsoft 365 enterprise users and administrators are most exposed, particularly organisations that enable Scout's experimental release without hardened Intune policies."
-tldr_actions: ["Audit and restrict Scout's MCP-connected external app integrations before enabling in production", "Enforce least-privilege Entra identity scopes for Scout and monitor its activity logs continuously", "Delay broad deployment until Microsoft provides a stable, non-experimental release with full governance controls"]
+tldr_actions:
+  - "Audit and restrict Scout's MCP-connected external app integrations before enabling in production"
+  - "Enforce least-privilege Entra identity scopes for Scout and monitor its activity logs continuously"
+  - "Delay broad deployment until Microsoft provides a stable, non-experimental release with full governance controls"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

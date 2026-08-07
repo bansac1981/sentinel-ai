@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Chinese actor deployed a weaponised DeepSeek AI agent to compromise 1,200+ hosts for proxyjacking."
 tldr_who_at_risk: "Security firms and enterprises running internet-exposed infrastructure are most at risk, as AI agents can autonomously enumerate and exploit hosts at scale."
-tldr_actions: ["Audit and restrict outbound network access for any LLM agent deployments in your environment", "Implement anomaly detection tuned for AI-driven lateral movement and bulk host enumeration patterns", "Apply least-privilege principles to all agentic AI systems and enforce strict tool-call allowlists"]
+tldr_actions:
+  - "Audit and restrict outbound network access for any LLM agent deployments in your environment"
+  - "Implement anomaly detection tuned for AI-driven lateral movement and bulk host enumeration patterns"
+  - "Apply least-privilege principles to all agentic AI systems and enforce strict tool-call allowlists"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

@@ -9,7 +9,10 @@ summary: "A researcher has disclosed a novel prompt injection attack technique d
 # ── TL;DR ──
 tldr_what: "AI coding agents hijacked via malicious comments embedded in source code files."
 tldr_who_at_risk: "Developers using Claude Code, Gemini CLI, or GitHub Copilot Agents on untrusted or third-party repositories."
-tldr_actions: ["Audit code comments in external repos before running agentic tools on them.", "Request sandbox isolation or confirmation prompts from AI tool vendors.", "Monitor agent activity logs for unexpected file access or exfiltration attempts."]
+tldr_actions:
+  - "Audit code comments in external repos before running agentic tools on them."
+  - "Request sandbox isolation or confirmation prompts from AI tool vendors."
+  - "Monitor agent activity logs for unexpected file access or exfiltration attempts."
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via-comments/"
 source_date: 2026-04-16T08:33:54+00:00

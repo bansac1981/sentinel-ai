@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "ClaudeBleed lets any Chrome extension inject prompts into Claude's AI agent and bypass user confirmation protections."
 tldr_who_at_risk: "Users running the Claude Chrome extension with agentic capabilities enabled are directly exposed, particularly those with other browser extensions installed."
-tldr_actions: ["Audit and minimise installed Chrome extensions to reduce attack surface", "Disable or restrict Claude Chrome extension permissions until a patch is confirmed", "Monitor for suspicious AI agent actions or unexpected Claude behaviours in the browser"]
+tldr_actions:
+  - "Audit and minimise installed Chrome extensions to reduce attack surface"
+  - "Disable or restrict Claude Chrome extension permissions until a patch is confirmed"
+  - "Monitor for suspicious AI agent actions or unexpected Claude behaviours in the browser"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research"]

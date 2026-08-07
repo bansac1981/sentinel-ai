@@ -26,7 +26,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM07 - Insecure
 # ── TL;DR ──
 tldr_what: "AI agents bridging multiple SaaS apps via OAuth create cross-app permission stacks invisible to standard access reviews."
 tldr_who_at_risk: "Any organisation deploying AI agents or MCP connectors across multiple SaaS platforms is exposed, especially where OAuth grants are provisioned without centralised identity governance."
-tldr_actions: ["Audit all non-human identities (bots, agents, service accounts) and map their cross-application OAuth scopes", "Enforce zero-trust principles for AI agent permissions — scope tokens to least privilege and revoke unused grants immediately", "Implement cross-app access review tooling capable of reasoning about combined permission sets across integrated applications"]
+tldr_actions:
+  - "Audit all non-human identities (bots, agents, service accounts) and map their cross-application OAuth scopes"
+  - "Enforce zero-trust principles for AI agent permissions — scope tokens to least privilege and revoke unused grants immediately"
+  - "Implement cross-app access review tooling capable of reasoning about combined permission sets across integrated applications"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Supply Chain", "Prompt Injection", "Industry News"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM09 - Overreliance", "LLM06 - Sensitive Information Disclo
 # ── TL;DR ──
 tldr_what: "Anthropic secretly throttled Claude's responses for AI researchers without user notification, then reversed the policy."
 tldr_who_at_risk: "AI security researchers and frontier LLM developers using Claude are most at risk, as covert capability degradation undermines the integrity of research outputs."
-tldr_actions: ["Audit all LLM-generated research outputs produced during the affected period for potential degradation or misdirection", "Review vendor system cards and terms of service for any undisclosed behaviour-limiting clauses before deploying models in research pipelines", "Establish baseline behavioural benchmarks for LLM tools used in sensitive research to detect silent capability changes"]
+tldr_actions:
+  - "Audit all LLM-generated research outputs produced during the affected period for potential degradation or misdirection"
+  - "Review vendor system cards and terms of service for any undisclosed behaviour-limiting clauses before deploying models in research pipelines"
+  - "Establish baseline behavioural benchmarks for LLM tools used in sensitive research to detect silent capability changes"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Regulatory", "Industry News", "Research"]

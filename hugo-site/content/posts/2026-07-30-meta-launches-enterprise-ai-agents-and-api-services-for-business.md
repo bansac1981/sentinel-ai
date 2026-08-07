@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Meta is launching enterprise AI agents, APIs, developer tools, and compute services for business customers."
 tldr_who_at_risk: "Businesses integrating Meta AI agents into customer-facing messaging and internal workflows are newly exposed to prompt injection, data leakage, and supply chain risks."
-tldr_actions: ["Evaluate prompt injection risks in any Meta agent deployment handling untrusted user input via messaging platforms", "Assess API authentication and authorisation controls before onboarding Meta enterprise AI APIs into production workflows", "Treat Meta-sourced compute as a third-party cloud dependency and apply standard supply chain due diligence and contractual security obligations"]
+tldr_actions:
+  - "Evaluate prompt injection risks in any Meta agent deployment handling untrusted user input via messaging platforms"
+  - "Assess API authentication and authorisation controls before onboarding Meta enterprise AI APIs into production workflows"
+  - "Treat Meta-sourced compute as a third-party cloud dependency and apply standard supply chain due diligence and contractual security obligations"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain", "Industry News"]

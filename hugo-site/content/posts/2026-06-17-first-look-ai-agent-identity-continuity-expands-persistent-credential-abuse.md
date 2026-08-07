@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "CrowdStrike ships persistent identity for AI agents, creating durable credential targets attackers can compromise for long-lived platform access."
 tldr_who_at_risk: "Enterprise SOC teams deploying CrowdStrike's agentic capabilities \u2014 Charlotte AI and AgentWorks integrations \u2014 are the primary beneficiaries: this capability gives them the identity governance infrastructure needed to operate AI agents with accountability, auditability, and enforceable access control for the first time."
-tldr_actions: "[\"Inventory all AI agent identities provisioned in Falcon and assign ownership, scoping documentation, and a least-privilege access policy to each\", \"Establish credential rotation schedules and short-lived token windows for agent identities, mirroring the session hygiene already applied to human accounts\", \"Instrument independent monitoring for agent identity usage patterns so behavioral baselines can be established and anomalies surfaced through channels separate from agent-generated telemetry\"]"
+tldr_actions:
+  - "Inventory all AI agent identities provisioned in Falcon and assign ownership, scoping documentation, and a least-privilege access policy to each"
+  - "Establish credential rotation schedules and short-lived token windows for agent identities, mirroring the session hygiene already applied to human accounts"
+  - "Instrument independent monitoring for agent identity usage patterns so behavioral baselines can be established and anomalies surfaced through channels separate from agent-generated telemetry"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Industry News"]

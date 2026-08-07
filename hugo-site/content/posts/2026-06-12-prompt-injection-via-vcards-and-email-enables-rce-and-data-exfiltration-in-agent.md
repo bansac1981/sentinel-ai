@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Hidden instructions in vCards and emails tricked OpenClaw AI agent into executing code and leaking secrets."
 tldr_who_at_risk: "Organisations running self-hosted OpenClaw agents with access to mailboxes, contacts, or cloud credentials are directly exposed."
-tldr_actions: ["Update OpenClaw to version 2026.4.23 or later immediately", "Apply least-privilege principles to agent tool and data access scopes", "Implement untrusted-content boundaries for all external data ingested by LLM agents"]
+tldr_actions:
+  - "Update OpenClaw to version 2026.4.23 or later immediately"
+  - "Apply least-privilege principles to agent tool and data access scopes"
+  - "Implement untrusted-content boundaries for all external data ingested by LLM agents"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research"]

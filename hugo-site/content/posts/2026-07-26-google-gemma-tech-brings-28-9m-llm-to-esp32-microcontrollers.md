@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM03 - Training Data Poisoning"
 # ── TL;DR ──
 tldr_what: "A 28.9M-parameter LLM now runs fully offline on an $8 ESP32-S3 microcontroller using Google's Gemma flash-storage technique."
 tldr_who_at_risk: "OT/IoT asset owners, embedded systems manufacturers, and defenders relying on network-based AI monitoring are newly exposed as LLM inference moves entirely off-network onto commodity hardware."
-tldr_actions: ["Audit IoT and embedded device firmware pipelines for unauthorised model weight inclusion", "Establish asset inventory controls that flag devices capable of on-chip AI inference", "Update threat models for OT/IoT environments to include local LLM-driven autonomous behaviour without C2 connectivity"]
+tldr_actions:
+  - "Audit IoT and embedded device firmware pipelines for unauthorised model weight inclusion"
+  - "Establish asset inventory controls that flag devices capable of on-chip AI inference"
+  - "Update threat models for OT/IoT environments to include local LLM-driven autonomous behaviour without C2 connectivity"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Supply Chain", "Adversarial ML", "Research"]

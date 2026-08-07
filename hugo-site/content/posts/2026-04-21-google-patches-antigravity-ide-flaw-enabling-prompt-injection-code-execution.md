@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "Google's Antigravity agentic IDE had a prompt injection flaw enabling sandbox-bypassing arbitrary code execution."
 tldr_who_at_risk: "Developers using Google Antigravity IDE are most exposed, particularly those opening files or repositories from untrusted sources where hidden prompt injection payloads could trigger silent code execution."
-tldr_actions: ["Update Google Antigravity IDE to the patched version released February 28, 2026", "Audit all agentic tool interfaces for strict parameter validation before sandbox constraints are applied", "Treat all external file content as untrusted input and scan for embedded prompt injection payloads before AI agent processing"]
+tldr_actions:
+  - "Update Google Antigravity IDE to the patched version released February 28, 2026"
+  - "Audit all agentic tool interfaces for strict parameter validation before sandbox constraints are applied"
+  - "Treat all external file content as untrusted input and scan for embedded prompt injection payloads before AI agent processing"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Research"]

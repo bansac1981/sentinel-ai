@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM10 - Model Theft"
 # ── TL;DR ──
 tldr_what: "Rio's '397B homegrown LLM' is an undisclosed 60/40 weight merge of Nex-N2_pro and Qwen with no original training."
 tldr_who_at_risk: "AI model developers and open-source contributors whose weights can be silently merged and redistributed under false provenance claims."
-tldr_actions: ["Implement cryptographic model fingerprinting to detect unauthorised weight reuse or merges", "Probe deployed LLMs with identity and backstory queries to surface undisclosed base model provenance", "Require model cards and reproducible training logs for any government or enterprise LLM procurement"]
+tldr_actions:
+  - "Implement cryptographic model fingerprinting to detect unauthorised weight reuse or merges"
+  - "Probe deployed LLMs with identity and backstory queries to surface undisclosed base model provenance"
+  - "Require model cards and reproducible training logs for any government or enterprise LLM procurement"
 
 # ── Taxonomies ──
 categories: ["Model Theft", "Supply Chain", "LLM Security", "Industry News", "Regulatory"]

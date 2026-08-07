@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Amazon Quick agentic assistant connects production observability data to autonomous task creation, creating an indirect prompt injection pathway through live telemetry."
 tldr_who_at_risk: "SRE and platform engineering teams operating at scale benefit most from this capability \u2014 particularly those managing high alert volumes where manual triage creates bottlenecks, context loss between tools, and inconsistent incident documentation."
-tldr_actions: "[\"Integrate the Amazon Quick agentic triage assistant into your incident response runbooks as the primary triage interface for New Relic-instrumented services, mapping it to your existing Asana incident project boards\", \"Configure connector permissions at deployment time using least-privilege scoping \u2014 New Relic read-only access limited to relevant service entities, Asana write access scoped to designated incident boards \u2014 so the agent operates with production-appropriate authority from day one\", \"Establish an input validation layer for telemetry ingested by the agent and define a human-review step for agent-generated RCA briefs before tasks are actioned, building oversight into the workflow rather than retrofitting it later\"]"
+tldr_actions:
+  - "Integrate the Amazon Quick agentic triage assistant into your incident response runbooks as the primary triage interface for New Relic-instrumented services, mapping it to your existing Asana incident project boards"
+  - "Configure connector permissions at deployment time using least-privilege scoping — New Relic read-only access limited to relevant service entities, Asana write access scoped to designated incident boards — so the agent operates with production-appropriate authority from day one"
+  - "Establish an input validation layer for telemetry ingested by the agent and define a human-review step for agent-generated RCA briefs before tasks are actioned, building oversight into the workflow rather than retrofitting it later"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security"]

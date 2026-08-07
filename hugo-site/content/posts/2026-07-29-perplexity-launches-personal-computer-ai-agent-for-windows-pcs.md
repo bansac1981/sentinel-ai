@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Perplexity Personal Computer now runs as a local AI agent on Windows, accessing files, apps, and Office 365."
 tldr_who_at_risk: "Enterprise Windows users and IT teams whose endpoints now host a locally-executed AI agent with broad file system and Microsoft 365 access."
-tldr_actions: ["Audit whether Personal Computer is present on managed endpoints and classify it as a high-privilege process in your EDR policy", "Implement DLP controls and alert rules for bulk file reads or unusual Office 365 API calls originating from Perplexity agent processes", "Assess all document ingestion pipelines for prompt injection payloads that could redirect agent behaviour"]
+tldr_actions:
+  - "Audit whether Personal Computer is present on managed endpoints and classify it as a high-privilege process in your EDR policy"
+  - "Implement DLP controls and alert rules for bulk file reads or unusual Office 365 API calls originating from Perplexity agent processes"
+  - "Assess all document ingestion pipelines for prompt injection payloads that could redirect agent behaviour"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security"]

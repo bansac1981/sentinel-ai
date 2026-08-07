@@ -30,7 +30,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM08 - Excessive Agency
 # ── TL;DR ──
 tldr_what: "Chinese group Outsider Enterprise used Gemini to generate 300+ phishing site templates sold via Telegram."
 tldr_who_at_risk: "General consumers targeted by SMS phishing campaigns impersonating Google, YouTube, and US government toll services."
-tldr_actions: ["Enforce stricter output filtering on LLM APIs for HTML/CSS generation mimicking known brand assets", "Implement on-device or carrier-level scam SMS detection layered with AI-generated content signals", "Require stepped-up identity verification before granting access to generative AI code/web-page generation features"]
+tldr_actions:
+  - "Enforce stricter output filtering on LLM APIs for HTML/CSS generation mimicking known brand assets"
+  - "Implement on-device or carrier-level scam SMS detection layered with AI-generated content signals"
+  - "Require stepped-up identity verification before granting access to generative AI code/web-page generation features"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Industry News", "Regulatory"]

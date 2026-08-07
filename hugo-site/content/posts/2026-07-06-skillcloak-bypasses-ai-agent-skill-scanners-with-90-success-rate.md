@@ -30,7 +30,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM07 - Insecure Plu
 # ── TL;DR ──
 tldr_what: "SKILLCLOAK systematically evades all tested AI agent skill scanners with over 90% success using packing techniques."
 tldr_who_at_risk: "Developers and organisations using AI coding agents (Claude Code, OpenAI Codex) that install skills from public marketplaces are directly exposed to credential theft, code exfiltration, and backdoor installation."
-tldr_actions: ["Audit all installed AI agent skills and remove any sourced from unvetted public marketplaces", "Deploy runtime behavioral monitoring (sandbox-based) rather than relying solely on static skill scanners", "Apply strict allowlisting for skill directories and flag or block execution from paths like .git/ at the agent runtime level"]
+tldr_actions:
+  - "Audit all installed AI agent skills and remove any sourced from unvetted public marketplaces"
+  - "Deploy runtime behavioral monitoring (sandbox-based) rather than relying solely on static skill scanners"
+  - "Apply strict allowlisting for skill directories and flag or block execution from paths like .git/ at the agent runtime level"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Supply Chain", "LLM Security", "Research", "Adversarial ML"]

@@ -9,7 +9,10 @@ summary: "OpenAI has been impacted by a supply chain attack attributed to North 
 # ── TL;DR ──
 tldr_what: "North Korea-linked actors compromised Axios macOS certificate, exposing OpenAI and downstream users."
 tldr_who_at_risk: "Enterprises and developers relying on OpenAI APIs and services that depend on compromised Axios library."
-tldr_actions: ["Audit Axios dependencies in your build and development pipelines immediately.", "Revoke or re-validate any macOS code signing certificates from affected timeframe.", "Monitor for suspicious code execution or network activity from Axios-dependent applications."]
+tldr_actions:
+  - "Audit Axios dependencies in your build and development pipelines immediately."
+  - "Revoke or re-validate any macOS code signing certificates from affected timeframe."
+  - "Monitor for suspicious code execution or network activity from Axios-dependent applications."
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/openai-impacted-by-north-korea-linked-axios-supply-chain-hack/"
 source_date: 2026-04-13T12:34:06+00:00

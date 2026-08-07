@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "6,000 public prompt injection attempts against a Claude Opus 4.6 email agent all failed to leak secrets."
 tldr_who_at_risk: "Developers deploying LLM-based agents that ingest untrusted external content such as emails, documents, or web pages are most directly exposed."
-tldr_actions: ["Do not rely solely on model-level instruction-following as a security boundary for sensitive operations", "Implement architectural controls — sandboxing, allowlists, and human-in-the-loop gates — for any irreversible agent actions", "Treat public red-team results as a lower bound, not a guarantee; assume sophisticated adversaries will continue probing"]
+tldr_actions:
+  - "Do not rely solely on model-level instruction-following as a security boundary for sensitive operations"
+  - "Implement architectural controls — sandboxing, allowlists, and human-in-the-loop gates — for any irreversible agent actions"
+  - "Treat public red-team results as a lower bound, not a guarantee; assume sophisticated adversaries will continue probing"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "LLM Security", "Research", "Industry News"]

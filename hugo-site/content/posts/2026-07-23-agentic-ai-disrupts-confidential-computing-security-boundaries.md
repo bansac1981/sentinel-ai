@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Agentic AI systems are breaking trust assumptions in confidential computing environments as adoption scales."
 tldr_who_at_risk: "Enterprises and cloud providers running sensitive workloads inside TEEs or secure enclaves that now integrate or are adjacent to agentic AI pipelines."
-tldr_actions: ["Audit all agentic AI access paths to TEE-protected data and enforce least-privilege tool permissions", "Re-evaluate remote attestation workflows to detect behavioural drift in LLM agents post-verification", "Implement egress monitoring and output inspection for any agent operating within or adjacent to confidential compute boundaries"]
+tldr_actions:
+  - "Audit all agentic AI access paths to TEE-protected data and enforce least-privilege tool permissions"
+  - "Re-evaluate remote attestation workflows to detect behavioural drift in LLM agents post-verification"
+  - "Implement egress monitoring and output inspection for any agent operating within or adjacent to confidential compute boundaries"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Industry News"]

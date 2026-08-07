@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Major vendors acquired AI security firms to address agentic identity, LLM validation, and browser-level AI control gaps."
 tldr_who_at_risk: "Enterprises deploying autonomous AI agents are most exposed, as non-human identity and LLM oversight tooling remains immature."
-tldr_actions: ["Audit all non-human identities (API keys, service accounts, AI agents) in your environment now", "Implement continuous LLM evaluation and output monitoring before deploying autonomous agents in production", "Enforce browser-level AI usage policies to prevent data leakage via AI-enabled web and IDE tooling"]
+tldr_actions:
+  - "Audit all non-human identities (API keys, service accounts, AI agents) in your environment now"
+  - "Implement continuous LLM evaluation and output monitoring before deploying autonomous agents in production"
+  - "Enforce browser-level AI usage policies to prevent data leakage via AI-enabled web and IDE tooling"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News", "Supply Chain"]

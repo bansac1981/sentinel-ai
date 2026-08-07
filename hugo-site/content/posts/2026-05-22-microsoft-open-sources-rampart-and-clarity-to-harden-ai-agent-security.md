@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Microsoft open-sources RAMPART and Clarity to bring adversarial security testing into AI agent development pipelines."
 tldr_who_at_risk: "Developers and product teams building AI agents are at risk if security testing is deferred until post-deployment, leaving prompt injection and data exfiltration vectors unverified."
-tldr_actions: ["Integrate RAMPART into CI/CD pipelines to run adversarial and safety tests against AI agents continuously", "Use Clarity during design phases to surface and challenge unsafe assumptions about agent tool access and trust boundaries", "Map existing PyRIT red team findings into RAMPART test cases to make mitigations reproducible and verifiable"]
+tldr_actions:
+  - "Integrate RAMPART into CI/CD pipelines to run adversarial and safety tests against AI agents continuously"
+  - "Use Clarity during design phases to surface and challenge unsafe assumptions about agent tool access and trust boundaries"
+  - "Map existing PyRIT red team findings into RAMPART test cases to make mitigations reproducible and verifiable"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research", "Industry News"]

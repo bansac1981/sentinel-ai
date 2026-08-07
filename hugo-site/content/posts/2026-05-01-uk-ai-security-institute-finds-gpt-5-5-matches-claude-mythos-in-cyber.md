@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "UK AISI confirms GPT-5.5 matches Claude Mythos in finding security vulnerabilities, and is publicly available."
 tldr_who_at_risk: "Organisations with internet-exposed software assets are most at risk, as capable AI vulnerability-discovery tools are now broadly accessible."
-tldr_actions: ["Accelerate vulnerability scanning and patch cadence for externally exposed systems", "Monitor for AI-assisted reconnaissance and exploitation patterns in threat detection pipelines", "Review access controls and API exposure for services that could be targeted by automated AI-driven discovery"]
+tldr_actions:
+  - "Accelerate vulnerability scanning and patch cadence for externally exposed systems"
+  - "Monitor for AI-assisted reconnaissance and exploitation patterns in threat detection pipelines"
+  - "Review access controls and API exposure for services that could be targeted by automated AI-driven discovery"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Research", "Industry News", "Regulatory"]

@@ -26,7 +26,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM05 - Supply C
 # ── TL;DR ──
 tldr_what: "Discord users accessed Anthropic's restricted Mythos AI model via breached data, URL guessing, and contractor permissions."
 tldr_who_at_risk: "AI labs using contractor ecosystems and URL-predictable model endpoints are most exposed, especially those with powerful restricted models."
-tldr_actions: ["Audit and revoke excessive contractor API permissions for all restricted model tiers", "Randomise or tokenise model endpoint URLs to prevent educated-guess enumeration", "Monitor third-party breach data for credential and metadata exposure linked to your API ecosystem"]
+tldr_actions:
+  - "Audit and revoke excessive contractor API permissions for all restricted model tiers"
+  - "Randomise or tokenise model endpoint URLs to prevent educated-guess enumeration"
+  - "Monitor third-party breach data for credential and metadata exposure linked to your API ecosystem"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Model Theft", "Supply Chain", "Industry News"]

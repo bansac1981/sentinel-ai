@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Attackers inject malicious instructions into Sentry errors to hijack AI coding agents into executing arbitrary code."
 tldr_who_at_risk: "Developers using AI coding agents (Claude Code, Cursor) integrated with Sentry via MCP are directly exposed due to implicit trust in external tool output."
-tldr_actions: ["Audit all MCP server integrations and remove unnecessary external data source connections", "Restrict or rotate Sentry DSNs and treat them as sensitive credentials, not public endpoints", "Configure AI coding agents to require explicit human approval before executing any code suggested from external tool responses"]
+tldr_actions:
+  - "Audit all MCP server integrations and remove unnecessary external data source connections"
+  - "Restrict or rotate Sentry DSNs and treat them as sensitive credentials, not public endpoints"
+  - "Configure AI coding agents to require explicit human approval before executing any code suggested from external tool responses"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Prompt Injection", "LLM Security", "Supply Chain", "Research"]

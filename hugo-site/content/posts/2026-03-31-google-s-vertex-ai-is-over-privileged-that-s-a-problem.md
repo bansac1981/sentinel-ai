@@ -8,7 +8,10 @@ summary: "Palo Alto Networks researchers have identified over-privilege vulnerab
 # ── TL;DR ──
 tldr_what: "Google Vertex AI agents operate with excessive permissions, enabling data theft and infrastructure pivots."
 tldr_who_at_risk: "Enterprise organizations deploying agentic AI systems on Google Cloud without strict permission enforcement."
-tldr_actions: ["Audit all Vertex AI service account IAM roles for over-privilege immediately.", "Implement least-privilege principles on AI agent permissions and credentials.", "Establish guardrails against prompt injection attacks targeting AI agents with cloud access."]
+tldr_actions:
+  - "Audit all Vertex AI service account IAM roles for over-privilege immediately."
+  - "Implement least-privilege principles on AI agent permissions and credentials."
+  - "Establish guardrails against prompt injection attacks targeting AI agents with cloud access."
 source: "Dark Reading"
 source_url: "https://www.darkreading.com/cyber-risk/googles-vertex-ai-over-privilege-problem"
 author: "Grid the Grey Editorial"

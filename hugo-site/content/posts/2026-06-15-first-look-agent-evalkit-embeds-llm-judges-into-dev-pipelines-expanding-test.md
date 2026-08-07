@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Agent-EvalKit embeds LLM judges and code-reading AI assistants into agent dev pipelines, creating evaluation-layer attack surfaces."
 tldr_who_at_risk: "Development teams building agents on Amazon Bedrock or Strands Agents gain the most immediate benefit: Agent-EvalKit closes the gap between informal, ad-hoc agent testing and structured, repeatable pre-deployment quality assurance with LLM-as-judge scoring and automated test case generation."
-tldr_actions: "[\"Integrate Agent-EvalKit into your agent CI/CD pipeline and configure evaluation pass thresholds as merge gates to catch regressions automatically\", \"Establish version-pinned, integrity-verified evaluation datasets as a shared team asset \u2014 treat them with the same governance as production configuration\", \"Review Agent-EvalKit-generated code recommendations as part of your standard pull-request process, applying the same scrutiny as any third-party dependency suggestion\"]"
+tldr_actions:
+  - "Integrate Agent-EvalKit into your agent CI/CD pipeline and configure evaluation pass thresholds as merge gates to catch regressions automatically"
+  - "Establish version-pinned, integrity-verified evaluation datasets as a shared team asset — treat them with the same governance as production configuration"
+  - "Review Agent-EvalKit-generated code recommendations as part of your standard pull-request process, applying the same scrutiny as any third-party dependency suggestion"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Supply Chain", "LLM Security", "Prompt Injection"]

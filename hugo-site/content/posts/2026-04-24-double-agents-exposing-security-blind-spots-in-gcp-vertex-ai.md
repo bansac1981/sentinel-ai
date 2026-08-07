@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Vertex AI agents can be weaponized to steal GCP service credentials and escalate privileges across Google Cloud infrastructure."
 tldr_who_at_risk: "Any organisation deploying AI agents on GCP Vertex AI Agent Engine is exposed due to excessive default permissions granted to service agents."
-tldr_actions: ["Audit and restrict P4SA default permissions for all Vertex AI Agent Engine deployments immediately", "Implement least-privilege IAM policies for all GCP service agents associated with AI workloads", "Monitor service agent credential usage with Cloud Audit Logs and alert on anomalous cross-project access"]
+tldr_actions:
+  - "Audit and restrict P4SA default permissions for all Vertex AI Agent Engine deployments immediately"
+  - "Implement least-privilege IAM policies for all GCP service agents associated with AI workloads"
+  - "Monitor service agent credential usage with Cloud Audit Logs and alert on anomalous cross-project access"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research", "Supply Chain"]

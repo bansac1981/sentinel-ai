@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Google DeepMind formalises a six-category taxonomy of adversarial traps targeting autonomous AI agents processing external data."
 tldr_who_at_risk: "Any organisation deploying AI agents with access to external data sources \u2014 web, email, CRM, documents, or APIs \u2014 is newly exposed to structured, high-success-rate instruction hijacking."
-tldr_actions: ["Audit every data source your AI agents ingest and treat all external content as untrusted input requiring sandboxed parsing", "Implement strict instruction-data separation at the agent orchestration layer to prevent external content from being processed as executable instructions", "Deploy agent action monitoring with anomaly detection tuned to unexpected outbound data transfers or privilege escalation patterns"]
+tldr_actions:
+  - "Audit every data source your AI agents ingest and treat all external content as untrusted input requiring sandboxed parsing"
+  - "Implement strict instruction-data separation at the agent orchestration layer to prevent external content from being processed as executable instructions"
+  - "Deploy agent action monitoring with anomaly detection tuned to unexpected outbound data transfers or privilege escalation patterns"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security", "Adversarial ML", "Research"]

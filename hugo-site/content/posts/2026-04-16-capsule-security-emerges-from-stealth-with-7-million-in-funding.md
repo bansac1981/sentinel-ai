@@ -9,7 +9,10 @@ summary: "Capsule Security, an Israeli startup, has emerged from stealth with $7
 # ── TL;DR ──
 tldr_what: "Capsule Security launches with $7M to monitor AI agent runtime behaviour and block unsafe actions."
 tldr_who_at_risk: "Enterprises deploying autonomous AI agents with tool access, API integrations, and code execution capabilities."
-tldr_actions: ["Implement runtime monitoring for all deployed AI agents with broad tool permissions.", "Audit agent guardrails against prompt injection, excessive agency, and insecure output handling.", "Evaluate runtime security solutions designed for agentic AI systems in your stack."]
+tldr_actions:
+  - "Implement runtime monitoring for all deployed AI agents with broad tool permissions."
+  - "Audit agent guardrails against prompt injection, excessive agency, and insecure output handling."
+  - "Evaluate runtime security solutions designed for agentic AI systems in your stack."
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/capsule-security-emerges-from-stealth-with-7-million-in-funding/"
 source_date: 2026-04-15T13:56:50+00:00

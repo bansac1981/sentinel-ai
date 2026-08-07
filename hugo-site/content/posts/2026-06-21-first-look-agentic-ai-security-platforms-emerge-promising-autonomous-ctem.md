@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Agentic AI security platforms now autonomously correlate threat intelligence, validate controls, and trigger remediations across enterprise security stacks continuously."
 tldr_who_at_risk: "Enterprise security teams deploying agentic CTEM platforms are newly exposed \u2014 the AI's broad access to live posture data and autonomous action authority makes it a high-value pivot point for adversaries."
-tldr_actions: ["Audit all external data sources (threat feeds, vuln scanners) ingested by the agentic system for injection and poisoning risk before go-live", "Enforce least-privilege tool-use boundaries: the agent should recommend, not autonomously execute, high-impact remediations without human approval gates", "Implement anomaly monitoring on agent outputs and decision logs to detect adversarial manipulation of prioritization or suppression of critical alerts"]
+tldr_actions:
+  - "Audit all external data sources (threat feeds, vuln scanners) ingested by the agentic system for injection and poisoning risk before go-live"
+  - "Enforce least-privilege tool-use boundaries: the agent should recommend, not autonomously execute, high-impact remediations without human approval gates"
+  - "Implement anomaly monitoring on agent outputs and decision logs to detect adversarial manipulation of prioritization or suppression of critical alerts"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection", "Supply Chain", "Industry News"]

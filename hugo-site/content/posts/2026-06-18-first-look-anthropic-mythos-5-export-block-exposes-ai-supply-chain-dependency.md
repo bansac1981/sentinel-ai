@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM04 - Model Denial
 # ── TL;DR ──
 tldr_what: "Anthropic's Mythos 5 and Fable 5 models were blocked from export overnight by the U.S. government on national security grounds."
 tldr_who_at_risk: "Security, procurement, and infrastructure teams at any organisation running U.S.-hosted AI models in production now have the mandate and the evidence to invest in AI supply chain resilience \u2014 this event closes the gap between theoretical vendor dependency risk and lived operational reality."
-tldr_actions: "[\"Audit all production workloads for U.S.-hosted AI model dependencies and document the operational impact of access loss \u2014 use this as the evidence base for resilience investment\", \"Begin structured evaluation of sovereign and open-source model alternatives now, assessing security posture and capability parity so substitution plans are ready before a forced migration event\", \"Engage legal and procurement to negotiate AI vendor contracts that include force majeure protections, access revocation notice requirements, and data portability guarantees as standard terms\"]"
+tldr_actions:
+  - "Audit all production workloads for U.S.-hosted AI model dependencies and document the operational impact of access loss — use this as the evidence base for resilience investment"
+  - "Begin structured evaluation of sovereign and open-source model alternatives now, assessing security posture and capability parity so substitution plans are ready before a forced migration event"
+  - "Engage legal and procurement to negotiate AI vendor contracts that include force majeure protections, access revocation notice requirements, and data portability guarantees as standard terms"
 
 # ── Taxonomies ──
 categories: ["First Look", "Supply Chain", "Regulatory", "Industry News", "LLM Security"]

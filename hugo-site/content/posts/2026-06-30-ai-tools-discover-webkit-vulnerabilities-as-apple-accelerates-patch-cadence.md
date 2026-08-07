@@ -30,7 +30,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities"]
 # ── TL;DR ──
 tldr_what: "AI tools from OpenAI and Anthropic discovered four WebKit vulnerabilities now patched by Apple."
 tldr_who_at_risk: "All Apple device users running unpatched iOS, macOS, or Safari are exposed to memory corruption and sandbox escape via malicious web content."
-tldr_actions: ["Update all Apple devices to iOS 26.5.2, macOS Tahoe 26.5.2, and Safari 26.5.2 immediately", "Monitor vendor advisories for AI-assisted vulnerability disclosures as a new normal in the threat landscape", "Security teams should evaluate AI-assisted fuzzing and code analysis tools for internal vulnerability research programmes"]
+tldr_actions:
+  - "Update all Apple devices to iOS 26.5.2, macOS Tahoe 26.5.2, and Safari 26.5.2 immediately"
+  - "Monitor vendor advisories for AI-assisted vulnerability disclosures as a new normal in the threat landscape"
+  - "Security teams should evaluate AI-assisted fuzzing and code analysis tools for internal vulnerability research programmes"
 
 # ── Taxonomies ──
 categories: ["Industry News", "Research", "LLM Security"]

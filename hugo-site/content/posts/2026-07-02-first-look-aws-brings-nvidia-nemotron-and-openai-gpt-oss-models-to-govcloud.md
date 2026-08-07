@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "AWS now runs NVIDIA Nemotron and OpenAI GPT OSS open-weight models inside the GovCloud FedRAMP High compliance boundary via Amazon Bedrock."
 tldr_who_at_risk: "U.S. government agencies, defense contractors, and intelligence community personnel deploying agentic AI workflows against sensitive or regulated data are newly exposed."
-tldr_actions: ["Inventory all Bedrock-connected agentic pipelines in GovCloud and apply strict input/output validation before models touch CUI or classified-adjacent data", "Establish weight provenance and integrity verification processes for open-weight models before authorising them in ATO boundary documentation", "Red-team mission-critical workflows (security log analysis, contract review) for indirect prompt injection via adversarial document content"]
+tldr_actions:
+  - "Inventory all Bedrock-connected agentic pipelines in GovCloud and apply strict input/output validation before models touch CUI or classified-adjacent data"
+  - "Establish weight provenance and integrity verification processes for open-weight models before authorising them in ATO boundary documentation"
+  - "Red-team mission-critical workflows (security log analysis, contract review) for indirect prompt injection via adversarial document content"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Supply Chain", "Prompt Injection", "Agentic AI", "Regulatory"]

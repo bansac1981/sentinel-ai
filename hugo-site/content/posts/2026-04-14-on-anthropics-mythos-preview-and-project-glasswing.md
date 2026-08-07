@@ -9,7 +9,10 @@ summary: "Bruce Schneier analyses Anthropic's Claude Mythos Preview and Project 
 # ── TL;DR ──
 tldr_what: "Claude Mythos Preview demonstrates autonomous LLM exploit generation, narrowing defender advantage in vulnerability discovery."
 tldr_who_at_risk: "Software vendors and infrastructure operators facing imminent threat of commoditised zero-day exploits from advanced LLM capabilities."
-tldr_actions: ["Accelerate vulnerability patching cycles before public LLM release", "Invest in automated exploit detection and containment systems", "Participate in controlled LLM security programmes like Project Glasswing"]
+tldr_actions:
+  - "Accelerate vulnerability patching cycles before public LLM release"
+  - "Invest in automated exploit detection and containment systems"
+  - "Participate in controlled LLM security programmes like Project Glasswing"
 source: "Schneier on Security"
 source_url: "https://www.schneier.com/blog/archives/2026/04/on-anthropics-mythos-preview-and-project-glasswing.html"
 source_date: 2026-04-13T16:52:57+00:00

@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Anthropic expands Claude voice mode to Opus and Sonnet with agentic actions in Gmail, Slack, and Canva."
 tldr_who_at_risk: "Enterprise users and organisations that have authorised Claude integrations with email, messaging, or productivity platforms are newly exposed to voice-driven agentic abuse."
-tldr_actions: ["Audit which third-party app integrations (Gmail, Slack, Canva) are authorised for Claude voice mode in your organisation and apply least-privilege scopes", "Update DLP and SIEM rules to capture voice-session transcripts and agentic action logs from Claude integrations, treating them as a new high-risk input channel", "Test voice input paths for prompt injection and jailbreak resilience, particularly around model-switching boundaries between Haiku, Sonnet, and Opus"]
+tldr_actions:
+  - "Audit which third-party app integrations (Gmail, Slack, Canva) are authorised for Claude voice mode in your organisation and apply least-privilege scopes"
+  - "Update DLP and SIEM rules to capture voice-session transcripts and agentic action logs from Claude integrations, treating them as a new high-risk input channel"
+  - "Test voice input paths for prompt injection and jailbreak resilience, particularly around model-switching boundaries between Haiku, Sonnet, and Opus"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security"]

@@ -30,7 +30,12 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "AI has shifted from attack assistant to live operator, running intrusions end-to-end across criminal and nation-state campaigns."
 tldr_who_at_risk: "Enterprises using GenAI applications\u2014especially in Business Services\u2014face the highest exposure due to unsanctioned AI use and indirect prompt injection targeting agentic workflows."
-tldr_actions: ["Audit and restrict unsanctioned AI application use across the organisation", "Implement monitoring for indirect prompt injection in agentic AI pipelines", "Enforce configuration file integrity controls to prevent persistent jailbreak implants in AI agents", "Deploy data loss prevention rules scoped specifically to GenAI prompt content", "Apply multi-factor verification for voice and video identity across high-risk workflows"]
+tldr_actions:
+  - "Audit and restrict unsanctioned AI application use across the organisation"
+  - "Implement monitoring for indirect prompt injection in agentic AI pipelines"
+  - "Enforce configuration file integrity controls to prevent persistent jailbreak implants in AI agents"
+  - "Deploy data loss prevention rules scoped specifically to GenAI prompt content"
+  - "Apply multi-factor verification for voice and video identity across high-risk workflows"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Jailbreaks", "Supply Chain", "Research", "Industry News"]

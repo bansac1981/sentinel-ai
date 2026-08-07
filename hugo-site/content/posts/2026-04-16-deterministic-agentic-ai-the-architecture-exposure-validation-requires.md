@@ -9,7 +9,10 @@ summary: "The article examines the architectural tension between fully agentic A
 # ── TL;DR ──
 tldr_what: "Fully agentic AI in security testing sacrifices repeatability and auditability for autonomy."
 tldr_who_at_risk: "Enterprise security teams relying on AI-driven validation platforms to demonstrate consistent compliance and control effectiveness."
-tldr_actions: ["Implement deterministic execution backbone for AI-driven security testing workflows.", "Audit AI reasoning logs to distinguish security improvements from test variance.", "Isolate agentic AI capabilities (payload generation, sequencing) within bounded, measurable constraints."]
+tldr_actions:
+  - "Implement deterministic execution backbone for AI-driven security testing workflows."
+  - "Audit AI reasoning logs to distinguish security improvements from test variance."
+  - "Isolate agentic AI capabilities (payload generation, sequencing) within bounded, measurable constraints."
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/deterministic-agentic-ai-architecture.html"
 source_date: 2026-04-15T11:30:00+00:00

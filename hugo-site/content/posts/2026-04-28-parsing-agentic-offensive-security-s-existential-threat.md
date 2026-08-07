@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance", "LLM01 - 
 # ── TL;DR ──
 tldr_what: "Frontier agentic LLMs risk industrialising cyberattacks, but may also empower defenders."
 tldr_who_at_risk: "Enterprise security teams and critical infrastructure operators are most exposed as agentic AI lowers the barrier for scalable, automated exploitation campaigns."
-tldr_actions: ["Audit and constrain agentic AI tool permissions to prevent excessive autonomous action", "Implement LLM output monitoring and anomaly detection for AI-assisted security tooling", "Develop red-team exercises specifically simulating agentic offensive AI attack chains"]
+tldr_actions:
+  - "Audit and constrain agentic AI tool permissions to prevent excessive autonomous action"
+  - "Implement LLM output monitoring and anomaly detection for AI-assisted security tooling"
+  - "Develop red-team exercises specifically simulating agentic offensive AI attack chains"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research", "Industry News"]

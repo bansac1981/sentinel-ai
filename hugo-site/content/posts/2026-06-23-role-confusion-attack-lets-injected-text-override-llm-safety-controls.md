@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "LLMs trust text style over role tags, enabling injected content to hijack model behaviour."
 tldr_who_at_risk: "Any application deploying LLMs with structured role boundaries \u2014 especially agentic pipelines processing untrusted external input \u2014 is directly exposed."
-tldr_actions: ["Implement output-layer destyling filters that normalise untrusted input before model processing", "Audit agentic pipelines for inputs that could stylistically mimic system, think, or assistant role formats", "Treat prompt injection as an architectural risk, not a prompt-level fix — enforce hard privilege separation at the infrastructure layer"]
+tldr_actions:
+  - "Implement output-layer destyling filters that normalise untrusted input before model processing"
+  - "Audit agentic pipelines for inputs that could stylistically mimic system, think, or assistant role formats"
+  - "Treat prompt injection as an architectural risk, not a prompt-level fix — enforce hard privilege separation at the infrastructure layer"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Jailbreaks", "Adversarial ML", "Research"]

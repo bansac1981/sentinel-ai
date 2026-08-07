@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "AI agents are creating and inheriting machine identities at scale, outpacing enterprise identity governance controls."
 tldr_who_at_risk: "Any enterprise deploying AI agents in cloud or SaaS environments where machine identities are not inventoried, governed, or rotated consistently."
-tldr_actions: ["Conduct a full inventory of all machine identities — including AI agent credentials, OAuth tokens, and service accounts — and assign explicit owners", "Apply least-privilege to every AI agent identity and enforce automated rotation and expiry policies", "Instrument SIEM and UEBA tooling to baseline and alert on non-human identity behaviour, especially cross-service token use"]
+tldr_actions:
+  - "Conduct a full inventory of all machine identities — including AI agent credentials, OAuth tokens, and service accounts — and assign explicit owners"
+  - "Apply least-privilege to every AI agent identity and enforce automated rotation and expiry policies"
+  - "Instrument SIEM and UEBA tooling to baseline and alert on non-human identity behaviour, especially cross-service token use"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Industry News"]

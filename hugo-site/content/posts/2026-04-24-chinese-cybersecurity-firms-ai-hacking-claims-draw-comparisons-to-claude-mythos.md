@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Chinese firm 360 claims AI multi-agent system autonomously found ~1,000 vulns, rivalling Anthropic's Mythos."
 tldr_who_at_risk: "Vendors and defenders of Windows, Office, Android, and IoT products face accelerated zero-day exposure from AI-driven offensive tooling."
-tldr_actions: ["Accelerate patch cadence for Windows, Office, and Android given AI-assisted discovery compresses zero-day windows", "Monitor for CVE-2026-32190 and CVE-2026-24293 advisories and apply mitigations immediately upon release", "Invest in AI-assisted defensive vulnerability research to match pace of adversarial autonomous discovery"]
+tldr_actions:
+  - "Accelerate patch cadence for Windows, Office, and Android given AI-assisted discovery compresses zero-day windows"
+  - "Monitor for CVE-2026-32190 and CVE-2026-24293 advisories and apply mitigations immediately upon release"
+  - "Invest in AI-assisted defensive vulnerability research to match pace of adversarial autonomous discovery"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Research", "Industry News", "LLM Security"]

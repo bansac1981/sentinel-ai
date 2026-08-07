@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities"]
 # ── TL;DR ──
 tldr_what: "Typosquatted Hugging Face repo impersonating OpenAI delivered Rust infostealer to 244,000 downloaders."
 tldr_who_at_risk: "AI/ML developers and researchers who install models from Hugging Face without verifying repository authenticity are most exposed."
-tldr_actions: ["Audit any recently installed Hugging Face packages, especially those referencing OpenAI projects", "Implement code review of loader scripts before executing any downloaded ML repository files", "Enforce allowlists for trusted Hugging Face organisations and verify model card authenticity before download"]
+tldr_actions:
+  - "Audit any recently installed Hugging Face packages, especially those referencing OpenAI projects"
+  - "Implement code review of loader scripts before executing any downloaded ML repository files"
+  - "Enforce allowlists for trusted Hugging Face organisations and verify model card authenticity before download"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Industry News", "LLM Security"]

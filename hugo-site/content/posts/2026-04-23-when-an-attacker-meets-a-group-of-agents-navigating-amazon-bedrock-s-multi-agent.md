@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Prompt injection attacks can traverse Amazon Bedrock multi-agent hierarchies, exposing instructions and enabling unauthorized tool invocation."
 tldr_who_at_risk: "Organizations deploying Amazon Bedrock multi-agent applications without Guardrails configured are exposed to agent hijacking and sensitive instruction disclosure."
-tldr_actions: ["Enable and properly configure Amazon Bedrock's built-in prompt injection Guardrails on all agent pre-processing stages", "Audit inter-agent communication channels and restrict agent tool invocation permissions to least privilege", "Treat all untrusted text inputs to LLM agents as potential adversarial payloads and implement input validation layers"]
+tldr_actions:
+  - "Enable and properly configure Amazon Bedrock's built-in prompt injection Guardrails on all agent pre-processing stages"
+  - "Audit inter-agent communication channels and restrict agent tool invocation permissions to least privilege"
+  - "Treat all untrusted text inputs to LLM agents as potential adversarial payloads and implement input validation layers"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research"]

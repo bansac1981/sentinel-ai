@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Claude Opus 4.7 helped a researcher gain super-admin access to a major US festival ticketing platform."
 tldr_who_at_risk: "Organisations running internal APIs behind WAFs are most exposed, as LLM-assisted recon can bypass standard perimeter controls and surface undocumented endpoints."
-tldr_actions: ["Audit internal APIs for unauthenticated or over-privileged endpoints, regardless of WAF protection", "Treat LLM-assisted recon as a credible threat model and include it in penetration testing scopes", "Establish or expand verified researcher programmes with clear AI-tool usage policies before incidents occur"]
+tldr_actions:
+  - "Audit internal APIs for unauthenticated or over-privileged endpoints, regardless of WAF protection"
+  - "Treat LLM-assisted recon as a credible threat model and include it in penetration testing scopes"
+  - "Establish or expand verified researcher programmes with clear AI-tool usage policies before incidents occur"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research", "Industry News"]

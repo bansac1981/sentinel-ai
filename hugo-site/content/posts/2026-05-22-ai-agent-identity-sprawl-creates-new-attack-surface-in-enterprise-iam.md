@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "AI agent identity sprawl is outpacing enterprise IAM controls, creating unmanaged non-human identity risk."
 tldr_who_at_risk: "Enterprises deploying AI agent workflows are most exposed due to ungoverned machine identities with privileged access to systems and data."
-tldr_actions: ["Inventory all AI agent identities and map their access privileges across your environment", "Apply least-privilege principles and time-bound credentials to all non-human AI agent accounts", "Establish a dedicated governance framework for AI agent identity lifecycle management separate from traditional IAM"]
+tldr_actions:
+  - "Inventory all AI agent identities and map their access privileges across your environment"
+  - "Apply least-privilege principles and time-bound credentials to all non-human AI agent accounts"
+  - "Establish a dedicated governance framework for AI agent identity lifecycle management separate from traditional IAM"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Industry News", "Regulatory"]

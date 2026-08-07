@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "OpenAI is building ChatGPT experiences specifically for families, caregivers, and older adults as household adoption accelerates."
 tldr_who_at_risk: "Minors, elderly users, and parents relying on AI-mediated household tools are newly exposed to manipulation, data leakage, and guardrail-bypass attacks."
-tldr_actions: ["Audit how family-mode guardrails are implemented and test them against known jailbreak payloads targeting child-safety filters", "Assess parental oversight credential flows for account takeover and privilege-escalation risks across linked household profiles", "Monitor for adversarial research publications probing age-verification and consent mechanisms in consumer AI family tiers"]
+tldr_actions:
+  - "Audit how family-mode guardrails are implemented and test them against known jailbreak payloads targeting child-safety filters"
+  - "Assess parental oversight credential flows for account takeover and privilege-escalation risks across linked household profiles"
+  - "Monitor for adversarial research publications probing age-verification and consent mechanisms in consumer AI family tiers"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Jailbreaks", "Regulatory", "Industry News"]

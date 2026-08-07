@@ -26,7 +26,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Compromised Context.ai OAuth token gave attackers access to Vercel's Google Workspace and environment credentials."
 tldr_who_at_risk: "Organizations whose employees use AI productivity tools with enterprise accounts and broad OAuth scopes are directly exposed to lateral-movement attacks via third-party AI service compromises."
-tldr_actions: ["Audit and revoke 'Allow All' OAuth grants from third-party AI tools across all enterprise accounts immediately", "Rotate all non-sensitive environment variables in Vercel and mark secrets as 'sensitive' to enforce encryption", "Implement strict OAuth scope policies requiring least-privilege permissions for any AI SaaS integrations"]
+tldr_actions:
+  - "Audit and revoke 'Allow All' OAuth grants from third-party AI tools across all enterprise accounts immediately"
+  - "Rotate all non-sensitive environment variables in Vercel and mark secrets as 'sensitive' to enforce encryption"
+  - "Implement strict OAuth scope policies requiring least-privilege permissions for any AI SaaS integrations"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "LLM Security", "Industry News"]

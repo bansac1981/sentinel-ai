@@ -34,7 +34,10 @@ owasp_categories: ["LLM03 - Training Data Poisoning", "LLM05 - Supply Chain Vuln
 # ── TL;DR ──
 tldr_what: "AWS released a managed multi-turn RL training pipeline for Amazon Nova agents on SageMaker HyperPod with event-driven orchestration."
 tldr_who_at_risk: "Enterprises deploying or operating Amazon Nova fine-tuning pipelines on SageMaker HyperPod, particularly those granting broad S3 write or ECS task permissions to multiple teams."
-tldr_actions: ["Audit IAM permissions scoping S3 write access to the training-trigger bucket — restrict to least-privilege principals only", "Treat ECS Fargate reward workers as a security boundary: enforce network segmentation, image signing, and runtime integrity checks on all reward environment containers", "Instrument Nova Forge SDK message routing with logging and anomaly detection to detect out-of-distribution reward signals before GRPO weight updates are applied"]
+tldr_actions:
+  - "Audit IAM permissions scoping S3 write access to the training-trigger bucket — restrict to least-privilege principals only"
+  - "Treat ECS Fargate reward workers as a security boundary: enforce network segmentation, image signing, and runtime integrity checks on all reward environment containers"
+  - "Instrument Nova Forge SDK message routing with logging and anomaly detection to detect out-of-distribution reward signals before GRPO weight updates are applied"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Data Poisoning", "Supply Chain", "Adversarial ML", "LLM Security"]

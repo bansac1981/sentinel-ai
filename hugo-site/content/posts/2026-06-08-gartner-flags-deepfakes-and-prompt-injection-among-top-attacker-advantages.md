@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Gartner analysts flag deepfakes and prompt injection as critical threats where attackers currently outpace defenders."
 tldr_who_at_risk: "Enterprises deploying LLM-based tools and organizations reliant on digital identity verification are most exposed due to immature defensive tooling."
-tldr_actions: ["Implement prompt injection detection and output validation layers in all LLM-integrated applications", "Deploy deepfake detection controls at identity verification and executive communication channels", "Conduct red-team exercises specifically targeting AI-native attack surfaces before broader deployment"]
+tldr_actions:
+  - "Implement prompt injection detection and output validation layers in all LLM-integrated applications"
+  - "Deploy deepfake detection controls at identity verification and executive communication channels"
+  - "Conduct red-team exercises specifically targeting AI-native attack surfaces before broader deployment"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Adversarial ML", "Industry News"]

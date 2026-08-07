@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Two Chinese AI firms have released frontier-grade LLMs competitive with leading US models, expanding global access to powerful AI capabilities."
 tldr_who_at_risk: "Security operations teams, enterprises integrating third-party LLM APIs, and organisations targeted by nation-state actors who can now leverage capable, potentially less-restricted AI at scale."
-tldr_actions: ["Audit any third-party LLM API integrations for provenance, safety standards, and data residency implications", "Update threat models to account for adversaries using Chinese frontier-grade LLMs for phishing, social engineering, and code generation", "Evaluate whether existing content-detection controls are calibrated for output characteristics of non-US LLM providers"]
+tldr_actions:
+  - "Audit any third-party LLM API integrations for provenance, safety standards, and data residency implications"
+  - "Update threat models to account for adversaries using Chinese frontier-grade LLMs for phishing, social engineering, and code generation"
+  - "Evaluate whether existing content-detection controls are calibrated for output characteristics of non-US LLM providers"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Industry News", "Supply Chain", "Jailbreaks"]

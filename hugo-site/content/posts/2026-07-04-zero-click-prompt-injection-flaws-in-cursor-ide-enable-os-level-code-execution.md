@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "DuneSlide flaws in Cursor AI IDE allow zero-click prompt injection leading to full OS-level code execution."
 tldr_who_at_risk: "Software developers using Cursor AI are directly exposed, as exploitation requires no user interaction and targets the developer's local machine."
-tldr_actions: ["Update Cursor IDE to the latest patched version immediately", "Restrict Cursor's access to sensitive filesystem directories and environment variables", "Audit AI-generated code suggestions and agent actions before execution in CI/CD pipelines"]
+tldr_actions:
+  - "Update Cursor IDE to the latest patched version immediately"
+  - "Restrict Cursor's access to sensitive filesystem directories and environment variables"
+  - "Audit AI-generated code suggestions and agent actions before execution in CI/CD pipelines"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Supply Chain"]

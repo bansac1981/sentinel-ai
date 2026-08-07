@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "CVSS 10 Gemini CLI flaw lets attackers execute arbitrary commands via malicious CI workspace config files."
 tldr_who_at_risk: "Any team running Gemini CLI in headless/CI mode to process untrusted inputs such as external pull requests or GitHub issues is directly exposed."
-tldr_actions: ["Upgrade @google/gemini-cli to ≥0.39.1 (or ≥0.40.0-preview.3 for preview) and google-github-actions/run-gemini-cli to ≥0.1.22 immediately", "Audit all CI workflows using Gemini CLI in headless mode and explicitly set GEMINI_TRUST_WORKSPACE only for trusted-input pipelines", "Disable or strictly scope --yolo mode; review tool allowlists in ~/.gemini/settings.json to prevent unrestricted shell command auto-approval"]
+tldr_actions:
+  - "Upgrade @google/gemini-cli to ≥0.39.1 (or ≥0.40.0-preview.3 for preview) and google-github-actions/run-gemini-cli to ≥0.1.22 immediately"
+  - "Audit all CI workflows using Gemini CLI in headless mode and explicitly set GEMINI_TRUST_WORKSPACE only for trusted-input pipelines"
+  - "Disable or strictly scope --yolo mode; review tool allowlists in ~/.gemini/settings.json to prevent unrestricted shell command auto-approval"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Supply Chain", "Prompt Injection"]

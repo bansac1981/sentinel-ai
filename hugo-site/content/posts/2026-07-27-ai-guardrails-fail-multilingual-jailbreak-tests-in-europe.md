@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "AI safety guardrails fail unevenly across languages, enabling jailbreaks in non-English inputs."
 tldr_who_at_risk: "Any organisation deploying LLM-based products to multilingual or European audiences is exposed to language-specific safety bypass attacks."
-tldr_actions: ["Audit safety benchmarks across all supported languages, not just English", "Implement language-agnostic content filtering at the output layer", "Red-team AI products using non-English prompt injection and jailbreak payloads"]
+tldr_actions:
+  - "Audit safety benchmarks across all supported languages, not just English"
+  - "Implement language-agnostic content filtering at the output layer"
+  - "Red-team AI products using non-English prompt injection and jailbreak payloads"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Adversarial ML", "Research"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Critical SQL injection in LiteLLM proxy exploited within 36 hours to steal LLM provider API keys."
 tldr_who_at_risk: "Any organisation running LiteLLM proxy versions >=1.81.16 <1.83.7 with exposed API endpoints, particularly those managing high-value LLM provider credentials."
-tldr_actions: ["Patch LiteLLM to version 1.83.7-stable or later immediately", "Rotate all LLM provider API keys stored in the proxy database as a precaution", "Set 'disable_error_logs: true' under general settings if immediate patching is not possible"]
+tldr_actions:
+  - "Patch LiteLLM to version 1.83.7-stable or later immediately"
+  - "Rotate all LLM provider API keys stored in the proxy database as a precaution"
+  - "Set 'disable_error_logs: true' under general settings if immediate patching is not possible"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Supply Chain", "Industry News"]

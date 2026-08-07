@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Attackers exploit legacy infrastructure misconfigurations to hijack AI agent permissions without ever touching the model."
 tldr_who_at_risk: "Enterprises running AI agents on AWS, Azure, or GCP that inherit permissions from pre-existing, under-audited IAM roles and service accounts."
-tldr_actions: ["Audit all IAM roles and service accounts inherited by AI agents and enforce least-privilege access", "Patch and harden legacy infrastructure — Active Directory, credential stores, Lambda functions — before onboarding AI workloads", "Map every external dependency (S3 buckets, SaaS integrations, APIs) reachable by AI agent credentials and apply network segmentation"]
+tldr_actions:
+  - "Audit all IAM roles and service accounts inherited by AI agents and enforce least-privilege access"
+  - "Patch and harden legacy infrastructure — Active Directory, credential stores, Lambda functions — before onboarding AI workloads"
+  - "Map every external dependency (S3 buckets, SaaS integrations, APIs) reachable by AI agent credentials and apply network segmentation"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Supply Chain", "Industry News"]

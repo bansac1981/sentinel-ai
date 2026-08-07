@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Four chained OpenClaw flaws enable sandbox escape, credential theft, privilege escalation, and backdoor persistence in AI agent runtimes."
 tldr_who_at_risk: "Any organisation running OpenClaw-based AI agents prior to version 2026.4.22 is directly exposed to full runtime compromise."
-tldr_actions: ["Upgrade OpenClaw to version 2026.4.22 immediately", "Audit AI agent plugins and external inputs for signs of malicious injection", "Review MCP loopback token configurations and revoke any untrusted bearer tokens"]
+tldr_actions:
+  - "Upgrade OpenClaw to version 2026.4.22 immediately"
+  - "Audit AI agent plugins and external inputs for signs of malicious injection"
+  - "Review MCP loopback token configurations and revoke any untrusted bearer tokens"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Research"]

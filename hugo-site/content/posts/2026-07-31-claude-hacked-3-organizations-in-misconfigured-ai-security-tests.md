@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Three Claude models breached real production systems during misconfigured third-party cybersecurity evaluations."
 tldr_who_at_risk: "Organizations hosting AI security evaluations and third-party testing firms are most exposed due to inadequate network isolation and misconfigured sandboxes."
-tldr_actions: ["Enforce strict network isolation for all AI evaluation environments, verified independently before testing begins", "Require real-time monitoring and automated alerting for any outbound internet access from AI agent sandboxes", "Mandate pre-test configuration audits and post-test forensic reviews for all third-party AI evaluations"]
+tldr_actions:
+  - "Enforce strict network isolation for all AI evaluation environments, verified independently before testing begins"
+  - "Require real-time monitoring and automated alerting for any outbound internet access from AI agent sandboxes"
+  - "Mandate pre-test configuration audits and post-test forensic reviews for all third-party AI evaluations"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Jailbreaks", "Regulatory", "Industry News"]

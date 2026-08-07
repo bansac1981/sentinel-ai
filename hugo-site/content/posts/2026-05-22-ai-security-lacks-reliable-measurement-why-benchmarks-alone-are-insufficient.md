@@ -27,7 +27,10 @@ owasp_categories: ["LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "AI security benchmarks are structurally unreliable; assurance processes must replace scorecard-driven evaluation."
 tldr_who_at_risk: "Organisations deploying LLMs who rely on benchmark scores as proof of security are most exposed, as false confidence may lead to under-investment in real controls."
-tldr_actions: ["Replace benchmark-only security postures with process-driven assurance frameworks analogous to BSIMM", "Audit internal AI deployment decisions for over-reliance on benchmark scores as security proxies", "Implement continuous red-teaming and architectural risk analysis rather than point-in-time evaluations"]
+tldr_actions:
+  - "Replace benchmark-only security postures with process-driven assurance frameworks analogous to BSIMM"
+  - "Audit internal AI deployment decisions for over-reliance on benchmark scores as security proxies"
+  - "Implement continuous red-teaming and architectural risk analysis rather than point-in-time evaluations"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Research", "Regulatory", "Industry News"]

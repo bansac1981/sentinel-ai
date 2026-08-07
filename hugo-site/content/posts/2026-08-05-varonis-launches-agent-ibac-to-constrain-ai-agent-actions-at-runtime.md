@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Varonis launched Agent IBAC inside Atlas to block AI agents that deviate from their intended instructions at runtime."
 tldr_who_at_risk: "Enterprises deploying AI agents against internal data stores are exposed if adversaries learn to spoof intent signals or probe IBAC thresholds to stay inside the logging-only band."
-tldr_actions: ["Red-team Agent IBAC with adversarial prompts designed to make malicious tool calls appear intent-aligned before trusting it in production", "Map which agent actions fall into the drift-but-no-block logging band and treat that zone as an active reconnaissance risk requiring additional monitoring", "Verify that the identity quarantine mechanism cannot be remotely triggered against legitimate agent identities as a denial-of-service vector"]
+tldr_actions:
+  - "Red-team Agent IBAC with adversarial prompts designed to make malicious tool calls appear intent-aligned before trusting it in production"
+  - "Map which agent actions fall into the drift-but-no-block logging band and treat that zone as an active reconnaissance risk requiring additional monitoring"
+  - "Verify that the identity quarantine mechanism cannot be remotely triggered against legitimate agent identities as a denial-of-service vector"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection"]

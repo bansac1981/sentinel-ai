@@ -9,7 +9,10 @@ summary: "The article highlights a critical operational gap in SOC environments 
 # ── TL;DR ──
 tldr_what: "SOC teams optimizing detection speed miss the real gap: post-alert investigation window where attackers now break out in 29 minutes."
 tldr_who_at_risk: "SOC analysts and security leaders relying on MTTD metrics to measure defense effectiveness against AI-accelerated adversaries."
-tldr_actions: ["Measure and compress post-alert investigation time, not just detection latency.", "Deploy AI-driven investigation tooling to automate alert correlation and context gathering.", "Baseline your breakout window against attacker hand-off times under 22 seconds."]
+tldr_actions:
+  - "Measure and compress post-alert investigation time, not just detection latency."
+  - "Deploy AI-driven investigation tooling to automate alert correlation and context gathering."
+  - "Baseline your breakout window against attacker hand-off times under 22 seconds."
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/your-mttd-looks-great-your-post-alert.html"
 source_date: 2026-04-13T11:41:00+00:00

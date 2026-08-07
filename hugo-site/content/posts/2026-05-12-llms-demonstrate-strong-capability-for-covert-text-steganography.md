@@ -27,7 +27,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM06 - Sensitive Inform
 # ── TL;DR ──
 tldr_what: "LLMs can reliably encode and decode hidden messages inside normal-looking text."
 tldr_who_at_risk: "Organisations relying on LLM-based content moderation or DLP tools are most exposed, as steganographic output evades text-level inspection."
-tldr_actions: ["Audit LLM output pipelines for unexpected or anomalous linguistic patterns that may indicate steganographic encoding", "Incorporate semantic and statistical analysis into content moderation — not just surface-level text inspection", "Restrict LLM access in high-sensitivity environments where covert data exfiltration via generated text is a concern"]
+tldr_actions:
+  - "Audit LLM output pipelines for unexpected or anomalous linguistic patterns that may indicate steganographic encoding"
+  - "Incorporate semantic and statistical analysis into content moderation — not just surface-level text inspection"
+  - "Restrict LLM access in high-sensitivity environments where covert data exfiltration via generated text is a concern"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Adversarial ML", "Research"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "Anthropic launches Claude Fable 5 with domain-specific fallback guardrails blocking cybersecurity and biology uplift."
 tldr_who_at_risk: "Defenders relying on these guardrails are exposed if adversaries find bypass techniques; Project Glasswing partners with elevated access represent an insider risk surface."
-tldr_actions: ["Monitor for jailbreak techniques targeting Fable 5's classifier fallback mechanism in threat intelligence feeds", "If integrating Claude Fable 5 via API, implement independent output filtering rather than relying solely on Anthropic's fallback controls", "Security teams granted Project Glasswing Mythos 5 access should enforce least-privilege usage policies and audit query logs for misuse indicators"]
+tldr_actions:
+  - "Monitor for jailbreak techniques targeting Fable 5's classifier fallback mechanism in threat intelligence feeds"
+  - "If integrating Claude Fable 5 via API, implement independent output filtering rather than relying solely on Anthropic's fallback controls"
+  - "Security teams granted Project Glasswing Mythos 5 access should enforce least-privilege usage policies and audit query logs for misuse indicators"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Agentic AI", "Industry News", "Regulatory"]

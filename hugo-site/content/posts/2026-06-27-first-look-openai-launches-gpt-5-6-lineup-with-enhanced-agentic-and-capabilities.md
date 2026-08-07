@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "OpenAI releases GPT-5.6 lineup \u2014 Sol, Terra, Luna \u2014 in restricted preview with advanced multi-subagent orchestration and cybersecurity-domain enhancements."
 tldr_who_at_risk: "Security teams at OpenAI's trusted partner organisations, government reviewers, and defenders who will face adversaries empowered by Sol's agentic cybersecurity capabilities once broadly released."
-tldr_actions: ["Audit and harden credential security for any organisation in OpenAI's trusted partner programme — these accounts are now high-value targets", "Begin threat modelling agentic multi-subagent attack chains now, before GPT-5.6 reaches broad availability", "Review your organisation's AI acceptable-use and output-handling policies to account for Sol's enhanced cybersecurity and biology dual-use output quality"]
+tldr_actions:
+  - "Audit and harden credential security for any organisation in OpenAI's trusted partner programme — these accounts are now high-value targets"
+  - "Begin threat modelling agentic multi-subagent attack chains now, before GPT-5.6 reaches broad availability"
+  - "Review your organisation's AI acceptable-use and output-handling policies to account for Sol's enhanced cybersecurity and biology dual-use output quality"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Regulatory", "Industry News"]

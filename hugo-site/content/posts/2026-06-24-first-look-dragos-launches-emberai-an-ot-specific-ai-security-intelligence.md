@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM03 - Training Data Poisoning"
 # ── TL;DR ──
 tldr_what: "Dragos launched EmberAI, an OT-specific AI module that lets analysts query threat intel and asset data in plain language."
 tldr_who_at_risk: "Critical infrastructure operators using EmberAI who may face adversaries targeting the platform's consolidated OT intelligence corpus or manipulating AI-generated analyst guidance."
-tldr_actions: ["Audit what data sources EmberAI ingests and enforce strict input validation to limit prompt injection via attacker-influenced OT telemetry", "Establish mandatory human verification workflows for any EmberAI recommendation that triggers an operational response in safety-critical environments", "Monitor and restrict query patterns against the Intelligence Fabric layer to detect abnormal data extraction attempts by insiders or compromised accounts"]
+tldr_actions:
+  - "Audit what data sources EmberAI ingests and enforce strict input validation to limit prompt injection via attacker-influenced OT telemetry"
+  - "Establish mandatory human verification workflows for any EmberAI recommendation that triggers an operational response in safety-critical environments"
+  - "Monitor and restrict query patterns against the Intelligence Fabric layer to detect abnormal data extraction attempts by insiders or compromised accounts"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Prompt Injection", "Supply Chain", "Industry News"]

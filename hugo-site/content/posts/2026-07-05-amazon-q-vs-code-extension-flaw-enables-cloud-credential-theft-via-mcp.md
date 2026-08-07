@@ -30,7 +30,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Amazon Q VS Code extension flaw lets attackers plant malicious repos to steal cloud credentials."
 tldr_who_at_risk: "Developers using Amazon Q within VS Code are directly exposed, particularly those with AWS credentials or cloud environment access configured in their IDE."
-tldr_actions: ["Audit and restrict which repositories are permitted to interact with Amazon Q and MCP integrations", "Rotate any AWS credentials accessible from affected developer environments immediately", "Update the Amazon Q VS Code extension to the latest patched version and monitor vendor advisories"]
+tldr_actions:
+  - "Audit and restrict which repositories are permitted to interact with Amazon Q and MCP integrations"
+  - "Rotate any AWS credentials accessible from affected developer environments immediately"
+  - "Update the Amazon Q VS Code extension to the latest patched version and monitor vendor advisories"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Supply Chain", "Agentic AI", "Industry News"]

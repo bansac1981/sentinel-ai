@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Prompt injection in Claude Code GitHub Action exposed CI/CD secrets via /proc/self/environ file read."
 tldr_who_at_risk: "Any organisation running Claude Code GitHub Actions on repositories that accept untrusted user input such as issues or pull requests."
-tldr_actions: ["Upgrade Claude Code to version 2.1.128 or later immediately", "Audit all AI-assisted GitHub workflows that process untrusted content and have access to secrets", "Apply least-privilege secret scoping — never expose broad API keys to AI agent runners"]
+tldr_actions:
+  - "Upgrade Claude Code to version 2.1.128 or later immediately"
+  - "Audit all AI-assisted GitHub workflows that process untrusted content and have access to secrets"
+  - "Apply least-privilege secret scoping — never expose broad API keys to AI agent runners"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Supply Chain", "Research"]

@@ -26,7 +26,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Bitwarden CLI npm package backdoored to steal developer and AI coding tool credentials via preinstall hook."
 tldr_who_at_risk: "Developers using @bitwarden/cli@2026.4.0 are directly exposed, especially those whose environments include AI coding assistants like Claude, Cursor, or Codex CLI."
-tldr_actions: ["Immediately audit installed npm packages and remove or downgrade @bitwarden/cli@2026.4.0", "Rotate all GitHub tokens, npm credentials, SSH keys, and cloud secrets on affected developer machines", "Audit CI/CD pipelines for injected or unauthorised GitHub Actions workflows"]
+tldr_actions:
+  - "Immediately audit installed npm packages and remove or downgrade @bitwarden/cli@2026.4.0"
+  - "Rotate all GitHub tokens, npm credentials, SSH keys, and cloud secrets on affected developer machines"
+  - "Audit CI/CD pipelines for injected or unauthorised GitHub Actions workflows"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "LLM Security", "Industry News"]

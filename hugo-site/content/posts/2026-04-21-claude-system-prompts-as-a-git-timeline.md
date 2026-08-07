@@ -26,7 +26,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM01 - Prompt I
 # ── TL;DR ──
 tldr_what: "Git-based tooling now enables structured diff tracking of Claude's publicly released system prompt history across model versions."
 tldr_who_at_risk: "Anthropic and enterprise Claude deployers are most exposed, as systematic prompt evolution tracking can reveal weakening safety constraints or exploitable behavioral shifts."
-tldr_actions: ["Monitor published system prompt diffs for unintentional disclosure of safety constraint relaxations", "Treat system prompt versioning as security-relevant data — review changes before public release", "Use prompt evolution analysis defensively to identify regression in safety guardrails across model updates"]
+tldr_actions:
+  - "Monitor published system prompt diffs for unintentional disclosure of safety constraint relaxations"
+  - "Treat system prompt versioning as security-relevant data — review changes before public release"
+  - "Use prompt evolution analysis defensively to identify regression in safety guardrails across model updates"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Research", "Industry News"]

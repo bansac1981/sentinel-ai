@@ -30,7 +30,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure"]
 # ── TL;DR ──
 tldr_what: "UK AI Security Institute issued a formal security incident report dated 2026-07-28."
 tldr_who_at_risk: "UK government AI safety staff, researchers, and partner organisations interfacing with AISI systems are most directly exposed due to potential data or system compromise at a national AI oversight body."
-tldr_actions: ["Monitor official UK AISI communications for public disclosure of incident scope and affected parties", "Review any data shared with or processed by AISI systems for potential exposure", "Assess third-party integrations with AISI platforms and apply access control audits"]
+tldr_actions:
+  - "Monitor official UK AISI communications for public disclosure of incident scope and affected parties"
+  - "Review any data shared with or processed by AISI systems for potential exposure"
+  - "Assess third-party integrations with AISI platforms and apply access control audits"
 
 # ── Taxonomies ──
 categories: ["Regulatory", "Industry News", "LLM Security"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency"]
 # ── TL;DR ──
 tldr_what: "AI agents solve CAPTCHAs correctly but with detectably non-human behavioural patterns across 30 cognitive tasks."
 tldr_who_at_risk: "Platform operators relying solely on CAPTCHA accuracy for bot detection are exposed, as are any services that assume task-completion parity implies human-likeness."
-tldr_actions: ["Supplement CAPTCHA accuracy checks with process-level behavioural telemetry (click sequences, direction changes, timing)", "Evaluate bot-detection pipelines against frontier LLM agents, not just legacy scripted bots", "Monitor the CogCAPTCHA30 preprint for adversarial robustness findings before adopting process-based detection at scale"]
+tldr_actions:
+  - "Supplement CAPTCHA accuracy checks with process-level behavioural telemetry (click sequences, direction changes, timing)"
+  - "Evaluate bot-detection pipelines against frontier LLM agents, not just legacy scripted bots"
+  - "Monitor the CogCAPTCHA30 preprint for adversarial robustness findings before adopting process-based detection at scale"
 
 # ── Taxonomies ──
 categories: ["Adversarial ML", "Agentic AI", "Research"]

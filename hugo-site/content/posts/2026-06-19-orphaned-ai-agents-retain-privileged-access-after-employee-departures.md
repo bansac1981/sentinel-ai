@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Autonomous AI agents retain live access tokens after their creating employees leave, creating unmonitored attack surfaces."
 tldr_who_at_risk: "Enterprises using internal AI automation tools are most exposed, particularly where agent ownership and credential lifecycles are not tracked."
-tldr_actions: ["Audit all active AI agents and map each to a current, named human owner", "Implement automated token revocation workflows tied to employee offboarding processes", "Deploy a unified identity control plane covering human, machine, and AI agent identities"]
+tldr_actions:
+  - "Audit all active AI agents and map each to a current, named human owner"
+  - "Implement automated token revocation workflows tied to employee offboarding processes"
+  - "Deploy a unified identity control plane covering human, machine, and AI agent identities"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

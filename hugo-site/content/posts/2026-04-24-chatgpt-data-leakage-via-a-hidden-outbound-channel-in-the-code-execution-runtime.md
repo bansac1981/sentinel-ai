@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Hidden outbound channel in ChatGPT's code runtime silently exfiltrates user data via a single malicious prompt."
 tldr_who_at_risk: "Any ChatGPT user who shares sensitive files, medical records, financial documents, or personal data in conversations is directly exposed to silent exfiltration."
-tldr_actions: ["Audit all custom GPTs and their configured Actions for unauthorised external API endpoints", "Avoid uploading sensitive or identity-rich documents to ChatGPT until OpenAI confirms a patch", "Monitor OpenAI's security advisories and apply any runtime sandbox updates immediately upon release"]
+tldr_actions:
+  - "Audit all custom GPTs and their configured Actions for unauthorised external API endpoints"
+  - "Avoid uploading sensitive or identity-rich documents to ChatGPT until OpenAI confirms a patch"
+  - "Monitor OpenAI's security advisories and apply any runtime sandbox updates immediately upon release"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research"]

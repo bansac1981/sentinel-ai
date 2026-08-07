@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities"]
 # ── TL;DR ──
 tldr_what: "Fake OpenAI model repo on Hugging Face delivered a Rust infostealer to 244,000 downloaders."
 tldr_who_at_risk: "AI/ML practitioners and developers who downloaded or executed the typosquatted Open-OSS/privacy-filter repository on Windows machines are directly exposed."
-tldr_actions: ["Audit any usage of Open-OSS/privacy-filter and treat affected systems as fully compromised", "Verify Hugging Face repository provenance by checking namespace and commit history before execution", "Rotate browser credentials, cryptocurrency wallet keys, and Discord tokens on any affected machine"]
+tldr_actions:
+  - "Audit any usage of Open-OSS/privacy-filter and treat affected systems as fully compromised"
+  - "Verify Hugging Face repository provenance by checking namespace and commit history before execution"
+  - "Rotate browser credentials, cryptocurrency wallet keys, and Discord tokens on any affected machine"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Industry News", "LLM Security"]

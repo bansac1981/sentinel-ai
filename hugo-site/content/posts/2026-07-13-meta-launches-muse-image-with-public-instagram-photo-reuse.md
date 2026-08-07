@@ -34,7 +34,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM02 - Insecure
 # ── TL;DR ──
 tldr_what: "Meta's Muse Image lets anyone generate AI images using public Instagram photos via a simple @-mention, enabled by default."
 tldr_who_at_risk: "Any individual or organisation with a public Instagram account \u2014 particularly executives, journalists, and public-facing employees \u2014 is newly exposed to AI-generated impersonation and synthetic media abuse."
-tldr_actions: ["Immediately audit and disable 'Allow people to create with and reuse your content' on all corporate and executive Instagram profiles", "Update threat intelligence playbooks to include Muse Image as a synthetic media source for impersonation and business email compromise lure creation", "Brief communications and HR teams on the absence of notification when employee likenesses are used, and establish a reporting channel for synthetic media sightings"]
+tldr_actions:
+  - "Immediately audit and disable 'Allow people to create with and reuse your content' on all corporate and executive Instagram profiles"
+  - "Update threat intelligence playbooks to include Muse Image as a synthetic media source for impersonation and business email compromise lure creation"
+  - "Brief communications and HR teams on the absence of notification when employee likenesses are used, and establish a reporting channel for synthetic media sightings"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Adversarial ML", "Industry News", "Regulatory"]

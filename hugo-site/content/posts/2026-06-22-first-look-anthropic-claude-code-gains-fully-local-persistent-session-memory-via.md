@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Recall adds durable, fully-local session memory to Anthropic's Claude Code via an open-source Python plugin."
 tldr_who_at_risk: "Developers using Claude Code on shared or multi-user machines, and teams where local project directories may be accessible to untrusted code or processes."
-tldr_actions: ["Audit file permissions on Recall's local memory store and restrict write access to the owning developer account only", "Treat the persisted context file as a trust boundary — review its contents before deploying to new environments or sharing project directories", "Pin the Recall dependency and its transitive Python packages to verified versions and integrate integrity checks into CI pipelines"]
+tldr_actions:
+  - "Audit file permissions on Recall's local memory store and restrict write access to the owning developer account only"
+  - "Treat the persisted context file as a trust boundary — review its contents before deploying to new environments or sharing project directories"
+  - "Pin the Recall dependency and its transitive Python packages to verified versions and integrate integrity checks into CI pipelines"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Prompt Injection", "Agentic AI", "Supply Chain"]

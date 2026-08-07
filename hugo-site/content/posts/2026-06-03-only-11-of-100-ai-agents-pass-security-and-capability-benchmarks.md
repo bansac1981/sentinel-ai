@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Only 11 of 100 AI agents tested are both capable and secure, per Adversa AI's benchmark."
 tldr_who_at_risk: "Enterprises deploying autonomous AI agents \u2014 especially computer and coding agents \u2014 face systemic risk due to structural design trade-offs between capability and security."
-tldr_actions: ["Audit all deployed AI agents against the lethal trifecta: restrict private data access, untrusted content exposure, and outbound action scope", "Prioritise agents ranked in the 'capable well-defended' quadrant and validate vendor security claims independently", "Implement least-privilege boundaries and sandboxing for computer and coding agents before granting autonomous operation"]
+tldr_actions:
+  - "Audit all deployed AI agents against the lethal trifecta: restrict private data access, untrusted content exposure, and outbound action scope"
+  - "Prioritise agents ranked in the 'capable well-defended' quadrant and validate vendor security claims independently"
+  - "Implement least-privilege boundaries and sandboxing for computer and coding agents before granting autonomous operation"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Research", "Industry News"]

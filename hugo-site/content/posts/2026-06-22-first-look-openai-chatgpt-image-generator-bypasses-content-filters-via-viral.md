@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "OpenAI's ChatGPT image generator produces violent and sexual content via an indirect viral prompt without users explicitly requesting prohibited material."
 tldr_who_at_risk: "Enterprise teams deploying ChatGPT in customer-facing or internal workflows, platform operators relying on OpenAI's content filters, and any end-users exposed to ChatGPT-generated imagery through integrated products."
-tldr_actions: ["Audit all ChatGPT image generation integrations for output-layer content scanning independent of OpenAI's built-in filters", "Implement secondary classifier checks on all AI-generated images before surfacing to end-users or storing in downstream systems", "Establish a prompt monitoring policy to detect and block known jailbreak structures, including indirect framing and instruction-suppression patterns"]
+tldr_actions:
+  - "Audit all ChatGPT image generation integrations for output-layer content scanning independent of OpenAI's built-in filters"
+  - "Implement secondary classifier checks on all AI-generated images before surfacing to end-users or storing in downstream systems"
+  - "Establish a prompt monitoring policy to detect and block known jailbreak structures, including indirect framing and instruction-suppression patterns"
 
 # ── Taxonomies ──
 categories: ["First Look", "Jailbreaks", "LLM Security", "Adversarial ML", "Research"]

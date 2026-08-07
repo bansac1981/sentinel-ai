@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "Statewright enforces state-machine guardrails limiting which tools AI coding agents can call per workflow phase."
 tldr_who_at_risk: "Development teams using autonomous AI coding agents (Claude Code, Codex, Cursor) where unrestricted tool access could trigger unintended or destructive actions."
-tldr_actions: ["Audit all tool permissions granted to AI agents and restrict access to the minimum required per workflow phase", "Evaluate state machine or policy-based guardrail frameworks before deploying autonomous AI agents in production pipelines", "Validate third-party AI agent plugins (e.g. via MCP or marketplace) against insecure plugin design criteria before installation"]
+tldr_actions:
+  - "Audit all tool permissions granted to AI agents and restrict access to the minimum required per workflow phase"
+  - "Evaluate state machine or policy-based guardrail frameworks before deploying autonomous AI agents in production pipelines"
+  - "Validate third-party AI agent plugins (e.g. via MCP or marketplace) against insecure plugin design criteria before installation"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Research", "Industry News"]

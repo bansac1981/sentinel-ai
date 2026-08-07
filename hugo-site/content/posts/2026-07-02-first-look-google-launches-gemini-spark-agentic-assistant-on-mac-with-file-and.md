@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Google's Gemini Spark agentic assistant launches on Mac with local file access, third-party app integrations, MCP support, and real-time topic monitoring."
 tldr_who_at_risk: "Google AI Ultra subscribers using Spark on Mac, particularly enterprise users whose local files and connected SaaS apps (Dropbox, Workspace, Keep) are now within the agent's action scope."
-tldr_actions: ["Audit which files and directories Gemini Spark can access and apply least-privilege folder permissions before deployment", "Treat any custom MCP integration as an untrusted third-party plugin — require security review before connection", "Establish policies governing what data Spark is permitted to push into Google Workspace documents or share with third-party services"]
+tldr_actions:
+  - "Audit which files and directories Gemini Spark can access and apply least-privilege folder permissions before deployment"
+  - "Treat any custom MCP integration as an untrusted third-party plugin — require security review before connection"
+  - "Establish policies governing what data Spark is permitted to push into Google Workspace documents or share with third-party services"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "Supply Chain", "LLM Security"]

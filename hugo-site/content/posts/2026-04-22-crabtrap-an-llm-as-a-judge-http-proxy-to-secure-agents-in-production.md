@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Brex open-sources CrabTrap, an LLM-judge HTTP proxy that blocks unsafe AI agent actions in real time."
 tldr_who_at_risk: "Organisations deploying autonomous AI agents in production are exposed to uncontrolled agent actions without runtime enforcement layers like this."
-tldr_actions: ["Evaluate CrabTrap or equivalent proxy-based guardrails for any production agentic AI deployment", "Define explicit allow/deny policies covering sensitive HTTP endpoints agents can reach", "Audit existing agent architectures for excessive agency and lack of runtime action validation"]
+tldr_actions:
+  - "Evaluate CrabTrap or equivalent proxy-based guardrails for any production agentic AI deployment"
+  - "Define explicit allow/deny policies covering sensitive HTTP endpoints agents can reach"
+  - "Audit existing agent architectures for excessive agency and lack of runtime action validation"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Research", "Industry News"]

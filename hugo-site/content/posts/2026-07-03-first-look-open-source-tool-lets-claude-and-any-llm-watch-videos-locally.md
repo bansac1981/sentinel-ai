@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Open-source tool lets any LLM ingest video via scene-aware frame extraction and audio transcription, running entirely locally."
 tldr_who_at_risk: "Developers and enterprises building LLM agents or pipelines that process user-supplied or third-party video content are newly exposed to visual and audio prompt injection attacks."
-tldr_actions: ["Treat all video-derived frames and transcripts as untrusted input and apply the same injection defences used for text prompts", "Audit any agentic pipeline that ingests video URLs for SSRF exposure and supply chain substitution risk at the fetch layer", "Implement context-length and frame-count limits to prevent resource exhaustion from adversarially crafted long or high-change-rate videos"]
+tldr_actions:
+  - "Treat all video-derived frames and transcripts as untrusted input and apply the same injection defences used for text prompts"
+  - "Audit any agentic pipeline that ingests video URLs for SSRF exposure and supply chain substitution risk at the fetch layer"
+  - "Implement context-length and frame-count limits to prevent resource exhaustion from adversarially crafted long or high-change-rate videos"
 
 # ── Taxonomies ──
 categories: ["First Look", "Prompt Injection", "LLM Security", "Agentic AI", "Supply Chain"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Robinhood now lets AI agents autonomously trade stocks and make payments via MCP integration."
 tldr_who_at_risk: "Retail investors using third-party AI agents connected to Robinhood are exposed to prompt injection attacks that could trigger unauthorised trades or financial data exfiltration."
-tldr_actions: ["Enforce strict spending and trading limits on any AI agent wallet or virtual card", "Require human approval for all agent-initiated trades above a defined risk threshold", "Audit the prompt pipelines of any third-party LLM or agent connected to financial MCP servers"]
+tldr_actions:
+  - "Enforce strict spending and trading limits on any AI agent wallet or virtual card"
+  - "Require human approval for all agent-initiated trades above a defined risk threshold"
+  - "Audit the prompt pipelines of any third-party LLM or agent connected to financial MCP servers"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Industry News", "Regulatory"]

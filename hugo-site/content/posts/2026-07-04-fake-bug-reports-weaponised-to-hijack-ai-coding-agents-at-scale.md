@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Attackers embed malicious instructions inside fake bug reports to hijack AI coding agents."
 tldr_who_at_risk: "Development teams using AI coding agents with access to codebases, CI/CD pipelines, or external issue trackers are directly exposed."
-tldr_actions: ["Implement strict input sandboxing so AI agents cannot execute instructions sourced from external content like bug reports", "Apply least-privilege principles to AI agent permissions — restrict filesystem, network, and shell access to the minimum required", "Require human-in-the-loop confirmation before AI agents take irreversible actions triggered by external data"]
+tldr_actions:
+  - "Implement strict input sandboxing so AI agents cannot execute instructions sourced from external content like bug reports"
+  - "Apply least-privilege principles to AI agent permissions — restrict filesystem, network, and shell access to the minimum required"
+  - "Require human-in-the-loop confirmation before AI agents take irreversible actions triggered by external data"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Supply Chain"]

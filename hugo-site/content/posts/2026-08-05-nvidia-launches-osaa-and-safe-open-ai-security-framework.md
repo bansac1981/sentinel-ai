@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "NVIDIA leads a 120-company alliance (OSAA) launching the first structured, confidential AI security incident sharing framework (SAFE), alongside consolidated open-source tooling for AI vulnerability scanning, agent identity, and authorization."
 tldr_who_at_risk: "Organizations deploying AI agents without standardized identity, authorization, or access to shared AI threat intelligence — the majority of enterprises today — now have a collective defense mechanism to close these gaps."
-tldr_actions: ["Join OSAA working groups relevant to your AI deployment stack and begin contributing to SAFE incident submissions", "Integrate NVIDIA Garak into AI model validation and pre-deployment testing pipelines", "Evaluate Cedar for standardizing agent authorization policies and Okta primitives for agent identity across internal platforms"]
+tldr_actions:
+  - "Join OSAA working groups relevant to your AI deployment stack and begin contributing to SAFE incident submissions"
+  - "Integrate NVIDIA Garak into AI model validation and pre-deployment testing pipelines"
+  - "Evaluate Cedar for standardizing agent authorization policies and Okta primitives for agent identity across internal platforms"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain", "AI Governance"]

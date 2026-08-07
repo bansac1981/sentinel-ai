@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance", "LLM02 - 
 # ── TL;DR ──
 tldr_what: "AI models now autonomously chain vulnerabilities into working exploits, marking a new offensive inflection point."
 tldr_who_at_risk: "Any organisation relying on traditional signature-based or reactive security tooling is exposed as AI-accelerated attack cycles compress dwell and response times."
-tldr_actions: ["Audit detection pipelines for coverage gaps AI-generated exploit chains could exploit before human analysts respond", "Evaluate AI-native SOC tooling that matches the speed and automation of adversarial AI capabilities", "Implement continuous vulnerability prioritisation that accounts for chained lower-severity CVE combinations, not just individual CVSS scores"]
+tldr_actions:
+  - "Audit detection pipelines for coverage gaps AI-generated exploit chains could exploit before human analysts respond"
+  - "Evaluate AI-native SOC tooling that matches the speed and automation of adversarial AI capabilities"
+  - "Implement continuous vulnerability prioritisation that accounts for chained lower-severity CVE combinations, not just individual CVSS scores"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Adversarial ML", "Industry News"]

@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Malicious repos exploit symlinks to trick AI coding agents into writing attacker SSH keys."
 tldr_who_at_risk: "Developers using Amazon Q Developer, Claude Code, Augment, Cursor, Google Antigravity, or Windsurf who open or clone untrusted repositories."
-tldr_actions: ["Update Amazon Q Developer Language Server to 1.69.0 or later immediately", "Avoid running AI coding agents against untrusted or unvetted repositories until all vendors patch", "Audit SSH authorized_keys and shell startup files for unexpected entries after recent agent usage"]
+tldr_actions:
+  - "Update Amazon Q Developer Language Server to 1.69.0 or later immediately"
+  - "Avoid running AI coding agents against untrusted or unvetted repositories until all vendors patch"
+  - "Audit SSH authorized_keys and shell startup files for unexpected entries after recent agent usage"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Supply Chain", "Research"]

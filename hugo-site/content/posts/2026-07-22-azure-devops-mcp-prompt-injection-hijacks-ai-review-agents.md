@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Hidden HTML comments in Azure DevOps PRs hijack AI review agents via unguarded MCP tool."
 tldr_who_at_risk: "Engineering teams using AI coding agents integrated with Azure DevOps MCP, especially senior reviewers whose credentials grant broad cross-project access."
-tldr_actions: ["Audit AI agent permissions and apply least-privilege scoping across Azure DevOps projects", "Patch or pin the Azure DevOps MCP server and monitor repo_get_pull_request_by_id output for injection markers", "Implement human-in-the-loop approval gates before AI agents take cross-project actions"]
+tldr_actions:
+  - "Audit AI agent permissions and apply least-privilege scoping across Azure DevOps projects"
+  - "Patch or pin the Azure DevOps MCP server and monitor repo_get_pull_request_by_id output for injection markers"
+  - "Implement human-in-the-loop approval gates before AI agents take cross-project actions"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Supply Chain"]

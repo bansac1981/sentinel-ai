@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Browser Harness gives LLMs full, self-modifying browser control with no guardrails via Chrome DevTools Protocol."
 tldr_who_at_risk: "Any user or organisation deploying Browser Harness is exposed to uncontrolled LLM-driven browser actions, arbitrary code execution, and credential/session theft via prompt injection from malicious web content."
-tldr_actions: ["Do not deploy Browser Harness in production or against authenticated browser sessions without strict sandboxing", "Audit all LLM-generated code before execution; disable mid-task self-modification in sensitive environments", "Implement prompt injection defences and content isolation to prevent malicious web pages from hijacking the agent"]
+tldr_actions:
+  - "Do not deploy Browser Harness in production or against authenticated browser sessions without strict sandboxing"
+  - "Audit all LLM-generated code before execution; disable mid-task self-modification in sensitive environments"
+  - "Implement prompt injection defences and content isolation to prevent malicious web pages from hijacking the agent"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "Deno releases Claw Patrol, an open-source firewall intercepting AI agent traffic before it hits production systems."
 tldr_who_at_risk: "Teams deploying autonomous AI agents with access to production infrastructure, databases, or orchestration systems like Kubernetes."
-tldr_actions: ["Evaluate Claw Patrol for deployment between AI agents and production endpoints", "Define explicit HCL deny-rules for destructive operations such as SQL drops and kubectl deletes", "Implement human-in-the-loop approval gates for all irreversible agent-initiated actions"]
+tldr_actions:
+  - "Evaluate Claw Patrol for deployment between AI agents and production endpoints"
+  - "Define explicit HCL deny-rules for destructive operations such as SQL drops and kubectl deletes"
+  - "Implement human-in-the-loop approval gates for all irreversible agent-initiated actions"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Two Semantic Kernel CVEs let prompt injection trigger remote code execution via compromised agent plugins."
 tldr_who_at_risk: "Developers and enterprises building AI agent applications on Semantic Kernel, LangChain, or CrewAI are directly exposed due to systemic trust misplacement in framework tool-mapping layers."
-tldr_actions: ["Patch Semantic Kernel immediately and review CVE-2026-26030 and CVE-2026-25592 advisories", "Audit all agent plugins/tools for untrusted input paths and enforce strict parameter validation", "Apply least-privilege principles to agent tool permissions and sandbox code execution environments"]
+tldr_actions:
+  - "Patch Semantic Kernel immediately and review CVE-2026-26030 and CVE-2026-25592 advisories"
+  - "Audit all agent plugins/tools for untrusted input paths and enforce strict parameter validation"
+  - "Apply least-privilege principles to agent tool permissions and sandbox code execution environments"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research"]

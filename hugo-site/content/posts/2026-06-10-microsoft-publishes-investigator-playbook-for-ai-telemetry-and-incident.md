@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Microsoft releases structured AI incident investigation playbook covering prompt injection, data access, and telemetry reconstruction."
 tldr_who_at_risk: "Enterprise security teams using Microsoft 365 Copilot and Azure AI services, where unstructured telemetry has obscured AI-related incidents."
-tldr_actions: ["Deploy the Microsoft investigator playbook for M365 Copilot and Azure AI across your SOC workflows", "Ensure Purview, Defender, and Sentinel are configured to capture AI interaction telemetry with identity and resource context", "Adopt the scope–context–signal sequence when triaging alerts involving AI systems to establish coherent incident timelines"]
+tldr_actions:
+  - "Deploy the Microsoft investigator playbook for M365 Copilot and Azure AI across your SOC workflows"
+  - "Ensure Purview, Defender, and Sentinel are configured to capture AI interaction telemetry with identity and resource context"
+  - "Adopt the scope–context–signal sequence when triaging alerts involving AI systems to establish coherent incident timelines"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Research", "Industry News"]

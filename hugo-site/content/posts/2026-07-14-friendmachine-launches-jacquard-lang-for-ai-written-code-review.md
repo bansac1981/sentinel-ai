@@ -34,7 +34,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM05 - Supply Chain Vul
 # ── TL;DR ──
 tldr_what: "Jacquard is an open-source language designed for ML-generated code reviewed by humans before execution."
 tldr_who_at_risk: "Development teams and organisations adopting AI-assisted coding pipelines where Jacquard's review workflow may create false confidence in AI-generated output."
-tldr_actions: ["Audit the Jacquard toolchain dependencies (OCaml checker, runtime, prelude) for supply chain integrity before adoption", "Establish semantic review standards — do not treat Jacquard's syntax/type checks as a substitute for logic-level security review", "Threat-model the upstream model used to generate Jacquard code as an adversarial input surface, not a trusted code author"]
+tldr_actions:
+  - "Audit the Jacquard toolchain dependencies (OCaml checker, runtime, prelude) for supply chain integrity before adoption"
+  - "Establish semantic review standards — do not treat Jacquard's syntax/type checks as a substitute for logic-level security review"
+  - "Threat-model the upstream model used to generate Jacquard code as an adversarial input surface, not a trusted code author"
 
 # ── Taxonomies ──
 categories: ["First Look", "Supply Chain", "LLM Security", "Agentic AI", "Research"]

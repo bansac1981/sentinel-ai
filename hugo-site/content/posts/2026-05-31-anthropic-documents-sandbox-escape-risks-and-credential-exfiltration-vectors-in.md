@@ -27,7 +27,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM08 - Excessiv
 # ── TL;DR ──
 tldr_what: "Anthropic publicly documents Claude sandbox architecture, disclosing a real credential exfiltration vector via its files API."
 tldr_who_at_risk: "Developers and enterprises deploying Claude-based agents are most exposed, particularly where credentials or sensitive data enter the agent's execution environment."
-tldr_actions: ["Ensure credentials are never injected into agent sandbox environments — rely on external secret management", "Review egress controls for any LLM agent deployment, blocking outbound calls to unexpected endpoints", "Audit use of Anthropic's files API endpoint for unintended data exfiltration paths"]
+tldr_actions:
+  - "Ensure credentials are never injected into agent sandbox environments — rely on external secret management"
+  - "Review egress controls for any LLM agent deployment, blocking outbound calls to unexpected endpoints"
+  - "Audit use of Anthropic's files API endpoint for unintended data exfiltration paths"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Research", "Industry News"]

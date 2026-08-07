@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "AWS launched autonomous agents in Amazon Quick that continuously execute enterprise tasks across 16+ integrated business apps with no coding required."
 tldr_who_at_risk: "Enterprise security, compliance, and operations teams stand to gain persistent, cross-application automation capabilities that close long-standing gaps in continuous monitoring, regulatory change management, and business-process visibility \u2014 particularly in organisations where manual triage of high-volume data sources has been a resource constraint."
-tldr_actions: "[\"Inventory and formally govern all Quick agents as privileged service accounts from day one \u2014 establish scope, integration, and autonomy documentation as part of your standard agent deployment workflow\", \"Prioritise deployment of compliance monitoring and activity feed agents for high-value data sources such as regulatory feeds, CRM pipelines, and executive communications to capture immediate operational return\", \"Integrate Quick agent provisioning and deprovisioning into existing IAM and offboarding workflows to ensure the governance model scales with adoption\"]"
+tldr_actions:
+  - "Inventory and formally govern all Quick agents as privileged service accounts from day one — establish scope, integration, and autonomy documentation as part of your standard agent deployment workflow"
+  - "Prioritise deployment of compliance monitoring and activity feed agents for high-value data sources such as regulatory feeds, CRM pipelines, and executive communications to capture immediate operational return"
+  - "Integrate Quick agent provisioning and deprovisioning into existing IAM and offboarding workflows to ensure the governance model scales with adoption"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security", "Supply Chain"]

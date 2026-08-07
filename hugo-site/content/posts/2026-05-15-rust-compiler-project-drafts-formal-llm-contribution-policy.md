@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM09 - Overreliance
 # ── TL;DR ──
 tldr_what: "Rust compiler project proposes formal policy restricting and governing LLM use in contributions."
 tldr_who_at_risk: "Open-source maintainers and downstream users of Rust toolchain who depend on compiler code integrity."
-tldr_actions: ["Monitor the policy's final wording for lessons applicable to your own open-source or internal AI code-use governance", "Audit contribution pipelines for AI-generated code lacking review controls, especially in security-critical projects", "Adopt explicit LLM disclosure requirements in CONTRIBUTING.md files for projects with high security impact"]
+tldr_actions:
+  - "Monitor the policy's final wording for lessons applicable to your own open-source or internal AI code-use governance"
+  - "Audit contribution pipelines for AI-generated code lacking review controls, especially in security-critical projects"
+  - "Adopt explicit LLM disclosure requirements in CONTRIBUTING.md files for projects with high security impact"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Regulatory", "Industry News", "LLM Security"]

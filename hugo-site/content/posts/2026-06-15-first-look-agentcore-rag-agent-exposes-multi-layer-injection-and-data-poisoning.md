@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "AgentCore ships a RAG-plus-persistent-memory agent pattern that creates compounded injection, poisoning, and session-persistence attack surfaces."
 tldr_who_at_risk: "Organizations in agriculture, manufacturing, and field-service verticals benefit directly: teams that previously lacked a production-ready, AWS-native blueprint for agentic AI can now deploy knowledge-grounded, memory-persistent repair assistance against existing Cognito, S3, and DynamoDB infrastructure without building custom orchestration from scratch."
-tldr_actions: "[\"Adopt the AgentCore reference architecture as your baseline agentic deployment pattern and extend it with S3 bucket policies, document signing, and hash verification at the knowledge base ingestion stage to ensure knowledge integrity from day one.\", \"Deploy an API Gateway with WAF and rate limiting in front of the /invocations endpoint, and configure AgentCore Memory namespaces to strict per-user-identity scoping before promoting any instance to production.\", \"Instrument CloudWatch log monitoring for invocation path fields and agent tool calls, and establish a red-team exercise cadence targeting the document ingestion pipeline to validate your ingestion controls continuously.\"]"
+tldr_actions:
+  - "Adopt the AgentCore reference architecture as your baseline agentic deployment pattern and extend it with S3 bucket policies, document signing, and hash verification at the knowledge base ingestion stage to ensure knowledge integrity from day one."
+  - "Deploy an API Gateway with WAF and rate limiting in front of the /invocations endpoint, and configure AgentCore Memory namespaces to strict per-user-identity scoping before promoting any instance to production."
+  - "Instrument CloudWatch log monitoring for invocation path fields and agent tool calls, and establish a red-team exercise cadence targeting the document ingestion pipeline to validate your ingestion controls continuously."
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "Data Poisoning", "LLM Security"]

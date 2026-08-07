@@ -8,7 +8,10 @@ summary: "CrowdStrike's Charlotte AI AgentWorks introduces an agentic security e
 # ── TL;DR ──
 tldr_what: "CrowdStrike's Charlotte AI AgentWorks enables autonomous SOC agents, expanding attack surface through agent-to-agent trust risks."
 tldr_who_at_risk: "Security teams deploying multi-agent AI orchestration in SOCs where compromised agents can propagate malicious instructions across the pipeline."
-tldr_actions: ["Enforce strict agent-to-agent validation and context verification in agentic SOC pipelines.", "Implement human-in-the-loop approvals for all agent remediation actions (isolation, firewall changes).", "Audit prompt injection and agent manipulation vectors before production deployment."]
+tldr_actions:
+  - "Enforce strict agent-to-agent validation and context verification in agentic SOC pipelines."
+  - "Implement human-in-the-loop approvals for all agent remediation actions (isolation, firewall changes)."
+  - "Audit prompt injection and agent manipulation vectors before production deployment."
 source: "CrowdStrike Blog"
 source_url: "https://www.crowdstrike.com/en-us/blog/how-charlotte-ai-agentworks-fuels-securitys-agentic-ecosystem/"
 author: "Grid the Grey Editorial"

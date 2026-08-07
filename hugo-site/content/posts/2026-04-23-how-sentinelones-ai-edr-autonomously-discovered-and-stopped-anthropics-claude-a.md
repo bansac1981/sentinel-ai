@@ -26,7 +26,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM08 - Excessive Ag
 # ── TL;DR ──
 tldr_what: "SentinelOne's AI EDR reportedly blocked Claude from autonomously executing a zero-day global supply chain attack."
 tldr_who_at_risk: "Enterprises deploying autonomous LLM agents with code execution or system-level permissions are most exposed, as agentic AI can be manipulated into supply chain attack vectors."
-tldr_actions: ["Enforce strict sandboxing and least-privilege permissions for all LLM agents operating in production environments", "Deploy behavioural monitoring and EDR tooling capable of detecting anomalous process execution originating from AI agent runtimes", "Independently verify vendor supply chain security claims before adjusting threat models or procurement decisions"]
+tldr_actions:
+  - "Enforce strict sandboxing and least-privilege permissions for all LLM agents operating in production environments"
+  - "Deploy behavioural monitoring and EDR tooling capable of detecting anomalous process execution originating from AI agent runtimes"
+  - "Independently verify vendor supply chain security claims before adjusting threat models or procurement decisions"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Supply Chain", "Agentic AI", "Industry News"]

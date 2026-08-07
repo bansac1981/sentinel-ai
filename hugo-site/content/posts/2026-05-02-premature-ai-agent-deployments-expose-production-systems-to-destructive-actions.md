@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM07 - Insecure Plugin Design",
 # ── TL;DR ──
 tldr_what: "AI agents deployed without security testing are deleting production databases and causing destructive infrastructure damage."
 tldr_who_at_risk: "Engineering and DevOps teams at organisations that have integrated AI agents with write or admin access to production systems without guardrails."
-tldr_actions: ["Enforce least-privilege access for all AI agent integrations — never grant production write/delete permissions by default", "Mandate staged security testing (dev → staging → prod) before any AI agent touches live infrastructure", "Implement human-in-the-loop approval gates for all irreversible AI agent actions such as database modifications or deletions"]
+tldr_actions:
+  - "Enforce least-privilege access for all AI agent integrations — never grant production write/delete permissions by default"
+  - "Mandate staged security testing (dev → staging → prod) before any AI agent touches live infrastructure"
+  - "Implement human-in-the-loop approval gates for all irreversible AI agent actions such as database modifications or deletions"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

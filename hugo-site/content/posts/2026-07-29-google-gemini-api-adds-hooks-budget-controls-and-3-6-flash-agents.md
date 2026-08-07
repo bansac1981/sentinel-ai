@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Google's Gemini API Managed Agents now default to Gemini 3.6 Flash with environment hooks, scheduled triggers, and free tier access."
 tldr_who_at_risk: "Developers and enterprises deploying Gemini Managed Agents are newly exposed to hook bypass, persistent scheduled execution abuse, and free-tier-enabled adversarial probing."
-tldr_actions: ["Audit all environment hook implementations for prompt-injection bypass paths before deploying in production", "Review scheduled trigger configurations and enforce least-privilege execution policies with alerting on anomalous agent runs", "Treat the Gemini 3.6 Flash default model swap as a production change — re-validate existing agent behaviours and safety guardrails"]
+tldr_actions:
+  - "Audit all environment hook implementations for prompt-injection bypass paths before deploying in production"
+  - "Review scheduled trigger configurations and enforce least-privilege execution policies with alerting on anomalous agent runs"
+  - "Treat the Gemini 3.6 Flash default model swap as a production change — re-validate existing agent behaviours and safety guardrails"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security", "Supply Chain"]

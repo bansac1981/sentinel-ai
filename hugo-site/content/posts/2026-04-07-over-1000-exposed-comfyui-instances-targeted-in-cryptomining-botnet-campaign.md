@@ -8,7 +8,10 @@ summary: "Threat actors are actively exploiting internet-exposed ComfyUI instanc
 # ── TL;DR ──
 tldr_what: "Attackers exploit 1,000+ exposed ComfyUI instances via malicious custom nodes for cryptomining."
 tldr_who_at_risk: "Organizations running internet-exposed ComfyUI deployments without authentication or network segmentation controls."
-tldr_actions: ["Restrict ComfyUI network access; require authentication and firewall egress controls", "Audit installed custom nodes; remove or pin versions of Shell-Executor and similar packages", "Deploy ComfyUI behind reverse proxy with API key validation and rate limiting"]
+tldr_actions:
+  - "Restrict ComfyUI network access; require authentication and firewall egress controls"
+  - "Audit installed custom nodes; remove or pin versions of Shell-Executor and similar packages"
+  - "Deploy ComfyUI behind reverse proxy with API key validation and rate limiting"
 source: "The Hacker News"
 source_url: "https://thehackernews.com/2026/04/over-1000-exposed-comfyui-instances.html"
 author: "Grid the Grey Editorial"

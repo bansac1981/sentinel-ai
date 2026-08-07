@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "AWS launched AgentCore Payments, enabling AI agents to autonomously pay for external model services via the x402 protocol without human approval."
 tldr_who_at_risk: "Enterprises deploying autonomous AI agents on AWS that now hold live payment credentials and can transact real funds without per-transaction human review."
-tldr_actions: ["Enforce strict per-agent spending budgets and alert thresholds in AgentCore before any production deployment", "Treat agent payment signing credentials as Tier-1 secrets — rotate regularly, store in secrets manager, and audit all access", "Validate and allowlist model provider endpoints the agent can route payments to, blocking any runtime-injected or unrecognised destinations"]
+tldr_actions:
+  - "Enforce strict per-agent spending budgets and alert thresholds in AgentCore before any production deployment"
+  - "Treat agent payment signing credentials as Tier-1 secrets — rotate regularly, store in secrets manager, and audit all access"
+  - "Validate and allowlist model provider endpoints the agent can route payments to, blocking any runtime-injected or unrecognised destinations"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain", "Prompt Injection"]

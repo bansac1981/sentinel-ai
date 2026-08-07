@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Android 17 embeds Gemini Omni across OS-level audio, video, and call pipelines, creating broad multimodal prompt injection and data exfiltration surfaces."
 tldr_who_at_risk: "Pixel 9 and 10 device users, enterprise Android fleet administrators, and lone or field workers gain the most immediate benefit \u2014 on-device AI now handles call screening, emergency alerting, and real-time translation without external service dependencies."
-tldr_actions: "[\"Configure MDM/EMM profiles for Android 17 to establish Gemini Omni permission baselines and enable ambient AI capabilities selectively for validated enterprise use cases before fleet rollout.\", \"Integrate the 'Take a Message' call-screening transcripts and Pixel Watch emergency detection events into SIEM or workforce safety monitoring pipelines to operationalise the new data streams.\", \"Evaluate AudioLM real-time translation for secure multilingual communications workflows, and establish input-validation standards for Lyria 3 and Gemini video pipelines to support responsible adoption of multimodal AI features.\"]"
+tldr_actions:
+  - "Configure MDM/EMM profiles for Android 17 to establish Gemini Omni permission baselines and enable ambient AI capabilities selectively for validated enterprise use cases before fleet rollout."
+  - "Integrate the 'Take a Message' call-screening transcripts and Pixel Watch emergency detection events into SIEM or workforce safety monitoring pipelines to operationalise the new data streams."
+  - "Evaluate AudioLM real-time translation for secure multilingual communications workflows, and establish input-validation standards for Lyria 3 and Gemini video pipelines to support responsible adoption of multimodal AI features."
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Prompt Injection", "Agentic AI", "Industry News"]

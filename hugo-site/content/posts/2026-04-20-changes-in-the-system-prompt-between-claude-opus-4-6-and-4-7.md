@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Claude Opus 4.7 system prompt adds autonomous browsing, spreadsheet/slide agents, and proactive tool-calling before asking users."
 tldr_who_at_risk: "Enterprise users and developers deploying Claude in agentic workflows are most exposed due to expanded autonomous tool-calling and reduced clarification checkpoints."
-tldr_actions: ["Audit Claude agentic deployments for unintended tool_search escalation paths that could be triggered via injected inputs", "Review expanded browsing and Office-suite agent integrations for data exfiltration and prompt injection vectors", "Monitor system prompt changes on future Claude releases via Anthropic's published archive to track evolving capability boundaries"]
+tldr_actions:
+  - "Audit Claude agentic deployments for unintended tool_search escalation paths that could be triggered via injected inputs"
+  - "Review expanded browsing and Office-suite agent integrations for data exfiltration and prompt injection vectors"
+  - "Monitor system prompt changes on future Claude releases via Anthropic's published archive to track evolving capability boundaries"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Industry News", "Research"]

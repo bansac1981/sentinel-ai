@@ -27,7 +27,10 @@ owasp_categories: ["LLM04 - Model Denial of Service", "LLM08 - Excessive Agency"
 # ── TL;DR ──
 tldr_what: "Surging AI-driven attacks are making agentic defense token costs unpredictable, threatening budget exhaustion mid-incident."
 tldr_who_at_risk: "CISOs and security operations teams relying on agentic AI tooling are most exposed, particularly those on metered or pre-paid token plans."
-tldr_actions: ["Audit current agentic AI token consumption patterns and establish hard budget thresholds with alerting", "Evaluate flat-rate or cost-predictable AI security vendor models to avoid mid-attack budget exhaustion", "Implement agent loop detection and cost-circuit-breakers to prevent runaway token spend during attacks"]
+tldr_actions:
+  - "Audit current agentic AI token consumption patterns and establish hard budget thresholds with alerting"
+  - "Evaluate flat-rate or cost-predictable AI security vendor models to avoid mid-attack budget exhaustion"
+  - "Implement agent loop detection and cost-circuit-breakers to prevent runaway token spend during attacks"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

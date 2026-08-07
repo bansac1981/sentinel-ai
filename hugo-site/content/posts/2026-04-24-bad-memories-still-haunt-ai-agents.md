@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Cisco found and disclosed a memory-handling vulnerability in Anthropic's AI systems, now patched."
 tldr_who_at_risk: "Enterprises and developers deploying Anthropic-powered agentic AI systems with persistent memory are most exposed, as malicious actors could manipulate stored context to hijack agent behaviour."
-tldr_actions: ["Audit all AI agent memory files and persistent context stores for unexpected or injected content", "Apply Anthropic's latest patches immediately and monitor vendor advisories for further memory-related fixes", "Implement strict input/output validation and sandboxing around AI agent memory read/write operations"]
+tldr_actions:
+  - "Audit all AI agent memory files and persistent context stores for unexpected or injected content"
+  - "Apply Anthropic's latest patches immediately and monitor vendor advisories for further memory-related fixes"
+  - "Implement strict input/output validation and sandboxing around AI agent memory read/write operations"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Prompt Injection", "Research"]

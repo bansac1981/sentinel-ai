@@ -30,7 +30,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM05 - Supply C
 # ── TL;DR ──
 tldr_what: "Attackers create fake OpenAI tenants impersonating real companies to harvest sensitive employee data via ChatGPT."
 tldr_who_at_risk: "Cybersecurity and technology sector employees are most exposed due to targeted use of work email addresses and impersonation of their own organisations."
-tldr_actions: ["Train employees to verify the inviter's email domain before accepting any OpenAI organisation invitations", "Establish an internal policy requiring out-of-band confirmation before joining any new ChatGPT workspace", "Audit existing OpenAI tenant memberships to identify any unauthorised or unrecognised organisations employees have joined"]
+tldr_actions:
+  - "Train employees to verify the inviter's email domain before accepting any OpenAI organisation invitations"
+  - "Establish an internal policy requiring out-of-band confirmation before joining any new ChatGPT workspace"
+  - "Audit existing OpenAI tenant memberships to identify any unauthorised or unrecognised organisations employees have joined"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Industry News", "Supply Chain"]

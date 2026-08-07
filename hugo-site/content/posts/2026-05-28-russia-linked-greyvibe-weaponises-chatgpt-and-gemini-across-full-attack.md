@@ -27,7 +27,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "GreyVibe uses ChatGPT, Gemini, and Ideogram AI to accelerate malware development and phishing operations against Ukraine."
 tldr_who_at_risk: "Ukrainian military, government, civilian, and business entities are the primary targets, though the AI-assisted TTPs are transferable to any adversary campaign."
-tldr_actions: ["Hunt for LLM-characteristic code artefacts (verbose comments, stylistic inconsistencies) in malware samples as detection signals", "Deploy behavioural detection rules targeting LegionRelay IOCs and similarly structured AI-generated loaders", "Brief threat intelligence teams on AI-augmented adversary workflows to update attribution and triage methodologies"]
+tldr_actions:
+  - "Hunt for LLM-characteristic code artefacts (verbose comments, stylistic inconsistencies) in malware samples as detection signals"
+  - "Deploy behavioural detection rules targeting LegionRelay IOCs and similarly structured AI-generated loaders"
+  - "Brief threat intelligence teams on AI-augmented adversary workflows to update attribution and triage methodologies"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Adversarial ML", "Industry News", "Research"]

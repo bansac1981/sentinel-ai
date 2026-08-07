@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Pixel-level image perturbations can embed invisible prompt injections that VLMs act on while humans see noise."
 tldr_who_at_risk: "Any organisation deploying vision-language models to process user-supplied or external images\u2014including AI agents with document or web browsing capabilities\u2014is directly exposed."
-tldr_actions: ["Audit all VLM pipelines that ingest external or user-supplied images for prompt injection exposure", "Apply image preprocessing filters (normalisation, compression) to degrade perturbation effectiveness before model ingestion", "Enforce strict output sandboxing and least-privilege agency to limit harm from injected instructions"]
+tldr_actions:
+  - "Audit all VLM pipelines that ingest external or user-supplied images for prompt injection exposure"
+  - "Apply image preprocessing filters (normalisation, compression) to degrade perturbation effectiveness before model ingestion"
+  - "Enforce strict output sandboxing and least-privilege agency to limit harm from injected instructions"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Adversarial ML", "LLM Security", "Agentic AI", "Research"]

@@ -26,7 +26,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Meta releases Llama Guard 4, a 12B multimodal safety model detecting jailbreaks and harmful content across 14 hazard categories."
 tldr_who_at_risk: "Organisations deploying open-source LLMs in production are most exposed if they lack robust input/output filtering against jailbreaks and prompt injection."
-tldr_actions: ["Integrate Llama Guard 4 as an input/output filter layer in any production LLM pipeline", "Deploy Llama Prompt Guard 2 lightweight classifiers for low-latency prompt injection screening", "Regularly audit configured hazard categories to ensure coverage aligns with your threat model"]
+tldr_actions:
+  - "Integrate Llama Guard 4 as an input/output filter layer in any production LLM pipeline"
+  - "Deploy Llama Prompt Guard 2 lightweight classifiers for low-latency prompt injection screening"
+  - "Regularly audit configured hazard categories to ensure coverage aligns with your threat model"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Prompt Injection", "Research", "Industry News"]

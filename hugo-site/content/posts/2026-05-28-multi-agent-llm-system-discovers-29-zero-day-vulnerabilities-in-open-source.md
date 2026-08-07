@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Multi-agent LLM system autonomously finds and reproduces real zero-day vulnerabilities at near-human expert capability."
 tldr_who_at_risk: "Maintainers of open-source C/C++ projects are most directly exposed, as this class of tooling can systematically surface exploitable bugs at scale."
-tldr_actions: ["Accelerate patching cadence for open-source C/C++ projects likely to attract automated scanning", "Integrate fuzzing-as-a-service (e.g., OSS-Fuzz) into CI/CD pipelines before adversaries can exploit discovered bugs", "Monitor for automated vulnerability disclosure patterns that may indicate AI-assisted reconnaissance against your codebase"]
+tldr_actions:
+  - "Accelerate patching cadence for open-source C/C++ projects likely to attract automated scanning"
+  - "Integrate fuzzing-as-a-service (e.g., OSS-Fuzz) into CI/CD pipelines before adversaries can exploit discovered bugs"
+  - "Monitor for automated vulnerability disclosure patterns that may indicate AI-assisted reconnaissance against your codebase"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "Research", "LLM Security"]

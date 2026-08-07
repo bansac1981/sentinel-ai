@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "Frontier LLMs can now discover novel cryptanalytic attacks against real-world cryptographic primitives."
 tldr_who_at_risk: "Organisations relying on cryptographic primitives under active standardisation or with design-level weaknesses are most exposed, as AI-assisted attacks may surface flaws faster than human review."
-tldr_actions: ["Run candidate cryptographic schemes through AI-assisted analysis tools before deployment", "Monitor CryptanalysisBench results for any primitives used in production systems", "Accelerate security reviews of NIST competition candidates flagged by LLM benchmarks"]
+tldr_actions:
+  - "Run candidate cryptographic schemes through AI-assisted analysis tools before deployment"
+  - "Monitor CryptanalysisBench results for any primitives used in production systems"
+  - "Accelerate security reviews of NIST competition candidates flagged by LLM benchmarks"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Research", "Adversarial ML"]

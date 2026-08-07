@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "AI coding agents tricked into executing attacker binaries via poisoned README instructions during security reviews."
 tldr_who_at_risk: "Developers using Claude Code or OpenAI Codex in autonomous/auto-review mode to audit untrusted open-source repositories are directly exposed."
-tldr_actions: ["Disable autonomous/auto-approve modes in Claude Code and Codex when reviewing untrusted third-party code", "Treat README.md files as untrusted input and audit any instructions they contain before agent execution", "Sandbox AI coding agents in isolated environments with no network or filesystem access to sensitive resources"]
+tldr_actions:
+  - "Disable autonomous/auto-approve modes in Claude Code and Codex when reviewing untrusted third-party code"
+  - "Treat README.md files as untrusted input and audit any instructions they contain before agent execution"
+  - "Sandbox AI coding agents in isolated environments with no network or filesystem access to sensitive resources"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Supply Chain", "Research"]

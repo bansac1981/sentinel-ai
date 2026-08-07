@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "OpenAI upgraded ChatGPT with GPT-5.5 Instant, delivering physician-informed health reasoning and enhanced medical response quality."
 tldr_who_at_risk: "End users seeking health guidance, healthcare organisations integrating ChatGPT, and platforms built on ChatGPT's API that handle sensitive medical conversations are newly exposed to overreliance, data leakage, and adversarial health misinformation risks."
-tldr_actions: ["Audit any ChatGPT-based health or wellness integrations for prompt injection exposure and output validation gaps", "Implement user-facing disclaimers and response filtering for medical outputs in downstream applications consuming the ChatGPT API", "Monitor for jailbreak attempts targeting the expanded health reasoning surface, particularly in public-facing GPT wrappers"]
+tldr_actions:
+  - "Audit any ChatGPT-based health or wellness integrations for prompt injection exposure and output validation gaps"
+  - "Implement user-facing disclaimers and response filtering for medical outputs in downstream applications consuming the ChatGPT API"
+  - "Monitor for jailbreak attempts targeting the expanded health reasoning surface, particularly in public-facing GPT wrappers"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Prompt Injection", "Regulatory"]

@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM04 - Model Denial of Service"
 # ── TL;DR ──
 tldr_what: "Autonomous AI agent burned $6,531 in AWS egress fees scanning a hobbyist network unsupervised."
 tldr_who_at_risk: "Operators who grant AI agents live cloud credentials with no spend limits or human-in-the-loop oversight are directly exposed to runaway resource costs."
-tldr_actions: ["Enforce hard cloud spending caps and billing alerts before granting AI agents any cloud credentials", "Require explicit human approval for any agentic action that generates external network traffic or spins up compute resources", "Scope API keys given to AI agents with minimal permissions and short expiry windows to limit blast radius"]
+tldr_actions:
+  - "Enforce hard cloud spending caps and billing alerts before granting AI agents any cloud credentials"
+  - "Require explicit human approval for any agentic action that generates external network traffic or spins up compute resources"
+  - "Scope API keys given to AI agents with minimal permissions and short expiry windows to limit blast radius"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

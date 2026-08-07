@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM02 - Insecure Out
 # ── TL;DR ──
 tldr_what: "Z.ai released GLM-5.2, a freely downloadable open-weight model reportedly matching frontier AI on cybersecurity and bug-finding tasks."
 tldr_who_at_risk: "Any organisation with internet-exposed software or infrastructure is newly at risk from actors who can now run frontier-grade vulnerability discovery locally, at scale, with no oversight."
-tldr_actions: ["Accelerate your own vulnerability remediation cadence — assume adversaries now have low-cost automated bug-finding at frontier quality", "Audit any internal use of GLM-5.2 or derivatives for supply chain integrity before deployment; verify weights against official checksums", "Review SOC detection rules for AI-assisted reconnaissance signatures, including high-volume automated probing and novel exploit pattern clusters"]
+tldr_actions:
+  - "Accelerate your own vulnerability remediation cadence — assume adversaries now have low-cost automated bug-finding at frontier quality"
+  - "Audit any internal use of GLM-5.2 or derivatives for supply chain integrity before deployment; verify weights against official checksums"
+  - "Review SOC detection rules for AI-assisted reconnaissance signatures, including high-volume automated probing and novel exploit pattern clusters"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Supply Chain", "Research", "Industry News"]

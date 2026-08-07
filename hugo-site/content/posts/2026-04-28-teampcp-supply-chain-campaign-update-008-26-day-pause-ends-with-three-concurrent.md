@@ -26,7 +26,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "TeamPCP resumes supply chain attacks, poisoning xinference PyPI and triggering a Bitwarden CLI cascade via compromised Docker image."
 tldr_who_at_risk: "AI/ML developers and DevSecOps teams using xinference, Checkmarx KICS, or npm packages within automated CI/CD pipelines are most directly exposed."
-tldr_actions: ["Audit all xinference PyPI installations and verify package integrity against known-good hashes", "Pin Docker image digests explicitly in CI/CD pipelines rather than using mutable 'latest' tags", "Scan npm dependency trees for CanisterSprawl indicators across @automagik, pgserve, @fairwords, and @openwebconcept namespaces"]
+tldr_actions:
+  - "Audit all xinference PyPI installations and verify package integrity against known-good hashes"
+  - "Pin Docker image digests explicitly in CI/CD pipelines rather than using mutable 'latest' tags"
+  - "Scan npm dependency trees for CanisterSprawl indicators across @automagik, pgserve, @fairwords, and @openwebconcept namespaces"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Industry News", "LLM Security"]

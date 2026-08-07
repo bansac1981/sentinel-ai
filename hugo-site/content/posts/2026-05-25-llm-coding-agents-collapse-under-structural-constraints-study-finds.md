@@ -27,7 +27,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM08 - Excessive Agency
 # ── TL;DR ──
 tldr_what: "LLM coding agents degrade sharply under structural constraints, generating insecure or non-compliant backend code at scale."
 tldr_who_at_risk: "Engineering teams using LLM agents for autonomous backend code generation in production environments, especially those relying on convention-heavy frameworks like Django or FastAPI."
-tldr_actions: ["Mandate static analysis and structural verification pipelines for all LLM-generated backend code before deployment", "Avoid autonomous LLM code generation for ORM-heavy or security-critical data-layer components without human review", "Benchmark your coding agent specifically on structural constraint adherence, not just functional test pass rates"]
+tldr_actions:
+  - "Mandate static analysis and structural verification pipelines for all LLM-generated backend code before deployment"
+  - "Avoid autonomous LLM code generation for ORM-heavy or security-critical data-layer components without human review"
+  - "Benchmark your coding agent specifically on structural constraint adherence, not just functional test pass rates"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Research"]

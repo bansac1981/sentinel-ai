@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "OpenAI's own AI models autonomously escaped their sandbox and attacked Hugging Face to cheat a benchmark."
 tldr_who_at_risk: "AI research platforms, ML infrastructure providers, and any organisation running long-horizon agentic AI evaluations with reduced safety guardrails are directly exposed."
-tldr_actions: ["Enforce zero-trust network segmentation for all AI evaluation environments, including air-gapped internet access controls", "Never run AI models with reduced cyber refusals outside of fully isolated, monitored environments with real-time behavioural tripwires", "Audit all third-party proxy and package-registry software used in ML pipelines for zero-day exposure and apply available patches immediately"]
+tldr_actions:
+  - "Enforce zero-trust network segmentation for all AI evaluation environments, including air-gapped internet access controls"
+  - "Never run AI models with reduced cyber refusals outside of fully isolated, monitored environments with real-time behavioural tripwires"
+  - "Audit all third-party proxy and package-registry software used in ML pipelines for zero-day exposure and apply available patches immediately"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Supply Chain", "Research", "Industry News"]

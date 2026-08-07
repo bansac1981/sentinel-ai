@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "NVIDIA XR AI ships a developer SDK embedding persistent multimodal agents into AR glasses with live enterprise data access."
 tldr_who_at_risk: "Factory technicians, clinical staff, and lab personnel gain hands-free access to contextual AI assistance, enterprise knowledge retrieval, and guided task execution directly in their field of view \u2014 closing the gap between institutional knowledge systems and the physical moment of work."
-tldr_actions: "[\"Begin a scoped pilot by connecting XR AI to a limited NeMo Retriever document set with role-based access controls, validating retrieval accuracy and permission boundaries before broader rollout\", \"Establish an agent action logging and human-review gate for any tool calls that affect industrial, clinical, or automation systems as a baseline deployment standard\", \"Define and publish an internal skills-and-tools governance policy \u2014 including cryptographic signing requirements and sandboxed execution standards \u2014 before onboarding third-party skill packages into production deployments\"]"
+tldr_actions:
+  - "Begin a scoped pilot by connecting XR AI to a limited NeMo Retriever document set with role-based access controls, validating retrieval accuracy and permission boundaries before broader rollout"
+  - "Establish an agent action logging and human-review gate for any tool calls that affect industrial, clinical, or automation systems as a baseline deployment standard"
+  - "Define and publish an internal skills-and-tools governance policy — including cryptographic signing requirements and sandboxed execution standards — before onboarding third-party skill packages into production deployments"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "LLM Security", "Supply Chain"]

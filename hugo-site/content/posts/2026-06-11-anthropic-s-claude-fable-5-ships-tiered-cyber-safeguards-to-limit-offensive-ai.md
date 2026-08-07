@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM1
 # ── TL;DR ──
 tldr_what: "Anthropic splits Claude Fable 5 into public and vetted tiers using AI classifiers to block offensive cyber capability access."
 tldr_who_at_risk: "Any organisation relying on Claude Fable 5 for security tooling may hit false-positive fallbacks; adversaries probing classifier boundaries could extract offensive uplift if bypass techniques mature."
-tldr_actions: ["Audit your Claude API integration to understand when fallback to Opus 4.8 is triggered and log those events", "Apply for Mythos 5 vetted access if your use case is defensive security, to avoid classifier false positives degrading tooling", "Monitor Anthropic's safeguard update cycle and re-evaluate classifier robustness after each tuning release"]
+tldr_actions:
+  - "Audit your Claude API integration to understand when fallback to Opus 4.8 is triggered and log those events"
+  - "Apply for Mythos 5 vetted access if your use case is defensive security, to avoid classifier false positives degrading tooling"
+  - "Monitor Anthropic's safeguard update cycle and re-evaluate classifier robustness after each tuning release"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Jailbreaks", "Agentic AI", "Regulatory", "Industry News", "Research"]

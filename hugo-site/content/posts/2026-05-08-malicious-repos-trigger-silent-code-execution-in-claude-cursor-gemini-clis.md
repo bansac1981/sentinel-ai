@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Malicious repositories silently trigger code execution in major AI coding CLI tools via weak warnings."
 tldr_who_at_risk: "Software developers using Claude Code, Cursor CLI, Gemini CLI, or GitHub Copilot CLI who clone or open untrusted repositories are directly exposed to host-level compromise."
-tldr_actions: ["Audit AI coding tool configurations to restrict automatic execution of repository-supplied instructions or scripts", "Treat all repository-embedded AI instruction files (e.g., .cursor, CLAUDE.md, system prompts) as untrusted input requiring explicit review", "Apply least-privilege sandboxing to AI CLI agents to limit blast radius of any code execution"]
+tldr_actions:
+  - "Audit AI coding tool configurations to restrict automatic execution of repository-supplied instructions or scripts"
+  - "Treat all repository-embedded AI instruction files (e.g., .cursor, CLAUDE.md, system prompts) as untrusted input requiring explicit review"
+  - "Apply least-privilege sandboxing to AI CLI agents to limit blast radius of any code execution"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Prompt Injection", "Agentic AI", "Supply Chain", "Research"]

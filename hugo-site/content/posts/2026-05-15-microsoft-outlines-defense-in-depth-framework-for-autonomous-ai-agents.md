@@ -27,7 +27,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Microsoft defines a four-layer security framework for autonomous AI agents acting in production systems."
 tldr_who_at_risk: "Organisations deploying autonomous AI agents in production are exposed to amplified blast radius from any permission, access control, or data protection weaknesses."
-tldr_actions: ["Enforce least-privilege permissions at the application layer before granting agents tool or data access", "Implement runtime guardrails and logging at the safety system layer to detect and interrupt anomalous agent behaviour", "Audit agentic supply chains — including third-party tools, workflows, and plugins — for compromise vectors"]
+tldr_actions:
+  - "Enforce least-privilege permissions at the application layer before granting agents tool or data access"
+  - "Implement runtime guardrails and logging at the safety system layer to detect and interrupt anomalous agent behaviour"
+  - "Audit agentic supply chains — including third-party tools, workflows, and plugins — for compromise vectors"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Prompt Injection", "Supply Chain", "Research"]

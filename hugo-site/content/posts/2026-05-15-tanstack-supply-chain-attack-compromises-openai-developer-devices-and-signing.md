@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "TanStack supply chain attack hit two OpenAI employee devices, exposing code-signing certificates and internal repositories."
 tldr_who_at_risk: "macOS users of OpenAI apps and developers relying on TanStack or shared open-source CI/CD tooling are most directly exposed."
-tldr_actions: ["Update ChatGPT Desktop, Codex App, Codex CLI, and Atlas on macOS before June 12, 2026", "Audit all dependencies and CI/CD pipelines for TanStack or other TeamPCP-targeted packages", "Rotate credentials and code-signing certificates for any repositories exposed to compromised developer environments"]
+tldr_actions:
+  - "Update ChatGPT Desktop, Codex App, Codex CLI, and Atlas on macOS before June 12, 2026"
+  - "Audit all dependencies and CI/CD pipelines for TanStack or other TeamPCP-targeted packages"
+  - "Rotate credentials and code-signing certificates for any repositories exposed to compromised developer environments"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Industry News", "LLM Security"]

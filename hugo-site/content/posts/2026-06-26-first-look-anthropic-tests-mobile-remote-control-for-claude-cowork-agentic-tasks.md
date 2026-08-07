@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM08 - Excessive Agency", "LLM0
 # ── TL;DR ──
 tldr_what: "Anthropic is testing a mobile interface for Claude Cowork, letting phones remotely control a background-running desktop AI agent with local file access."
 tldr_who_at_risk: "Enterprise users and knowledge workers running Claude Cowork on corporate endpoints, whose mobile devices now serve as a remote attack vector into desktop AI agents."
-tldr_actions: ["Inventory all endpoints running Claude Cowork and classify them as hosting persistent agentic processes requiring EDR monitoring", "Enforce MFA and session-binding controls on Claude mobile app authentication to prevent cross-device session hijacking", "Define and enforce data-access policies governing which file paths Cowork agents are permitted to read, write, or enumerate"]
+tldr_actions:
+  - "Inventory all endpoints running Claude Cowork and classify them as hosting persistent agentic processes requiring EDR monitoring"
+  - "Enforce MFA and session-binding controls on Claude mobile app authentication to prevent cross-device session hijacking"
+  - "Define and enforce data-access policies governing which file paths Cowork agents are permitted to read, write, or enumerate"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection"]

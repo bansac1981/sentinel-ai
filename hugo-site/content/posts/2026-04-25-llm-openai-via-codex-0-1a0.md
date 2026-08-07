@@ -26,7 +26,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "New tool hijacks Codex CLI credentials to access OpenAI models via an unofficial backdoor API endpoint."
 tldr_who_at_risk: "Organisations and individuals with Codex CLI installed are at risk of credential misuse and unauthorised API quota consumption."
-tldr_actions: ["Audit Codex CLI credential storage and restrict file permissions on token files", "Monitor OpenAI API usage for anomalous requests originating outside expected tooling", "Avoid installing unvetted third-party LLM plugins that request access to existing CLI credentials"]
+tldr_actions:
+  - "Audit Codex CLI credential storage and restrict file permissions on token files"
+  - "Monitor OpenAI API usage for anomalous requests originating outside expected tooling"
+  - "Avoid installing unvetted third-party LLM plugins that request access to existing CLI credentials"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Supply Chain", "Industry News"]

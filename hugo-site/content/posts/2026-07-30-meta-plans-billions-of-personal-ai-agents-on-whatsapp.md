@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Meta plans to deploy personal AI agents for billions of users via WhatsApp within five years."
 tldr_who_at_risk: "Any individual using Meta messaging platforms where personal agents manage sensitive life domains \u2014 finances, health, and relationships \u2014 is newly exposed to agent-mediated data theft and manipulation."
-tldr_actions: ["Establish agent identity verification standards before personal agents are trusted with sensitive domain actions", "Audit and restrict agent permission scopes for financial and health data access as Meta's rollout accelerates", "Model prompt injection threat scenarios specific to messaging-delivered agents and develop detection playbooks now"]
+tldr_actions:
+  - "Establish agent identity verification standards before personal agents are trusted with sensitive domain actions"
+  - "Audit and restrict agent permission scopes for financial and health data access as Meta's rollout accelerates"
+  - "Model prompt injection threat scenarios specific to messaging-delivered agents and develop detection playbooks now"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection", "Industry News"]

@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM07 - Insecure Plu
 # ── TL;DR ──
 tldr_what: "A fake AI agent skill passed Cisco, NVIDIA, and skills.sh scanners and reached 26,000 agents via a post-install URL swap technique."
 tldr_who_at_risk: "Any enterprise or individual deploying AI agents that consume third-party skills from public marketplaces, particularly non-technical users targeted by social advertising."
-tldr_actions: ["Prohibit agent skills that reference external URLs for setup instructions; require all skill logic to be self-contained and re-scanned on any dependency change", "Implement continuous runtime monitoring of outbound URLs fetched by agents, alerting on domain changes or new script-delivery patterns post-install", "Treat GitHub star counts and marketplace provenance as zero-trust signals; enforce an internal allow-list of approved skills with periodic re-verification"]
+tldr_actions:
+  - "Prohibit agent skills that reference external URLs for setup instructions; require all skill logic to be self-contained and re-scanned on any dependency change"
+  - "Implement continuous runtime monitoring of outbound URLs fetched by agents, alerting on domain changes or new script-delivery patterns post-install"
+  - "Treat GitHub star counts and marketplace provenance as zero-trust signals; enforce an internal allow-list of approved skills with periodic re-verification"
 
 # ── Taxonomies ──
 categories: ["First Look", "Supply Chain", "Agentic AI", "LLM Security", "Prompt Injection"]

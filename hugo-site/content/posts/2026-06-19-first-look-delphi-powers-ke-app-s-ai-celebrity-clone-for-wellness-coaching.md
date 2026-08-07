@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM03 - Training Data Poisoning"
 # ── TL;DR ──
 tldr_what: "Delphi-powered K\u0113 app ships a real-time AI voice clone of celebrity Karamo Brown for wellness coaching."
 tldr_who_at_risk: "Emotionally vulnerable users of the app, the celebrity's broader reputation, and any other Delphi-hosted persona deployments sharing underlying infrastructure."
-tldr_actions: ["Red-team the persona boundary: test whether 'AI Karamo' can be prompted to provide harmful mental-health or medical advice outside its intended scope", "Audit Delphi's supply chain controls and data isolation guarantees before deploying similar celebrity-clone integrations in regulated wellness contexts", "Implement hard-coded escalation triggers that route users expressing crisis signals to human or emergency resources regardless of LLM output"]
+tldr_actions:
+  - "Red-team the persona boundary: test whether 'AI Karamo' can be prompted to provide harmful mental-health or medical advice outside its intended scope"
+  - "Audit Delphi's supply chain controls and data isolation guarantees before deploying similar celebrity-clone integrations in regulated wellness contexts"
+  - "Implement hard-coded escalation triggers that route users expressing crisis signals to human or emergency resources regardless of LLM output"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Prompt Injection", "Supply Chain", "Industry News"]

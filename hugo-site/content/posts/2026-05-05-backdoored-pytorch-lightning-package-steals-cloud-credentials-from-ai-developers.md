@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Backdoored PyTorch Lightning v2.6.3 on PyPI silently stole cloud credentials from AI developers."
 tldr_who_at_risk: "AI/ML developers who installed or imported PyTorch Lightning v2.6.3 are at risk of having cloud, browser, and API credentials exfiltrated."
-tldr_actions: ["Immediately downgrade to PyTorch Lightning v2.6.1 or the latest safe release", "Rotate all secrets, API keys, GitHub tokens, and cloud credentials if v2.6.3 was imported", "Audit CI/CD pipelines and developer environments for signs of ShaiWorm activity"]
+tldr_actions:
+  - "Immediately downgrade to PyTorch Lightning v2.6.1 or the latest safe release"
+  - "Rotate all secrets, API keys, GitHub tokens, and cloud credentials if v2.6.3 was imported"
+  - "Audit CI/CD pipelines and developer environments for signs of ShaiWorm activity"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "LLM Security", "Industry News"]

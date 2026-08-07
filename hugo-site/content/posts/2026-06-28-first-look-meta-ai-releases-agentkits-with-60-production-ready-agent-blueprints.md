@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "Meta AI releases AgentKits: 60 free, open agent blueprints with system prompts and tool configs across 30 enterprise categories."
 tldr_who_at_risk: "Any organisation deploying AgentKits blueprints \u2014 especially those using access provisioning, SecOps triage, or compliance agents \u2014 is exposed if blueprints are adopted without independent security review."
-tldr_actions: ["Treat all public AgentKits system prompts as adversarially known — rotate or substantially modify any deployed verbatim", "Audit access provisioning and SecOps blueprint deployments against their documented escalation thresholds to ensure adversarial inputs cannot manipulate auto-approval logic", "Establish an internal approval gate before any AgentKits blueprint reaches production, including tool scope review and injection testing"]
+tldr_actions:
+  - "Treat all public AgentKits system prompts as adversarially known — rotate or substantially modify any deployed verbatim"
+  - "Audit access provisioning and SecOps blueprint deployments against their documented escalation thresholds to ensure adversarial inputs cannot manipulate auto-approval logic"
+  - "Establish an internal approval gate before any AgentKits blueprint reaches production, including tool scope review and injection testing"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "Prompt Injection", "Supply Chain", "LLM Security"]

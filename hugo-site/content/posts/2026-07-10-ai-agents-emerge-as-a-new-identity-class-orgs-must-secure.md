@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "AI agents are a distinct identity class that existing IAM frameworks were not built to govern."
 tldr_who_at_risk: "Any organisation deploying AI agents under legacy service-account or API-token governance frameworks is newly exposed to undetected privilege abuse and lateral movement."
-tldr_actions: ["Inventory all deployed AI agents and audit their current permission scopes against least-privilege principles", "Establish agent-specific identity lifecycle policies including credential rotation, decommissioning, and anomaly baselines", "Instrument agent activity logs into your SIEM with dedicated detection rules distinct from human and service-account baselines"]
+tldr_actions:
+  - "Inventory all deployed AI agents and audit their current permission scopes against least-privilege principles"
+  - "Establish agent-specific identity lifecycle policies including credential rotation, decommissioning, and anomaly baselines"
+  - "Instrument agent activity logs into your SIEM with dedicated detection rules distinct from human and service-account baselines"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security"]

@@ -30,7 +30,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "Hidden prompt injection in a repository tricks Claude Code into spawning a reverse shell on the developer's machine."
 tldr_who_at_risk: "Developers using Claude Code to analyse or work with untrusted repositories are directly exposed, as the agent operates with local system privileges."
-tldr_actions: ["Audit all repositories before opening them with Claude Code or any agentic coding assistant", "Apply principle of least privilege — restrict Claude Code's file system and network access using sandboxing or containerisation", "Monitor for unexpected outbound network connections spawned by AI coding agents during development sessions"]
+tldr_actions:
+  - "Audit all repositories before opening them with Claude Code or any agentic coding assistant"
+  - "Apply principle of least privilege — restrict Claude Code's file system and network access using sandboxing or containerisation"
+  - "Monitor for unexpected outbound network connections spawned by AI coding agents during development sessions"
 
 # ── Taxonomies ──
 categories: ["Prompt Injection", "Agentic AI", "LLM Security", "Supply Chain", "Research"]

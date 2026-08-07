@@ -26,7 +26,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Critical OpenClaw flaw lets low-privilege attackers silently seize full admin control of AI agent instances."
 tldr_who_at_risk: "Organizations and developers running OpenClaw as a company-wide AI agent platform are most exposed, as a compromised instance holds broad access to credentials, files, and connected services."
-tldr_actions: ["Patch all OpenClaw instances immediately to the latest version addressing CVE-2026-33579", "Audit all connected data sources and credentials accessible to existing OpenClaw deployments for signs of exfiltration", "Assume compromise on any OpenClaw instance that ran unpatched during the exposure window and rotate all linked credentials"]
+tldr_actions:
+  - "Patch all OpenClaw instances immediately to the latest version addressing CVE-2026-33579"
+  - "Audit all connected data sources and credentials accessible to existing OpenClaw deployments for signs of exfiltration"
+  - "Assume compromise on any OpenClaw instance that ran unpatched during the exposure window and rotate all linked credentials"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News"]

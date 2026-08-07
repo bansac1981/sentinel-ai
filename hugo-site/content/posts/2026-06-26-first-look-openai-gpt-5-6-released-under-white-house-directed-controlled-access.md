@@ -34,7 +34,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM08 - Excessive Ag
 # ── TL;DR ──
 tldr_what: "OpenAI's GPT-5.6 will debut in a government-gated partner-only preview, with the White House approving access customer by customer."
 tldr_who_at_risk: "Organisations in OpenAI's partner pipeline, government reviewers with pre-release access, and any enterprise running unpatched software that a frontier cyber model could autonomously probe."
-tldr_actions: ["Audit whether your organisation or any third-party vendor is in the GPT-5.6 approved-access cohort and review their credential and access controls", "Assume frontier-class autonomous vulnerability discovery is operationally available to sophisticated threat actors now and accelerate patch cadence for known CVEs", "Establish internal policy for how employees interacting with government-previewed AI models handle outputs, logs, and model-derived intelligence"]
+tldr_actions:
+  - "Audit whether your organisation or any third-party vendor is in the GPT-5.6 approved-access cohort and review their credential and access controls"
+  - "Assume frontier-class autonomous vulnerability discovery is operationally available to sophisticated threat actors now and accelerate patch cadence for known CVEs"
+  - "Establish internal policy for how employees interacting with government-previewed AI models handle outputs, logs, and model-derived intelligence"
 
 # ── Taxonomies ──
 categories: ["First Look", "Regulatory", "LLM Security", "Supply Chain", "Agentic AI"]

@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Attackers weaponised the Hermes open-source AI agent in YOLO mode to spy on Thailand's Ministry of Finance."
 tldr_who_at_risk: "Government ministries and public-sector organisations are most exposed, as autonomous AI agents can operate persistently inside networks with minimal human oversight."
-tldr_actions: ["Audit and restrict deployment of open-source agentic AI tools within sensitive network environments", "Enforce strict guardrails and human-in-the-loop approval for any autonomous agent actions touching government infrastructure", "Monitor for anomalous autonomous process execution patterns indicative of AI agent activity"]
+tldr_actions:
+  - "Audit and restrict deployment of open-source agentic AI tools within sensitive network environments"
+  - "Enforce strict guardrails and human-in-the-loop approval for any autonomous agent actions touching government infrastructure"
+  - "Monitor for anomalous autonomous process execution patterns indicative of AI agent activity"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Jailbreaks", "Industry News"]

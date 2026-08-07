@@ -34,7 +34,10 @@ owasp_categories: ["LLM02 - Insecure Output Handling", "LLM08 - Excessive Agency
 # ── TL;DR ──
 tldr_what: "OpenAI's internal Astra model reportedly solved ten major open problems in mathematics and computer science."
 tldr_who_at_risk: "Security researchers, cryptography teams, and software vendors whose vulnerability landscapes can now be systematically analysed at machine speed."
-tldr_actions: ["Audit your threat model for scenarios where AI-accelerated vulnerability discovery compresses your patch window", "Engage your cryptography team to identify any in-use protocols that rely on the hardness of problems susceptible to advanced formal reasoning", "Monitor for third-party tools and APIs that may soon integrate Astra-class reasoning, expanding your supply chain exposure"]
+tldr_actions:
+  - "Audit your threat model for scenarios where AI-accelerated vulnerability discovery compresses your patch window"
+  - "Engage your cryptography team to identify any in-use protocols that rely on the hardness of problems susceptible to advanced formal reasoning"
+  - "Monitor for third-party tools and APIs that may soon integrate Astra-class reasoning, expanding your supply chain exposure"
 
 # ── Taxonomies ──
 categories: ["First Look", "LLM Security", "Agentic AI", "Research"]

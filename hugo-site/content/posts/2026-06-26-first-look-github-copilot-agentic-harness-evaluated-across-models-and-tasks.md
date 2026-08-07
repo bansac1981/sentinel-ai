@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM05 - Supply Chain Vulnerabili
 # ── TL;DR ──
 tldr_what: "GitHub published performance and efficiency evaluations of the Copilot agentic harness running across multiple models and coding task types."
 tldr_who_at_risk: "Enterprise development teams and platform engineers relying on GitHub Copilot's agentic workflows for automated coding, testing, or deployment tasks are newly exposed to orchestration-layer attacks."
-tldr_actions: ["Audit which model endpoints the Copilot agentic harness is authorised to select and enforce allowlists for approved backends", "Instrument harness orchestration logs to detect anomalous task routing, unexpected model switches, or abnormally long agentic chains", "Apply prompt injection mitigations at each task boundary within the harness, not solely at the initial user input layer"]
+tldr_actions:
+  - "Audit which model endpoints the Copilot agentic harness is authorised to select and enforce allowlists for approved backends"
+  - "Instrument harness orchestration logs to detect anomalous task routing, unexpected model switches, or abnormally long agentic chains"
+  - "Apply prompt injection mitigations at each task boundary within the harness, not solely at the initial user input layer"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain", "Prompt Injection"]

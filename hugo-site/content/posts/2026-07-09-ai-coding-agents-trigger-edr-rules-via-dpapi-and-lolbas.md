@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "AI coding agents are triggering high-fidelity EDR rules by mimicking attacker techniques on developer machines."
 tldr_who_at_risk: "Enterprise security teams and developers using agentic AI tools on Windows endpoints, where behavioral detection rules cannot distinguish agent activity from real attacks."
-tldr_actions: ["Audit AI agent configurations and disable dangerous flags such as Claude Code's --dangerously-skip-permissions in enterprise environments", "Create allow-list exceptions or contextual suppression rules for known AI agent processes to reduce alert fatigue without blanking high-signal detections", "Monitor and log all DPAPI, certutil, and bitsadmin invocations originating from AI agent parent processes for anomaly baselining"]
+tldr_actions:
+  - "Audit AI agent configurations and disable dangerous flags such as Claude Code's --dangerously-skip-permissions in enterprise environments"
+  - "Create allow-list exceptions or contextual suppression rules for known AI agent processes to reduce alert fatigue without blanking high-signal detections"
+  - "Monitor and log all DPAPI, certutil, and bitsadmin invocations originating from AI agent parent processes for anomaly baselining"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News", "Research"]

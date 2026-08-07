@@ -26,7 +26,10 @@ owasp_categories: ["LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "Claude AI identified 271 Firefox vulnerabilities in collaboration with Mozilla, fixed in Firefox 150."
 tldr_who_at_risk: "Firefox users and browser vendors are indirectly affected; the broader implication is that unpatched codebases not yet subject to AI-assisted auditing carry elevated residual risk."
-tldr_actions: ["Evaluate AI-assisted code auditing tools (e.g., Claude, GPT-4) for integration into your SDL pipeline", "Audit legacy and high-attack-surface codebases using LLM-powered static analysis before threat actors do", "Avoid overreliance on AI audit results alone — validate findings with human security review and fuzzing"]
+tldr_actions:
+  - "Evaluate AI-assisted code auditing tools (e.g., Claude, GPT-4) for integration into your SDL pipeline"
+  - "Audit legacy and high-attack-surface codebases using LLM-powered static analysis before threat actors do"
+  - "Avoid overreliance on AI audit results alone — validate findings with human security review and fuzzing"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Research", "Industry News", "Agentic AI"]

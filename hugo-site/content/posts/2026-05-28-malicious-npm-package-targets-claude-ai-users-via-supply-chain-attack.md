@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "Malicious npm package silently exfiltrated Claude AI workspace files to attacker-controlled GitHub repository."
 tldr_who_at_risk: "Developers who install unvetted npm packages while using Anthropic's Claude AI tooling are most exposed, as the malware targets Claude's dedicated file upload/output directory."
-tldr_actions: ["Audit npm dependencies for 'mouse5212-super-formatter' and remove immediately", "Rotate any GitHub tokens or credentials present in affected environment variables", "Enforce npm package vetting policies and monitor postinstall script behaviour in CI/CD pipelines"]
+tldr_actions:
+  - "Audit npm dependencies for 'mouse5212-super-formatter' and remove immediately"
+  - "Rotate any GitHub tokens or credentials present in affected environment variables"
+  - "Enforce npm package vetting policies and monitor postinstall script behaviour in CI/CD pipelines"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "LLM Security", "Industry News"]

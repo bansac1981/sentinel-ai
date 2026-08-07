@@ -27,7 +27,10 @@ owasp_categories: ["LLM03 - Training Data Poisoning", "LLM05 - Supply Chain Vuln
 # ── TL;DR ──
 tldr_what: "Unauthorized actors reportedly accessed Anthropic's Claude Mythos preview model within hours of its limited release."
 tldr_who_at_risk: "U.S. defense and intelligence agencies deploying agentic AI on classified networks face the highest exposure due to sensitive data, multi-domain operations, and mission-critical workflows."
-tldr_actions: ["Implement hardware-enforced cross-domain controls before deploying any AI model on classified or sensitive networks", "Audit and inspect all training data and commercial models entering classified environments for poisoning or staleness", "Enforce least-privilege governed access for all AI consumers including analysts, coalition partners, and edge operators"]
+tldr_actions:
+  - "Implement hardware-enforced cross-domain controls before deploying any AI model on classified or sensitive networks"
+  - "Audit and inspect all training data and commercial models entering classified environments for poisoning or staleness"
+  - "Enforce least-privilege governed access for all AI consumers including analysts, coalition partners, and edge operators"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Supply Chain", "Data Poisoning", "Industry News"]

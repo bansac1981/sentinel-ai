@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM03 - Training Dat
 # ── TL;DR ──
 tldr_what: "AI BOMs are being positioned as essential supply chain transparency tools for managing ML model risk."
 tldr_who_at_risk: "Enterprises deploying third-party or open-source AI models without component visibility are most exposed to undetected supply chain compromises."
-tldr_actions: ["Inventory all AI/ML models in production and document their training data, dependencies, and provenance", "Adopt or pilot an AI BOM standard (e.g., CycloneDX ML extension) for new model deployments", "Integrate AI BOM review into procurement and third-party risk assessment processes"]
+tldr_actions:
+  - "Inventory all AI/ML models in production and document their training data, dependencies, and provenance"
+  - "Adopt or pilot an AI BOM standard (e.g., CycloneDX ML extension) for new model deployments"
+  - "Integrate AI BOM review into procurement and third-party risk assessment processes"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Regulatory", "Industry News", "Research"]

@@ -30,7 +30,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance", "LLM05 - 
 # ── TL;DR ──
 tldr_what: "AI systems let low-skill attackers autonomously hack networks, deploy ransomware, and steal data."
 tldr_who_at_risk: "Any internet-connected organisation is exposed, as AI dramatically lowers the expertise threshold for sophisticated cyberattacks."
-tldr_actions: ["Deploy AI-assisted defensive tooling to match the speed and scale of AI-enabled threats", "Monitor for autonomous attack patterns that lack the hallmarks of skilled human operators", "Do not rely solely on vendor guardrails — assume uncensored open-source models are available to adversaries"]
+tldr_actions:
+  - "Deploy AI-assisted defensive tooling to match the speed and scale of AI-enabled threats"
+  - "Monitor for autonomous attack patterns that lack the hallmarks of skilled human operators"
+  - "Do not rely solely on vendor guardrails — assume uncensored open-source models are available to adversaries"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Regulatory", "Industry News"]

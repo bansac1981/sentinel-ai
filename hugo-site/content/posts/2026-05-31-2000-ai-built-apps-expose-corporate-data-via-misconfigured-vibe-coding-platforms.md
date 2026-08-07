@@ -27,7 +27,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM07 - Insecure
 # ── TL;DR ──
 tldr_what: "Over 2,000 AI-built corporate apps sit exposed on the open web with no access controls."
 tldr_who_at_risk: "Enterprises across all industries whose employees have used vibe-coding platforms to build and publish apps connected to production systems without IT oversight."
-tldr_actions: ["Inventory AI-assisted development platform usage across the organisation and identify publicly accessible artifacts", "Enforce access control policies at the vibe-coding platform level, requiring authentication by default for all published apps", "Extend CASB and web asset discovery tooling to monitor AI-native development platforms as a new shadow-IT vector"]
+tldr_actions:
+  - "Inventory AI-assisted development platform usage across the organisation and identify publicly accessible artifacts"
+  - "Enforce access control policies at the vibe-coding platform level, requiring authentication by default for all published apps"
+  - "Extend CASB and web asset discovery tooling to monitor AI-native development platforms as a new shadow-IT vector"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Supply Chain", "Industry News"]

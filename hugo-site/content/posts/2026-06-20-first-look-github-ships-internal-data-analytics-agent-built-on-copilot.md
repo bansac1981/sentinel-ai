@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM02 - Insecure Output Handling
 # ── TL;DR ──
 tldr_what: "GitHub published its internal blueprint for an agentic data analytics tool built on Copilot with autonomous query execution."
 tldr_who_at_risk: "Engineering and data teams deploying LLM-based analytics agents with access to internal databases and business intelligence systems."
-tldr_actions: ["Enforce query allowlisting or sandboxed execution environments for any LLM-generated SQL before it reaches production data stores", "Implement per-query human-in-the-loop approval gates for high-sensitivity data sources accessed by analytics agents", "Audit system prompts and context windows for data schema leakage and restrict agent memory to least-privilege data access"]
+tldr_actions:
+  - "Enforce query allowlisting or sandboxed execution environments for any LLM-generated SQL before it reaches production data stores"
+  - "Implement per-query human-in-the-loop approval gates for high-sensitivity data sources accessed by analytics agents"
+  - "Audit system prompts and context windows for data schema leakage and restrict agent memory to least-privilege data access"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Prompt Injection"]

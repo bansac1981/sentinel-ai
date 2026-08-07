@@ -30,7 +30,10 @@ owasp_categories: ["LLM10 - Model Theft", "LLM06 - Sensitive Information Disclos
 # ── TL;DR ──
 tldr_what: "China-linked group allegedly accessed Anthropic's restricted Mythos frontier AI model, triggering White House export controls."
 tldr_who_at_risk: "Organisations and governments relying on Anthropic's frontier models are most exposed, as adversarial access could enable capability replication via distillation."
-tldr_actions: ["Audit access logs and API credentials for all frontier model deployments immediately", "Enforce strict access controls and zero-trust principles for restricted AI model environments", "Monitor for signs of model distillation activity — unusual inference volumes or structured query patterns targeting capability boundaries"]
+tldr_actions:
+  - "Audit access logs and API credentials for all frontier model deployments immediately"
+  - "Enforce strict access controls and zero-trust principles for restricted AI model environments"
+  - "Monitor for signs of model distillation activity — unusual inference volumes or structured query patterns targeting capability boundaries"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Model Theft", "Jailbreaks", "Regulatory", "Industry News"]

@@ -34,7 +34,12 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Researchers published a PoC that hides prompt injection inside PNG images to make AI coding agents silently steal repo secrets."
 tldr_who_at_risk: "Engineering teams using AI code review tools and coding agents \u2014 such as CodeRabbit or similar \u2014 on repositories that accept external pull requests are directly exposed."
-tldr_actions: ["Audit all AGENTS.md, CLAUDE.md, and equivalent agent-policy files in your repositories for external image references", "Configure AI review tools to treat image files as reviewable artifacts in agentic contexts, not excluded binary blobs", "Restrict AI agent filesystem permissions so agents cannot read .env or credential files without explicit, scoped human approval", "Implement secrets-scanning on all agent-generated code commits, including numeric or encoded constant arrays", "Enforce mandatory human review for any PR that modifies agent convention files, regardless of bot review outcomes"]
+tldr_actions:
+  - "Audit all AGENTS.md, CLAUDE.md, and equivalent agent-policy files in your repositories for external image references"
+  - "Configure AI review tools to treat image files as reviewable artifacts in agentic contexts, not excluded binary blobs"
+  - "Restrict AI agent filesystem permissions so agents cannot read .env or credential files without explicit, scoped human approval"
+  - "Implement secrets-scanning on all agent-generated code commits, including numeric or encoded constant arrays"
+  - "Enforce mandatory human review for any PR that modifies agent convention files, regardless of bot review outcomes"
 
 # ── Taxonomies ──
 categories: ["First Look", "Prompt Injection", "Agentic AI", "Supply Chain", "LLM Security", "Research"]

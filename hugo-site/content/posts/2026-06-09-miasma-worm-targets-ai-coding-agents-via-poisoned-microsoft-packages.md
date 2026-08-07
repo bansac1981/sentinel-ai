@@ -27,7 +27,10 @@ owasp_categories: ["LLM05 - Supply Chain Vulnerabilities", "LLM06 - Sensitive In
 # ── TL;DR ──
 tldr_what: "73 Microsoft packages infected with Miasma credential stealer, triggered by AI coding agents."
 tldr_who_at_risk: "Developers using AI coding agents to work with Microsoft open source packages are directly exposed, with cloud credentials and developer tool configs at risk."
-tldr_actions: ["Audit all recently installed Microsoft npm/PyPI packages against the 73 flagged identifiers and treat any usage via AI agent as a full compromise event", "Rotate all cloud credentials (AWS, Azure, GCP, Kubernetes) and secrets stored in password managers on any affected developer machines", "Restrict AI coding agent permissions to read-only package access and enforce sandboxed execution environments before installing open source dependencies"]
+tldr_actions:
+  - "Audit all recently installed Microsoft npm/PyPI packages against the 73 flagged identifiers and treat any usage via AI agent as a full compromise event"
+  - "Rotate all cloud credentials (AWS, Azure, GCP, Kubernetes) and secrets stored in password managers on any affected developer machines"
+  - "Restrict AI coding agent permissions to read-only package access and enforce sandboxed execution environments before installing open source dependencies"
 
 # ── Taxonomies ──
 categories: ["Supply Chain", "Agentic AI", "LLM Security", "Industry News"]

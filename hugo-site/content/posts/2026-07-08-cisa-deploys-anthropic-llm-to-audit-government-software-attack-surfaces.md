@@ -30,7 +30,10 @@ owasp_categories: ["LLM06 - Sensitive Information Disclosure", "LLM09 - Overreli
 # ── TL;DR ──
 tldr_what: "CISA is using Anthropic's Mythos LLM to scan federal government software for security vulnerabilities."
 tldr_who_at_risk: "U.S. federal agencies and their software vendors are most exposed, given the sensitivity of codebases being analysed by a commercial AI model."
-tldr_actions: ["Audit data handling agreements with any commercial LLM provider processing government source code", "Validate AI-generated vulnerability findings with human expert review to prevent overreliance", "Assess the attack surface of the LLM pipeline itself, including API access controls and output integrity"]
+tldr_actions:
+  - "Audit data handling agreements with any commercial LLM provider processing government source code"
+  - "Validate AI-generated vulnerability findings with human expert review to prevent overreliance"
+  - "Assess the attack surface of the LLM pipeline itself, including API access controls and output integrity"
 
 # ── Taxonomies ──
 categories: ["LLM Security", "Agentic AI", "Regulatory", "Industry News"]

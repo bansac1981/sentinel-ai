@@ -27,7 +27,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM09 - Overreliance"]
 # ── TL;DR ──
 tldr_what: "Sweet Security launches runtime-aware agentic AI red teaming to outpace AI-assisted cyberattacks at scale."
 tldr_who_at_risk: "Cloud-native organisations facing high vulnerability volume are most exposed, as human teams cannot triage or remediate exploitable chains fast enough."
-tldr_actions: ["Prioritise runtime-context-aware vulnerability triage over static scanner outputs", "Evaluate agentic red teaming tools that ingest live environment topology before deployment", "Establish governance controls for autonomous AI security agents, including scope limits and human-in-the-loop checkpoints"]
+tldr_actions:
+  - "Prioritise runtime-context-aware vulnerability triage over static scanner outputs"
+  - "Evaluate agentic red teaming tools that ingest live environment topology before deployment"
+  - "Establish governance controls for autonomous AI security agents, including scope limits and human-in-the-loop checkpoints"
 
 # ── Taxonomies ──
 categories: ["Agentic AI", "LLM Security", "Industry News", "Research"]

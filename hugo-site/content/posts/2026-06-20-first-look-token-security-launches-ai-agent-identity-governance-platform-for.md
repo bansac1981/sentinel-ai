@@ -34,7 +34,10 @@ owasp_categories: ["LLM08 - Excessive Agency", "LLM01 - Prompt Injection", "LLM0
 # ── TL;DR ──
 tldr_what: "Token Security identifies and addresses AI agents as unmanaged enterprise identities with broad, ungoverned access to critical business systems."
 tldr_who_at_risk: "Enterprises that have connected AI agents to production systems, SaaS platforms, or cloud environments without applying IAM lifecycle controls to those agents."
-tldr_actions: ["Inventory all AI agents in your environment and treat each as a non-human identity requiring a formal access review", "Audit credentials used by AI agents — revoke any that are shared, repurposed, or over-provisioned relative to least-privilege requirements", "Instrument agent activity with the same SIEM/UEBA telemetry applied to service accounts, flagging anomalous cross-system actions"]
+tldr_actions:
+  - "Inventory all AI agents in your environment and treat each as a non-human identity requiring a formal access review"
+  - "Audit credentials used by AI agents — revoke any that are shared, repurposed, or over-provisioned relative to least-privilege requirements"
+  - "Instrument agent activity with the same SIEM/UEBA telemetry applied to service accounts, flagging anomalous cross-system actions"
 
 # ── Taxonomies ──
 categories: ["First Look", "Agentic AI", "LLM Security", "Supply Chain"]

@@ -34,7 +34,10 @@ owasp_categories: ["LLM01 - Prompt Injection", "LLM06 - Sensitive Information Di
 # ── TL;DR ──
 tldr_what: "Anthropic and OpenAI now offer vetted researchers AI access with reduced cybersecurity guardrails via formal application programs."
 tldr_who_at_risk: "Organisations relying on AI provider guardrails as a security control are exposed if adversaries successfully impersonate or compromise vetted researcher accounts."
-tldr_actions: ["Audit whether any staff or contractors hold vetted-access credentials and enforce MFA and session monitoring on those accounts", "Treat guardrail-reduced model access as a privileged credential class — apply the same controls as privileged identity management", "Establish internal policy defining acceptable use of any guardrail-reduced AI access before applying to vendor programs"]
+tldr_actions:
+  - "Audit whether any staff or contractors hold vetted-access credentials and enforce MFA and session monitoring on those accounts"
+  - "Treat guardrail-reduced model access as a privileged credential class — apply the same controls as privileged identity management"
+  - "Establish internal policy defining acceptable use of any guardrail-reduced AI access before applying to vendor programs"
 
 # ── Taxonomies ──
 categories: ["First Look", "Jailbreaks", "LLM Security", "Regulatory", "Research"]

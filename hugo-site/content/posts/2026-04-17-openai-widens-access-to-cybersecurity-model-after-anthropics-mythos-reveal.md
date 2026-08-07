@@ -9,7 +9,10 @@ summary: "OpenAI has expanded access to GPT-5.4-Cyber, a fine-tuned model design
 # ── TL;DR ──
 tldr_what: "OpenAI expands GPT-5.4-Cyber access, escalating dual-use risks in AI security tools."
 tldr_who_at_risk: "Security practitioners and defenders facing increased risk of model jailbreaks and misuse by lower-skilled threat actors."
-tldr_actions: ["Enforce strict access controls and identity verification for cybersecurity model deployments.", "Audit fine-tuned model safety guardrails against offensive tradecraft extraction attempts.", "Establish industry policy standards for competitive pressure in security-focused AI model releases."]
+tldr_actions:
+  - "Enforce strict access controls and identity verification for cybersecurity model deployments."
+  - "Audit fine-tuned model safety guardrails against offensive tradecraft extraction attempts."
+  - "Establish industry policy standards for competitive pressure in security-focused AI model releases."
 source: "SecurityWeek"
 source_url: "https://www.securityweek.com/openai-widens-access-to-cybersecurity-model-after-anthropics-mythos-reveal/"
 source_date: 2026-04-16T14:27:06+00:00

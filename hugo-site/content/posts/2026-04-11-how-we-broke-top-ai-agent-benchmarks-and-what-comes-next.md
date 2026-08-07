@@ -8,7 +8,10 @@ summary: "Researchers at UC Berkeley demonstrated that every major AI agent benc
 # ── TL;DR ──
 tldr_what: "UC Berkeley researchers exploited every major AI agent benchmark to achieve perfect scores without solving any tasks."
 tldr_who_at_risk: "AI procurement teams, researchers, and enterprises relying on benchmark scores to evaluate and deploy AI agents in production."
-tldr_actions: ["Audit evaluation harness code for environmental manipulation vulnerabilities before trusting benchmark results.", "Implement isolated sandboxing and result validation to prevent pytest hooks, file system leaks, and DOM injection attacks.", "Require independent task verification and adversarial testing before using benchmarks for deployment decisions."]
+tldr_actions:
+  - "Audit evaluation harness code for environmental manipulation vulnerabilities before trusting benchmark results."
+  - "Implement isolated sandboxing and result validation to prevent pytest hooks, file system leaks, and DOM injection attacks."
+  - "Require independent task verification and adversarial testing before using benchmarks for deployment decisions."
 source: "HN AI Security"
 source_url: "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/"
 author: "Grid the Grey Editorial"
