@@ -166,22 +166,18 @@
   <text x="490" y="318" font-family="Inter,Segoe UI,sans-serif" font-size="9" fill="#4338ca" text-anchor="middle">{{ mode_value }}</text>
 
   <!-- ── ORBITING CAPABILITY NODES (6, evenly around middle ring) ── -->
-  {% set angles = [300, 0, 60, 120, 180, 240] %}
-  {% set cap_icons = ['⚡','◈','🔒','⬡','📋','▸'] %}
+  <!-- Pre-computed positions: 6 nodes at r=128 from (490,308) at 300°,0°,60°,120°,180°,240° -->
+  <!-- Spoke endpoints at r=92 (just inside middle ring) -->
+  {% set node_cx = [554, 618, 554, 426, 362, 426] %}
+  {% set node_cy = [197, 308, 419, 419, 308, 197] %}
+  {% set spoke_x = [536, 582, 536, 444, 398, 444] %}
+  {% set spoke_y = [228, 308, 388, 388, 308, 228] %}
   {% for cap in capabilities[:6] %}
-  {% set angle_rad = (angles[loop.index0] * 3.14159 / 180) %}
-  {% set nx = (490 + 128 * (angles[loop.index0] * 3.14159 / 180)|cos)|int %}
-  {% set ny = (308 + 128 * (angles[loop.index0] * 3.14159 / 180)|sin)|int %}
-  <!-- spoke line -->
-  <line x1="490" y1="308"
-        x2="{{ 490 + (92 * [0.866,1,0.5,-0.5,-1,-0.5][loop.index0])|int }}"
-        y2="{{ 308 + (92 * [-0.5,0,0.866,0.866,0,-0.866][loop.index0])|int }}"
-        stroke="#a5b4fc" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
-  <!-- node pill -->
-  {% set pill_x = (490 + 128 * [0.866,1,0.5,-0.5,-1,-0.5][loop.index0] - 56)|int %}
-  {% set pill_y = (308 + 128 * [-0.5,0,0.866,0.866,0,-0.866][loop.index0] - 14)|int %}
-  <rect x="{{ pill_x }}" y="{{ pill_y }}" width="112" height="28" rx="14" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" filter="url(#card-shadow)"/>
-  <text x="{{ pill_x + 56 }}" y="{{ pill_y + 18 }}" font-family="Inter,Segoe UI,sans-serif" font-size="8.5" fill="#3730a3" text-anchor="middle" font-weight="600">{{ cap|truncate(18,true,'…') }}</text>
+  {% set cx = node_cx[loop.index0] %}
+  {% set cy = node_cy[loop.index0] %}
+  <line x1="490" y1="308" x2="{{ spoke_x[loop.index0] }}" y2="{{ spoke_y[loop.index0] }}" stroke="#a5b4fc" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
+  <rect x="{{ cx - 56 }}" y="{{ cy - 14 }}" width="112" height="28" rx="14" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" filter="url(#card-shadow)"/>
+  <text x="{{ cx }}" y="{{ cy + 4 }}" font-family="Inter,Segoe UI,sans-serif" font-size="8.5" fill="#3730a3" text-anchor="middle" font-weight="600">{{ cap|truncate(18,true,'…') }}</text>
   {% endfor %}
 
   <!-- ── RIGHT PANEL — inputs/outputs as stacked info cards ── -->
