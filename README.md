@@ -186,7 +186,7 @@ Lists available drafts or publishes a specific slug. Runs duplicate detection be
 ### publish-deep-signal.yml — Deep Signal Auto-Publish
 **Trigger:** Push to `sources/pending/*.md`
 
-Automatically processes and publishes original analysis articles to the Deep Signal section when Markdown files are pushed to the pending directory.
+Automatically rewrites and publishes original analysis articles to the Deep Signal section when Markdown files are pushed to the pending directory. See [Publishing a Deep Signal Article](#publishing-a-deep-signal-article) for full instructions.
 
 ### retitle.yml — SEO Title Optimisation
 **Trigger:** Manual dispatch
@@ -194,6 +194,102 @@ Automatically processes and publishes original analysis articles to the Deep Sig
 Evaluates article titles for SEO quality and rewrites underperforming ones. Supports dry-run mode and configurable article limits.
 
 **Inputs:** `apply` (write changes to disk), `limit` (max articles to process)
+
+---
+
+## Publishing a Deep Signal Article
+
+Deep Signal articles are original long-form pieces written from research input files. The pipeline rewrites the raw research into a structured editorial article, generates SVG visuals, and deploys everything automatically.
+
+### Article Types
+
+Pick the type that matches your source material:
+
+| Type | When to use | Word target | Read time |
+|------|-------------|-------------|-----------|
+| `1` — Security Gap / Event | A threat, attack, broken control, or active incident | 1,400–1,800 words | 7–9 min |
+| `2` — Research / Capability | An emerging technology, new approach, or capability analysis | 1,600–2,000 words | 8–10 min |
+
+**Type 1 structure:** What's Broken → Why Existing Defences Miss It → What Attackers Actually Do → How to Respond → Honest Assessment
+
+**Type 2 structure:** Why This Is Worth Your Attention → What It Actually Is → Where It Fits in Your Stack → The Gaps and Gotchas → Where to Start
+
+### Publishing from a Phone or Browser (GitHub UI)
+
+**Step 1 — Prepare your file**
+
+Rename your `.md` research file with the correct prefix before uploading:
+- `gap-my-article.md` → Type 1 (Security Gap / Event)
+- `cap-my-article.md` → Type 2 (Research / Capability)
+
+The prefix is how the workflow knows which template to use. Everything after the prefix is up to you.
+
+**Step 2 — Upload to GitHub**
+
+1. Go to `github.com/bansac1981/sentinel-ai`
+2. Navigate to `sources/pending/`
+3. Click **Add file → Upload files**
+4. Upload your `gap-*.md` or `cap-*.md` file
+5. Click **Commit changes**
+
+**Step 3 — Watch it publish**
+
+Go to the **Actions** tab (`github.com/bansac1981/sentinel-ai/actions`). Two workflows fire in sequence:
+
+1. **Publish Deep Signal Article** (~30–45s) — rewrites the article, generates SVGs, commits to the repo
+2. **Grid the Grey — Build & Deploy** (~1 min) — rebuilds Hugo site, deploys to GitHub Pages
+
+A green ✓ on both means the article is live. A red ✗ means something failed — click it to see the error log.
+
+The article URL will be: `https://gridthegrey.com/deep-signal/{slug}/`
+
+### Publishing from a Terminal (Local)
+
+```bash
+# Pass the article type as the second argument
+python scripts/publish_deep_signal.py sources/pending/my-article.md 1
+python scripts/publish_deep_signal.py sources/pending/my-article.md 2
+
+# Or omit it to get an interactive prompt
+python scripts/publish_deep_signal.py sources/pending/my-article.md
+```
+
+Requires `ANTHROPIC_API_KEY` set in your environment. No filename prefix needed when running locally.
+
+### Re-publishing an Existing Article
+
+If you need to rewrite a previously published article (e.g. to apply the new templates to an old one):
+
+```bash
+# Copy the archived source back to pending
+cp sources/processed/your-file.md sources/pending/
+
+# Run the script with the correct type
+python scripts/publish_deep_signal.py sources/pending/your-file.md 2
+```
+
+The script overwrites the existing Hugo content file and SVGs, then re-archives the source.
+
+### What Happens Under the Hood
+
+1. Claude rewrites the raw research through the selected article template
+2. Claude extracts structured metadata (title, slug, tags, TL;DR, SVG diagram data) from the rewritten body
+3. Two SVGs are rendered — a 1200×630 hero image and a 520×312 card thumbnail
+4. The Hugo content file is written to `hugo-site/content/deep-signal/YYYY-MM-DD-{slug}.md`
+5. All three files are committed and pushed to `main`
+6. The source file is archived to `sources/processed/`
+7. The deploy workflow triggers and rebuilds the site
+
+### Troubleshooting
+
+**Workflow fails with `EOFError`**  
+The filename is missing the `gap-` or `cap-` prefix. Rename the file and upload again.
+
+**Hero image shows as broken / alt text only**  
+The SVG contains an invalid XML character (usually `&` in a label). Pull the latest commits, find the SVG in `hugo-site/static/img/`, fix the character, push — the deploy will re-run.
+
+**Article published but site not updated**  
+The deploy workflow may not have triggered. Go to Actions → select **Grid the Grey — Build & Deploy** → click **Run workflow** to trigger it manually.
 
 ---
 
