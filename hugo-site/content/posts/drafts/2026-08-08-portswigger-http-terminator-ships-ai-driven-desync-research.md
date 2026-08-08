@@ -1,7 +1,7 @@
 ---
 title: "PortSwigger HTTP Terminator Ships AI-Driven Desync Research"
 date: 2026-08-08T09:32:06+00:00
-draft: true
+draft: false 
 slug: "portswigger-http-terminator-ships-ai-driven-desync-research"
 
 # ── Content metadata ──
