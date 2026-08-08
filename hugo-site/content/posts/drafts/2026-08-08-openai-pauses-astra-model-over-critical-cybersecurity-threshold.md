@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Pauses Astra Model Over Critical Cybersecurity Threshold"
 date: 2026-08-08T13:23:17+00:00
-draft: true
+draft: false 
 slug: "openai-pauses-astra-model-over-critical-cybersecurity-threshold"
 
 # ── Content metadata ──
