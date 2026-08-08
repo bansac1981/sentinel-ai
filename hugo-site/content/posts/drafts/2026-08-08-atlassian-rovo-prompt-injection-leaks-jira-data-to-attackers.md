@@ -1,7 +1,7 @@
 ---
 title: "Atlassian Rovo Prompt Injection Leaks Jira Data to Attackers"
 date: 2026-08-08T09:30:34+00:00
-draft: true
+draft: false 
 slug: "atlassian-rovo-prompt-injection-leaks-jira-data-to-attackers"
 
 # ── Content metadata ──
