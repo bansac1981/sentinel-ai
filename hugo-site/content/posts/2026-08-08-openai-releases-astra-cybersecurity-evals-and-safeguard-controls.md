@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Releases Astra Cybersecurity Evals and Safeguard Controls"
-date: 2026-08-08T14:54:09+00:00
+date: "2026-08-08T20:05:42+00:00"
 draft: false 
 slug: "openai-releases-astra-cybersecurity-evals-and-safeguard-controls"
 
