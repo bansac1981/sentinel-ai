@@ -1,6 +1,6 @@
 ---
 title: "Cloudflare Launches Kitesurf, a Cloud Browser Built for AI Agents"
-date: 2026-08-08T14:53:26+00:00
+date: "2026-08-08T20:00:33+00:00"
 draft: false 
 slug: "cloudflare-launches-kitesurf-a-cloud-browser-built-for-ai-agents"
 
