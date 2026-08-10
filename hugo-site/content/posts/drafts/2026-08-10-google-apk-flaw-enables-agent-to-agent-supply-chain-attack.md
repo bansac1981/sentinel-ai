@@ -1,7 +1,7 @@
 ---
 title: "Google APK Flaw Enables Agent-to-Agent Supply Chain Attack"
 date: 2026-08-10T04:50:13+00:00
-draft: true
+draft: false 
 slug: "google-apk-flaw-enables-agent-to-agent-supply-chain-attack"
 
 # ── Content metadata ──
