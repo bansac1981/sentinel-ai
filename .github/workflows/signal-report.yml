@@ -74,7 +74,7 @@ jobs:
       - name: Determine preview URL
         id: url
         run: |
-          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug: *"//;s/"$//')
+          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug:[[:space:]]*//' | tr -d '"' | tr -d "'")
           echo "slug=${SLUG}" >> $GITHUB_OUTPUT
           echo "preview_url=https://gridthegrey.com/deep-signal/${SLUG}/" >> $GITHUB_OUTPUT
 
@@ -123,7 +123,7 @@ jobs:
           echo "══════════════════════════════════════════════════════════════"
 
           # Also write to GitHub Actions Job Summary (visible in UI)
-          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
+          cat >> $GITHUB_STEP_SUMMARY << EOF
           ## 📰 Weekly Signal Report — Preview Ready
 
           **Proofread the report here:**
@@ -132,7 +132,7 @@ jobs:
 
           ---
 
-          When satisfied, run this workflow again with `action: publish-latest` to commit to main and trigger the production deploy.
+          When satisfied, run this workflow again with \`action: publish-latest\` to commit to main and trigger the production deploy.
           EOF
 
   # Deploy preview to GitHub Pages
