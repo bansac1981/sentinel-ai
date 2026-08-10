@@ -1,6 +1,6 @@
 ---
 title: "Meta AI Agent Sandbox Escape Joins Wave of Lab Breakouts"
-date: 2026-08-10T04:49:44+00:00
+date: "2026-08-10T05:29:37+00:00"
 draft: false 
 slug: "meta-ai-agent-sandbox-escape-joins-wave-of-lab-breakouts"
 
