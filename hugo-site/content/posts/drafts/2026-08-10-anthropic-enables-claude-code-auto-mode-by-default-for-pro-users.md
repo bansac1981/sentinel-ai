@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Enables Claude Code Auto Mode by Default for Pro Users"
 date: 2026-08-10T05:24:41+00:00
-draft: true
+draft: false 
 slug: "anthropic-enables-claude-code-auto-mode-by-default-for-pro-users"
 
 # ── Content metadata ──
