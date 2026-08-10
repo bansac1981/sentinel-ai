@@ -1,6 +1,6 @@
 ---
 title: "Poison Claude Proxy Exposes All Customer Prompts to Operators"
-date: 2026-08-10T04:50:49+00:00
+date: "2026-08-10T05:28:53+00:00"
 draft: false 
 slug: "poison-claude-proxy-exposes-all-customer-prompts-to-operators"
 
