@@ -1,0 +1,187 @@
+name: "One-off: Regenerate w31 Charts (fixed axes)"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Regenerate w31 charts with fixed axes
+        run: |
+          python - << 'EOF'
+          from pathlib import Path
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          import matplotlib.patches as mpatches
+
+          CHART_OUTPUT_DIR = Path("hugo-site/static/img/signal")
+
+          OWASP_COLORS = {
+              'LLM01': '#E63946', 'LLM02': '#2A9D8F', 'LLM03': '#6930C3', 'LLM04': '#F77F00',
+              'LLM05': '#264653', 'LLM06': '#E76F51', 'LLM07': '#3B82F6', 'LLM08': '#D946EF',
+              'LLM09': '#059669', 'LLM10': '#7C3AED'
+          }
+          MITRE_COLORS = [
+              '#E63946', '#2A9D8F', '#F59E0B', '#7C3AED', '#059669', '#EC4899',
+              '#3B82F6', '#D946EF', '#F97316', '#264653', '#06B6D4', '#DC2626',
+              '#1D4ED8', '#16A34A', '#9333EA', '#CA8A04'
+          ]
+
+          owasp_items = [
+              {"id": "LLM08", "label": "Excessive Agency",                "frequency": 17, "relevance": 7.57},
+              {"id": "LLM05", "label": "Supply Chain Vulnerabilities",    "frequency": 15, "relevance": 7.31},
+              {"id": "LLM01", "label": "Prompt Injection",                "frequency": 14, "relevance": 7.09},
+              {"id": "LLM07", "label": "Insecure Plugin Design",          "frequency": 12, "relevance": 7.57},
+              {"id": "LLM06", "label": "Sensitive Information Disclosure","frequency": 12, "relevance": 7.42},
+              {"id": "LLM02", "label": "Insecure Output Handling",        "frequency": 11, "relevance": 7.64},
+              {"id": "LLM09", "label": "Overreliance",                    "frequency":  7, "relevance": 7.27},
+              {"id": "LLM10", "label": "Model Theft",                     "frequency":  2, "relevance": 6.50},
+              {"id": "LLM04", "label": "Model Denial of Service",         "frequency":  1, "relevance": 7.20},
+              {"id": "LLM03", "label": "Training Data Poisoning",         "frequency":  1, "relevance": 7.20},
+          ]
+
+          mitre_items = [
+              {"id": "AML.T0047", "label": "ML-Enabled Product or Service",  "frequency": 18, "relevance": 7.55},
+              {"id": "AML.T0051", "label": "LLM Prompt Injection",           "frequency": 17, "relevance": 7.32},
+              {"id": "AML.T0010", "label": "ML Supply Chain Compromise",     "frequency": 14, "relevance": 7.18},
+              {"id": "AML.T0057", "label": "LLM Data Leakage",               "frequency": 12, "relevance": 7.18},
+              {"id": "AML.T0040", "label": "ML Model Inference API Access",  "frequency":  9, "relevance": 7.02},
+              {"id": "AML.T0054", "label": "LLM Jailbreak",                  "frequency":  7, "relevance": 7.56},
+              {"id": "AML.T0012", "label": "Valid Accounts",                 "frequency":  7, "relevance": 7.36},
+              {"id": "AML.T0018", "label": "Backdoor ML Model",              "frequency":  6, "relevance": 7.12},
+              {"id": "AML.T0044", "label": "Full ML Model Access",           "frequency":  5, "relevance": 7.78},
+              {"id": "AML.T0043", "label": "Craft Adversarial Data",         "frequency":  3, "relevance": 7.63},
+              {"id": "AML.T0056", "label": "LLM Meta Prompt Extraction",     "frequency":  3, "relevance": 7.73},
+              {"id": "AML.T0015", "label": "Evade ML Model",                 "frequency":  2, "relevance": 7.20},
+              {"id": "AML.T0031", "label": "Erode ML Model Integrity",       "frequency":  1, "relevance": 8.50},
+              {"id": "AML.T0020", "label": "Poison Training Data",           "frequency":  1, "relevance": 6.20},
+          ]
+
+          def generate_quadrant_chart(items, title, palette, output_path,
+                                       quadrant_labels=('CRITICAL FOCUS', 'EMERGING RISK', 'TRENDING', 'MONITOR')):
+              fig, ax = plt.subplots(1, 1, figsize=(12, 8), dpi=250)
+              fig.subplots_adjust(left=0.08, right=0.97, top=0.93, bottom=0.18)
+              fig.patch.set_facecolor('#FFFFFF')
+              ax.set_facecolor('#FAFBFC')
+
+              freqs = [item['frequency'] for item in items]
+              max_freq = max(max(freqs) * 1.2 if freqs else 10, 10)
+              rel_min = 0
+              rel_max = 10
+              mid_x = max_freq / 2
+              mid_y = 5.0
+
+              ax.axhspan(mid_y, rel_max, xmin=0.5, xmax=1.0, alpha=0.07, color='#E63946', zorder=0)
+              ax.axhspan(mid_y, rel_max, xmin=0.0, xmax=0.5, alpha=0.05, color='#F59E0B', zorder=0)
+              ax.axhspan(rel_min, mid_y, xmin=0.5, xmax=1.0, alpha=0.04, color='#3B82F6', zorder=0)
+              ax.axhspan(rel_min, mid_y, xmin=0.0, xmax=0.5, alpha=0.04, color='#10B981', zorder=0)
+
+              ax.axhline(y=mid_y, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.6, zorder=2)
+              ax.axvline(x=mid_x, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.6, zorder=2)
+
+              placed = []
+              for i, item in enumerate(items):
+                  color = palette.get(item['id'], '#4A6FA5') if isinstance(palette, dict) else palette[i % len(palette)]
+                  size = 60 + item['frequency'] * 18
+                  ax.scatter(item['frequency'], item['relevance'], s=size,
+                             c=color, alpha=0.85, edgecolors='white', linewidth=2, zorder=5)
+                  placed.append((item['frequency'], item['relevance']))
+
+              for i, item in enumerate(items):
+                  lx, ly = item['frequency'], item['relevance']
+                  offset_x, offset_y = 0, 10
+                  ha = 'center'
+                  for j, (px, py) in enumerate(placed):
+                      if j == i:
+                          continue
+                      if abs(lx - px) < max_freq * 0.06 and abs(ly - py) < (rel_max - rel_min) * 0.05:
+                          offset_y += 8
+                  if lx > max_freq * 0.8:
+                      offset_x = -10
+                      ha = 'right'
+                  elif lx < max_freq * 0.15:
+                      offset_x = 10
+                      ha = 'left'
+                  ax.annotate(item['id'], (lx, ly),
+                              textcoords="offset points", xytext=(offset_x, offset_y),
+                              ha=ha, fontsize=8.5, fontweight='bold', color='#1E293B',
+                              fontfamily='monospace', zorder=8,
+                              bbox=dict(boxstyle='round,pad=0.15', facecolor='white', edgecolor='none', alpha=0.85))
+
+              ax.set_xlim(0, max_freq)
+              ax.set_ylim(rel_min, rel_max)
+              ax.set_xlabel('Event Frequency', fontsize=11, fontfamily='monospace',
+                            color='#334155', fontweight='bold', labelpad=10)
+              ax.set_ylabel('Avg Relevance Score', fontsize=11, fontfamily='monospace',
+                            color='#334155', fontweight='bold', labelpad=10)
+              ax.set_title(title, fontsize=14, fontweight='bold', fontfamily='monospace',
+                           color='#0F172A', pad=16)
+
+              ql_props = dict(fontsize=9, fontfamily='monospace', fontweight='bold', alpha=0.5, zorder=1)
+              ax.text(max_freq * 0.75, rel_max - (rel_max - rel_min) * 0.07, quadrant_labels[0],
+                      ha='center', color='#B91C1C', **ql_props)
+              ax.text(max_freq * 0.25, rel_max - (rel_max - rel_min) * 0.07, quadrant_labels[1],
+                      ha='center', color='#D97706', **ql_props)
+              ax.text(max_freq * 0.75, rel_min + (rel_max - rel_min) * 0.07, quadrant_labels[2],
+                      ha='center', color='#1D4ED8', **ql_props)
+              ax.text(max_freq * 0.25, rel_min + (rel_max - rel_min) * 0.07, quadrant_labels[3],
+                      ha='center', color='#059669', **ql_props)
+
+              ax.grid(True, alpha=0.15, linewidth=0.5, color='#94A3B8')
+              ax.tick_params(labelsize=9, colors='#475569', direction='out', length=4)
+              for spine in ax.spines.values():
+                  spine.set_color('#CBD5E1')
+                  spine.set_linewidth(0.8)
+
+              legend_items = []
+              for i, item in enumerate(items):
+                  color = palette.get(item['id'], '#4A6FA5') if isinstance(palette, dict) else palette[i % len(palette)]
+                  legend_items.append(mpatches.Patch(color=color, label=f"{item['id']} {item['label']}"))
+              ax.legend(handles=legend_items, loc='upper center', bbox_to_anchor=(0.5, -0.10),
+                        ncol=2, fontsize=7.5, frameon=False, prop={'family': 'monospace'})
+
+              output_path.parent.mkdir(parents=True, exist_ok=True)
+              fig.savefig(output_path, facecolor='#FFFFFF', edgecolor='none', bbox_inches='tight', pad_inches=0.15)
+              plt.close(fig)
+              print(f"Saved: {output_path}")
+
+          generate_quadrant_chart(owasp_items, "OWASP LLM Top 10 — Threat Quadrant", OWASP_COLORS,
+                                  CHART_OUTPUT_DIR / "owasp-2026w31.png")
+          generate_quadrant_chart(mitre_items, "MITRE ATLAS — Technique Landscape", MITRE_COLORS,
+                                  CHART_OUTPUT_DIR / "mitre-2026w31.png")
+          print("Done.")
+          EOF
+
+      - name: Commit and push updated charts
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          git add hugo-site/static/img/signal/owasp-2026w31.png
+          git add hugo-site/static/img/signal/mitre-2026w31.png
+          if git diff --staged --quiet; then
+            echo "No changes — charts already up to date."
+            exit 0
+          fi
+          git commit -m "fix(w31): regenerate charts with fixed y-axis 0-10 and consistent x-axis scale"
+          git push
