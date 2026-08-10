@@ -778,22 +778,24 @@ def generate_quadrant_chart(items: list, title: str, palette: dict | list, outpu
     fig.patch.set_facecolor('#FFFFFF')
     ax.set_facecolor('#FAFBFC')
 
-    # Data ranges
+    # Fixed axis ranges — consistent across all weekly reports so charts are comparable
     freqs = [item['frequency'] for item in items]
     rels = [item['relevance'] for item in items]
-    max_freq = max(freqs) * 1.2
-    rel_min = min(rels) - 0.6 if rels else 0
-    rel_max = max(rels) + 0.6 if rels else 10
+    # X: frequency — always 0 to at least 10, expanded if data exceeds it
+    max_freq = max(max(freqs) * 1.2 if freqs else 10, 10)
+    # Y: relevance — always 0–10 (the scoring scale)
+    rel_min = 0
+    rel_max = 10
 
-    # Quadrant center
+    # Quadrant center — fixed midpoints for consistent quadrant placement
     mid_x = max_freq / 2
-    mid_y = (rel_max + rel_min) / 2
+    mid_y = 5.0
 
     # Subtle quadrant tints
-    ax.axhspan(mid_y, rel_max + 1, xmin=0.5, xmax=1.0, alpha=0.07, color='#E63946', zorder=0)
-    ax.axhspan(mid_y, rel_max + 1, xmin=0.0, xmax=0.5, alpha=0.05, color='#F59E0B', zorder=0)
-    ax.axhspan(rel_min - 1, mid_y, xmin=0.5, xmax=1.0, alpha=0.04, color='#3B82F6', zorder=0)
-    ax.axhspan(rel_min - 1, mid_y, xmin=0.0, xmax=0.5, alpha=0.04, color='#10B981', zorder=0)
+    ax.axhspan(mid_y, rel_max, xmin=0.5, xmax=1.0, alpha=0.07, color='#E63946', zorder=0)
+    ax.axhspan(mid_y, rel_max, xmin=0.0, xmax=0.5, alpha=0.05, color='#F59E0B', zorder=0)
+    ax.axhspan(rel_min, mid_y, xmin=0.5, xmax=1.0, alpha=0.04, color='#3B82F6', zorder=0)
+    ax.axhspan(rel_min, mid_y, xmin=0.0, xmax=0.5, alpha=0.04, color='#10B981', zorder=0)
 
     # Quadrant dividers — dashed
     ax.axhline(y=mid_y, color='#94A3B8', linewidth=1, linestyle='--', alpha=0.6, zorder=2)
