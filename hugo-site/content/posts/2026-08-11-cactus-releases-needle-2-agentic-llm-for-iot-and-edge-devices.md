@@ -1,6 +1,6 @@
 ---
 title: "Cactus Releases Needle 2 Agentic LLM for IoT and Edge Devices"
-date: 2026-08-11T04:41:10+00:00
+date: "2026-08-11T05:08:20+00:00"
 draft: false 
 slug: "cactus-releases-needle-2-agentic-llm-for-iot-and-edge-devices"
 
