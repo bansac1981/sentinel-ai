@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Releases GPT-5.6 Cyber for Approved Security Partners"
 date: 2026-08-11T04:40:15+00:00
-draft: true
+draft: false 
 slug: "openai-releases-gpt-5-6-cyber-for-approved-security-partners"
 
 # ── Content metadata ──
