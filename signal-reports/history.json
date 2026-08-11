@@ -56,6 +56,62 @@
         "Jailbreaks",
         "Regulatory"
       ]
+    },
+    {
+      "week": "2026-W33",
+      "date": "2026-08-11",
+      "article_count": 27,
+      "mitre_distribution": {
+        "AML.T0047 - ML-Enabled Product or Service": 26,
+        "AML.T0051 - LLM Prompt Injection": 18,
+        "AML.T0057 - LLM Data Leakage": 14,
+        "AML.T0040 - ML Model Inference API Access": 12,
+        "AML.T0010 - ML Supply Chain Compromise": 10,
+        "AML.T0012 - Valid Accounts": 8,
+        "AML.T0054 - LLM Jailbreak": 8,
+        "AML.T0043 - Craft Adversarial Data": 6,
+        "AML.T0044 - Full ML Model Access": 4,
+        "AML.T0015 - Evade ML Model": 2,
+        "AML.T0031 - Erode ML Model Integrity": 1,
+        "AML.T0018 - Backdoor ML Model": 1,
+        "AML.T0056 - LLM Meta Prompt Extraction": 1
+      },
+      "owasp_distribution": {
+        "LLM08 - Excessive Agency": 22,
+        "LLM02 - Insecure Output Handling": 15,
+        "LLM07 - Insecure Plugin Design": 15,
+        "LLM06 - Sensitive Information Disclosure": 14,
+        "LLM05 - Supply Chain Vulnerabilities": 13,
+        "LLM01 - Prompt Injection": 12,
+        "LLM09 - Overreliance": 5,
+        "LLM04 - Model Denial of Service": 1,
+        "LLM10 - Model Theft": 1
+      },
+      "threat_level_distribution": {
+        "HIGH": 11,
+        "CRITICAL": 8,
+        "MEDIUM": 6,
+        "LOW": 2
+      },
+      "threat_actor_distribution": {
+        "researcher": 22,
+        "cybercriminal": 19,
+        "nation-state": 7,
+        "insider": 6
+      },
+      "avg_relevance": 8.0,
+      "top_categories": [
+        "LLM Security",
+        "Agentic AI",
+        "Industry News",
+        "Supply Chain",
+        "Research",
+        "First Look",
+        "Prompt Injection",
+        "Jailbreaks",
+        "Regulatory",
+        "AI Governance"
+      ]
     }
   ]
 }
