@@ -1,6 +1,6 @@
 ---
 title: "GhostJacking Attack Hijacks AI Agents via Security Alerts"
-date: 2026-08-11T04:38:40+00:00
+date: "2026-08-11T05:11:31+00:00"
 draft: false 
 slug: "ghostjacking-attack-hijacks-ai-agents-via-security-alerts"
 
