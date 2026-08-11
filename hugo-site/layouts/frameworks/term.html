@@ -170,21 +170,6 @@
 
 {{ end }}
 
-{{ if $isMitre }}
-{{/* ══════════════════════════════════════════════════════════════
-     ATLAS: TECHNIQUE DEEP-DIVE CARDS
-     ══════════════════════════════════════════════════════════════ */}}
-<section class="fw-section">
-  <h2 class="fw-section__title"><span class="fw-section__accent"></span>Technique Deep Dives</h2>
-  <p class="fw-section__sub">Top active attack techniques with real-world context and defensive guidance</p>
-  <div class="fw-section__howto">
-    <strong>How to read:</strong> The most frequently referenced techniques, ranked by article count. Click any row to expand and see: what the technique means, which tactic it belongs to, its OWASP mapping, a link to the most recent article referencing it, and a link to the official documentation.
-  </div>
-  <div class="fw-deepdive" id="fwDeepDive">
-    <!-- Populated by JS -->
-  </div>
-</section>
-{{ end }}
 
 {{ if $isMitre }}
 {{/* ══════════════════════════════════════════════════════════════
@@ -855,58 +840,6 @@
     el.innerHTML = html;
   }
 
-  // ══════════════════════════════════════════════════════════════
-  // RENDER: Deep-Dive Cards
-  // ══════════════════════════════════════════════════════════════
-  function renderDeepDive() {
-    var el = document.getElementById('fwDeepDive');
-    if (!el) return;
-
-    var freq = buildFreqMap(filteredArticles);
-    var sorted = Object.values(freq).sort(function(a, b) { return b.count - a.count; });
-    var top = sorted.slice(0, isMitre ? 8 : 10);
-
-    var html = '';
-    top.forEach(function(tech) {
-      var details, officialUrl, mitigation;
-
-      if (isMitre) {
-        var tactic = TECHNIQUE_TACTICS[tech.id] || 'Unknown';
-        details = '<dt>Tactic</dt><dd>' + tactic + '</dd>';
-        officialUrl = 'https://atlas.mitre.org/techniques/' + tech.id + '/';
-        var mappedOwasp = CROSS_MAP[tech.id];
-        if (mappedOwasp) {
-          details += '<dt>OWASP Mapping</dt><dd>' + mappedOwasp.join(', ') + '</dd>';
-        }
-      } else {
-        var owaspInfo = OWASP_DATA[tech.id];
-        details = '<dt>Risk Level</dt><dd>' + (owaspInfo ? owaspInfo.risk : 'Unknown') + '</dd>';
-        officialUrl = 'https://genai.owasp.org/llm-top-10/';
-        if (owaspInfo) {
-          mitigation = owaspInfo.mitigation;
-        }
-      }
-
-      var exemplar = tech.articles[0];
-
-      html += '<details class="fw-deepdive__card">' +
-        '<summary class="fw-deepdive__summary">' +
-          '<span class="fw-deepdive__id technique-tag" data-id="' + tech.id + '">' + tech.id + '</span>' +
-          '<span class="fw-deepdive__name">' + tech.label + '</span>' +
-          '<span class="fw-deepdive__count">' + tech.count + ' articles</span>' +
-          '<span class="fw-deepdive__chevron">▸</span>' +
-        '</summary>' +
-        '<div class="fw-deepdive__body">' +
-          '<dl class="fw-deepdive__meta">' + details + '</dl>' +
-          ((!isMitre && OWASP_DATA[tech.id]) ? '<p class="fw-deepdive__desc">' + OWASP_DATA[tech.id].desc + '</p>' : '') +
-          (mitigation ? '<div class="fw-deepdive__mitigation"><strong>Defensive Guidance:</strong><ul>' + mitigation.map(function(m) { return '<li>' + m + '</li>'; }).join('') + '</ul></div>' : '') +
-          (exemplar ? '<div class="fw-deepdive__exemplar"><strong>Latest article:</strong> <a href="' + exemplar.url + '">' + exemplar.title + '</a> <span class="fw-deepdive__exemplar-date">(' + exemplar.dateDisplay + ')</span></div>' : '') +
-          '<a class="fw-deepdive__official" href="' + officialUrl + '" target="_blank" rel="noopener noreferrer">View official documentation ↗</a>' +
-        '</div>' +
-      '</details>';
-    });
-    el.innerHTML = html;
-  }
 
   // ══════════════════════════════════════════════════════════════
   // RENDER: Cross-Framework Links
@@ -975,7 +908,6 @@
     }
     renderTrends();
     if (isMitre) renderCooccurrence();
-    if (isMitre) renderDeepDive();
     renderCrosslinks();
 
     if (typeof window.wireAtlasTags === 'function') {
