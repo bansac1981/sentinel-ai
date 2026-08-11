@@ -1996,11 +1996,53 @@
   background: var(--bg-secondary);
 }
 
-/* Radar canvas sizing */
+/* Radar: wrapper for canvas + positioned tags */
+.fw-radar__wrap {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 .fw-radar canvas {
   display: block;
-  margin: 0 auto;
-  max-width: 100%;
+}
+
+.fw-radar__tags {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.fw-radar__tag {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.fw-radar__tag .technique-tag {
+  background: rgba(168,85,247,0.12);
+  color: #a855f7;
+  border: 1px solid rgba(168,85,247,0.3);
+  transition: all var(--transition);
+}
+
+.fw-radar__tag:hover .technique-tag {
+  background: rgba(168,85,247,0.3);
+  color: var(--text-primary);
+  border-color: var(--owasp-color);
+}
+
+.fw-radar__tag-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 /* Risk tile: template-specific sub-elements */
