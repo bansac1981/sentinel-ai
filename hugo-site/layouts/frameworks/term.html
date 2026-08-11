@@ -79,30 +79,16 @@
 
 {{ if $isMitre }}
 {{/* ══════════════════════════════════════════════════════════════
-     ATLAS: TACTIC OVERVIEW (replaces horizontal kill chain scroll)
+     ATLAS: TACTIC DISTRIBUTION (with inline technique expansion)
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>Tactic Distribution</h2>
   <p class="fw-section__sub">How attack activity distributes across the ATLAS tactic lifecycle</p>
   <div class="fw-section__howto">
-    <strong>How to read:</strong> Each box represents one ATLAS tactic — a stage in the adversarial lifecycle. The number shows how many technique mentions appear in our articles for that stage. Click any tactic to filter the heatmap and other visualizations below to only show techniques belonging to that stage. Click again to clear the filter.
+    <strong>How to read:</strong> Each box represents one ATLAS tactic — a stage in the adversarial lifecycle. The number shows how many technique mentions appear in our articles for that stage. Click any tactic to expand it and see the individual techniques associated with that stage. Darker cells = more articles reference that technique. Click a technique cell for full details.
   </div>
   <div class="fw-killchain fw-killchain--grid" id="fwKillChain">
     <!-- Populated by JS -->
-  </div>
-</section>
-
-{{/* ══════════════════════════════════════════════════════════════
-     ATLAS: TECHNIQUE HEATMAP
-     ══════════════════════════════════════════════════════════════ */}}
-<section class="fw-section">
-  <h2 class="fw-section__title"><span class="fw-section__accent"></span>Technique Heatmap</h2>
-  <p class="fw-section__sub">Visual map of technique activity across all ATLAS tactics</p>
-  <div class="fw-section__howto">
-    <strong>How to read:</strong> Techniques are grouped by their parent tactic. Darker blue = more articles reference that technique. The number inside each cell is the article count. Click any cell to open a detail panel explaining the technique, its tactic category, and a link to the official MITRE documentation.
-  </div>
-  <div class="fw-heatmap" id="fwHeatmap">
-    <div class="fw-heatmap__loading">Building heatmap…</div>
   </div>
 </section>
 
@@ -184,19 +170,21 @@
 
 {{ end }}
 
+{{ if $isMitre }}
 {{/* ══════════════════════════════════════════════════════════════
-     SHARED: DEEP-DIVE CARDS
+     ATLAS: TECHNIQUE DEEP-DIVE CARDS
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
-  <h2 class="fw-section__title"><span class="fw-section__accent"></span>{{ cond $isMitre "Technique" "Category" }} Deep Dives</h2>
-  <p class="fw-section__sub">Top active {{ cond $isMitre "attack techniques" "risk categories" }} with real-world context and defensive guidance</p>
+  <h2 class="fw-section__title"><span class="fw-section__accent"></span>Technique Deep Dives</h2>
+  <p class="fw-section__sub">Top active attack techniques with real-world context and defensive guidance</p>
   <div class="fw-section__howto">
-    <strong>How to read:</strong> The most frequently referenced {{ cond $isMitre "techniques" "categories" }}, ranked by article count. Click any row to expand and see: what the {{ cond $isMitre "technique" "risk" }} means, {{ cond $isMitre "which tactic it belongs to, its OWASP mapping," "its OWASP severity rating, specific mitigation steps," }} a link to the most recent article referencing it, and a link to the official documentation.
+    <strong>How to read:</strong> The most frequently referenced techniques, ranked by article count. Click any row to expand and see: what the technique means, which tactic it belongs to, its OWASP mapping, a link to the most recent article referencing it, and a link to the official documentation.
   </div>
   <div class="fw-deepdive" id="fwDeepDive">
     <!-- Populated by JS -->
   </div>
 </section>
+{{ end }}
 
 {{ if $isMitre }}
 {{/* ══════════════════════════════════════════════════════════════
@@ -414,7 +402,7 @@
   }
 
   // ══════════════════════════════════════════════════════════════
-  // RENDER: Tactic Distribution (ATLAS — compact grid with tooltips)
+  // RENDER: Tactic Distribution (ATLAS — grid with inline technique expansion)
   // ══════════════════════════════════════════════════════════════
   function renderKillChain() {
     if (!isMitre) return;
@@ -442,11 +430,44 @@
       var isActive = activeKillChainTactic === tactic;
       var pct = maxTacticCount > 0 ? Math.round((count / maxTacticCount) * 100) : 0;
       var desc = TACTIC_DESCRIPTIONS[tactic] || '';
-      html += '<div class="fw-killchain__node' + (isActive ? ' fw-killchain__node--active' : '') + (count === 0 ? ' fw-killchain__node--empty' : '') + '" data-tactic="' + tactic + '" title="' + desc + '">' +
-        '<div class="fw-killchain__label">' + tactic + '</div>' +
-        '<div class="fw-killchain__bar"><div class="fw-killchain__bar-fill" style="width:' + pct + '%"></div></div>' +
-        '<div class="fw-killchain__count">' + count + ' mentions</div>' +
-      '</div>';
+      html += '<div class="fw-killchain__item' + (isActive ? ' fw-killchain__item--expanded' : '') + '">' +
+        '<div class="fw-killchain__node' + (isActive ? ' fw-killchain__node--active' : '') + (count === 0 ? ' fw-killchain__node--empty' : '') + '" data-tactic="' + tactic + '" title="' + desc + '">' +
+          '<div class="fw-killchain__label">' + tactic + '</div>' +
+          '<div class="fw-killchain__bar"><div class="fw-killchain__bar-fill" style="width:' + pct + '%"></div></div>' +
+          '<div class="fw-killchain__count">' + count + ' mentions</div>' +
+          '<div class="fw-killchain__expand-icon">' + (isActive ? '▾' : '▸') + '</div>' +
+        '</div>';
+
+      if (isActive) {
+        var techniques = [];
+        Object.keys(TECHNIQUE_TACTICS).forEach(function(id) {
+          if (TECHNIQUE_TACTICS[id] === tactic) {
+            techniques.push({
+              id: id,
+              name: TECHNIQUE_NAMES[id] || id,
+              count: freq[id] ? freq[id].count : 0
+            });
+          }
+        });
+        techniques.sort(function(a, b) { return b.count - a.count; });
+
+        var maxTechCount = techniques.length ? techniques[0].count : 1;
+        if (maxTechCount === 0) maxTechCount = 1;
+
+        html += '<div class="fw-killchain__techniques">';
+        techniques.forEach(function(tech) {
+          var intensity = maxTechCount > 0 ? tech.count / maxTechCount : 0;
+          var opacity = 0.1 + (intensity * 0.9);
+          html += '<div class="fw-killchain__tech-cell" data-technique-id="' + tech.id + '" title="' + tech.name + ' — ' + tech.count + ' article' + (tech.count !== 1 ? 's' : '') + '. Click for details." style="background:rgba(59,130,246,' + opacity.toFixed(2) + ');' + (intensity > 0.5 ? 'color:#fff;' : '') + '">' +
+            '<span class="fw-killchain__tech-id">' + tech.id.replace('AML.', '') + '</span>' +
+            '<span class="fw-killchain__tech-name">' + tech.name + '</span>' +
+            '<span class="fw-killchain__tech-count">' + tech.count + '</span>' +
+          '</div>';
+        });
+        html += '</div>';
+      }
+
+      html += '</div>';
     });
     el.innerHTML = html;
 
@@ -454,89 +475,24 @@
       node.addEventListener('click', function() {
         var tactic = this.getAttribute('data-tactic');
         activeKillChainTactic = (activeKillChainTactic === tactic) ? null : tactic;
-        renderAll();
+        renderKillChain();
+        if (typeof window.wireAtlasTags === 'function') {
+          setTimeout(function() { window.wireAtlasTags(); }, 50);
+        }
       });
     });
-  }
 
-  // ══════════════════════════════════════════════════════════════
-  // RENDER: Heatmap (ATLAS — with click-to-open-modal)
-  // ══════════════════════════════════════════════════════════════
-  function renderHeatmap() {
-    if (!isMitre) return;
-    var el = document.getElementById('fwHeatmap');
-    if (!el) return;
-
-    var freq = buildFreqMap(filteredArticles);
-    var maxCount = 0;
-    Object.values(freq).forEach(function(t) { if (t.count > maxCount) maxCount = t.count; });
-
-    var tacticGroups = {};
-    TACTICS_ORDER.forEach(function(t) { tacticGroups[t] = []; });
-    Object.keys(TECHNIQUE_TACTICS).forEach(function(id) {
-      var tactic = TECHNIQUE_TACTICS[id];
-      if (tacticGroups[tactic]) {
-        tacticGroups[tactic].push({
-          id: id,
-          name: TECHNIQUE_NAMES[id] || id,
-          count: freq[id] ? freq[id].count : 0
-        });
-      }
-    });
-
-    var displayTactics = activeKillChainTactic
-      ? TACTICS_ORDER.filter(function(t) { return t === activeKillChainTactic; })
-      : TACTICS_ORDER.filter(function(t) { return tacticGroups[t].length > 0; });
-
-    var html = '<div class="fw-heatmap__grid">';
-    displayTactics.forEach(function(tactic) {
-      var techniques = tacticGroups[tactic].sort(function(a, b) { return b.count - a.count; });
-      html += '<div class="fw-heatmap__group">';
-      html += '<div class="fw-heatmap__tactic">' + tactic + '</div>';
-      html += '<div class="fw-heatmap__cells">';
-      techniques.forEach(function(tech) {
-        var intensity = maxCount > 0 ? tech.count / maxCount : 0;
-        var opacity = 0.1 + (intensity * 0.9);
-        html += '<div class="fw-heatmap__cell" data-technique-id="' + tech.id + '" title="' + tech.name + ' — ' + tech.count + ' article' + (tech.count !== 1 ? 's' : '') + '. Click for details." style="background:rgba(59,130,246,' + opacity.toFixed(2) + ');' + (intensity > 0.5 ? 'color:#fff;' : '') + '">' +
-          '<span class="fw-heatmap__cell-id">' + tech.id.replace('AML.', '') + '</span>' +
-          '<span class="fw-heatmap__cell-count">' + tech.count + '</span>' +
-        '</div>';
-      });
-      html += '</div></div>';
-    });
-    html += '</div>';
-
-    if (maxCount > 0) {
-      html += '<div class="fw-heatmap__legend">' +
-        '<span class="fw-heatmap__legend-label">Low frequency</span>' +
-        '<div class="fw-heatmap__legend-bar"></div>' +
-        '<span class="fw-heatmap__legend-label">High frequency</span>' +
-      '</div>';
-    }
-
-    el.innerHTML = html;
-
-    // Wire heatmap cells to open the ATLAS modal
-    el.querySelectorAll('.fw-heatmap__cell').forEach(function(cell) {
-      cell.style.cursor = 'pointer';
-      cell.addEventListener('click', function() {
+    el.querySelectorAll('.fw-killchain__tech-cell').forEach(function(cell) {
+      cell.addEventListener('click', function(e) {
+        e.stopPropagation();
         var id = this.getAttribute('data-technique-id');
         if (id && typeof window.openAtlasModal === 'function') {
           window.openAtlasModal(id);
-        } else if (id && typeof window.wireAtlasTags === 'function') {
-          // Fallback: simulate the tag click path
-          var temp = document.createElement('span');
-          temp.className = 'technique-id';
-          temp.textContent = id;
-          temp.style.display = 'none';
-          document.body.appendChild(temp);
-          window.wireAtlasTags();
-          temp.click();
-          document.body.removeChild(temp);
         }
       });
     });
   }
+
 
   // ══════════════════════════════════════════════════════════════
   // RENDER: Trend Sparklines
@@ -1012,7 +968,6 @@
     renderHeroStats();
     if (isMitre) {
       renderKillChain();
-      renderHeatmap();
     } else {
       renderRadar();
       renderRiskTiles();
@@ -1020,7 +975,7 @@
     }
     renderTrends();
     if (isMitre) renderCooccurrence();
-    renderDeepDive();
+    if (isMitre) renderDeepDive();
     renderCrosslinks();
 
     if (typeof window.wireAtlasTags === 'function') {

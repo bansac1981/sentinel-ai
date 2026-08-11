@@ -2627,8 +2627,106 @@ details.fw-intro[open] .fw-intro__icon {
   opacity: 1;
 }
 
+/* ── Tactic item wrapper (node + expandable techniques) ── */
+.fw-killchain__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.fw-killchain__item--expanded {
+  grid-column: 1 / -1;
+}
+
+.fw-killchain__item--expanded .fw-killchain__node {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: transparent;
+}
+
+.fw-killchain__expand-icon {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.fw-killchain__node--active .fw-killchain__expand-icon {
+  color: var(--atlas-color);
+}
+
+.fw-killchain--grid .fw-killchain__node {
+  position: relative;
+}
+
+/* ── Inline technique cells (expanded within tactic) ── */
+.fw-killchain__techniques {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 2px;
+  padding: var(--space-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--atlas-color);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  animation: fw-expand-in 0.2s ease-out;
+}
+
+@keyframes fw-expand-in {
+  from { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; }
+  to { opacity: 1; max-height: 600px; padding-top: var(--space-md); padding-bottom: var(--space-md); }
+}
+
+.fw-killchain__tech-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 1px solid transparent;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.fw-killchain__tech-cell:hover {
+  border-color: var(--atlas-color);
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+.fw-killchain__tech-id {
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.fw-killchain__tech-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+}
+
+.fw-killchain__tech-count {
+  flex-shrink: 0;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
 /* Responsive overrides for template classes */
 @media (max-width: 768px) {
+  .fw-killchain__techniques {
+    grid-template-columns: 1fr;
+  }
+
+  .fw-killchain__tech-name {
+    display: none;
+  }
+
   .fw-crosslinks__grid {
     grid-template-columns: 1fr;
   }
