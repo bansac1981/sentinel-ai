@@ -687,14 +687,20 @@
     var tagsContainer = document.getElementById('fwRadarTags');
     if (!canvas || !tagsContainer) return;
     var ctx = canvas.getContext('2d');
-    var wrap = canvas.parentElement;
-    var size = Math.min(wrap.clientWidth || 500, 500);
-    canvas.width = size;
-    canvas.height = size;
+    var wrap = canvas.closest('.fw-radar__wrap');
+    var containerWidth = wrap.clientWidth || 500;
+    var size = Math.min(containerWidth, 500);
+
+    // Use 2x pixel ratio for sharp rendering on retina, but CSS size stays at `size`
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
     canvas.style.width = size + 'px';
     canvas.style.height = size + 'px';
+    ctx.scale(dpr, dpr);
+
     var cx = size / 2, cy = size / 2;
-    var radius = size * 0.32;
+    var radius = size * 0.30;
 
     var categories = ['LLM01','LLM02','LLM03','LLM04','LLM05','LLM06','LLM07','LLM08','LLM09','LLM10'];
     var freq = buildFreqMap(filteredArticles);
@@ -765,24 +771,24 @@
       ctx.fill();
     });
 
-    // Render clickable HTML tags positioned around the chart
-    var tagRadius = radius + 40;
+    // Position clickable HTML tags using percentages (responsive)
+    var tagRadius = radius + (size * 0.1);
     var tagsHtml = '';
     categories.forEach(function(cat, i) {
       var count = freq[cat] ? freq[cat].count : 0;
       var angle = angleStep * i - Math.PI / 2;
       var lx = cx + tagRadius * Math.cos(angle);
       var ly = cy + tagRadius * Math.sin(angle);
+      var leftPct = (lx / size * 100).toFixed(1);
+      var topPct = (ly / size * 100).toFixed(1);
       var name = OWASP_DATA[cat] ? OWASP_DATA[cat].name : cat;
 
-      tagsHtml += '<div class="fw-radar__tag" style="left:' + lx.toFixed(0) + 'px;top:' + ly.toFixed(0) + 'px;" data-id="' + cat + '" title="' + name + ' — ' + count + ' articles. Click for details.">' +
+      tagsHtml += '<div class="fw-radar__tag" style="left:' + leftPct + '%;top:' + topPct + '%;" data-id="' + cat + '" title="' + name + ' — ' + count + ' articles. Click for details.">' +
         '<span class="technique-tag" data-id="' + cat + '">' + cat + '</span>' +
         '<span class="fw-radar__tag-count">' + count + '</span>' +
       '</div>';
     });
     tagsContainer.innerHTML = tagsHtml;
-    tagsContainer.style.width = size + 'px';
-    tagsContainer.style.height = size + 'px';
 
     // Wire tag clicks to open modal
     tagsContainer.querySelectorAll('.fw-radar__tag').forEach(function(tag) {
