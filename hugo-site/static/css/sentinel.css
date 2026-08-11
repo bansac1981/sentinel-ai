@@ -2513,7 +2513,23 @@ blockquote {
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 .technique-id--clickable:hover { color: var(--atlas-color); border-color: var(--atlas-color); }
+.technique-id--owasp.technique-id--clickable:hover { color: var(--owasp-color); border-color: var(--owasp-color); }
 .technique-tag--clickable:hover { background: rgba(59,130,246,0.25); color: var(--text-primary); }
+
+/* ── OWASP colour modifier on the shared modal ── */
+.atlas-modal--owasp .atlas-modal__id {
+  color: var(--owasp-color);
+  background: var(--owasp-bg);
+  border-color: rgba(168,85,247,0.3);
+}
+.atlas-modal--owasp .atlas-modal__link {
+  color: var(--owasp-color);
+  border-color: rgba(168,85,247,0.3);
+}
+.atlas-modal--owasp .atlas-modal__link:hover {
+  background: var(--owasp-bg);
+  border-color: var(--owasp-color);
+}
 
 /* ── ATLAS Technique Modal ── */
 .atlas-modal-overlay {

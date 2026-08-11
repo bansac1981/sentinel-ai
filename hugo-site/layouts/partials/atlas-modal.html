@@ -1,6 +1,6 @@
-{{/* MITRE ATLAS technique detail modal — included once in baseof.html */}}
+{{/* Framework technique detail modal (MITRE ATLAS + OWASP LLM) — included once in baseof.html */}}
 
-<!-- ATLAS technique modal -->
+<!-- Framework technique modal (shared by ATLAS and OWASP) -->
 <div class="atlas-modal-overlay" id="atlasModalOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="atlasModalName">
   <div class="atlas-modal" id="atlasModal">
     <div class="atlas-modal__header">
@@ -14,7 +14,7 @@
     <div class="atlas-modal__desc" id="atlasModalDesc"></div>
     <div class="atlas-modal__footer">
       <a class="atlas-modal__link" id="atlasModalLink" href="#" target="_blank" rel="noopener noreferrer">
-        View full technique on atlas.mitre.org ↗
+        View full details ↗
       </a>
     </div>
   </div>
@@ -22,7 +22,7 @@
 
 <script>
 (function() {
-  // ── Technique data (v2026.07 curated set) ──
+  // ── MITRE ATLAS data (v2026.07 curated set) ──
   var ATLAS = {
     // Core ML/AI
     'AML.T0006': { name: 'Active Learning Attack', tactic: 'ML Attack Staging', platform: 'Predictive AI', desc: 'Adversaries query a target ML model repeatedly with crafted inputs to extract information about its decision boundary, using an active learning strategy to minimise the number of queries needed.' },
@@ -78,8 +78,23 @@
     'AML.T0114': { name: 'AI Service Web Interface', tactic: 'Initial Access', platform: 'Generative AI', desc: 'Adversaries target the web-based interface of AI services directly — bypassing API-layer controls — to interact with models, extract data, or perform attacks through the user-facing application.' }
   };
 
+  // ── OWASP LLM Top 10 data ──
+  var OWASP = {
+    'LLM01': { name: 'Prompt Injection', risk: 'Critical', desc: 'Attackers manipulate an LLM through crafted inputs, causing it to execute unintended instructions. Direct injection overrides system prompts; indirect injection comes from external content the model processes — documents, web pages, tool outputs — without the user knowing.' },
+    'LLM02': { name: 'Insecure Output Handling', risk: 'High', desc: 'LLM outputs are passed to downstream components (browsers, shells, APIs) without sufficient validation, enabling XSS, SSRF, privilege escalation, or remote code execution depending on the consuming system.' },
+    'LLM03': { name: 'Training Data Poisoning', risk: 'High', desc: 'Adversaries corrupt the data used to train or fine-tune an LLM, introducing backdoors, biases, or vulnerabilities that persist into production and are difficult to detect after deployment.' },
+    'LLM04': { name: 'Model Denial of Service', risk: 'Medium', desc: 'Attackers consume disproportionate compute resources by submitting unusually complex or recursive prompts, degrading service availability or driving up costs for the operator.' },
+    'LLM05': { name: 'Supply Chain Vulnerabilities', risk: 'High', desc: 'Risks introduced through third-party components in the LLM lifecycle — pre-trained model weights, fine-tuning datasets, plugins, integrations, or deployment infrastructure — that may be compromised or malicious.' },
+    'LLM06': { name: 'Sensitive Information Disclosure', risk: 'High', desc: 'LLMs inadvertently reveal confidential data from their training corpus, system prompt, or conversation context — including PII, credentials, proprietary business logic, or internal configuration details.' },
+    'LLM07': { name: 'Insecure Plugin Design', risk: 'High', desc: 'LLM plugins or tool integrations that lack proper input validation, access controls, or scope restrictions can be exploited to perform unintended actions, access sensitive systems, or exfiltrate data.' },
+    'LLM08': { name: 'Excessive Agency', risk: 'High', desc: 'LLM-based systems granted excessive permissions, autonomy, or access to consequential tools can cause unintended harm when they act on hallucinated instructions, injected prompts, or ambiguous user requests.' },
+    'LLM09': { name: 'Overreliance', risk: 'Medium', desc: 'Organisations or users place excessive trust in LLM outputs without independent validation, leading to propagation of factual errors, security misjudgements, or flawed decisions in critical workflows.' },
+    'LLM10': { name: 'Model Theft', risk: 'Medium', desc: 'Adversaries reconstruct or extract a proprietary LLM\'s weights, architecture, or training data through systematic querying — enabling them to replicate the model, reverse-engineer its capabilities, or undermine its commercial value.' }
+  };
+
   // ── DOM refs ──
   var overlay = document.getElementById('atlasModalOverlay');
+  var modal = document.getElementById('atlasModal');
   var modalId = document.getElementById('atlasModalId');
   var modalName = document.getElementById('atlasModalName');
   var modalMeta = document.getElementById('atlasModalMeta');
@@ -89,15 +104,31 @@
   if (!overlay) return;
 
   function openModal(id) {
-    var t = ATLAS[id];
+    var isOwasp = id.indexOf('LLM') === 0;
+    var t = isOwasp ? OWASP[id] : ATLAS[id];
     if (!t) return;
+
+    // Toggle colour theme
+    modal.classList.toggle('atlas-modal--owasp', isOwasp);
+
     modalId.textContent = id;
     modalName.textContent = t.name;
-    modalMeta.innerHTML =
-      '<dt class="atlas-modal__meta-key">Tactic</dt><dd class="atlas-modal__meta-val">' + t.tactic + '</dd>' +
-      '<dt class="atlas-modal__meta-key">Platform</dt><dd class="atlas-modal__meta-val">' + t.platform + '</dd>';
+
+    if (isOwasp) {
+      modalMeta.innerHTML =
+        '<dt class="atlas-modal__meta-key">Risk Level</dt><dd class="atlas-modal__meta-val">' + t.risk + '</dd>' +
+        '<dt class="atlas-modal__meta-key">Framework</dt><dd class="atlas-modal__meta-val">OWASP LLM Top 10</dd>';
+      modalLink.href = 'https://genai.owasp.org/llm-top-10/';
+      modalLink.textContent = 'View full details on owasp.org ↗';
+    } else {
+      modalMeta.innerHTML =
+        '<dt class="atlas-modal__meta-key">Tactic</dt><dd class="atlas-modal__meta-val">' + t.tactic + '</dd>' +
+        '<dt class="atlas-modal__meta-key">Platform</dt><dd class="atlas-modal__meta-val">' + t.platform + '</dd>';
+      modalLink.href = 'https://atlas.mitre.org/techniques/' + id + '/';
+      modalLink.textContent = 'View full technique on atlas.mitre.org ↗';
+    }
+
     modalDesc.textContent = t.desc;
-    modalLink.href = 'https://atlas.mitre.org/techniques/' + id + '/';
     overlay.classList.add('atlas-modal-overlay--open');
     overlay.setAttribute('aria-hidden', 'false');
     closeBtn.focus();
@@ -108,53 +139,45 @@
     overlay.setAttribute('aria-hidden', 'true');
   }
 
-  // Close on backdrop click
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closeModal();
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
   closeBtn.addEventListener('click', closeModal);
 
-  // ── Wire up all technique tags (runs once on load + exposed for dynamic content) ──
+  // ── Wire all framework tags (ATLAS + OWASP) ──
   function wireAtlasTags() {
-    // article framework panel: <span class="technique-id">AML.T0051 - ...</span>
-    document.querySelectorAll('.technique-list__item .technique-id:not([data-atlas-wired])').forEach(function(el) {
+    // Article framework panel: <span class="technique-id">AML.T0051 - ... or LLM01 - ...</span>
+    document.querySelectorAll('.technique-list__item .technique-id:not([data-fw-wired])').forEach(function(el) {
       var id = el.textContent.split(' - ')[0].trim();
-      if (!ATLAS[id]) return;
-      el.setAttribute('data-atlas-wired', '1');
+      var known = ATLAS[id] || OWASP[id];
+      if (!known) return;
+      el.setAttribute('data-fw-wired', '1');
       el.classList.add('technique-id--clickable');
+      if (OWASP[id]) el.classList.add('technique-id--owasp');
       el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
-      el.setAttribute('title', 'View technique details');
+      el.setAttribute('title', 'View details');
       el.addEventListener('click', function() { openModal(id); });
       el.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(id); } });
     });
 
-    // framework matrix / bar chart: <a class="technique-tag">AML.T0051</a>
-    document.querySelectorAll('.technique-tag:not([data-atlas-wired])').forEach(function(el) {
+    // Framework matrix / bar chart: <a class="technique-tag">AML.T0051 or LLM01</a>
+    document.querySelectorAll('.technique-tag:not([data-fw-wired])').forEach(function(el) {
       var id = el.textContent.trim().split(' - ')[0].trim();
-      if (!ATLAS[id]) return;
-      el.setAttribute('data-atlas-wired', '1');
+      var known = ATLAS[id] || OWASP[id];
+      if (!known) return;
+      el.setAttribute('data-fw-wired', '1');
       el.classList.add('technique-tag--clickable');
-      el.setAttribute('title', ATLAS[id].name);
-      // Replace href-based navigation with modal
+      el.setAttribute('title', known.name);
       el.addEventListener('click', function(e) { e.preventDefault(); openModal(id); });
     });
   }
 
-  // Wire on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', wireAtlasTags);
   } else {
     wireAtlasTags();
   }
 
-  // Expose so framework matrix pages can call after dynamic render
   window.wireAtlasTags = wireAtlasTags;
 })();
 </script>
