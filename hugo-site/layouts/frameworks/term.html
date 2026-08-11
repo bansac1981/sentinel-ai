@@ -50,13 +50,9 @@
 </div>
 
 {{/* ══════════════════════════════════════════════════════════════
-     FRAMEWORK INTRO ACCORDION
+     FRAMEWORK INTRO (always visible, not collapsible)
      ══════════════════════════════════════════════════════════════ */}}
-<details class="fw-intro">
-  <summary class="fw-intro__toggle">
-    <span class="fw-intro__icon">▸</span>
-    What is {{ $frameworkName }}?
-  </summary>
+<div class="fw-intro fw-intro--static">
   <div class="fw-intro__body">
     {{ if $isMitre }}
     <p><strong>MITRE ATLAS</strong> (Adversarial Threat Landscape for Artificial-Intelligence Systems) is a knowledge base of adversarial tactics and techniques targeting AI/ML systems, maintained by MITRE Corporation. Structured analogously to the well-known MITRE ATT&CK framework, it covers <strong>101 techniques across 16 tactics</strong> — with expansions into agentic AI attacks, RAG-based attacks, and AI supply chain threats.</p>
@@ -68,7 +64,7 @@
     <p><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener noreferrer" class="fw-intro__link">→ Official OWASP LLM Top 10</a></p>
     {{ end }}
   </div>
-</details>
+</div>
 
 {{/* ══════════════════════════════════════════════════════════════
      TIME RANGE FILTER (shared)
@@ -83,12 +79,15 @@
 
 {{ if $isMitre }}
 {{/* ══════════════════════════════════════════════════════════════
-     ATLAS: KILL CHAIN BANNER
+     ATLAS: TACTIC OVERVIEW (replaces horizontal kill chain scroll)
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
-  <h2 class="fw-section__title"><span class="fw-section__accent"></span>Attack Kill Chain</h2>
-  <p class="fw-section__sub">MITRE ATLAS tactic progression — click a stage to filter techniques</p>
-  <div class="fw-killchain" id="fwKillChain">
+  <h2 class="fw-section__title"><span class="fw-section__accent"></span>Tactic Distribution</h2>
+  <p class="fw-section__sub">How attack activity distributes across the ATLAS tactic lifecycle</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Each box represents one ATLAS tactic — a stage in the adversarial lifecycle. The number shows how many technique mentions appear in our articles for that stage. Click any tactic to filter the heatmap and other visualizations below to only show techniques belonging to that stage. Click again to clear the filter.
+  </div>
+  <div class="fw-killchain fw-killchain--grid" id="fwKillChain">
     <!-- Populated by JS -->
   </div>
 </section>
@@ -98,7 +97,10 @@
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>Technique Heatmap</h2>
-  <p class="fw-section__sub">Color intensity = article frequency — click any cell for details</p>
+  <p class="fw-section__sub">Visual map of technique activity across all ATLAS tactics</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Techniques are grouped by their parent tactic. Darker blue = more articles reference that technique. The number inside each cell is the article count. Click any cell to open a detail panel explaining the technique, its tactic category, and a link to the official MITRE documentation.
+  </div>
   <div class="fw-heatmap" id="fwHeatmap">
     <div class="fw-heatmap__loading">Building heatmap…</div>
   </div>
@@ -109,7 +111,10 @@
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>Emerging Techniques</h2>
-  <p class="fw-section__sub">Technique mention trajectory over time — rising threats highlighted</p>
+  <p class="fw-section__sub">Technique mention trajectory over the last 12 weeks</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Each row shows one technique. The sparkline charts weekly mention counts — rising lines indicate growing attacker interest. The percentage on the right compares the last 4 weeks against the prior 4 weeks. Green ↑ = accelerating, grey ↓ = declining. Click any technique ID to see its full description.
+  </div>
   <div class="fw-trends" id="fwTrends">
     <div class="fw-trends__loading">Calculating trends…</div>
   </div>
@@ -120,7 +125,10 @@
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>Attack Patterns</h2>
-  <p class="fw-section__sub">Techniques that frequently appear together — revealing composite attack chains</p>
+  <p class="fw-section__sub">Techniques that frequently appear together in the same article</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Each node is a technique. Lines connect techniques that co-occur in the same article — thicker lines mean they appear together more often. This reveals composite attack chains: e.g., prompt injection (T0051) often co-occurs with data leakage (T0057), suggesting attackers chain these techniques. Larger nodes indicate more total mentions.
+  </div>
   <div class="fw-cooccurrence" id="fwCooccurrence">
     <canvas id="fwCooccurrenceCanvas" width="700" height="400"></canvas>
   </div>
@@ -132,7 +140,10 @@
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>Risk Radar</h2>
-  <p class="fw-section__sub">Article frequency across all 10 OWASP categories — revealing where industry attention concentrates</p>
+  <p class="fw-section__sub">Coverage distribution across all 10 OWASP LLM categories</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Each spoke of the radar represents one OWASP category (LLM01 through LLM10). The distance from the centre shows how many articles in our corpus reference that category — further out means more coverage. Categories that "bulge" outward are dominating industry discussion. Categories close to the centre may represent under-reported risks. The number below each label is the exact article count.
+  </div>
   <div class="fw-radar" id="fwRadar">
     <canvas id="fwRadarCanvas" width="500" height="500"></canvas>
   </div>
@@ -143,7 +154,10 @@
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>Risk Categories</h2>
-  <p class="fw-section__sub">Click any category to view mapped articles and defensive guidance</p>
+  <p class="fw-section__sub">All 10 OWASP LLM categories with severity, trend, and defensive guidance</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Each tile shows one OWASP category. The severity badge (Critical/High/Medium) reflects OWASP's official risk rating. The article count and trend arrow show how actively this risk appears in recent coverage. Click any tile to expand it and see: a description of the vulnerability, concrete mitigation steps, and links to recent articles covering this risk.
+  </div>
   <div class="fw-risk-tiles" id="fwRiskTiles">
     <!-- Populated by JS -->
   </div>
@@ -154,7 +168,10 @@
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>Coverage Gaps & Blindspots</h2>
-  <p class="fw-section__sub">Under-reported categories that may indicate emerging risk or coverage blindspots</p>
+  <p class="fw-section__sub">Categories with significantly fewer articles than average</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> These alerts flag OWASP categories that have less than half the average coverage. This doesn't necessarily mean the risk is low — it may indicate the industry is not yet paying sufficient attention. Categories marked "High" severity with low coverage deserve particular scrutiny.
+  </div>
   <div class="fw-gaps" id="fwGaps">
     <!-- Populated by JS -->
   </div>
@@ -168,6 +185,9 @@
 <section class="fw-section">
   <h2 class="fw-section__title"><span class="fw-section__accent"></span>{{ cond $isMitre "Technique" "Category" }} Deep Dives</h2>
   <p class="fw-section__sub">Top active {{ cond $isMitre "attack techniques" "risk categories" }} with real-world context and defensive guidance</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> The most frequently referenced {{ cond $isMitre "techniques" "categories" }}, ranked by article count. Click any row to expand and see: what the {{ cond $isMitre "technique" "risk" }} means, {{ cond $isMitre "which tactic it belongs to, its OWASP mapping," "its OWASP severity rating, specific mitigation steps," }} a link to the most recent article referencing it, and a link to the official documentation.
+  </div>
   <div class="fw-deepdive" id="fwDeepDive">
     <!-- Populated by JS -->
   </div>
@@ -178,41 +198,27 @@
      ATLAS: CROSS-FRAMEWORK LINKS
      ══════════════════════════════════════════════════════════════ */}}
 <section class="fw-section">
-  <h2 class="fw-section__title"><span class="fw-section__accent"></span>ATLAS ↔ OWASP Mapping</h2>
+  <h2 class="fw-section__title"><span class="fw-section__accent"></span>ATLAS → OWASP Mapping</h2>
   <p class="fw-section__sub">How MITRE ATLAS techniques relate to OWASP LLM Top 10 categories</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Each card shows an OWASP category and the ATLAS techniques that map to it. This helps you understand how granular attack techniques (ATLAS) roll up into broader vulnerability categories (OWASP) — useful for bridging operational threat intelligence with risk management frameworks.
+  </div>
   <div class="fw-crosslinks" id="fwCrosslinks">
     <!-- Populated by JS -->
   </div>
 </section>
 {{ else }}
 <section class="fw-section">
-  <h2 class="fw-section__title"><span class="fw-section__accent"></span>OWASP ↔ ATLAS Mapping</h2>
-  <p class="fw-section__sub">How OWASP categories map to specific MITRE ATLAS attack techniques</p>
+  <h2 class="fw-section__title"><span class="fw-section__accent"></span>OWASP → ATLAS Mapping</h2>
+  <p class="fw-section__sub">Which specific MITRE ATLAS attack techniques underlie each OWASP category</p>
+  <div class="fw-section__howto">
+    <strong>How to read:</strong> Each card shows an OWASP category and the specific ATLAS techniques that represent concrete attacks in that risk area. This helps translate high-level risk categories into actionable threat intelligence — what specific attacks should your team be monitoring for?
+  </div>
   <div class="fw-crosslinks" id="fwCrosslinks">
     <!-- Populated by JS -->
   </div>
 </section>
 {{ end }}
-
-{{/* ══════════════════════════════════════════════════════════════
-     SHARED: ARTICLE COVERAGE MATRIX (improved)
-     ══════════════════════════════════════════════════════════════ */}}
-<section class="fw-section">
-  <h2 class="fw-section__title"><span class="fw-section__accent"></span>Article Coverage Matrix</h2>
-  <p class="fw-section__sub">Full mapping of articles to {{ cond $isMitre "MITRE ATLAS techniques" "OWASP LLM categories" }}</p>
-  <div class="fw-matrix" id="fwMatrix">
-    <div class="fw-matrix__controls">
-      <input type="text" class="fw-matrix__search" id="fwMatrixSearch" placeholder="Filter articles or techniques…" autocomplete="off">
-      <div class="fw-matrix__sort">
-        <button class="fw-matrix__sort-btn fw-matrix__sort-btn--active" data-sort="date">Newest</button>
-        <button class="fw-matrix__sort-btn" data-sort="techniques">Most tagged</button>
-      </div>
-    </div>
-    <div class="fw-matrix__table" id="fwMatrixTable">
-      <div class="fw-matrix__loading">Loading matrix…</div>
-    </div>
-  </div>
-</section>
 
 {{/* ══════════════════════════════════════════════════════════════
      JAVASCRIPT ENGINE
@@ -230,7 +236,7 @@
   var activeRange = 'all';
   var activeKillChainTactic = null;
 
-  // ── ATLAS tactic definitions with ordering ──
+  // ── Tactic definitions with descriptions for tooltips ──
   var TACTICS_ORDER = [
     'Reconnaissance', 'Resource Development', 'Initial Access',
     'ML Attack Staging', 'Execution', 'Persistence',
@@ -238,7 +244,22 @@
     'Credential Access', 'Exfiltration', 'Impact'
   ];
 
-  // ── ATLAS technique → tactic mapping (from atlas-modal.html data) ──
+  var TACTIC_DESCRIPTIONS = {
+    'Reconnaissance': 'Gathering information about target AI/ML systems before attacking',
+    'Resource Development': 'Acquiring tools, infrastructure, or capabilities to support AI attacks',
+    'Initial Access': 'Gaining the first foothold into an AI system or its pipeline',
+    'ML Attack Staging': 'Preparing adversarial inputs, poisoned data, or crafted prompts',
+    'Execution': 'Running adversarial code or triggering malicious AI behaviour',
+    'Persistence': 'Maintaining access to AI systems across sessions or updates',
+    'Defense Evasion': 'Bypassing safety filters, detection systems, or guardrails',
+    'Discovery': 'Probing AI systems to map capabilities, tools, and configurations',
+    'Collection': 'Extracting system prompts, configurations, or operational details',
+    'Credential Access': 'Stealing API keys, tokens, or credentials from AI infrastructure',
+    'Exfiltration': 'Extracting sensitive data via the AI system\'s legitimate channels',
+    'Impact': 'Disrupting, degrading, or corrupting AI system outputs and integrity'
+  };
+
+  // ── ATLAS technique → tactic mapping ──
   var TECHNIQUE_TACTICS = {
     'AML.T0006': 'ML Attack Staging', 'AML.T0010': 'Initial Access',
     'AML.T0012': 'Initial Access', 'AML.T0015': 'Defense Evasion',
@@ -322,11 +343,10 @@
     'AML.T0044': ['LLM10'], 'AML.T0040': ['LLM10']
   };
 
-  // ── Utility: parse technique ID from full string ──
+  // ── Utility functions ──
   function parseId(t) { return t.split(' - ')[0].trim(); }
   function parseLabel(t) { return t.split(' - ').slice(1).join(' - ').trim() || parseId(t); }
 
-  // ── Utility: filter articles by time range ──
   function filterByRange(arts, range) {
     if (range === 'all') return arts;
     var now = new Date();
@@ -335,10 +355,6 @@
     return arts.filter(function(a) { return new Date(a.date) >= cutoff; });
   }
 
-  // ── Utility: get date bucket (YYYY-MM) ──
-  function getMonthKey(dateStr) { return dateStr.substring(0, 7); }
-
-  // ── Utility: build frequency map from articles ──
   function buildFreqMap(arts) {
     var freq = {};
     arts.forEach(function(a) {
@@ -353,28 +369,8 @@
     return freq;
   }
 
-  // ── Utility: build weekly time series for each technique ──
-  function buildTimeSeries(arts) {
-    var series = {};
-    var weekMap = {};
-    arts.forEach(function(a) {
-      var d = new Date(a.date);
-      var weekStart = new Date(d);
-      weekStart.setDate(d.getDate() - d.getDay());
-      var weekKey = weekStart.toISOString().substring(0, 10);
-      if (!weekMap[weekKey]) weekMap[weekKey] = {};
-      (a.techniques || []).forEach(function(t) {
-        var id = parseId(t);
-        if (!series[id]) series[id] = {};
-        if (!series[id][weekKey]) series[id][weekKey] = 0;
-        series[id][weekKey]++;
-      });
-    });
-    return series;
-  }
-
   // ══════════════════════════════════════════════════════════════
-  // RENDER: Hero Stats
+  // RENDER: Hero Stats (with tooltips)
   // ══════════════════════════════════════════════════════════════
   function renderHeroStats() {
     var freq = buildFreqMap(filteredArticles);
@@ -383,7 +379,6 @@
     var totalArticles = filteredArticles.length;
     var topTechnique = sorted.length ? sorted[0] : null;
 
-    // Calculate trend (last 30d vs prior 30d)
     var now = new Date();
     var d30 = new Date(now); d30.setDate(d30.getDate() - 30);
     var d60 = new Date(now); d60.setDate(d60.getDate() - 60);
@@ -395,26 +390,26 @@
 
     var el = document.getElementById('fwHeroStats');
     el.innerHTML =
-      '<div class="fw-stat fw-animate-in">' +
+      '<div class="fw-stat fw-animate-in" title="Total number of articles in our corpus that reference at least one ' + (isMitre ? 'MITRE ATLAS technique' : 'OWASP LLM category') + '">' +
         '<span class="fw-stat__value">' + totalArticles + '</span>' +
         '<span class="fw-stat__label">Articles Mapped</span>' +
       '</div>' +
-      '<div class="fw-stat fw-animate-in" style="animation-delay:0.1s">' +
+      '<div class="fw-stat fw-animate-in" style="animation-delay:0.1s" title="Number of distinct ' + (isMitre ? 'ATLAS techniques referenced across all articles — out of 101 total in the framework' : 'OWASP categories appearing in our coverage — out of 10 total') + '">' +
         '<span class="fw-stat__value">' + uniqueTechniques + '</span>' +
         '<span class="fw-stat__label">' + (isMitre ? 'Techniques Tracked' : 'Categories Active') + '</span>' +
       '</div>' +
-      '<div class="fw-stat fw-animate-in" style="animation-delay:0.2s">' +
+      '<div class="fw-stat fw-animate-in" style="animation-delay:0.2s" title="The ' + (isMitre ? 'technique' : 'category') + ' that appears in the most articles — indicates the dominant threat vector in current coverage">' +
         '<span class="fw-stat__value">' + (topTechnique ? topTechnique.id : '—') + '</span>' +
         '<span class="fw-stat__label">Most Active</span>' +
       '</div>' +
-      '<div class="fw-stat ' + trendClass + ' fw-animate-in" style="animation-delay:0.3s">' +
+      '<div class="fw-stat ' + trendClass + ' fw-animate-in" style="animation-delay:0.3s" title="Compares article volume from the last 30 days against the prior 30 days — shows whether coverage of this framework is increasing or decreasing">' +
         '<span class="fw-stat__value">' + trendDir + ' ' + Math.abs(trendPct) + '%</span>' +
         '<span class="fw-stat__label">30-day Trend</span>' +
       '</div>';
   }
 
   // ══════════════════════════════════════════════════════════════
-  // RENDER: Kill Chain (ATLAS only)
+  // RENDER: Tactic Distribution (ATLAS — compact grid with tooltips)
   // ══════════════════════════════════════════════════════════════
   function renderKillChain() {
     if (!isMitre) return;
@@ -431,37 +426,36 @@
       }
     });
 
-    var html = '<div class="fw-killchain__track">';
-    TACTICS_ORDER.forEach(function(tactic, i) {
+    var maxTacticCount = 0;
+    TACTICS_ORDER.forEach(function(t) {
+      if ((tacticCounts[t] || 0) > maxTacticCount) maxTacticCount = tacticCounts[t];
+    });
+
+    var html = '';
+    TACTICS_ORDER.forEach(function(tactic) {
       var count = tacticCounts[tactic] || 0;
       var isActive = activeKillChainTactic === tactic;
-      html += '<div class="fw-killchain__node' + (isActive ? ' fw-killchain__node--active' : '') + (count === 0 ? ' fw-killchain__node--empty' : '') + '" data-tactic="' + tactic + '">' +
-        '<div class="fw-killchain__count">' + count + '</div>' +
+      var pct = maxTacticCount > 0 ? Math.round((count / maxTacticCount) * 100) : 0;
+      var desc = TACTIC_DESCRIPTIONS[tactic] || '';
+      html += '<div class="fw-killchain__node' + (isActive ? ' fw-killchain__node--active' : '') + (count === 0 ? ' fw-killchain__node--empty' : '') + '" data-tactic="' + tactic + '" title="' + desc + '">' +
         '<div class="fw-killchain__label">' + tactic + '</div>' +
+        '<div class="fw-killchain__bar"><div class="fw-killchain__bar-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="fw-killchain__count">' + count + ' mentions</div>' +
       '</div>';
-      if (i < TACTICS_ORDER.length - 1) {
-        html += '<div class="fw-killchain__arrow">→</div>';
-      }
     });
-    html += '</div>';
     el.innerHTML = html;
 
-    // Attach click handlers
     el.querySelectorAll('.fw-killchain__node').forEach(function(node) {
       node.addEventListener('click', function() {
         var tactic = this.getAttribute('data-tactic');
-        if (activeKillChainTactic === tactic) {
-          activeKillChainTactic = null;
-        } else {
-          activeKillChainTactic = tactic;
-        }
+        activeKillChainTactic = (activeKillChainTactic === tactic) ? null : tactic;
         renderAll();
       });
     });
   }
 
   // ══════════════════════════════════════════════════════════════
-  // RENDER: Heatmap (ATLAS only)
+  // RENDER: Heatmap (ATLAS — with click-to-open-modal)
   // ══════════════════════════════════════════════════════════════
   function renderHeatmap() {
     if (!isMitre) return;
@@ -472,7 +466,6 @@
     var maxCount = 0;
     Object.values(freq).forEach(function(t) { if (t.count > maxCount) maxCount = t.count; });
 
-    // Group techniques by tactic
     var tacticGroups = {};
     TACTICS_ORDER.forEach(function(t) { tacticGroups[t] = []; });
     Object.keys(TECHNIQUE_TACTICS).forEach(function(id) {
@@ -486,7 +479,6 @@
       }
     });
 
-    // Filter by active tactic if set
     var displayTactics = activeKillChainTactic
       ? TACTICS_ORDER.filter(function(t) { return t === activeKillChainTactic; })
       : TACTICS_ORDER.filter(function(t) { return tacticGroups[t].length > 0; });
@@ -500,7 +492,7 @@
       techniques.forEach(function(tech) {
         var intensity = maxCount > 0 ? tech.count / maxCount : 0;
         var opacity = 0.1 + (intensity * 0.9);
-        html += '<div class="fw-heatmap__cell technique-tag" data-id="' + tech.id + '" title="' + tech.name + ' (' + tech.count + ' articles)" style="background:rgba(59,130,246,' + opacity.toFixed(2) + ');' + (intensity > 0.5 ? 'color:#fff;' : '') + '">' +
+        html += '<div class="fw-heatmap__cell" data-technique-id="' + tech.id + '" title="' + tech.name + ' — ' + tech.count + ' article' + (tech.count !== 1 ? 's' : '') + '. Click for details." style="background:rgba(59,130,246,' + opacity.toFixed(2) + ');' + (intensity > 0.5 ? 'color:#fff;' : '') + '">' +
           '<span class="fw-heatmap__cell-id">' + tech.id.replace('AML.', '') + '</span>' +
           '<span class="fw-heatmap__cell-count">' + tech.count + '</span>' +
         '</div>';
@@ -511,13 +503,34 @@
 
     if (maxCount > 0) {
       html += '<div class="fw-heatmap__legend">' +
-        '<span class="fw-heatmap__legend-label">Low</span>' +
+        '<span class="fw-heatmap__legend-label">Low frequency</span>' +
         '<div class="fw-heatmap__legend-bar"></div>' +
-        '<span class="fw-heatmap__legend-label">High</span>' +
+        '<span class="fw-heatmap__legend-label">High frequency</span>' +
       '</div>';
     }
 
     el.innerHTML = html;
+
+    // Wire heatmap cells to open the ATLAS modal
+    el.querySelectorAll('.fw-heatmap__cell').forEach(function(cell) {
+      cell.style.cursor = 'pointer';
+      cell.addEventListener('click', function() {
+        var id = this.getAttribute('data-technique-id');
+        if (id && typeof window.openAtlasModal === 'function') {
+          window.openAtlasModal(id);
+        } else if (id && typeof window.wireAtlasTags === 'function') {
+          // Fallback: simulate the tag click path
+          var temp = document.createElement('span');
+          temp.className = 'technique-id';
+          temp.textContent = id;
+          temp.style.display = 'none';
+          document.body.appendChild(temp);
+          window.wireAtlasTags();
+          temp.click();
+          document.body.removeChild(temp);
+        }
+      });
+    });
   }
 
   // ══════════════════════════════════════════════════════════════
@@ -530,7 +543,6 @@
     var freq = buildFreqMap(filteredArticles);
     var sorted = Object.values(freq).sort(function(a, b) { return b.count - a.count; }).slice(0, 10);
 
-    // Build weekly counts for sparklines
     var allWeeks = {};
     articles.forEach(function(a) {
       var d = new Date(a.date);
@@ -540,11 +552,10 @@
       allWeeks[key] = true;
     });
     var weekKeys = Object.keys(allWeeks).sort();
-    var recentWeeks = weekKeys.slice(-12); // Last 12 weeks
+    var recentWeeks = weekKeys.slice(-12);
 
     var html = '<div class="fw-trends__list">';
     sorted.forEach(function(tech) {
-      // Build sparkline data
       var sparkData = recentWeeks.map(function(w) {
         var count = 0;
         tech.articles.forEach(function(a) {
@@ -564,7 +575,6 @@
         return x.toFixed(1) + ',' + y.toFixed(1);
       }).join(' ');
 
-      // Trend calculation (last 4 weeks vs prior 4 weeks)
       var recentSum = sparkData.slice(-4).reduce(function(a, b) { return a + b; }, 0);
       var priorSum = sparkData.slice(-8, -4).reduce(function(a, b) { return a + b; }, 0);
       var trend = priorSum > 0 ? ((recentSum - priorSum) / priorSum * 100).toFixed(0) : (recentSum > 0 ? 100 : 0);
@@ -595,7 +605,6 @@
     var W = canvas.width = canvas.parentElement.clientWidth || 700;
     var H = canvas.height = 400;
 
-    // Build co-occurrence matrix
     var cooc = {};
     filteredArticles.forEach(function(a) {
       var ids = (a.techniques || []).map(parseId);
@@ -617,12 +626,10 @@
       return;
     }
 
-    // Collect unique nodes
     var nodeSet = {};
     pairs.forEach(function(p) { nodeSet[p.a] = true; nodeSet[p.b] = true; });
     var nodes = Object.keys(nodeSet);
 
-    // Position nodes in a circle
     var cx = W / 2, cy = H / 2, radius = Math.min(W, H) * 0.38;
     var nodePositions = {};
     nodes.forEach(function(n, i) {
@@ -632,7 +639,6 @@
 
     var maxCooc = pairs[0].count;
 
-    // Draw edges
     pairs.forEach(function(p) {
       var from = nodePositions[p.a];
       var to = nodePositions[p.b];
@@ -646,7 +652,6 @@
       ctx.stroke();
     });
 
-    // Draw nodes
     var freq = buildFreqMap(filteredArticles);
     nodes.forEach(function(n) {
       var pos = nodePositions[n];
@@ -661,18 +666,11 @@
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Label
       ctx.fillStyle = '#E8ECF0';
       ctx.font = '10px IBM Plex Mono';
       ctx.textAlign = 'center';
       ctx.fillText(n.replace('AML.', ''), pos.x, pos.y + nodeRadius + 14);
     });
-
-    // Title in corner
-    ctx.fillStyle = '#4E5A6E';
-    ctx.font = '10px IBM Plex Mono';
-    ctx.textAlign = 'left';
-    ctx.fillText('Line thickness = co-occurrence frequency', 12, H - 12);
   }
 
   // ══════════════════════════════════════════════════════════════
@@ -701,7 +699,6 @@
     var n = categories.length;
     var angleStep = (2 * Math.PI) / n;
 
-    // Draw grid rings
     [0.25, 0.5, 0.75, 1.0].forEach(function(pct) {
       ctx.beginPath();
       for (var i = 0; i <= n; i++) {
@@ -716,7 +713,6 @@
       ctx.stroke();
     });
 
-    // Draw axis lines
     for (var i = 0; i < n; i++) {
       var angle = angleStep * i - Math.PI / 2;
       ctx.beginPath();
@@ -727,7 +723,6 @@
       ctx.stroke();
     }
 
-    // Draw data polygon
     ctx.beginPath();
     categories.forEach(function(cat, i) {
       var count = freq[cat] ? freq[cat].count : 0;
@@ -744,7 +739,6 @@
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Draw data points and labels
     categories.forEach(function(cat, i) {
       var count = freq[cat] ? freq[cat].count : 0;
       var pct = count / maxCount;
@@ -752,13 +746,11 @@
       var x = cx + radius * pct * Math.cos(angle);
       var y = cy + radius * pct * Math.sin(angle);
 
-      // Data point
       ctx.beginPath();
       ctx.arc(x, y, 4, 0, 2 * Math.PI);
       ctx.fillStyle = '#a855f7';
       ctx.fill();
 
-      // Label
       var labelRadius = radius + 24;
       var lx = cx + labelRadius * Math.cos(angle);
       var ly = cy + labelRadius * Math.sin(angle);
@@ -768,7 +760,6 @@
       ctx.textBaseline = 'middle';
       ctx.fillText(cat, lx, ly);
 
-      // Count below label
       ctx.fillStyle = '#E8ECF0';
       ctx.font = 'bold 11px IBM Plex Mono';
       ctx.fillText(count.toString(), lx, ly + 14);
@@ -786,7 +777,6 @@
     var freq = buildFreqMap(filteredArticles);
     var categories = Object.keys(OWASP_DATA);
 
-    // Calculate trends for each category
     var now = new Date();
     var d30 = new Date(now); d30.setDate(d30.getDate() - 30);
 
@@ -830,7 +820,6 @@
     });
     el.innerHTML = html;
 
-    // Toggle expand on click
     el.querySelectorAll('.fw-risk-tile').forEach(function(tile) {
       tile.addEventListener('click', function() {
         this.classList.toggle('fw-risk-tile--expanded');
@@ -918,7 +907,6 @@
         '</summary>' +
         '<div class="fw-deepdive__body">' +
           '<dl class="fw-deepdive__meta">' + details + '</dl>' +
-          (isMitre && TECHNIQUE_NAMES[tech.id] ? '' : '') +
           ((!isMitre && OWASP_DATA[tech.id]) ? '<p class="fw-deepdive__desc">' + OWASP_DATA[tech.id].desc + '</p>' : '') +
           (mitigation ? '<div class="fw-deepdive__mitigation"><strong>Defensive Guidance:</strong><ul>' + mitigation.map(function(m) { return '<li>' + m + '</li>'; }).join('') + '</ul></div>' : '') +
           (exemplar ? '<div class="fw-deepdive__exemplar"><strong>Latest article:</strong> <a href="' + exemplar.url + '">' + exemplar.title + '</a> <span class="fw-deepdive__exemplar-date">(' + exemplar.dateDisplay + ')</span></div>' : '') +
@@ -939,7 +927,6 @@
     var html = '<div class="fw-crosslinks__grid">';
 
     if (isMitre) {
-      // Group ATLAS techniques by their OWASP mapping
       var owaspGroups = {};
       Object.keys(CROSS_MAP).forEach(function(atlasId) {
         CROSS_MAP[atlasId].forEach(function(owaspId) {
@@ -960,7 +947,6 @@
         '</div>';
       });
     } else {
-      // Show each OWASP category and its ATLAS mappings
       Object.keys(OWASP_DATA).forEach(function(owaspId) {
         var mappedAtlas = [];
         Object.keys(CROSS_MAP).forEach(function(atlasId) {
@@ -985,78 +971,6 @@
   }
 
   // ══════════════════════════════════════════════════════════════
-  // RENDER: Article Matrix (improved)
-  // ══════════════════════════════════════════════════════════════
-  function renderMatrix() {
-    var el = document.getElementById('fwMatrixTable');
-    if (!el) return;
-
-    var arts = filteredArticles.slice();
-    var sortMode = document.querySelector('.fw-matrix__sort-btn--active');
-    var sortBy = sortMode ? sortMode.getAttribute('data-sort') : 'date';
-    var searchVal = (document.getElementById('fwMatrixSearch').value || '').toLowerCase();
-
-    // Filter by search
-    if (searchVal) {
-      arts = arts.filter(function(a) {
-        if (a.title.toLowerCase().indexOf(searchVal) !== -1) return true;
-        return (a.techniques || []).some(function(t) {
-          return t.toLowerCase().indexOf(searchVal) !== -1;
-        });
-      });
-    }
-
-    // Sort
-    if (sortBy === 'techniques') {
-      arts.sort(function(a, b) { return (b.techniques || []).length - (a.techniques || []).length; });
-    } else {
-      arts.sort(function(a, b) { return b.date.localeCompare(a.date); });
-    }
-
-    if (!arts.length) {
-      el.innerHTML = '<p class="fw-matrix__empty">No matching articles found.</p>';
-      return;
-    }
-
-    // Group by month
-    var months = {};
-    arts.forEach(function(a) {
-      var key = getMonthKey(a.date);
-      if (!months[key]) months[key] = [];
-      months[key].push(a);
-    });
-
-    var html = '';
-    Object.keys(months).sort().reverse().forEach(function(month) {
-      var monthLabel = new Date(month + '-01').toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
-      html += '<details class="fw-matrix__month" open>' +
-        '<summary class="fw-matrix__month-header">' + monthLabel + ' <span class="fw-matrix__month-count">(' + months[month].length + ')</span></summary>' +
-        '<table class="matrix-table"><thead><tr>' +
-          '<th class="matrix-table__article-col">Article</th>' +
-          '<th class="matrix-table__date-col">Date</th>' +
-          '<th class="matrix-table__tags-col">Mapped ' + (isMitre ? 'Techniques' : 'Categories') + '</th>' +
-        '</tr></thead><tbody>';
-
-      months[month].forEach(function(a) {
-        var tags = (a.techniques || []).map(function(t) {
-          var id = parseId(t);
-          return '<span class="technique-tag" data-id="' + id + '" title="' + t + '">' + id + '</span>';
-        }).join('');
-
-        html += '<tr class="matrix-table__row">' +
-          '<td class="matrix-table__title"><a href="' + a.url + '">' + a.title + '</a></td>' +
-          '<td class="matrix-table__date">' + a.dateDisplay + '</td>' +
-          '<td class="matrix-table__tags">' + (tags || '<span class="matrix-table__none">—</span>') + '</td>' +
-        '</tr>';
-      });
-
-      html += '</tbody></table></details>';
-    });
-
-    el.innerHTML = html;
-  }
-
-  // ══════════════════════════════════════════════════════════════
   // RENDER ALL
   // ══════════════════════════════════════════════════════════════
   function renderAll() {
@@ -1073,9 +987,7 @@
     if (isMitre) renderCooccurrence();
     renderDeepDive();
     renderCrosslinks();
-    renderMatrix();
 
-    // Wire technique tags for modal
     if (typeof window.wireAtlasTags === 'function') {
       setTimeout(function() { window.wireAtlasTags(); }, 50);
     }
@@ -1084,8 +996,6 @@
   // ══════════════════════════════════════════════════════════════
   // EVENT HANDLERS
   // ══════════════════════════════════════════════════════════════
-
-  // Time range filter
   document.getElementById('fwTimeFilter').addEventListener('click', function(e) {
     var pill = e.target.closest('.fw-timefilter__pill');
     if (!pill) return;
@@ -1098,28 +1008,6 @@
     renderAll();
   });
 
-  // Matrix search
-  var searchInput = document.getElementById('fwMatrixSearch');
-  if (searchInput) {
-    var debounceTimer;
-    searchInput.addEventListener('input', function() {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(renderMatrix, 200);
-    });
-  }
-
-  // Matrix sort buttons
-  document.querySelectorAll('.fw-matrix__sort-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.fw-matrix__sort-btn').forEach(function(b) {
-        b.classList.remove('fw-matrix__sort-btn--active');
-      });
-      this.classList.add('fw-matrix__sort-btn--active');
-      renderMatrix();
-    });
-  });
-
-  // Resize handler for canvas charts
   var resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
@@ -1129,7 +1017,6 @@
     }, 250);
   });
 
-  // ── Initial render ──
   renderAll();
 
 })();

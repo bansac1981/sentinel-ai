@@ -2447,6 +2447,120 @@ details.fw-intro[open] .fw-intro__icon {
   }
 }
 
+/* ── Static intro (non-collapsible) ── */
+.fw-intro--static {
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.fw-intro--static .fw-intro__body {
+  padding: 0;
+}
+
+/* ── Section "How to read" explanation boxes ── */
+.fw-section__howto {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--text-muted);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.fw-section__howto strong {
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+/* ── Kill chain as compact grid (not scrolling list) ── */
+.fw-killchain--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  overflow: visible;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+.fw-killchain--grid .fw-killchain__node {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition);
+  min-width: 0;
+}
+
+.fw-killchain--grid .fw-killchain__node:hover {
+  border-color: var(--atlas-color);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.fw-killchain--grid .fw-killchain__node--active {
+  border-color: var(--atlas-color);
+  background: var(--atlas-bg);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.1);
+}
+
+.fw-killchain--grid .fw-killchain__node--empty {
+  opacity: 0.5;
+}
+
+.fw-killchain--grid .fw-killchain__label {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fw-killchain--grid .fw-killchain__count {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.fw-killchain--grid .fw-killchain__node--active .fw-killchain__count {
+  color: var(--atlas-color);
+}
+
+.fw-killchain__bar {
+  width: 100%;
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fw-killchain__bar-fill {
+  height: 100%;
+  background: var(--atlas-color);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  opacity: 0.7;
+}
+
+.fw-killchain--grid .fw-killchain__node--active .fw-killchain__bar-fill {
+  opacity: 1;
+}
+
 /* Responsive overrides for template classes */
 @media (max-width: 768px) {
   .fw-crosslinks__grid {
