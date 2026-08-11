@@ -138,6 +138,8 @@
 
   html += '</tbody></table>';
   matrixEl.innerHTML = html;
+
+  if (typeof window.wireAtlasTags === 'function') window.wireAtlasTags();
 })();
 </script>
 

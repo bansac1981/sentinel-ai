@@ -1,0 +1,160 @@
+{{/* MITRE ATLAS technique detail modal — included once in baseof.html */}}
+
+<!-- ATLAS technique modal -->
+<div class="atlas-modal-overlay" id="atlasModalOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="atlasModalName">
+  <div class="atlas-modal" id="atlasModal">
+    <div class="atlas-modal__header">
+      <div>
+        <div class="atlas-modal__id" id="atlasModalId"></div>
+        <p class="atlas-modal__name" id="atlasModalName"></p>
+      </div>
+      <button class="atlas-modal__close" id="atlasModalClose" aria-label="Close">✕</button>
+    </div>
+    <dl class="atlas-modal__meta" id="atlasModalMeta"></dl>
+    <div class="atlas-modal__desc" id="atlasModalDesc"></div>
+    <div class="atlas-modal__footer">
+      <a class="atlas-modal__link" id="atlasModalLink" href="#" target="_blank" rel="noopener noreferrer">
+        View full technique on atlas.mitre.org ↗
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ── Technique data (v2026.07 curated set) ──
+  var ATLAS = {
+    // Core ML/AI
+    'AML.T0006': { name: 'Active Learning Attack', tactic: 'ML Attack Staging', platform: 'Predictive AI', desc: 'Adversaries query a target ML model repeatedly with crafted inputs to extract information about its decision boundary, using an active learning strategy to minimise the number of queries needed.' },
+    'AML.T0010': { name: 'AI Supply Chain Compromise', tactic: 'Initial Access', platform: 'Predictive AI, Generative AI', desc: 'Adversaries compromise components of the AI supply chain — including pre-trained models, training datasets, ML libraries, or deployment infrastructure — to introduce malicious behaviour into downstream systems.' },
+    'AML.T0012': { name: 'Valid Accounts', tactic: 'Initial Access', platform: 'Predictive AI, Generative AI', desc: 'Adversaries use legitimate credentials to access ML systems, model registries, or training infrastructure, bypassing the need for technical exploitation.' },
+    'AML.T0015': { name: 'Evade AI Model', tactic: 'Defense Evasion', platform: 'Predictive AI', desc: 'Adversaries craft inputs designed to cause an AI model to misclassify or produce incorrect output, evading detection or safety mechanisms without altering the model itself.' },
+    'AML.T0018': { name: 'Manipulate AI Model', tactic: 'Impact', platform: 'Predictive AI, Generative AI', desc: 'Adversaries modify a model\'s weights, architecture, or prompt construction logic to alter its behaviour — including embedding backdoors or biases that activate under specific conditions.' },
+    'AML.T0020': { name: 'Poison Training Data', tactic: 'ML Attack Staging', platform: 'Predictive AI, Generative AI', desc: 'Adversaries introduce malicious examples into training data to corrupt the model\'s learned behaviour, causing misclassification, introducing backdoors, or degrading overall performance.' },
+    'AML.T0031': { name: 'Erode AI Model Integrity', tactic: 'Impact', platform: 'Predictive AI', desc: 'Adversaries degrade model accuracy or reliability over time through repeated adversarial interactions, causing the model to drift from its intended behaviour without a single detectable attack event.' },
+    'AML.T0040': { name: 'AI Model Inference API Access', tactic: 'Reconnaissance', platform: 'Predictive AI, Generative AI', desc: 'Adversaries interact with a model\'s inference API to probe its capabilities, extract information about its architecture or training data, or stage further attacks.' },
+    'AML.T0043': { name: 'Craft Adversarial Data', tactic: 'ML Attack Staging', platform: 'Predictive AI', desc: 'Adversaries generate inputs specifically designed to cause an AI model to produce incorrect outputs, exploiting the model\'s sensitivity to imperceptible perturbations.' },
+    'AML.T0044': { name: 'Full AI Model Access', tactic: 'Reconnaissance', platform: 'Predictive AI, Generative AI', desc: 'Adversaries gain white-box access to a model\'s architecture, weights, and parameters — enabling more powerful attacks such as precise adversarial example crafting or model inversion.' },
+    'AML.T0047': { name: 'AI-Enabled Product or Service', tactic: 'Resource Development', platform: 'Generative AI', desc: 'Adversaries use AI-enabled products or services as infrastructure to support attacks — including using LLMs to generate phishing content, malware, or disinformation at scale.' },
+    'AML.T0059': { name: 'Erode Dataset Integrity', tactic: 'Impact', platform: 'Predictive AI, Generative AI', desc: 'Adversaries degrade the quality or trustworthiness of a dataset over time through repeated low-volume poisoning, making it difficult to detect compared to bulk data injection.' },
+    'AML.T0060': { name: 'Publish Hallucinated Entities', tactic: 'Impact', platform: 'Generative AI', desc: 'Adversaries exploit LLM hallucination behaviour by prompting models to generate and publish false information about people, organisations, events, or technical artefacts.' },
+    'AML.T0063': { name: 'Discover AI Model Outputs', tactic: 'Discovery', platform: 'Predictive AI, Generative AI', desc: 'Adversaries systematically collect and analyse AI model outputs to infer properties of the model, identify decision patterns, or detect the presence of backdoors.' },
+    // LLM-specific
+    'AML.T0051': { name: 'LLM Prompt Injection', tactic: 'Initial Access', platform: 'Generative AI', desc: 'Adversaries embed malicious instructions within user input or external content to hijack an LLM\'s behaviour — overriding system prompts, leaking context, or causing the model to perform unintended actions.' },
+    'AML.T0054': { name: 'LLM Jailbreak', tactic: 'Defense Evasion', platform: 'Generative AI', desc: 'Adversaries craft inputs that cause an LLM to bypass its safety guidelines or content filters, producing content or taking actions the model is intended to refuse.' },
+    'AML.T0056': { name: 'LLM Meta Prompt Extraction', tactic: 'Collection', platform: 'Generative AI', desc: 'Adversaries manipulate an LLM into revealing its system prompt or operational instructions, exposing proprietary configurations, safety rules, or persona definitions.' },
+    'AML.T0057': { name: 'LLM Data Leakage', tactic: 'Exfiltration', platform: 'Generative AI', desc: 'Adversaries extract sensitive information from an LLM\'s training data or context window — including personally identifiable information, proprietary data, or confidential documents.' },
+    'AML.T0061': { name: 'LLM Prompt Self-Replication', tactic: 'Execution', platform: 'Generative AI', desc: 'Adversaries craft prompts that, when processed by an LLM, cause the model to reproduce and propagate the malicious prompt to other systems or users — a form of LLM worm behaviour.' },
+    'AML.T0065': { name: 'LLM Prompt Crafting', tactic: 'ML Attack Staging', platform: 'Generative AI', desc: 'Adversaries iteratively design and refine prompts to elicit specific, often harmful outputs from an LLM — including crafting prompts that bypass safety filters or extract sensitive information.' },
+    'AML.T0067': { name: 'LLM Trusted Output Components Manipulation', tactic: 'Defense Evasion', platform: 'Generative AI', desc: 'Adversaries manipulate the trusted components that an LLM uses to construct its responses — such as tool outputs, retrieved documents, or structured data — causing the model to produce attacker-controlled content.' },
+    'AML.T0068': { name: 'LLM Prompt Obfuscation', tactic: 'Defense Evasion', platform: 'Generative AI', desc: 'Adversaries disguise malicious instructions within prompts using encoding, formatting tricks, or semantic obfuscation to evade prompt injection detection systems.' },
+    'AML.T0069': { name: 'Discover LLM System Information', tactic: 'Discovery', platform: 'Generative AI', desc: 'Adversaries probe an LLM to determine its underlying model, version, configuration, tool integrations, or operational constraints — informing more targeted follow-on attacks.' },
+    'AML.T0077': { name: 'LLM Response Rendering', tactic: 'Execution', platform: 'Generative AI', desc: 'Adversaries craft LLM outputs that exploit how the rendering environment (browser, app, terminal) processes model responses — including injecting HTML, Markdown, or executable content.' },
+    'AML.T0092': { name: 'Manipulate User LLM Chat History', tactic: 'Persistence', platform: 'Generative AI', desc: 'Adversaries tamper with a user\'s stored conversation history to alter future model behaviour, plant false context, or persist malicious instructions across sessions.' },
+    'AML.T0094': { name: 'Delay Execution of LLM Instructions', tactic: 'Defense Evasion', platform: 'Generative AI', desc: 'Adversaries embed instructions in an LLM\'s context that are designed to execute only after a delay or trigger condition, evading detection at the time of initial prompt processing.' },
+    // RAG attacks
+    'AML.T0064': { name: 'Gather RAG-Indexed Targets', tactic: 'Reconnaissance', platform: 'Generative AI', desc: 'Adversaries identify documents, data sources, or knowledge bases that are indexed by a Retrieval-Augmented Generation system, to target them for poisoning or exfiltration.' },
+    'AML.T0066': { name: 'Retrieval Content Crafting', tactic: 'ML Attack Staging', platform: 'Generative AI', desc: 'Adversaries craft documents or content specifically designed to be retrieved by a RAG system and to manipulate the LLM\'s response when that content is included in context.' },
+    'AML.T0070': { name: 'RAG Poisoning', tactic: 'Impact', platform: 'Generative AI', desc: 'Adversaries inject malicious or misleading content into a RAG knowledge base, causing the LLM to generate incorrect, harmful, or attacker-controlled responses when that content is retrieved.' },
+    'AML.T0071': { name: 'False RAG Entry Injection', tactic: 'Impact', platform: 'Generative AI', desc: 'Adversaries insert fabricated entries into a RAG system\'s index to cause the LLM to produce false information or perform unintended actions based on the injected content.' },
+    'AML.T0082': { name: 'RAG Credential Harvesting', tactic: 'Credential Access', platform: 'Generative AI', desc: 'Adversaries exploit a RAG-enabled LLM to extract credentials or sensitive tokens stored in the indexed knowledge base by crafting queries that cause the model to reproduce them.' },
+    // AI Agent attacks
+    'AML.T0080': { name: 'AI Agent Context Poisoning', tactic: 'ML Attack Staging', platform: 'Agentic AI', desc: 'Adversaries manipulate the context provided to an AI agent — including memory, tool outputs, or retrieved documents — to alter its behaviour, goals, or the actions it takes on behalf of users.' },
+    'AML.T0081': { name: 'Modify AI Agent Configuration', tactic: 'Persistence', platform: 'Agentic AI', desc: 'Adversaries alter an AI agent\'s configuration, system prompt, or operational parameters to persistently change its behaviour, expand its permissions, or redirect its actions.' },
+    'AML.T0083': { name: 'Credentials from AI Agent Configuration', tactic: 'Credential Access', platform: 'Agentic AI', desc: 'Adversaries extract API keys, tokens, or other credentials stored in an AI agent\'s configuration files, environment variables, or system prompt.' },
+    'AML.T0084': { name: 'Discover AI Agent Configuration', tactic: 'Discovery', platform: 'Agentic AI', desc: 'Adversaries probe an AI agent to map its available tools, permissions, memory architecture, connected services, and operational constraints — informing more targeted attacks.' },
+    'AML.T0086': { name: 'Exfiltration via AI Agent Tool Invocation', tactic: 'Exfiltration', platform: 'Agentic AI', desc: 'Adversaries cause an AI agent to exfiltrate sensitive data by invoking its legitimate tools (email, HTTP requests, file writes) with attacker-controlled payloads.' },
+    'AML.T0098': { name: 'AI Agent Tool Credential Harvesting', tactic: 'Credential Access', platform: 'Agentic AI', desc: 'Adversaries extract credentials exposed through an AI agent\'s tool integrations — including OAuth tokens, API keys, or session cookies passed to tools during execution.' },
+    'AML.T0099': { name: 'AI Agent Tool Data Poisoning', tactic: 'Impact', platform: 'Agentic AI', desc: 'Adversaries corrupt the data returned by tools used by an AI agent, causing the agent to make decisions or take actions based on false or manipulated information.' },
+    'AML.T0103': { name: 'Deploy AI Agent', tactic: 'Execution', platform: 'Agentic AI', desc: 'Adversaries deploy a malicious AI agent within a target environment to perform reconnaissance, lateral movement, or impact operations with the appearance of legitimate automated activity.' },
+    'AML.T0110': { name: 'AI Agent Tool Poisoning', tactic: 'ML Attack Staging', platform: 'Agentic AI', desc: 'Adversaries compromise an AI agent\'s tool definitions, implementations, or runtime responses to inject malicious instructions, alter tool behaviour, or hijack agent actions.' },
+    // Supply chain
+    'AML.T0109': { name: 'AI Supply Chain Rug Pull', tactic: 'Initial Access', platform: 'Predictive AI, Generative AI, Agentic AI', desc: 'Adversaries publish a legitimate-appearing AI model, dataset, or tool, build trust and adoption, then replace it with a malicious version — exploiting the established reputation.' },
+    'AML.T0111': { name: 'AI Supply Chain Reputation Inflation', tactic: 'Resource Development', platform: 'Predictive AI, Generative AI', desc: 'Adversaries artificially inflate the apparent reputation of a malicious AI artefact — through fake stars, downloads, citations, or reviews — to increase the likelihood of adoption.' },
+    'AML.T0115': { name: 'Publish Poisoned AI Artifacts', tactic: 'Resource Development', platform: 'Predictive AI, Generative AI, Agentic AI', desc: 'Adversaries publish manipulated AI models, datasets, or agent tools to public repositories, causing downstream systems that consume them to inherit malicious behaviour.' },
+    // Social engineering & web
+    'AML.T0088': { name: 'Generate Deepfakes', tactic: 'Resource Development', platform: 'Generative AI', desc: 'Adversaries use generative AI to create realistic synthetic audio, video, or images of real individuals — enabling impersonation, fraud, disinformation campaigns, or social engineering attacks.' },
+    'AML.T0113': { name: 'Steal Web Session Cookie', tactic: 'Credential Access', platform: 'Generative AI, Agentic AI', desc: 'Adversaries steal authenticated web session cookies from AI service interfaces to gain persistent access to user accounts without requiring credentials.' },
+    'AML.T0114': { name: 'AI Service Web Interface', tactic: 'Initial Access', platform: 'Generative AI', desc: 'Adversaries target the web-based interface of AI services directly — bypassing API-layer controls — to interact with models, extract data, or perform attacks through the user-facing application.' }
+  };
+
+  // ── DOM refs ──
+  var overlay = document.getElementById('atlasModalOverlay');
+  var modalId = document.getElementById('atlasModalId');
+  var modalName = document.getElementById('atlasModalName');
+  var modalMeta = document.getElementById('atlasModalMeta');
+  var modalDesc = document.getElementById('atlasModalDesc');
+  var modalLink = document.getElementById('atlasModalLink');
+  var closeBtn = document.getElementById('atlasModalClose');
+  if (!overlay) return;
+
+  function openModal(id) {
+    var t = ATLAS[id];
+    if (!t) return;
+    modalId.textContent = id;
+    modalName.textContent = t.name;
+    modalMeta.innerHTML =
+      '<dt class="atlas-modal__meta-key">Tactic</dt><dd class="atlas-modal__meta-val">' + t.tactic + '</dd>' +
+      '<dt class="atlas-modal__meta-key">Platform</dt><dd class="atlas-modal__meta-val">' + t.platform + '</dd>';
+    modalDesc.textContent = t.desc;
+    modalLink.href = 'https://atlas.mitre.org/techniques/' + id + '/';
+    overlay.classList.add('atlas-modal-overlay--open');
+    overlay.setAttribute('aria-hidden', 'false');
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    overlay.classList.remove('atlas-modal-overlay--open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  // Close on backdrop click
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  // ── Wire up all technique tags (runs once on load + exposed for dynamic content) ──
+  function wireAtlasTags() {
+    // article framework panel: <span class="technique-id">AML.T0051 - ...</span>
+    document.querySelectorAll('.technique-list__item .technique-id:not([data-atlas-wired])').forEach(function(el) {
+      var id = el.textContent.split(' - ')[0].trim();
+      if (!ATLAS[id]) return;
+      el.setAttribute('data-atlas-wired', '1');
+      el.classList.add('technique-id--clickable');
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('title', 'View technique details');
+      el.addEventListener('click', function() { openModal(id); });
+      el.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(id); } });
+    });
+
+    // framework matrix / bar chart: <a class="technique-tag">AML.T0051</a>
+    document.querySelectorAll('.technique-tag:not([data-atlas-wired])').forEach(function(el) {
+      var id = el.textContent.trim().split(' - ')[0].trim();
+      if (!ATLAS[id]) return;
+      el.setAttribute('data-atlas-wired', '1');
+      el.classList.add('technique-tag--clickable');
+      el.setAttribute('title', ATLAS[id].name);
+      // Replace href-based navigation with modal
+      el.addEventListener('click', function(e) { e.preventDefault(); openModal(id); });
+    });
+  }
+
+  // Wire on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireAtlasTags);
+  } else {
+    wireAtlasTags();
+  }
+
+  // Expose so framework matrix pages can call after dynamic render
+  window.wireAtlasTags = wireAtlasTags;
+})();
+</script>
