@@ -246,24 +246,67 @@ VALID_CATEGORIES = [
 ]
 
 # MITRE ATLAS techniques reference (for Claude's context)
+# Updated to v2026.07 (released 2026-08-07) — curated 45-technique subset
 MITRE_ATLAS_CONTEXT = """
-Key MITRE ATLAS Techniques:
+Key MITRE ATLAS Techniques (v2026.07):
+
+Core ML/AI Techniques:
 - AML.T0006: Active Learning Attack
-- AML.T0010: ML Supply Chain Compromise
+- AML.T0010: AI Supply Chain Compromise
 - AML.T0012: Valid Accounts
-- AML.T0015: Evade ML Model
-- AML.T0018: Backdoor ML Model
-- AML.T0019: Publish Poisoned Datasets
+- AML.T0015: Evade AI Model
+- AML.T0018: Manipulate AI Model
 - AML.T0020: Poison Training Data
-- AML.T0031: Erode ML Model Integrity
-- AML.T0040: ML Model Inference API Access
+- AML.T0031: Erode AI Model Integrity
+- AML.T0040: AI Model Inference API Access
 - AML.T0043: Craft Adversarial Data
-- AML.T0044: Full ML Model Access
-- AML.T0047: ML-Enabled Product or Service
+- AML.T0044: Full AI Model Access
+- AML.T0047: AI-Enabled Product or Service
+- AML.T0059: Erode Dataset Integrity
+- AML.T0060: Publish Hallucinated Entities
+- AML.T0063: Discover AI Model Outputs
+
+LLM-Specific Techniques:
 - AML.T0051: LLM Prompt Injection
 - AML.T0054: LLM Jailbreak
 - AML.T0056: LLM Meta Prompt Extraction
 - AML.T0057: LLM Data Leakage
+- AML.T0061: LLM Prompt Self-Replication
+- AML.T0065: LLM Prompt Crafting
+- AML.T0067: LLM Trusted Output Components Manipulation
+- AML.T0068: LLM Prompt Obfuscation
+- AML.T0069: Discover LLM System Information
+- AML.T0077: LLM Response Rendering
+- AML.T0092: Manipulate User LLM Chat History
+- AML.T0094: Delay Execution of LLM Instructions
+
+RAG Attack Techniques:
+- AML.T0064: Gather RAG-Indexed Targets
+- AML.T0066: Retrieval Content Crafting
+- AML.T0070: RAG Poisoning
+- AML.T0071: False RAG Entry Injection
+- AML.T0082: RAG Credential Harvesting
+
+AI Agent Attack Techniques:
+- AML.T0080: AI Agent Context Poisoning
+- AML.T0081: Modify AI Agent Configuration
+- AML.T0083: Credentials from AI Agent Configuration
+- AML.T0084: Discover AI Agent Configuration
+- AML.T0086: Exfiltration via AI Agent Tool Invocation
+- AML.T0098: AI Agent Tool Credential Harvesting
+- AML.T0099: AI Agent Tool Data Poisoning
+- AML.T0103: Deploy AI Agent
+- AML.T0110: AI Agent Tool Poisoning
+
+Supply Chain & Infrastructure:
+- AML.T0109: AI Supply Chain Rug Pull
+- AML.T0111: AI Supply Chain Reputation Inflation
+- AML.T0115: Publish Poisoned AI Artifacts
+
+Social Engineering & Web:
+- AML.T0088: Generate Deepfakes
+- AML.T0113: Steal Web Session Cookie
+- AML.T0114: AI Service Web Interface
 """
 
 # OWASP LLM Top 10 reference

@@ -12,7 +12,7 @@ Grid the Grey maps every article to two industry-standard AI security frameworks
 
 **MITRE ATLAS** (Adversarial Threat Landscape for Artificial-Intelligence Systems) is a knowledge base of adversarial tactics and techniques targeting AI/ML systems, maintained by MITRE Corporation.
 
-It is structured analogously to the well-known MITRE ATT&CK framework but focused specifically on machine learning systems.
+It is structured analogously to the well-known MITRE ATT&CK framework but focused specifically on AI and machine learning systems. The current release (v2026.07, August 2026) covers **101 techniques** across **16 tactics**, with major expansions into AI agent attacks, RAG-based attacks, and AI supply chain threats.
 
 **Technique ID format:** `AML.T####` (e.g. AML.T0051 — LLM Prompt Injection)
 
@@ -20,12 +20,14 @@ It is structured analogously to the well-known MITRE ATT&CK framework but focuse
 
 | Tactic | Description |
 |---|---|
-| Reconnaissance | Gathering information about target ML systems |
+| Reconnaissance | Gathering information about target AI/ML systems |
 | Resource Development | Acquiring/staging resources for attacks |
-| Initial Access | Gaining entry to ML systems or pipelines |
+| Initial Access | Gaining entry to AI systems or pipelines |
 | ML Attack Staging | Preparing adversarial inputs or attacks |
 | Exfiltration | Stealing model parameters, training data, or outputs |
-| Impact | Disrupting availability, integrity, or confidentiality of ML systems |
+| Impact | Disrupting availability, integrity, or confidentiality of AI systems |
+| Command and Control | Controlling compromised AI infrastructure (added 2025) |
+| Lateral Movement | Pivoting through AI agent infrastructure (added 2025) |
 
 → [Official MITRE ATLAS site](https://atlas.mitre.org)
 
