@@ -1,7 +1,7 @@
 ---
 title: "OpenAI and AWS Launch Daybreak Red and Blue on Amazon Bedrock"
 date: 2026-08-12T04:40:14+00:00
-draft: true
+draft: false 
 slug: "openai-and-aws-launch-daybreak-red-and-blue-on-amazon-bedrock"
 
 # ── Content metadata ──
