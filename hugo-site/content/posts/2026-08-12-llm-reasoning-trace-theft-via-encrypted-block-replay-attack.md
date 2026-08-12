@@ -1,6 +1,6 @@
 ---
 title: "LLM Reasoning Trace Theft via Encrypted Block Replay Attack"
-date: 2026-08-12T04:39:27+00:00
+date: "2026-08-12T04:44:48+00:00"
 draft: false 
 slug: "llm-reasoning-trace-theft-via-encrypted-block-replay-attack"
 
