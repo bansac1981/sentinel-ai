@@ -1,7 +1,7 @@
 ---
 title: "OpenAI, Anthropic, Google APIs Let Weaker Models Steal Reasoning"
 date: 2026-08-13T06:01:27+00:00
-draft: true
+draft: false 
 slug: "openai-anthropic-google-apis-let-weaker-models-steal-reasoning"
 
 # ── Content metadata ──
