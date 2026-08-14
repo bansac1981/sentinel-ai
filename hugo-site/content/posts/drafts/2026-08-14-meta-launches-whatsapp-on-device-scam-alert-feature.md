@@ -1,7 +1,7 @@
 ---
 title: "Meta Launches WhatsApp On-Device Scam Alert Feature"
 date: 2026-08-14T05:01:11+00:00
-draft: true
+draft: false
 slug: "meta-launches-whatsapp-on-device-scam-alert-feature"
 
 # ── Content metadata ──
