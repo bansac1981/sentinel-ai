@@ -1,6 +1,6 @@
 ---
 title: "Context Bombing Uses Prompt Injection to Stop AI Hacking Agents"
-date: 2026-08-14T05:02:06+00:00
+date: "2026-08-14T07:15:27+00:00"
 draft: false
 slug: "context-bombing-uses-prompt-injection-to-stop-ai-hacking-agents"
 
