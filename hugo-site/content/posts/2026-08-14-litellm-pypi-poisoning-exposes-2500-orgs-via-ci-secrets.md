@@ -1,6 +1,6 @@
 ---
 title: "LiteLLM PyPI Poisoning Exposes 2,500+ Orgs via CI Secrets"
-date: 2026-08-14T05:02:47+00:00
+date: "2026-08-14T07:17:23+00:00"
 draft: false
 slug: "litellm-pypi-poisoning-exposes-2500-orgs-via-ci-secrets"
 
