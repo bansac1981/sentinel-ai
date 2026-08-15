@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Frontier Red Team Studies Multi-Agent Conflict Dynamics"
 date: 2026-08-15T10:35:06+00:00
-draft: true
+draft: false
 slug: "anthropic-frontier-red-team-studies-multi-agent-conflict-dynamics"
 
 # ── Content metadata ──
