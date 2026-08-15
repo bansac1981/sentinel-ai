@@ -1,7 +1,7 @@
 ---
 title: "Trivy Flaw Behind 2,500-Org Breach, Not LiteLLM Packages"
 date: 2026-08-15T06:21:23+00:00
-draft: true
+draft: false
 slug: "trivy-flaw-behind-2500-org-breach-not-litellm-packages"
 
 # ── Content metadata ──
