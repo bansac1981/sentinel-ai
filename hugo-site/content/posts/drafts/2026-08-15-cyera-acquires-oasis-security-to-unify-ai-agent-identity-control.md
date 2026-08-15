@@ -1,7 +1,7 @@
 ---
 title: "Cyera Acquires Oasis Security to Unify AI Agent Identity Control"
 date: 2026-08-15T06:20:41+00:00
-draft: true
+draft: false
 slug: "cyera-acquires-oasis-security-to-unify-ai-agent-identity-control"
 
 # ── Content metadata ──
