@@ -1,7 +1,7 @@
 ---
 title: "AWS Launches SageMaker AI and Bedrock AgentCore Workflow Integration"
 date: 2026-08-15T10:33:29+00:00
-draft: true
+draft: false
 slug: "aws-launches-sagemaker-ai-and-bedrock-agentcore-workflow-integration"
 
 # ── Content metadata ──
