@@ -1,6 +1,6 @@
 ---
 title: "GhostSplice MCP Attack Splits Prompts to Exfiltrate SSH Keys"
-date: 2026-08-16T05:56:17+00:00
+date: "2026-08-16T07:53:00+00:00"
 draft: false 
 slug: "ghostsplice-mcp-attack-splits-prompts-to-exfiltrate-ssh-keys"
 
