@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Astra Launches with Critical-Level Cyber Evaluation Controls"
-date: 2026-08-16T05:58:29+00:00
+date: "2026-08-16T07:55:43+00:00"
 draft: false 
 slug: "openai-astra-launches-with-critical-level-cyber-evaluation-controls"
 
