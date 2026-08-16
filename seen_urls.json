@@ -1576,10 +1576,12 @@
     "https://thehackernews.com/2026/08/hugging-face-diffusers-flaws-could-let.html",
     "https://thehackernews.com/2026/08/inc-ransomware-emerges-as-dominant.html",
     "https://thehackernews.com/2026/08/kali365-weaponizes-microsoft.html",
+    "https://thehackernews.com/2026/08/kimsuky-builds-offline-ai-stack-that.html",
     "https://thehackernews.com/2026/08/kimwolf-v7-android-botnet-makes-http2.html",
     "https://thehackernews.com/2026/08/lazarus-exploits-windows-zero-day-to.html",
     "https://thehackernews.com/2026/08/leaked-n8n-api-tokens-exposed-live.html",
     "https://thehackernews.com/2026/08/malicious-litellm-releases-tied-to.html",
+    "https://thehackernews.com/2026/08/malicious-mcp-servers-can-split.html",
     "https://thehackernews.com/2026/08/malware-can-abuse-windows-hello-for.html",
     "https://thehackernews.com/2026/08/metabase-zero-day-exploited-in-wild.html",
     "https://thehackernews.com/2026/08/microsoft-365-aitm-phishing-hijacks.html",
@@ -1598,6 +1600,8 @@
     "https://thehackernews.com/2026/08/open-vsx-removes-77-malicious-evil-twin.html",
     "https://thehackernews.com/2026/08/openai-anthropic-google-api-flaw-let.html",
     "https://thehackernews.com/2026/08/openai-disrupts-poipet-scam-network.html",
+    "https://thehackernews.com/2026/08/openai-launches-gpt-56-cyber-with.html",
+    "https://thehackernews.com/2026/08/openais-next-ai-model-astra-shows-cyber.html",
     "https://thehackernews.com/2026/08/over-250-clickfix-domains-use-browser.html",
     "https://thehackernews.com/2026/08/over-4400-rockwell-plcs-exposed-online.html",
     "https://thehackernews.com/2026/08/paperclip-ai-flaws-let-attackers-run.html",
@@ -1622,6 +1626,7 @@
     "https://thehackernews.com/2026/08/unc6671-vishing-attacks-target-personal.html",
     "https://thehackernews.com/2026/08/veeam-terraform-mcp-django-patch.html",
     "https://thehackernews.com/2026/08/webkit-proxy-bypasses-can-expose-real.html",
+    "https://thehackernews.com/2026/08/weekly-recap-ai-goes-rogue-metabase-0.html",
     "https://thehackernews.com/2026/08/weekly-recap-rogue-ai-models-88m.html",
     "https://thehackernews.com/2026/08/when-vibe-hacking-turns-ai-into-junior.html",
     "https://thehackernews.com/2026/08/zoom-annotation-flaws-could-let-meeting.html",
@@ -1987,6 +1992,7 @@
     "https://www.bleepingcomputer.com/news/security/new-dolphin-x-malware-uses-ai-to-rank-high-value-targets",
     "https://www.bleepingcomputer.com/news/security/new-doublecup-clickfix-service-hides-malware-in-browser-cache-images",
     "https://www.bleepingcomputer.com/news/security/new-dysphoria-ddos-botnet-spreads-to-200k-devices-worldwide",
+    "https://www.bleepingcomputer.com/news/security/new-evooo1bot-linux-botnet-turns-routers-into-traffic-relay-nodes",
     "https://www.bleepingcomputer.com/news/security/new-forg365-phishing-platform-uses-ai-to-target-microsoft-365-accounts",
     "https://www.bleepingcomputer.com/news/security/new-helix-vishing-group-emerges-in-sharepoint-data-theft-attacks",
     "https://www.bleepingcomputer.com/news/security/new-infratrust-report-reveals-infrastructure-flaws-admins-should-patch-first",
@@ -2569,6 +2575,7 @@
     "https://www.schneier.com/blog/archives/2026/07/why-ai-needs-a-genie-coefficient.html",
     "https://www.schneier.com/blog/archives/2026/08/adversarial-clothing-designed-to-fool-facial-recognition-systems.html",
     "https://www.schneier.com/blog/archives/2026/08/ai-for-military-support.html",
+    "https://www.schneier.com/blog/archives/2026/08/ai-genie-in-the-wild.html",
     "https://www.schneier.com/blog/archives/2026/08/friday-squid-blogging-arctic-bobtail-squid-video.html",
     "https://www.schneier.com/blog/archives/2026/08/friday-squid-blogging-searching-for-the-colossal-squid-2.html",
     "https://www.schneier.com/blog/archives/2026/08/ice-is-buying-access-to-credit-card-records.html",
@@ -3189,5 +3196,5 @@
     "https://xcancel.com/coinbureau/status/2071330294452666695",
     "https://zcode.z.ai/cn"
   ],
-  "updated_at": "2026-08-15T10:35:58.297550+00:00"
+  "updated_at": "2026-08-16T05:58:30.979630+00:00"
 }
