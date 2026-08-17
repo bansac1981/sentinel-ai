@@ -812,6 +812,9 @@
     "https://simonwillison.net/2026/Aug/14/dont-classify-hallucinate",
     "https://simonwillison.net/2026/Aug/15/cors-chat",
     "https://simonwillison.net/2026/Aug/15/sighting-391300422",
+    "https://simonwillison.net/2026/Aug/16/dario-amodei",
+    "https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades",
+    "https://simonwillison.net/2026/Aug/16/qwen-38-27b",
     "https://simonwillison.net/2026/Aug/2/condense-json",
     "https://simonwillison.net/2026/Aug/2/july-newsletter",
     "https://simonwillison.net/2026/Aug/2/open-letters",
@@ -1226,6 +1229,9 @@
     "https://techcrunch.com/2026/08/15/anthropic-shares-more-details-about-how-claudes-new-watermarks-will-work",
     "https://techcrunch.com/2026/08/15/spacex-officially-closes-its-cursor-acquisition",
     "https://techcrunch.com/2026/08/15/woman-claims-her-stepfather-used-grok-to-transform-childhood-photo-into-explicit-imagery",
+    "https://techcrunch.com/2026/08/16/anthropic-ceo-says-ai-backlash-is-fundamentally-a-crisis-of-trust",
+    "https://techcrunch.com/2026/08/16/stripe-will-reportedly-acquire-ai-gateway-startup-openrouter-for-7b",
+    "https://techcrunch.com/2026/08/16/why-people-arent-buying-mark-zuckerbergs-ai-future",
     "https://techcrunch.com/podcast/jill-lepore-on-the-artificial-state-and-why-silicon-valleys-leaders-are-bad-sci-fi-readers",
     "https://techcrunch.com/podcast/metas-open-ai-and-a-250m-deal-gone-very-wrong",
     "https://techcrunch.com/podcast/neas-tiffany-luck-on-ai-ipos-personal-agents-and-the-roi-reckoning/",
@@ -3022,12 +3028,16 @@
     "https://www.theverge.com/ai-artificial-intelligence/977733/amazon-order-emails-google-gmail-ai-agents-data",
     "https://www.theverge.com/ai-artificial-intelligence/977909/zoom-vulnerability-ai-attack",
     "https://www.theverge.com/ai-artificial-intelligence/978982/daddario-guitar-ai-music-suno",
+    "https://www.theverge.com/ai-artificial-intelligence/979345/suno-studio-2-0-midi-chatbot-custom-effects",
     "https://www.theverge.com/ai-artificial-intelligence/979815/openai-denise-dresser-leaving-executive-departure",
     "https://www.theverge.com/ai-artificial-intelligence/980160/apple-intelligence-china-custom-ai-model-alibaba",
+    "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+    "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
     "https://www.theverge.com/column/959433/libby-ai-filter",
     "https://www.theverge.com/column/961707/smart-glasses-ai-wearables-meta-surveillance-privacy",
     "https://www.theverge.com/column/963346/ai-data-centers-fight",
     "https://www.theverge.com/column/976690/ai-writing-detectors-suspicion",
+    "https://www.theverge.com/column/980337/rogue-ai-science-fiction-openai",
     "https://www.theverge.com/entertainment/954899/luca-guadagnino-artificial-sam-altman-amazon-a24-neon-mubi-chatgpt",
     "https://www.theverge.com/entertainment/968703/neill-blomkamps-nightborne-barley-studios-seedance",
     "https://www.theverge.com/entertainment/976939/roku-fairground-ai-fast-channel",
@@ -3222,5 +3232,5 @@
     "https://xcancel.com/coinbureau/status/2071330294452666695",
     "https://zcode.z.ai/cn"
   ],
-  "updated_at": "2026-08-17T04:08:38.934222+00:00"
+  "updated_at": "2026-08-17T04:14:59.887683+00:00"
 }
