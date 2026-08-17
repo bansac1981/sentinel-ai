@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Disbands Preparedness Team Amid IPO Safety Concerns"
-date: 2026-08-17T04:13:04+00:00
+date: "2026-08-17T04:19:07+00:00"
 draft: false 
 slug: "openai-disbands-preparedness-team-amid-ipo-safety-concerns"
 
