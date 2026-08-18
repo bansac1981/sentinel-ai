@@ -1,6 +1,6 @@
 ---
 title: "GitHub Copilot Autofix Introduced CI/CD Injection in Snowflake"
-date: 2026-08-18T04:53:55+00:00
+date: "2026-08-18T05:09:26+00:00"
 draft: false 
 slug: "github-copilot-autofix-introduced-ci-cd-injection-in-snowflake"
 
