@@ -1,7 +1,7 @@
 ---
 title: "Naming Error Lets Anthropic AI Models Attack Real Company"
 date: 2026-08-18T04:54:40+00:00
-draft: true
+draft: false 
 slug: "naming-error-lets-anthropic-ai-models-attack-real-company"
 
 # ── Content metadata ──
