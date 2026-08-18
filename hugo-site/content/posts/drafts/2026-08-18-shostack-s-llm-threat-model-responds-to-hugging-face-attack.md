@@ -1,7 +1,7 @@
 ---
 title: "Shostack's LLM Threat Model Responds to Hugging Face Attack"
 date: 2026-08-18T04:53:03+00:00
-draft: true
+draft: false 
 slug: "shostack-s-llm-threat-model-responds-to-hugging-face-attack"
 
 # ── Content metadata ──
