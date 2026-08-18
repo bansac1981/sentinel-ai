@@ -1,6 +1,6 @@
 ---
 title: "Anthropic MCP Server Security Risks and Secrets Exposure Explained"
-date: 2026-08-18T04:55:34+00:00
+date: "2026-08-18T04:59:08+00:00"
 draft: false 
 slug: "anthropic-mcp-server-security-risks-and-secrets-exposure-explained"
 
