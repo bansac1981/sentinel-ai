@@ -1,7 +1,7 @@
 ---
 title: "Israel-Linked Fake Think Tank Targets LLM Training Data"
 date: 2026-08-18T04:47:30+00:00
-draft: true
+draft: false 
 slug: "israel-linked-fake-think-tank-targets-llm-training-data"
 
 # ── Content metadata ──
