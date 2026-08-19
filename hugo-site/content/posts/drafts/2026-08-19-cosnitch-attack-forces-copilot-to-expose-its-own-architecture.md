@@ -1,7 +1,7 @@
 ---
 title: "CoSnitch Attack Forces Copilot to Expose Its Own Architecture"
 date: 2026-08-19T04:16:51+00:00
-draft: true
+draft: false 
 slug: "cosnitch-attack-forces-copilot-to-expose-its-own-architecture"
 
 # ── Content metadata ──
