@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Adds Chain-of-Thought Monitoring to Astra Safety Controls"
 date: 2026-08-19T04:17:42+00:00
-draft: true
+draft: false 
 slug: "openai-adds-chain-of-thought-monitoring-to-astra-safety-controls"
 
 # ── Content metadata ──
