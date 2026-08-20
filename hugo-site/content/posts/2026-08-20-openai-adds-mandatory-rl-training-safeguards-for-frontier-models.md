@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Adds Mandatory RL Training Safeguards for Frontier Models"
-date: 2026-08-20T07:31:46+00:00
+date: "2026-08-20T08:33:52+00:00"
 draft: false
 slug: "openai-adds-mandatory-rl-training-safeguards-for-frontier-models"
 
