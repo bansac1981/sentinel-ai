@@ -1,6 +1,6 @@
 ---
 title: "Fortinet Acquires Virtue AI to Secure AI Models and Agents"
-date: 2026-08-19T04:20:28+00:00
+date: "2026-08-20T08:16:47+00:00"
 draft: false
 slug: "fortinet-acquires-virtue-ai-to-secure-ai-models-and-agents"
 
