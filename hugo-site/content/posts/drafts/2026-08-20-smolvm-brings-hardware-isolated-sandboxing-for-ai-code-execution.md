@@ -1,7 +1,7 @@
 ---
 title: "smolvm Brings Hardware-Isolated Sandboxing for AI Code Execution"
 date: 2026-08-20T07:37:33+00:00
-draft: true
+draft: false
 slug: "smolvm-brings-hardware-isolated-sandboxing-for-ai-code-execution"
 
 # ── Content metadata ──
