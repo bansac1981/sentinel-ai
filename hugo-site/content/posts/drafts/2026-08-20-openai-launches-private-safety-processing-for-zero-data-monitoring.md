@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Launches Private Safety Processing for Zero-Data Monitoring"
 date: 2026-08-20T07:39:09+00:00
-draft: true
+draft: false
 slug: "openai-launches-private-safety-processing-for-zero-data-monitoring"
 
 # ── Content metadata ──
