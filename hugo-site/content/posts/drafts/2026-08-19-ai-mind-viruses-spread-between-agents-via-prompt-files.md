@@ -1,7 +1,7 @@
 ---
 title: "AI Mind Viruses Spread Between Agents via Prompt Files"
 date: 2026-08-19T04:19:41+00:00
-draft: true
+draft: false
 slug: "ai-mind-viruses-spread-between-agents-via-prompt-files"
 
 # ── Content metadata ──
