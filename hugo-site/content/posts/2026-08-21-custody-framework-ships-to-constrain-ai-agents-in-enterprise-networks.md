@@ -1,6 +1,6 @@
 ---
 title: "CUSTODY Framework Ships to Constrain AI Agents in Enterprise Networks"
-date: 2026-08-21T07:06:33+00:00
+date: "2026-08-21T09:12:40+00:00"
 draft: false
 slug: "custody-framework-ships-to-constrain-ai-agents-in-enterprise-networks"
 
