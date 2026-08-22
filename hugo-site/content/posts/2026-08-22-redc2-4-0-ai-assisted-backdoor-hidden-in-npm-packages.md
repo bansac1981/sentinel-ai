@@ -1,6 +1,6 @@
 ---
 title: "RedC2 4.0 AI-Assisted Backdoor Hidden in npm Packages"
-date: 2026-08-22T07:53:50+00:00
+date: "2026-08-22T13:58:05+00:00"
 draft: false
 slug: "redc2-4-0-ai-assisted-backdoor-hidden-in-npm-packages"
 
