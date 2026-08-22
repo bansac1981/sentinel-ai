@@ -1,6 +1,6 @@
 ---
 title: "Encrypted Prompts Bypass Safety Guardrails in Grok and Gemini"
-date: 2026-08-22T07:54:26+00:00
+date: "2026-08-22T20:40:42+00:00"
 draft: false
 slug: "encrypted-prompts-bypass-safety-guardrails-in-grok-and-gemini"
 
