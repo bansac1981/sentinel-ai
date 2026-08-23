@@ -1,7 +1,7 @@
 ---
 title: "Grok Data Exfiltration via Cryptographic Context Injection"
 date: 2026-08-23T13:09:14+00:00
-draft: true
+draft: false 
 slug: "grok-data-exfiltration-via-cryptographic-context-injection"
 
 # ── Content metadata ──
