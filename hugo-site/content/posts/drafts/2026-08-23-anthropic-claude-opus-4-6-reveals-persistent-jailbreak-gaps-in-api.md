@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Claude Opus 4.6 Reveals Persistent Jailbreak Gaps in API"
 date: 2026-08-23T13:13:57+00:00
-draft: true
+draft: false 
 slug: "anthropic-claude-opus-4-6-reveals-persistent-jailbreak-gaps-in-api"
 
 # ── Content metadata ──
