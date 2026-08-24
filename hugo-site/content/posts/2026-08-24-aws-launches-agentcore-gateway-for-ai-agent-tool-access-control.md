@@ -1,6 +1,6 @@
 ---
 title: "AWS Launches AgentCore Gateway for AI Agent Tool Access Control"
-date: 2026-08-24T06:23:08+00:00
+date: "2026-08-24T06:29:23+00:00"
 draft: false 
 slug: "aws-launches-agentcore-gateway-for-ai-agent-tool-access-control"
 
