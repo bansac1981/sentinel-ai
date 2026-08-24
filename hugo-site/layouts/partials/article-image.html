@@ -40,6 +40,113 @@
 
 {{ if $thumb }}
 <img src="{{ $thumb }}" alt="{{ $title }}" loading="lazy" class="article-thumb-img">
+{{ else if eq (.Params.content_type | default "") "signal_report" }}
+
+{{/* ═══════════════════════════════════════════════════════════
+     PATTERN: SIGNAL RADAR  — for signal_report content type
+     Concentric radar rings with a rotating sweep, pulsing threat
+     nodes at varying distances, and a "DEEP SIGNAL" brand mark.
+     ═══════════════════════════════════════════════════════════ */}}
+{{ $week := "" }}
+{{ if .Params.subtitle }}{{ $week = .Params.subtitle }}{{ end }}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Deep Signal — {{ $title }}">
+  <defs>
+    <style>
+      .sr-sweep { animation: sr-rotate 4s linear infinite; transform-origin: 400px 210px; }
+      @keyframes sr-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      .sr-ping1 { animation: sr-ping 2.4s ease-out infinite; }
+      .sr-ping2 { animation: sr-ping 2.4s ease-out infinite; animation-delay: -0.8s; }
+      .sr-ping3 { animation: sr-ping 2.4s ease-out infinite; animation-delay: -1.6s; }
+      @keyframes sr-ping { 0% { opacity: .9; r: 4; } 100% { opacity: 0; r: 14; } }
+      .sr-dot1 { animation: sr-pulse 1.8s ease-in-out infinite; }
+      .sr-dot2 { animation: sr-pulse 1.8s ease-in-out infinite; animation-delay: -0.6s; }
+      .sr-dot3 { animation: sr-pulse 1.8s ease-in-out infinite; animation-delay: -1.2s; }
+      @keyframes sr-pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+      .sr-ring-pulse { animation: sr-rp 3s ease-in-out infinite; }
+      @keyframes sr-rp { 0%,100% { opacity: .12; } 50% { opacity: .28; } }
+      .sr-fade { animation: sr-fade-in 2s ease-in-out infinite alternate; }
+      @keyframes sr-fade-in { 0% { opacity: .3; } 100% { opacity: .7; } }
+    </style>
+    <radialGradient id="sr-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="{{ $tc }}" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="{{ $tc }}" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sr-sweep-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="{{ $tc }}" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="{{ $tc }}" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="#0A0E14"/>
+
+  <!-- Accent bar -->
+  <rect x="0" y="0" width="4" height="420" fill="{{ $tc }}" opacity=".9"/>
+
+  <!-- Subtle grid -->
+  {{ range $i := seq 1 7 }}
+  <line x1="{{ mul $i 100 }}" y1="0" x2="{{ mul $i 100 }}" y2="420" stroke="{{ $tc }}" stroke-width=".25" opacity=".08"/>
+  {{ end }}
+  {{ range $i := seq 1 5 }}
+  <line x1="0" y1="{{ mul $i 70 }}" x2="800" y2="{{ mul $i 70 }}" stroke="{{ $tc }}" stroke-width=".25" opacity=".08"/>
+  {{ end }}
+
+  <!-- Centre glow -->
+  <circle cx="400" cy="210" r="160" fill="url(#sr-glow)"/>
+
+  <!-- Concentric radar rings -->
+  <circle cx="400" cy="210" r="40"  fill="none" stroke="{{ $tc }}" stroke-width=".6" opacity=".18"/>
+  <circle cx="400" cy="210" r="80"  fill="none" stroke="{{ $tc }}" stroke-width=".6" opacity=".15" class="sr-ring-pulse"/>
+  <circle cx="400" cy="210" r="120" fill="none" stroke="{{ $tc }}" stroke-width=".7" opacity=".18"/>
+  <circle cx="400" cy="210" r="160" fill="none" stroke="{{ $tc }}" stroke-width=".5" opacity=".12" class="sr-ring-pulse" style="animation-delay:-1.5s"/>
+
+  <!-- Crosshairs -->
+  <line x1="400" y1="50" x2="400" y2="370" stroke="{{ $tc }}" stroke-width=".4" opacity=".12"/>
+  <line x1="240" y1="210" x2="560" y2="210" stroke="{{ $tc }}" stroke-width=".4" opacity=".12"/>
+
+  <!-- Rotating sweep arm -->
+  <g class="sr-sweep">
+    <line x1="400" y1="210" x2="560" y2="210" stroke="{{ $tc }}" stroke-width="1.5" opacity=".6"/>
+    <path d="M400,210 L555,190 A160,160,0,0,1,555,230 Z" fill="url(#sr-sweep-grad)" opacity=".4"/>
+  </g>
+
+  <!-- Threat nodes (positioned at various distances from centre) -->
+  <circle cx="440" cy="180" r="4" fill="{{ $tc }}" class="sr-dot1"/>
+  <circle cx="440" cy="180" r="4" fill="none" stroke="{{ $tc }}" stroke-width="1" class="sr-ping1"/>
+  <circle cx="340" cy="145" r="3.5" fill="{{ $tc }}" class="sr-dot2"/>
+  <circle cx="340" cy="145" r="3.5" fill="none" stroke="{{ $tc }}" stroke-width="1" class="sr-ping2"/>
+  <circle cx="480" cy="280" r="3" fill="{{ $tc }}" class="sr-dot3"/>
+  <circle cx="480" cy="280" r="3" fill="none" stroke="{{ $tc }}" stroke-width="1" class="sr-ping3"/>
+  <circle cx="310" cy="240" r="3.5" fill="{{ $tc }}" class="sr-dot1" style="animation-delay:-.9s"/>
+  <circle cx="310" cy="240" r="3.5" fill="none" stroke="{{ $tc }}" stroke-width="1" class="sr-ping2" style="animation-delay:-1.4s"/>
+  <circle cx="460" cy="120" r="2.5" fill="{{ $tc }}" class="sr-dot3" style="animation-delay:-.3s"/>
+
+  <!-- Connecting lines between nodes (attack paths) -->
+  <line x1="440" y1="180" x2="480" y2="280" stroke="{{ $tc }}" stroke-width=".6" opacity=".2" class="sr-fade"/>
+  <line x1="340" y1="145" x2="440" y2="180" stroke="{{ $tc }}" stroke-width=".6" opacity=".15" class="sr-fade" style="animation-delay:-1s"/>
+  <line x1="310" y1="240" x2="480" y2="280" stroke="{{ $tc }}" stroke-width=".5" opacity=".15" class="sr-fade" style="animation-delay:-.5s"/>
+
+  <!-- DEEP SIGNAL brand -->
+  <text x="28" y="32" font-family="monospace" font-size="11" fill="{{ $tc }}" letter-spacing="3" opacity=".9" font-weight="bold">DEEP SIGNAL</text>
+
+  <!-- Week label (top right) -->
+  {{ if $week }}
+  <text x="772" y="32" font-family="monospace" font-size="9" fill="#667" text-anchor="end">{{ $week }}</text>
+  {{ end }}
+
+  <!-- Corner brackets -->
+  <polyline points="20,50 20,38 32,38"     fill="none" stroke="{{ $tc }}" stroke-width="1.4" opacity=".6"/>
+  <polyline points="780,50 780,38 768,38"   fill="none" stroke="{{ $tc }}" stroke-width="1.4" opacity=".6"/>
+  <polyline points="20,392 20,404 32,404"   fill="none" stroke="{{ $tc }}" stroke-width="1.4" opacity=".6"/>
+  <polyline points="780,392 780,404 768,404" fill="none" stroke="{{ $tc }}" stroke-width="1.4" opacity=".6"/>
+
+  <!-- Title overlay -->
+  <rect x="0" y="354" width="800" height="66" fill="rgba(8,8,14,.92)"/>
+  <line x1="28" y1="356" x2="772" y2="356" stroke="{{ $tc }}" stroke-width=".6" opacity=".5"/>
+  <text x="28" y="381" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l1 }}</text>
+  <text x="28" y="407" font-family="Georgia, serif" font-size="15.5" fill="#ededf0" font-weight="600">{{ $l2 }}</text>
+</svg>
+
 {{ else }}
 
 {{/* ═══════════════════════════════════════════════════════════
@@ -270,4 +377,4 @@
 </svg>
 {{ end }}{{/* end pat 2 */}}
 
-{{ end }}{{/* end if thumb */}}
+{{ end }}{{/* end if thumb / signal_report / else */}}

@@ -72,7 +72,7 @@
       {{ $isDeepSignal := or (eq (.Params.content_type | default "") "deep_signal") (eq (.Params.content_type | default "") "signal_report") }}
       {{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
       <article class="post-card post-card--h {{ if $isDeepSignal }}post-card--deep-signal{{ else if $isFirstLook }}post-card--first-look{{ end }}">
-        {{ if or (not $isDeepSignal) .Params.thumbnail_card }}
+        {{ if or (not $isDeepSignal) .Params.thumbnail_card (eq (.Params.content_type | default "") "signal_report") }}
         <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
           {{ partial "article-image.html" . }}
         </a>
