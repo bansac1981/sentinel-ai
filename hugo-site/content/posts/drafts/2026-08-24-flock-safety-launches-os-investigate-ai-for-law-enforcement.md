@@ -1,7 +1,7 @@
 ---
 title: "Flock Safety Launches OS Investigate AI for Law Enforcement"
 date: 2026-08-24T06:18:50+00:00
-draft: true
+draft: false 
 slug: "flock-safety-launches-os-investigate-ai-for-law-enforcement"
 
 # ── Content metadata ──
