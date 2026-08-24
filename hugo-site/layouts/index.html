@@ -35,7 +35,7 @@
     <span class="ds-pinned__label">Original Analysis</span>
   </div>
   <article class="post-card post-card--h post-card--deep-signal post-card--deep-signal-featured">
-    {{ if .Params.thumbnail_card }}
+    {{ if or .Params.thumbnail_card (eq (.Params.content_type | default "") "signal_report") }}
     <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
       {{ partial "article-image.html" . }}
     </a>
