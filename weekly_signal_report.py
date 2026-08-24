@@ -518,6 +518,9 @@ Based on this data, generate a comprehensive intelligence report with the follow
   "headline": "A catchy, concise headline (max 12 words) that captures the week's dominant theme — like a newspaper headline. Example: 'AI Goes Offensive: From Research to Real-World Attacks'. Do NOT include the week number.",
   "story_hook": "2-3 short paragraphs (max 200 words total) that open the report like a compelling intelligence briefing. Lead with the 2-3 most significant stories of the week — name the events, the actors, and why they matter. This should read like the opening of a Reuters or Bloomberg intelligence report: punchy, specific, immediately grabs a senior security leader's attention. Reference specific article titles and findings. End with a single sentence framing what the rest of the report will unpack.",
   "executive_summary": "2 short paragraphs (max 120 words total) analysing this week's dominant themes and what's shifting. Be specific — reference technique IDs and findings. No filler.",
+  "wow_persisting": "2-3 sentences about MITRE techniques that persist from the prior week. Name the techniques with their IDs, explain WHY they continue to dominate and what it means for defenders. Example: 'AML.T0051 (Prompt Injection), AML.T0047 (ML-Enabled Product), AML.T0057 (Data Leakage) continue to dominate for the second consecutive week, indicating sustained adversary focus on these attack vectors.' If no prior week data is available, write 'First report — baseline established this week.'",
+  "wow_emerging": "1-2 sentences about MITRE techniques that appeared THIS week but were NOT present last week. Name them with IDs, explain what triggered their appearance and the risk implication. If none emerged, write 'No new techniques observed this week.'",
+  "wow_dropped": "1-2 sentences about MITRE techniques present last week but absent this week. Explain whether this represents a tactical pivot, seasonal variation, or resolution. If none dropped, write 'All prior techniques remain active.'",
   "enterprise_focus": ["3-4 bullet points for CISOs. One sentence each — concrete and specific to THIS week's data."],
   "trajectory_watch": "1 short paragraph (max 80 words) on the 4-8 week outlook. What should security teams prepare for?",
   "attack_chain_analysis": "1 short paragraph (max 80 words) on how MITRE ATLAS techniques chain together this week. Reference specific technique pairs from the co-occurrence data.",
@@ -1045,24 +1048,20 @@ def generate_hugo_article(
         # Derive slug from title (Hugo default: lowercase, hyphens, no special chars)
         slug = re.sub(r'[^a-z0-9]+', '-', article["title"].lower()).strip('-')
         link = f"[{title_display}](/posts/{slug}/)"
+        summary_short = article["summary"][:120].rstrip(".") + "." if article["summary"] else ""
         top_articles_rows.append(
-            f"| {link} | {article['threat_level']} | {article['relevance_score']:.1f} | {article['source']} |"
+            f"| {link} | {article['relevance_score']:.1f} | {summary_short} |"
         )
     top_articles_table = "\n".join(top_articles_rows)
 
-    # Week-over-week summary
+    # Week-over-week summary — Claude-generated narrative
     wow_section = ""
     if wow.get("has_comparison"):
         wow_lines = []
-        wow_lines.append(f"**Article volume**: {analytics['article_count']} ({wow['article_count_change']:+d} vs prior week)")
-        wow_lines.append(f"**Average relevance**: {analytics['avg_relevance']}/10 (prior: {wow['prev_avg_relevance']}/10)")
-
-        if wow.get("new_techniques"):
-            wow_lines.append(f"\n**New techniques this week**: {', '.join(wow['new_techniques'][:5])}")
-        if wow.get("disappeared_techniques"):
-            wow_lines.append(f"\n**No longer observed**: {', '.join(wow['disappeared_techniques'][:5])}")
-
-        wow_section = "\n".join(wow_lines)
+        wow_lines.append(f"### Persisting techniques\n\n{narrative.get('wow_persisting', 'No prior week data available.')}")
+        wow_lines.append(f"### Emerging this week\n\n{narrative.get('wow_emerging', 'No new techniques observed this week.')}")
+        wow_lines.append(f"### No longer observed\n\n{narrative.get('wow_dropped', 'All prior techniques remain active.')}")
+        wow_section = "\n\n".join(wow_lines)
     else:
         wow_section = "*This is the first weekly signal report. Week-over-week comparisons will be available from next week.*"
 
@@ -1097,6 +1096,16 @@ tags: {tags_yaml}
 </div>
 
 {narrative.get("story_hook", "")}
+
+---
+
+## Top Articles This Week
+
+| Title | Relevance | Summary |
+|-------|-----------|---------|
+{top_articles_table}
+
+---
 
 <div class="ds-article__hero" style="margin:1.5rem 0;">
   <img src="{chart_paths.get('owasp', '')}" alt="OWASP LLM Top 10 — Threat Quadrant" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
@@ -1151,14 +1160,6 @@ tags: {tags_yaml}
 ## Geographic and Sector Analysis
 
 {narrative.get("geographic_sector_analysis", "No geographic analysis available.")}
-
----
-
-## Top Articles This Week
-
-| Title | Threat | Relevance | Source |
-|-------|--------|-----------|--------|
-{top_articles_table}
 '''
 
     return markdown
@@ -1185,8 +1186,18 @@ def mock_narrative(analytics: dict, wow: dict) -> dict:
     mitre_top = list(analytics["mitre_distribution"].keys())[:5]
     owasp_top = list(analytics["owasp_distribution"].keys())[:5]
 
+    # Build mock wow narrative from available data
+    persisting = [t for t in list(analytics["mitre_distribution"].keys())[:5]]
+    wow_persisting_text = (
+        f"{', '.join(persisting[:3])} continue to dominate for the second consecutive week, "
+        f"indicating sustained adversary focus on these attack vectors."
+    ) if persisting else "First report — baseline established this week."
+
     return {
         "headline": "AI Goes Offensive: From Research to Real-World Attacks",
+        "wow_persisting": wow_persisting_text,
+        "wow_emerging": "AML.T0043 (Craft Adversarial Data) appeared for the first time, signalling a new weaponisation vector worth tracking.",
+        "wow_dropped": "AML.T0020 (Poison Training Data) dropped off entirely, suggesting a tactical pivot away from training-time attacks toward inference-time exploitation.",
         "story_hook": (
             "Claude hacked three organisations in misconfigured security tests. An AI espionage agent named "
             "Hermes automated post-exploitation against Thailand's finance ministry. And OpenAI disclosed that "
