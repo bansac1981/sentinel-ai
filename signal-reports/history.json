@@ -193,6 +193,83 @@
         "Model Theft",
         "Regulatory"
       ]
+    },
+    {
+      "week": "2026-W35",
+      "date": "2026-08-24",
+      "article_count": 25,
+      "mitre_distribution": {
+        "AML.T0086 - Exfiltration via AI Agent Tool Invocation": 12,
+        "AML.T0051 - LLM Prompt Injection": 11,
+        "AML.T0047 - AI-Enabled Product or Service": 11,
+        "AML.T0080 - AI Agent Context Poisoning": 9,
+        "AML.T0065 - LLM Prompt Crafting": 8,
+        "AML.T0081 - Modify AI Agent Configuration": 8,
+        "AML.T0103 - Deploy AI Agent": 6,
+        "AML.T0110 - AI Agent Tool Poisoning": 6,
+        "AML.T0084 - Discover AI Agent Configuration": 6,
+        "AML.T0057 - LLM Data Leakage": 5,
+        "AML.T0010 - AI Supply Chain Compromise": 5,
+        "AML.T0083 - Credentials from AI Agent Configuration": 5,
+        "AML.T0043 - Craft Adversarial Data": 4,
+        "AML.T0040 - AI Model Inference API Access": 4,
+        "AML.T0054 - LLM Jailbreak": 4,
+        "AML.T0015 - Evade AI Model": 4,
+        "AML.T0068 - LLM Prompt Obfuscation": 3,
+        "AML.T0063 - Discover AI Model Outputs": 3,
+        "AML.T0020 - Poison Training Data": 3,
+        "AML.T0098 - AI Agent Tool Credential Harvesting": 3,
+        "AML.T0061 - LLM Prompt Self-Replication": 2,
+        "AML.T0056 - LLM Meta Prompt Extraction": 2,
+        "AML.T0069 - Discover LLM System Information": 2,
+        "AML.T0031 - Erode AI Model Integrity": 2,
+        "AML.T0018 - Manipulate AI Model": 2,
+        "AML.T0059 - Erode Dataset Integrity": 2,
+        "AML.T0115 - Publish Poisoned AI Artifacts": 2,
+        "AML.T0092 - Manipulate User LLM Chat History": 1,
+        "AML.T0066 - Retrieval Content Crafting": 1,
+        "AML.T0070 - RAG Poisoning": 1,
+        "AML.T0071 - False RAG Entry Injection": 1,
+        "AML.T0067 - LLM Trusted Output Components Manipulation": 1,
+        "AML.T0044 - Full AI Model Access": 1,
+        "AML.T0012 - Valid Accounts": 1
+      },
+      "owasp_distribution": {
+        "LLM08 - Excessive Agency": 16,
+        "LLM02 - Insecure Output Handling": 14,
+        "LLM01 - Prompt Injection": 13,
+        "LLM07 - Insecure Plugin Design": 13,
+        "LLM06 - Sensitive Information Disclosure": 11,
+        "LLM05 - Supply Chain Vulnerabilities": 9,
+        "LLM09 - Overreliance": 5,
+        "LLM03 - Training Data Poisoning": 4,
+        "LLM04 - Model Denial of Service": 1
+      },
+      "threat_level_distribution": {
+        "HIGH": 11,
+        "MEDIUM": 7,
+        "CRITICAL": 6,
+        "LOW": 1
+      },
+      "threat_actor_distribution": {
+        "cybercriminal": 16,
+        "researcher": 14,
+        "insider": 8,
+        "nation-state": 7
+      },
+      "avg_relevance": 7.73,
+      "top_categories": [
+        "LLM Security",
+        "Agentic AI",
+        "Research",
+        "Industry News",
+        "First Look",
+        "Adversarial ML",
+        "Supply Chain",
+        "Prompt Injection",
+        "Jailbreaks",
+        "Data Poisoning"
+      ]
     }
   ]
 }
