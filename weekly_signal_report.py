@@ -1358,7 +1358,16 @@ def cmd_generate(days: int, use_mock: bool = False, as_draft: bool = False) -> N
     output_path.write_text(markdown, encoding="utf-8")
     log.info(f"  Article saved: {output_path}")
 
-    # Step 7: Append to history
+    # Step 7: Generate LinkedIn post
+    log.info("  Generating LinkedIn post...")
+    linkedin_text = generate_linkedin_post(articles, narrative, analytics, label)
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    week_lower = label.lower().replace("-", "")
+    linkedin_path = HISTORY_DIR / f"linkedin-{week_lower}.txt"
+    linkedin_path.write_text(linkedin_text, encoding="utf-8")
+    log.info(f"  LinkedIn post saved: {linkedin_path}")
+
+    # Step 8: Append to history
     log.info("  Updating history...")
     week_entry = {
         "week": label,
@@ -1382,6 +1391,7 @@ def cmd_generate(days: int, use_mock: bool = False, as_draft: bool = False) -> N
     print("=" * 70)
     print(f"  Weekly Signal Report Generated: {label}")
     print(f"  Output: {output_path}")
+    print(f"  LinkedIn: {linkedin_path}")
     print(f"  Articles analysed: {analytics['article_count']}")
     print(f"  MITRE techniques tracked: {len(analytics['mitre_distribution'])}")
     print(f"  OWASP categories tracked: {len(analytics['owasp_distribution'])}")
