@@ -34,6 +34,7 @@ OTHER COMMANDS
     python weekly_signal_report.py --list            # List existing signal reports
     python weekly_signal_report.py --days 14         # Override lookback period
     python weekly_signal_report.py --dry-run         # Print analytics without generating article
+    python weekly_signal_report.py --linkedin        # Generate LinkedIn post from latest report
 
 REQUIREMENTS
 ------------
@@ -1503,6 +1504,125 @@ def cmd_publish(slug: str) -> None:
     print()
 
 
+def generate_linkedin_post(articles: list, narrative: dict, analytics: dict, week_label: str) -> str:
+    """
+    Generate a LinkedIn-ready plain-text post from the signal report data.
+    Returns a string that can be directly pasted into LinkedIn.
+    """
+    THREAT_INDICATOR = {"CRITICAL": "[!!]", "HIGH": "[!]", "MEDIUM": "[~]", "LOW": "[.]"}
+
+    headline = narrative.get("headline", f"Weekly AI Security Signal: {week_label}")
+
+    lines = []
+    lines.append(f"AI Security Weekly Signal | {week_label}")
+    lines.append("")
+    lines.append(headline)
+    lines.append("")
+    lines.append(f"{analytics['article_count']} articles analysed | Avg relevance: {analytics['avg_relevance']}/10")
+    lines.append("")
+    lines.append("Top 10 stories this week:")
+    lines.append("")
+
+    for i, article in enumerate(articles[:10], 1):
+        threat = article["threat_level"]
+        indicator = THREAT_INDICATOR.get(threat, "[ ]")
+        lines.append(f"{i:2d}. {indicator} {article['title']}")
+        lines.append(f"    {threat} | Relevance: {article['relevance_score']:.1f}/10 | {article['source']}")
+        lines.append("")
+
+    lines.append("Enterprise takeaways:")
+    enterprise_focus = narrative.get("enterprise_focus", [])
+    if isinstance(enterprise_focus, list):
+        for item in enterprise_focus[:4]:
+            lines.append(f"- {item}")
+    lines.append("")
+
+    trajectory = narrative.get("trajectory_watch", "")[:250]
+    if trajectory:
+        lines.append(f"Outlook: {trajectory}")
+        lines.append("")
+
+    lines.append("Full report with MITRE ATLAS & OWASP analysis on Grid the Grey.")
+    lines.append("")
+    lines.append("#AISecurity #CyberSecurity #ThreatIntelligence #CISO #InfoSec #AIGovernance #LLMSecurity")
+
+    return "\n".join(lines)
+
+def cmd_linkedin(days: int, slug: str = None) -> None:
+    """Generate a LinkedIn post from the latest or specified signal report."""
+    label = get_week_label()
+    log.info(f"=== LinkedIn Post Generation ({label}) ===")
+
+    # Read articles for the top 10 list
+    articles = get_articles(days)
+    if not articles:
+        log.error(f"No published articles found in the last {days} days.")
+        sys.exit(1)
+
+    analytics = compute_analytics(articles)
+
+    # Try to load the narrative from the existing report, or use mock
+    report_path = None
+    if slug:
+        for path in DEEP_SIGNAL_DIR.glob("*weekly-signal-report*.md"):
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            if f'slug: "{slug}"' in text or slug in path.name:
+                report_path = path
+                break
+    else:
+        reports = sorted(DEEP_SIGNAL_DIR.glob("*weekly-signal-report*.md"), key=lambda p: p.name, reverse=True)
+        if reports:
+            report_path = reports[0]
+
+    # Extract narrative elements from existing report if available
+    narrative = {}
+    if report_path:
+        text = report_path.read_text(encoding="utf-8", errors="ignore")
+        title_match = re.search(r'^title:\s*"([^"]+)"', text, re.MULTILINE)
+        if title_match:
+            narrative["headline"] = title_match.group(1)
+
+        # Extract enterprise focus bullets
+        focus_match = re.search(r'## Enterprise Focus Areas\s*\n(.*?)(?=\n---|\n##)', text, re.DOTALL)
+        if focus_match:
+            bullets = re.findall(r'^- (.+)$', focus_match.group(1), re.MULTILINE)
+            narrative["enterprise_focus"] = bullets
+
+        # Extract trajectory watch
+        traj_match = re.search(r'## Trajectory Watch\s*\n(.*?)(?=\n---|\n##)', text, re.DOTALL)
+        if traj_match:
+            narrative["trajectory_watch"] = traj_match.group(1).strip()
+
+    if not narrative.get("headline"):
+        narrative["headline"] = f"Weekly AI Security Signal: {label}"
+    if not narrative.get("enterprise_focus"):
+        narrative["enterprise_focus"] = ["See the full report for enterprise focus areas."]
+    if not narrative.get("trajectory_watch"):
+        narrative["trajectory_watch"] = "See the full report for trajectory analysis."
+
+    # Generate the post
+    post_text = generate_linkedin_post(articles, narrative, analytics, label)
+
+    # Save to file
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    week_lower = label.lower().replace("-", "")
+    output_path = HISTORY_DIR / f"linkedin-{week_lower}.txt"
+    output_path.write_text(post_text, encoding="utf-8")
+
+    print()
+    print("=" * 70)
+    print(f"  LinkedIn Post Generated: {label}")
+    print(f"  Output: {output_path}")
+    print(f"  Characters: {len(post_text)} (LinkedIn limit: 3,000)")
+    print("=" * 70)
+    print()
+    print(post_text)
+    print()
+    print("=" * 70)
+    print("  Copy the text above and paste directly into LinkedIn.")
+    print("=" * 70)
+
+
 def cmd_list() -> None:
     """List existing signal reports in the deep-signal directory."""
     DEEP_SIGNAL_DIR.mkdir(parents=True, exist_ok=True)
@@ -1570,6 +1690,8 @@ Examples:
                         help="Generate as draft (draft: true). Use 'hugo server --buildDrafts' to preview before publishing.")
     parser.add_argument("--publish", type=str, metavar="SLUG",
                         help="Publish a draft report by setting draft: false. Pass the slug (e.g. 'weekly-signal-report-2026w31')")
+    parser.add_argument("--linkedin", action="store_true",
+                        help="Generate a LinkedIn-ready post from the latest signal report")
     parser.add_argument("--debug", action="store_true",
                         help="Enable verbose debug logging")
 
@@ -1578,7 +1700,7 @@ Examples:
     if args.debug:
         log.setLevel(logging.DEBUG)
 
-    if not any([args.generate, args.dry_run, args.list, args.publish]):
+    if not any([args.generate, args.dry_run, args.list, args.publish, args.linkedin]):
         parser.print_help()
         sys.exit(0)
 
@@ -1588,6 +1710,8 @@ Examples:
         cmd_dry_run(days=args.days)
     elif args.publish:
         cmd_publish(slug=args.publish)
+    elif args.linkedin:
+        cmd_linkedin(days=args.days)
     elif args.generate:
         cmd_generate(days=args.days, use_mock=args.mock, as_draft=args.draft)
 
