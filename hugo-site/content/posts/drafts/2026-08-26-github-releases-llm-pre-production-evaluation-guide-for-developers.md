@@ -1,7 +1,7 @@
 ---
 title: "GitHub Releases LLM Pre-Production Evaluation Guide for Developers"
 date: 2026-08-26T07:25:17+00:00
-draft: true
+draft: false
 slug: "github-releases-llm-pre-production-evaluation-guide-for-developers"
 
 # ── Content metadata ──
