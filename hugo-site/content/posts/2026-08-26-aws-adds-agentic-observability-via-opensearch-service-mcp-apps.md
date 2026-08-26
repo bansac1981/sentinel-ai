@@ -1,6 +1,6 @@
 ---
 title: "AWS Adds Agentic Observability via OpenSearch Service MCP Apps"
-date: 2026-08-26T07:26:07+00:00
+date: "2026-08-26T07:49:27+00:00"
 draft: false
 slug: "aws-adds-agentic-observability-via-opensearch-service-mcp-apps"
 
