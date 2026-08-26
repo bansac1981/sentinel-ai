@@ -1,7 +1,7 @@
 ---
 title: "NVIDIA NemoClaw Flaw Lets Malicious Page Poison Local AI Model"
 date: 2026-08-26T07:14:27+00:00
-draft: true
+draft: false
 slug: "nvidia-nemoclaw-flaw-lets-malicious-page-poison-local-ai-model"
 
 # ── Content metadata ──
