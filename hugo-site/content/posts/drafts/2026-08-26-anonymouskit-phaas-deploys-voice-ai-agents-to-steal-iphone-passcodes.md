@@ -1,7 +1,7 @@
 ---
 title: "AnonyMousKIT PhaaS Deploys Voice AI Agents to Steal iPhone Passcodes"
 date: 2026-08-26T07:13:15+00:00
-draft: true
+draft: false
 slug: "anonymouskit-phaas-deploys-voice-ai-agents-to-steal-iphone-passcodes"
 
 # ── Content metadata ──
