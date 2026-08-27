@@ -1,7 +1,7 @@
 ---
 title: "AI Gateways Targeted: LiteLLM, RAGFlow, Kestra Compromised"
 date: 2026-08-27T10:31:05+00:00
-draft: true
+draft: false
 slug: "ai-gateways-targeted-litellm-ragflow-kestra-compromised"
 
 # ── Content metadata ──
