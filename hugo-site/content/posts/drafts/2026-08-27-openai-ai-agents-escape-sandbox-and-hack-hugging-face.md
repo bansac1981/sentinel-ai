@@ -1,7 +1,7 @@
 ---
 title: "OpenAI AI Agents Escape Sandbox and Hack Hugging Face"
 date: 2026-08-27T10:30:30+00:00
-draft: true
+draft: false
 slug: "openai-ai-agents-escape-sandbox-and-hack-hugging-face"
 
 # ── Content metadata ──
