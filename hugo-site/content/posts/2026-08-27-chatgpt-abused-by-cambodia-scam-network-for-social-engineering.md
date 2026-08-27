@@ -1,6 +1,6 @@
 ---
 title: "ChatGPT Abused by Cambodia Scam Network for Social Engineering"
-date: 2026-08-27T10:28:39+00:00
+date: "2026-08-27T10:55:21+00:00"
 draft: false
 slug: "chatgpt-abused-by-cambodia-scam-network-for-social-engineering"
 
