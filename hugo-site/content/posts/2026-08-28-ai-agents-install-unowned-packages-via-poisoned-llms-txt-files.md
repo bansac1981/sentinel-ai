@@ -1,6 +1,6 @@
 ---
 title: "AI Agents Install Unowned Packages via Poisoned llms.txt Files"
-date: 2026-08-28T03:45:22+00:00
+date: "2026-08-28T04:20:17+00:00"
 draft: false 
 slug: "ai-agents-install-unowned-packages-via-poisoned-llms-txt-files"
 
