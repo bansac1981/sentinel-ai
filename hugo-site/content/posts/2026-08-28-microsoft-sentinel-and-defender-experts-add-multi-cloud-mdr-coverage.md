@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Sentinel and Defender Experts Add Multi-Cloud MDR Coverage"
-date: 2026-08-28T03:44:32+00:00
+date: "2026-08-28T09:21:42+00:00"
 draft: false 
 slug: "microsoft-sentinel-and-defender-experts-add-multi-cloud-mdr-coverage"
 
