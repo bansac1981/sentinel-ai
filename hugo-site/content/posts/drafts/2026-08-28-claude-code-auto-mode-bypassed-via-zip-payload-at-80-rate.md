@@ -1,7 +1,7 @@
 ---
 title: "Claude Code Auto Mode Bypassed via Zip Payload at 80% Rate"
 date: 2026-08-28T03:53:13+00:00
-draft: true
+draft: false
 slug: "claude-code-auto-mode-bypassed-via-zip-payload-at-80-rate"
 
 # ── Content metadata ──
