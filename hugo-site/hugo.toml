@@ -23,6 +23,11 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
   enableFrameworkBadges = true
   scoreThreshold = 6.0
 
+[permalinks]
+  [permalinks.page]
+    posts = "/:sections/:slug/"
+    deep-signal = "/:sections/:slug/"
+
 [taxonomies]
   category = "categories"
   tag = "tags"
