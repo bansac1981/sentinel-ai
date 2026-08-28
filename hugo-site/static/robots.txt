@@ -4,6 +4,7 @@
 # Allow all bots
 User-agent: *
 Allow: /
+Allow: /index.json
 Disallow: /admin/
 Disallow: /*.json$
 Disallow: /draft/

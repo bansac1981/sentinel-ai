@@ -161,18 +161,19 @@ jobs:
           token_format: 'access_token'
           access_token_scopes: 'https://www.googleapis.com/auth/indexing'
 
-      # 2. Trigger Indexing via direct API call (No third-party actions needed)
-      - name: 'Google Indexing API 🚀'
+      # 2. Notify Google of updated content
+      - name: 'Google Indexing API'
         run: |
-          # Get the temporary access token from the 'auth' step
           ACCESS_TOKEN="${{ steps.auth.outputs.access_token }}"
-          
-          # Send the newest URL from your sitemap to Google
-          # Note: We are notifying Google of the sitemap itself so it recrawls everything
-          curl -H "Content-Type: application/json" \
+
+          # Notify Google Indexing API of the homepage (valid URL_UPDATED target)
+          curl -s -H "Content-Type: application/json" \
                -H "Authorization: Bearer $ACCESS_TOKEN" \
                -X POST -d '{
-                 "url": "https://gridthegrey.com/sitemap.xml",
+                 "url": "https://gridthegrey.com/",
                  "type": "URL_UPDATED"
                }' "https://indexing.googleapis.com/v3/urlNotifications:publish"
+
+          # Ping Google to recrawl the sitemap (standard mechanism)
+          curl -s "https://www.google.com/ping?sitemap=https://gridthegrey.com/sitemap.xml"
     # ───────────────────────────────────────────────────────────── 

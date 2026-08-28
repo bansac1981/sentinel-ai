@@ -332,6 +332,7 @@ RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "6.0"))
 HUGO_POSTS_DIR      = Path(os.getenv("HUGO_POSTS_DIR", "hugo-site/content/posts"))
 HUGO_DRAFTS_DIR     = HUGO_POSTS_DIR / "drafts"
 SEEN_URLS_FILE      = Path(os.getenv("SEEN_URLS_FILE", "seen_urls.json"))
+SEEN_URLS_MAX       = int(os.getenv("SEEN_URLS_MAX", "2000"))
 MAX_ARTICLES        = int(os.getenv("MAX_ARTICLES_PER_RUN", "15"))
 FETCH_FULL_CONTENT  = os.getenv("FETCH_FULL_CONTENT", "true").lower() == "true"
 FETCH_TIMEOUT       = int(os.getenv("FETCH_TIMEOUT", "10"))
@@ -590,8 +591,11 @@ def load_seen_urls(path: Path) -> set:
 
 
 def save_seen_urls(path: Path, seen: set) -> None:
+    urls = sorted(seen)
+    if len(urls) > SEEN_URLS_MAX:
+        urls = urls[-SEEN_URLS_MAX:]
     with open(path, "w", encoding="utf-8") as f:
-        json.dump({"urls": sorted(seen), "updated_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
+        json.dump({"urls": urls, "updated_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
 
 
 def flush_seen_urls(path: Path, seen: set) -> None:
