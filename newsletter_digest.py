@@ -104,6 +104,7 @@ def parse_frontmatter(text: str) -> dict:
     result["source_url"]       = _get("source_url")
     result["threat_level"]     = _get("threat_level")
     result["relevance_score"]  = float(_get("relevance_score") or 0)
+    result["slug"]             = _get("slug")
     result["thumbnail"]        = _get("thumbnail")
     result["draft"]            = _get("draft").lower() == "true"
     result["mitre_techniques"] = _get_list("mitre_techniques")
@@ -151,8 +152,8 @@ def load_deep_signal_posts(days: int) -> list[dict]:
             continue
 
         fm["pub_date"] = pub_date
-        fm["slug"]     = md_file.stem
-        fm["url"]      = f"{SITE_URL}/deep-signal/{md_file.stem}/"
+        fm["slug"]     = fm.get("slug") or md_file.stem
+        fm["url"]      = f"{SITE_URL}/deep-signal/{fm['slug']}/"
         posts.append(fm)
 
     posts.sort(key=lambda p: p["pub_date"], reverse=True)
@@ -191,8 +192,8 @@ def load_posts(days: int) -> list[dict]:
             continue
 
         fm["pub_date"] = pub_date
-        fm["slug"]     = md_file.stem
-        fm["url"]      = f"{SITE_URL}/posts/{md_file.stem}/"
+        fm["slug"]     = fm.get("slug") or md_file.stem
+        fm["url"]      = f"{SITE_URL}/posts/{fm['slug']}/"
         posts.append(fm)
 
     posts.sort(key=lambda p: p["relevance_score"], reverse=True)
