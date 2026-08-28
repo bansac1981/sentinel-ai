@@ -84,5 +84,6 @@ jobs:
 
           REFRAMED=$(git diff --staged --name-only | grep "hugo-site/content/posts/.*\.md" | wc -l | tr -d ' ')
           git commit -m "refactor: reframe ${REFRAMED} first-look article(s) to defender-oriented framing"
+          git pull --rebase
           git push
           echo "✓ Committed ${REFRAMED} reframed article(s). Tracker updated."

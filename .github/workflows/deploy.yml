@@ -83,6 +83,7 @@ jobs:
 
           if [ "$PUBLISHED_COUNT" -gt 0 ]; then
             git commit -m "auto-publish: $PUBLISHED_COUNT article(s)"
+            git pull --rebase
             git push
             echo "Pushed $PUBLISHED_COUNT published article(s)."
           else

@@ -180,4 +180,5 @@ jobs:
             echo "✓ Updated seen_urls cache only. Skipping deploy."
           fi
 
+          git pull --rebase
           git push

@@ -115,6 +115,7 @@ jobs:
             echo "Nothing staged — no deletions to commit."
           else
             git commit -m "cleanup: remove ${{ env.DELETED_COUNT }} draft(s) older than ${{ github.event.inputs.days || '15' }} days"
+            git pull --rebase
             git push
             echo "Cleanup committed and pushed."
           fi

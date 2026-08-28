@@ -44,25 +44,30 @@ jobs:
           python-version: "3.12"
 
       - name: Unpublish article
+        env:
+          INPUT_SLUG: ${{ inputs.slug }}
+          INPUT_MODE: ${{ inputs.mode }}
         run: |
-          python unpublish.py "${{ inputs.slug }}" --mode "${{ inputs.mode }}"
+          python unpublish.py "$INPUT_SLUG" --mode "$INPUT_MODE"
 
       - name: Commit and push
+        env:
+          INPUT_SLUG: ${{ inputs.slug }}
+          INPUT_MODE: ${{ inputs.mode }}
         run: |
           git config user.name  "Grid the Grey Bot"
           git config user.email "bot@gridthegrey.com"
-          git add -A hugo-site/content/ hugo-site/static/img/signal/
+          git add hugo-site/content/ hugo-site/static/img/signal/
           if git diff --staged --quiet; then
             echo "No changes — article may not exist or was already in desired state."
             exit 0
           fi
-          MODE="${{ inputs.mode }}"
-          SLUG="${{ inputs.slug }}"
-          if [ "$MODE" = "draft" ]; then
-            git commit -m "fix: unpublish article — set to draft ($SLUG)"
+          if [ "$INPUT_MODE" = "draft" ]; then
+            git commit -m "fix: unpublish article — set to draft ($INPUT_SLUG)"
           else
-            git commit -m "fix: unpublish article — deleted ($SLUG)"
+            git commit -m "fix: unpublish article — deleted ($INPUT_SLUG)"
           fi
+          git pull --rebase
           git push
 
           echo ""
