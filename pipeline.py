@@ -1581,8 +1581,8 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
     # In single-mode runs the list is already homogeneous so interleaving is skipped.
     all_articles.sort(key=lambda a: a["published"], reverse=True)
     if mode == "all":
-        fl_articles = [a for a in all_articles if a["source"] in FIRST_LOOK_FEEDS]
-        tr_articles = [a for a in all_articles if a["source"] not in FIRST_LOOK_FEEDS]
+        fl_articles = [a for a in all_articles if a["feed_key"] in FIRST_LOOK_FEEDS]
+        tr_articles = [a for a in all_articles if a["feed_key"] not in FIRST_LOOK_FEEDS]
         interleaved = []
         fi, ti = 0, 0
         while fi < len(fl_articles) or ti < len(tr_articles):

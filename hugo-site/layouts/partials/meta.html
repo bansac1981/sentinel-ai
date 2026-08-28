@@ -45,7 +45,7 @@
 
 {{/* Favicon */}}
 <link rel="icon" type="image/svg+xml" href="{{ "img/favicon.svg" | relURL }}">
-<link rel="icon" type="image/png" href="{{ "img/favicon.png" | relURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "img/favicon.svg" | relURL }}">
 
 {{/* Stylesheet */}}
 <link rel="stylesheet" href="{{ "css/sentinel.css" | relURL }}">
@@ -61,7 +61,7 @@
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
   "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
   "author": { "@type": "Organization", "name": "{{ .Site.Title }}" },
-  "publisher": { "@type": "Organization", "name": "{{ .Site.Title }}", "logo": { "@type": "ImageObject", "url": "{{ "img/favicon.png" | absURL }}" } },
+  "publisher": { "@type": "Organization", "name": "{{ .Site.Title }}", "logo": { "@type": "ImageObject", "url": "{{ "img/favicon.svg" | absURL }}" } },
   "url": "{{ .Permalink }}"{{ if .Params.thumbnail }},
   "image": { "@type": "ImageObject", "url": "{{ .Params.thumbnail | absURL }}" }{{ end }}
 }

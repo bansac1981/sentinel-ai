@@ -2,6 +2,7 @@
 title: "GitHub Supply Chain Attacks via PRT-scan Campaign"
 date: 2026-04-06T21:38:53+00:00
 draft: false
+slug: "ai-assisted-supply-chain-attack-targets-github"
 
 # ── Content metadata ──
 summary: "A threat actor identified as part of the PRT-scan campaign has leveraged AI-assisted automation to systematically target a widespread GitHub misconfiguration, marking the second such campaign in recent months. The use of AI for automated reconnaissance and exploitation of supply chain vulnerabilities represents a significant escalation in attacker capability. This campaign highlights the growing risk of AI-augmented attacks against software supply chains, which can have cascading downstream effects on ML pipelines and production systems."
