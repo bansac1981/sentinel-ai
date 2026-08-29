@@ -1,6 +1,6 @@
 ---
 title: "US Lawmakers Propose Mandatory AI Kill Switch Controls for Agents"
-date: 2026-08-29T06:55:27+00:00
+date: "2026-08-29T10:22:17+00:00"
 draft: false 
 slug: "us-lawmakers-propose-mandatory-ai-kill-switch-controls-for-agents"
 
