@@ -1,7 +1,7 @@
 ---
 title: "LLM Safety Circuits Found in Just 50 Neurons by Unit 42"
 date: 2026-08-29T06:54:28+00:00
-draft: true
+draft: false 
 slug: "llm-safety-circuits-found-in-just-50-neurons-by-unit-42"
 
 # ── Content metadata ──
