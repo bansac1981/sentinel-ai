@@ -1,6 +1,6 @@
 ---
 title: "Anthropic Previews Automated Alignment Researcher for AI Safety"
-date: 2026-08-29T08:09:51+00:00
+date: "2026-08-29T10:03:10+00:00"
 draft: false 
 slug: "anthropic-previews-automated-alignment-researcher-for-ai-safety"
 
