@@ -1,7 +1,7 @@
 ---
 title: "AI Agents Running as Root Expose Systems to Full Takeover"
 date: 2026-08-29T08:10:29+00:00
-draft: true
+draft: false 
 slug: "ai-agents-running-as-root-expose-systems-to-full-takeover"
 
 # ── Content metadata ──
