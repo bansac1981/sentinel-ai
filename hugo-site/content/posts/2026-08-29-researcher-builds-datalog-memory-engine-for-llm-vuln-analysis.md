@@ -1,6 +1,6 @@
 ---
 title: "Researcher Builds Datalog Memory Engine for LLM Vuln Analysis"
-date: 2026-08-29T06:53:50+00:00
+date: "2026-08-29T10:21:11+00:00"
 draft: false 
 slug: "researcher-builds-datalog-memory-engine-for-llm-vuln-analysis"
 
