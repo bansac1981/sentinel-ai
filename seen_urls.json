@@ -164,6 +164,7 @@
     "https://isc.sans.edu/diary/rss/33290",
     "https://isc.sans.edu/diary/rss/33292",
     "https://isc.sans.edu/diary/rss/33294",
+    "https://isc.sans.edu/diary/rss/33296",
     "https://krebsonsecurity.com/2026/08/two-alleged-teampcp-hackers-arrested-in-australia",
     "https://krebsonsecurity.com/2026/08/whos-tracking-you-use-this-new-service-to-find-out",
     "https://larsfaye.com/articles/ai-coding-will-prevent-expertise",
@@ -432,6 +433,7 @@
     "https://wpintelligence.washingtonpost.com/topics/ai-tech/2026/08/19/wpi-conversation-why-an-ai-job-apocalypse-is-unlikely",
     "https://www.anthropic.com/news/model-hardware-standard-research-preview",
     "https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-is-cutting-claude-codes-current-weekly-limits-by-17-percent",
+    "https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-warns-infostealer-malware-is-hijacking-claude-sessions-to-drain-usage",
     "https://www.bleepingcomputer.com/news/legal/tiktok-reaches-400m-settlement-with-us-over-coppa-violations",
     "https://www.bleepingcomputer.com/news/microsoft/microsoft-august-windows-updates-may-cause-gaming-issues-reboots",
     "https://www.bleepingcomputer.com/news/microsoft/microsoft-blames-windows-gaming-issues-on-rgb-lighting-devices",
@@ -449,6 +451,7 @@
     "https://www.bleepingcomputer.com/news/security/boston-scientific-says-cyberattack-disrupted-operations-globally",
     "https://www.bleepingcomputer.com/news/security/brave-browser-adds-email-aliases-to-help-users-evade-tracking",
     "https://www.bleepingcomputer.com/news/security/carhartt-data-breach-exposes-information-of-129-million-accounts",
+    "https://www.bleepingcomputer.com/news/security/chrome-web-store-extensions-caught-stealing-crypto-browser-data",
     "https://www.bleepingcomputer.com/news/security/cisa-hackers-now-exploiting-citrix-netscaler-rce-flaw-in-attacks",
     "https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-actively-exploited-trueconf-server-flaws",
     "https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-exploiting-critical-mlflow-vulnerability",
@@ -458,6 +461,7 @@
     "https://www.bleepingcomputer.com/news/security/critical-zimbra-rce-flaw-now-actively-exploited-in-attacks",
     "https://www.bleepingcomputer.com/news/security/fbi-disrupts-proxy-network-enabling-chinese-espionage-operations",
     "https://www.bleepingcomputer.com/news/security/from-fake-workers-to-account-recovery-the-growing-identity-verification-risk",
+    "https://www.bleepingcomputer.com/news/security/fulcrumsec-claims-manchester-airports-hack-theft-of-86-gb-of-data",
     "https://www.bleepingcomputer.com/news/security/givewp-wordpress-donation-plugin-flaw-lets-hackers-execute-server-commands",
     "https://www.bleepingcomputer.com/news/security/hackers-abuse-ftp-server-banners-to-deliver-new-windows-malware",
     "https://www.bleepingcomputer.com/news/security/hackers-abuse-npm-mirrors-to-host-phishing-redirect-pages",
@@ -637,6 +641,7 @@
     "https://www.securityweek.com/linux-foundation-to-govern-trace-an-open-standard-for-ai-runtime-attestation",
     "https://www.securityweek.com/microsoft-rolls-out-22-fresh-security-patches",
     "https://www.securityweek.com/mlflow-vulnerability-exploited-for-cloud-credential-theft",
+    "https://www.securityweek.com/more-details-emerge-on-exploited-papercut-vulnerabilities",
     "https://www.securityweek.com/new-phishing-toolkit-uses-passkeys-to-maintain-access-after-password-resets",
     "https://www.securityweek.com/okta-shares-surge-on-strong-earnings-growing-demand-for-ai-identity-security",
     "https://www.securityweek.com/openai-agents-coordinated-via-makeshift-message-board-ahead-of-hugging-face-hack",
@@ -713,5 +718,5 @@
     "https://www.youtube.com/watch?v=2ZU3j4GQ4K8",
     "https://www.zdnet.com/article/i-cant-stop-80-of-developers-find-ai-coding-more-addictive-than-helpful"
   ],
-  "updated_at": "2026-08-30T10:37:38.522768+00:00"
+  "updated_at": "2026-08-31T07:51:38.098367+00:00"
 }
