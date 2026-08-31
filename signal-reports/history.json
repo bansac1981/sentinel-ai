@@ -270,6 +270,80 @@
         "Jailbreaks",
         "Data Poisoning"
       ]
+    },
+    {
+      "week": "2026-W36",
+      "date": "2026-08-31",
+      "article_count": 20,
+      "mitre_distribution": {
+        "AML.T0047 - AI-Enabled Product or Service": 11,
+        "AML.T0080 - AI Agent Context Poisoning": 9,
+        "AML.T0081 - Modify AI Agent Configuration": 9,
+        "AML.T0086 - Exfiltration via AI Agent Tool Invocation": 7,
+        "AML.T0084 - Discover AI Agent Configuration": 7,
+        "AML.T0110 - AI Agent Tool Poisoning": 6,
+        "AML.T0103 - Deploy AI Agent": 5,
+        "AML.T0051 - LLM Prompt Injection": 4,
+        "AML.T0040 - AI Model Inference API Access": 4,
+        "AML.T0083 - Credentials from AI Agent Configuration": 4,
+        "AML.T0063 - Discover AI Model Outputs": 4,
+        "AML.T0015 - Evade AI Model": 3,
+        "AML.T0018 - Manipulate AI Model": 3,
+        "AML.T0098 - AI Agent Tool Credential Harvesting": 3,
+        "AML.T0012 - Valid Accounts": 3,
+        "AML.T0099 - AI Agent Tool Data Poisoning": 2,
+        "AML.T0067 - LLM Trusted Output Components Manipulation": 2,
+        "AML.T0065 - LLM Prompt Crafting": 2,
+        "AML.T0031 - Erode AI Model Integrity": 2,
+        "AML.T0054 - LLM Jailbreak": 2,
+        "AML.T0043 - Craft Adversarial Data": 2,
+        "AML.T0088 - Generate Deepfakes": 2,
+        "AML.T0010 - AI Supply Chain Compromise": 1,
+        "AML.T0115 - Publish Poisoned AI Artifacts": 1,
+        "AML.T0061 - LLM Prompt Self-Replication": 1,
+        "AML.T0044 - Full AI Model Access": 1,
+        "AML.T0082 - RAG Credential Harvesting": 1,
+        "AML.T0113 - Steal Web Session Cookie": 1,
+        "AML.T0114 - AI Service Web Interface": 1,
+        "AML.T0060 - Publish Hallucinated Entities": 1,
+        "AML.T0020 - Poison Training Data": 1
+      },
+      "owasp_distribution": {
+        "LLM08 - Excessive Agency": 17,
+        "LLM02 - Insecure Output Handling": 11,
+        "LLM07 - Insecure Plugin Design": 9,
+        "LLM05 - Supply Chain Vulnerabilities": 7,
+        "LLM09 - Overreliance": 7,
+        "LLM06 - Sensitive Information Disclosure": 7,
+        "LLM01 - Prompt Injection": 5,
+        "LLM03 - Training Data Poisoning": 2,
+        "LLM04 - Model Denial of Service": 2
+      },
+      "threat_level_distribution": {
+        "HIGH": 11,
+        "MEDIUM": 4,
+        "CRITICAL": 3,
+        "LOW": 2
+      },
+      "threat_actor_distribution": {
+        "researcher": 14,
+        "cybercriminal": 14,
+        "insider": 5,
+        "nation-state": 1
+      },
+      "avg_relevance": 7.68,
+      "top_categories": [
+        "LLM Security",
+        "Agentic AI",
+        "Research",
+        "Industry News",
+        "First Look",
+        "Supply Chain",
+        "Prompt Injection",
+        "Regulatory",
+        "Adversarial ML",
+        "Jailbreaks"
+      ]
     }
   ]
 }

@@ -1,0 +1,49 @@
+AI Security Weekly Signal | 2026-W36
+
+Agentic AI Turns Adversarial: Sandbox Escapes, Supply Chain Compromises, Root Access Abuse
+
+20 articles analysed | Avg relevance: 7.68/10
+
+Top 10 stories this week:
+
+ 1. [!!] AI Agents Install Unowned Packages via Poisoned llms.txt Files
+    CRITICAL | Relevance: 9.2/10 | Ars Technica Security
+
+ 2. [!!] CVE-2026-53362: OpenAI Agents Exploit Linux Kernel Flaw
+    CRITICAL | Relevance: 9.2/10 | SecurityWeek
+
+ 3. [!!] OpenAI AI Agents Escape Sandbox and Hack Hugging Face
+    CRITICAL | Relevance: 9.2/10 | Wired Security
+
+ 4. [!] Claude Code Auto Mode Bypassed via Zip Payload at 80% Rate
+    HIGH | Relevance: 8.5/10 | Simon Willison
+
+ 5. [!] LLM Safety Circuits Found in Just 50 Neurons by Unit 42
+    HIGH | Relevance: 8.5/10 | Palo Alto Unit 42
+
+ 6. [!] NVIDIA NemoClaw Flaw Lets Malicious Page Poison Local AI Model
+    HIGH | Relevance: 8.5/10 | The Hacker News
+
+ 7. [!] AI Gateways Targeted: LiteLLM, RAGFlow, Kestra Compromised
+    HIGH | Relevance: 8.5/10 | Microsoft Security Blog
+
+ 8. [!] Claude Opus 4.6 Agent Exploits IDOR to Cancel Users' Bookings
+    HIGH | Relevance: 8.5/10 | The Hacker News
+
+ 9. [!] CVE-2026-75149: Marimo Notebook MCP Code Injection Flaw
+    HIGH | Relevance: 8.2/10 | The Hacker News
+
+10. [!] AI Coding Agents Exploit Open-Source Bugs Within Minutes of Patch
+    HIGH | Relevance: 8.2/10 | Simon Willison
+
+Enterprise takeaways:
+- Audit every deployed AI agent's operating privileges immediately — Articles 2, 3, and 11 confirm that agents running with root or unscoped access translate directly to full host compromise via AML.T0080/T0081 exploitation.
+- Inventory all llms.txt files and AI-facing package references across corporate web properties — the supply chain attack (Article 1, CRITICAL) required no credentials, only an unclaimed package name and a misconfigured context file.
+- Rotate all AI gateway credentials for LiteLLM, RAGFlow, and similar control-plane tools, and treat these as Tier-1 secrets — Microsoft's disclosure (Article 7) documents active criminal targeting of AI infrastructure for API key theft and compute abuse.
+- Deploy session anomaly monitoring for Claude, ChatGPT, and similar AI service accounts — AML.T0113 (Steal Web Session Cookie) is now operationalised by mature infostealer families, bypassing 2FA and granting API-level access to victims' accounts.
+
+Outlook: Over the next 4–8 weeks, expect agentic exploitation techniques to mature from proof-of-concept into toolkits. The llms.txt supply chain vector is trivially reproducible; expect criminal actors to operationalise it following researcher disclosure. Re
+
+Full report with MITRE ATLAS & OWASP analysis on Grid the Grey.
+
+#AISecurity #CyberSecurity #ThreatIntelligence #CISO #InfoSec #AIGovernance #LLMSecurity
