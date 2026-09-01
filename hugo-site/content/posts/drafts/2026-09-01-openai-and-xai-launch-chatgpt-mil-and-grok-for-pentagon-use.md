@@ -1,7 +1,7 @@
 ---
 title: "OpenAI and xAI Launch ChatGPT Mil and Grok for Pentagon Use"
 date: 2026-09-01T09:56:34+00:00
-draft: true
+draft: false
 slug: "openai-and-xai-launch-chatgpt-mil-and-grok-for-pentagon-use"
 
 # ── Content metadata ──
