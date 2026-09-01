@@ -1,7 +1,7 @@
 ---
 title: "Almanac (YC S26) Launches Agentic AI with Self-Updating Company Wiki"
 date: 2026-09-01T08:52:15+00:00
-draft: true
+draft: false
 slug: "almanac-yc-s26-launches-agentic-ai-with-self-updating-company-wiki"
 
 # ── Content metadata ──
