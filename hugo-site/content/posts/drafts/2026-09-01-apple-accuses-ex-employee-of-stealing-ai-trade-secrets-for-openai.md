@@ -1,7 +1,7 @@
 ---
 title: "Apple Accuses Ex-Employee of Stealing AI Trade Secrets for OpenAI"
 date: 2026-09-01T09:55:42+00:00
-draft: true
+draft: false
 slug: "apple-accuses-ex-employee-of-stealing-ai-trade-secrets-for-openai"
 
 # ── Content metadata ──
