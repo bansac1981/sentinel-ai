@@ -1,6 +1,6 @@
 ---
 title: "Aurora Ransomware Operators Weaponise Cursor AI for Attacks"
-date: 2026-09-01T10:18:29+00:00
+date: "2026-09-01T14:07:19+00:00"
 draft: false
 slug: "aurora-ransomware-operators-weaponise-cursor-ai-for-attacks"
 
