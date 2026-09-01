@@ -1,7 +1,7 @@
 ---
 title: "Hugging Face Incident Exposes AI Agent Identity Risks"
 date: 2026-09-01T10:17:39+00:00
-draft: true
+draft: false
 slug: "hugging-face-incident-exposes-ai-agent-identity-risks"
 
 # ── Content metadata ──
