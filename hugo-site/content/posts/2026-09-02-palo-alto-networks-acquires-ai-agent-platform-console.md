@@ -1,6 +1,6 @@
 ---
 title: "Palo Alto Networks Acquires AI Agent Platform Console"
-date: 2026-09-02T05:24:34+00:00
+date: "2026-09-02T07:06:59+00:00"
 draft: false 
 slug: "palo-alto-networks-acquires-ai-agent-platform-console"
 
