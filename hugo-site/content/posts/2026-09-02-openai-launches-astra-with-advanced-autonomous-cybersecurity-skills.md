@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Launches Astra with Advanced Autonomous Cybersecurity Skills"
-date: 2026-09-02T05:35:50+00:00
+date: "2026-09-02T05:44:20+00:00"
 draft: false 
 slug: "openai-launches-astra-with-advanced-autonomous-cybersecurity-skills"
 
