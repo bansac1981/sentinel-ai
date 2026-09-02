@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Launches Astra with Critical Cyber Capability Controls"
 date: 2026-09-02T05:25:32+00:00
-draft: true
+draft: false 
 slug: "openai-launches-astra-with-critical-cyber-capability-controls"
 
 # ── Content metadata ──
