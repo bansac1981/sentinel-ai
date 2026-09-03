@@ -18,6 +18,7 @@ import logging
 import os
 import re
 import sys
+import time
 from collections import Counter, defaultdict
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -234,9 +235,17 @@ def _call_claude(model: str, prompt: str, max_tokens: int = 16000, use_thinking:
     if use_thinking:
         body["thinking"] = {"type": "adaptive"}
 
+    retries = [30, 60, 120]
     with httpx.Client(timeout=300.0) as client:
-        resp = client.post("https://api.anthropic.com/v1/messages", headers=headers, json=body)
-        resp.raise_for_status()
+        for attempt in range(len(retries) + 1):
+            resp = client.post("https://api.anthropic.com/v1/messages", headers=headers, json=body)
+            if resp.status_code == 529 and attempt < len(retries):
+                wait = retries[attempt]
+                log.warning(f"  API overloaded (529), retrying in {wait}s (attempt {attempt + 1}/{len(retries)})...")
+                time.sleep(wait)
+                continue
+            resp.raise_for_status()
+            break
         data = resp.json()
 
     stop_reason = data.get("stop_reason", "unknown")
