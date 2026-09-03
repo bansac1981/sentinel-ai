@@ -40,7 +40,7 @@
 
 {{ if $thumb }}
 <img src="{{ $thumb }}" alt="{{ $title }}" loading="lazy" class="article-thumb-img">
-{{ else if eq (.Params.content_type | default "") "signal_report" }}
+{{ else if or (eq (.Params.content_type | default "") "signal_report") (eq (.Params.content_type | default "") "monthly_review") }}
 
 {{/* ═══════════════════════════════════════════════════════════
      PATTERN: SIGNAL RADAR  — for signal_report content type

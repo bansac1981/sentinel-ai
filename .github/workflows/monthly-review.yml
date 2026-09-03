@@ -1,0 +1,263 @@
+name: "Grid the Grey — Monthly Intelligence Review"
+
+# ─────────────────────────────────────────────
+# Monthly AI Security Intelligence Review
+#   Step 1 (auto/manual): Generate report → deploy preview (not pushed to main)
+#   Step 2 (manual): Approve → commit to main → prod deploy
+# ─────────────────────────────────────────────
+on:
+  # 2nd of every month at 11:00 AM IST (05:30 UTC)
+  schedule:
+    - cron: "30 5 2 * *"
+
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Month to review (YYYY-MM). Leave blank for previous month."
+        required: false
+        default: ""
+      action:
+        description: "What to do"
+        required: true
+        default: "generate-preview"
+        type: choice
+        options:
+          - generate-preview
+          - publish-latest
+          - dry-run
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  # ══════════════════════════════════════════════════════════════
+  # JOB 1: Generate monthly review and deploy a PREVIEW
+  # ══════════════════════════════════════════════════════════════
+  generate:
+    name: "Generate Monthly Review & Preview"
+    if: ${{ github.event.inputs.action != 'publish-latest' && github.event.inputs.action != 'dry-run' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 1
+
+      - name: Pull latest changes
+        run: git pull --rebase origin main
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate monthly review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MONTHLY_NARRATIVE_MODEL: ${{ vars.MONTHLY_NARRATIVE_MODEL || 'claude-opus-5' }}
+          MONTHLY_SUPPORT_MODEL: ${{ vars.MONTHLY_SUPPORT_MODEL || 'claude-sonnet-5' }}
+        run: |
+          MONTH="${{ github.event.inputs.month }}"
+          if [ -n "$MONTH" ]; then
+            echo "Generating monthly review for ${MONTH}..."
+            python generate_monthly_review.py --generate --linkedin --month "${MONTH}"
+          else
+            echo "Generating monthly review for previous month..."
+            python generate_monthly_review.py --generate --linkedin
+          fi
+
+      - name: Determine preview URL
+        id: url
+        run: |
+          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*monthly-review*.md 2>/dev/null | tail -1 | sed 's/^slug:[[:space:]]*//' | tr -d '"' | tr -d "'")
+          echo "slug=${SLUG}" >> $GITHUB_OUTPUT
+          echo "preview_url=https://gridthegrey.com/deep-signal/${SLUG}/" >> $GITHUB_OUTPUT
+
+      - name: Save generated files as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: monthly-review-files
+          path: |
+            hugo-site/content/deep-signal/*monthly-review*.md
+            signal-reports/linkedin-monthly-*.txt
+          retention-days: 7
+
+      - name: Setup Hugo (extended)
+        run: |
+          HUGO_VERSION="0.147.9"
+          curl -Lo /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          tar -xzf /tmp/hugo.tar.gz -C /tmp
+          sudo install /tmp/hugo /usr/local/bin/hugo
+
+      - name: Build site (includes new report for preview)
+        working-directory: hugo-site
+        env:
+          HUGO_ENVIRONMENT: production
+          TZ: Asia/Kolkata
+        run: hugo --minify --baseURL "https://gridthegrey.com/"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: hugo-site/public
+
+      - name: Summary
+        run: |
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+          echo ""
+          echo "  ✓ Monthly Review generated and preview deployed"
+          echo ""
+          echo "  PROOFREAD HERE:"
+          echo "     ${{ steps.url.outputs.preview_url }}"
+          echo ""
+          echo "  When satisfied, run this workflow again with:"
+          echo "     action = 'publish-latest'"
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## Monthly Intelligence Review — Preview Ready
+
+          **Proofread the report here:**
+
+          [${{ steps.url.outputs.preview_url }}](${{ steps.url.outputs.preview_url }})
+
+          ---
+
+          When satisfied, run this workflow again with \`action: publish-latest\` to commit to main and trigger the production deploy.
+
+          **LinkedIn post** saved to \`signal-reports/linkedin-monthly-*.txt\` — copy and post manually after publishing.
+          EOF
+
+  deploy-preview:
+    name: "Deploy Preview"
+    needs: generate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ══════════════════════════════════════════════════════════════
+  # JOB 2: Publish (commit to main → triggers regular deploy.yml)
+  # ══════════════════════════════════════════════════════════════
+  publish:
+    name: "Publish Monthly Review"
+    if: ${{ github.event.inputs.action == 'publish-latest' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 1
+
+      - name: Pull latest changes
+        run: git pull --rebase origin main
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate monthly review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MONTHLY_NARRATIVE_MODEL: ${{ vars.MONTHLY_NARRATIVE_MODEL || 'claude-opus-5' }}
+          MONTHLY_SUPPORT_MODEL: ${{ vars.MONTHLY_SUPPORT_MODEL || 'claude-sonnet-5' }}
+        run: |
+          MONTH="${{ github.event.inputs.month }}"
+          if [ -n "$MONTH" ]; then
+            python generate_monthly_review.py --generate --linkedin --month "${MONTH}"
+          else
+            python generate_monthly_review.py --generate --linkedin
+          fi
+
+      - name: Commit and push to main
+        run: |
+          git config user.name  "Grid the Grey Bot"
+          git config user.email "bot@gridthegrey.com"
+          git add hugo-site/content/deep-signal/*monthly-review*.md
+          git add signal-reports/linkedin-monthly-*.txt
+          if git diff --staged --quiet; then
+            echo "No changes — report may already be published."
+            exit 0
+          fi
+          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*monthly-review*.md 2>/dev/null | tail -1 | sed 's/^slug: *"//;s/"$//')
+          MONTH_LABEL=$(grep '^subtitle:' hugo-site/content/deep-signal/*monthly-review*.md 2>/dev/null | tail -1 | sed 's/^subtitle: *"//;s/"$//')
+          git commit -m "feat: publish monthly intelligence review — ${MONTH_LABEL}"
+          git push
+
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+          echo ""
+          echo "  ✓ Monthly Review PUBLISHED to main"
+          echo "  ✓ deploy.yml will rebuild production site"
+          echo "  https://gridthegrey.com/deep-signal/${SLUG}/"
+          echo ""
+          echo "══════════════════════════════════════════════════════════════"
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## Monthly Review Published
+
+          The report is now live:
+
+          [https://gridthegrey.com/deep-signal/${SLUG}/](https://gridthegrey.com/deep-signal/${SLUG}/)
+
+          ---
+
+          **Next:** Copy the LinkedIn post from \`signal-reports/linkedin-monthly-*.txt\` and publish it.
+          EOF
+
+  # ══════════════════════════════════════════════════════════════
+  # JOB 3: Dry run (analytics only)
+  # ══════════════════════════════════════════════════════════════
+  dry-run:
+    name: "Dry Run (Analytics Only)"
+    if: ${{ github.event.inputs.action == 'dry-run' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run dry analysis
+        run: |
+          MONTH="${{ github.event.inputs.month }}"
+          if [ -n "$MONTH" ]; then
+            python generate_monthly_review.py --dry-run --month "${MONTH}"
+          else
+            python generate_monthly_review.py --dry-run
+          fi

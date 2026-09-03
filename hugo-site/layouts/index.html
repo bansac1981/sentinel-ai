@@ -26,7 +26,7 @@
 </section>
 
 {{/* ── DEEP SIGNAL PINNED FEATURE ── */}}
-{{ $latestDS := where .Site.RegularPages "Params.content_type" "in" (slice "deep_signal" "signal_report") }}
+{{ $latestDS := where .Site.RegularPages "Params.content_type" "in" (slice "deep_signal" "signal_report" "monthly_review") }}
 {{ $latestDS = first 1 $latestDS }}
 {{ range $latestDS }}
 <section class="ds-pinned">
@@ -35,7 +35,7 @@
     <span class="ds-pinned__label">Original Analysis</span>
   </div>
   <article class="post-card post-card--h post-card--deep-signal post-card--deep-signal-featured">
-    {{ if or .Params.thumbnail_card (eq (.Params.content_type | default "") "signal_report") }}
+    {{ if or .Params.thumbnail_card (eq (.Params.content_type | default "") "signal_report") (eq (.Params.content_type | default "") "monthly_review") }}
     <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
       {{ partial "article-image.html" . }}
     </a>
@@ -69,10 +69,10 @@
     <h3 class="date-group__heading">{{ .Key }}</h3>
     <div class="posts-list">
       {{ range .Pages }}
-      {{ $isDeepSignal := or (eq (.Params.content_type | default "") "deep_signal") (eq (.Params.content_type | default "") "signal_report") }}
+      {{ $isDeepSignal := or (eq (.Params.content_type | default "") "deep_signal") (eq (.Params.content_type | default "") "signal_report") (eq (.Params.content_type | default "") "monthly_review") }}
       {{ $isFirstLook := eq (.Params.content_type | default "threat_report") "first_look" }}
       <article class="post-card post-card--h {{ if $isDeepSignal }}post-card--deep-signal{{ else if $isFirstLook }}post-card--first-look{{ end }}">
-        {{ if or (not $isDeepSignal) .Params.thumbnail_card (eq (.Params.content_type | default "") "signal_report") }}
+        {{ if or (not $isDeepSignal) .Params.thumbnail_card (eq (.Params.content_type | default "") "signal_report") (eq (.Params.content_type | default "") "monthly_review") }}
         <a href="{{ .RelPermalink }}" class="post-card__image--h" aria-label="{{ .Title }}">
           {{ partial "article-image.html" . }}
         </a>
