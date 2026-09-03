@@ -239,6 +239,10 @@ def _call_claude(model: str, prompt: str, max_tokens: int = 16000, use_thinking:
         resp.raise_for_status()
         data = resp.json()
 
+    stop_reason = data.get("stop_reason", "unknown")
+    if stop_reason == "max_tokens":
+        log.warning(f"  Response truncated (hit max_tokens={max_tokens})")
+
     raw_text = ""
     for block in data.get("content", []):
         if block.get("type") == "text":
@@ -247,6 +251,83 @@ def _call_claude(model: str, prompt: str, max_tokens: int = 16000, use_thinking:
 
     usage = data.get("usage", {})
     return raw_text, usage
+
+
+def _repair_truncated_json(text: str) -> dict | None:
+    """Try to repair JSON truncated by max_tokens by closing open brackets."""
+    open_braces = 0
+    open_brackets = 0
+    in_string = False
+    escape_next = False
+    for ch in text:
+        if escape_next:
+            escape_next = False
+            continue
+        if ch == '\\' and in_string:
+            escape_next = True
+            continue
+        if ch == '"' and not escape_next:
+            in_string = not in_string
+            continue
+        if in_string:
+            continue
+        if ch == '{':
+            open_braces += 1
+        elif ch == '}':
+            open_braces -= 1
+        elif ch == '[':
+            open_brackets += 1
+        elif ch == ']':
+            open_brackets -= 1
+
+    if open_braces == 0 and open_brackets == 0:
+        return None
+
+    repaired = text.rstrip().rstrip(',')
+    if repaired[-1] == ':':
+        repaired += ' ""'
+    repaired += ']' * open_brackets + '}' * open_braces
+    try:
+        return json.loads(repaired)
+    except json.JSONDecodeError:
+        last_comma = repaired.rfind(',')
+        if last_comma > 0:
+            trimmed = repaired[:last_comma]
+            trimmed += ']' * trimmed.count('[') + '}' * trimmed.count('{')
+            closers_needed_brackets = trimmed.count('[') - trimmed.count(']')
+            closers_needed_braces = trimmed.count('{') - trimmed.count('}')
+            trimmed = repaired[:last_comma]
+            trimmed += ']' * max(closers_needed_brackets, 0) + '}' * max(closers_needed_braces, 0)
+            try:
+                return json.loads(trimmed)
+            except json.JSONDecodeError:
+                return None
+        return None
+
+
+def _parse_json_response(raw_text: str) -> dict:
+    """Parse JSON from Claude response, with truncation repair as fallback."""
+    try:
+        return json.loads(raw_text)
+    except json.JSONDecodeError as e:
+        log.warning(f"  Direct JSON parse failed: {e}")
+
+    json_match = re.search(r'\{.*\}', raw_text, re.DOTALL)
+    if json_match:
+        try:
+            return json.loads(json_match.group())
+        except json.JSONDecodeError:
+            pass
+
+    log.warning("  Attempting truncated JSON repair...")
+    repaired = _repair_truncated_json(raw_text)
+    if repaired:
+        log.info("  Truncated JSON repaired successfully (some sections may be incomplete)")
+        return repaired
+
+    log.error(f"  Raw response (first 1000 chars): {raw_text[:1000]}")
+    log.error("  Could not parse or repair JSON. Aborting.")
+    sys.exit(1)
 
 
 def generate_narrative(articles: list, analytics: dict, month_label: str) -> dict:
@@ -325,27 +406,13 @@ IMPORTANT RULES:
 - Output ONLY the JSON object. No markdown code fences, no preamble."""
 
     log.info(f"  Calling {NARRATIVE_MODEL} for monthly narrative generation...")
-    raw_text, usage = _call_claude(NARRATIVE_MODEL, prompt, max_tokens=16000, use_thinking=True)
+    raw_text, usage = _call_claude(NARRATIVE_MODEL, prompt, max_tokens=32000, use_thinking=True)
 
     if raw_text.startswith("```"):
         raw_text = re.sub(r'^```(?:json)?\s*\n?', '', raw_text)
         raw_text = re.sub(r'\n?```\s*$', '', raw_text)
 
-    try:
-        narrative = json.loads(raw_text)
-    except json.JSONDecodeError as e:
-        log.error(f"  Failed to parse response as JSON: {e}")
-        log.error(f"  Raw response (first 1000 chars): {raw_text[:1000]}")
-        json_match = re.search(r'\{.*\}', raw_text, re.DOTALL)
-        if json_match:
-            try:
-                narrative = json.loads(json_match.group())
-            except json.JSONDecodeError:
-                log.error("  Could not extract JSON. Aborting.")
-                sys.exit(1)
-        else:
-            log.error("  No JSON found in response. Aborting.")
-            sys.exit(1)
+    narrative = _parse_json_response(raw_text)
 
     log.info(f"  Narrative generated: {len(raw_text)} chars")
     log.info(f"  Usage: input={usage.get('input_tokens', '?')}, output={usage.get('output_tokens', '?')}")
