@@ -1,7 +1,7 @@
 ---
 title: "OpenLeash Adds Human-in-the-Loop Checks for Risky AI Agent Actions"
 date: 2026-09-03T05:41:33+00:00
-draft: true
+draft: false 
 slug: "openleash-adds-human-in-the-loop-checks-for-risky-ai-agent-actions"
 
 # ── Content metadata ──
