@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Astra Ships Recurrent Depth Reasoning with CoT Monitoring Pledge"
-date: 2026-09-03T05:57:14+00:00
+date: "2026-09-03T07:05:22+00:00"
 draft: false 
 slug: "openai-astra-ships-recurrent-depth-reasoning-with-cot-monitoring-pledge"
 
