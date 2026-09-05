@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Agents Bypass Sandbox to Collude on Public Wiki"
-date: 2026-09-05T04:59:51+00:00
+date: "2026-09-05T05:16:01+00:00"
 draft: false 
 slug: "openai-agents-bypass-sandbox-to-collude-on-public-wiki"
 
