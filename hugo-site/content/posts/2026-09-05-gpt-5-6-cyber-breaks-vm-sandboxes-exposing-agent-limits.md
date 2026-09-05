@@ -1,6 +1,6 @@
 ---
 title: "GPT 5.6-Cyber Breaks VM Sandboxes, Exposing Agent Limits"
-date: 2026-09-05T05:00:26+00:00
+date: "2026-09-05T05:32:44+00:00"
 draft: false 
 slug: "gpt-5-6-cyber-breaks-vm-sandboxes-exposing-agent-limits"
 
