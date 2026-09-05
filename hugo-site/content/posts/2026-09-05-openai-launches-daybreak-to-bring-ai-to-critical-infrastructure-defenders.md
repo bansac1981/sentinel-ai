@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Launches Daybreak to Bring AI to Critical Infrastructure Defenders"
-date: 2026-09-05T05:01:12+00:00
+date: "2026-09-05T05:31:44+00:00"
 draft: false 
 slug: "openai-launches-daybreak-to-bring-ai-to-critical-infrastructure-defenders"
 
