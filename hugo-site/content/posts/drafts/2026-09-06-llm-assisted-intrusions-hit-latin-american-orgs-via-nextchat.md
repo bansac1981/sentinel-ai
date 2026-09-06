@@ -1,7 +1,7 @@
 ---
 title: "LLM-Assisted Intrusions Hit Latin American Orgs via NextChat"
 date: 2026-09-06T03:45:34+00:00
-draft: true
+draft: false 
 slug: "llm-assisted-intrusions-hit-latin-american-orgs-via-nextchat"
 
 # ── Content metadata ──
