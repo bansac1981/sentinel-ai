@@ -1,7 +1,7 @@
 ---
 title: "Capsule Security Launches AI Circuit Breaker for Rogue Agents"
 date: 2026-09-04T09:55:53+00:00
-draft: true
+draft: false 
 slug: "capsule-security-launches-ai-circuit-breaker-for-rogue-agents"
 
 # ── Content metadata ──
