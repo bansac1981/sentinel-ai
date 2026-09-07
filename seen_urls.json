@@ -289,6 +289,7 @@
     "https://old.reddit.com/r/cscareerquestions/comments/1vi1i7m/my_entire_software_development_workflow_is_ai_now",
     "https://omegion.dev/2026/08/ai-and-infrastructure-engineering",
     "https://openai.com/index/ai-native-company-workflows",
+    "https://openai.com/index/an-alien-mind",
     "https://openai.com/index/atv-big-air-tour",
     "https://openai.com/index/bringing-chatgpt-for-teachers-to-more-us-school-districts",
     "https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources",
@@ -311,6 +312,7 @@
     "https://openai.com/index/path-to-astra",
     "https://openai.com/index/playco-game-prototyping-with-astra",
     "https://openai.com/index/polimill",
+    "https://openai.com/index/research-acceleration-view-inside-openai",
     "https://openai.com/index/safety-overview-gpt-6-astra",
     "https://openai.com/index/supporting-california-bill-advance-ai-youth-safety",
     "https://openai.com/index/supporting-next-generation-ai-startups-thailand",
@@ -378,6 +380,9 @@
     "https://simonwillison.net/2026/Sep/4/rogue-agent-wikis",
     "https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos",
     "https://simonwillison.net/2026/Sep/5/introducing-gpt-6-astra-for-developers",
+    "https://simonwillison.net/2026/Sep/6/research-acceleration-the-view-inside-openai",
+    "https://simonwillison.net/2026/Sep/6/the-purpose-of-dns-is-to-spread-scams",
+    "https://simonwillison.net/2026/Sep/6/theres-no-limit-to-how-bad-code-can-get",
     "https://simonwillison.net/2026/Sep/6/zach-kehs",
     "https://spectrum.ieee.org/ai-engineer-skills",
     "https://sreenathmenon.com/blog/2026-08-04-webmcp-teaching-websites-to-talk-to-ai-agents",
@@ -515,6 +520,8 @@
     "https://techcrunch.com/2026/09/05/hikers-rescued-after-using-google-gemini-for-planning",
     "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure",
     "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft",
+    "https://techcrunch.com/2026/09/06/authors-push-back-as-publishers-and-agents-seek-share-of-anthropic-settlement",
+    "https://techcrunch.com/2026/09/06/travis-kalanicks-atoms-might-be-getting-into-the-robotaxi-business",
     "https://techcrunch.com/podcast/apples-ternus-era-begins-as-nvidia-bets-on-the-whole-ai-stack",
     "https://techcrunch.com/podcast/the-doj-is-investigating-a16z-what-does-this-mean-for-venture-capital",
     "https://techcrunch.com/podcast/were-dangerously-close-to-dead-internet-theory-says-pangrams-ceo",
@@ -933,6 +940,7 @@
     "https://www.economist.com/graphic-detail/2026/08/18/does-ai-stop-children-from-learning",
     "https://www.economist.com/leaders/2026/08/06/how-ai-is-breaking-the-british-state",
     "https://www.eff.org/deeplinks/2026/08/eff-courts-dont-rewrite-copyright-over-ai-hype",
+    "https://www.effort.news/revelation",
     "https://www.fast.ai/posts/2026-08-18-returning-to-AI",
     "https://www.ft.com/content/5ee49718-c258-4f01-aa32-7e5b76ae5245",
     "https://www.gatesnotes.com/a-turbulent-ai-era-and-critical-choices-to-make",
@@ -1139,6 +1147,7 @@
     "https://www.theverge.com/ai-artificial-intelligence/990149/openai-rogue-agents-german-wiki",
     "https://www.theverge.com/ai-artificial-intelligence/990197/roland-ai-music-melody-flip",
     "https://www.theverge.com/ai-artificial-intelligence/990773/openai-german-wiki-incident",
+    "https://www.theverge.com/ai-artificial-intelligence/990932/seattle-times-newsday-lawsuit-openai-microsoft",
     "https://www.theverge.com/entertainment/981644/robin-williams-instagram-account-ai",
     "https://www.theverge.com/entertainment/985866/h4rris-nihil-young-edm-suno-ai",
     "https://www.theverge.com/gadgets/985549/hugging-face-microduck-robot",
@@ -1200,5 +1209,5 @@
     "https://www.youtube.com/watch?v=2ZU3j4GQ4K8",
     "https://www.zdnet.com/article/i-cant-stop-80-of-developers-find-ai-coding-more-addictive-than-helpful"
   ],
-  "updated_at": "2026-09-07T06:49:08.633312+00:00"
+  "updated_at": "2026-09-07T06:52:09.588329+00:00"
 }
