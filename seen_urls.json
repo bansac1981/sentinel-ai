@@ -286,6 +286,7 @@
     "https://news.ycombinator.com/item?id=49468252",
     "https://news.ycombinator.com/item?id=49510066",
     "https://news.ycombinator.com/item?id=49551096",
+    "https://news.ycombinator.com/item?id=49600233",
     "https://newsletter.eng-leadership.com/p/good-culture-is-the-biggest-productivity",
     "https://newsletter.semianalysis.com/p/openai-jalapeno-better-than-nvidia",
     "https://noaifridays.com/",
@@ -378,7 +379,10 @@
     "https://simonwillison.net/2026/Sep/1/python-315-rc-2",
     "https://simonwillison.net/2026/Sep/1/tarn-adams",
     "https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt",
+    "https://simonwillison.net/2026/Sep/2/llm",
+    "https://simonwillison.net/2026/Sep/2/llm-anthropic",
     "https://simonwillison.net/2026/Sep/2/llm-gemini",
+    "https://simonwillison.net/2026/Sep/2/llm-openrouter",
     "https://simonwillison.net/2026/Sep/2/rick-brewster",
     "https://simonwillison.net/2026/Sep/3/gpt6-astra",
     "https://simonwillison.net/2026/Sep/4/astra-pelicans",
@@ -390,6 +394,11 @@
     "https://simonwillison.net/2026/Sep/6/the-purpose-of-dns-is-to-spread-scams",
     "https://simonwillison.net/2026/Sep/6/theres-no-limit-to-how-bad-code-can-get",
     "https://simonwillison.net/2026/Sep/6/zach-kehs",
+    "https://simonwillison.net/2026/Sep/7/creepy-crawlies",
+    "https://simonwillison.net/2026/Sep/7/equal-earth",
+    "https://simonwillison.net/2026/Sep/7/jakub-pachocki",
+    "https://simonwillison.net/2026/Sep/7/llm",
+    "https://simonwillison.net/2026/Sep/7/video-compressor",
     "https://spectrum.ieee.org/ai-engineer-skills",
     "https://sreenathmenon.com/blog/2026-08-04-webmcp-teaching-websites-to-talk-to-ai-agents",
     "https://status.claude.com/incidents/461yvfrzpwtt",
@@ -528,6 +537,7 @@
     "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft",
     "https://techcrunch.com/2026/09/06/authors-push-back-as-publishers-and-agents-seek-share-of-anthropic-settlement",
     "https://techcrunch.com/2026/09/06/travis-kalanicks-atoms-might-be-getting-into-the-robotaxi-business",
+    "https://techcrunch.com/2026/09/07/artificial-intelligence-definition-glossary-hallucinations-guide-to-common-ai-terms",
     "https://techcrunch.com/podcast/apples-ternus-era-begins-as-nvidia-bets-on-the-whole-ai-stack",
     "https://techcrunch.com/podcast/the-doj-is-investigating-a16z-what-does-this-mean-for-venture-capital",
     "https://techcrunch.com/podcast/were-dangerously-close-to-dead-internet-theory-says-pangrams-ceo",
@@ -1237,5 +1247,5 @@
     "https://www.youtube.com/watch?v=2ZU3j4GQ4K8",
     "https://www.zdnet.com/article/i-cant-stop-80-of-developers-find-ai-coding-more-addictive-than-helpful"
   ],
-  "updated_at": "2026-09-08T05:03:55.810169+00:00"
+  "updated_at": "2026-09-08T05:22:16.806510+00:00"
 }
