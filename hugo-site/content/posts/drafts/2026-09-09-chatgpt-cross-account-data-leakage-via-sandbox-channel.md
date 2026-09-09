@@ -1,7 +1,7 @@
 ---
 title: "ChatGPT Cross-Account Data Leakage via Sandbox Channel"
 date: 2026-09-09T07:31:01+00:00
-draft: true
+draft: false 
 slug: "chatgpt-cross-account-data-leakage-via-sandbox-channel"
 
 # ── Content metadata ──
