@@ -1,6 +1,6 @@
 ---
 title: "Schneier and Raghavan Frame AI Agent Risk as a Genie Problem"
-date: 2026-09-08T18:28:49+00:00
+date: "2026-09-09T07:46:57+00:00"
 draft: false 
 slug: "schneier-and-raghavan-frame-ai-agent-risk-as-a-genie-problem"
 
