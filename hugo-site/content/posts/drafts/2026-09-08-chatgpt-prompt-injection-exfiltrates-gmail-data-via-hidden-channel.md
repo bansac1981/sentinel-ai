@@ -1,7 +1,7 @@
 ---
 title: "ChatGPT Prompt Injection Exfiltrates Gmail Data via Hidden Channel"
 date: 2026-09-08T18:31:11+00:00
-draft: true
+draft: false 
 slug: "chatgpt-prompt-injection-exfiltrates-gmail-data-via-hidden-channel"
 
 # ── Content metadata ──
