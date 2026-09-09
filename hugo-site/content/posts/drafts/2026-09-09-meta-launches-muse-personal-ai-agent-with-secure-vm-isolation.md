@@ -1,7 +1,7 @@
 ---
 title: "Meta Launches Muse Personal AI Agent with Secure VM Isolation"
 date: 2026-09-09T07:30:13+00:00
-draft: true
+draft: false 
 slug: "meta-launches-muse-personal-ai-agent-with-secure-vm-isolation"
 
 # ── Content metadata ──
