@@ -1,7 +1,7 @@
 ---
 title: "Hidden Prompt Injection Attacks Hijack Autonomous AI Agents"
 date: 2026-09-08T18:29:26+00:00
-draft: true
+draft: false 
 slug: "hidden-prompt-injection-attacks-hijack-autonomous-ai-agents"
 
 # ── Content metadata ──
