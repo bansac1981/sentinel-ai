@@ -1,7 +1,7 @@
 ---
 title: "Chinese AI Firms Accused of Distilling OpenAI and Anthropic Models"
 date: 2026-09-10T08:04:26+00:00
-draft: true
+draft: false 
 slug: "chinese-ai-firms-accused-of-distilling-openai-and-anthropic-models"
 
 # ── Content metadata ──
