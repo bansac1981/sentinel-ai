@@ -1,7 +1,7 @@
 ---
 title: "Workflow Identity Hijacking Targets Enterprise AI Data Access"
 date: 2026-09-10T08:05:52+00:00
-draft: true
+draft: false 
 slug: "workflow-identity-hijacking-targets-enterprise-ai-data-access"
 
 # ── Content metadata ──
