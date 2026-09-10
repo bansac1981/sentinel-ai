@@ -1,7 +1,7 @@
 ---
 title: "arXiv Research Introduces Self-Evolving Procedural Graphs for LLM Agents"
 date: 2026-09-10T08:05:17+00:00
-draft: true
+draft: false 
 slug: "arxiv-research-introduces-self-evolving-procedural-graphs-for-llm-agents"
 
 # ── Content metadata ──
