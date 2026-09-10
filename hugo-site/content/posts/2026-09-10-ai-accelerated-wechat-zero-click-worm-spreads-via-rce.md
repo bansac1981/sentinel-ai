@@ -1,6 +1,6 @@
 ---
 title: "AI-Accelerated WeChat Zero-Click Worm Spreads via RCE"
-date: 2026-09-10T08:36:22+00:00
+date: "2026-09-10T08:45:13+00:00"
 draft: false 
 slug: "ai-accelerated-wechat-zero-click-worm-spreads-via-rce"
 
