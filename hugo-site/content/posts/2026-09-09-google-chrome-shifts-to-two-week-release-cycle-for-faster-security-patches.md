@@ -1,6 +1,6 @@
 ---
 title: "Google Chrome Shifts to Two-Week Release Cycle for Faster Security Patches"
-date: 2026-09-09T10:00:55+00:00
+date: "2026-09-11T15:40:03+00:00"
 draft: false 
 slug: "google-chrome-shifts-to-two-week-release-cycle-for-faster-security-patches"
 
