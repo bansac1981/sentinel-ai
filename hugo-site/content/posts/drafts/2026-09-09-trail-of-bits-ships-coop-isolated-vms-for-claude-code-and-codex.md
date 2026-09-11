@@ -1,7 +1,7 @@
 ---
 title: "Trail of Bits Ships Coop: Isolated VMs for Claude Code and Codex"
 date: 2026-09-09T10:03:50+00:00
-draft: true
+draft: false 
 slug: "trail-of-bits-ships-coop-isolated-vms-for-claude-code-and-codex"
 
 # ── Content metadata ──
