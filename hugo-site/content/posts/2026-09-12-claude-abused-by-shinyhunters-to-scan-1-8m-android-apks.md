@@ -1,6 +1,6 @@
 ---
 title: "Claude Abused by ShinyHunters to Scan 1.8M Android APKs"
-date: 2026-09-12T09:23:16+00:00
+date: "2026-09-12T16:53:13+00:00"
 draft: false
 slug: "claude-abused-by-shinyhunters-to-scan-1-8m-android-apks"
 
