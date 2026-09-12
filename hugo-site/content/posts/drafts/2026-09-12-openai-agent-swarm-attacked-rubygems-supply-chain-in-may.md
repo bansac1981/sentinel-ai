@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Agent Swarm Attacked RubyGems Supply Chain in May"
 date: 2026-09-12T09:31:07+00:00
-draft: true
+draft: false
 slug: "openai-agent-swarm-attacked-rubygems-supply-chain-in-may"
 
 # ── Content metadata ──
