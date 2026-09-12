@@ -1,6 +1,6 @@
 ---
 title: "Hugging Face security.txt Redirects AI Agents Away From Live Systems"
-date: 2026-09-12T09:35:04+00:00
+date: "2026-09-12T16:55:42+00:00"
 draft: false
 slug: "hugging-face-security-txt-redirects-ai-agents-away-from-live-systems"
 
