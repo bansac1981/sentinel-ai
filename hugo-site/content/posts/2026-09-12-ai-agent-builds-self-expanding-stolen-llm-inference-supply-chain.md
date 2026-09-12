@@ -1,6 +1,6 @@
 ---
 title: "AI Agent Builds Self-Expanding Stolen LLM Inference Supply Chain"
-date: 2026-09-12T09:25:29+00:00
+date: "2026-09-12T16:46:53+00:00"
 draft: false
 slug: "ai-agent-builds-self-expanding-stolen-llm-inference-supply-chain"
 
