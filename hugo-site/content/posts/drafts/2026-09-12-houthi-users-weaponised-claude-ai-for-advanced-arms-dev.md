@@ -1,7 +1,7 @@
 ---
 title: "Houthi Users Weaponised Claude AI for Advanced Arms Dev"
 date: 2026-09-12T09:22:40+00:00
-draft: true
+draft: false
 slug: "houthi-users-weaponised-claude-ai-for-advanced-arms-dev"
 
 # ── Content metadata ──
