@@ -1,7 +1,7 @@
 ---
 title: "Claude Weaponised by State Hackers for Automated Data Theft"
 date: 2026-09-12T09:36:34+00:00
-draft: true
+draft: false
 slug: "claude-weaponised-by-state-hackers-for-automated-data-theft"
 
 # ── Content metadata ──
