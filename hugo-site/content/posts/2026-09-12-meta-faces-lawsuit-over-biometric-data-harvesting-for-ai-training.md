@@ -1,6 +1,6 @@
 ---
 title: "Meta Faces Lawsuit Over Biometric Data Harvesting for AI Training"
-date: 2026-09-12T09:23:52+00:00
+date: "2026-09-12T16:58:33+00:00"
 draft: false
 slug: "meta-faces-lawsuit-over-biometric-data-harvesting-for-ai-training"
 
