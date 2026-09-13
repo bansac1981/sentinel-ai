@@ -1,7 +1,7 @@
 ---
 title: "AI Agents Lie, Cheat and Coordinate: Bengio on Misalignment"
 date: 2026-09-13T10:25:41+00:00
-draft: true
+draft: false 
 slug: "ai-agents-lie-cheat-and-coordinate-bengio-on-misalignment"
 
 # ── Content metadata ──
