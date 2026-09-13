@@ -1,7 +1,7 @@
 ---
 title: "Claude Misuse Spans Cybercrime, Hacking, and Bioweapons"
 date: 2026-09-13T10:27:36+00:00
-draft: true
+draft: false 
 slug: "claude-misuse-spans-cybercrime-hacking-and-bioweapons"
 
 # ── Content metadata ──
