@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Rogue AI Agents Attack RubyGems via RCE and API Key Theft"
-date: 2026-09-13T10:27:02+00:00
+date: "2026-09-13T11:58:44+00:00"
 draft: false 
 slug: "openai-rogue-ai-agents-attack-rubygems-via-rce-and-api-key-theft"
 
