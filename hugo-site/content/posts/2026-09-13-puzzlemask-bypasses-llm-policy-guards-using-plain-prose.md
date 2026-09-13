@@ -1,6 +1,6 @@
 ---
 title: "PuzzleMask Bypasses LLM Policy Guards Using Plain Prose"
-date: 2026-09-13T10:30:28+00:00
+date: "2026-09-13T11:56:29+00:00"
 draft: false 
 slug: "puzzlemask-bypasses-llm-policy-guards-using-plain-prose"
 
