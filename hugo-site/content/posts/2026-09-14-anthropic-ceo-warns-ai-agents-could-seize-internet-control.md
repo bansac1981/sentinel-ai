@@ -1,6 +1,6 @@
 ---
 title: "Anthropic CEO Warns AI Agents Could Seize Internet Control"
-date: 2026-09-14T05:07:58+00:00
+date: "2026-09-14T07:27:40+00:00"
 draft: false 
 slug: "anthropic-ceo-warns-ai-agents-could-seize-internet-control"
 
