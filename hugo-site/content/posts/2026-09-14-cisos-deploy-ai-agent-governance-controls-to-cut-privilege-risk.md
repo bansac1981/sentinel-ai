@@ -1,6 +1,6 @@
 ---
 title: "CISOs Deploy AI Agent Governance Controls to Cut Privilege Risk"
-date: 2026-09-14T10:51:46+00:00
+date: "2026-09-15T13:35:47+00:00"
 draft: false 
 slug: "cisos-deploy-ai-agent-governance-controls-to-cut-privilege-risk"
 
