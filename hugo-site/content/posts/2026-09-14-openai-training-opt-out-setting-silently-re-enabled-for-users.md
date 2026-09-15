@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Training Opt-Out Setting Silently Re-Enabled for Users"
-date: 2026-09-14T10:58:33+00:00
+date: "2026-09-15T13:32:58+00:00"
 draft: false 
 slug: "openai-training-opt-out-setting-silently-re-enabled-for-users"
 
