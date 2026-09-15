@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Exposes 200M-Exchange Model Distillation Attacks"
 date: 2026-09-14T10:52:39+00:00
-draft: true
+draft: false 
 slug: "anthropic-exposes-200m-exchange-model-distillation-attacks"
 
 # ── Content metadata ──
