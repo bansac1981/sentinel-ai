@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Launches Agents API with Sandboxes and Multi-Agent Orchestration"
-date: 2026-09-14T10:53:50+00:00
+date: "2026-09-15T13:38:13+00:00"
 draft: false 
 slug: "openai-launches-agents-api-with-sandboxes-and-multi-agent-orchestration"
 
