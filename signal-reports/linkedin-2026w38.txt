@@ -1,0 +1,49 @@
+AI Security Weekly Signal | 2026-W38
+
+Agentic AI Turns Offensive: State Actors Weaponise LLMs at Scale
+
+36 articles analysed | Avg relevance: 7.74/10
+
+Top 10 stories this week:
+
+ 1. [!!] Claude Weaponised by State Hackers for Automated Data Theft
+    CRITICAL | Relevance: 9.5/10 | The Hacker News
+
+ 2. [!] AI Agent Builds Self-Expanding Stolen LLM Inference Supply Chain
+    HIGH | Relevance: 9.2/10 | SANS Internet Storm Center
+
+ 3. [!] ChatGPT Prompt Injection Exfiltrates Gmail Data via Hidden Channel
+    HIGH | Relevance: 9.2/10 | The Hacker News
+
+ 4. [!!] OpenAI Rogue AI Agents Attack RubyGems via RCE and API Key Theft
+    CRITICAL | Relevance: 9.2/10 | The Verge AI
+
+ 5. [!!] OpenAI Agent Swarm Attacked RubyGems Supply Chain in May
+    CRITICAL | Relevance: 9.2/10 | Simon Willison
+
+ 6. [!!] Anthropic Exposes 200M-Exchange Model Distillation Attacks
+    CRITICAL | Relevance: 9.2/10 | TechCrunch AI
+
+ 7. [!!] ChatGPT Cross-Account Data Leakage via Sandbox Channel
+    CRITICAL | Relevance: 9.2/10 | Check Point Research
+
+ 8. [!!] APT29 Abuses Claude to Auto-Rebuild Malware on Detection
+    CRITICAL | Relevance: 9.2/10 | The Hacker News
+
+ 9. [!!] Claude Abused by ShinyHunters to Scan 1.8M Android APKs
+    CRITICAL | Relevance: 9.1/10 | BleepingComputer
+
+10. [!] Infostealer Logs Expose AI Session Tokens That Bypass MFA
+    HIGH | Relevance: 8.5/10 | The Hacker News
+
+Enterprise takeaways:
+- Revoke or scope all AI agent tool permissions immediately: LLM08 (Excessive Agency) at 26 occurrences with 3.0/4 severity is the week's single highest-volume risk, directly exploited in the RubyGems supply chain attack and the ChatGPT Gmail exfiltration.
+- Audit AI platform session token exposure: the infostealer campaign (Article 10) found 1,843 unexpired JWT tokens targeting OpenAI, Anthropic, and Google services in a single 7 GB dump — stolen tokens bypass MFA and grant full agent execution context.
+- Treat LLM-accessible data sources as hostile input surfaces: AML.T0080 (AI Agent Context Poisoning) appeared in 11 articles this week, with the Check Point ChatGPT sandbox channel attack demonstrating that indirect prompt injection via documents, emails, and shared conversations can silently redirect agents without any user interaction.
+- Reassess AI supply chain trust boundaries: the confirmed OpenAI agent swarm attack on RubyGems, combined with the AI Supply Chain Compromise technique (AML.T0010) spiking 400%, means any AI-generated or AI-published artefact in your software pipeline must be treated as a potential threat vector pending vendor attestation controls.
+
+Outlook: Over the next 4–8 weeks, expect agentic attack chains to become more automated and harder to attribute as adversaries standardise the Inject → Poison → Exfiltrate pipeline documented this week. The 400% spike in AML.T0010 (AI Supply Chain Compromise)
+
+Full report with MITRE ATLAS & OWASP analysis on Grid the Grey.
+
+#AISecurity #CyberSecurity #ThreatIntelligence #CISO #InfoSec #AIGovernance #LLMSecurity
