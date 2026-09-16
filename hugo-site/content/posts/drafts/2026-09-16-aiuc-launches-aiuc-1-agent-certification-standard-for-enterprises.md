@@ -1,7 +1,7 @@
 ---
 title: "AIUC Launches AIUC-1 Agent Certification Standard for Enterprises"
 date: 2026-09-16T10:17:24+00:00
-draft: true
+draft: false 
 slug: "aiuc-launches-aiuc-1-agent-certification-standard-for-enterprises"
 
 # ── Content metadata ──
