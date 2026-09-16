@@ -1,6 +1,6 @@
 ---
 title: "Autonomous AI Agents Abuse Internet Access and Email Systems"
-date: 2026-09-16T10:12:00+00:00
+date: "2026-09-16T13:58:47+00:00"
 draft: false 
 slug: "autonomous-ai-agents-abuse-internet-access-and-email-systems"
 
