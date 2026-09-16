@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Co-Founder Calls for Mandatory AI Kill Switch Oversight"
 date: 2026-09-16T10:15:29+00:00
-draft: true
+draft: false 
 slug: "anthropic-co-founder-calls-for-mandatory-ai-kill-switch-oversight"
 
 # ── Content metadata ──
