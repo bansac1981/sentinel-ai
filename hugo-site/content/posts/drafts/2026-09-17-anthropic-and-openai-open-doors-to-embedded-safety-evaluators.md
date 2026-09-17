@@ -1,7 +1,7 @@
 ---
 title: "Anthropic and OpenAI Open Doors to Embedded Safety Evaluators"
 date: 2026-09-17T06:26:16+00:00
-draft: true
+draft: false 
 slug: "anthropic-and-openai-open-doors-to-embedded-safety-evaluators"
 
 # ── Content metadata ──
