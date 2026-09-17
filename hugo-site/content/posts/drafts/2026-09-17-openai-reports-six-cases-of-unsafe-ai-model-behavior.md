@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Reports Six Cases of Unsafe AI Model Behavior"
 date: 2026-09-17T06:24:30+00:00
-draft: true
+draft: false 
 slug: "openai-reports-six-cases-of-unsafe-ai-model-behavior"
 
 # ── Content metadata ──
