@@ -1,7 +1,7 @@
 ---
 title: "Agentic AI Causes First Autonomous Data Breach in Spain"
 date: 2026-09-17T06:07:03+00:00
-draft: true
+draft: false 
 slug: "agentic-ai-causes-first-autonomous-data-breach-in-spain"
 
 # ── Content metadata ──
