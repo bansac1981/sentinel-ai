@@ -1,6 +1,6 @@
 ---
 title: "BragJack Attack Hijacks Browser AI Agents to Steal Data"
-date: 2026-09-17T06:06:30+00:00
+date: "2026-09-17T06:17:31+00:00"
 draft: false 
 slug: "bragjack-attack-hijacks-browser-ai-agents-to-steal-data"
 
