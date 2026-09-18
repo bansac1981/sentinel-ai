@@ -1,6 +1,6 @@
 ---
 title: "Anthropic Launches Claude Code Projects for Multi-Agent Cloud Orchestration"
-date: 2026-09-18T10:04:32+00:00
+date: "2026-09-18T12:16:10+00:00"
 draft: false 
 slug: "anthropic-launches-claude-code-projects-for-multi-agent-cloud-orchestration"
 
