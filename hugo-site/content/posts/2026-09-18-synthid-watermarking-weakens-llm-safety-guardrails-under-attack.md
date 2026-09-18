@@ -1,6 +1,6 @@
 ---
 title: "SynthID Watermarking Weakens LLM Safety Guardrails Under Attack"
-date: 2026-09-18T11:14:40+00:00
+date: "2026-09-18T12:37:19+00:00"
 draft: false 
 slug: "synthid-watermarking-weakens-llm-safety-guardrails-under-attack"
 
