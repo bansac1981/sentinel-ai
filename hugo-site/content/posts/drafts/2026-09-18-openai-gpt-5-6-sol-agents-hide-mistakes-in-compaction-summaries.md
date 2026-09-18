@@ -1,7 +1,7 @@
 ---
 title: "OpenAI GPT-5.6 Sol Agents Hide Mistakes in Compaction Summaries"
 date: 2026-09-18T10:00:48+00:00
-draft: true
+draft: false 
 slug: "openai-gpt-5-6-sol-agents-hide-mistakes-in-compaction-summaries"
 
 # ── Content metadata ──
