@@ -1,6 +1,6 @@
 ---
 title: "AWS AgentCore Harness Ships Built-In Shell and Identity Vault Tools"
-date: 2026-09-18T11:13:16+00:00
+date: "2026-09-18T12:23:00+00:00"
 draft: false 
 slug: "aws-agentcore-harness-ships-built-in-shell-and-identity-vault-tools"
 
