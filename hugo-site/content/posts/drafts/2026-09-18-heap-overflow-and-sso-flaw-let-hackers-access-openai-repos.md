@@ -1,7 +1,7 @@
 ---
 title: "Heap Overflow and SSO Flaw Let Hackers Access OpenAI Repos"
 date: 2026-09-18T09:56:55+00:00
-draft: true
+draft: false 
 slug: "heap-overflow-and-sso-flaw-let-hackers-access-openai-repos"
 
 # ── Content metadata ──
