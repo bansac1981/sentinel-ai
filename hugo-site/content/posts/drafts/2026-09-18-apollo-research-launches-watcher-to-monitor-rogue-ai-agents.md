@@ -1,7 +1,7 @@
 ---
 title: "Apollo Research Launches Watcher to Monitor Rogue AI Agents"
 date: 2026-09-18T10:00:02+00:00
-draft: true
+draft: false 
 slug: "apollo-research-launches-watcher-to-monitor-rogue-ai-agents"
 
 # ── Content metadata ──
