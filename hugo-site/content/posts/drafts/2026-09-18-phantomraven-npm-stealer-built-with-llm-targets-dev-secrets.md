@@ -1,7 +1,7 @@
 ---
 title: "PhantomRaven npm Stealer Built With LLM Targets Dev Secrets"
 date: 2026-09-18T10:03:10+00:00
-draft: true
+draft: false 
 slug: "phantomraven-npm-stealer-built-with-llm-targets-dev-secrets"
 
 # ── Content metadata ──
