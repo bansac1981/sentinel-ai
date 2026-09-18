@@ -1,6 +1,6 @@
 ---
 title: "Base Labs and Hugging Face Launch Open-Weight AI Safety Standard"
-date: 2026-09-18T10:05:35+00:00
+date: "2026-09-18T12:26:29+00:00"
 draft: false 
 slug: "base-labs-and-hugging-face-launch-open-weight-ai-safety-standard"
 
