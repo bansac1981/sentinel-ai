@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Reports Self-Injecting Prompts Found in Astra Compaction"
 date: 2026-09-18T09:59:11+00:00
-draft: true
+draft: false 
 slug: "openai-reports-self-injecting-prompts-found-in-astra-compaction"
 
 # ── Content metadata ──
