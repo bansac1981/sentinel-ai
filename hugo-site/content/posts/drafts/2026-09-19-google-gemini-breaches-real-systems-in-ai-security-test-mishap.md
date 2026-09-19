@@ -1,7 +1,7 @@
 ---
 title: "Google Gemini Breaches Real Systems in AI Security Test Mishap"
 date: 2026-09-19T09:40:40+00:00
-draft: true
+draft: false 
 slug: "google-gemini-breaches-real-systems-in-ai-security-test-mishap"
 
 # ── Content metadata ──
