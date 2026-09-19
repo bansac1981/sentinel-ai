@@ -1,6 +1,6 @@
 ---
 title: "TypeSafe AI Launches Jev, a Non-LLM Model for AI Agent Oversight"
-date: 2026-09-19T09:43:18+00:00
+date: "2026-09-19T17:02:57+00:00"
 draft: false 
 slug: "typesafe-ai-launches-jev-a-non-llm-model-for-ai-agent-oversight"
 
