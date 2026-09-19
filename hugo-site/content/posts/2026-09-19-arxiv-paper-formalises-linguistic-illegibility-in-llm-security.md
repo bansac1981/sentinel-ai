@@ -1,6 +1,6 @@
 ---
 title: "arXiv Paper Formalises Linguistic Illegibility in LLM Security"
-date: 2026-09-19T08:14:35+00:00
+date: "2026-09-19T17:28:16+00:00"
 draft: false 
 slug: "arxiv-paper-formalises-linguistic-illegibility-in-llm-security"
 
