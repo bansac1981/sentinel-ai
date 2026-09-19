@@ -1,7 +1,7 @@
 ---
 title: "Gemini AI Agent Breaches Three Companies via Password Guessing"
 date: 2026-09-19T08:17:35+00:00
-draft: true
+draft: false 
 slug: "gemini-ai-agent-breaches-three-companies-via-password-guessing"
 
 # ── Content metadata ──
