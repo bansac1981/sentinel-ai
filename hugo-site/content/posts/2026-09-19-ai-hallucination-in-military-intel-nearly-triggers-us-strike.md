@@ -1,6 +1,6 @@
 ---
 title: "AI Hallucination in Military Intel Nearly Triggers US Strike"
-date: 2026-09-19T08:18:11+00:00
+date: "2026-09-19T17:29:37+00:00"
 draft: false 
 slug: "ai-hallucination-in-military-intel-nearly-triggers-us-strike"
 
