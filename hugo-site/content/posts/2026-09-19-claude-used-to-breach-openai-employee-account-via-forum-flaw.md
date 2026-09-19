@@ -1,6 +1,6 @@
 ---
 title: "Claude Used to Breach OpenAI Employee Account via Forum Flaw"
-date: 2026-09-19T08:16:02+00:00
+date: "2026-09-19T17:34:23+00:00"
 draft: false 
 slug: "claude-used-to-breach-openai-employee-account-via-forum-flaw"
 
