@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Embeds Accenture as Its First Third-Party AI Safety Evaluator"
 date: 2026-09-19T08:19:02+00:00
-draft: true
+draft: false 
 slug: "anthropic-embeds-accenture-as-its-first-third-party-ai-safety-evaluator"
 
 # ── Content metadata ──
