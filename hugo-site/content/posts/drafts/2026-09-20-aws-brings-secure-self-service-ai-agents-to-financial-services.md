@@ -1,7 +1,7 @@
 ---
 title: "AWS Brings Secure Self-Service AI Agents to Financial Services"
 date: 2026-09-20T09:57:41+00:00
-draft: true
+draft: false 
 slug: "aws-brings-secure-self-service-ai-agents-to-financial-services"
 
 # ── Content metadata ──
