@@ -1,6 +1,6 @@
 ---
 title: "Anthropic CEO Calls for AI Control Over Capability Race"
-date: 2026-09-20T07:10:29+00:00
+date: "2026-09-20T11:15:09+00:00"
 draft: false 
 slug: "anthropic-ceo-calls-for-ai-control-over-capability-race"
 
