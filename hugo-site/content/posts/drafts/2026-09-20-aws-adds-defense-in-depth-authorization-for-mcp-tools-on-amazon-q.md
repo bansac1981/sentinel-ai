@@ -1,7 +1,7 @@
 ---
 title: "AWS Adds Defense-in-Depth Authorization for MCP Tools on Amazon Q"
 date: 2026-09-20T09:58:27+00:00
-draft: true
+draft: false 
 slug: "aws-adds-defense-in-depth-authorization-for-mcp-tools-on-amazon-q"
 
 # ── Content metadata ──
