@@ -1,6 +1,6 @@
 ---
 title: "BragJack Hijacks AI Browser Agents via Malicious Extensions"
-date: 2026-09-20T07:09:30+00:00
+date: "2026-09-20T11:18:36+00:00"
 draft: false 
 slug: "bragjack-hijacks-ai-browser-agents-via-malicious-extensions"
 
