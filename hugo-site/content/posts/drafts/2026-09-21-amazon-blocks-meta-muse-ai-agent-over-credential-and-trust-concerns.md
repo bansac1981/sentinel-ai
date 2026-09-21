@@ -1,7 +1,7 @@
 ---
 title: "Amazon Blocks Meta Muse AI Agent Over Credential and Trust Concerns"
 date: 2026-09-21T10:54:56+00:00
-draft: true
+draft: false 
 slug: "amazon-blocks-meta-muse-ai-agent-over-credential-and-trust-concerns"
 
 # ── Content metadata ──
