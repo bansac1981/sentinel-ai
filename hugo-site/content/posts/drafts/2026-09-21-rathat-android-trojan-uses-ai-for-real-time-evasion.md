@@ -1,7 +1,7 @@
 ---
 title: "RatHat Android Trojan Uses AI for Real-Time Evasion"
 date: 2026-09-21T16:23:25+00:00
-draft: true
+draft: false 
 slug: "rathat-android-trojan-uses-ai-for-real-time-evasion"
 
 # ── Content metadata ──
