@@ -1,6 +1,6 @@
 ---
 title: "OWASP Flags AI Agent Unbounded Consumption as Top Enterprise Risk"
-date: 2026-09-22T08:22:41+00:00
+date: "2026-09-22T10:58:51+00:00"
 draft: false 
 slug: "owasp-flags-ai-agent-unbounded-consumption-as-top-enterprise-risk"
 
