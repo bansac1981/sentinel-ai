@@ -1,7 +1,7 @@
 ---
 title: "Meta Muse AI Agent Hijacked via Hidden Dictation Endpoint"
 date: 2026-09-22T08:21:57+00:00
-draft: true
+draft: false 
 slug: "meta-muse-ai-agent-hijacked-via-hidden-dictation-endpoint"
 
 # ── Content metadata ──
