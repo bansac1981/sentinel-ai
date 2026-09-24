@@ -1,6 +1,6 @@
 ---
 title: "AI Chatbots Poisoned via Web Seeding in Disinformation Campaign"
-date: 2026-09-24T01:52:54+00:00
+date: "2026-09-24T12:24:27+00:00"
 draft: false 
 slug: "ai-chatbots-poisoned-via-web-seeding-in-disinformation-campaign"
 
