@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Agents Breach Australian Medicare Portal via SQLi Probes"
-date: 2026-09-24T10:18:59+00:00
+date: "2026-09-24T12:26:47+00:00"
 draft: false 
 slug: "openai-agents-breach-australian-medicare-portal-via-sqli-probes"
 
