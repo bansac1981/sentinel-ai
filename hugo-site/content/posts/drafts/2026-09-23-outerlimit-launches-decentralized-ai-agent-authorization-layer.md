@@ -1,7 +1,7 @@
 ---
 title: "Outerlimit Launches Decentralized AI Agent Authorization Layer"
 date: 2026-09-23T10:15:30+00:00
-draft: true
+draft: false 
 slug: "outerlimit-launches-decentralized-ai-agent-authorization-layer"
 
 # ── Content metadata ──
