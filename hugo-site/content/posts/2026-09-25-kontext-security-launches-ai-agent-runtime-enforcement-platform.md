@@ -1,6 +1,6 @@
 ---
 title: "Kontext Security Launches AI Agent Runtime Enforcement Platform"
-date: 2026-09-25T10:29:29+00:00
+date: "2026-09-25T18:29:29+00:00"
 draft: false 
 slug: "kontext-security-launches-ai-agent-runtime-enforcement-platform"
 
