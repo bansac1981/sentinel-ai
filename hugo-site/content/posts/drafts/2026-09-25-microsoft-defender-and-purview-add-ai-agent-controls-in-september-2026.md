@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Defender and Purview Add AI Agent Controls in September 2026"
 date: 2026-09-25T10:28:44+00:00
-draft: true
+draft: false 
 slug: "microsoft-defender-and-purview-add-ai-agent-controls-in-september-2026"
 
 # ── Content metadata ──
