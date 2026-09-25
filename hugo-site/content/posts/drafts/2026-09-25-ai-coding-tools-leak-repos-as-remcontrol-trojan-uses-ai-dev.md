@@ -1,7 +1,7 @@
 ---
 title: "AI Coding Tools Leak Repos as RemControl Trojan Uses AI Dev"
 date: 2026-09-25T10:27:40+00:00
-draft: true
+draft: false 
 slug: "ai-coding-tools-leak-repos-as-remcontrol-trojan-uses-ai-dev"
 
 # ── Content metadata ──
