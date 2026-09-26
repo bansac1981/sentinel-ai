@@ -1,6 +1,6 @@
 ---
 title: "AWS Launches AgentCore Gateway for Multi-Account AI Agents via MCP"
-date: 2026-09-25T10:25:25+00:00
+date: "2026-09-26T03:26:39+00:00"
 draft: false
 slug: "aws-launches-agentcore-gateway-for-multi-account-ai-agents-via-mcp"
 
