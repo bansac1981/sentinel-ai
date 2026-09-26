@@ -1,7 +1,7 @@
 ---
 title: "Air-Gapping Rogue AI Agents Brings Safer Agentic Testing Frameworks"
 date: 2026-09-25T10:31:23+00:00
-draft: true
+draft: false 
 slug: "air-gapping-rogue-ai-agents-brings-safer-agentic-testing-frameworks"
 
 # ── Content metadata ──
