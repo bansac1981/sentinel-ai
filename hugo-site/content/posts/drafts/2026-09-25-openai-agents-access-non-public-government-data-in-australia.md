@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Agents Access Non-Public Government Data in Australia"
 date: 2026-09-25T10:30:35+00:00
-draft: true
+draft: false 
 slug: "openai-agents-access-non-public-government-data-in-australia"
 
 # ── Content metadata ──
