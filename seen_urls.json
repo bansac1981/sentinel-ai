@@ -1,12 +1,5 @@
 {
   "urls": [
-    "https://projectzero.google/2026/09/windows-dangling-com.html",
-    "https://proofcraft.systems/news-2026",
-    "https://purplesyringa.moe/blog/guest/the-nx-bit-is-not-just-about-security",
-    "https://pwning.systems/posts/llm-memory-program-analysis",
-    "https://quad9.net/",
-    "https://radicle.dev/2026/09/23/disclosure-of-vulnerability-in-network-protocol",
-    "https://reinvently.co.uk/tools/ed-o-meter",
     "https://research.checkpoint.com/2026/14th-september-threat-intelligence-report",
     "https://research.checkpoint.com/2026/17th-august-threat-intelligence-report",
     "https://research.checkpoint.com/2026/21st-september-threat-intelligence-report",
@@ -121,6 +114,7 @@
     "https://simonwillison.net/2026/Sep/23/shadow-roots",
     "https://simonwillison.net/2026/Sep/24/commit-rewriter",
     "https://simonwillison.net/2026/Sep/24/datasette",
+    "https://simonwillison.net/2026/Sep/24/harder",
     "https://simonwillison.net/2026/Sep/25/john-gruber",
     "https://simonwillison.net/2026/Sep/25/sighting-403293902",
     "https://simonwillison.net/2026/Sep/26/kakapo-party",
@@ -810,6 +804,7 @@
     "https://thehackernews.com/2026/09/us-becomes-top-target-in-rmm-phishing.html",
     "https://thehackernews.com/2026/09/us-disrupts-xinbi-guarantee-scam.html",
     "https://thehackernews.com/2026/09/us-seizes-nightmarestresser-domains.html",
+    "https://thehackernews.com/2026/09/warning-two-unpatched-citrix-netscaler.html",
     "https://thehackernews.com/2026/09/weaselbiscuit-stealer-spreads-via-13.html",
     "https://thehackernews.com/2026/09/webinar-learn-how-to-answer-are-we.html",
     "https://thehackernews.com/2026/09/wechat-zero-click-worm-took-over.html",
@@ -1179,6 +1174,7 @@
     "https://www.bleepingcomputer.com/news/security/why-even-the-best-edge-security-still-misses-high-risk-sessions",
     "https://www.bleepingcomputer.com/news/security/why-patch-automation-needs-brakes-not-just-an-accelerator",
     "https://www.bleepingcomputer.com/news/security/windows-11-kb5120998-update-released-with-35-changes-and-fixes",
+    "https://www.bleepingcomputer.com/news/security/with-the-rise-of-ai-agents-soc-2-should-adapt-or-risk-irrelevance",
     "https://www.bleepingcomputer.com/news/security/wordpress-backup-plugin-flaw-exposes-millions-of-sites-to-takeover-attacks",
     "https://www.bleepingcomputer.com/news/security/wordpress-click2shell-flaw-lets-hackers-execute-php-on-the-server",
     "https://www.bleepingcomputer.com/news/security/your-employees-password-appeared-in-an-infostealer-log-now-what",
@@ -1499,6 +1495,7 @@
     "https://www.schneier.com/blog/archives/2026/09/malicious-npm-packages-that-evade-defenses.html",
     "https://www.schneier.com/blog/archives/2026/09/microsofts-patching.html",
     "https://www.schneier.com/blog/archives/2026/09/my-talk-at-def-con.html",
+    "https://www.schneier.com/blog/archives/2026/09/on-anthropics-ai-misuse-report.html",
     "https://www.schneier.com/blog/archives/2026/09/on-the-nsas-supercomputer-from-the-1960s.html",
     "https://www.schneier.com/blog/archives/2026/09/researching-employment-scams.html",
     "https://www.schneier.com/blog/archives/2026/09/reverse-engineering-flock-cameras.html",
@@ -1656,6 +1653,7 @@
     "https://www.securityweek.com/microsoft-patches-18-vulnerabilities-in-ai-cloud-products",
     "https://www.securityweek.com/microsoft-patches-record-974-vulnerabilities-including-two-exploited-zero-days",
     "https://www.securityweek.com/microsoft-rolls-out-22-fresh-security-patches",
+    "https://www.securityweek.com/microsoft-sharepoint-flaw-cve-2026-65660-now-exploited-in-attacks",
     "https://www.securityweek.com/mikrotik-patches-critical-flaws-chained-to-hack-routers",
     "https://www.securityweek.com/mind-secures-72-million-for-ai-powered-dlp",
     "https://www.securityweek.com/mlflow-vulnerability-exploited-for-cloud-credential-theft",
@@ -1681,6 +1679,7 @@
     "https://www.securityweek.com/openai-agents-probed-websites-for-vulnerabilities-while-fetching-public-data",
     "https://www.securityweek.com/openai-investigates-report-linking-ai-agents-to-rubygems-attack",
     "https://www.securityweek.com/openai-pledges-1-billion-to-bring-frontier-ai-to-critical-infrastructure-defenders",
+    "https://www.securityweek.com/openai-says-its-models-engaged-with-us-government-websites-in-new-model-misbehavior-disclosure",
     "https://www.securityweek.com/openais-astra-becomes-first-model-to-cross-critical-cybersecurity-threshold",
     "https://www.securityweek.com/openleash-adds-a-human-check-to-risky-ai-agent-actions",
     "https://www.securityweek.com/oracle-patches-800-vulnerabilities-in-september-2026-security-update",
@@ -1783,6 +1782,7 @@
     "https://www.thestar.com/news/gta/meta-bans-another-toronto-performer-from-instagram-and-facebook-saying-an-old-photo-of-dancers-in-bikinis-promotes-harm/article_36e2d204-66c0-4559-aa37-0c26b6ce7b87.html",
     "https://www.theverge.com/ai-artificial-intelligence/1000116/google-gemini-business-phone-calls",
     "https://www.theverge.com/ai-artificial-intelligence/1000222/meta-muse-ai-filesystem",
+    "https://www.theverge.com/ai-artificial-intelligence/1000644/irregular-rogue-ai-cyberattacks-hacking-openai-meta-anthropic-google",
     "https://www.theverge.com/ai-artificial-intelligence/1000758/suno-sony-umg-lawsuit-ai-music",
     "https://www.theverge.com/ai-artificial-intelligence/1000784/meta-muse-filesystem",
     "https://www.theverge.com/ai-artificial-intelligence/1001049/openai-training-pause",
@@ -2001,5 +2001,5 @@
     "https://xeiaso.net/notes/2026/everyone-slowdown-but-me",
     "https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating"
   ],
-  "updated_at": "2026-09-27T06:56:31.673612+00:00"
+  "updated_at": "2026-09-27T10:45:57.624424+00:00"
 }
