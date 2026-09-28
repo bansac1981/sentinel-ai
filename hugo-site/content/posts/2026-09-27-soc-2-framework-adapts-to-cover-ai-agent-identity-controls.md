@@ -1,6 +1,6 @@
 ---
 title: "SOC 2 Framework Adapts to Cover AI Agent Identity Controls"
-date: 2026-09-27T10:42:07+00:00
+date: "2026-09-28T19:34:41+00:00"
 draft: false 
 slug: "soc-2-framework-adapts-to-cover-ai-agent-identity-controls"
 

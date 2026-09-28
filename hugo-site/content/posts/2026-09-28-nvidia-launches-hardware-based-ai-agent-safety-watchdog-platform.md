@@ -1,6 +1,6 @@
 ---
 title: "NVIDIA Launches Hardware-Based AI Agent Safety Watchdog Platform"
-date: 2026-09-28T11:53:29+00:00
+date: "2026-09-28T19:34:41+00:00"
 draft: false 
 slug: "nvidia-launches-hardware-based-ai-agent-safety-watchdog-platform"
 
