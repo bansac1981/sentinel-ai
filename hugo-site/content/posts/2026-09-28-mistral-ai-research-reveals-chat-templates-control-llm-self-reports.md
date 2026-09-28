@@ -1,6 +1,6 @@
 ---
 title: "Mistral AI Research Reveals Chat Templates Control LLM Self-Reports"
-date: 2026-09-28T11:55:43+00:00
+date: "2026-09-28T19:33:22+00:00"
 draft: false 
 slug: "mistral-ai-research-reveals-chat-templates-control-llm-self-reports"
 
