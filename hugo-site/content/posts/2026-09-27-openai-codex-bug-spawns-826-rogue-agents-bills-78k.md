@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Codex Bug Spawns 826 Rogue Agents, Bills $78K"
-date: 2026-09-27T06:52:10+00:00
+date: "2026-09-29T05:39:59+00:00"
 draft: false 
 slug: "openai-codex-bug-spawns-826-rogue-agents-bills-78k"
 
