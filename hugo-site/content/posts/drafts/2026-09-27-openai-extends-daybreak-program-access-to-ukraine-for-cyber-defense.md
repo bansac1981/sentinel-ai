@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Extends Daybreak Program Access to Ukraine for Cyber Defense"
 date: 2026-09-27T10:44:31+00:00
-draft: true
+draft: false 
 slug: "openai-extends-daybreak-program-access-to-ukraine-for-cyber-defense"
 
 # ── Content metadata ──
