@@ -1,6 +1,6 @@
 ---
 title: "Enterprises Extend PAM Controls to Cover AI Agent Access"
-date: 2026-09-29T11:36:40+00:00
+date: "2026-09-29T18:31:02+00:00"
 draft: false 
 slug: "enterprises-extend-pam-controls-to-cover-ai-agent-access"
 
