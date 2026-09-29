@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Files IPO Prospectus Disclosing AI Safety Risks"
 date: 2026-09-29T10:44:53+00:00
-draft: true
+draft: false 
 slug: "anthropic-files-ipo-prospectus-disclosing-ai-safety-risks"
 
 # ── Content metadata ──
