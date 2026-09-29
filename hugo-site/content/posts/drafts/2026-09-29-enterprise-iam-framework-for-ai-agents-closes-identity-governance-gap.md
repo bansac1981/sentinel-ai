@@ -1,7 +1,7 @@
 ---
 title: "Enterprise IAM Framework for AI Agents Closes Identity Governance Gap"
 date: 2026-09-29T11:37:34+00:00
-draft: true
+draft: false 
 slug: "enterprise-iam-framework-for-ai-agents-closes-identity-governance-gap"
 
 # ── Content metadata ──
