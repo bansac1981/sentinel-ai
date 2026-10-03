@@ -1,7 +1,7 @@
 ---
 title: "ServiceNow Releases AutoSynthData for Enterprise Agent Training"
 date: 2026-10-02T11:14:28+00:00
-draft: true
+draft: false 
 slug: "servicenow-releases-autosynthdata-for-enterprise-agent-training"
 
 # ── Content metadata ──
