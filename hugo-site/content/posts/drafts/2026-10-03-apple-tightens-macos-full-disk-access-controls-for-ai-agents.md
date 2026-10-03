@@ -1,7 +1,7 @@
 ---
 title: "Apple Tightens macOS Full Disk Access Controls for AI Agents"
 date: 2026-10-03T10:33:59+00:00
-draft: true
+draft: false 
 slug: "apple-tightens-macos-full-disk-access-controls-for-ai-agents"
 
 # ── Content metadata ──
