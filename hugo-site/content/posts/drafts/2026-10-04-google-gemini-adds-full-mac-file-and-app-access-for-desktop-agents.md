@@ -1,7 +1,7 @@
 ---
 title: "Google Gemini Adds Full Mac File and App Access for Desktop Agents"
 date: 2026-10-04T11:15:44+00:00
-draft: true
+draft: false 
 slug: "google-gemini-adds-full-mac-file-and-app-access-for-desktop-agents"
 
 # ── Content metadata ──
