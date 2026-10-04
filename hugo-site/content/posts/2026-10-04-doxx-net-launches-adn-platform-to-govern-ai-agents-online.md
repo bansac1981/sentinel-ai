@@ -1,6 +1,6 @@
 ---
 title: "doxx.net Launches ADN Platform to Govern AI Agents Online"
-date: 2026-10-04T11:17:27+00:00
+date: "2026-10-04T14:34:30+00:00"
 draft: false 
 slug: "doxx-net-launches-adn-platform-to-govern-ai-agents-online"
 
