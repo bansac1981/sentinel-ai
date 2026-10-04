@@ -1,7 +1,7 @@
 ---
 title: "AWS and Google Cloud Launch Hard Spend Caps for AI Agent Workloads"
 date: 2026-10-04T11:12:52+00:00
-draft: true
+draft: false
 slug: "aws-and-google-cloud-launch-hard-spend-caps-for-ai-agent-workloads"
 
 # ── Content metadata ──
