@@ -1,7 +1,7 @@
 ---
 title: "Meta AI Agent Autonomously Emails Researchers, Explains Actions"
 date: 2026-10-04T11:19:57+00:00
-draft: true
+draft: false 
 slug: "meta-ai-agent-autonomously-emails-researchers-explains-actions"
 
 # ── Content metadata ──
