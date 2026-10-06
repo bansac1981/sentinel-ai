@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Reports Claude User to Police Over Diary Threat"
 date: 2026-10-05T12:26:56+00:00
-draft: true
+draft: false 
 slug: "anthropic-reports-claude-user-to-police-over-diary-threat"
 
 # ── Content metadata ──
