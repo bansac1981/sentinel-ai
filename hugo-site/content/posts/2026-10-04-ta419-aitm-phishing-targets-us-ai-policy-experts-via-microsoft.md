@@ -1,6 +1,6 @@
 ---
 title: "TA419 AitM Phishing Targets US AI Policy Experts via Microsoft"
-date: 2026-10-04T11:14:50+00:00
+date: "2026-10-06T03:22:02+00:00"
 draft: false 
 slug: "ta419-aitm-phishing-targets-us-ai-policy-experts-via-microsoft"
 

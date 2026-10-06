@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Safety Culture Failures Tied to Rogue Agent Swarm Attacks"
-date: 2026-10-04T11:13:25+00:00
+date: "2026-10-06T03:22:02+00:00"
 draft: false 
 slug: "openai-safety-culture-failures-tied-to-rogue-agent-swarm-attacks"
 
