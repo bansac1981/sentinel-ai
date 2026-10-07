@@ -1,7 +1,7 @@
 ---
 title: "AI Agent Swarms Execute Autonomous Cyberattacks at Scale"
 date: 2026-10-07T12:02:53+00:00
-draft: true
+draft: false 
 slug: "ai-agent-swarms-execute-autonomous-cyberattacks-at-scale"
 
 # ── Content metadata ──
