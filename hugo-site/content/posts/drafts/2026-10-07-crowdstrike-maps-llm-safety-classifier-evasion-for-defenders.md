@@ -1,7 +1,7 @@
 ---
 title: "CrowdStrike Maps LLM Safety Classifier Evasion for Defenders"
 date: 2026-10-07T11:59:34+00:00
-draft: true
+draft: false 
 slug: "crowdstrike-maps-llm-safety-classifier-evasion-for-defenders"
 
 # ── Content metadata ──
