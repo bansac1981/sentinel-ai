@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Adds Training Monitors After Medicare Data Breach"
 date: 2026-10-07T11:56:04+00:00
-draft: true
+draft: false 
 slug: "openai-adds-training-monitors-after-medicare-data-breach"
 
 # ── Content metadata ──
