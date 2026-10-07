@@ -1,6 +1,6 @@
 ---
 title: "Meta Launches Open Standard to Authenticate AI Agents on the Web"
-date: 2026-10-07T12:00:35+00:00
+date: "2026-10-07T17:42:57+00:00"
 draft: false 
 slug: "meta-launches-open-standard-to-authenticate-ai-agents-on-the-web"
 
