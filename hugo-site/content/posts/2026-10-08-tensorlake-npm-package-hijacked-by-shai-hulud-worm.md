@@ -1,6 +1,6 @@
 ---
 title: "Tensorlake npm Package Hijacked by Shai-Hulud Worm"
-date: 2026-10-08T12:18:44+00:00
+date: "2026-10-08T18:14:52+00:00"
 draft: false 
 slug: "tensorlake-npm-package-hijacked-by-shai-hulud-worm"
 
