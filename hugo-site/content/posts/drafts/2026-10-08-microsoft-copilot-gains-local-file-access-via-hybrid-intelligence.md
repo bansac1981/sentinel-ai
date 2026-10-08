@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Copilot Gains Local File Access via Hybrid Intelligence"
 date: 2026-10-08T12:15:03+00:00
-draft: true
+draft: false 
 slug: "microsoft-copilot-gains-local-file-access-via-hybrid-intelligence"
 
 # ── Content metadata ──
