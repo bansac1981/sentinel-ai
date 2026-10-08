@@ -1,7 +1,7 @@
 ---
 title: "AWS Adds Native Access Controls for RAG via Amazon Quick and Bedrock"
 date: 2026-10-08T12:12:37+00:00
-draft: true
+draft: false 
 slug: "aws-adds-native-access-controls-for-rag-via-amazon-quick-and-bedrock"
 
 # ── Content metadata ──
