@@ -1,7 +1,7 @@
 ---
 title: "Rein Security Launches $25M Runtime Guard for AI Agents"
 date: 2026-10-08T12:16:02+00:00
-draft: true
+draft: false 
 slug: "rein-security-launches-25m-runtime-guard-for-ai-agents"
 
 # ── Content metadata ──
