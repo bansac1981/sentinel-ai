@@ -1,7 +1,7 @@
 ---
 title: "DPRK npm Supply Chain Worm Uses Web3 C2 to Steal Cloud Keys"
 date: 2026-10-08T12:19:21+00:00
-draft: true
+draft: false 
 slug: "dprk-npm-supply-chain-worm-uses-web3-c2-to-steal-cloud-keys"
 
 # ── Content metadata ──
