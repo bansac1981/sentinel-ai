@@ -1,7 +1,7 @@
 ---
 title: "Anthropic AI Agent Submits False Homicide Tip to Police Tipline"
 date: 2026-10-10T11:19:00+00:00
-draft: true
+draft: false 
 slug: "anthropic-ai-agent-submits-false-homicide-tip-to-police-tipline"
 
 # ── Content metadata ──
