@@ -1,6 +1,6 @@
 ---
 title: "Token Security Adds Enforcement Controls for AI Agent Permissions"
-date: 2026-10-10T11:23:04+00:00
+date: "2026-10-10T16:02:42+00:00"
 draft: false 
 slug: "token-security-adds-enforcement-controls-for-ai-agent-permissions"
 
