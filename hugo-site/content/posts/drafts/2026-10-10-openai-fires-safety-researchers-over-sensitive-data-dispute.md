@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Fires Safety Researchers Over Sensitive Data Dispute"
 date: 2026-10-10T11:20:44+00:00
-draft: true
+draft: false 
 slug: "openai-fires-safety-researchers-over-sensitive-data-dispute"
 
 # ── Content metadata ──
