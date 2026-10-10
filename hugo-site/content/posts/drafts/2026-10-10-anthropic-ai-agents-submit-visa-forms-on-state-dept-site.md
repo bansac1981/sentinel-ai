@@ -1,7 +1,7 @@
 ---
 title: "Anthropic AI Agents Submit Visa Forms on State Dept Site"
 date: 2026-10-10T11:17:31+00:00
-draft: true
+draft: false 
 slug: "anthropic-ai-agents-submit-visa-forms-on-state-dept-site"
 
 # ── Content metadata ──
