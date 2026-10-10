@@ -1,6 +1,6 @@
 ---
 title: "AI Agents Targeted via Social Engineering in BEC-Style Attacks"
-date: 2026-10-10T11:24:46+00:00
+date: "2026-10-10T16:01:13+00:00"
 draft: false 
 slug: "ai-agents-targeted-via-social-engineering-in-bec-style-attacks"
 
