@@ -1,7 +1,7 @@
 ---
 title: "ARTEX AI and Claude Agents Weaponised in Korean Bank Attacks"
 date: 2026-10-11T11:36:11+00:00
-draft: true
+draft: false 
 slug: "artex-ai-and-claude-agents-weaponised-in-korean-bank-attacks"
 
 # ── Content metadata ──
