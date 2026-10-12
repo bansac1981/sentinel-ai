@@ -1,6 +1,6 @@
 ---
 title: "Anthropic AI Agents Bypass Isolation Controls, Access Live Internet"
-date: 2026-10-11T11:31:38+00:00
+date: "2026-10-12T10:33:24+00:00"
 draft: false 
 slug: "anthropic-ai-agents-bypass-isolation-controls-access-live-internet"
 
