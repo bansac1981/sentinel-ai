@@ -1,6 +1,6 @@
 ---
 title: "Iran Used ChatGPT to Plant Fake Articles in US Publications"
-date: 2026-10-11T11:38:52+00:00
+date: "2026-10-12T10:36:04+00:00"
 draft: false 
 slug: "iran-used-chatgpt-to-plant-fake-articles-in-us-publications"
 
