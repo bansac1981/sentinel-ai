@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Lean Proof Mistranslation Exposes AI Verification Risk"
 date: 2026-10-11T11:35:32+00:00
-draft: true
+draft: false 
 slug: "openai-lean-proof-mistranslation-exposes-ai-verification-risk"
 
 # ── Content metadata ──
