@@ -1,7 +1,7 @@
 ---
 title: "Grok Bot AI Agent Leaks Personal Bank Data to Company Slack"
 date: 2026-10-11T11:34:58+00:00
-draft: true
+draft: false 
 slug: "grok-bot-ai-agent-leaks-personal-bank-data-to-company-slack"
 
 # ── Content metadata ──
