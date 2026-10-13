@@ -1,10 +1,5 @@
 {
   "urls": [
-    "https://thehackernews.com/2026/08/sap-commerce-cloud-cve-2026-58231.html",
-    "https://thehackernews.com/2026/08/securing-claude-code-new-compliance-api.html",
-    "https://thehackernews.com/2026/08/shipping-more-ai-code-than-you-can.html",
-    "https://thehackernews.com/2026/08/silkparasite-espionage-campaign-targets.html",
-    "https://thehackernews.com/2026/08/snowflake-github-actions-flaw-lets.html",
     "https://thehackernews.com/2026/08/snowflake-github-actions-flaw-lets_0330881554.html",
     "https://thehackernews.com/2026/08/spark-rat-targets-cambodia-abuses.html",
     "https://thehackernews.com/2026/08/stopandprotect-uses-nearly-2000-hacked.html",
@@ -272,6 +267,7 @@
     "https://thehackernews.com/2026/10/antino-backdoor-uses-outlook-and.html",
     "https://thehackernews.com/2026/10/apple-coregraphics-poc-emerges-as.html",
     "https://thehackernews.com/2026/10/apple-plans-tighter-macos-full-disk.html",
+    "https://thehackernews.com/2026/10/artex-ai-pentesting-tool-used-in-data.html",
     "https://thehackernews.com/2026/10/attackers-exploit-ahsaycbs-flaws-to.html",
     "https://thehackernews.com/2026/10/attackers-exploit-cvss-100-bricksforge.html",
     "https://thehackernews.com/2026/10/attackers-heat-french-supermarket.html",
@@ -291,6 +287,7 @@
     "https://thehackernews.com/2026/10/cyberxero-uses-claude-code-in-campaign.html",
     "https://thehackernews.com/2026/10/dell-csm-flaws-enable-unauthenticated.html",
     "https://thehackernews.com/2026/10/denmark-says-attackers-accessed-cpr.html",
+    "https://thehackernews.com/2026/10/eight-malicious-npm-packages-downloaded.html",
     "https://thehackernews.com/2026/10/fake-chatgpt-gemini-and-claude-ad.html",
     "https://thehackernews.com/2026/10/fbi-arrests-another-shinyhunters.html",
     "https://thehackernews.com/2026/10/fbi-removes-accenture-contractor-after.html",
@@ -333,6 +330,7 @@
     "https://thehackernews.com/2026/10/three-teams-demonstrate-remote-hacks-of.html",
     "https://thehackernews.com/2026/10/tp-link-sued-by-four-more-us-states.html",
     "https://thehackernews.com/2026/10/two-critical-marklogic-flaws-could-give.html",
+    "https://thehackernews.com/2026/10/uac-0099-targets-ukrainian-government.html",
     "https://thehackernews.com/2026/10/us-offers-up-to-10-million-for-tips-on.html",
     "https://thehackernews.com/2026/10/warlock-exploits-sharepoint-flaws-to.html",
     "https://thehackernews.com/2026/10/wazza-phishkit-targets-banking.html",
@@ -973,6 +971,7 @@
     "https://www.darkreading.com/cyberattacks-data-breaches/malicious-custom-gpts-chatgpt-rat-delivery-lure",
     "https://www.darkreading.com/cyberattacks-data-breaches/maximum-severity-gitlab-flaw-supply-chains-risk",
     "https://www.darkreading.com/cyberattacks-data-breaches/old-unpatched-flaws-attackers-philippines-nuclear-agency",
+    "https://www.darkreading.com/cyberattacks-data-breaches/openai-agent-escape-causes-wikimedia-service-outage",
     "https://www.darkreading.com/cyberattacks-data-breaches/openai-agents-wiki-site-hugging-face-attack",
     "https://www.darkreading.com/cyberattacks-data-breaches/pakistan-transparent-tribe-afghan-cyberattacks",
     "https://www.darkreading.com/cyberattacks-data-breaches/papercut-ai-swarm-attack-cyber-kill-chain",
@@ -1428,6 +1427,7 @@
     "https://www.securityweek.com/google-hit-with-463-million-fine-for-eu-location-data-rule-breach",
     "https://www.securityweek.com/google-launches-gemini-4-argon-with-guardrail-free-access-for-vetted-defenders",
     "https://www.securityweek.com/google-narrows-open-source-bug-bounty-amid-wave-of-invalid-automated-reports",
+    "https://www.securityweek.com/google-partially-reverses-chrome-bug-bounty-cuts",
     "https://www.securityweek.com/google-patches-6th-chrome-zero-day-of-2026",
     "https://www.securityweek.com/google-pixel-10-exploits-earned-hackers-560000-at-pwn2own",
     "https://www.securityweek.com/google-warns-of-shinyhunters-fresh-oracle-peoplesoft-campaign",
@@ -2001,5 +2001,5 @@
     "https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating",
     "https://yyhh.org/blog/2026/10/ai-is-a-tool"
   ],
-  "updated_at": "2026-10-13T17:05:30.056599+00:00"
+  "updated_at": "2026-10-13T17:11:21.425697+00:00"
 }
