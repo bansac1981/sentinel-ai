@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Engineer Arrested for Planting Hidden Spy Device"
 date: 2026-10-14T09:14:33+00:00
-draft: true
+draft: false
 slug: "openai-engineer-arrested-for-planting-hidden-spy-device"
 
 # ── Content metadata ──
