@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Engineer Used Chatbot to Plan Covert Bug Planting"
 date: 2026-10-14T09:13:58+00:00
-draft: true
+draft: false
 slug: "openai-engineer-used-chatbot-to-plan-covert-bug-planting"
 
 # ── Content metadata ──
