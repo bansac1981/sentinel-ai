@@ -1,6 +1,6 @@
 ---
 title: "Laplace Intelligence Launches AI Red-Teaming for Robots and AVs"
-date: 2026-10-14T09:13:23+00:00
+date: "2026-10-14T09:55:44+00:00"
 draft: false
 slug: "laplace-intelligence-launches-ai-red-teaming-for-robots-and-avs"
 
