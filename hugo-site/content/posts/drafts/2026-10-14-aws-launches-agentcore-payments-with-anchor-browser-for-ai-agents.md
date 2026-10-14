@@ -1,7 +1,7 @@
 ---
 title: "AWS Launches AgentCore Payments with Anchor Browser for AI Agents"
 date: 2026-10-14T09:12:34+00:00
-draft: true
+draft: false
 slug: "aws-launches-agentcore-payments-with-anchor-browser-for-ai-agents"
 
 # ── Content metadata ──
