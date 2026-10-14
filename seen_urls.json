@@ -1,8 +1,5 @@
 {
   "urls": [
-    "https://thehackernews.com/2026/09/17000-urls-reveal-how-clickfix-turns.html",
-    "https://thehackernews.com/2026/09/3bb-attacker-used-meshcentral-backdoor.html",
-    "https://thehackernews.com/2026/09/545-hackers-tested-it-first-now-xranges.html",
     "https://thehackernews.com/2026/09/a-leaked-gitlab-issue-email-address.html",
     "https://thehackernews.com/2026/09/acronis-cpanel-backup-plugin.html",
     "https://thehackernews.com/2026/09/active-exploitation-attempts-target.html",
@@ -419,6 +416,7 @@
     "https://www.bleepingcomputer.com/news/artificial-intelligence/claude-opus-55-uses-95-percent-fewer-em-dashes-but-its-answers-are-getting-longer",
     "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-confirms-chatgpt-is-down-ahead-of-astra-model-launch",
     "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-confirms-chatgpt-outage-as-users-report-errors",
+    "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-engineer-arrested-for-allegedly-planting-spy-device-in-office",
     "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-is-adding-invisible-watermarks-to-chatgpt-and-codex-text-in-the-eu",
     "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-is-preparing-a-500-chatgpt-pro-max-plan-with-faster-codex",
     "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-is-preparing-o-an-always-on-chatgpt-assistant-that-could-handle-email",
@@ -595,6 +593,7 @@
     "https://www.bleepingcomputer.com/news/security/frontline-education-data-breach-impacts-school-district-employees",
     "https://www.bleepingcomputer.com/news/security/fulcrumsec-claims-manchester-airports-hack-theft-of-86-gb-of-data",
     "https://www.bleepingcomputer.com/news/security/germany-arrests-alleged-core-qilin-ransomware-member-after-extradition",
+    "https://www.bleepingcomputer.com/news/security/ghostscript-flaw-lets-hackers-hijack-servers-via-pdf-uploads",
     "https://www.bleepingcomputer.com/news/security/github-actions-re-enabled-with-mini-shai-hulud-payload-still-active",
     "https://www.bleepingcomputer.com/news/security/gitlab-urges-users-to-patch-max-severity-path-traversal-flaw",
     "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-critical-rce-vulnerability-in-ai-gateway-service",
@@ -1927,6 +1926,7 @@
     "https://www.wired.com/story/a-georgia-cop-used-flock-to-track-2-other-cops-his-ex-and-her-friend",
     "https://www.wired.com/story/a-tool-for-tracking-ai-integrated-malware-uncovered-an-autonomous-command-system",
     "https://www.wired.com/story/ai-is-getting-really-good-at-messing-with-cybercriminals",
+    "https://www.wired.com/story/an-openai-employee-allegedly-used-a-chatbot-to-help-plant-a-recording-device-at-the-office",
     "https://www.wired.com/story/an-undercover-google-analyst-infiltrated-a-notorious-supply-chain-hacking-gang",
     "https://www.wired.com/story/apple-doesnt-want-you-to-worry-about-the-new-apple-watchs-listening-features",
     "https://www.wired.com/story/atm-flaws-reveal-key-weaknesses-in-the-software-supply-chain",
@@ -2001,5 +2001,5 @@
     "https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating",
     "https://yyhh.org/blog/2026/10/ai-is-a-tool"
   ],
-  "updated_at": "2026-10-14T09:03:10.302571+00:00"
+  "updated_at": "2026-10-14T09:14:49.489545+00:00"
 }
