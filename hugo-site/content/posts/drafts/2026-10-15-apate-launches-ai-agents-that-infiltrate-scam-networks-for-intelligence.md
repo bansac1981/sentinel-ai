@@ -1,7 +1,7 @@
 ---
 title: "Apate Launches AI Agents That Infiltrate Scam Networks for Intelligence"
 date: 2026-10-15T07:24:27+00:00
-draft: true
+draft: false
 slug: "apate-launches-ai-agents-that-infiltrate-scam-networks-for-intelligence"
 
 # ── Content metadata ──
