@@ -1,6 +1,6 @@
 ---
 title: "Anthropic Opens Employee-Level Access to METR Safety Researchers"
-date: 2026-10-16T10:02:24+00:00
+date: "2026-10-16T18:24:20+00:00"
 draft: false
 slug: "anthropic-opens-employee-level-access-to-metr-safety-researchers"
 
