@@ -1,7 +1,7 @@
 ---
 title: "AWS Launches Trust in Depth Controls for Autonomous AI Agents"
 date: 2026-10-16T10:07:27+00:00
-draft: true
+draft: false
 slug: "aws-launches-trust-in-depth-controls-for-autonomous-ai-agents"
 
 # ── Content metadata ──
