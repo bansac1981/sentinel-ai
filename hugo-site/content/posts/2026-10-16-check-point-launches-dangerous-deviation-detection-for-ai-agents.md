@@ -1,6 +1,6 @@
 ---
 title: "Check Point Launches Dangerous Deviation Detection for AI Agents"
-date: 2026-10-16T10:04:43+00:00
+date: "2026-10-16T18:29:54+00:00"
 draft: false
 slug: "check-point-launches-dangerous-deviation-detection-for-ai-agents"
 
