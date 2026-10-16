@@ -1,7 +1,7 @@
 ---
 title: "CERT-In: AI Agents Breached Indian Orgs via Exposed Credentials"
 date: 2026-10-16T10:03:01+00:00
-draft: true
+draft: false
 slug: "cert-in-ai-agents-breached-indian-orgs-via-exposed-credentials"
 
 # ── Content metadata ──
