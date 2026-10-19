@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Decisions API Brings Typed AI Triage to SOC Platforms"
-date: 2026-10-18T09:52:54+00:00
+date: "2026-10-19T10:11:47+00:00"
 draft: false
 slug: "openai-decisions-api-brings-typed-ai-triage-to-soc-platforms"
 
