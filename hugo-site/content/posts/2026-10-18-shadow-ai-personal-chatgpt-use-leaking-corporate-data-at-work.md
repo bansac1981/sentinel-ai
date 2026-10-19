@@ -1,6 +1,6 @@
 ---
 title: "Shadow AI: Personal ChatGPT Use Leaking Corporate Data at Work"
-date: 2026-10-18T09:50:57+00:00
+date: "2026-10-19T08:18:46+00:00"
 draft: false
 slug: "shadow-ai-personal-chatgpt-use-leaking-corporate-data-at-work"
 
