@@ -1,6 +1,6 @@
 ---
 title: "OpenAI, Meta and Google AI Agents Blocked by Major Web Services"
-date: 2026-10-18T09:45:54+00:00
+date: "2026-10-19T08:20:38+00:00"
 draft: false
 slug: "openai-meta-and-google-ai-agents-blocked-by-major-web-services"
 
