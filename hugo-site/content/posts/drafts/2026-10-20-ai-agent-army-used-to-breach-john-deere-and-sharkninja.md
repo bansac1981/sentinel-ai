@@ -1,7 +1,7 @@
 ---
 title: "AI Agent Army Used to Breach John Deere and SharkNinja"
 date: 2026-10-20T10:21:11+00:00
-draft: true
+draft: false 
 slug: "ai-agent-army-used-to-breach-john-deere-and-sharkninja"
 
 # ── Content metadata ──
