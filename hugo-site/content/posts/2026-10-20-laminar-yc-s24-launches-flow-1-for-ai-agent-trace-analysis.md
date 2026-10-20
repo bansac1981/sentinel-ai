@@ -1,6 +1,6 @@
 ---
 title: "Laminar YC S24 Launches flow-1 for AI Agent Trace Analysis"
-date: 2026-10-20T10:19:21+00:00
+date: "2026-10-20T13:07:32+00:00"
 draft: false 
 slug: "laminar-yc-s24-launches-flow-1-for-ai-agent-trace-analysis"
 

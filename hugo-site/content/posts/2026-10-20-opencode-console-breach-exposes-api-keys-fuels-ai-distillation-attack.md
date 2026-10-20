@@ -1,6 +1,6 @@
 ---
 title: "OpenCode Console Breach Exposes API Keys, Fuels AI Distillation Attack"
-date: 2026-10-20T10:16:14+00:00
+date: "2026-10-20T13:07:32+00:00"
 draft: false 
 slug: "opencode-console-breach-exposes-api-keys-fuels-ai-distillation-attack"
 
