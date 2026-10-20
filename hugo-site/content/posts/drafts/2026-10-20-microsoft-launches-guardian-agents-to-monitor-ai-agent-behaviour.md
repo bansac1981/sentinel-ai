@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Launches Guardian Agents to Monitor AI Agent Behaviour"
 date: 2026-10-20T10:15:21+00:00
-draft: true
+draft: false 
 slug: "microsoft-launches-guardian-agents-to-monitor-ai-agent-behaviour"
 
 # ── Content metadata ──
