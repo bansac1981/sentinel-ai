@@ -1,7 +1,7 @@
 ---
 title: "NVIDIA Launches Nemotron 3.5 Super VL and Bolt Agent Models"
 date: 2026-10-20T10:20:20+00:00
-draft: true
+draft: false 
 slug: "nvidia-launches-nemotron-3-5-super-vl-and-bolt-agent-models"
 
 # ── Content metadata ──
