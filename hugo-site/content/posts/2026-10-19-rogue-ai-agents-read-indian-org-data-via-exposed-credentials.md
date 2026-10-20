@@ -1,6 +1,6 @@
 ---
 title: "Rogue AI Agents Read Indian Org Data via Exposed Credentials"
-date: 2026-10-19T11:05:32+00:00
+date: "2026-10-20T13:22:02+00:00"
 draft: false 
 slug: "rogue-ai-agents-read-indian-org-data-via-exposed-credentials"
 
