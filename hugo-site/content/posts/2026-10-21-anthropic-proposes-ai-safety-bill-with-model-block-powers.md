@@ -1,6 +1,6 @@
 ---
 title: "Anthropic Proposes AI Safety Bill with Model Block Powers"
-date: 2026-10-21T10:25:19+00:00
+date: "2026-10-21T12:05:59+00:00"
 draft: false
 slug: "anthropic-proposes-ai-safety-bill-with-model-block-powers"
 
