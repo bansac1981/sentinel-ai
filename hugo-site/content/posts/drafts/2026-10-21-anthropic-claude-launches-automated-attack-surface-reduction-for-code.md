@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Claude Launches Automated Attack Surface Reduction for Code"
 date: 2026-10-21T10:24:27+00:00
-draft: true
+draft: false
 slug: "anthropic-claude-launches-automated-attack-surface-reduction-for-code"
 
 # ── Content metadata ──
