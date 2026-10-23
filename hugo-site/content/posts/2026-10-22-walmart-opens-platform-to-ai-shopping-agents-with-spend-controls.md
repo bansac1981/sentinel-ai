@@ -1,6 +1,6 @@
 ---
 title: "Walmart Opens Platform to AI Shopping Agents With Spend Controls"
-date: 2026-10-22T10:26:41+00:00
+date: "2026-10-23T12:48:11+00:00"
 draft: false
 slug: "walmart-opens-platform-to-ai-shopping-agents-with-spend-controls"
 
