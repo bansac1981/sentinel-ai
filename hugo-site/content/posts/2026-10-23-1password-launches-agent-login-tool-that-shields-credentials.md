@@ -1,6 +1,6 @@
 ---
 title: "1Password Launches Agent Login Tool That Shields Credentials"
-date: 2026-10-23T10:18:02+00:00
+date: "2026-10-23T12:35:43+00:00"
 draft: false
 slug: "1password-launches-agent-login-tool-that-shields-credentials"
 
