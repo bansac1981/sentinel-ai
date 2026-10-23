@@ -1,7 +1,7 @@
 ---
 title: "AI Agent ARTEX Weaponised in ConnectWise Supply Chain Breach"
 date: 2026-10-23T10:27:32+00:00
-draft: true
+draft: false
 slug: "ai-agent-artex-weaponised-in-connectwise-supply-chain-breach"
 
 # ── Content metadata ──
