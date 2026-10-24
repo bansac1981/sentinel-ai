@@ -1,7 +1,7 @@
 ---
 title: "Aokigahara Infostealer Targets Claude, Copilot, and Cursor Credentials"
 date: 2026-10-24T09:47:41+00:00
-draft: true
+draft: false 
 slug: "aokigahara-infostealer-targets-claude-copilot-and-cursor-credentials"
 
 # ── Content metadata ──
