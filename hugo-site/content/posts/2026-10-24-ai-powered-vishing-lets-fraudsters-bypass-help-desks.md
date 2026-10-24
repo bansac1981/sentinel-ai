@@ -1,6 +1,6 @@
 ---
 title: "AI-Powered Vishing Lets Fraudsters Bypass Help Desks"
-date: 2026-10-24T09:44:11+00:00
+date: "2026-10-24T16:33:48+00:00"
 draft: false 
 slug: "ai-powered-vishing-lets-fraudsters-bypass-help-desks"
 
