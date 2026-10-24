@@ -1,7 +1,7 @@
 ---
 title: "AI Agents Hijacked via Prompt Injection and Malicious Skills"
 date: 2026-10-24T09:47:02+00:00
-draft: true
+draft: false 
 slug: "ai-agents-hijacked-via-prompt-injection-and-malicious-skills"
 
 # ── Content metadata ──
