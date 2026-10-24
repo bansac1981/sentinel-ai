@@ -1,7 +1,7 @@
 ---
 title: "Samsung TV Found Sending Audio to OpenAI Without Consent"
 date: 2026-10-24T09:39:58+00:00
-draft: true
+draft: false
 slug: "samsung-tv-found-sending-audio-to-openai-without-consent"
 
 # ── Content metadata ──
