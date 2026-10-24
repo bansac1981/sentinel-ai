@@ -1,6 +1,6 @@
 ---
 title: "LiteLLM 1.107.0 Supply Chain Attack Steals AI Credentials"
-date: 2026-10-24T09:44:50+00:00
+date: "2026-10-24T16:31:00+00:00"
 draft: false 
 slug: "litellm-1-107-0-supply-chain-attack-steals-ai-credentials"
 
