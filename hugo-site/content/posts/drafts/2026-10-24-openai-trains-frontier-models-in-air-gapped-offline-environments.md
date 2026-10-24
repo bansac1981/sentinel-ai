@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Trains Frontier Models in Air-Gapped Offline Environments"
 date: 2026-10-24T09:41:38+00:00
-draft: true
+draft: false 
 slug: "openai-trains-frontier-models-in-air-gapped-offline-environments"
 
 # ── Content metadata ──
