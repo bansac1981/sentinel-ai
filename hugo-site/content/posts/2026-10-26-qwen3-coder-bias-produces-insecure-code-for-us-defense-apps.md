@@ -1,6 +1,6 @@
 ---
 title: "Qwen3-Coder Bias Produces Insecure Code for US Defense Apps"
-date: 2026-10-26T11:20:44+00:00
+date: "2026-10-26T17:29:33+00:00"
 draft: false
 slug: "qwen3-coder-bias-produces-insecure-code-for-us-defense-apps"
 
