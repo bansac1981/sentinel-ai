@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Compaction Flaw Exposes Hidden Reasoning in GPT-5.6"
 date: 2026-10-27T10:49:52+00:00
-draft: true
+draft: false 
 slug: "openai-compaction-flaw-exposes-hidden-reasoning-in-gpt-5-6"
 
 # ── Content metadata ──
