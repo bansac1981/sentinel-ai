@@ -1,6 +1,6 @@
 ---
 title: "OpenAI GPT-6 Astra Powers Greptile Bug Detection Beyond Code Review"
-date: 2026-10-27T10:47:41+00:00
+date: "2026-10-27T17:35:12+00:00"
 draft: false 
 slug: "openai-gpt-6-astra-powers-greptile-bug-detection-beyond-code-review"
 
