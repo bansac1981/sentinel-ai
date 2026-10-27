@@ -1,6 +1,6 @@
 ---
 title: "OpenAI GPT-6.1 Sol Powers CodeRabbit Security Agent"
-date: 2026-10-27T10:51:07+00:00
+date: "2026-10-27T17:38:19+00:00"
 draft: false 
 slug: "openai-gpt-6-1-sol-powers-coderabbit-security-agent"
 
