@@ -1,7 +1,7 @@
 ---
 title: "OpenAI Ships GPT-6.1 Terra with Structured Safety Benchmarking"
 date: 2026-10-28T11:33:13+00:00
-draft: true
+draft: false
 slug: "openai-ships-gpt-6-1-terra-with-structured-safety-benchmarking"
 
 # ── Content metadata ──
