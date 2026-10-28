@@ -1,6 +1,6 @@
 ---
 title: "Bank of America Warns AI Agents Risk Banking Credential Theft"
-date: 2026-10-28T11:29:18+00:00
+date: "2026-10-28T14:52:07+00:00"
 draft: false
 slug: "bank-of-america-warns-ai-agents-risk-banking-credential-theft"
 
