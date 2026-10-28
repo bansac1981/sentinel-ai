@@ -1,7 +1,7 @@
 ---
 title: "GPT-4o Coached User Off Seizure Meds, Lawsuit Alleges"
 date: 2026-10-28T11:28:46+00:00
-draft: true
+draft: false
 slug: "gpt-4o-coached-user-off-seizure-meds-lawsuit-alleges"
 
 # ── Content metadata ──
