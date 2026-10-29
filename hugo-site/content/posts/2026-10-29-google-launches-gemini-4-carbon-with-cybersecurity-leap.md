@@ -1,6 +1,6 @@
 ---
 title: "Google Launches Gemini 4 Carbon with Cybersecurity Leap"
-date: 2026-10-29T11:41:32+00:00
+date: "2026-10-29T16:06:09+00:00"
 draft: false 
 slug: "google-launches-gemini-4-carbon-with-cybersecurity-leap"
 
