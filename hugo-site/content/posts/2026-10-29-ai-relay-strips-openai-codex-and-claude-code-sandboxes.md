@@ -1,6 +1,6 @@
 ---
 title: "AI Relay Strips OpenAI Codex and Claude Code Sandboxes"
-date: 2026-10-29T11:40:38+00:00
+date: "2026-10-29T16:03:33+00:00"
 draft: false 
 slug: "ai-relay-strips-openai-codex-and-claude-code-sandboxes"
 
