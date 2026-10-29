@@ -1,7 +1,7 @@
 ---
 title: "Claude Code Agent Transcripts Leaked via Silent Token Drain"
 date: 2026-10-29T11:39:07+00:00
-draft: true
+draft: false 
 slug: "claude-code-agent-transcripts-leaked-via-silent-token-drain"
 
 # ── Content metadata ──
