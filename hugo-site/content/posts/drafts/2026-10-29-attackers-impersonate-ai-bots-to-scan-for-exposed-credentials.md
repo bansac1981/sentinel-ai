@@ -1,7 +1,7 @@
 ---
 title: "Attackers Impersonate AI Bots to Scan for Exposed Credentials"
 date: 2026-10-29T11:47:23+00:00
-draft: true
+draft: false 
 slug: "attackers-impersonate-ai-bots-to-scan-for-exposed-credentials"
 
 # ── Content metadata ──
