@@ -1,6 +1,6 @@
 ---
 title: "Prompt Injection Targets AI Agent Planning in New Attacks"
-date: 2026-10-30T11:30:09+00:00
+date: "2026-10-30T14:00:02+00:00"
 draft: false
 slug: "prompt-injection-targets-ai-agent-planning-in-new-attacks"
 

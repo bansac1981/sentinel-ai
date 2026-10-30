@@ -1,6 +1,6 @@
 ---
 title: "OpenAI Updates Model Spec to Sharpen AI Judgment and Safety"
-date: 2026-10-30T11:36:35+00:00
+date: "2026-10-30T14:00:02+00:00"
 draft: false
 slug: "openai-updates-model-spec-to-sharpen-ai-judgment-and-safety"
 
