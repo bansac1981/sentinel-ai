@@ -1,6 +1,6 @@
 ---
 title: "Claude Code VS Code Extension Trojanized with SSH Backdoor"
-date: 2026-10-30T11:31:47+00:00
+date: "2026-10-30T13:52:05+00:00"
 draft: false
 slug: "claude-code-vs-code-extension-trojanized-with-ssh-backdoor"
 
