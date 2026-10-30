@@ -1,7 +1,7 @@
 ---
 title: "YC Labs Runs GPT-6.1 Multi-Agent Swarms in Open Game Worlds"
 date: 2026-10-30T11:31:08+00:00
-draft: true
+draft: false
 slug: "yc-labs-runs-gpt-6-1-multi-agent-swarms-in-open-game-worlds"
 
 # ── Content metadata ──
