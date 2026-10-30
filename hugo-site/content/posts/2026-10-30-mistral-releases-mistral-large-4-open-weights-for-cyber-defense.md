@@ -1,6 +1,6 @@
 ---
 title: "Mistral Releases Mistral Large 4 Open Weights for Cyber Defense"
-date: 2026-10-30T11:37:30+00:00
+date: "2026-10-30T13:54:44+00:00"
 draft: false
 slug: "mistral-releases-mistral-large-4-open-weights-for-cyber-defense"
 
