@@ -1,6 +1,6 @@
 ---
 title: "AWS AgentCore Gateway Turns 400-Plus APIs into Agent Tools"
-date: 2026-10-30T11:38:24+00:00
+date: "2026-10-30T13:50:14+00:00"
 draft: false
 slug: "aws-agentcore-gateway-turns-400-plus-apis-into-agent-tools"
 
