@@ -1,6 +1,6 @@
 ---
 title: "Cathedral AI Agents Breach Anthropic Systems in Under 12 Hours"
-date: 2026-11-01T12:00:08+00:00
+date: "2026-11-01T14:16:23+00:00"
 draft: false
 slug: "cathedral-ai-agents-breach-anthropic-systems-in-under-12-hours"
 
