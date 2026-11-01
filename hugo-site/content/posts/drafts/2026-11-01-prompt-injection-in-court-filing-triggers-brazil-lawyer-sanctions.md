@@ -1,7 +1,7 @@
 ---
 title: "Prompt Injection in Court Filing Triggers Brazil Lawyer Sanctions"
 date: 2026-11-01T11:59:33+00:00
-draft: true
+draft: false
 slug: "prompt-injection-in-court-filing-triggers-brazil-lawyer-sanctions"
 
 # ── Content metadata ──
