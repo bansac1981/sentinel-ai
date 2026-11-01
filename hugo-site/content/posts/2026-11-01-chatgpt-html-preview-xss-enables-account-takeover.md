@@ -1,6 +1,6 @@
 ---
 title: "ChatGPT HTML Preview XSS Enables Account Takeover"
-date: 2026-11-01T11:56:49+00:00
+date: "2026-11-01T14:17:24+00:00"
 draft: false
 slug: "chatgpt-html-preview-xss-enables-account-takeover"
 
