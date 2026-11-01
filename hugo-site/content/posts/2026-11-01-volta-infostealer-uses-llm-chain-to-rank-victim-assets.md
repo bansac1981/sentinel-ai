@@ -1,6 +1,6 @@
 ---
 title: "VOLTA Infostealer Uses LLM Chain to Rank Victim Assets"
-date: 2026-11-01T12:02:37+00:00
+date: "2026-11-01T14:19:47+00:00"
 draft: false
 slug: "volta-infostealer-uses-llm-chain-to-rank-victim-assets"
 
