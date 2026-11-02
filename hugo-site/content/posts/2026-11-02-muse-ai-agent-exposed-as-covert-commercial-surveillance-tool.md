@@ -1,6 +1,6 @@
 ---
 title: "Muse AI Agent Exposed as Covert Commercial Surveillance Tool"
-date: 2026-11-02T13:46:05+00:00
+date: "2026-11-02T14:05:23+00:00"
 draft: false
 slug: "muse-ai-agent-exposed-as-covert-commercial-surveillance-tool"
 
