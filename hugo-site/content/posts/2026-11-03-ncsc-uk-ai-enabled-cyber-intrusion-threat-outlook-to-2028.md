@@ -1,6 +1,6 @@
 ---
 title: "NCSC UK: AI-Enabled Cyber Intrusion Threat Outlook to 2028"
-date: 2026-11-03T12:59:52+00:00
+date: "2026-11-03T15:24:19+00:00"
 draft: false
 slug: "ncsc-uk-ai-enabled-cyber-intrusion-threat-outlook-to-2028"
 
