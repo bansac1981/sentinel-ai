@@ -1,6 +1,6 @@
 ---
 title: "CrowdStrike Acquires Dreadnode to Add AI Red-Teaming to Falcon"
-date: 2026-11-03T12:58:16+00:00
+date: "2026-11-03T15:20:52+00:00"
 draft: false
 slug: "crowdstrike-acquires-dreadnode-to-add-ai-red-teaming-to-falcon"
 
