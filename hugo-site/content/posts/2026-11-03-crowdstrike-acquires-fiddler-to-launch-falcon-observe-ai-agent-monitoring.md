@@ -1,6 +1,6 @@
 ---
 title: "CrowdStrike Acquires Fiddler to Launch Falcon Observe AI Agent Monitoring"
-date: 2026-11-03T12:56:37+00:00
+date: "2026-11-03T15:23:04+00:00"
 draft: false
 slug: "crowdstrike-acquires-fiddler-to-launch-falcon-observe-ai-agent-monitoring"
 

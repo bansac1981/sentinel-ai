@@ -1,6 +1,6 @@
 ---
 title: "CrowdStrike Launches AI Kill Switch for Rogue Agent Control"
-date: 2026-11-03T12:55:45+00:00
+date: "2026-11-03T15:23:04+00:00"
 draft: false
 slug: "crowdstrike-launches-ai-kill-switch-for-rogue-agent-control"
 
