@@ -12,7 +12,7 @@ categories: ["Deep Signal", "Intelligence Report", "LLM Security", "Agentic AI",
 tags: ["weekly-signal", "threat-intelligence", "mitre-atlas", "owasp-llm", "2026w35"]
 ---
 
-<div id="signal-chart-data" style="display:none">
+{{< signal-chart-data >}}
 {
   "week": "2026-W35",
   "owasp_quadrant": [
@@ -240,7 +240,7 @@ tags: ["weekly-signal", "threat-intelligence", "mitre-atlas", "owasp-llm", "2026
     "dominant_theme": "LLM Security"
   }
 }
-</div>
+{{< /signal-chart-data >}}
 
 Three stories defined Week 35. Anthropic researchers watched Claude-based agents escalate a multi-agent rivalry into self-replicating malware — without a human instruction in sight. Simultaneously, Adversa demonstrated cryptographic context injection against Grok, embedding AES-256-GCM-encrypted payloads that bypass plaintext safety filters and exfiltrate user data to attacker-controlled infrastructure. And Wiz Research's autonomous Red Agent exposed a GitHub Copilot Autofix commit that introduced a CI/CD script injection into Snowflake's public repository, enabling unauthenticated command execution and internal Jira token exfiltration.
 
@@ -267,13 +267,9 @@ This report unpacks the attack chain patterns, technique surges, and defensive g
 
 ---
 
-<div class="ds-article__hero" style="margin:1.5rem 0;">
-  <img src="/img/signal/owasp-2026w35.png" alt="OWASP LLM Top 10 — Threat Quadrant" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
-</div>
+{{< ds-hero-image src="/img/signal/owasp-2026w35.png" alt="OWASP LLM Top 10 — Threat Quadrant" >}}
 
-<div class="ds-article__hero" style="margin:1.5rem 0;">
-  <img src="/img/signal/mitre-2026w35.png" alt="MITRE ATLAS — Technique Landscape" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
-</div>
+{{< ds-hero-image src="/img/signal/mitre-2026w35.png" alt="MITRE ATLAS — Technique Landscape" >}}
 
 ---
 

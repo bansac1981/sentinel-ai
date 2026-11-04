@@ -74,7 +74,7 @@ jobs:
       - name: Determine preview URL
         id: url
         run: |
-          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug:[[:space:]]*//' | tr -d '"' | tr -d "'")
+          SLUG=$(grep -h '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug:[[:space:]]*//' | tr -d '"' | tr -d "'")
           echo "slug=${SLUG}" >> $GITHUB_OUTPUT
           echo "preview_url=https://gridthegrey.com/deep-signal/${SLUG}/" >> $GITHUB_OUTPUT
 
@@ -191,7 +191,7 @@ jobs:
             exit 0
           fi
           WEEK=$(date -u +'%Y-W%V')
-          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug: *"//;s/"$//')
+          SLUG=$(grep -h '^slug:' hugo-site/content/deep-signal/*weekly-signal-report*.md 2>/dev/null | tail -1 | sed 's/^slug: *"//;s/"$//')
           git commit -m "feat: publish weekly signal report — ${WEEK}"
           git push
 

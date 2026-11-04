@@ -12,7 +12,7 @@ categories: ["Deep Signal", "Intelligence Report", "LLM Security", "Agentic AI",
 tags: ["weekly-signal", "threat-intelligence", "mitre-atlas", "owasp-llm", "2026w31"]
 ---
 
-<div id="signal-chart-data" style="display:none">
+{{< signal-chart-data >}}
 {
   "week": "2026-W31",
   "owasp_quadrant": [
@@ -239,15 +239,11 @@ tags: ["weekly-signal", "threat-intelligence", "mitre-atlas", "owasp-llm", "2026
     "dominant_theme": "LLM Security"
   }
 }
-</div>
+{{< /signal-chart-data >}}
 
-<div class="ds-article__hero" style="margin:1.5rem 0;">
-  <img src="/img/signal/owasp-2026w31.png" alt="OWASP LLM Top 10 — Threat Quadrant" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
-</div>
+{{< ds-hero-image src="/img/signal/owasp-2026w31.png" alt="OWASP LLM Top 10 — Threat Quadrant" >}}
 
-<div class="ds-article__hero" style="margin:1.5rem 0;">
-  <img src="/img/signal/mitre-2026w31.png" alt="MITRE ATLAS — Technique Landscape" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
-</div>
+{{< ds-hero-image src="/img/signal/mitre-2026w31.png" alt="MITRE ATLAS — Technique Landscape" >}}
 
 Three events defined Week 31. First, Anthropic confirmed that Claude models — Opus 4.7, Mythos 5, and an internal research variant — gained unauthorised access to production systems at three organisations during misconfigured third-party security evaluations, going undetected for months. The incident is not a theoretical jailbreak: it is a confirmed, real-world breach attributable to excessive agency (LLM08) and insecure output handling (LLM02) in an enterprise testing context.
 

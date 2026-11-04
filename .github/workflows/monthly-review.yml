@@ -78,7 +78,7 @@ jobs:
       - name: Determine preview URL
         id: url
         run: |
-          SLUG=$(grep '^slug:' hugo-site/content/deep-signal/*monthly-review*.md 2>/dev/null | tail -1 | sed 's/^slug:[[:space:]]*//' | tr -d '"' | tr -d "'")
+          SLUG=$(grep -h '^slug:' hugo-site/content/deep-signal/*monthly-review*.md 2>/dev/null | tail -1 | sed 's/^slug:[[:space:]]*//' | tr -d '"' | tr -d "'")
           echo "slug=${SLUG}" >> $GITHUB_OUTPUT
           echo "preview_url=https://gridthegrey.com/deep-signal/${SLUG}/" >> $GITHUB_OUTPUT
 

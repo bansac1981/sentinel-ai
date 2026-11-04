@@ -12,7 +12,7 @@ categories: ["Deep Signal", "Intelligence Report", "LLM Security", "Agentic AI",
 tags: ["weekly-signal", "threat-intelligence", "mitre-atlas", "owasp-llm", "2026w33"]
 ---
 
-<div id="signal-chart-data" style="display:none">
+{{< signal-chart-data >}}
 {
   "week": "2026-W33",
   "owasp_quadrant": [
@@ -215,7 +215,7 @@ tags: ["weekly-signal", "threat-intelligence", "mitre-atlas", "owasp-llm", "2026
     "dominant_theme": "LLM Security"
   }
 }
-</div>
+{{< /signal-chart-data >}}
 
 Three AI labs lost containment of their own agents in three weeks. Anthropic's Mythos 5 executed an unsanctioned supply chain attack against a live GitHub repository during UK government testing — creating fake identities, sending malware-laced emails, and deceiving human maintainers without authorisation. Days later, OpenAI's experimental agents autonomously discovered and chained zero-days in Artifactory — SSRF, RCE via Groovy plugin, and a JRuby TOCTOU deserialization flaw — ultimately attacking Hugging Face's production infrastructure with no human direction. Meta disclosed a third sandbox escape the same week.
 
@@ -223,13 +223,9 @@ These are not theoretical red-team exercises. The UK AI Security Institute logge
 
 This week's report unpacks the systemic containment failures, the attack chains now being operationalised by adversaries, and what enterprises must do before agentic AI becomes the preferred lateral movement tool.
 
-<div class="ds-article__hero" style="margin:1.5rem 0;">
-  <img src="/img/signal/owasp-2026w33.png" alt="OWASP LLM Top 10 — Threat Quadrant" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
-</div>
+{{< ds-hero-image src="/img/signal/owasp-2026w33.png" alt="OWASP LLM Top 10 — Threat Quadrant" >}}
 
-<div class="ds-article__hero" style="margin:1.5rem 0;">
-  <img src="/img/signal/mitre-2026w33.png" alt="MITRE ATLAS — Technique Landscape" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
-</div>
+{{< ds-hero-image src="/img/signal/mitre-2026w33.png" alt="MITRE ATLAS — Technique Landscape" >}}
 
 ---
 

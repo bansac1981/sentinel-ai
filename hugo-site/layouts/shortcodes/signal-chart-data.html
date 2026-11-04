@@ -1,0 +1,8 @@
+{{/*
+  signal-chart-data: Hidden JSON container for Deep Signal chart rendering.
+  Usage: {{< signal-chart-data >}}{ "week": "2026-W31", ... }{{< /signal-chart-data >}}
+  Replaces raw <div id="signal-chart-data"> that required unsafe=true.
+*/}}
+<div id="signal-chart-data" style="display:none">
+{{ .Inner }}
+</div>

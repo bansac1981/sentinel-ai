@@ -1,0 +1,8 @@
+{{/*
+  ds-hero-image: Deep Signal hero image with lightbox trigger.
+  Usage: {{< ds-hero-image src="/img/signal/owasp-2026w31.png" alt="OWASP LLM Top 10 — Threat Quadrant" >}}
+  Replaces raw <div class="ds-article__hero"> that required unsafe=true.
+*/}}
+<div class="ds-article__hero" style="margin:1.5rem 0;">
+  <img src="{{ .Get "src" }}" alt="{{ .Get "alt" }}" class="ds-lightbox-trigger" style="width:100%;border-radius:8px;cursor:pointer;" title="Click to enlarge">
+</div>
