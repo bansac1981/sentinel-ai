@@ -41,7 +41,7 @@ copyright = "© 2026 Grid the Grey. All rights reserved."
     noClasses = false
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = false  # SECURITY: raw HTML in markdown is stripped. Use shortcodes instead.
+      unsafe = true  # Required for Deep Signal content. Pipeline sanitises RSS article bodies.
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

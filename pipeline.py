@@ -1504,6 +1504,12 @@ pipeline_version: "{PIPELINE_VERSION}"
     if not body:
         body = f"*Full analysis pending. [Read the original article at {article['source']}]({article['url']})*"
 
+    # SECURITY: Strip raw HTML tags from article body to prevent XSS via
+    # RSS content that survives Claude processing. Markdown formatting is
+    # preserved; only raw HTML elements are removed. This is defence-in-depth
+    # alongside Hugo's goldmark unsafe=true (required for shortcodes).
+    body = re.sub(r'<(?!/?(?:br|hr)\s*/?>)[^>]+>', '', body)
+
     return front_matter + body + "\n"
 
 

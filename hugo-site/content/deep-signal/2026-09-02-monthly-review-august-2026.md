@@ -26,7 +26,6 @@ August 2026 was the month AI autonomy stopped being a governance abstraction and
 
 ## 2. By the Numbers
 
-{{< rawhtml >}}
 <div class="monthly-stats-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; text-align: center;">
 
 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem;">
@@ -60,11 +59,9 @@ August 2026 was the month AI autonomy stopped being a governance abstraction and
 </div>
 
 </div>
-{{< /rawhtml >}}
 
 ### Threat Severity Distribution
 
-{{< rawhtml >}}
 <div style="display:flex; align-items:end; gap:0.75rem; height:180px; margin:2rem 0; padding:1rem 0;">
   <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
     <div style="font-weight:700;font-size:0.8rem;color:#991b1b;margin-bottom:0.25rem;">19</div>
@@ -87,11 +84,9 @@ August 2026 was the month AI autonomy stopped being a governance abstraction and
     <div style="font-size:0.75rem;color:#64748b;margin-top:0.5rem;font-weight:600;">LOW</div>
   </div>
 </div>
-{{< /rawhtml >}}
 
 ### Top OWASP LLM Categories
 
-{{< rawhtml >}}
 <div style="margin:2rem 0;">
   <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem;">
     <div style="width:200px;font-size:0.8rem;color:#334155;font-weight:600;text-align:right;">Excessive Agency</div>
@@ -136,11 +131,9 @@ August 2026 was the month AI autonomy stopped being a governance abstraction and
     </div>
   </div>
 </div>
-{{< /rawhtml >}}
 
 ### Top MITRE ATLAS Techniques
 
-{{< rawhtml >}}
 <div style="margin:2rem 0;">
   <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem;">
     <div style="width:200px;font-size:0.8rem;color:#334155;font-weight:600;text-align:right;">LLM Prompt Injection</div>
@@ -179,7 +172,6 @@ August 2026 was the month AI autonomy stopped being a governance abstraction and
     </div>
   </div>
 </div>
-{{< /rawhtml >}}
 
 ### Dominant Attack Chain
 
@@ -206,7 +198,6 @@ flowchart LR
 
 ### Threat Actor Attribution
 
-{{< rawhtml >}}
 <div style="display:flex; gap:1rem; margin:2rem 0; flex-wrap:wrap;">
   <div style="flex:1;min-width:140px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem;text-align:center;">
     <div style="font-size:2rem;font-weight:800;color:#0f172a;">58</div>
@@ -229,7 +220,6 @@ flowchart LR
     <div style="width:100%;height:4px;background:#e2e8f0;border-radius:2px;margin-top:0.5rem;"><div style="width:38%;height:100%;background:#f59e0b;border-radius:2px;"></div></div>
   </div>
 </div>
-{{< /rawhtml >}}
 
 ---
 
@@ -337,7 +327,6 @@ Regulators moved from consultation to scrutiny. The Hugging Face agent breach tr
 
 ### CVE Severity Overview
 
-{{< rawhtml >}}
 <div style="margin:2rem 0;">
   <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
     <div style="width:160px;font-size:0.75rem;color:#334155;font-weight:600;text-align:right;">CVE-2026-12537</div>
@@ -394,7 +383,6 @@ Regulators moved from consultation to scrutiny. The Hugging Face agent breach tr
     </div>
   </div>
 </div>
-{{< /rawhtml >}}
 
 ---
 
