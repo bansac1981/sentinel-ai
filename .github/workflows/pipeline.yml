@@ -25,6 +25,11 @@ on:
         type: boolean
         required: false
         default: false
+      auto_publish:
+        description: "Auto-publish — skip draft review, publish articles directly (7-layer dedup)"
+        type: boolean
+        required: false
+        default: true
       mode:
         description: "Article type to process (all = full pipeline, threat = security feeds only, first_look = AI capability/vendor feeds only)"
         required: false
@@ -150,6 +155,17 @@ jobs:
           FEED="${{ github.event.inputs.feed }}"
           if [ -n "$FEED" ]; then
             ARGS="$ARGS --feed $FEED"
+          fi
+
+          # Auto-publish: on scheduled runs, use the repo variable (default: true).
+          # On manual dispatch, use the checkbox input.
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            AUTO_PUB="${{ vars.AUTO_PUBLISH }}"
+            if [ "$AUTO_PUB" != "false" ]; then
+              ARGS="$ARGS --auto-publish"
+            fi
+          elif [ "${{ github.event.inputs.auto_publish }}" = "true" ]; then
+            ARGS="$ARGS --auto-publish"
           fi
 
           echo "Running: python pipeline.py $ARGS"

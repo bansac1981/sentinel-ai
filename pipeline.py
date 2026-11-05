@@ -17,6 +17,7 @@ Usage:
 """
 
 import argparse
+import hashlib
 import json
 import logging
 import os
@@ -332,7 +333,7 @@ RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "6.0"))
 HUGO_POSTS_DIR      = Path(os.getenv("HUGO_POSTS_DIR", "hugo-site/content/posts"))
 HUGO_DRAFTS_DIR     = HUGO_POSTS_DIR / "drafts"
 SEEN_URLS_FILE      = Path(os.getenv("SEEN_URLS_FILE", "seen_urls.json"))
-SEEN_URLS_MAX       = int(os.getenv("SEEN_URLS_MAX", "2000"))
+SEEN_URLS_MAX       = int(os.getenv("SEEN_URLS_MAX", "10000"))
 MAX_ARTICLES        = int(os.getenv("MAX_ARTICLES_PER_RUN", "15"))
 FETCH_FULL_CONTENT  = os.getenv("FETCH_FULL_CONTENT", "true").lower() == "true"
 FETCH_TIMEOUT       = int(os.getenv("FETCH_TIMEOUT", "10"))
@@ -553,7 +554,7 @@ FIRST_LOOK_FEEDS = {
 }
 
 # Story deduplication — suppress same-event articles from different sources
-STORY_WINDOW_DAYS = int(os.getenv("STORY_WINDOW_DAYS", "7"))  # look-back window for story index
+STORY_WINDOW_DAYS = int(os.getenv("STORY_WINDOW_DAYS", "30"))  # look-back window for story index
 
 # Pipeline version — bump when changing the Claude prompt
 PIPELINE_VERSION = "2.1.0"
@@ -1347,13 +1348,30 @@ def _story_match(title_a: str, title_b: str) -> bool:
     return False
 
 
-def build_story_index(log: logging.Logger) -> list[tuple[str, str]]:
+_SENTINEL = object()  # distinguishes "not passed" from "passed as None"
+
+def build_story_index(log: logging.Logger, window_days: int | None = _SENTINEL) -> list[tuple[str, str]]:
     """
-    Build a list of (title, filepath) for existing posts/drafts within STORY_WINDOW_DAYS.
+    Build a list of (title, filepath) for existing posts/drafts.
     Used to match incoming articles against already-published content.
+
+    Args:
+        window_days: Number of days to look back.
+                     Default (not passed) = STORY_WINDOW_DAYS.
+                     None = all posts (no time limit).
     """
     from datetime import timedelta
-    cutoff = datetime.now(timezone.utc) - timedelta(days=STORY_WINDOW_DAYS)
+    if window_days is _SENTINEL:
+        # Default call — use the configured window
+        window_days = STORY_WINDOW_DAYS
+        use_window = True
+    elif window_days is None:
+        # Explicit None — scan all posts
+        use_window = False
+    else:
+        use_window = True
+
+    cutoff = datetime.now(timezone.utc) - timedelta(days=window_days) if use_window else None
     date_prefix_re = re.compile(r"^(\d{4}-\d{2}-\d{2})-")
     index = []
     for search_dir in [HUGO_POSTS_DIR, HUGO_DRAFTS_DIR]:
@@ -1365,12 +1383,13 @@ def build_story_index(log: logging.Logger) -> list[tuple[str, str]]:
             m = date_prefix_re.match(f.stem)
             if not m:
                 continue
-            try:
-                file_date = datetime.strptime(m.group(1), "%Y-%m-%d").replace(tzinfo=timezone.utc)
-            except ValueError:
-                continue
-            if file_date < cutoff:
-                continue
+            if cutoff:
+                try:
+                    file_date = datetime.strptime(m.group(1), "%Y-%m-%d").replace(tzinfo=timezone.utc)
+                except ValueError:
+                    continue
+                if file_date < cutoff:
+                    continue
             try:
                 head = f.read_text(encoding="utf-8", errors="ignore").splitlines()[:20]
             except OSError:
@@ -1381,7 +1400,8 @@ def build_story_index(log: logging.Logger) -> list[tuple[str, str]]:
                     if title:
                         index.append((title, str(f)))
                     break
-    log.info(f"Story index: {len(index)} posts/drafts from last {STORY_WINDOW_DAYS} days")
+    label = "all time" if not use_window else f"last {window_days} days"
+    log.info(f"Story index: {len(index)} posts/drafts ({label})")
     return index
 
 
@@ -1417,6 +1437,32 @@ def is_story_duplicate(title: str, story_index: list[tuple[str, str]], log: logg
     return False
 
 
+def build_content_hash_index(log: logging.Logger) -> dict[str, str]:
+    """
+    Build a dict mapping content_hash → filename for all existing posts and drafts.
+    Used by Layer 6 (content hash dedup) to detect identical article bodies.
+    """
+    hash_re = re.compile(r'^content_hash:\s*"?([a-f0-9]+)"?', re.MULTILINE)
+    index: dict[str, str] = {}
+    for search_dir in [HUGO_POSTS_DIR, HUGO_DRAFTS_DIR]:
+        if not search_dir.exists():
+            continue
+        for f in search_dir.glob("*.md"):
+            if f.stem == "_index":
+                continue
+            try:
+                # Only read the frontmatter (first ~40 lines) for speed
+                head = f.read_text(encoding="utf-8", errors="ignore").splitlines()[:40]
+                text = "\n".join(head)
+                m = hash_re.search(text)
+                if m and m.group(1):
+                    index[m.group(1)] = f.name
+            except OSError:
+                continue
+    log.info(f"Content hash index: {len(index)} hashed posts on disk")
+    return index
+
+
 def to_yaml_list(items: list | None) -> str:
     """Convert a Python list to YAML inline list string."""
     if not items:
@@ -1425,10 +1471,15 @@ def to_yaml_list(items: list | None) -> str:
     return "[" + ", ".join(f'"{s}"' for s in safe) + "]"
 
 
-def generate_hugo_markdown(article: dict, analysis: dict, slug: str) -> str:
+def generate_hugo_markdown(article: dict, analysis: dict, slug: str, *,
+                           auto_publish: bool = False, content_hash: str = "") -> str:
     """
     Build the full Hugo markdown file content from article metadata
     and Claude's analysis. Matches the post archetype exactly.
+
+    Args:
+        auto_publish: If True, sets draft: false (article publishes immediately).
+        content_hash: SHA-256 hash of normalised body text for dedup tracking.
     """
     now = datetime.now(timezone.utc)
     fetch_date = now.strftime("%Y-%m-%dT%H:%M:%S+00:00")
@@ -1454,10 +1505,12 @@ attack_vectors_introduced: {to_yaml_list(analysis.get('attack_vectors_introduced
 content_type: "threat_report"
 """
 
+    draft_value = "false" if auto_publish else "true"
+
     front_matter = f"""---
 title: {json.dumps(display_title)}
 date: {fetch_date}
-draft: true
+draft: {draft_value}
 slug: {json.dumps(slug)}
 
 # ── Content metadata ──
@@ -1496,6 +1549,7 @@ fetched_at: "{now.strftime('%Y-%m-%dT%H:%M:%S+00:00')}"
 feed_source: {json.dumps(article['feed_key'])}
 original_url: {json.dumps(article['url'])}
 pipeline_version: "{PIPELINE_VERSION}"
+content_hash: "{content_hash}"
 ---
 
 """
@@ -1513,21 +1567,34 @@ pipeline_version: "{PIPELINE_VERSION}"
     return front_matter + body + "\n"
 
 
-def write_hugo_post(slug: str, content: str, log: logging.Logger) -> Path | None:
-    """Write the markdown file to the Hugo drafts directory. Returns path or None."""
-    HUGO_DRAFTS_DIR.mkdir(parents=True, exist_ok=True)
+def write_hugo_post(slug: str, content: str, log: logging.Logger, *,
+                    auto_publish: bool = False) -> Path | None:
+    """Write the markdown file to Hugo. Returns path or None.
+
+    Args:
+        auto_publish: If True, writes directly to posts/ (published).
+                      If False, writes to posts/drafts/ (default, manual review).
+    """
+    if auto_publish:
+        target_dir = HUGO_POSTS_DIR
+        label = "posts"
+    else:
+        target_dir = HUGO_DRAFTS_DIR
+        label = "posts/drafts"
+
+    target_dir.mkdir(parents=True, exist_ok=True)
     date_prefix = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     filename = f"{date_prefix}-{slug}.md"
-    filepath = HUGO_DRAFTS_DIR / filename
+    filepath = target_dir / filename
 
-    # If a file with this slug already exists in drafts, skip
+    # If a file with this slug already exists, skip
     if filepath.exists():
-        log.warning(f"  ⚠ Skipping — draft already exists: {filename}")
+        log.warning(f"  ⚠ Skipping — file already exists: {label}/{filename}")
         return None
 
     try:
         filepath.write_text(content, encoding="utf-8")
-        log.info(f"  ✓ Written: posts/drafts/{filename}")
+        log.info(f"  ✓ Written: {label}/{filename}")
         return filepath
     except OSError as e:
         log.error(f"  ✗ Failed to write {filepath}: {e}")
@@ -1641,6 +1708,13 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
     # Fix 2: build set of source URLs already recorded in frontmatter (catches feed-alias duplicates)
     source_url_index = build_source_url_index()
     log.info(f"Source URL index: {len(source_url_index)} original_url values on disk")
+
+    # Layer 6 index: content hashes from existing posts (for body-level dedup)
+    content_hash_index = build_content_hash_index(log)
+
+    # Layer 7 cache: full story index (no window limit) — built lazily on first auto-publish article
+    full_story_index_cache: list[tuple[str, str]] = []
+    full_story_index_built = False
 
     new_articles = []
     batch_seen: set[str] = set()  # tracks URLs added to new_articles this run
@@ -1821,8 +1895,66 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
             time.sleep(1.0)
             continue
 
-        markdown = generate_hugo_markdown(article, analysis, slug)
-        written = write_hugo_post(slug, markdown, log)
+        # ── Enhanced dedup layers (always run, but only block in auto-publish mode) ──
+        body = analysis.get("article_body", "").strip()
+        summary_text = analysis.get("summary", "")
+
+        # Layer 6: Content hash — SHA-256 of normalised body text
+        normalised_body = re.sub(r"\s+", " ", body.lower().strip())
+        content_hash = hashlib.sha256(normalised_body.encode("utf-8")).hexdigest()[:16]
+        if content_hash in content_hash_index:
+            matched_file = content_hash_index[content_hash]
+            log.info(f"  ↓ Content hash duplicate: matches '{matched_file}'")
+            seen_urls.add(article["url"])
+            stats["already_seen"] += 1
+            if not args.dry_run:
+                flush_seen_urls(SEEN_URLS_FILE, seen_urls)
+            time.sleep(1.0)
+            continue
+
+        if args.auto_publish:
+            # Layer 5: Content similarity check (title + summary + body, 80% threshold)
+            from check_duplicate import is_content_duplicate
+            dup_result = is_content_duplicate(
+                title=slug_title,
+                summary=summary_text,
+                body=body,
+                posts_dir=HUGO_POSTS_DIR,
+            )
+            if dup_result["is_duplicate"]:
+                log.info(
+                    f"  ↓ Content duplicate ({dup_result['similarity']:.0%}): "
+                    f"matches '{dup_result['match_file']}'"
+                )
+                seen_urls.add(article["url"])
+                stats["already_seen"] += 1
+                if not args.dry_run:
+                    flush_seen_urls(SEEN_URLS_FILE, seen_urls)
+                time.sleep(1.0)
+                continue
+
+            # Layer 7: Generated-title fingerprint — run story dedup on Claude's
+            # generated title against ALL published posts (not just the 30-day window)
+            full_story_index = build_story_index(log, window_days=None) if not full_story_index_built else full_story_index_cache
+            if not full_story_index_built:
+                full_story_index_cache = full_story_index
+                full_story_index_built = True
+            if is_story_duplicate(slug_title, full_story_index, log):
+                log.info(f"  ↓ Full-index story duplicate (generated title)")
+                seen_urls.add(article["url"])
+                stats["already_seen"] += 1
+                if not args.dry_run:
+                    flush_seen_urls(SEEN_URLS_FILE, seen_urls)
+                time.sleep(1.0)
+                continue
+
+            log.info(f"  ✓ Passed all auto-publish dedup checks")
+
+        markdown = generate_hugo_markdown(article, analysis, slug,
+                                          auto_publish=args.auto_publish,
+                                          content_hash=content_hash)
+        written = write_hugo_post(slug, markdown, log,
+                                  auto_publish=args.auto_publish)
         if written:
             stats["posts_written"] += 1
             if content_type == "first_look":
@@ -1833,6 +1965,8 @@ def run_pipeline(args: argparse.Namespace, log: logging.Logger) -> None:
             existing_slugs.add(slug)
             # Add to story index so same-run duplicates are also caught
             story_index.append((slug_title, slug))
+            # Track content hash for same-run dedup
+            content_hash_index[content_hash] = slug
         else:
             stats["errors"] += 1
 
@@ -1906,6 +2040,15 @@ def parse_args() -> argparse.Namespace:
         help="Ignore the seen_urls cache and re-evaluate all articles",
     )
     parser.add_argument(
+        "--auto-publish", action="store_true",
+        help=(
+            "Auto-publish articles that pass all dedup checks. "
+            "Writes directly to posts/ with draft:false instead of drafts/ with draft:true. "
+            "Runs enhanced dedup layers (content similarity + content hash + generated-title fingerprint) "
+            "before writing. Without this flag, behaviour is unchanged (writes to drafts/)."
+        ),
+    )
+    parser.add_argument(
         "--verbose", "-v", action="store_true",
         help="Enable DEBUG-level logging",
     )
@@ -1920,6 +2063,7 @@ if __name__ == "__main__":
     log.info("║     GRID THE GREY  —  RSS Pipeline     ║")
     log.info(f"║     v{PIPELINE_VERSION}  |  {CLAUDE_MODEL:<22}║")
     log.info("╚══════════════════════════════════════╝")
-    log.info(f"Mode: {'DRY RUN' if args.dry_run else 'LIVE'}  |  Threshold: {RELEVANCE_THRESHOLD}  |  Max articles: {args.limit or MAX_ARTICLES}")
+    publish_mode = "AUTO-PUBLISH" if args.auto_publish else "DRAFTS"
+    log.info(f"Mode: {'DRY RUN' if args.dry_run else 'LIVE'}  |  Publish: {publish_mode}  |  Threshold: {RELEVANCE_THRESHOLD}  |  Max articles: {args.limit or MAX_ARTICLES}")
 
     run_pipeline(args, log)

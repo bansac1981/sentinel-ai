@@ -3,13 +3,19 @@
 Grid the Grey — Duplicate Content Checker
 ==========================================
 Checks if a draft article is too similar to any existing published article.
-Uses difflib.SequenceMatcher on normalised title + summary text.
+Uses difflib.SequenceMatcher on normalised title + summary + body text.
 Threshold: 80% similarity = blocked.
 
-Usage:
+Usage (CLI):
     python check_duplicate.py <path-to-draft-file>
 
-Exit codes:
+Usage (importable):
+    from check_duplicate import is_content_duplicate
+    result = is_content_duplicate(title, summary, body, posts_dir)
+    if result["is_duplicate"]:
+        print(result["match_title"], result["similarity"])
+
+Exit codes (CLI only):
     0 = OK to publish (no significant duplicate found)
     1 = Duplicate detected (blocked)
     2 = Usage / file error
@@ -50,7 +56,7 @@ def normalize(text: str) -> str:
 
 
 def extract_fields(filepath: Path) -> dict:
-    """Pull title, summary, and draft status from YAML frontmatter."""
+    """Pull title, summary, body preview, and draft status from YAML frontmatter + content."""
     try:
         content = filepath.read_text(encoding="utf-8")
     except OSError:
@@ -59,8 +65,10 @@ def extract_fields(filepath: Path) -> dict:
     title = ""
     summary = ""
     is_draft = False
+    content_hash = ""
 
     in_frontmatter = False
+    frontmatter_end = 0
     lines = content.splitlines()
 
     for i, line in enumerate(lines):
@@ -69,6 +77,7 @@ def extract_fields(filepath: Path) -> dict:
             in_frontmatter = True
             continue
         if in_frontmatter and line.strip() == "---":
+            frontmatter_end = i + 1
             break
         if not in_frontmatter:
             continue
@@ -80,12 +89,103 @@ def extract_fields(filepath: Path) -> dict:
         elif line.startswith("draft:"):
             val = line.split(":", 1)[1].strip().lower()
             is_draft = val == "true"
+        elif line.startswith("content_hash:"):
+            content_hash = line.split(":", 1)[1].strip().strip('"\'')
 
-    return {"title": title, "summary": summary, "is_draft": is_draft}
+    # Extract first ~500 chars of body text (after frontmatter)
+    body_lines = lines[frontmatter_end:]
+    body_preview = " ".join(body_lines)[:500]
+
+    return {
+        "title": title,
+        "summary": summary,
+        "is_draft": is_draft,
+        "body_preview": body_preview,
+        "content_hash": content_hash,
+    }
 
 
 # ─────────────────────────────────────────────
-# Main check
+# Importable API — used by pipeline.py
+# ─────────────────────────────────────────────
+
+def is_content_duplicate(
+    title: str,
+    summary: str,
+    body: str = "",
+    posts_dir: Path | None = None,
+    threshold: float = SIMILARITY_THRESHOLD,
+) -> dict:
+    """
+    Check if an article (title + summary + body preview) is too similar to any
+    existing published post. Returns a dict with the result.
+
+    Args:
+        title:     Article title
+        summary:   Article summary
+        body:      Article body text (first ~500 chars used)
+        posts_dir: Path to published posts directory
+        threshold: Similarity threshold (0.0–1.0, default 0.80)
+
+    Returns:
+        {
+            "is_duplicate": bool,
+            "similarity": float,       # highest match ratio
+            "match_title": str | None,  # title of best match
+            "match_file": str | None,   # filename of best match
+            "checked": int,             # number of posts compared
+        }
+    """
+    if posts_dir is None:
+        posts_dir = POSTS_DIR
+
+    # Build the candidate text: title + summary + body preview
+    body_preview = body[:500] if body else ""
+    candidate_text = normalize(f"{title} {summary} {body_preview}")
+
+    if not candidate_text.strip():
+        return {"is_duplicate": False, "similarity": 0.0, "match_title": None,
+                "match_file": None, "checked": 0}
+
+    max_ratio = 0.0
+    best_match_file = None
+    best_match_title = None
+    checked = 0
+
+    for pub_file in posts_dir.glob("*.md"):
+        if pub_file.name == "_index.md":
+            continue
+
+        pub_fields = extract_fields(pub_file)
+        if not pub_fields or pub_fields.get("is_draft"):
+            continue
+
+        pub_text = normalize(
+            f"{pub_fields.get('title', '')} {pub_fields.get('summary', '')} "
+            f"{pub_fields.get('body_preview', '')}"
+        )
+        if not pub_text.strip():
+            continue
+
+        ratio = difflib.SequenceMatcher(None, candidate_text, pub_text).ratio()
+        checked += 1
+
+        if ratio > max_ratio:
+            max_ratio = ratio
+            best_match_file = pub_file.name
+            best_match_title = pub_fields.get("title", "Unknown")
+
+    return {
+        "is_duplicate": max_ratio >= threshold,
+        "similarity": max_ratio,
+        "match_title": best_match_title,
+        "match_file": best_match_file,
+        "checked": checked,
+    }
+
+
+# ─────────────────────────────────────────────
+# CLI check (original behaviour preserved)
 # ─────────────────────────────────────────────
 
 def check_duplicate(draft_path: Path) -> None:
@@ -98,62 +198,40 @@ def check_duplicate(draft_path: Path) -> None:
 
     draft_title   = draft_fields.get("title", "")
     draft_summary = draft_fields.get("summary", "")
-    draft_text    = normalize(f"{draft_title} {draft_summary}")
+    draft_body    = draft_fields.get("body_preview", "")
 
-    if not draft_text.strip():
+    result = is_content_duplicate(
+        title=draft_title,
+        summary=draft_summary,
+        body=draft_body,
+        posts_dir=POSTS_DIR,
+    )
+
+    if not (draft_title or draft_summary):
         print("WARNING: Draft has no title or summary — skipping duplicate check.")
         sys.exit(0)
 
     print(f"Checking: {draft_title[:80]}")
     print(f"Against all published articles in {POSTS_DIR}/")
     print("-" * 50)
+    print(f"Compared against {result['checked']} published article(s).")
 
-    # Load all published articles (only *.md directly in posts/, not in drafts/)
-    max_ratio       = 0.0
-    best_match_file = None
-    best_match_title = None
-    checked         = 0
-
-    for pub_file in POSTS_DIR.glob("*.md"):
-        if pub_file.name == "_index.md":
-            continue
-
-        pub_fields = extract_fields(pub_file)
-        if not pub_fields or pub_fields.get("is_draft"):
-            continue  # skip drafts and unreadable files
-
-        pub_text = normalize(
-            f"{pub_fields.get('title', '')} {pub_fields.get('summary', '')}"
-        )
-        if not pub_text.strip():
-            continue
-
-        ratio = difflib.SequenceMatcher(None, draft_text, pub_text).ratio()
-        checked += 1
-
-        if ratio > max_ratio:
-            max_ratio       = ratio
-            best_match_file  = pub_file.name
-            best_match_title = pub_fields.get("title", "Unknown")
-
-    print(f"Compared against {checked} published article(s).")
-
-    if checked == 0:
+    if result["checked"] == 0:
         print("No published articles to compare against — OK to publish.")
         sys.exit(0)
 
-    pct = f"{max_ratio:.1%}"
+    pct = f"{result['similarity']:.1%}"
     print(f"Highest similarity: {pct}  |  Threshold: {SIMILARITY_THRESHOLD:.0%}")
 
-    if max_ratio >= SIMILARITY_THRESHOLD:
+    if result["is_duplicate"]:
         print()
         print("=" * 50)
         print("DUPLICATE CHECK FAILED — PUBLISHING BLOCKED")
         print("=" * 50)
         print(f"  Draft:   {draft_title[:70]}")
-        print(f"  Matches: {best_match_title[:70]}")
+        print(f"  Matches: {result['match_title'][:70]}")
         print(f"  Score:   {pct}")
-        print(f"  File:    {best_match_file}")
+        print(f"  File:    {result['match_file']}")
         print()
         print("This draft is too similar to an existing published article.")
         print("The draft has NOT been published and remains in posts/drafts/.")
