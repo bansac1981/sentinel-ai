@@ -1,0 +1,25 @@
+𝗚𝗿𝗶𝗱 𝘁𝗵𝗲 𝗚𝗿𝗲𝘆 — 𝗠𝗼𝗻𝘁𝗵𝗹𝘆 𝗜𝗻𝘁𝗲𝗹𝗹𝗶𝗴𝗲𝗻𝗰𝗲 𝗥𝗲𝘃𝗶𝗲𝘄: 𝗢𝗰𝘁𝗼𝗯𝗲𝗿 𝟮𝟬𝟮𝟲
+"The Month Agents Stopped Asking Permission"
+
+October 2026 marks an inflection point: the AI agent is no longer a productivity feature — it's an enterprise principal with credentials, reach, and no accountability. Across 82 tracked articles and 8 critical events, one pattern dominated. Adversaries have stopped attacking models. They're attacking the plumbing agents depend on — package registries, extension marketplaces, config files, and tool permissions.
+
+𝗞𝗲𝘆 𝗳𝗶𝗻𝗱𝗶𝗻𝗴𝘀:
+
+→ The AI developer toolchain is now the primary supply chain target
+→ Autonomous agents executed intrusions at industrial scale
+→ Frontier models crossed into end-to-end exploit development
+→ AI vendors breached their own customers — and self-reported it, while attackers breached thousands on purpose
+
+The numbers tell the story: excessive agency appeared in 57 of 82 articles, and tool-invocation exfiltration in 38. This is the first reporting cycle where the dominant risk isn't what AI says — it's what AI is authorised to do. 35 HIGH and 8 CRITICAL severity events this month alone.
+
+𝗧𝗿𝗲𝗻𝗱𝘀 𝘁𝗼 𝘄𝗮𝘁𝗰𝗵:
+
+1️⃣ Agent identity becomes the next IAM programme
+2️⃣ Agent configuration files become the new crown jewels
+3️⃣ The exploitation window collapses faster than patching can keep up
+
+If your security roadmap still treats AI agents as a feature rather than a privileged identity, October's data says it's time to rethink that.
+
+📖 Read the full Grid the Grey Monthly Intelligence Review for the complete breakdown, event analysis, and recommendations.
+
+#AIsecurity #CyberSecurity #ThreatIntelligence #AgenticAI #SupplyChainSecurity #IAM #RiskManagement #GridTheGrey
