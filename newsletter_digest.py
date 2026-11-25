@@ -16,15 +16,20 @@ Environment variables (required for --send):
     RESEND_API_KEY       — your Resend API key
     MAILERLITE_API_KEY   — Mailerlite API key (for pulling subscriber list)
     MAILERLITE_LIST_ID   — Mailerlite group ID containing subscribers
+    UNSUBSCRIBE_SECRET   — HMAC key for signed unsubscribe links (optional, mailto fallback if unset)
 """
 
 import argparse
+import hashlib
+import hmac
+import html as html_mod
 import json
 import os
 import re
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import quote
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Config
@@ -38,6 +43,9 @@ TOP_STORY_MIN     = 7.5     # minimum score to be the lead story
 
 MAILERLITE_API  = "https://connect.mailerlite.com/api"
 RESEND_BATCH_URL = "https://api.resend.com/emails/batch"
+
+UNSUBSCRIBE_BASE_URL  = "https://gridthegrey.com/api/unsubscribe"
+UNSUBSCRIBE_PLACEHOLDER = "%%UNSUBSCRIBE_URL%%"
 
 # Email-safe colours (inline CSS only — no external stylesheets)
 ACCENT          = "#ff3b3b"
@@ -68,6 +76,19 @@ OWASP_SHORT = {
     "LLM09": "Overreliance",
     "LLM10": "Model Theft",
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Unsubscribe URL generator
+# ─────────────────────────────────────────────────────────────────────────────
+
+def generate_unsubscribe_url(email: str, secret: str) -> str:
+    """Generate an HMAC-signed unsubscribe URL for a subscriber."""
+    normalised = email.lower().strip()
+    token = hmac.new(
+        secret.encode(), normalised.encode(), hashlib.sha256
+    ).hexdigest()
+    return f"{UNSUBSCRIBE_BASE_URL}?email={quote(normalised)}&token={token}"
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Frontmatter parser
@@ -236,12 +257,17 @@ def framework_tags(mitre: list, owasp: list) -> str:
     return "".join(tags)
 
 
+def _esc(val) -> str:
+    """HTML-escape a value for safe interpolation into email HTML."""
+    return html_mod.escape(str(val)) if val else ""
+
+
 def lead_story_html(p: dict) -> str:
     img_block = ""
     if p.get("thumbnail"):
         img_block = (
-            f'<a href="{p["url"]}" style="display:block;margin-bottom:16px;">'
-            f'<img src="{p["thumbnail"]}" alt="{p["title"]}" '
+            f'<a href="{_esc(p["url"])}" style="display:block;margin-bottom:16px;">'
+            f'<img src="{_esc(p["thumbnail"])}" alt="{_esc(p["title"])}" '
             f'style="width:100%;max-height:220px;object-fit:cover;'
             f'border-radius:6px;border:1px solid {BORDER};" /></a>'
         )
@@ -257,22 +283,22 @@ def lead_story_html(p: dict) -> str:
     </p>
     <h2 style="margin:8px 0 12px 0;font-family:Georgia,serif;font-size:22px;
        font-weight:700;line-height:1.3;color:{TEXT_HEAD};">
-      <a href="{p['url']}" style="color:{TEXT_HEAD};text-decoration:none;">{p['title']}</a>
+      <a href="{_esc(p['url'])}" style="color:{TEXT_HEAD};text-decoration:none;">{_esc(p['title'])}</a>
     </h2>
     <p style="margin:0 0 14px 0;font-size:15px;line-height:1.6;color:{TEXT_BODY};">
-      {p.get('summary','')}
+      {_esc(p.get('summary',''))}
     </p>
     <p style="margin:0 0 12px 0;">
       {framework_tags(p.get('mitre_techniques',[]), p.get('owasp_categories',[]))}
     </p>
     <p style="margin:0;font-size:12px;color:{TEXT_MUTED};">
-      Source: <a href="{p.get('source_url','#')}" style="color:{TEXT_MUTED};"
-        target="_blank">{p.get('source','')}</a>
+      Source: <a href="{_esc(p.get('source_url','#'))}" style="color:{TEXT_MUTED};"
+        target="_blank">{_esc(p.get('source',''))}</a>
       &nbsp;·&nbsp; Score: {p['relevance_score']}/10
       &nbsp;·&nbsp; {p['pub_date'].strftime('%b %d, %Y')}
     </p>
     <p style="margin:14px 0 0 0;">
-      <a href="{p['url']}" style="display:inline-block;padding:10px 20px;
+      <a href="{_esc(p['url'])}" style="display:inline-block;padding:10px 20px;
          background:{ACCENT};color:#fff;border-radius:4px;font-size:13px;
          font-weight:700;text-decoration:none;font-family:monospace;
          letter-spacing:0.05em;">READ FULL ANALYSIS →</a>
@@ -282,6 +308,8 @@ def lead_story_html(p: dict) -> str:
 
 
 def secondary_story_html(p: dict) -> str:
+    summary_raw = p.get('summary') or ''
+    summary_trunc = _esc(summary_raw[:200]) + ('…' if len(summary_raw) > 200 else '')
     return f"""
 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
   <tr><td style="background:{BG_CARD};border:1px solid {BORDER};
@@ -293,15 +321,15 @@ def secondary_story_html(p: dict) -> str:
     </p>
     <h3 style="margin:6px 0 8px 0;font-family:Georgia,serif;font-size:17px;
        font-weight:700;line-height:1.3;color:{TEXT_HEAD};">
-      <a href="{p['url']}" style="color:{TEXT_HEAD};text-decoration:none;">{p['title']}</a>
+      <a href="{_esc(p['url'])}" style="color:{TEXT_HEAD};text-decoration:none;">{_esc(p['title'])}</a>
     </h3>
     <p style="margin:0 0 8px 0;font-size:13px;line-height:1.5;color:{TEXT_BODY};">
-      {(p.get('summary') or '')[:200]}{'…' if len(p.get('summary','')) > 200 else ''}
+      {summary_trunc}
     </p>
     <p style="margin:0;font-size:11px;color:{TEXT_MUTED};">
-      {p.get('source','')} &nbsp;·&nbsp; {p['pub_date'].strftime('%b %d')}
+      {_esc(p.get('source',''))} &nbsp;·&nbsp; {p['pub_date'].strftime('%b %d')}
       &nbsp;·&nbsp;
-      <a href="{p['url']}" style="color:{ACCENT};text-decoration:none;">Read more →</a>
+      <a href="{_esc(p['url'])}" style="color:{ACCENT};text-decoration:none;">Read more →</a>
     </p>
   </td></tr>
 </table>"""
@@ -316,18 +344,19 @@ def deep_signal_html(p: dict) -> str:
         if thumb.startswith("/"):
             thumb = f"{SITE_URL}{thumb}"
         img_block = (
-            f'<a href="{p["url"]}" style="display:block;margin-bottom:16px;">'
-            f'<img src="{thumb}" alt="{p["title"]}" '
+            f'<a href="{_esc(p["url"])}" style="display:block;margin-bottom:16px;">'
+            f'<img src="{_esc(thumb)}" alt="{_esc(p["title"])}" '
             f'style="width:100%;max-height:200px;object-fit:cover;'
             f'border-radius:6px;border:1px solid {DEEP_SIGNAL_ACCENT}44;" /></a>'
         )
 
     reading_time = p.get("reading_time", "")
     reading_time_html = (
-        f'&nbsp;·&nbsp; {reading_time} min read' if reading_time else ""
+        f'&nbsp;·&nbsp; {_esc(reading_time)} min read' if reading_time else ""
     )
 
-    summary = (p.get("summary") or "")[:280]
+    summary_raw = (p.get("summary") or "")[:280]
+    summary = _esc(summary_raw)
     if len(p.get("summary", "")) > 280:
         summary += "…"
 
@@ -340,7 +369,7 @@ def deep_signal_html(p: dict) -> str:
     {img_block}
     <h2 style="margin:0 0 12px 0;font-family:Georgia,serif;font-size:20px;
        font-weight:700;line-height:1.3;color:{TEXT_HEAD};">
-      <a href="{p['url']}" style="color:{TEXT_HEAD};text-decoration:none;">{p['title']}</a>
+      <a href="{_esc(p['url'])}" style="color:{TEXT_HEAD};text-decoration:none;">{_esc(p['title'])}</a>
     </h2>
     <p style="margin:0 0 14px 0;font-size:14px;line-height:1.6;color:{TEXT_BODY};">
       {summary}
@@ -349,7 +378,7 @@ def deep_signal_html(p: dict) -> str:
       {p['pub_date'].strftime('%b %d, %Y')}{reading_time_html}
     </p>
     <p style="margin:0;">
-      <a href="{p['url']}" style="display:inline-block;padding:10px 20px;
+      <a href="{_esc(p['url'])}" style="display:inline-block;padding:10px 20px;
          background:{DEEP_SIGNAL_ACCENT};color:#fff;border-radius:4px;font-size:13px;
          font-weight:700;text-decoration:none;font-family:monospace;
          letter-spacing:0.05em;">READ DEEP SIGNAL →</a>
@@ -488,7 +517,8 @@ def build_html(posts: list[dict], days: int, deep_signal: list[dict] | None = No
       Content aggregated from public sources for research and educational purposes.
     </p>
     <p style="margin:0;font-size:11px;color:{TEXT_MUTED};">
-      Reply "unsubscribe" to be removed from this list.
+      <a href="{UNSUBSCRIBE_PLACEHOLDER}" style="color:{TEXT_MUTED};text-decoration:underline;">Unsubscribe</a>
+      from future emails.
     </p>
   </td></tr>
 
@@ -571,12 +601,22 @@ def send_via_resend(html: str, subject: str, subscribers: list[str],
         print("[newsletter] ERROR: No subscribers to send to.", file=sys.stderr)
         return False
 
+    unsub_secret = os.environ.get("UNSUBSCRIBE_SECRET", "").strip()
+    if not unsub_secret:
+        print("[newsletter] WARNING: UNSUBSCRIBE_SECRET not set — "
+              "unsubscribe links will use mailto fallback.",
+              file=sys.stderr)
+
     if dry_run:
         print(f"[newsletter] DRY RUN — would send to {len(subscribers)} subscribers",
               file=sys.stderr)
         print(f"[newsletter] DRY RUN — subject: {subject!r}", file=sys.stderr)
         print(f"[newsletter] DRY RUN — from: {from_addr}", file=sys.stderr)
         print(f"[newsletter] DRY RUN — HTML length: {len(html):,} chars", file=sys.stderr)
+        if unsub_secret:
+            sample_url = generate_unsubscribe_url("example@test.com", unsub_secret)
+            print(f"[newsletter] DRY RUN — sample unsubscribe URL: {sample_url}",
+                  file=sys.stderr)
         return True
 
     headers = {
@@ -584,24 +624,37 @@ def send_via_resend(html: str, subject: str, subscribers: list[str],
         "Content-Type": "application/json",
     }
 
+    mailto_fallback = f"mailto:{from_addr.split('<')[-1].rstrip('>')}?subject=unsubscribe"
+
     # Resend batch endpoint accepts up to 100 emails per call
     BATCH_SIZE = 100
     total_sent = 0
 
     for i in range(0, len(subscribers), BATCH_SIZE):
         batch = subscribers[i:i + BATCH_SIZE]
-        payload = [
-            {
+        payload = []
+        for email in batch:
+            # Per-subscriber unsubscribe URL and personalised HTML
+            if unsub_secret:
+                unsub_url = generate_unsubscribe_url(email, unsub_secret)
+                personalised_html = html.replace(UNSUBSCRIBE_PLACEHOLDER, unsub_url)
+                email_headers = {
+                    "List-Unsubscribe": f"<{unsub_url}>",
+                    "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+                }
+            else:
+                personalised_html = html.replace(UNSUBSCRIBE_PLACEHOLDER, mailto_fallback)
+                email_headers = {
+                    "List-Unsubscribe": f"<{mailto_fallback}>",
+                }
+
+            payload.append({
                 "from": from_addr,
                 "to": [email],
                 "subject": subject,
-                "html": html,
-                "headers": {
-                    "List-Unsubscribe": f"<mailto:{from_addr.split('<')[-1].rstrip('>')}?subject=unsubscribe>",
-                },
-            }
-            for email in batch
-        ]
+                "html": personalised_html,
+                "headers": email_headers,
+            })
 
         for attempt in range(3):
             try:

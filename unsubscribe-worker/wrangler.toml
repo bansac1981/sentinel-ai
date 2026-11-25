@@ -1,0 +1,17 @@
+# Grid the Grey — Unsubscribe Worker
+# ===================================
+# Deploy: cd unsubscribe-worker && npx wrangler deploy
+#
+# Required secrets (set BEFORE deploying):
+#   npx wrangler secret put UNSUBSCRIBE_SECRET
+#   npx wrangler secret put MAILERLITE_API_KEY
+
+name = "gridthegrey-unsubscribe"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+
+# Route: handles gridthegrey.com/api/unsubscribe
+# Requires the domain to be on Cloudflare (already the case for gridthegrey.com)
+routes = [
+  { pattern = "gridthegrey.com/api/unsubscribe", zone_name = "gridthegrey.com" }
+]

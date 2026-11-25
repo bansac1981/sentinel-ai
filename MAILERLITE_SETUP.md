@@ -120,12 +120,27 @@ This is required for good email deliverability. Without it, emails may land in s
 
 Go to: **github.com/bansac1981/sentinel-ai → Settings → Secrets and variables → Actions**
 
-Add two secrets:
+Add three secrets:
 
 | Secret Name | Value |
 |---|---|
 | `MAILERLITE_API_KEY` | Your API token from Step 6 |
 | `MAILERLITE_LIST_ID` | Your Group ID from Step 3 |
+| `UNSUBSCRIBE_SECRET` | HMAC signing key (see Step 7b) |
+
+### Step 7b — Generate the Unsubscribe Signing Key
+
+This key signs unsubscribe links so they can't be forged. It must be **identical** in
+GitHub Actions and the Cloudflare Worker.
+
+```bash
+# Generate a secure random key
+python3 -c "import secrets; print(secrets.token_hex(32))"
+```
+
+Save the output, then add it in **two** places:
+1. **GitHub Secret:** `UNSUBSCRIBE_SECRET` (above)
+2. **Cloudflare Worker secret:** `cd unsubscribe-worker && npx wrangler secret put UNSUBSCRIBE_SECRET`
 
 ---
 

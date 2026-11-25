@@ -57,7 +57,7 @@ We aggregate from verified, high-quality sources:
 
 ## Newsletter
 
-The weekly **AI Threat Briefing** distils the week's most critical developments into a concise digest. Subscribe free via Beehiiv — no spam, unsubscribe anytime.
+The twice-weekly **AI Threat Briefing** distils the most critical developments into a concise digest. Subscribe free — no spam, unsubscribe anytime.
 
 ## Disclaimer
 

@@ -60,9 +60,10 @@ jobs:
 
       # 4. Save digest HTML as artifact (always, even on dry run)
       - name: Generate digest HTML
+        env:
+          INPUT_DAYS: ${{ github.event.inputs.days || '2' }}
         run: |
-          DAYS="${{ github.event.inputs.days || '2' }}"
-          python newsletter_digest.py --days "$DAYS" --output digest.html
+          python newsletter_digest.py --days "$INPUT_DAYS" --output digest.html
           echo "Digest saved to digest.html"
           wc -c digest.html
 
@@ -77,17 +78,17 @@ jobs:
       # 6. Send via Resend API (subscribers pulled from Mailerlite)
       - name: Send newsletter
         env:
-          RESEND_API_KEY:    ${{ secrets.RESEND_API_KEY }}
-          MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
-          MAILERLITE_LIST_ID: ${{ secrets.MAILERLITE_LIST_ID }}
+          RESEND_API_KEY:       ${{ secrets.RESEND_API_KEY }}
+          MAILERLITE_API_KEY:   ${{ secrets.MAILERLITE_API_KEY }}
+          MAILERLITE_LIST_ID:   ${{ secrets.MAILERLITE_LIST_ID }}
+          UNSUBSCRIBE_SECRET:   ${{ secrets.UNSUBSCRIBE_SECRET }}
+          INPUT_DAYS:         ${{ github.event.inputs.days || '2' }}
+          INPUT_DRY_RUN:      ${{ github.event.inputs.dry_run }}
+          INPUT_SUBJECT:      ${{ github.event.inputs.subject }}
         run: |
-          DAYS="${{ github.event.inputs.days || '2' }}"
-          DRY_RUN="${{ github.event.inputs.dry_run }}"
-          SUBJECT="${{ github.event.inputs.subject }}"
-
           EXTRA_ARGS=()
-          [ "$DRY_RUN" = "true" ] && EXTRA_ARGS+=(--dry-run)
-          [ -n "$SUBJECT" ] && EXTRA_ARGS+=(--subject "$SUBJECT")
+          [ "$INPUT_DRY_RUN" = "true" ] && EXTRA_ARGS+=(--dry-run)
+          [ -n "$INPUT_SUBJECT" ] && EXTRA_ARGS+=(--subject "$INPUT_SUBJECT")
 
-          echo "Running: python newsletter_digest.py --send --days $DAYS ${EXTRA_ARGS[*]}"
-          python newsletter_digest.py --send --days "$DAYS" "${EXTRA_ARGS[@]}"
+          echo "Running: python newsletter_digest.py --send --days $INPUT_DAYS ${EXTRA_ARGS[*]}"
+          python newsletter_digest.py --send --days "$INPUT_DAYS" "${EXTRA_ARGS[@]}"
